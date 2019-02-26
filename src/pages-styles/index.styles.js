@@ -1,6 +1,8 @@
 import styled from '@emotion/styled'
 
 export const MdPageContent = styled.div`
+  margin-top: 1rem;
+
   h2 {
     color: ${props => props.theme.primaryColor};
   }

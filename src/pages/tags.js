@@ -68,7 +68,7 @@ class TagsPage extends React.Component {
   }
 }
 
-export const pageQuery = graphql`
+export const query = graphql`
   query {
     allMarkdownRemark(limit: 2000) {
       group(field: frontmatter___tags) {

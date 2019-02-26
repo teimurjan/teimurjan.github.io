@@ -1,7 +1,12 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { MenuWrapper, MenuIcon, MenuDropdown } from './index.styles'
 
 export class Menu extends React.Component {
+  static propTypes = {
+    children: PropTypes.node.isRequired,
+  }
+
   state = {
     open: false,
   }
@@ -16,7 +21,9 @@ export class Menu extends React.Component {
     return (
       <MenuWrapper>
         <MenuIcon className="fas fa-bars" onClick={this.toggle} />
-        <MenuDropdown onClick={this.close} open={open}>{children}</MenuDropdown>
+        <MenuDropdown onClick={this.close} open={open}>
+          {children}
+        </MenuDropdown>
       </MenuWrapper>
     )
   }

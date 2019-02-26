@@ -6,7 +6,7 @@ const EXCERPT_HEIGHT = '2.4rem'
 
 export const PostPreviewExcerpt = styled.div`
   color: ${props => props.theme.fontOnBackgroundSecondaryColor};
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   transition: all 0.3s linear 0s;
   max-height: 0;
   overflow: hidden;
@@ -15,6 +15,10 @@ export const PostPreviewExcerpt = styled.div`
   line-height: 1.2rem;
   width: 100%;
   white-space: nowrap;
+
+  ${mediaSizeLessThan(sizes.md)} {
+    font-size: 0.8rem;
+  }
 `
 
 export const PostPreviewWrapperLink = styled(Link)`
@@ -44,12 +48,17 @@ export const PostPreviewWrapperLink = styled(Link)`
 `
 
 export const PostPreviewTitle = styled.h4`
+  font-size: 1.25rem;
   color: ${props => props.theme.fontOnBackgroundSecondaryColor};
   margin-bottom: 0.25rem;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
   display: block;
+
+  ${mediaSizeLessThan(sizes.md)} {
+    font-size: 1.15rem;
+  }
 `
 
 export const PostPreviewInfo = styled.div`
@@ -74,7 +83,7 @@ export const DateThumbnail = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  line-height: 1rem;
+  line-height: 1;
 `
 
 export const DateThumbnailDay = styled.div`
@@ -95,11 +104,19 @@ export const LevelOverlay = styled.div`
   color: ${props => props.theme.fontOnPrimaryColor};
   border-radius: 0 5px 5px 0;
   padding: 0.25rem 0.5rem;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
+
+  ${mediaSizeLessThan(sizes.md)} {
+    font-size: 0.8rem;
+  }
 `
 
 export const PostPreviewFooter = styled.div`
   color: ${props => props.theme.fontSecondaryOnBackgroundSecondaryColor};
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   padding-bottom: 0.5rem;
+
+  ${mediaSizeLessThan(sizes.md)} {
+    font-size: 0.8rem;
+  }
 `

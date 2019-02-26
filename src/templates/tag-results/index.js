@@ -19,10 +19,10 @@ const TagResultsTemplate = ({ pageContext, data }) => {
         <TagResultsTitle>{tagHeader}</TagResultsTitle>
         <ResultsList>
           {edges.map(({ node }) => {
-            const { path, title } = node.frontmatter
+            const { id, slug, title } = node.frontmatter
             return (
-              <li key={path}>
-                <Link to={path}>{title}</Link>
+              <li key={id}>
+                <Link to={`/blog/${slug}`}>{title}</Link>
               </li>
             )
           })}
@@ -56,7 +56,7 @@ TagResultsTemplate.propTypes = {
 
 export default TagResultsTemplate
 
-export const pageQuery = graphql`
+export const query = graphql`
   query($tag: String) {
     allMarkdownRemark(
       limit: 2000
@@ -66,9 +66,10 @@ export const pageQuery = graphql`
       totalCount
       edges {
         node {
+          id
           frontmatter {
             title
-            path
+            slug
           }
         }
       }

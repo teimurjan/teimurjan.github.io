@@ -24,6 +24,10 @@ const Layout = ({ children }) => {
           @import url('https://fonts.googleapis.com/css?family=Bungee');
           @import url('https://use.fontawesome.com/releases/v5.6.3/css/all.css');
 
+          hr {
+            background: ${theme.primaryColor};
+          }
+
           html,
           body {
             background: ${theme.backgroundColor};

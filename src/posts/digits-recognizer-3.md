@@ -1,6 +1,6 @@
 ---
 title: Digits Recognizer using Python and React. Create UI.
-path: '/digits-recognizer-3'
+slug: 'digits-recognizer-3'
 date: 2018-04-10 16:00:58
 tags: ["javascript", "sketch", "react", "image processing", "react-sketch"]
 excerpt: "Finally, let's teach our app to draw."

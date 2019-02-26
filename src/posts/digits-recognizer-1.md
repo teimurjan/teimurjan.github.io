@@ -1,6 +1,6 @@
 ---
 title: Digits Recognizer using Python and React. Train the model.
-path: '/digits-recognizer-1'
+slug: 'digits-recognizer-1'
 date: 2018-03-23 12:34:00
 tags: ['python', "machine learning", "scikit", "numpy", "sklearn"]
 excerpt: "The first part in the series of creation your own Digits Recognizer using Python"

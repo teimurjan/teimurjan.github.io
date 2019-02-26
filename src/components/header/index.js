@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {
   HeaderWrapper,
   HeaderInner,
@@ -26,5 +27,9 @@ const Header = ({ siteTitle }) => (
     </Container>
   </HeaderWrapper>
 )
+
+Header.propTypes = {
+  siteTitle: PropTypes.string.isRequired,
+}
 
 export default Header

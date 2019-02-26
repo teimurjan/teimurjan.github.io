@@ -3,6 +3,7 @@ import format from 'date-fns/format'
 import distanceInWords from 'date-fns/distance_in_words'
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 import { faClock } from '@fortawesome/free-regular-svg-icons/faClock'
+import PropTypes from 'prop-types'
 import {
   PostPreviewExcerpt,
   PostPreviewFooter,
@@ -24,7 +25,7 @@ const PostPreview = ({
 }) => {
   const date = new Date(frontmatter.date)
   return (
-    <PostPreviewWrapperLink to={frontmatter.path} hide={shouldHide}>
+    <PostPreviewWrapperLink to={`/blog/${frontmatter.slug}`} hide={shouldHide}>
       <LevelOverlay>
         {'🍩'.repeat(Math.ceil(readingTime.minutes / 5))} {readingTime.text}
       </LevelOverlay>
@@ -41,6 +42,25 @@ const PostPreview = ({
       </PostPreviewInfo>
     </PostPreviewWrapperLink>
   )
+}
+
+PostPreview.propTypes = {
+  post: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    fields: PropTypes.shape({
+      readingTime: PropTypes.shape({
+        minutes: PropTypes.number.isRequired,
+        text: PropTypes.string.isRequired,
+      }),
+    }),
+    frontmatter: PropTypes.shape({
+      date: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+      slug: PropTypes.string.isRequired,
+      excerpt: PropTypes.string.isRequired,
+    }),
+  }),
 }
 
 export default PostPreview

@@ -1,6 +1,6 @@
 ---
 title: Digits Recognizer using Python and React. Build backend with Flask.
-path: '/digits-recognizer-2'
+slug: 'digits-recognizer-2'
 date: 2018-03-23 12:34:00
 tags: ["python", "machine learning", "flask", "image processing"]
 excerpt: "The time of building API for the recognizer."

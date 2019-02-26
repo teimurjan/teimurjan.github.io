@@ -1,17 +1,17 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
+import { graphql } from 'gatsby'
+import PropTypes from 'prop-types'
 import Layout from '../components/layout'
 import { Container } from '../components/container/index.styles'
 import { MdPageTitle, MdPageContent } from '../pages-styles/index.styles'
 
 const IndexPage = ({ data }) => {
-  const { markdownRemark } = data
+  const { markdownRemark, site } = data
   const { frontmatter, html } = markdownRemark
   const {
-    site: {
-      siteMetadata: { title: siteTitle },
-    },
-  } = data
+    siteMetadata: { title: siteTitle },
+  } = site
   return (
     <Layout>
       {frontmatter.title && (
@@ -25,7 +25,23 @@ const IndexPage = ({ data }) => {
   )
 }
 
-export const pageQuery = graphql`
+IndexPage.propTypes = {
+  data: PropTypes.shape({
+    markdownRemark: PropTypes.shape({
+      frontmatter: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+      }),
+      html: PropTypes.string.isRequired,
+    }),
+    site: PropTypes.shape({
+      siteMetadata: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+      }),
+    }),
+  }).isRequired,
+}
+
+export const query = graphql`
   query {
     markdownRemark(frontmatter: { path: { eq: "/" } }) {
       html

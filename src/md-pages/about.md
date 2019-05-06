@@ -22,9 +22,9 @@ My name is Teimur Gasanov. I am a purposeful full-stack developer worked mostly 
 - Created a browser extension for scrapping, analyzing, and representing the data
 - Worked in variously sized teams of two, four, and eight developers
 
-Technologies used: `Python`, `Django`, `Flask`, `Javascript`, `Node.js`, `ReactJS`
+Technologies used: `Python`, `Django`, `Flask`, `Javascript`, `Node.js`, `React`
 
-### <a href="https://www.linkedin.com/company/stratact/" target="_blank">Stratact GmbH</a> via <a href="https://www.toptal.com/" target="_blank">Toptal</a>
+### <a href="https://www.linkedin.com/company/stratact/" target="_blank">Stratact GmbH</a>
 
 #### Front-end Developer,<br/>June 2018 - January 2019
 
@@ -35,7 +35,31 @@ Technologies used: `Python`, `Django`, `Flask`, `Javascript`, `Node.js`, `ReactJ
 - Set up full international support
 - Covered 95% with unit and snapshot tests
 
-Technologies used: `Javascript`, `ReactJS`
+Technologies used: `Javascript`, `React`
+
+### <a href="https://www.linkedin.com/company/evanx/" target="_blank">EvanX</a>
+
+#### Front-end Developer,<br/>February 2019 - March 2019
+
+- Created an immutable architecture for a complex tree-like text editor
+- Designed customized DraftJS editor
+- Set up front-end ready for any real-time back-end
+- Optimized rendering performance of the text editor app
+- Wrote bash scripts for setting up the environment for MacOS
+
+Technologies used: `Javascript`, `React`, `DraftJS`
+
+### <a href="https://clubhouse.io" target="_blank">Clubhouse</a>
+
+#### Front-end Developer,<br/>February 2019 - Present
+
+- Implemented new landing pages using Gatsby and Prismic
+- Reduced usage of Typescript's any types
+- Set up autogenerating Typescript types from GraphQL schemas
+- Solved the tasks in the team of designers, developers, product and engineering managers
+- Designed new visual and interactive components
+
+Technologies used: `Javascript`, `React`, `Typescript`, `Gatsby`, `CSS3`, `HTML5`, `Prismic CMS`, `jQuery`
 
 ## Education
 
@@ -64,7 +88,7 @@ Things learned: `Python`, `Calculus`, `Linear Algebra`, `Algorithms`, `Data Stru
         <ul style="list-style-type:none; margin-left: 0;">
             <li>Django</li>
             <li>Flask</li>
-            <li>ReactJS</li>
+            <li>React</li>
             <li>Typescript</li>
             <li>MySQL</li>
             <li>PostgreSQL</li>

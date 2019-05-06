@@ -13,7 +13,6 @@ import {
 } from './index.styles'
 import { Container } from '../../components/container/index.styles'
 import {
-  LevelOverlay,
   DateThumbnailDay,
   DateThumbnailMonth,
 } from '../../components/post-preview/index.styles'

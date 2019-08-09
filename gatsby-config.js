@@ -1,3 +1,5 @@
+const config = require('./config')
+
 module.exports = {
   siteMetadata: {
     title: 'teimurjan',
@@ -75,6 +77,13 @@ module.exports = {
               // If setting this to true, the parser won't handle and highlight inline
               // code used in markdown i.e. single backtick code like `this`.
               noInlineHighlight: false,
+            },
+          },
+          {
+            resolve: 'gatsby-plugin-google-tagmanager',
+            options: {
+              id: config.GOOGLE_TAG_MANAGER_ID,
+              includeInDevelopment: false,
             },
           },
         ],

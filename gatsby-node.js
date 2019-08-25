@@ -51,7 +51,7 @@ exports.createPages = async ({ actions, graphql }) => {
   const tags = getTagsFromPosts(posts)
   tags.forEach(tag => {
     createPage({
-      path: `/tags/${_.kebabCase(tag)}`,
+      path: `/blog/tags/${_.kebabCase(tag)}`,
       component: tagTemplate,
       context: {
         tag,

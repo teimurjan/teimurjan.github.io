@@ -56,7 +56,7 @@ class TagsPage extends React.Component {
               .map(tag => (
                 <TagButton
                   key={tag.fieldValue}
-                  to={`/tags/${kebabCase(tag.fieldValue)}/`}
+                  to={`/blog/tags/${kebabCase(tag.fieldValue)}/`}
                 >
                   {tag.fieldValue}
                 </TagButton>

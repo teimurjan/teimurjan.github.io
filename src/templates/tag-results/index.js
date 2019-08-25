@@ -8,7 +8,10 @@ import { PrimaryButtonLink } from '../../components/button-link/index.styles'
 
 const TagResultsTemplate = ({ pageContext, data }) => {
   const { tag } = pageContext
-  const { edges, totalCount } = data.allMarkdownRemark
+  const { edges, totalCount } = data.allMarkdownRemark || {
+    edges: [],
+    totalCount: 0,
+  }
   const tagHeader = `${totalCount} post${
     totalCount === 1 ? '' : 's'
   } tagged with "${tag}"`
@@ -61,7 +64,7 @@ export const query = graphql`
     allMarkdownRemark(
       limit: 2000
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { tags: { in: [$tag] } } }
+      filter: { frontmatter: { tags: { in: [$tag] }, hidden: { ne: true } } }
     ) {
       totalCount
       edges {
@@ -70,6 +73,7 @@ export const query = graphql`
           frontmatter {
             title
             slug
+            hidden
           }
         }
       }

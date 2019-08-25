@@ -8,7 +8,7 @@ const Tags = ({ tags }) => (
     Tags:{' '}
     {tags.map((tag, i) => (
       <React.Fragment key={tag}>
-        <PrimaryLink to={`/tags/${kebabCase(tag)}`}>#{tag}</PrimaryLink>
+        <PrimaryLink to={`/blog/tags/${kebabCase(tag)}`}>#{tag}</PrimaryLink>
         {i < tags.length - 1 ? ', ' : ''}
       </React.Fragment>
     ))}

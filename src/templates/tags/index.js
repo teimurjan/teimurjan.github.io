@@ -2,14 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import kebabCase from 'lodash/kebabCase'
 import { graphql } from 'gatsby'
-import Layout from '../components/layout'
-import { Container } from '../components/container/index.styles'
-import {
-  TagsTitle,
-  TagButton,
-  TagButtonsWrapper,
-} from '../pages-styles/tags.styles'
-import { Input } from '../components/input/index.styles'
+import Layout from '../../components/layout'
+import { Container } from '../../components/container/index.styles'
+import { Input } from '../../components/input/index.styles'
+import { TagsTitle, TagButton, TagButtonsWrapper } from './index.styles'
 
 class TagsPage extends React.Component {
   static propTypes = {

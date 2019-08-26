@@ -30,7 +30,7 @@ const TagResultsTemplate = ({ pageContext, data }) => {
             )
           })}
         </ResultsList>
-        <PrimaryButtonLink to="/tags">All tags</PrimaryButtonLink>
+        <PrimaryButtonLink to="/blog/tags">All tags</PrimaryButtonLink>
       </Container>
     </Layout>
   )

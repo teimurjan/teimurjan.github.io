@@ -47,6 +47,12 @@ exports.createPages = async ({ actions, graphql }) => {
     })
   })
 
+  const allTagsTemplate = path.resolve('src/templates/tags/index.js')
+  createPage({
+    path: `/blog/tags`,
+    component: allTagsTemplate,
+  })
+
   const tagTemplate = path.resolve('src/templates/tag-results/index.js')
   const tags = getTagsFromPosts(posts)
   tags.forEach(tag => {

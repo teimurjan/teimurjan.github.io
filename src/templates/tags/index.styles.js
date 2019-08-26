@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { PrimaryButtonLink } from '../components/button-link/index.styles'
+import { PrimaryButtonLink } from '../../components/button-link/index.styles'
 
 export const TagsTitle = styled.h2`
   color: ${props => props.theme.fontOnBackgroundColor};

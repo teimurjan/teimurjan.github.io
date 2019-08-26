@@ -7,7 +7,7 @@ export const FooterWrapper = styled.div`
   position: fixed;
   width 100%;
   z-index: 2;
-  background: ${props => props.theme.backgroundColor};
+  background: var(--backgroundColor);
   bottom: 0;
   height: 50px;
 
@@ -32,7 +32,7 @@ export const FooterLinkIcon = styled.a`
   color: gray;
   transition: color 0.3s ease-in-out;
   &:hover {
-    color: ${props => props.theme.primaryColor};
+    color: var(--primaryColor);
   }
   font-size: 1.5rem;
   margin: 0 10px;

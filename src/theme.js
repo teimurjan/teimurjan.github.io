@@ -1,38 +1,19 @@
-export const LIGHT_THEME_NAME = 'light'
-export const DARK_THEME_NAME = 'dark'
+import React from 'react'
 
-export const lightTheme = {
-  name: LIGHT_THEME_NAME,
-  primaryColor: '#C42B2B',
-  primaryDarkColor: '#AD6565',
+export const useTheme = () => {
+  const [theme, setTheme] = React.useState(
+    typeof window !== 'undefined' ? window.__theme : undefined
+  )
 
-  backgroundColor: '#EDEDED',
-  backgroundSecondaryColor: '#c17676',
+  React.useEffect(() => {
+    window.__onThemeChange = () => {
+      setTheme(window.__theme)
+    }
+  }, [])
 
-  fontOnPrimaryColor: '#f2f2f2',
-  fontOnBackgroundColor: '#333333',
-  fontOnBackgroundSecondaryColor: '#f2f2f2',
-  fontSecondaryOnBackgroundSecondaryColor: '#ededed',
+  const toggleTheme = React.useCallback(() => {
+    window.__setTheme(theme === 'light' ? 'dark' : 'light')
+  })
 
-  codeBackgroundColor: '#474545',
-  codePrimaryColor: '#ff6459',
-  codeSecondaryColor: '#00BBBB',
-}
-
-export const darkTheme = {
-  name: DARK_THEME_NAME,
-  primaryColor: '#2bbc8a',
-  primaryDarkColor: '#7DBAA5',
-
-  backgroundColor: '#1d1f21',
-  backgroundSecondaryColor: '#2b2b2b',
-
-  fontOnPrimaryColor: '#333333',
-  fontOnBackgroundColor: '#eadede',
-  fontOnBackgroundSecondaryColor: '#eadede',
-  fontSecondaryOnBackgroundSecondaryColor: '#999999',
-
-  codeBackgroundColor: '#2b2b2b',
-  codePrimaryColor: '#2bbc8a',
-  codeSecondaryColor: '#e09142',
+  return [theme, toggleTheme]
 }

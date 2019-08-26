@@ -9,5 +9,5 @@ export const NotFoundPageWrapper = styled.div`
 `
 
 export const NotFoundPageTitle = styled.h1`
-  color: ${props => props.theme.primaryColor};
+  color: var(--primaryColor);
 `

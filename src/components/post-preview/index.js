@@ -1,8 +1,6 @@
 import React from 'react'
 import format from 'date-fns/format'
 import distanceInWords from 'date-fns/distance_in_words'
-import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
-import { faClock } from '@fortawesome/free-regular-svg-icons/faClock'
 import PropTypes from 'prop-types'
 import {
   PostPreviewExcerpt,
@@ -37,7 +35,7 @@ const PostPreview = ({
         <PostPreviewTitle>{frontmatter.title}</PostPreviewTitle>
         <PostPreviewExcerpt>{frontmatter.excerpt}</PostPreviewExcerpt>
         <PostPreviewFooter>
-          <Icon icon={faClock} /> {distanceInWords(new Date(), date)} ago.{' '}
+          <i className="far fa-clock" /> {distanceInWords(new Date(), date)} ago.{' '}
         </PostPreviewFooter>
       </PostPreviewInfo>
     </PostPreviewWrapperLink>

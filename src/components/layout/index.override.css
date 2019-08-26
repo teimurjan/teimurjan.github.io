@@ -16,3 +16,78 @@ h5,
 h6 {
   font-family: 'Nunito Sans', sans-serif;
 }
+
+html {
+  --primaryColor: #c42b2b;
+  --primaryDarkColor: #691515;
+  --primaryLightColor: #ad6565;
+
+  --backgroundColor: #ededed;
+  --backgroundSecondaryColor: #c17676;
+
+  --fontOnPrimaryColor: #f2f2f2;
+  --fontOnBackgroundColor: #333333;
+  --fontOnBackgroundSecondaryColor: #f2f2f2;
+  --fontSecondaryOnBackgroundSecondaryColor: #ededed;
+
+  --codeBackgroundColor: #474545;
+  --codePrimaryColor: #ff6459;
+  --codeSecondaryColor: #00bbbb;
+
+  --mobileMenuBackground: var(--backgroundColor);
+
+  background: var(--backgroundColor);
+}
+
+html[data-theme='dark'] {
+  --primaryColor: #2bbc8a;
+  --primaryDarkColor: #1f8b66;
+  --primaryLightColor: #7dbaa5;
+
+  --backgroundColor: #1d1f21;
+  --backgroundSecondaryColor: #2b2b2b;
+
+  --fontOnPrimaryColor: #333333;
+  --fontOnBackgroundColor: #eadede;
+  --fontOnBackgroundSecondaryColor: #eadede;
+  --fontSecondaryOnBackgroundSecondaryColor: #999999;
+
+  --codeBackgroundColor: #2b2b2b;
+  --codePrimaryColor: #2bbc8a;
+  --codeSecondaryColor: #e09142;
+
+  --mobileMenuBackground: var(--backgroundSecondaryColor);
+
+  background: var(--backgroundColor);
+}
+
+#themeSwitcher {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  transition: all 300ms ease-in-out;
+  background: var(--primaryDarkColor);
+  border-radius: 50%;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#themeSwitcher::after {
+  content: '☀️';
+  display: block;
+  margin: 2.25px 1px 0 0;
+}
+
+html[data-theme='dark'] #themeSwitcher {
+  left: 31px;
+  font-size: 16px;
+}
+
+html[data-theme='dark'] #themeSwitcher::after {
+  content: '🌙';
+  margin: 1.5px 1px 0 0;
+}

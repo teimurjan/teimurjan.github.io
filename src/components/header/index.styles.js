@@ -7,7 +7,7 @@ export const HeaderWrapper = styled.div`
   position: fixed;
   width 100%;
   z-index: 2;
-  background: ${props => props.theme.backgroundColor};
+  background: var(--backgroundColor);
   top: 0;
   height: 60px;
 
@@ -37,6 +37,6 @@ export const HeaderTitle = styled.h2`
 `
 
 export const HeaderLink = styled(Link)`
-  color: ${props => props.theme.primaryColor};
+  color: var(--primaryColor);
   text-decoration: none;
 `

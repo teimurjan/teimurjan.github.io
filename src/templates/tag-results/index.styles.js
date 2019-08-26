@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 
 export const TagResultsTitle = styled.h2`
-  color: ${props => props.theme.fontOnBackgroundColor};
+  color: var(--fontOnBackgroundColor);
 `
 
 export const ResultsList = styled.ul`
@@ -9,12 +9,12 @@ export const ResultsList = styled.ul`
   margin-left: 0;
 
   a {
-    color: ${props => props.theme.fontOnBackgroundColor};
+    color: var(--fontOnBackgroundColor);
     &::before {
       content: '➤';
       display: inline-block;
       text-decoration: none;
-      color: ${props => props.theme.primaryColor};
+      color: var(--primaryColor);
       margin-right: 0.5rem;
     }
   }

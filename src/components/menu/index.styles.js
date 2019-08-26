@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { css } from '@emotion/core'
 import { mediaSizeLessThan, sizes } from '../../media'
 import { PrimaryLink, PrimaryALink } from '../link/index.styles'
 
@@ -7,7 +8,7 @@ export const MenuIcon = styled.i`
   display: none !important;
 
   ${mediaSizeLessThan(sizes.md)} {
-    color: ${props => props.theme.primaryColor};
+    color: var(--primaryColor);
     display: block !important;
   }
 
@@ -22,26 +23,37 @@ export const MenuDropdown = styled.div`
   align-items: center;
 
   ${mediaSizeLessThan(sizes.md)} {
-    transition: all 150ms ease-in;
-    transform-origin: top right;
+    transition: all 200ms ease-in-out;
+    transform-origin: top center;
     width: 100%;
     right: 0;
-    margin-top: 7px;
-    transform: scale(${props => (props.open ? 1 : 0)});
+    margin-top: 14px;
+    transform: scaleY(${props => (props.open ? 1 : 0)});
     position: absolute;
     flex-direction: column;
+    height: 100vh;
+    background: var(--mobileMenuBackground);
   }
 `
-export const MenuItem = styled(PrimaryLink)`
+
+const menuItemCSS = css`
   padding: 0 1rem;
   text-transform: uppercase;
 
   ${mediaSizeLessThan(sizes.md)} {
-    padding: 0.5rem 0;
+    padding: 1rem 0 0.5rem 0;
     width: 100%;
     text-align: center;
-    background: ${props => props.theme.backgroundSecondaryColor};
   }
 `
 
-export const MenuItemA = MenuItem.withComponent(PrimaryALink)
+export const MenuItem = styled.div`
+  ${menuItemCSS}
+`
+export const MenuItemLink = styled(PrimaryLink)`
+  ${menuItemCSS}
+`
+
+export const MenuItemA = styled(PrimaryALink)`
+  ${menuItemCSS}
+`

@@ -4,7 +4,7 @@ export const MdPageContent = styled.div`
   margin-top: 1rem;
 
   h2 {
-    color: ${props => props.theme.primaryColor};
+    color: var(--primaryColor);
   }
 
   p,
@@ -13,11 +13,11 @@ export const MdPageContent = styled.div`
   }
 
   a {
-    color: ${props => props.theme.primaryColor};
+    color: var(--primaryColor);
   }
 `
 
 export const MdPageTitle = styled.h1`
-  color: ${props => props.theme.primaryColor};
+  color: var(--primaryColor);
   margin: 0.5rem 0;
 `

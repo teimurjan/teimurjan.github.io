@@ -15,7 +15,7 @@ export const BlogPostContent = styled.div`
 
   h2 {
     &:before {
-      color: ${props => props.theme.primaryColor};
+      color: var(--primaryColor);
     }
   }
 
@@ -25,7 +25,7 @@ export const BlogPostContent = styled.div`
   }
 
   a {
-    color: ${props => props.theme.primaryColor};
+    color: var(--primaryColor);
   }
 
   ${mediaSizeGreaterThan(sizes.xl)} {
@@ -34,7 +34,7 @@ export const BlogPostContent = styled.div`
 `
 
 export const BlogPostTitle = styled.h1`
-  color: ${props => props.theme.fontOnBackgroundColor};
+  color: var(--fontOnBackgroundColor);
   margin: 1rem 0;
   width: 80%;
 `

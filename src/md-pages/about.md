@@ -8,7 +8,44 @@ My name is Teimur Gasanov. I am a purposeful full-stack developer worked mostly 
 
 ## Experience
 
-### <a href="https://www.attractor-software.com/" target="_blank">Attractor Software</a>
+### Clubhouse <a href="https://clubhouse.io" target="_blank" rel="noopener noreferrer" style="text-decoration:none;"><small>🔗</small></a>
+
+#### Front-end Developer,<br/>February 2019 - Present
+
+- Implemented new landing pages using Gatsby and Prismic
+- Reduced usage of Typescript's any types
+- Set up autogenerating Typescript types from GraphQL schemas
+- Solved the tasks in the team of designers, developers, product and engineering managers
+- Designed new visual and interactive components
+
+Technologies used: `Javascript`, `React`, `Typescript`, `Gatsby`, `CSS3`, `HTML5`, `Prismic CMS`, `jQuery`
+
+### EvanX <a href="https://www.linkedin.com/company/evanx/" target="_blank" rel="noopener noreferrer" style="text-decoration:none;"><small>🔗</small></a>
+
+#### Front-end Developer,<br/>February 2019 - March 2019
+
+- Created an immutable architecture for a complex tree-like text editor
+- Designed customized DraftJS editor
+- Set up front-end ready for any real-time back-end
+- Optimized rendering performance of the text editor app
+- Wrote bash scripts for setting up the environment for MacOS
+
+Technologies used: `Javascript`, `React`, `DraftJS`
+
+### Stratact GmbH <a href="https://www.linkedin.com/company/stratact/" target="_blank" rel="noopener noreferrer" style="text-decoration:none;"><small>🔗</small></a>
+
+#### Front-end Developer,<br/>June 2018 - January 2019
+
+- Created a fully responsive, custom Bootstrap theme using styled components
+- Made different CSS animation from simple transitions to complex GIF-based animations
+- Optimized the startup performance
+- Provided support for Internet Explorer 11 (IE 11)
+- Set up full international support
+- Covered 95% with unit and snapshot tests
+
+Technologies used: `Javascript`, `React`
+
+### Attractor Software <a href="https://www.attractor-software.com/" target="_blank" rel="noopener noreferrer" style="text-decoration:none;"><small>🔗</small></a>
 
 #### Full-stack Developer,<br/>October 2016 - May 2018
 
@@ -24,48 +61,11 @@ My name is Teimur Gasanov. I am a purposeful full-stack developer worked mostly 
 
 Technologies used: `Python`, `Django`, `Flask`, `Javascript`, `Node.js`, `React`
 
-### <a href="https://www.linkedin.com/company/stratact/" target="_blank">Stratact GmbH</a>
-
-#### Front-end Developer,<br/>June 2018 - January 2019
-
-- Created a fully responsive, custom Bootstrap theme using styled components
-- Made different CSS animation from simple transitions to complex GIF-based animations
-- Optimized the startup performance
-- Provided support for Internet Explorer 11 (IE 11)
-- Set up full international support
-- Covered 95% with unit and snapshot tests
-
-Technologies used: `Javascript`, `React`
-
-### <a href="https://www.linkedin.com/company/evanx/" target="_blank">EvanX</a>
-
-#### Front-end Developer,<br/>February 2019 - March 2019
-
-- Created an immutable architecture for a complex tree-like text editor
-- Designed customized DraftJS editor
-- Set up front-end ready for any real-time back-end
-- Optimized rendering performance of the text editor app
-- Wrote bash scripts for setting up the environment for MacOS
-
-Technologies used: `Javascript`, `React`, `DraftJS`
-
-### <a href="https://clubhouse.io" target="_blank">Clubhouse</a>
-
-#### Front-end Developer,<br/>February 2019 - Present
-
-- Implemented new landing pages using Gatsby and Prismic
-- Reduced usage of Typescript's any types
-- Set up autogenerating Typescript types from GraphQL schemas
-- Solved the tasks in the team of designers, developers, product and engineering managers
-- Designed new visual and interactive components
-
-Technologies used: `Javascript`, `React`, `Typescript`, `Gatsby`, `CSS3`, `HTML5`, `Prismic CMS`, `jQuery`
-
 ## Education
 
-### <a href="http://www.iaau.edu.kg/" target="_blank">Ala-too Internatinal University</a>
+### Ala-too Internatinal University
 
-#### Computer Science,<br/>2015 - Present
+#### Computer Science,<br/>2015 - 2019
 
 - Got strong mathematical background
 - Received basic knowledge of Algorithms, Data Structures, Databases, Networking, and Robotics

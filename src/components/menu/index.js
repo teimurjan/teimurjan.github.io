@@ -1,30 +1,40 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { MenuWrapper, MenuIcon, MenuDropdown } from './index.styles'
+import {
+  MenuWrapper,
+  MenuIcon,
+  MenuDropdown,
+  MenuIconBar,
+} from './index.styles'
 
-export class Menu extends React.Component {
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-  }
+const MenuHamburger = ({ isOpen, ...props }) => (
+  <MenuIcon isOpen={isOpen} {...props}>
+    <MenuIconBar />
+    <MenuIconBar />
+    <MenuIconBar />
+  </MenuIcon>
+)
 
-  state = {
-    open: false,
-  }
+export const Menu = ({ children }) => {
+  const [isOpen, setIsOpen] = React.useState(false)
 
-  toggle = () => this.setState({ open: !this.state.open })
+  const toggle = React.useCallback(() => {
+    setIsOpen(!isOpen)
+  }, [isOpen])
+  const close = React.useCallback(() => {
+    setIsOpen(false)
+  }, [])
 
-  close = () => this.setState({ open: false })
+  return (
+    <MenuWrapper>
+      <MenuHamburger isOpen={isOpen} onClick={toggle} />
+      <MenuDropdown onClick={close} isOpen={isOpen}>
+        {children}
+      </MenuDropdown>
+    </MenuWrapper>
+  )
+}
 
-  render() {
-    const { children } = this.props
-    const { open } = this.state
-    return (
-      <MenuWrapper>
-        <MenuIcon className="fas fa-bars" onClick={this.toggle} />
-        <MenuDropdown onClick={this.close} open={open}>
-          {children}
-        </MenuDropdown>
-      </MenuWrapper>
-    )
-  }
+Menu.propTypes = {
+  children: PropTypes.node.isRequired,
 }

@@ -4,11 +4,28 @@ import { mediaSizeLessThan, sizes } from '../../media'
 import { PrimaryLink, PrimaryALink } from '../link/index.styles'
 
 export const MenuWrapper = styled.div``
-export const MenuIcon = styled.i`
-  display: none !important;
 
+const menuIconBarsCount = 3
+const menuIconBarHeight = 3
+const menuIconBarSpacing = 6
+const menuIconBarWidth = 25
+
+export const MenuIconBar = styled.div`
+  position: absolute;
+  left: 0;
+  height: ${menuIconBarHeight}px;
+  width: ${menuIconBarWidth}px;
+  background: var(--primaryColor);
+`
+
+export const MenuIcon = styled.div`
+  margin-top: ${menuIconBarSpacing}px;
+  position: relative;
+  width: ${menuIconBarWidth}px;
+  height: ${(menuIconBarHeight + menuIconBarSpacing) * menuIconBarsCount}px;
+
+  display: none !important;
   ${mediaSizeLessThan(sizes.md)} {
-    color: var(--primaryColor);
     display: block !important;
   }
 
@@ -17,7 +34,29 @@ export const MenuIcon = styled.i`
     outline-color: transparent;
     outline-style: none;
   }
+
+  ${MenuIconBar} {
+    transition: all 300ms ease-in-out;
+  }
+
+  & > div:nth-of-type(1) {
+    top: 0;
+    transform: ${props => (props.isOpen ? 'rotateZ(-45deg)' : undefined)};
+    transform-origin: center right;
+  }
+
+  & > div:nth-of-type(2) {
+    top: ${menuIconBarSpacing + menuIconBarHeight}px;
+    opacity: ${props => (props.isOpen ? 0 : 1)};
+  }
+
+  & > div:nth-of-type(3) {
+    top: ${(menuIconBarSpacing + menuIconBarHeight) * 2}px;
+    transform: ${props => (props.isOpen ? 'rotateZ(45deg)' : undefined)};
+    transform-origin: center right;
+  }
 `
+
 export const MenuDropdown = styled.div`
   display: flex;
   align-items: center;
@@ -28,7 +67,7 @@ export const MenuDropdown = styled.div`
     width: 100%;
     right: 0;
     margin-top: 14px;
-    transform: scaleY(${props => (props.open ? 1 : 0)});
+    transform: scaleY(${props => (props.isOpen ? 1 : 0)});
     position: absolute;
     flex-direction: column;
     height: 100vh;

@@ -56,18 +56,18 @@ html[data-theme='dark'] {
   --codePrimaryColor: #2bbc8a;
   --codeSecondaryColor: #e09142;
 
-  --mobileMenuBackground: var(--backgroundSecondaryColor);
+  --mobileMenuBackground: var(--backgroundColor);
 
   background: var(--backgroundColor);
 }
 
-#themeSwitcher {
+#themeSwitcherCircle {
   width: 30px;
   height: 30px;
   position: absolute;
   top: 3px;
   left: 3px;
-  transition: all 300ms ease-in-out;
+  transition: left 300ms ease-in-out;
   background: var(--primaryDarkColor);
   border-radius: 50%;
   font-size: 20px;
@@ -76,18 +76,21 @@ html[data-theme='dark'] {
   align-items: center;
 }
 
-#themeSwitcher::after {
-  content: '☀️';
-  display: block;
-  margin: 2.25px 1px 0 0;
-}
-
-html[data-theme='dark'] #themeSwitcher {
+html[data-theme='dark'] #themeSwitcherCircle {
   left: 31px;
-  font-size: 16px;
 }
 
-html[data-theme='dark'] #themeSwitcher::after {
-  content: '🌙';
-  margin: 1.5px 1px 0 0;
+#themeSwitcherCircle::after {
+  font-family: 'Font Awesome 5 Free';
+  content: '\f185';
+  display: block;
+  font-size: 20px;
+  color: #FFD03C;
+  margin-left: -1px;
+  font-weight: 900;
+}
+
+html[data-theme='dark'] #themeSwitcherCircle::after {
+  content: '\f186';
+  color: #ddd;
 }

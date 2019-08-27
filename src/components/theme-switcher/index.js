@@ -1,13 +1,21 @@
 import React from 'react'
-import { ThemeSwitcherWrapper, ThemeSwitcherCircle } from './index.styles'
+import { ThemeSwitcherWrapper } from './index.styles'
 import { useTheme } from '../../theme'
 
 const ThemeSwitcher = ({ className }) => {
   const [_, toggleTheme] = useTheme()
 
+  const onToggleClick = React.useCallback(
+    e => {
+      e.stopPropagation()
+      toggleTheme()
+    },
+    [toggleTheme]
+  )
+
   return (
-    <ThemeSwitcherWrapper className={className} onClick={toggleTheme}>
-      <div id="themeSwitcher" />
+    <ThemeSwitcherWrapper className={className} onClick={onToggleClick}>
+      <div id="themeSwitcherCircle" />
     </ThemeSwitcherWrapper>
   )
 }

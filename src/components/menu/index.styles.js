@@ -59,10 +59,9 @@ export const MenuIcon = styled.div`
 
 export const MenuDropdown = styled.div`
   align-items: center;
-  display: none;
+  display: flex;
 
   @media ${mediaSizeLessThan(sizes.md)} {
-    display: flex;
     transition: all 200ms ease-in-out;
     transform-origin: top center;
     width: 100%;

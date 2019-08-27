@@ -5,7 +5,7 @@ import { DateThumbnail } from '../../components/post-preview/index.styles'
 export const BlogPost = styled.div`
   padding: 0.5rem 20%;
 
-  ${mediaSizeLessThan(sizes.md)} {
+  @media ${mediaSizeLessThan(sizes.md)} {
     padding: 0.5rem 1rem;
   }
 `
@@ -28,7 +28,7 @@ export const BlogPostContent = styled.div`
     color: var(--primaryColor);
   }
 
-  ${mediaSizeGreaterThan(sizes.xl)} {
+  @media ${mediaSizeGreaterThan(sizes.xl)} {
     font-size: 1.1rem;
   }
 `
@@ -46,7 +46,7 @@ export const BlogPostHeader = styled.div`
 export const BlogPostDateThumbnail = styled(DateThumbnail)`
   top: 0;
 
-  ${mediaSizeLessThan(sizes.md)} {
+  @media ${mediaSizeLessThan(sizes.md)} {
     right: 0;
   }
 `

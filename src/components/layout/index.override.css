@@ -85,7 +85,7 @@ html[data-theme='dark'] #themeSwitcherCircle {
   content: '\f185';
   display: block;
   font-size: 20px;
-  color: #FFD03C;
+  color: #ffd03c;
   margin-left: -1px;
   font-weight: 900;
 }
@@ -93,4 +93,9 @@ html[data-theme='dark'] #themeSwitcherCircle {
 html[data-theme='dark'] #themeSwitcherCircle::after {
   content: '\f186';
   color: #ddd;
+}
+
+body.locked-scroll {
+  height: 100vh;
+  overflow-y: hidden;
 }

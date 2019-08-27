@@ -16,7 +16,7 @@ export const PostPreviewExcerpt = styled.div`
   width: 100%;
   white-space: nowrap;
 
-  ${mediaSizeLessThan(sizes.md)} {
+  @media ${mediaSizeLessThan(sizes.md)} {
     font-size: 0.8rem;
   }
 `
@@ -38,7 +38,7 @@ export const PostPreviewWrapperLink = styled(Link)`
     }
   }
 
-  ${mediaSizeLessThan(sizes.md)} {
+  @media ${mediaSizeLessThan(sizes.md)} {
     width: 100%;
     ${PostPreviewExcerpt} {
       max-height: ${EXCERPT_HEIGHT};
@@ -56,7 +56,7 @@ export const PostPreviewTitle = styled.h4`
   white-space: nowrap;
   display: block;
 
-  ${mediaSizeLessThan(sizes.md)} {
+  @media ${mediaSizeLessThan(sizes.md)} {
     font-size: 1.15rem;
   }
 `
@@ -106,7 +106,7 @@ export const LevelOverlay = styled.div`
   padding: 0.25rem 0.5rem;
   font-size: 0.9rem;
 
-  ${mediaSizeLessThan(sizes.md)} {
+  @media ${mediaSizeLessThan(sizes.md)} {
     font-size: 0.8rem;
   }
 `
@@ -116,7 +116,7 @@ export const PostPreviewFooter = styled.div`
   font-size: 0.9rem;
   padding-bottom: 0.5rem;
 
-  ${mediaSizeLessThan(sizes.md)} {
+  @media ${mediaSizeLessThan(sizes.md)} {
     font-size: 0.8rem;
   }
 

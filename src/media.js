@@ -6,5 +6,28 @@ export const sizes = {
   xl: 1200,
 }
 
-export const mediaSizeLessThan = size => `@media (max-width: ${size}px)`
-export const mediaSizeGreaterThan = size => `@media (min-width: ${size}px)`
+export const mediaSizeLessThan = size => `(max-width: ${size}px)`
+export const mediaSizeGreaterThan = size => `(min-width: ${size}px)`
+
+export const makeMediaListener = (
+  mediaQueryStr,
+  onMatch = () => {},
+  onDismatch = () => {}
+) => {
+  const mql = window.matchMedia(mediaQueryStr)
+  const stopListening = () => {
+    mql.removeListener(listener)
+  }
+
+  const listener = e => {
+    if (e.matches) {
+      onMatch({ stopListening })
+    } else {
+      onDismatch({ stopListening })
+    }
+  }
+
+  mql.addListener(listener)
+
+  return stopListening
+}

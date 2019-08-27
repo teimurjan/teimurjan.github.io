@@ -5,7 +5,7 @@ export const Container = styled.div`
   width: 55%;
   margin: 0 auto;
 
-  ${mediaSizeLessThan(sizes.md)} {
+  @media ${mediaSizeLessThan(sizes.md)} {
     width: 94%;
     margin: 0 3%;
   }

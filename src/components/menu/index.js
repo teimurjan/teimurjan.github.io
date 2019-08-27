@@ -6,6 +6,8 @@ import {
   MenuDropdown,
   MenuIconBar,
 } from './index.styles'
+import { listenMediaSizeLessThan, sizes } from '../../media'
+import useModalScrollLock from '../../hooks/useModalScrollLock'
 
 const MenuHamburger = ({ isOpen, ...props }) => (
   <MenuIcon isOpen={isOpen} {...props}>
@@ -17,10 +19,12 @@ const MenuHamburger = ({ isOpen, ...props }) => (
 
 export const Menu = ({ children }) => {
   const [isOpen, setIsOpen] = React.useState(false)
+  const [lockScroll, unlockScroll] = useModalScrollLock({ isOpen })
 
   const toggle = React.useCallback(() => {
     setIsOpen(!isOpen)
   }, [isOpen])
+
   const close = React.useCallback(() => {
     setIsOpen(false)
   }, [])

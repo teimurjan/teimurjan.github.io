@@ -9,7 +9,7 @@ export const LayoutContent = styled.div`
   margin: 60px 0 50px 0;
   padding-top: 5px;
 
-  ${mediaSizeLessThan(sizes.md)} {
+  @media ${mediaSizeLessThan(sizes.md)} {
     margin: 50px 0 40px 0;
   }
 `

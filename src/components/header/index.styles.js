@@ -11,7 +11,7 @@ export const HeaderWrapper = styled.div`
   top: 0;
   height: 60px;
 
-  ${mediaSizeLessThan(sizes.md)} {
+  @media ${mediaSizeLessThan(sizes.md)} {
     height: 50px;
   }
 
@@ -30,7 +30,7 @@ export const HeaderInner = styled.div`
 export const HeaderTitle = styled.h2`
   margin: 0;
   font-size: 2rem;
-  ${mediaSizeLessThan(sizes.sm)} {
+  @media ${mediaSizeLessThan(sizes.sm)} {
     font-size: 1.5rem;
   }
   font-family: 'Bungee', cursive;

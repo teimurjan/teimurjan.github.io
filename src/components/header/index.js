@@ -28,7 +28,7 @@ const Header = ({ siteTitle }) => (
           <MenuItem>
             <ThemeSwitcher
               css={css`
-                ${mediaSizeLessThan(sizes.sm)} {
+                @media ${mediaSizeLessThan(sizes.sm)} {
                   margin: 0 auto;
                 }
               `}

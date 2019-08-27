@@ -174,7 +174,7 @@ const Layout = ({ children }) => (
           );
         }
 
-        ${mediaSizeLessThan(sizes.md)} {
+        @media ${mediaSizeLessThan(sizes.md)} {
           h1 {
             font-size: 1.75rem !important;
           }

@@ -11,7 +11,7 @@ export const FooterWrapper = styled.div`
   bottom: 0;
   height: 50px;
 
-  ${mediaSizeLessThan(sizes.md)} {
+  @media ${mediaSizeLessThan(sizes.md)} {
     height: 40px;
   }
 
@@ -36,7 +36,7 @@ export const FooterLinkIcon = styled.a`
   }
   font-size: 1.5rem;
   margin: 0 10px;
-  ${mediaSizeLessThan(sizes.sm)} {
+  @media ${mediaSizeLessThan(sizes.sm)} {
     font-size: 1.2rem;
     margin: 0 7px;
   }
@@ -57,7 +57,7 @@ export const EmailLink = styled(PrimaryALink)`
   &:before {
     content: 'teymurgg321@gmail.com';
 
-    ${mediaSizeLessThan(sizes.md)} {
+    @media ${mediaSizeLessThan(sizes.md)} {
       content: 'email me';
     }
   }

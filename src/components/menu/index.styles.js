@@ -25,7 +25,7 @@ export const MenuIcon = styled.div`
   height: ${(menuIconBarHeight + menuIconBarSpacing) * menuIconBarsCount}px;
 
   display: none !important;
-  ${mediaSizeLessThan(sizes.md)} {
+  @media ${mediaSizeLessThan(sizes.md)} {
     display: block !important;
   }
 
@@ -58,15 +58,16 @@ export const MenuIcon = styled.div`
 `
 
 export const MenuDropdown = styled.div`
-  display: flex;
   align-items: center;
+  display: none;
 
-  ${mediaSizeLessThan(sizes.md)} {
+  @media ${mediaSizeLessThan(sizes.md)} {
+    display: flex;
     transition: all 200ms ease-in-out;
     transform-origin: top center;
     width: 100%;
     right: 0;
-    margin-top: 14px;
+    padding: 10px 0;
     transform: scaleY(${props => (props.isOpen ? 1 : 0)});
     position: absolute;
     flex-direction: column;
@@ -79,7 +80,7 @@ const menuItemCSS = css`
   padding: 0 1rem;
   text-transform: uppercase;
 
-  ${mediaSizeLessThan(sizes.md)} {
+  @media ${mediaSizeLessThan(sizes.md)} {
     padding: 1rem 0 0.5rem 0;
     width: 100%;
     text-align: center;

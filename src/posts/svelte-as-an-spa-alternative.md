@@ -59,9 +59,9 @@ Let’s look at the example in `src/App.svelte` file.
 
 <h1>{name}</h1>
 ```
-Script section is an optional JS block, which can declare variables and functions that will be used in the template block.
+Script section is an optional Javascript block, which can declare variables and functions that will be used in the template block.
 Style is an optional block with the CSS rules for the template block. It’s important to understand that these rules are scoped to the component. Applying a style to a `p` element won’t affect all the paragraphs on the page.
-Template block is the only required block, which is the presentation of a component. It’s tightly bound to the style and script blocks as they determine how the view will be styled and how it will behave.
+Template block is the only required one, which is the presentation of a component. It’s tightly bound to the style and script blocks as they determine how the view will be styled and how it will behave.
 
 Returning to the login form we’re building. Let’s create a new file `LoginForm.svelte` inside the `src` folder with the following content:
 
@@ -137,7 +137,7 @@ Returning to the login form we’re building. Let’s create a new file `LoginFo
 </form>
 ``` 
 
-It’s a dumb styled component that we’ll extend later. This component should be used inside the App component. Edit the `src/App.svelte` so it’ll look like this:
+It’s a dumb styled component that we’ll make smart later. To be able to see this component at our site we render it inside the App component. Edit the `src/App.svelte` so it’ll look like this:
 
 ```html
 <script>
@@ -147,11 +147,11 @@ It’s a dumb styled component that we’ll extend later. This component should 
 <style>
   section {
     height: 100vh;
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background: linear-gradient(to right, #cd76e2, #e358ab);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, #cd76e2, #e358ab);
   }
 </style>
 
@@ -159,9 +159,11 @@ It’s a dumb styled component that we’ll extend later. This component should 
   <LoginForm />
 </section>
 ```
-Now, visiting localhost:5000 should show the created form.
-State
-Any component is Svelte is able to have its own state. State is a variable or group of variables which can be used inside the template. In turn the template will be re-rendered once a state piece is changed.
+
+By doing that, we've made the form rendered at localhost:5000.
+
+# State
+Any component in Svelte is able to have its own state. State is a variable or group of variables which can be used inside the template. In turn the template will be re-rendered once a state piece is changed.
 
 We’ll declare email and password state variables where the form values for the appropriate fields will be stored. It’ll give us access to the form values, so we’ll create a fake function to handle form submissions too.
 
@@ -201,12 +203,12 @@ We’ll declare email and password state variables where the form values for the
 </form>
 ```
 
-State variables are declared as common Javascript variables, but in order to bind them to the form fields, it is necessary to use `bind:value` directive. There are also couple unfamiliar things: 
+State variables look like common Javascript variables, but in order to bind them to the form fields, it is necessary to use `bind:value` directive. There are also couple unfamiliar things: 
 * ```on:submit|preventDefault``` is a short-hand for preventing default events’ behaviour. It’s so comfortable to have it in this way rather than writing `e.preventDefault()` every time.
-* ```{#if isLoading}Logging in...{:else}Log in 🔒{/if}``` is about Svelte’s template syntax. As there is no JS in the template block, there is a special syntax for using ifs, loops etc.
+* ```{#if isLoading}Logging in...{:else}Log in 🔒{/if}``` is a piece of Svelte’s template syntax. As there is no JS in the template block, there is a special syntax for using ifs, loops etc.
 
 
-Finally, let’s add the validation to our form to make it 100% complete:
+Finally, let’s add the validation to our form. It can be acheived by creating another state variable `errors` which will be filled with the errors when the form with the invalid values is submitting.
 ```html
 <script>
   let email = "";
@@ -273,10 +275,138 @@ Finally, let’s add the validation to our form to make it 100% complete:
 </form>
 ```
 
-We’ve made a pretty login form with Svelte. However, after a successful login operation nothing happens.
-
 <div align="center">
     <img width="60%" src="./assets/svelte-as-an-spa-alternative/form-1.gif" />
 </div>
 
-Such a behaviour caused by doing nothing inside our fake submission function.
+The form is almost complete. The only thing left before usage of the form in production is the representation of a success message after the authentication went well.
+Let's create a state variable for tracking successful submissions:
+
+```js
+let isSuccess = false;
+```
+
+and modify our `handleSubmit` function to change the value of this variable:
+
+```js
+const handleSubmit = () => {
+  errors = {};
+
+  if (email.length === 0) {
+    errors.email = "Field should not be empty";
+  }
+  if (password.length === 0) {
+    errors.password = "Field should not be empty";
+  }
+
+  if (Object.keys(errors).length === 0) {
+    isLoading = true;
+    // Simulate network request
+    setTimeout(() => {
+      isLoading = false;
+      isSuccess = true;
+      // Authorize the user
+    }, 1000);
+  }
+};
+```
+
+This modification made the form to go into success state as soon as the submission is done. But if you check your development server, you won't find any changes in the form's behaviours. That's becuase the template has not been edited too. The logic should follow the rule: if `isSuccess`, then show a success message, otherwise show the login form. Svelte's template syntax allows us to write this logic easily:
+
+```html
+<form on:submit|preventDefault={handleSubmit}>
+  {#if isSuccess}
+    <div class="success">
+      🔓
+      <br />
+      You've been successfully logged in.
+    </div>
+  {:else}
+    <h1>👤</h1>
+
+    <label>Email</label>
+    <input name="email" placeholder="name@example.com" bind:value={email} />
+
+    <label>Password</label>
+    <input name="password" type="password" bind:value={password} />
+
+    <button type="submit">
+      {#if isLoading}Logging in...{:else}Log in 🔒{/if}
+    </button>
+
+    {#if Object.keys(errors).length > 0}
+      <ul class="errors">
+        {#each Object.keys(errors) as field}
+          <li>{field}: {errors[field]}</li>
+        {/each}
+      </ul>
+    {/if}
+  {/if}
+</form>
+```
+
+## Props
+We've sorted out everything about the internal component's state. Now it's time to go through the external dependencies called properties. Declaration of a property looks so similiar to the state, except the keyword `export`.
+
+```html
+<script>
+	export let answer;
+</script>
+
+<p>The answer is {answer}</p>
+```
+
+```html
+<script>
+	import Nested from './Nested.svelte';
+</script>
+
+<Nested answer={42}/>
+```
+
+To make our login form generic and clean, let's factor out the submission logic in a property `submit`. It will be a funciton which returns a resolved promise if the submit action has succeded and rejected promise if there is an error. Let us declare a prop `submit` by the example given above:
+
+```js
+export let submit;
+```
+
+And we also need an update in the `handleSubmit` function to use the new `submit` property.
+
+```js
+const handleSubmit = () => {
+  errors = {};
+
+  if (email.length === 0) {
+    errors.email = "Field should not be empty";
+  }
+  if (password.length === 0) {
+    errors.password = "Field should not be empty";
+  }
+
+  if (Object.keys(errors).length === 0) {
+    isLoading = true;
+    submit({ email, password })
+      .then(() => {
+        isSuccess = true;
+        isLoading = false;
+      })
+      .catch(err => {
+        errors.server = err;
+        isLoading = false;
+      });
+  }
+};
+```
+
+The component is ready and it's time to use it. If you return to the form and try to submit it, you'll notice that the state of the button has not been changed from loading. In addition there is an exception in the console saying: `Uncaught TypeError: submit is not a function`. Of course, it's because of the missing prop `submit`. `App.svelte` should pass this prop to our login form. Let's declare this function in the App component and pass it to the login form.
+
+```js
+const submit = ({ email, password }) =>
+  new Promise((resolve, reject) => setTimeout(resolve, 1000));
+```
+
+```jsx
+<section>
+  <LoginForm submit={submit} />
+</section>
+```

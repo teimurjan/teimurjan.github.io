@@ -17,14 +17,19 @@ collections:
       - { label: 'Excerpt', name: 'excerpt', widget: 'string' }
       - { label: 'Tags', name: 'tags', widget: 'list' }
       - { label: 'Body', name: 'body', widget: 'markdown' }
-  - name: "pages"
-    label: "Pages"
+  - name: 'pages'
+    label: 'Pages'
     files:
-      - file: "src/md-pages/index.md"
-        label: "Index Page"
-        name: "index"
+      - file: 'src/md-pages/index.md'
+        label: 'Index Page'
+        name: 'index'
         fields:
-          - {label: "Template Key", name: "templateKey", widget: "hidden", default: "md-page"}
-          - { label: 'Title', name: 'title', widget: 'string' }
+          - {
+              label: 'Template Key',
+              name: 'templateKey',
+              widget: 'hidden',
+              default: 'md-page',
+            }
+          - { label: 'Title', name: 'title', widget: 'string', optional: true }
           - { label: 'Path', name: 'path', widget: 'string' }
           - { label: 'Body', name: 'body', widget: 'markdown' }

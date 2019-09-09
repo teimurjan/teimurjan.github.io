@@ -2,30 +2,33 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import { graphql } from 'gatsby'
 import PropTypes from 'prop-types'
-import Layout from '../components/layout'
-import { Container } from '../components/container/index.styles'
-import { MdPageTitle, MdPageContent } from '../pages-styles/index.styles'
+import Layout from '../../components/layout'
+import { Container } from '../../components/container/index.styles'
+import { MdPageTitle, MdPageContent } from './index.styles'
 
-const IndexPage = ({ data }) => {
-  const { markdownRemark, site } = data
+const MarkdownPage = ({ pageContext }) => {
+  const { markdownRemark, site } = pageContext
   const { frontmatter, html } = markdownRemark
   const {
     siteMetadata: { title: siteTitle },
   } = site
+
+  const title =
+    frontmatter.title && frontmatter.title.length > 0
+      ? frontmatter.title
+      : undefined
   return (
     <Layout>
-      {frontmatter.title && (
-        <Helmet title={`${siteTitle} - ${frontmatter.title}`} />
-      )}
+      {title && <Helmet title={`${siteTitle} - ${title}`} />}
       <Container>
-        {frontmatter.title && <MdPageTitle>{frontmatter.title}</MdPageTitle>}
+        {title && <MdPageTitle>{title}</MdPageTitle>}
         <MdPageContent dangerouslySetInnerHTML={{ __html: html }} />
       </Container>
     </Layout>
   )
 }
 
-IndexPage.propTypes = {
+MarkdownPage.propTypes = {
   data: PropTypes.shape({
     markdownRemark: PropTypes.shape({
       frontmatter: PropTypes.shape({
@@ -41,21 +44,4 @@ IndexPage.propTypes = {
   }).isRequired,
 }
 
-export const query = graphql`
-  query {
-    markdownRemark(frontmatter: { path: { eq: "/" } }) {
-      html
-      frontmatter {
-        path
-        title
-      }
-    }
-    site {
-      siteMetadata {
-        title
-      }
-    }
-  }
-`
-
-export default IndexPage
+export default MarkdownPage

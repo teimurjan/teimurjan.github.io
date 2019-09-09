@@ -30,6 +30,6 @@ collections:
               widget: 'hidden',
               default: 'md-page',
             }
-          - { label: 'Title', name: 'title', widget: 'string', optional: true }
+          - { label: 'Title', name: 'title', widget: 'string', required: false }
           - { label: 'Path', name: 'path', widget: 'string' }
           - { label: 'Body', name: 'body', widget: 'markdown' }

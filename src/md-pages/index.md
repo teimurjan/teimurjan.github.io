@@ -1,5 +1,5 @@
 ---
-title: '1'
+title: ''
 path: /
 ---
 ## Let's get acquainted 🖐

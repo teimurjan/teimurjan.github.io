@@ -25,6 +25,7 @@ module.exports = {
       resolve: 'gatsby-transformer-remark',
       options: {
         plugins: [
+          'gatsby-plugin-sharp',
           'gatsby-remark-reading-time',
           'gatsby-remark-copy-images',
           'gatsby-remark-copy-linked-files',

@@ -1,0 +1,1 @@
+{"version":3,"file":"static/iframe.0cb79e8fea6889913d96.bundle.js","sources":["webpack:///./src/theme/default.js"],"sourcesContent":["export default {\n  colors: {\n    warning: \"#F7CA18\",\n    primary: \"#65b37a\",\n    danger: \"#D24D57\",\n    info: \"#458af9\"\n  }\n};\n"],"mappings":"AACA","sourceRoot":""}

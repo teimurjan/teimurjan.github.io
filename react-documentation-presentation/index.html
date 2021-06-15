@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Documentation in ReactJS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Roboto");
+
+        html {
+            background: #1d1e22;
+            font-family: "Roboto", sans-serif;
+            font-size: 1.5em;
+            height: 100%;
+        }
+
+        body {
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        .box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            flex-direction: column;
+        }
+
+        .box-link {
+            width: 60%;
+            display: flex;
+            align-items: center;
+            margin: 1em;
+        }
+
+        @media (orientation: portrait) {
+            .box-link {
+                width: 90%;
+            }
+        }
+
+        a {
+            padding: 1.5em;
+            border: solid 4px transparent;
+            text-decoration: none;
+            width: 100%;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: .2em;
+            font-weight: bold;
+        }
+
+        a.gradient-1 {
+            border-image: linear-gradient(-45deg, #ff9966, #ff5e62);
+            border-image-slice: 1;
+            color: #ff9966;
+        }
+
+        a.gradient-1:hover {
+            background: linear-gradient(-45deg, #ff9966, #ff5e62);
+            color: #fff;
+        }
+
+        a.gradient-2 {
+            border-image: linear-gradient(-45deg, #0cebeb, #29ffc6);
+            border-image-slice: 1;
+            color: #0cebeb;
+        }
+
+        a.gradient-2:hover {
+            background: linear-gradient(-45deg, #0cebeb, #29ffc6);
+            color: #fff;
+        }
+
+        a.gradient-3 {
+            border-image: linear-gradient(-45deg, #7F00FF, #E100FF);
+            border-image-slice: 1;
+            color: #E100FF;
+        }
+
+        a.gradient-3:hover {
+            background: linear-gradient(-45deg, #7F00FF, #E100FF);
+            color: #fff;
+        }
+
+        a.gradient-4 {
+            border-image: linear-gradient(-45deg, #2dc3ff, #3ef9f6);
+            border-image-slice: 1;
+            color: #19cbea;
+        }
+
+        a.gradient-4:hover {
+            background: linear-gradient(-45deg, #2dc3ff, #3ef9f6);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="box-link">
+            <a class="gradient-1" href="cosmos">Cosmos</a>
+        </div>
+        <div class="box-link">
+            <a class="gradient-2" href="styleguidist">Styleguidist</a>
+        </div>
+        <div class="box-link">
+            <a class="gradient-3" href="storybook">Storybook</a>
+        </div>
+        <div class="box-link">
+            <a class="gradient-4" href="docz">Docz</a>
+        </div>
+    </div>
+</body>
+
+</html>

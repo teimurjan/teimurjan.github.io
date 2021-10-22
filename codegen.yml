@@ -1,0 +1,14 @@
+overwrite: true
+schema: 'http://localhost:8000/___graphql'
+documents: 'src/**/*/!(*.d).{ts,tsx}'
+generates:
+  src/__generated__/graphql.d.ts:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+config:
+  namingConvention:
+    enumValues: keep
+hooks:
+  afterAllFileWrite:
+    - prettier --write

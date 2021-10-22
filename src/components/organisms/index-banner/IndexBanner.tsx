@@ -1,0 +1,95 @@
+import { StaticImage } from 'gatsby-plugin-image'
+import { css, keyframes } from '@emotion/react'
+import { Fragment } from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
+import { Banner } from '../../molecules'
+import { Square } from '../../atoms'
+import { theme } from '../../../utils'
+import { IndexBannerQuery } from '../../../__generated__/graphql'
+
+const roll = (rotation: number) => keyframes`
+  0% {
+    transform: translateX(-100vw);
+  }
+
+  100% {
+    transform: translateX(0) rotate(${rotation}deg);
+  }
+`
+
+const query = graphql`
+  query IndexBanner {
+    gcms {
+      bios {
+        fullName
+        headline
+        about
+      }
+    }
+  }
+`
+
+const IndexBanner = () => {
+  const {
+    gcms: {
+      bios: [{ fullName, headline, about }],
+    },
+  } = useStaticQuery<IndexBannerQuery>(query)
+
+  return (
+    <Banner
+      title={fullName}
+      subtitle={headline}
+      description={about}
+      image={
+        <Fragment>
+          <StaticImage
+            css={css``}
+            src="../../../assets/profile.png"
+            alt="profile"
+            placeholder="blurred"
+            layout="fullWidth"
+          />
+          <Square
+            sizes={['70vw', '80vw']}
+            color="blue"
+            css={css`
+              position: absolute;
+              z-index: -1;
+              bottom: 5vw;
+              left: 10%;
+              animation: ${roll(200)} 2s
+                ${theme.transition.timingFunction.easeInOutCubic} forwards;
+              max-width: 500px;
+
+              @media ${theme.screens.small.mediaUpTo} {
+                left: 30%;
+                bottom: 20%;
+              }
+            `}
+          />
+          <Square
+            sizes={['15vw', '70vw']}
+            color="blueAlpha"
+            css={css`
+              position: absolute;
+              z-index: -1;
+              bottom: 5vw;
+              left: -30%;
+              animation: ${roll(150)} 2s
+                ${theme.transition.timingFunction.easeInOutCubic} forwards;
+              max-width: 300px;
+
+              @media ${theme.screens.small.mediaUpTo} {
+                left: 0;
+                bottom: 10%;
+              }
+            `}
+          />
+        </Fragment>
+      }
+    />
+  )
+}
+
+export default IndexBanner

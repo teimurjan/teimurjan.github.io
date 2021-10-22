@@ -1,0 +1,154 @@
+import { css } from '@emotion/react'
+import { differenceInDays, format, parseISO } from 'date-fns'
+import { graphql, useStaticQuery } from 'gatsby'
+import { useElementVisibility } from '../../../hooks'
+import { theme } from '../../../utils'
+import { MediaQuery } from '../../../__generated__/graphql'
+import { Link, Typography } from '../../atoms'
+import { Timeline } from '../../molecules'
+
+const query = graphql`
+  query Media {
+    gcms {
+      publications {
+        __typename
+        id
+        title
+        link
+        date
+      }
+      conferences {
+        __typename
+        id
+        title
+        topic
+        link
+        date
+        videoEmbed {
+          link
+          iframeOptions
+        }
+      }
+      interviews {
+        __typename
+        id
+        title
+        date
+        videoEmbed {
+          link
+          iframeOptions
+        }
+      }
+    }
+  }
+`
+
+const DATE_FORMAT = 'MMM yyyy'
+
+const Media = () => {
+  const {
+    gcms: { publications, conferences, interviews },
+  } = useStaticQuery<MediaQuery>(query)
+
+  const { appearedOnce } = useElementVisibility(
+    typeof document !== 'undefined' ? document.getElementById('media') : null,
+    0.25
+  )
+
+  const mediaItems = [...publications, ...conferences, ...interviews].sort(
+    (a, b) => -differenceInDays(parseISO(a.date), parseISO(b.date))
+  )
+
+  const renderItem = (item: typeof mediaItems[0]) => {
+    if (item.__typename === 'GraphCMS_Conference') {
+      return (
+        <Timeline.Item
+          key={item.id}
+          icon="🎙"
+          date={format(parseISO(item.date), DATE_FORMAT)}
+        >
+          <Typography.Title variant="h5">
+            {item.title}
+            <Link to={item.link} underline="always">
+              {item.topic} at {item.title}
+            </Link>
+          </Typography.Title>
+          {item.videoEmbed && (
+            <iframe
+              css={css`
+                display: block;
+                margin-top: ${theme.spacing.small};
+              `}
+              src={item.videoEmbed?.link}
+              {...item.videoEmbed?.iframeOptions}
+            />
+          )}
+        </Timeline.Item>
+      )
+    }
+
+    if (item.__typename === 'GraphCMS_Interview') {
+      return (
+        <Timeline.Item
+          key={item.id}
+          icon="📺"
+          date={format(parseISO(item.date), DATE_FORMAT)}
+        >
+          <Typography.Title
+            variant="h5"
+            css={css`
+              margin-bottom: auto;
+            `}
+          >
+            TV: {item.title}
+          </Typography.Title>
+          {item.videoEmbed && (
+            <iframe
+              css={css`
+                display: block;
+                margin-top: ${theme.spacing.small};
+              `}
+              src={item.videoEmbed?.link}
+              {...item.videoEmbed?.iframeOptions}
+            />
+          )}
+        </Timeline.Item>
+      )
+    }
+
+    if (item.__typename === 'GraphCMS_Publication') {
+      return (
+        <Timeline.Item
+          key={item.id}
+          icon="✏️"
+          date={format(parseISO(item.date), DATE_FORMAT)}
+        >
+          <Typography.Title variant="h5">
+            {item.title}
+            <Link to={item.link} underline="always">
+              Check it out 🔗
+            </Link>
+          </Typography.Title>
+        </Timeline.Item>
+      )
+    }
+
+    return null
+  }
+
+  return (
+    <div id="media">
+      <Typography.Title
+        css={css`
+          margin-bottom: ${theme.spacing.medium};
+        `}
+        variant="h2"
+      >
+        Media
+      </Typography.Title>
+      <Timeline hideLine={!appearedOnce}>{mediaItems.map(renderItem)}</Timeline>
+    </div>
+  )
+}
+
+export default Media

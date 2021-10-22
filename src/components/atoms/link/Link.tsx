@@ -1,0 +1,133 @@
+import { Link as GatsbyLink, GatsbyLinkProps } from 'gatsby'
+import { MouseEventHandler, useCallback, useMemo, useRef } from 'react'
+import { AnchorLink } from 'gatsby-plugin-anchor-links'
+import { css } from '@emotion/react'
+import { EmotionProps, theme } from '../../../utils'
+
+export interface Props extends EmotionProps, GatsbyLinkProps<{}> {
+  inheritFontSize?: boolean
+  color?: keyof typeof theme.colors.link
+  underline?: 'none' | 'hover' | 'always'
+}
+
+const linkCss = ({
+  inheritFontSize,
+  color = 'blue',
+  underline,
+}: Pick<Props, 'inheritFontSize' | 'color' | 'underline'>) => css`
+  font-size: ${inheritFontSize ? 'inherit' : theme.typography.text.p.fontSize};
+  line-height: ${inheritFontSize
+    ? 'inherit'
+    : theme.typography.text.p.lineHeight};
+  color: ${theme.colors.link[color]};
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+  position: relative;
+  pointer-events: auto;
+
+  &:after {
+    content: '';
+    box-sizing: border-box;
+    display: ${underline === 'none' ? 'none' : 'block'};
+    width: 100%;
+    height: 1px;
+    background: ${theme.colors.link[color]};
+    transition: transform 300ms
+      ${theme.transition.timingFunction.easeInOutCubic};
+    transform: scaleX(${underline === 'always' ? '100%' : 0});
+    transform-origin: 0 50%;
+    bottom: -0.25rem;
+    left: 0;
+    position: absolute;
+  }
+
+  &:hover:after {
+    transform: scaleX(100%);
+  }
+`
+
+const Link = ({
+  to,
+  children,
+  className,
+  onClick,
+  inheritFontSize = false,
+  color = 'blue',
+  underline = 'hover',
+  rel = 'noopener noreferrer',
+  target = '_blank',
+}: Props) => {
+  const linkRef = useRef<HTMLAnchorElement>(null)
+  const isInternal = /^\/(?!\/)/.test(to)
+  const isAnchor = /^\/(?!\/#)/.test(to)
+
+  const link = useMemo(() => {
+    if (isInternal)
+      return (
+        <GatsbyLink
+          innerRef={linkRef}
+          css={linkCss({ inheritFontSize, color, underline })}
+          to={to}
+          onClick={onClick}
+        >
+          {children}
+        </GatsbyLink>
+      )
+
+    if (isAnchor)
+      return (
+        <AnchorLink
+          gatsbyLinkProps={{ innerRef: linkRef }}
+          css={linkCss({ inheritFontSize, color, underline })}
+          to={to}
+        >
+          {children}
+        </AnchorLink>
+      )
+
+    return (
+      <a
+        href={to}
+        ref={linkRef}
+        css={linkCss({ inheritFontSize, color, underline })}
+        onClick={onClick}
+        rel={rel}
+        target={target}
+      >
+        {children}
+      </a>
+    )
+  }, [to, isInternal, isAnchor, children, inheritFontSize, color])
+
+  const handleWrapperClick: MouseEventHandler<HTMLDivElement> = useCallback(
+    (e) => {
+      const target = e.target as HTMLDivElement
+      const isLinkPropogatedEvent = target.nodeName.toLowerCase() == 'a'
+
+      if (!isLinkPropogatedEvent) {
+        e.preventDefault()
+        linkRef.current?.click()
+      }
+    },
+    [linkRef.current]
+  )
+
+  return (
+    <div
+      onClick={handleWrapperClick}
+      css={css`
+        cursor: pointer;
+
+        &:hover > a:after {
+          transform: scaleX(100%);
+        }
+      `}
+      className={className}
+    >
+      {link}
+    </div>
+  )
+}
+
+export default Link

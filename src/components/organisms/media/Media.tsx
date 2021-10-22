@@ -1,10 +1,10 @@
 import { css } from '@emotion/react'
 import { differenceInDays, format, parseISO } from 'date-fns'
 import { graphql, useStaticQuery } from 'gatsby'
-import { useElementVisibility } from '../../../hooks'
 import { theme } from '../../../utils'
 import { MediaQuery } from '../../../__generated__/graphql'
 import { Link, Typography } from '../../atoms'
+import { useAppContext } from '../../context'
 import { Timeline } from '../../molecules'
 
 const query = graphql`
@@ -50,10 +50,7 @@ const Media = () => {
     gcms: { publications, conferences, interviews },
   } = useStaticQuery<MediaQuery>(query)
 
-  const { appearedOnce } = useElementVisibility(
-    typeof document !== 'undefined' ? document.getElementById('media') : null,
-    0.25
-  )
+  const { visitedLinks } = useAppContext()
 
   const mediaItems = [...publications, ...conferences, ...interviews].sort(
     (a, b) => -differenceInDays(parseISO(a.date), parseISO(b.date))
@@ -146,7 +143,9 @@ const Media = () => {
       >
         Media
       </Typography.Title>
-      <Timeline hideLine={!appearedOnce}>{mediaItems.map(renderItem)}</Timeline>
+      <Timeline hideLine={!visitedLinks.has('media')}>
+        {mediaItems.map(renderItem)}
+      </Timeline>
     </div>
   )
 }

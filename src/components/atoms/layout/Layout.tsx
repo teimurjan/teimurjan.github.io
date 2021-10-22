@@ -3,6 +3,7 @@ import { ReactNode } from 'react'
 import { Helmet } from 'react-helmet'
 import { useStaticQuery, graphql } from 'gatsby'
 import { MetaQuery } from '../../../__generated__/graphql'
+import { AppContextProvider } from '../../context'
 
 interface Props {
   children: ReactNode
@@ -49,7 +50,7 @@ const Layout = ({ children }: Props) => {
           }
         `}
       />
-      {children}
+      <AppContextProvider>{children}</AppContextProvider>
     </div>
   )
 }

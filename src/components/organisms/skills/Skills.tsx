@@ -1,10 +1,10 @@
 import { css } from '@emotion/react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { useCallback } from 'react'
-import { useElementVisibility } from '../../../hooks'
 import { theme } from '../../../utils'
 import { SkillsQuery } from '../../../__generated__/graphql'
 import { Typography } from '../../atoms'
+import { useAppContext } from '../../context'
 import { InformativeProgress } from '../../molecules'
 
 const query = graphql`
@@ -27,10 +27,7 @@ const Skills = () => {
     gcms: { skills },
   } = useStaticQuery<SkillsQuery>(query)
 
-  const { appearedOnce } = useElementVisibility(
-    typeof document !== 'undefined' ? document.getElementById('skills') : null,
-    0.5
-  )
+  const { visitedLinks } = useAppContext()
 
   const maxYearsOfExperience = Math.max(
     ...skills.map((skill) => skill.yearsOfExperience)
@@ -38,8 +35,10 @@ const Skills = () => {
 
   const getSkillPercentage = useCallback(
     (skill: SkillsQuery['gcms']['skills'][0]) =>
-      appearedOnce ? (100 * skill.yearsOfExperience) / maxYearsOfExperience : 0,
-    [maxYearsOfExperience, appearedOnce]
+      visitedLinks.has('skills')
+        ? (100 * skill.yearsOfExperience) / maxYearsOfExperience
+        : 0,
+    [maxYearsOfExperience, visitedLinks.has('skills')]
   )
 
   const getSkillProgressLabel = useCallback(

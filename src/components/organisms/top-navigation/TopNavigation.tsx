@@ -5,10 +5,10 @@ import { Logo, Container } from '../../atoms'
 import { NavigationItem, ButtonSelect } from '../../molecules'
 import { useWindowScroll } from '../../../hooks'
 import { theme } from '../../../utils'
-import { useActiveLink } from './hooks'
+import { useAppContext } from '../../context'
 
 const TopNavigation = () => {
-  const activeLink = useActiveLink()
+  const { activeLink } = useAppContext()
 
   const scrollTop = useWindowScroll()
 

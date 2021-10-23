@@ -20,6 +20,7 @@ export const buttonCss = (inverted: boolean) => css`
   padding: ${theme.spacing.xsmall} ${theme.spacing.small};
   cursor: pointer;
   transition: all 300ms ${theme.transition.timingFunction.easeInOutCubic};
+  text-align: center;
 
   &:hover {
     background-position: left bottom;

@@ -34,7 +34,7 @@ const linkCss = ({
     background: ${theme.colors.link[color]};
     transition: transform 300ms
       ${theme.transition.timingFunction.easeInOutCubic};
-    transform: scaleX(${underline === 'always' ? '100%' : 0});
+    transform: scaleX(${underline === 'always' ? 1 : 0});
     transform-origin: 0 50%;
     bottom: -0.25rem;
     left: 0;
@@ -42,7 +42,7 @@ const linkCss = ({
   }
 
   &:hover:after {
-    transform: scaleX(100%);
+    transform: scaleX(1);
   }
 `
 
@@ -127,7 +127,7 @@ const Link = ({
         cursor: pointer;
 
         &:hover > a:after {
-          transform: scaleX(100%);
+          transform: scaleX(1);
         }
       `}
       className={className}

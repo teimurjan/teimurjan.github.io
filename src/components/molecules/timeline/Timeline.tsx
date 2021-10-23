@@ -38,7 +38,8 @@ const Timeline = ({ children, hideLine = false }: Props) => (
         top: 0;
         transition: transform 500ms
           ${theme.transition.timingFunction.easeInOutCubic};
-        transform: scaleY(${hideLine ? 0 : '100%'});
+        transform: scaleY(${hideLine ? 0 : 1});
+        transition-delay: 300ms;
         transform-origin: 50% 0;
       `}
     />

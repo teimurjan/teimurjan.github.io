@@ -15,6 +15,10 @@ const Footer = () => {
         <Flex
           css={css`
             margin-bottom: ${theme.spacing.medium};
+
+            @media ${theme.screens.small.mediaUpTo} {
+              flex-direction: column;
+            }
           `}
           gap={theme.spacing.medium}
           justifySpaceBetween

@@ -24,7 +24,7 @@ const Progress = ({ className, percentage, fullWidth }: Props) => (
         bottom: 0;
         height: 100%;
         width: 100%;
-        transform: scaleX(${percentage}%);
+        transform: scaleX(${percentage / 100});
         transform-origin: 0 100%;
         transition: transform 500ms
           ${theme.transition.timingFunction.easeInOutCubic};

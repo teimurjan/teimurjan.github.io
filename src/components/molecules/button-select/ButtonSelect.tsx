@@ -1,6 +1,7 @@
 import { css } from '@emotion/react'
 import { Fragment, useCallback, useMemo, useState } from 'react'
 import { usePopper } from 'react-popper'
+import { CSSTransition } from 'react-transition-group'
 import { Button, Typography } from '../../atoms'
 import { EmotionProps, theme } from '../../../utils'
 import { useOnClickOutside } from '../../../hooks'
@@ -57,43 +58,67 @@ const ButtonSelect = ({
   return (
     <Fragment>
       <Button
-        style={{ width: styles.popper.width }}
         className={className}
         ref={setReferenceElement}
         onClick={handleClick}
       >
         {selectedOption ? selectedOption.label : placeholder} ⬇️
       </Button>
-      {isOpen && (
+      <CSSTransition
+        in={isOpen}
+        timeout={300}
+        unmountOnExit
+        classNames="appear"
+      >
         <div
           className={popperClassName}
-          css={css`
-            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-            background: ${theme.colors.background.beige};
-            text-transform: uppercase;
-          `}
           ref={setPopperElement}
           style={styles.popper}
           {...attributes.popper}
         >
-          {options.map((option) => (
-            <div
-              css={css`
-                padding: ${theme.spacing.xsmall} ${theme.spacing.small};
-              `}
-              key={option.value}
-              onClick={() => {
-                onChange(option.value)
-                setOpen(false)
-              }}
-            >
-              <Typography.Text variant="small" color="blue">
-                {option.label}
-              </Typography.Text>
-            </div>
-          ))}
+          <div
+            css={css`
+              box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+              background: ${theme.colors.background.beige};
+              text-transform: uppercase;
+              transition: all 300ms
+                ${theme.transition.timingFunction.easeInOutCubic};
+              transform-origin: 50% 0;
+
+              .appear-enter &,
+              .appear-exit &,
+              .appear-exit-active &,
+              .appear-exited & {
+                transform: scaleY(0);
+                opacity: 0;
+              }
+
+              .appear-enter-active &,
+              .appear-enter-done {
+                transform: scaleY(1);
+                opacity: 1;
+              }
+            `}
+          >
+            {options.map((option) => (
+              <div
+                css={css`
+                  padding: ${theme.spacing.xsmall} ${theme.spacing.small};
+                `}
+                key={option.value}
+                onClick={() => {
+                  onChange(option.value)
+                  setOpen(false)
+                }}
+              >
+                <Typography.Text variant="small" color="blue">
+                  {option.label}
+                </Typography.Text>
+              </div>
+            ))}
+          </div>
         </div>
-      )}
+      </CSSTransition>
     </Fragment>
   )
 }

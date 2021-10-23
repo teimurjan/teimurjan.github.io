@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, { Pagination } from 'swiper'
 import { theme } from '../../../utils'
 import { ExperienceHistoryQuery } from '../../../__generated__/graphql'
-import { RichText, Typography } from '../../atoms'
+import { RichText, ScrollToArea, Typography } from '../../atoms'
 import { Card } from '../../molecules'
 import { useMedia } from '../../../hooks'
 
@@ -49,8 +49,9 @@ const ExperienceHistory = () => {
   )
 
   return (
-    <div
+    <ScrollToArea
       id="experience"
+      scrollOffset={-120}
       css={css`
         .swiper-pagination-bullet {
           width: 1rem;
@@ -112,7 +113,7 @@ const ExperienceHistory = () => {
           )
         })}
       </Swiper>
-    </div>
+    </ScrollToArea>
   )
 }
 

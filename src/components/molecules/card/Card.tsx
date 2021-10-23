@@ -4,7 +4,7 @@ import { forwardRef, ReactNode } from 'react'
 import { EmotionProps, theme } from '../../../utils'
 import { Typography } from '../../atoms'
 
-interface Props extends EmotionProps {
+export interface Props extends EmotionProps {
   children: ReactNode
   id?: string
   imageSrc?: string
@@ -26,7 +26,7 @@ const Card = forwardRef<HTMLDivElement, Props>(
       imageAlt,
       subtitle1,
       subtitle2,
-      color = 'beige'
+      color = 'beige',
     },
     ref
   ) => {

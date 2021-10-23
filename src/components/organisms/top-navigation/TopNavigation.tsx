@@ -1,11 +1,18 @@
 import Flex from '@react-css/flex'
-import { Link, navigate } from 'gatsby'
+import { Link } from 'gatsby'
 import { css, ClassNames } from '@emotion/react'
 import { Logo, Container } from '../../atoms'
 import { NavigationItem, ButtonSelect } from '../../molecules'
 import { useWindowScroll } from '../../../hooks'
-import { theme } from '../../../utils'
-import { useAppContext } from '../../context'
+import { Anchor, navigateToAnchor, theme } from '../../../utils'
+import { useAppContext } from '../../../context'
+
+const ITEMS = [
+  { value: Anchor.Experience, label: Anchor.Experience.toUpperCase() },
+  { value: Anchor.Skills, label: Anchor.Skills.toUpperCase() },
+  { value: Anchor.Education, label: Anchor.Education.toUpperCase() },
+  { value: Anchor.Media, label: Anchor.Media.toUpperCase() },
+]
 
 const TopNavigation = () => {
   const { activeLink } = useAppContext()
@@ -23,18 +30,15 @@ const TopNavigation = () => {
       `}
       alignItemsCenter
     >
-      <NavigationItem to="/#experience" active={activeLink === 'experience'}>
-        Experience
-      </NavigationItem>
-      <NavigationItem to="/#skills" active={activeLink === 'skills'}>
-        Skills
-      </NavigationItem>
-      <NavigationItem to="/#education" active={activeLink === 'education'}>
-        Education
-      </NavigationItem>
-      <NavigationItem to="/#media" active={activeLink === 'media'}>
-        Media
-      </NavigationItem>
+      {ITEMS.map((item) => (
+        <NavigationItem
+          key={item.value}
+          to={`/#${item.value}`}
+          active={activeLink === item.value}
+        >
+          {item.label}
+        </NavigationItem>
+      ))}
     </Flex>
   )
 
@@ -51,13 +55,8 @@ const TopNavigation = () => {
           <ButtonSelect
             css={className}
             popperClassName={className}
-            options={[
-              { value: 'experience', label: 'Experience' },
-              { value: 'skills', label: 'Skills' },
-              { value: 'education', label: 'Education' },
-              { value: 'media', label: 'Media' },
-            ]}
-            onChange={(id) => navigate(`/#${id}`)}
+            options={ITEMS}
+            onChange={navigateToAnchor}
             placeholder="Navigate"
             value={activeLink}
           />

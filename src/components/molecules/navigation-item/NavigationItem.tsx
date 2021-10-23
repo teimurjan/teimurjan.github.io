@@ -3,7 +3,7 @@ import { ReactNode } from 'react'
 import { Link } from '../../atoms'
 import { EmotionProps, theme } from '../../../utils'
 
-interface Props extends EmotionProps {
+export interface Props extends EmotionProps {
   to: string
   children: ReactNode
   active?: boolean

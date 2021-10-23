@@ -7,7 +7,7 @@ const GRAPH_CMS_URL =
 module.exports = {
   siteMetadata: {
     siteUrl: 'https://teimurjan.github.io',
-    title: 'Teimur Gasanov'
+    title: 'Teimur Gasanov',
   },
   plugins: [
     'gatsby-plugin-emotion',
@@ -15,16 +15,16 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-google-analytics',
       options: {
-        trackingId: 'UA-145378647-1'
-      }
+        trackingId: 'UA-145378647-1',
+      },
     },
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        icon: path.join(ASSETS_PATH, 'icon.png')
-      }
+        icon: path.join(ASSETS_PATH, 'icon.png'),
+      },
     },
     'gatsby-transformer-remark',
     'gatsby-plugin-mdx',
@@ -34,17 +34,17 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'assets',
-        path: ASSETS_PATH
+        path: ASSETS_PATH,
       },
-      __key: 'assets'
+      __key: 'assets',
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'pages',
-        path: './src/pages/'
+        path: './src/pages/',
       },
-      __key: 'pages'
+      __key: 'pages',
     },
     'gatsby-plugin-typescript',
     {
@@ -52,22 +52,16 @@ module.exports = {
       options: {
         typeName: 'GraphCMS',
         fieldName: 'gcms',
-        url: GRAPH_CMS_URL
-      }
+        url: GRAPH_CMS_URL,
+      },
     },
     {
       resolve: 'gatsby-plugin-google-fonts',
       options: {
         fonts: ['Roboto Mono', 'Roboto'],
-        display: 'swap'
-      }
+        display: 'swap',
+      },
     },
-    {
-      resolve: 'gatsby-plugin-anchor-links',
-      options: {
-        offset: -100,
-        duration: 500
-      }
-    }
-  ]
+    'gatsby-plugin-smoothscroll',
+  ],
 }

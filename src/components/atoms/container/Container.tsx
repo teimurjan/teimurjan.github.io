@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 import { css } from '@emotion/react'
 import { EmotionProps, theme } from '../../../utils'
 
-interface Props extends EmotionProps {
+export interface Props extends EmotionProps {
   id?: string
   children: ReactNode
 }

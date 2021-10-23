@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 import { css } from '@emotion/react'
 import { EmotionProps, theme } from '../../../utils'
 
-interface Props extends EmotionProps {
+export interface Props extends EmotionProps {
   children: ReactNode
   variant?: keyof typeof theme.typography.text
   color?: 'blue' | 'beige'

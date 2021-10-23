@@ -4,7 +4,7 @@ import { css } from '@emotion/react'
 import { Typography } from '../../atoms'
 import { EmotionProps, theme } from '../../../utils'
 
-interface Props extends EmotionProps {
+export interface Props extends EmotionProps {
   title: string
   subtitle: string
   description: string

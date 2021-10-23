@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useContext, useMemo } from 'react'
-import { useElementVisibility } from '../../hooks'
+import { useElementVisibility } from '../hooks'
 
 interface ContextValue {
   activeLink?: 'experience' | 'skills' | 'education' | 'media'
@@ -58,8 +58,6 @@ const AppContextProvider = ({ children }: ProviderProps) => {
 
     return undefined
   }, [experienceVisible, skillsVisible, educationVisible, mediaVisible])
-
-  console.log(activeLink)
 
   return (
     <AppContext.Provider value={{ activeLink, visitedLinks }}>

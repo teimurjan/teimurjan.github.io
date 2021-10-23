@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { EmotionProps, theme } from '../../../utils'
 
-interface Props extends EmotionProps {
+export interface Props extends EmotionProps {
   size: keyof typeof theme.spacing
   variant?: 'horizontal' | 'vertical'
 }

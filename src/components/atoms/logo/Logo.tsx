@@ -2,6 +2,8 @@ import { StaticImage } from 'gatsby-plugin-image'
 import { css } from '@emotion/react'
 import { theme } from '../../../utils'
 
+export interface Props {}
+
 const Logo = () => (
   <div
     css={css`

@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import { theme } from '../../../utils'
 import { Container, Typography } from '../../atoms'
 
-interface Props {
+export interface Props {
   title: string
 }
 

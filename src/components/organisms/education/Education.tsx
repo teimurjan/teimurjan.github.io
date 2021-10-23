@@ -4,7 +4,7 @@ import { Fragment } from 'react'
 import { format, parseISO } from 'date-fns'
 import { theme } from '../../../utils'
 import { EducationQuery } from '../../../__generated__/graphql'
-import { RichText, Typography } from '../../atoms'
+import { RichText, ScrollToArea, Typography } from '../../atoms'
 
 const query = graphql`
   query Education {
@@ -32,8 +32,9 @@ const Education = () => {
   } = useStaticQuery<EducationQuery>(query)
 
   return (
-    <div
+    <ScrollToArea
       id="education"
+      scrollOffset={-120}
       css={css`
         padding-right: ${theme.spacing.small};
       `}
@@ -73,7 +74,7 @@ const Education = () => {
           </Typography.Text>
         </Fragment>
       ))}
-    </div>
+    </ScrollToArea>
   )
 }
 

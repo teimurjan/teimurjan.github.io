@@ -1,8 +1,7 @@
 import { Link as GatsbyLink, GatsbyLinkProps } from 'gatsby'
 import { MouseEventHandler, useCallback, useMemo, useRef } from 'react'
-import { AnchorLink } from 'gatsby-plugin-anchor-links'
 import { css } from '@emotion/react'
-import { EmotionProps, theme } from '../../../utils'
+import { EmotionProps, navigateToAnchor, theme } from '../../../utils'
 
 export interface Props extends EmotionProps, GatsbyLinkProps<{}> {
   inheritFontSize?: boolean
@@ -63,7 +62,25 @@ const Link = ({
   const isAnchor = /^\/(?!\/#)/.test(to)
 
   const link = useMemo(() => {
-    if (isInternal)
+    if (isAnchor) {
+      const anchor = to.split('#')[1]
+      return (
+        <a
+          href={to}
+          ref={linkRef}
+          css={linkCss({ inheritFontSize, color, underline })}
+          onClick={(e) => {
+            e.preventDefault()
+            navigateToAnchor(anchor)
+            onClick?.(e)
+          }}
+        >
+          {children}
+        </a>
+      )
+    }
+
+    if (isInternal) {
       return (
         <GatsbyLink
           innerRef={linkRef}
@@ -74,17 +91,7 @@ const Link = ({
           {children}
         </GatsbyLink>
       )
-
-    if (isAnchor)
-      return (
-        <AnchorLink
-          gatsbyLinkProps={{ innerRef: linkRef }}
-          css={linkCss({ inheritFontSize, color, underline })}
-          to={to}
-        >
-          {children}
-        </AnchorLink>
-      )
+    }
 
     return (
       <a

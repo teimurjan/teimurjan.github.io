@@ -10,7 +10,7 @@ type Option = {
   label: string
 }
 
-interface Props extends EmotionProps {
+export interface Props extends EmotionProps {
   options: Option[]
   value?: string
   placeholder: string

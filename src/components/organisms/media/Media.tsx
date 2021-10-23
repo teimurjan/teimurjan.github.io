@@ -3,8 +3,8 @@ import { differenceInDays, format, parseISO } from 'date-fns'
 import { graphql, useStaticQuery } from 'gatsby'
 import { theme } from '../../../utils'
 import { MediaQuery } from '../../../__generated__/graphql'
-import { Link, Typography } from '../../atoms'
-import { useAppContext } from '../../context'
+import { Link, ScrollToArea, Typography } from '../../atoms'
+import { useAppContext } from '../../../context'
 import { Timeline } from '../../molecules'
 
 const query = graphql`
@@ -134,7 +134,7 @@ const Media = () => {
   }
 
   return (
-    <div id="media">
+    <ScrollToArea id="media" scrollOffset={-120}>
       <Typography.Title
         css={css`
           margin-bottom: ${theme.spacing.medium};
@@ -146,7 +146,7 @@ const Media = () => {
       <Timeline hideLine={!visitedLinks.has('media')}>
         {mediaItems.map(renderItem)}
       </Timeline>
-    </div>
+    </ScrollToArea>
   )
 }
 

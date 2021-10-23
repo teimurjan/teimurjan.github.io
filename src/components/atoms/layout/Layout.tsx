@@ -3,9 +3,9 @@ import { ReactNode } from 'react'
 import { Helmet } from 'react-helmet'
 import { useStaticQuery, graphql } from 'gatsby'
 import { MetaQuery } from '../../../__generated__/graphql'
-import { AppContextProvider } from '../../context'
+import { AppContextProvider } from '../../../context'
 
-interface Props {
+export interface Props {
   children: ReactNode
 }
 
@@ -37,6 +37,7 @@ const Layout = ({ children }: Props) => {
           * {
             font-family: Roboto Mono, sans-serif;
             box-sizing: border-box;
+            overflow-anchor: none;
           }
 
           body {

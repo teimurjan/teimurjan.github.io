@@ -4,7 +4,7 @@ import { ReactNode } from 'react'
 import { theme } from '../../../utils'
 import { Background, BackgroundProps, Container } from '../../atoms'
 
-interface Props {
+export interface Props {
   children: ReactNode
   color: BackgroundProps['color']
 }

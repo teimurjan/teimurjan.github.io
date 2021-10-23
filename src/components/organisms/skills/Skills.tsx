@@ -3,8 +3,8 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { useCallback } from 'react'
 import { theme } from '../../../utils'
 import { SkillsQuery } from '../../../__generated__/graphql'
-import { Typography } from '../../atoms'
-import { useAppContext } from '../../context'
+import { ScrollToArea, Typography } from '../../atoms'
+import { useAppContext } from '../../../context'
 import { InformativeProgress } from '../../molecules'
 
 const query = graphql`
@@ -51,7 +51,7 @@ const Skills = () => {
   )
 
   return (
-    <div id="skills">
+    <ScrollToArea id="skills" scrollOffset={-120}>
       <Typography.Title
         css={css`
           margin-bottom: ${theme.spacing.medium};
@@ -73,7 +73,7 @@ const Skills = () => {
           fullWidth
         />
       ))}
-    </div>
+    </ScrollToArea>
   )
 }
 

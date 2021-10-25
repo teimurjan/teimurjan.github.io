@@ -1,3 +1,4 @@
+import path from 'path'
 import {
   Page,
   Text,
@@ -18,17 +19,18 @@ import {
   sortByDate,
   theme,
 } from '../../../utils'
-import ShareTech from '../../../assets/fonts/ShareTech-Regular.ttf'
-import ShareTechMono from '../../../assets/fonts/ShareTechMono-Regular.ttf'
 import { ResumeQuery } from '../../../__generated__/graphql'
 
 Font.register({
   family: 'ShareTech',
-  src: ShareTech,
+  src: path.resolve(__dirname, '../../../assets/fonts/ShareTech-Regular.ttf'),
 })
 Font.register({
   family: 'ShareTechMono',
-  src: ShareTechMono,
+  src: path.resolve(
+    __dirname,
+    '../../../assets/fonts/ShareTechMono-Regular.ttf'
+  ),
 })
 
 const styles = StyleSheet.create({
@@ -249,10 +251,11 @@ const Resume = ({
     experiences,
     publications,
     conferences,
+    ...rest
   },
 }: ResumeQuery) => {
-  return typeof window !== 'undefined' ? (
-    <Document>
+  return (
+    <Document {...rest}>
       <Page size="A4" style={styles.page}>
         <View style={styles.headerSection}>
           <View style={styles.headerContainer}>
@@ -387,7 +390,7 @@ const Resume = ({
         </View>
       </Page>
     </Document>
-  ) : null
+  )
 }
 
 export default Resume

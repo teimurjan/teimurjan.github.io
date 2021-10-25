@@ -7,6 +7,7 @@ export interface Props extends EmotionProps, GatsbyLinkProps<{}> {
   inheritFontSize?: boolean
   color?: keyof typeof theme.colors.link
   underline?: 'none' | 'hover' | 'always'
+  type?: 'anchor' | 'external' | 'internal'
 }
 
 const linkCss = ({
@@ -56,13 +57,28 @@ const Link = ({
   underline = 'hover',
   rel = 'noopener noreferrer',
   target = '_blank',
+  type,
 }: Props) => {
   const linkRef = useRef<HTMLAnchorElement>(null)
-  const isInternal = /^\/(?!\/)/.test(to)
-  const isAnchor = /^\/(?!\/#)/.test(to)
+
+  const linkType = useMemo(() => {
+    if (type) {
+      return type
+    }
+
+    if (/^\/(?!\/)/.test(to)) {
+      return 'internal'
+    }
+
+    if (/^\/#(?!\/)/.test(to)) {
+      return 'anchor'
+    }
+
+    return 'external'
+  }, [type])
 
   const link = useMemo(() => {
-    if (isAnchor) {
+    if (linkType === 'anchor') {
       const anchor = to.split('#')[1]
       return (
         <a
@@ -80,7 +96,7 @@ const Link = ({
       )
     }
 
-    if (isInternal) {
+    if (linkType === 'internal') {
       return (
         <GatsbyLink
           innerRef={linkRef}
@@ -105,7 +121,7 @@ const Link = ({
         {children}
       </a>
     )
-  }, [to, isInternal, isAnchor, children, inheritFontSize, color])
+  }, [to, linkType, children, inheritFontSize, color])
 
   const handleWrapperClick: MouseEventHandler<HTMLDivElement> = useCallback(
     (e) => {

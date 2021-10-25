@@ -16,5 +16,5 @@
     "emitDecoratorMetadata": true,
     "resolveJsonModule": true
   },
-  "include": ["./src/**/*", "@types/*.d.ts"]
+  "include": ["./src/**/*", "./config/node.tsx", "@types/*.d.ts"]
 }

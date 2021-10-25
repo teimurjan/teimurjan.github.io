@@ -3,10 +3,9 @@ import { css, keyframes } from '@emotion/react'
 import { Fragment } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { Banner } from '../../molecules'
-import { Square } from '../../atoms'
+import { Button, Square } from '../../atoms'
 import { theme } from '../../../utils'
 import { IndexBannerQuery } from '../../../__generated__/graphql'
-import { ResumeLink } from '../resume'
 
 const roll = (rotation: number) => keyframes`
   0% {
@@ -42,7 +41,11 @@ const IndexBanner = () => {
       title={fullName}
       subtitle={headline}
       description={about}
-      button={<ResumeLink />}
+      button={
+        <Button.Link type="external" to="/resume.pdf">
+          Get resume
+        </Button.Link>
+      }
       image={
         <Fragment>
           <StaticImage

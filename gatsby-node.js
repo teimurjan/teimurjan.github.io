@@ -1,20 +1,14 @@
-const webpack = require('webpack')
+const { useGatsbyNode } = require('gatsby-plugin-ts-config')
 
-exports.onCreateWebpackConfig = ({ actions }) => {
-  actions.setWebpackConfig({
-    resolve: {
-      fallback: {
-        stream: 'stream-browserify',
-        zlib: 'browserify-zlib',
-        util: require.resolve('util/'),
-        assert: require.resolve('assert/'),
-      },
-    },
-    plugins: [
-      new webpack.ProvidePlugin({
-        Buffer: ['buffer', 'Buffer'],
-        process: 'process/browser',
-      }),
+module.exports = useGatsbyNode(() => require('./config/node'), {
+  transpilerOptions: {
+    presets: [
+      [
+        '@babel/preset-react',
+        {
+          runtime: 'automatic',
+        },
+      ],
     ],
-  })
-}
+  },
+})

@@ -101,24 +101,24 @@ export default {
   },
   screens: {
     small: {
-      width: smallScreenWidth,
+      containerWidth: smallScreenWidth,
       mediaUpTo: `(max-width: ${smallScreenWidth}px)`,
       mediaFrom: `(min-width: ${smallScreenWidth + 1}px)`,
     },
     medium: {
-      width: mediumScreenWidth,
-      mediaUpTo: `(max-width: ${mediumScreenWidth}px)`,
-      mediaFrom: `(min-width: ${mediumScreenWidth + 1}px)`,
+      containerWidth: mediumScreenWidth,
+      mediaUpTo: `(max-width: ${mediumScreenWidth + 50}px)`,
+      mediaFrom: `(min-width: ${mediumScreenWidth + 51}px)`,
     },
     large: {
-      width: largeScreenWidth,
-      mediaUpTo: `(max-width: ${largeScreenWidth}px)`,
-      mediaFrom: `(min-width: ${largeScreenWidth + 1}px)`,
+      containerWidth: largeScreenWidth,
+      mediaUpTo: `(max-width: ${largeScreenWidth + 100}px)`,
+      mediaFrom: `(min-width: ${largeScreenWidth + 101}px)`,
     },
     xlarge: {
-      width: xlargeScreenWidth,
-      mediaUpTo: `(max-width: ${xlargeScreenWidth}px)`,
-      mediaFrom: `(min-width: ${xlargeScreenWidth + 1}px)`,
+      containerWidth: xlargeScreenWidth,
+      mediaUpTo: `(max-width: ${xlargeScreenWidth + 100}px)`,
+      mediaFrom: `(min-width: ${xlargeScreenWidth + 101}px)`,
     },
   },
   spacing: {

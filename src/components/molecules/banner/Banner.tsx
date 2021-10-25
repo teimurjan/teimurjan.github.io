@@ -31,14 +31,19 @@ const Banner = ({
       alignItemsCenter
     >
       <Flex.Item
-        flex={0.7}
         css={css`
+          flex: 0.7;
+
           @media ${theme.screens.small.mediaFrom} {
             padding-right: ${theme.spacing.medium};
           }
 
           @media ${theme.screens.small.mediaUpTo} {
             padding-bottom: ${theme.spacing.medium};
+          }
+
+          @media ${theme.screens.medium.mediaUpTo} {
+            flex: 0.6;
           }
         `}
       >
@@ -80,8 +85,13 @@ const Banner = ({
             margin-bottom: ${theme.spacing.medium};
             width: 100%;
           }
+
+          flex: 0.3;
+
+          @media ${theme.screens.medium.mediaUpTo} {
+            flex: 0.4;
+          }
         `}
-        flex={0.3}
       >
         {image}
       </Flex.Item>

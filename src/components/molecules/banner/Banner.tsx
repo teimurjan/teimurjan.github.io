@@ -28,19 +28,13 @@ const Banner = ({
         }
       `}
       className={className}
+      gap={theme.spacing.medium}
       alignItemsCenter
     >
       <Flex.Item
         css={css`
           flex: 0.7;
-
-          @media ${theme.screens.small.mediaFrom} {
-            padding-right: ${theme.spacing.medium};
-          }
-
-          @media ${theme.screens.small.mediaUpTo} {
-            padding-bottom: ${theme.spacing.medium};
-          }
+          padding-bottom: ${theme.spacing.medium};
 
           @media ${theme.screens.medium.mediaUpTo} {
             flex: 0.6;
@@ -80,13 +74,12 @@ const Banner = ({
         css={css`
           z-index: 1;
           position: relative;
+          align-self: flex-end;
+          flex: 0.3;
 
           @media ${theme.screens.small.mediaUpTo} {
-            margin-bottom: ${theme.spacing.medium};
             width: 100%;
           }
-
-          flex: 0.3;
 
           @media ${theme.screens.medium.mediaUpTo} {
             flex: 0.4;

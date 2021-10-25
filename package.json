@@ -1,8 +1,8 @@
 {
-  "name": "temp",
+  "name": "teimurjan",
   "version": "1.0.0",
   "private": true,
-  "description": "temp",
+  "description": "Personal website built with Gatsby.",
   "author": "Teimur Gasanov",
   "keywords": [
     "gatsby"

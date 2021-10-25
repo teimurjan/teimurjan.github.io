@@ -66,12 +66,12 @@ const Link = ({
       return type
     }
 
-    if (/^\/(?!\/)/.test(to)) {
-      return 'internal'
-    }
-
     if (/^\/#(?!\/)/.test(to)) {
       return 'anchor'
+    }
+
+    if (/^\/(?!\/)/.test(to)) {
+      return 'internal'
     }
 
     return 'external'

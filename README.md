@@ -1,54 +1,50 @@
 <p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
+  <a href="https://teimurjan.dev">
+    <img alt="Gatsby" src="./src/assets/images/logo.png" width="200" />
   </a>
 </p>
 <h1 align="center">
-  Gatsby minimal starter
+  <a href="https://teimurjan.dev">
+    teimurjan.dev
+  </a>
 </h1>
+
+Hey! 👋 This repository contains the source code for my personal website hosted on GitHub Pages.
+
+## 🤷 What makes this project special?
+
+1. Tech stack: [GraphCMS](https://graphcms.com/) + [Gatsby](https://www.gatsbyjs.com/) + [TypeScript](https://www.typescriptlang.org/).
+2. [Atomic Design Methodology](https://atomicdesign.bradfrost.com/).
+3. [GraphQL TypeScript codegen](https://www.graphql-code-generator.com/).
+4. Resume generation on website start/build via [react-pdf](https://react-pdf.org/).
+5. GitHub Actions-based automatic deployment.
 
 ## 🚀 Quick start
 
-1.  **Create a Gatsby site.**
-
-    Use the Gatsby CLI to create a new site, specifying the minimal starter.
-
+1.  **Run locally**
     ```shell
-    # create a new Gatsby site using the minimal starter
-    npm init gatsby
+    yarn start
     ```
 
-2.  **Start developing.**
-
-    Navigate into your new site’s directory and start it up.
+2.  **Build**
 
     ```shell
-    cd my-gatsby-site/
-    npm run develop
+    yarn build
     ```
 
-3.  **Open the code and start customizing!**
+3.  **Generate GraphQL typings**
 
-    Your site is now running at http://localhost:8000!
+    Run the project locally so Gatsby's GraphQL API is available. After that run:
 
-    Edit `src/pages/index.js` to see your site update in real-time!
+    ```shell
+    yarn codegen
+    ```
 
-4.  **Learn more**
+## ➡️ Plans
 
-    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
+- [ ] Automatic deployment via serverless function when a GraphCMS entity changes.
+- [ ] Extra data fethcing from LinkedIn (recommendations, skills, endorsements, etc.).
 
-    - [Tutorials](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
+## 🙏 Contribution
 
-    - [Guides](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-## 🚀 Quick start (Gatsby Cloud)
-
-Deploy this starter with one click on [Gatsby Cloud](https://www.gatsbyjs.com/cloud/):
-
-[<img src="https://www.gatsbyjs.com/deploynow.svg" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-minimal)
+Did you find a bug? Report it in Issues, please.

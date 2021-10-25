@@ -56,7 +56,12 @@ const IndexBanner = () => {
             layout="fullWidth"
           />
           <Square
-            sizes={['70vw', '80vw']}
+            sizes={{
+              small: '80vw',
+              medium: '35vw',
+              large: '30vw',
+              xlarge: '30vw',
+            }}
             color="blue"
             css={css`
               position: absolute;
@@ -74,7 +79,12 @@ const IndexBanner = () => {
             `}
           />
           <Square
-            sizes={['15vw', '70vw']}
+            sizes={{
+              small: '70vw',
+              medium: '25vw',
+              large: '20vw',
+              xlarge: '15vw',
+            }}
             color="blueAlpha"
             css={css`
               position: absolute;

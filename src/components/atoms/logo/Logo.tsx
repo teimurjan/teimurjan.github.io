@@ -17,7 +17,7 @@ const Logo = () => (
     `}
   >
     <StaticImage
-      src="../../../assets/icon.png"
+      src="../../../assets/images/logo.png"
       alt="logo"
       placeholder="blurred"
       layout="fullWidth"

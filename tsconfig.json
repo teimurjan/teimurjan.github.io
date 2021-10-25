@@ -16,5 +16,5 @@
     "emitDecoratorMetadata": true,
     "resolveJsonModule": true
   },
-  "include": ["./src/**/*"]
+  "include": ["./src/**/*", "@types/*.d.ts"]
 }

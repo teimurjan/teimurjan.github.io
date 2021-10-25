@@ -14,6 +14,10 @@ const NavigationItem = ({ to, children, className }: Props) => (
     css={css`
       padding: ${theme.spacing.small} ${theme.spacing.medium};
       text-transform: uppercase;
+
+      @media ${theme.screens.small.mediaUpTo} {
+        padding: ${theme.spacing.xsmall} ${theme.spacing.small};
+      }
     `}
     to={to}
     className={className}

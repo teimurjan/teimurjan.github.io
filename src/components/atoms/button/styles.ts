@@ -1,7 +1,11 @@
 import { css } from '@emotion/react'
 import { theme } from '../../../utils'
 
-export const buttonCss = (inverted: boolean) => css`
+interface Args {
+  inverted?: boolean
+}
+
+export const buttonCss = ({ inverted }: Args) => css`
   border: none;
   background: ${inverted
     ? `linear-gradient(to right, ${theme.colors.button.beigeDarken} 50%, ${theme.colors.button.beige} 50%)`

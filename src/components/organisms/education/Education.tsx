@@ -1,8 +1,7 @@
 import { graphql, useStaticQuery } from 'gatsby'
 import { css } from '@emotion/react'
 import { Fragment } from 'react'
-import { format, parseISO } from 'date-fns'
-import { theme } from '../../../utils'
+import { prettyRange, theme } from '../../../utils'
 import { EducationQuery } from '../../../__generated__/graphql'
 import { RichText, ScrollToArea, Typography } from '../../atoms'
 
@@ -23,8 +22,6 @@ const query = graphql`
     }
   }
 `
-
-const DATE_FORMAT = 'MMM yyyy'
 
 const Education = () => {
   const {
@@ -66,8 +63,7 @@ const Education = () => {
             {education.degree} in {education.areaOfStudy}
           </Typography.Title>
           <Typography.Text>
-            {format(parseISO(education.startDate), DATE_FORMAT)} -{' '}
-            {format(parseISO(education.endDate), DATE_FORMAT)}
+            {prettyRange(education.startDate, education.endDate)}
           </Typography.Text>
           <Typography.Text container>
             <RichText html={education.description.html} />

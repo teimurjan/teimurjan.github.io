@@ -1,9 +1,8 @@
 import { graphql, useStaticQuery } from 'gatsby'
 import { css } from '@emotion/react'
-import { format, parseISO } from 'date-fns'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, { Pagination } from 'swiper'
-import { theme } from '../../../utils'
+import { prettyRange, theme } from '../../../utils'
 import { ExperienceHistoryQuery } from '../../../__generated__/graphql'
 import { RichText, ScrollToArea, Typography } from '../../atoms'
 import { Card } from '../../molecules'
@@ -34,8 +33,6 @@ const query = graphql`
 `
 
 SwiperCore.use([Pagination])
-
-const DATE_FORMAT = 'MMM yyyy'
 
 const ExperienceHistory = () => {
   const {
@@ -98,14 +95,10 @@ const ExperienceHistory = () => {
                 imageAlt={experience.company}
                 title={experience.position}
                 subtitle1={`at ${experience.company}`}
-                subtitle2={`${format(
-                  parseISO(experience.startDate),
-                  DATE_FORMAT
-                )} - ${
+                subtitle2={prettyRange(
+                  experience.startDate,
                   experience.endDate
-                    ? format(parseISO(experience.endDate), DATE_FORMAT)
-                    : 'Now'
-                }`}
+                )}
               >
                 <RichText html={experience.description.html} />
               </Card>

@@ -23,7 +23,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        icon: path.join(ASSETS_PATH, 'icon.png'),
+        icon: path.join(ASSETS_PATH, 'images', 'logo.png'),
       },
     },
     'gatsby-transformer-remark',

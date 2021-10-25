@@ -6,6 +6,7 @@ import { Banner } from '../../molecules'
 import { Square } from '../../atoms'
 import { theme } from '../../../utils'
 import { IndexBannerQuery } from '../../../__generated__/graphql'
+import { ResumeLink } from '../resume'
 
 const roll = (rotation: number) => keyframes`
   0% {
@@ -41,11 +42,12 @@ const IndexBanner = () => {
       title={fullName}
       subtitle={headline}
       description={about}
+      button={<ResumeLink />}
       image={
         <Fragment>
           <StaticImage
             css={css``}
-            src="../../../assets/profile.png"
+            src="../../../assets/images/me.png"
             alt="profile"
             placeholder="blurred"
             layout="fullWidth"

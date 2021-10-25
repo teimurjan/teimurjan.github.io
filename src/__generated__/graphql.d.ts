@@ -2017,12 +2017,15 @@ export type GraphCms_Bio = GraphCms_Node & {
   createdBy?: Maybe<GraphCms_User>
   /** Get the document in other stages */
   documentInStages: Array<GraphCms_Bio>
+  email: Scalars['String']
   fullName: Scalars['String']
   headline: Scalars['String']
   /** List of Bio versions */
   history: Array<GraphCms_Version>
   /** The unique identifier */
   id: Scalars['ID']
+  location: Scalars['String']
+  phoneNumber: Scalars['String']
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** User that last published this document */
@@ -2079,8 +2082,11 @@ export type GraphCms_BioConnection = {
 export type GraphCms_BioCreateInput = {
   about: Scalars['String']
   createdAt?: Maybe<Scalars['GraphCMS_DateTime']>
+  email: Scalars['String']
   fullName: Scalars['String']
   headline: Scalars['String']
+  location: Scalars['String']
+  phoneNumber: Scalars['String']
   updatedAt?: Maybe<Scalars['GraphCMS_DateTime']>
 }
 
@@ -2152,6 +2158,25 @@ export type GraphCms_BioManyWhereInput = {
   /** All values that are not contained in given list. */
   createdAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
   createdBy?: Maybe<GraphCms_UserWhereInput>
+  email?: Maybe<Scalars['String']>
+  /** All values containing the given string. */
+  email_contains?: Maybe<Scalars['String']>
+  /** All values ending with the given string. */
+  email_ends_with?: Maybe<Scalars['String']>
+  /** All values that are contained in given list. */
+  email_in?: Maybe<Array<Scalars['String']>>
+  /** All values that are not equal to given value. */
+  email_not?: Maybe<Scalars['String']>
+  /** All values not containing the given string. */
+  email_not_contains?: Maybe<Scalars['String']>
+  /** All values not ending with the given string */
+  email_not_ends_with?: Maybe<Scalars['String']>
+  /** All values that are not contained in given list. */
+  email_not_in?: Maybe<Array<Scalars['String']>>
+  /** All values not starting with the given string. */
+  email_not_starts_with?: Maybe<Scalars['String']>
+  /** All values starting with the given string. */
+  email_starts_with?: Maybe<Scalars['String']>
   fullName?: Maybe<Scalars['String']>
   /** All values containing the given string. */
   fullName_contains?: Maybe<Scalars['String']>
@@ -2209,6 +2234,44 @@ export type GraphCms_BioManyWhereInput = {
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
   id_starts_with?: Maybe<Scalars['ID']>
+  location?: Maybe<Scalars['String']>
+  /** All values containing the given string. */
+  location_contains?: Maybe<Scalars['String']>
+  /** All values ending with the given string. */
+  location_ends_with?: Maybe<Scalars['String']>
+  /** All values that are contained in given list. */
+  location_in?: Maybe<Array<Scalars['String']>>
+  /** All values that are not equal to given value. */
+  location_not?: Maybe<Scalars['String']>
+  /** All values not containing the given string. */
+  location_not_contains?: Maybe<Scalars['String']>
+  /** All values not ending with the given string */
+  location_not_ends_with?: Maybe<Scalars['String']>
+  /** All values that are not contained in given list. */
+  location_not_in?: Maybe<Array<Scalars['String']>>
+  /** All values not starting with the given string. */
+  location_not_starts_with?: Maybe<Scalars['String']>
+  /** All values starting with the given string. */
+  location_starts_with?: Maybe<Scalars['String']>
+  phoneNumber?: Maybe<Scalars['String']>
+  /** All values containing the given string. */
+  phoneNumber_contains?: Maybe<Scalars['String']>
+  /** All values ending with the given string. */
+  phoneNumber_ends_with?: Maybe<Scalars['String']>
+  /** All values that are contained in given list. */
+  phoneNumber_in?: Maybe<Array<Scalars['String']>>
+  /** All values that are not equal to given value. */
+  phoneNumber_not?: Maybe<Scalars['String']>
+  /** All values not containing the given string. */
+  phoneNumber_not_contains?: Maybe<Scalars['String']>
+  /** All values not ending with the given string */
+  phoneNumber_not_ends_with?: Maybe<Scalars['String']>
+  /** All values that are not contained in given list. */
+  phoneNumber_not_in?: Maybe<Array<Scalars['String']>>
+  /** All values not starting with the given string. */
+  phoneNumber_not_starts_with?: Maybe<Scalars['String']>
+  /** All values starting with the given string. */
+  phoneNumber_starts_with?: Maybe<Scalars['String']>
   publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values greater than the given value. */
   publishedAt_gt?: Maybe<Scalars['GraphCMS_DateTime']>
@@ -2248,12 +2311,18 @@ export enum GraphCms_BioOrderByInput {
   about_DESC = 'about_DESC',
   createdAt_ASC = 'createdAt_ASC',
   createdAt_DESC = 'createdAt_DESC',
+  email_ASC = 'email_ASC',
+  email_DESC = 'email_DESC',
   fullName_ASC = 'fullName_ASC',
   fullName_DESC = 'fullName_DESC',
   headline_ASC = 'headline_ASC',
   headline_DESC = 'headline_DESC',
   id_ASC = 'id_ASC',
   id_DESC = 'id_DESC',
+  location_ASC = 'location_ASC',
+  location_DESC = 'location_DESC',
+  phoneNumber_ASC = 'phoneNumber_ASC',
+  phoneNumber_DESC = 'phoneNumber_DESC',
   publishedAt_ASC = 'publishedAt_ASC',
   publishedAt_DESC = 'publishedAt_DESC',
   updatedAt_ASC = 'updatedAt_ASC',
@@ -2262,8 +2331,11 @@ export enum GraphCms_BioOrderByInput {
 
 export type GraphCms_BioUpdateInput = {
   about?: Maybe<Scalars['String']>
+  email?: Maybe<Scalars['String']>
   fullName?: Maybe<Scalars['String']>
   headline?: Maybe<Scalars['String']>
+  location?: Maybe<Scalars['String']>
+  phoneNumber?: Maybe<Scalars['String']>
 }
 
 export type GraphCms_BioUpdateManyInlineInput = {
@@ -2285,8 +2357,11 @@ export type GraphCms_BioUpdateManyInlineInput = {
 
 export type GraphCms_BioUpdateManyInput = {
   about?: Maybe<Scalars['String']>
+  email?: Maybe<Scalars['String']>
   fullName?: Maybe<Scalars['String']>
   headline?: Maybe<Scalars['String']>
+  location?: Maybe<Scalars['String']>
+  phoneNumber?: Maybe<Scalars['String']>
 }
 
 export type GraphCms_BioUpdateManyWithNestedWhereInput = {
@@ -2377,6 +2452,25 @@ export type GraphCms_BioWhereInput = {
   /** All values that are not contained in given list. */
   createdAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
   createdBy?: Maybe<GraphCms_UserWhereInput>
+  email?: Maybe<Scalars['String']>
+  /** All values containing the given string. */
+  email_contains?: Maybe<Scalars['String']>
+  /** All values ending with the given string. */
+  email_ends_with?: Maybe<Scalars['String']>
+  /** All values that are contained in given list. */
+  email_in?: Maybe<Array<Scalars['String']>>
+  /** All values that are not equal to given value. */
+  email_not?: Maybe<Scalars['String']>
+  /** All values not containing the given string. */
+  email_not_contains?: Maybe<Scalars['String']>
+  /** All values not ending with the given string */
+  email_not_ends_with?: Maybe<Scalars['String']>
+  /** All values that are not contained in given list. */
+  email_not_in?: Maybe<Array<Scalars['String']>>
+  /** All values not starting with the given string. */
+  email_not_starts_with?: Maybe<Scalars['String']>
+  /** All values starting with the given string. */
+  email_starts_with?: Maybe<Scalars['String']>
   fullName?: Maybe<Scalars['String']>
   /** All values containing the given string. */
   fullName_contains?: Maybe<Scalars['String']>
@@ -2434,6 +2528,44 @@ export type GraphCms_BioWhereInput = {
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
   id_starts_with?: Maybe<Scalars['ID']>
+  location?: Maybe<Scalars['String']>
+  /** All values containing the given string. */
+  location_contains?: Maybe<Scalars['String']>
+  /** All values ending with the given string. */
+  location_ends_with?: Maybe<Scalars['String']>
+  /** All values that are contained in given list. */
+  location_in?: Maybe<Array<Scalars['String']>>
+  /** All values that are not equal to given value. */
+  location_not?: Maybe<Scalars['String']>
+  /** All values not containing the given string. */
+  location_not_contains?: Maybe<Scalars['String']>
+  /** All values not ending with the given string */
+  location_not_ends_with?: Maybe<Scalars['String']>
+  /** All values that are not contained in given list. */
+  location_not_in?: Maybe<Array<Scalars['String']>>
+  /** All values not starting with the given string. */
+  location_not_starts_with?: Maybe<Scalars['String']>
+  /** All values starting with the given string. */
+  location_starts_with?: Maybe<Scalars['String']>
+  phoneNumber?: Maybe<Scalars['String']>
+  /** All values containing the given string. */
+  phoneNumber_contains?: Maybe<Scalars['String']>
+  /** All values ending with the given string. */
+  phoneNumber_ends_with?: Maybe<Scalars['String']>
+  /** All values that are contained in given list. */
+  phoneNumber_in?: Maybe<Array<Scalars['String']>>
+  /** All values that are not equal to given value. */
+  phoneNumber_not?: Maybe<Scalars['String']>
+  /** All values not containing the given string. */
+  phoneNumber_not_contains?: Maybe<Scalars['String']>
+  /** All values not ending with the given string */
+  phoneNumber_not_ends_with?: Maybe<Scalars['String']>
+  /** All values that are not contained in given list. */
+  phoneNumber_not_in?: Maybe<Array<Scalars['String']>>
+  /** All values not starting with the given string. */
+  phoneNumber_not_starts_with?: Maybe<Scalars['String']>
+  /** All values starting with the given string. */
+  phoneNumber_starts_with?: Maybe<Scalars['String']>
   publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values greater than the given value. */
   publishedAt_gt?: Maybe<Scalars['GraphCMS_DateTime']>
@@ -8864,7 +8996,6 @@ export enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___cssPropOptimization = 'pluginCreator___pluginOptions___cssPropOptimization',
   pluginCreator___pluginOptions___defaultQuality = 'pluginCreator___pluginOptions___defaultQuality',
   pluginCreator___pluginOptions___display = 'pluginCreator___pluginOptions___display',
-  pluginCreator___pluginOptions___duration = 'pluginCreator___pluginOptions___duration',
   pluginCreator___pluginOptions___enableWebVitalsTracking = 'pluginCreator___pluginOptions___enableWebVitalsTracking',
   pluginCreator___pluginOptions___entryLimit = 'pluginCreator___pluginOptions___entryLimit',
   pluginCreator___pluginOptions___extensions = 'pluginCreator___pluginOptions___extensions',
@@ -8881,7 +9012,6 @@ export enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___lessBabel = 'pluginCreator___pluginOptions___lessBabel',
   pluginCreator___pluginOptions___mediaTypes = 'pluginCreator___pluginOptions___mediaTypes',
   pluginCreator___pluginOptions___name = 'pluginCreator___pluginOptions___name',
-  pluginCreator___pluginOptions___offset = 'pluginCreator___pluginOptions___offset',
   pluginCreator___pluginOptions___output = 'pluginCreator___pluginOptions___output',
   pluginCreator___pluginOptions___pageTransitionDelay = 'pluginCreator___pluginOptions___pageTransitionDelay',
   pluginCreator___pluginOptions___path = 'pluginCreator___pluginOptions___path',
@@ -9134,7 +9264,6 @@ export enum SitePluginFieldsEnum {
   pluginOptions___cssPropOptimization = 'pluginOptions___cssPropOptimization',
   pluginOptions___defaultQuality = 'pluginOptions___defaultQuality',
   pluginOptions___display = 'pluginOptions___display',
-  pluginOptions___duration = 'pluginOptions___duration',
   pluginOptions___enableWebVitalsTracking = 'pluginOptions___enableWebVitalsTracking',
   pluginOptions___entryLimit = 'pluginOptions___entryLimit',
   pluginOptions___extensions = 'pluginOptions___extensions',
@@ -9151,7 +9280,6 @@ export enum SitePluginFieldsEnum {
   pluginOptions___lessBabel = 'pluginOptions___lessBabel',
   pluginOptions___mediaTypes = 'pluginOptions___mediaTypes',
   pluginOptions___name = 'pluginOptions___name',
-  pluginOptions___offset = 'pluginOptions___offset',
   pluginOptions___output = 'pluginOptions___output',
   pluginOptions___pageTransitionDelay = 'pluginOptions___pageTransitionDelay',
   pluginOptions___path = 'pluginOptions___path',
@@ -9308,7 +9436,6 @@ export type SitePluginPluginOptions = {
   cssPropOptimization?: Maybe<Scalars['Boolean']>
   defaultQuality?: Maybe<Scalars['Int']>
   display?: Maybe<Scalars['String']>
-  duration?: Maybe<Scalars['Int']>
   enableWebVitalsTracking?: Maybe<Scalars['Boolean']>
   entryLimit?: Maybe<Scalars['Int']>
   extensions?: Maybe<Array<Maybe<Scalars['String']>>>
@@ -9325,7 +9452,6 @@ export type SitePluginPluginOptions = {
   lessBabel?: Maybe<Scalars['Boolean']>
   mediaTypes?: Maybe<Array<Maybe<Scalars['String']>>>
   name?: Maybe<Scalars['String']>
-  offset?: Maybe<Scalars['Int']>
   output?: Maybe<Scalars['String']>
   pageTransitionDelay?: Maybe<Scalars['Int']>
   path?: Maybe<Scalars['String']>
@@ -9353,7 +9479,6 @@ export type SitePluginPluginOptionsFilterInput = {
   cssPropOptimization?: Maybe<BooleanQueryOperatorInput>
   defaultQuality?: Maybe<IntQueryOperatorInput>
   display?: Maybe<StringQueryOperatorInput>
-  duration?: Maybe<IntQueryOperatorInput>
   enableWebVitalsTracking?: Maybe<BooleanQueryOperatorInput>
   entryLimit?: Maybe<IntQueryOperatorInput>
   extensions?: Maybe<StringQueryOperatorInput>
@@ -9370,7 +9495,6 @@ export type SitePluginPluginOptionsFilterInput = {
   lessBabel?: Maybe<BooleanQueryOperatorInput>
   mediaTypes?: Maybe<StringQueryOperatorInput>
   name?: Maybe<StringQueryOperatorInput>
-  offset?: Maybe<IntQueryOperatorInput>
   output?: Maybe<StringQueryOperatorInput>
   pageTransitionDelay?: Maybe<IntQueryOperatorInput>
   path?: Maybe<StringQueryOperatorInput>
@@ -9515,14 +9639,14 @@ export type MediaQuery = {
   gcms: {
     __typename?: 'GraphCMS'
     publications: Array<{
-      __typename?: 'GraphCMS_Publication'
+      __typename: 'GraphCMS_Publication'
       id: string
       title: string
       link: string
       date: any
     }>
     conferences: Array<{
-      __typename?: 'GraphCMS_Conference'
+      __typename: 'GraphCMS_Conference'
       id: string
       title: string
       topic: string
@@ -9538,7 +9662,7 @@ export type MediaQuery = {
         | undefined
     }>
     interviews: Array<{
-      __typename?: 'GraphCMS_Interview'
+      __typename: 'GraphCMS_Interview'
       id: string
       title: string
       date: any
@@ -9550,6 +9674,63 @@ export type MediaQuery = {
           }
         | null
         | undefined
+    }>
+  }
+}
+
+export type ResumeQueryVariables = Exact<{ [key: string]: never }>
+
+export type ResumeQuery = {
+  __typename?: 'Query'
+  gcms: {
+    __typename?: 'GraphCMS'
+    bios: Array<{
+      __typename?: 'GraphCMS_Bio'
+      fullName: string
+      headline: string
+      about: string
+      location: string
+      phoneNumber: string
+      email: string
+    }>
+    educations: Array<{
+      __typename?: 'GraphCMS_Education'
+      id: string
+      school: string
+      degree?: string | null | undefined
+      areaOfStudy: string
+      startDate: any
+      endDate?: any | null | undefined
+    }>
+    skills: Array<{
+      __typename?: 'GraphCMS_Skill'
+      id: string
+      title: string
+      yearsOfExperience: number
+    }>
+    experiences: Array<{
+      __typename?: 'GraphCMS_Experience'
+      id: string
+      company: string
+      position: string
+      startDate: any
+      endDate?: any | null | undefined
+      description: { __typename?: 'GraphCMS_RichText'; html: string }
+    }>
+    publications: Array<{
+      __typename?: 'GraphCMS_Publication'
+      id: string
+      title: string
+      link: string
+      date: any
+    }>
+    conferences: Array<{
+      __typename?: 'GraphCMS_Conference'
+      id: string
+      title: string
+      topic: string
+      link: string
+      date: any
     }>
   }
 }

@@ -124,6 +124,7 @@ const Link = ({
     <div
       onClick={handleWrapperClick}
       css={css`
+        display: inline-block;
         cursor: pointer;
 
         &:hover > a:after {

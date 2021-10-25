@@ -1,7 +1,6 @@
 import { css } from '@emotion/react'
-import { differenceInDays, format, parseISO } from 'date-fns'
 import { graphql, useStaticQuery } from 'gatsby'
-import { theme } from '../../../utils'
+import { prettyDate, sortByDate, theme } from '../../../utils'
 import { MediaQuery } from '../../../__generated__/graphql'
 import { Link, ScrollToArea, Typography } from '../../atoms'
 import { useAppContext } from '../../../context'
@@ -43,8 +42,6 @@ const query = graphql`
   }
 `
 
-const DATE_FORMAT = 'MMM yyyy'
-
 const Media = () => {
   const {
     gcms: { publications, conferences, interviews },
@@ -52,18 +49,16 @@ const Media = () => {
 
   const { visitedLinks } = useAppContext()
 
-  const mediaItems = [...publications, ...conferences, ...interviews].sort(
-    (a, b) => -differenceInDays(parseISO(a.date), parseISO(b.date))
-  )
+  const mediaItems = sortByDate([
+    ...publications,
+    ...conferences,
+    ...interviews,
+  ])
 
   const renderItem = (item: typeof mediaItems[0]) => {
     if (item.__typename === 'GraphCMS_Conference') {
       return (
-        <Timeline.Item
-          key={item.id}
-          icon="🎙"
-          date={format(parseISO(item.date), DATE_FORMAT)}
-        >
+        <Timeline.Item key={item.id} icon="🎙" date={prettyDate(item.date)}>
           <Typography.Title variant="h5">
             {item.title}
             <Link to={item.link} underline="always">
@@ -86,11 +81,7 @@ const Media = () => {
 
     if (item.__typename === 'GraphCMS_Interview') {
       return (
-        <Timeline.Item
-          key={item.id}
-          icon="📺"
-          date={format(parseISO(item.date), DATE_FORMAT)}
-        >
+        <Timeline.Item key={item.id} icon="📺" date={prettyDate(item.date)}>
           <Typography.Title
             variant="h5"
             css={css`
@@ -115,11 +106,7 @@ const Media = () => {
 
     if (item.__typename === 'GraphCMS_Publication') {
       return (
-        <Timeline.Item
-          key={item.id}
-          icon="✏️"
-          date={format(parseISO(item.date), DATE_FORMAT)}
-        >
+        <Timeline.Item key={item.id} icon="✏️" date={prettyDate(item.date)}>
           <Typography.Title variant="h5">
             {item.title}
             <Link to={item.link} underline="always">

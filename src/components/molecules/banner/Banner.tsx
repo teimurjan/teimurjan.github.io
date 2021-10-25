@@ -8,10 +8,18 @@ export interface Props extends EmotionProps {
   title: string
   subtitle: string
   description: string
+  button?: ReactNode
   image: ReactNode
 }
 
-const Banner = ({ title, subtitle, description, image, className }: Props) => {
+const Banner = ({
+  title,
+  subtitle,
+  description,
+  image,
+  button,
+  className,
+}: Props) => {
   return (
     <Flex
       css={css`
@@ -27,6 +35,10 @@ const Banner = ({ title, subtitle, description, image, className }: Props) => {
         css={css`
           @media ${theme.screens.small.mediaFrom} {
             padding-right: ${theme.spacing.medium};
+          }
+
+          @media ${theme.screens.small.mediaUpTo} {
+            padding-bottom: ${theme.spacing.medium};
           }
         `}
       >
@@ -52,10 +64,12 @@ const Banner = ({ title, subtitle, description, image, className }: Props) => {
         <Typography.Text
           css={css`
             max-width: 700px;
+            margin-bottom: ${theme.spacing.small};
           `}
         >
           {description}
         </Typography.Text>
+        {button}
       </Flex.Item>
       <Flex.Item
         css={css`

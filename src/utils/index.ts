@@ -1,3 +1,5 @@
 export { default as theme } from './theme'
 export * from './component-types'
 export * from './navigation'
+export * from './date'
+export * from './math'

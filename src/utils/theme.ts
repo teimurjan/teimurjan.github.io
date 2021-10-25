@@ -12,6 +12,13 @@ const xlargeScreenWidth = 1700
 
 export default {
   colors: {
+    resume: {
+      green: '#96D3AC',
+      black: '#252525',
+      darkGrey: '#777777',
+      grey: '#E8E8E8',
+      white: '#FDFDFD',
+    },
     typography: {
       blue: blue.hex(),
       beige: beige.hex(),

@@ -16,7 +16,6 @@ const ITEMS = [
 
 const TopNavigation = () => {
   const { activeLink } = useAppContext()
-
   const scrollTop = useWindowScroll()
 
   const shouldInvert = scrollTop > 20

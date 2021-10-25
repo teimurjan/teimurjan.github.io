@@ -9,7 +9,7 @@ export interface Props extends EmotionProps, HTMLAttributes<HTMLButtonElement> {
 
 const Button = forwardRef<HTMLButtonElement, Props>(
   ({ children, inverted = false, ...rest }, ref) => (
-    <button ref={ref} css={buttonCss(inverted)} {...rest}>
+    <button ref={ref} css={buttonCss({ inverted })} {...rest}>
       {children}
     </button>
   )

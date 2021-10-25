@@ -19,15 +19,15 @@ const Container = ({ children, className, id }: Props) => (
       }
 
       @media ${theme.screens.medium.mediaFrom} {
-        width: ${theme.screens.medium.width}px;
+        width: ${theme.screens.medium.width - 100}px;
       }
 
       @media ${theme.screens.large.mediaFrom} {
-        width: ${theme.screens.large.width}px;
+        width: ${theme.screens.large.width - 100}px;
       }
 
       @media ${theme.screens.xlarge.mediaFrom} {
-        width: ${theme.screens.xlarge.width}px;
+        width: ${theme.screens.xlarge.width - 100}px;
       }
     `}
     className={className}

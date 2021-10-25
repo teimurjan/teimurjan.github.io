@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { useCallback } from 'react'
-import { theme } from '../../../utils'
+import { calculatePercentage, theme } from '../../../utils'
 import { SkillsQuery } from '../../../__generated__/graphql'
 import { ScrollToArea, Typography } from '../../atoms'
 import { useAppContext } from '../../../context'
@@ -29,16 +29,12 @@ const Skills = () => {
 
   const { visitedLinks } = useAppContext()
 
-  const maxYearsOfExperience = Math.max(
-    ...skills.map((skill) => skill.yearsOfExperience)
-  )
-
   const getSkillPercentage = useCallback(
     (skill: SkillsQuery['gcms']['skills'][0]) =>
       visitedLinks.has('skills')
-        ? (100 * skill.yearsOfExperience) / maxYearsOfExperience
+        ? calculatePercentage(skills, 'yearsOfExperience', skill)
         : 0,
-    [maxYearsOfExperience, visitedLinks.has('skills')]
+    [visitedLinks.has('skills'), skills]
   )
 
   const getSkillProgressLabel = useCallback(
@@ -47,7 +43,7 @@ const Skills = () => {
 
       return `${skill.yearsOfExperience} ${postfix}`
     },
-    [maxYearsOfExperience]
+    []
   )
 
   return (

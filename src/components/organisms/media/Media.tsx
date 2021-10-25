@@ -61,6 +61,7 @@ const Media = () => {
         <Timeline.Item key={item.id} icon="🎙" date={prettyDate(item.date)}>
           <Typography.Title variant="h5">
             {item.title}
+            <br />
             <Link to={item.link} underline="always">
               {item.topic} at {item.title}
             </Link>
@@ -109,6 +110,7 @@ const Media = () => {
         <Timeline.Item key={item.id} icon="✏️" date={prettyDate(item.date)}>
           <Typography.Title variant="h5">
             {item.title}
+            <br />
             <Link to={item.link} underline="always">
               Check it out 🔗
             </Link>

@@ -2,7 +2,12 @@ on:
   push:
     branches:
       - main
-  pull_request:
+  workflow_dispatch:
+
+  # Allows external webhook trigger
+  repository_dispatch:
+    types:
+      - webhook
 
 jobs:
   deploy:

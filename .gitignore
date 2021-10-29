@@ -1,6 +1,2 @@
-node_modules/
-.cache/
-public
 .DS_Store
-# generated when deploy
-static/resume.pdf
+node_modules

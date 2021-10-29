@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://teimurjan.dev">
-    <img alt="Gatsby" src="./src/assets/images/logo.png" width="200" />
+    <img alt="Gatsby" src="./workspaces/landing/src/assets/images/logo.png" width="200" />
   </a>
 </p>
 <h1 align="center">
@@ -18,6 +18,7 @@ Hey! 👋 This repository contains the source code for my personal website hoste
 3. [GraphQL TypeScript codegen](https://www.graphql-code-generator.com/).
 4. Resume generation on website start/build via [react-pdf](https://react-pdf.org/).
 5. GitHub Actions-based automatic deployment.
+6. Monorepo project structure with [yarn workspaces](https://yarnpkg.com/features/workspaces).
 
 ## 🚀 Quick start
 
@@ -42,7 +43,7 @@ Hey! 👋 This repository contains the source code for my personal website hoste
 
 ## ➡️ Plans
 
-- [ ] Automatic deployment via serverless function when a GraphCMS entity changes.
+- [x] Automatic deployment via serverless function when a GraphCMS entity changes.
 - [ ] Extra data fethcing from LinkedIn (recommendations, skills, endorsements, etc.).
 
 ## 🙏 Contribution

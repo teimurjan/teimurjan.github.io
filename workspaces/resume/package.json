@@ -1,0 +1,19 @@
+{
+  "name": "@teimurjan/resume",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Resume component",
+  "author": "Teimur Gasanov",
+  "main": "./src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@react-pdf/renderer": "^2.0.20",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-pdf-html": "^1.1.4",
+    "@teimurjan/utils": "1.0.0",
+    "@teimurjan/gql-types": "1.0.0"
+  }
+}

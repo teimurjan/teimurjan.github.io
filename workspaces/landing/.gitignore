@@ -1,0 +1,4 @@
+.cache/
+public
+# generated during deploy
+static/resume.pdf

@@ -1,0 +1,18 @@
+overwrite: true
+schema: 'http://localhost:8000/___graphql'
+documents:
+  - ../landing/**/*/!(*.d).{ts,tsx}
+generates:
+  ./index.ts:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - add:
+          content: |
+            /* eslint-disable */
+config:
+  namingConvention:
+    enumValues: keep
+hooks:
+  afterAllFileWrite:
+    - prettier --write

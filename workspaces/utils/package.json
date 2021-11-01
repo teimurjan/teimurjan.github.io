@@ -2,7 +2,7 @@
   "name": "@teimurjan/utils",
   "version": "1.0.0",
   "private": true,
-  "description": "Utility tools",
+  "description": "Utilities",
   "author": "Teimur Gasanov",
   "main": "./src/index.ts",
   "scripts": {

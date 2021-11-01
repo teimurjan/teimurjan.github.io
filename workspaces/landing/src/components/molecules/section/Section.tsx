@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
 import { theme } from '@teimurjan/utils'
+import { css } from '@emotion/react'
 import { Background, BackgroundProps, Container, Spacer } from '../../atoms'
 
 export interface Props {
@@ -17,7 +18,12 @@ const Section = ({
   spacings = ['medium', 'medium'],
 }: Props) => {
   return (
-    <Background color={color}>
+    <Background
+      css={css`
+        overflow: hidden;
+      `}
+      color={color}
+    >
       {spacings[0] && <Spacer size={spacings[0]} />}
       <Container>{children}</Container>
       {spacings[1] && <Spacer size={spacings[1]} />}

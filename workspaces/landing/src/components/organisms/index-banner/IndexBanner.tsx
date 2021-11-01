@@ -49,7 +49,6 @@ const IndexBanner = () => {
       image={
         <Fragment>
           <StaticImage
-            css={css``}
             src="../../../assets/images/me.png"
             alt="profile"
             placeholder="blurred"
@@ -57,8 +56,8 @@ const IndexBanner = () => {
           />
           <Square
             sizes={{
-              small: '80vw',
-              medium: '35vw',
+              small: '90vw',
+              medium: '40vw',
               large: '30vw',
               xlarge: '30vw',
             }}
@@ -66,7 +65,7 @@ const IndexBanner = () => {
             css={css`
               position: absolute;
               z-index: -1;
-              bottom: 5vw;
+              bottom: 0;
               left: 10%;
               animation: ${roll(200)} 2s
                 ${theme.transition.timingFunction.easeInOutCubic} forwards;
@@ -74,14 +73,14 @@ const IndexBanner = () => {
 
               @media ${theme.screens.small.mediaUpTo} {
                 left: 30%;
-                bottom: 20%;
+                bottom: 15%;
               }
             `}
           />
           <Square
             sizes={{
-              small: '70vw',
-              medium: '25vw',
+              small: '80vw',
+              medium: '35vw',
               large: '20vw',
               xlarge: '15vw',
             }}
@@ -89,14 +88,14 @@ const IndexBanner = () => {
             css={css`
               position: absolute;
               z-index: -1;
-              bottom: 5vw;
+              bottom: 0;
               left: -30%;
               animation: ${roll(150)} 2s
                 ${theme.transition.timingFunction.easeInOutCubic} forwards;
               max-width: 300px;
 
               @media ${theme.screens.small.mediaUpTo} {
-                left: 0;
+                left: -10%;
                 bottom: 10%;
               }
             `}

@@ -41,6 +41,14 @@ Hey! 👋 This repository contains the source code for my personal website hoste
     yarn codegen
     ```
 
+## ✈️ Deployment
+
+GitHub Actions is mechanism reponsible for the deployments. There is a workflow file [deploy.yml](./.github/workflows/deploy.yml) that starts when the code or data are changed.
+
+<div align="center">
+  <img alt="Gatsby" src="./images/deployment.png" width="1000" />
+</div>
+
 ## ➡️ Plans
 
 - [x] Automatic deployment via serverless function when a GraphCMS entity changes.

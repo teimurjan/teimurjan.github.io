@@ -25,7 +25,7 @@ const Banner = ({
     <Flex
       css={css`
         @media ${theme.screens.small.mediaUpTo} {
-          flex-direction: column-reverse;
+          flex-direction: column;
         }
       `}
       className={className}
@@ -39,6 +39,7 @@ const Banner = ({
 
           @media ${theme.screens.medium.mediaUpTo} {
             flex: 0.6;
+            padding-bottom: 0;
           }
         `}
       >

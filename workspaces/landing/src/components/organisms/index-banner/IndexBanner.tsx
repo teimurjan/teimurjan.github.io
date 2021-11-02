@@ -51,7 +51,8 @@ const IndexBanner = () => {
           <StaticImage
             src="../../../assets/images/me.png"
             alt="profile"
-            placeholder="blurred"
+            placeholder="tracedSVG"
+            tracedSVGOptions={{ color: '#05386b' }}
             layout="fullWidth"
           />
           <Square

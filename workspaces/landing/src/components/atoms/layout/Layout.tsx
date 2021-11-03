@@ -2,7 +2,7 @@ import { css, Global } from '@emotion/react'
 import { ReactNode } from 'react'
 import { Helmet } from 'react-helmet'
 import { useStaticQuery, graphql } from 'gatsby'
-import { MetaQuery } from '@teimurjan/gql-types'
+import { SeoQuery } from '@teimurjan/gql-types'
 import { AppContextProvider } from '../../../context'
 
 export interface Props {
@@ -10,17 +10,29 @@ export interface Props {
 }
 
 const query = graphql`
-  query Meta {
+  query Seo {
     site {
       siteMetadata {
-        title
+        siteUrl
+        image
+      }
+    }
+    gcms {
+      bios {
+        fullName
+        headline
       }
     }
   }
 `
 
 const Layout = ({ children }: Props) => {
-  const { site } = useStaticQuery<MetaQuery>(query)
+  const {
+    site,
+    gcms: {
+      bios: [{ fullName, headline }],
+    },
+  } = useStaticQuery<SeoQuery>(query)
 
   return (
     <div
@@ -30,7 +42,22 @@ const Layout = ({ children }: Props) => {
     >
       <Helmet>
         <meta charSet="utf-8" />
-        <title>{site?.siteMetadata?.title}</title>
+        <title>{fullName}</title>
+        <meta name="description" content={headline} />
+        {site?.siteMetadata?.siteUrl && (
+          <meta property="og:siteUrl" content={site?.siteMetadata?.siteUrl} />
+        )}
+        <meta property="og:title" content={fullName} />
+        {headline && <meta property="og:description" content={headline} />}
+        {site?.siteMetadata?.image && (
+          <meta property="og:image" content={site?.siteMetadata?.image} />
+        )}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={fullName} />
+        {headline && <meta name="twitter:description" content={headline} />}
+        {site?.siteMetadata?.image && (
+          <meta name="twitter:image" content={site?.siteMetadata?.image} />
+        )}
       </Helmet>
       <Global
         styles={css`

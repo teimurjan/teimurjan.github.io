@@ -8514,6 +8514,7 @@ export enum SiteFieldsEnum {
   polyfill = 'polyfill',
   port = 'port',
   siteMetadata___description = 'siteMetadata___description',
+  siteMetadata___image = 'siteMetadata___image',
   siteMetadata___siteUrl = 'siteMetadata___siteUrl',
   siteMetadata___title = 'siteMetadata___title',
 }
@@ -9520,12 +9521,14 @@ export type SitePluginSortInput = {
 export type SiteSiteMetadata = {
   __typename?: 'SiteSiteMetadata'
   description?: Maybe<Scalars['String']>
+  image?: Maybe<Scalars['String']>
   siteUrl?: Maybe<Scalars['String']>
   title?: Maybe<Scalars['String']>
 }
 
 export type SiteSiteMetadataFilterInput = {
   description?: Maybe<StringQueryOperatorInput>
+  image?: Maybe<StringQueryOperatorInput>
   siteUrl?: Maybe<StringQueryOperatorInput>
   title?: Maybe<StringQueryOperatorInput>
 }
@@ -9619,9 +9622,9 @@ export type ResumeSsrQuery = {
   }
 }
 
-export type MetaQueryVariables = Exact<{ [key: string]: never }>
+export type SeoQueryVariables = Exact<{ [key: string]: never }>
 
-export type MetaQuery = {
+export type SeoQuery = {
   __typename?: 'Query'
   site?:
     | {
@@ -9629,13 +9632,22 @@ export type MetaQuery = {
         siteMetadata?:
           | {
               __typename?: 'SiteSiteMetadata'
-              title?: string | null | undefined
+              siteUrl?: string | null | undefined
+              image?: string | null | undefined
             }
           | null
           | undefined
       }
     | null
     | undefined
+  gcms: {
+    __typename?: 'GraphCMS'
+    bios: Array<{
+      __typename?: 'GraphCMS_Bio'
+      fullName: string
+      headline: string
+    }>
+  }
 }
 
 export type EducationQueryVariables = Exact<{ [key: string]: never }>
@@ -9733,63 +9745,6 @@ export type MediaQuery = {
           }
         | null
         | undefined
-    }>
-  }
-}
-
-export type ResumeQueryVariables = Exact<{ [key: string]: never }>
-
-export type ResumeQuery = {
-  __typename?: 'Query'
-  gcms: {
-    __typename?: 'GraphCMS'
-    bios: Array<{
-      __typename?: 'GraphCMS_Bio'
-      fullName: string
-      headline: string
-      about: string
-      location: string
-      phoneNumber: string
-      email: string
-    }>
-    educations: Array<{
-      __typename?: 'GraphCMS_Education'
-      id: string
-      school: string
-      degree?: string | null | undefined
-      areaOfStudy: string
-      startDate: any
-      endDate?: any | null | undefined
-    }>
-    skills: Array<{
-      __typename?: 'GraphCMS_Skill'
-      id: string
-      title: string
-      yearsOfExperience: number
-    }>
-    experiences: Array<{
-      __typename?: 'GraphCMS_Experience'
-      id: string
-      company: string
-      position: string
-      startDate: any
-      endDate?: any | null | undefined
-      description: { __typename?: 'GraphCMS_RichText'; html: string }
-    }>
-    publications: Array<{
-      __typename?: 'GraphCMS_Publication'
-      id: string
-      title: string
-      link: string
-      date: any
-    }>
-    conferences: Array<{
-      __typename?: 'GraphCMS_Conference'
-      id: string
-      title: string
-      topic: string
-      link: string
-      date: any
     }>
   }
 }

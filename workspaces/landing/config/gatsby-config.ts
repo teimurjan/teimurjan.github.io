@@ -6,8 +6,8 @@ const GRAPH_CMS_URL =
 
 module.exports = {
   siteMetadata: {
-    siteUrl: 'https://teimurjan.github.io',
-    title: 'Teimur Gasanov',
+    siteUrl: 'https://teimurjan.dev',
+    image: '/seo.png',
   },
   plugins: [
     'gatsby-plugin-emotion',

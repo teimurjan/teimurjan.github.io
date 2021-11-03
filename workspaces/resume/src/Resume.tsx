@@ -13,7 +13,7 @@ import {
   sortByDate,
   theme,
 } from '@teimurjan/utils'
-import { ResumeQuery } from '@teimurjan/gql-types'
+import { ResumeSsrQuery } from '@teimurjan/gql-types'
 import Header from './components/header'
 import Contacts from './components/contacts'
 import Profile from './components/profile'
@@ -113,7 +113,7 @@ const Resume = ({
     conferences,
     ...rest
   },
-}: ResumeQuery) => {
+}: ResumeSsrQuery) => {
   return (
     <Document {...rest}>
       <Page size="A4" style={styles.page}>

@@ -13,8 +13,11 @@
     "codegen": "yarn workspace @teimurjan/gql-types codegen",
     "typecheck": "yarn workspaces run typecheck",
     "lint": "eslint workspaces/*/src",
-    "test:e2e": "start-server-and-test develop http://localhost:8000 cypress open",
-    "test:e2e:ci": "start-server-and-test develop http://localhost:8000 percy exec -- cypress run"
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:percy:run": "percy exec -- cypress run",
+    "test:e2e": "start-server-and-test develop http://localhost:8000 cy:open",
+    "test:e2e:ci": "start-server-and-test develop http://localhost:8000 cy:percy:run"
   },
   "dependencies": {
     "@percy/cli": "^1.0.0-beta.70",

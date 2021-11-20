@@ -8,6 +8,12 @@
     teimurjan.dev
   </a>
 </h1>
+<div align="center">
+
+![](https://github.com/teimurjan/teimurjan.github.io/actions/workflows/test.yml/badge.svg)
+![](https://github.com/teimurjan/teimurjan.github.io/actions/workflows/deploy.yml/badge.svg)
+
+</div>
 
 Hey! 👋 This repository contains the source code for my personal website hosted on GitHub Pages.
 

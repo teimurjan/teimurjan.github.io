@@ -2,7 +2,7 @@ describe('Landing Page', () => {
   it('opens all sections', () => {
     cy.visit('/')
 
-    cy.get('#experience').should('be.visible')
+    cy.findByText('Get resume').should('be.visible')
 
     cy.percySnapshot('Landing Page', { widths: [700, 1200] })
   })

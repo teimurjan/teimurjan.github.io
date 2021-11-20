@@ -12,6 +12,7 @@
 
 ![](https://github.com/teimurjan/teimurjan.github.io/actions/workflows/test.yml/badge.svg)
 ![](https://github.com/teimurjan/teimurjan.github.io/actions/workflows/deploy.yml/badge.svg)
+[![This project is using Percy.io for visual regression testing.](https://percy.io/static/images/percy-badge.svg)](https://percy.io/b3c6e6d8/teimurjan.dev)
 
 </div>
 

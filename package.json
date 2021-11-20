@@ -12,12 +12,18 @@
     "clean": "yarn workspace @teimurjan/landing clean",
     "codegen": "yarn workspace @teimurjan/gql-types codegen",
     "typecheck": "yarn workspaces run typecheck",
-    "lint": "eslint workspaces/*/src"
+    "lint": "eslint workspaces/*/src",
+    "cy:open": "cypress open",
+    "cy:run": "cypress open",
+    "test:e2e": "start-server-and-test develop http://localhost:8000 cy:open"
   },
   "dependencies": {
+    "@percy/cli": "^1.0.0-beta.70",
+    "@percy/cypress": "^3.1.1",
     "@typescript-eslint/eslint-plugin": "^4.0.0",
     "@typescript-eslint/parser": "^4.0.0",
     "babel-eslint": "^10.0.0",
+    "cypress": "^9.0.0",
     "eslint": "^7.5.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-react-app": "^6.0.0",
@@ -28,6 +34,7 @@
     "eslint-plugin-react": "^7.20.3",
     "eslint-plugin-react-hooks": "^4.0.8",
     "prettier": "^2.4.1",
+    "start-server-and-test": "^1.14.0",
     "typescript": "^4.4.4"
   },
   "workspaces": [

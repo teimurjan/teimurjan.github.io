@@ -1,11 +1,19 @@
+const waitAllImagesToLoad = () =>
+  cy
+    .get('img', { includeShadowDom: true })
+    .filter('[src]')
+    .filter(':visible')
+    .should(($images) =>
+      $images.map((_, image: HTMLImageElement) =>
+        expect(image.naturalWidth).to.be.greaterThan(0)
+      )
+    )
+
 describe('Landing Page', () => {
   it('opens all sections', () => {
     cy.visit('/')
 
-    // page is rendered
-    cy.findByText('Experience').should('be.visible')
-    // swiper needs some time to initialize
-    cy.wait(500)
+    waitAllImagesToLoad()
 
     cy.percySnapshot('Landing Page', { widths: [700, 1200] })
   })

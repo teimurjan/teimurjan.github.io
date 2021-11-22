@@ -33,6 +33,9 @@ const query = graphql`
 
 SwiperCore.use([Pagination])
 
+const handleSwiperBreakpointChange = (swiper: SwiperCore) =>
+  swiper.el.setAttribute('data-breakpoint', swiper.currentBreakpoint)
+
 const ExperienceHistory = () => {
   const {
     gcms: { experiences },
@@ -75,6 +78,7 @@ const ExperienceHistory = () => {
             slidesPerView: 3,
           },
         }}
+        onBreakpoint={handleSwiperBreakpointChange}
       >
         {experiences.map((experience, index) => {
           return (

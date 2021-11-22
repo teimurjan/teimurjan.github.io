@@ -1,19 +1,8 @@
-const waitAllImagesToLoad = () =>
-  cy
-    .get('img', { includeShadowDom: true })
-    .filter('[src]')
-    .filter(':visible')
-    .should(($images) =>
-      $images.map((_, image: HTMLImageElement) =>
-        expect(image.naturalWidth).to.be.greaterThan(0)
-      )
-    )
-
 describe('Landing Page', () => {
   it('opens all sections', () => {
     cy.visit('/')
 
-    waitAllImagesToLoad()
+    cy.get('img[data-placeholder-image]').should('not.be.visible')
 
     cy.percySnapshot('Landing Page', { widths: [700, 1200] })
   })

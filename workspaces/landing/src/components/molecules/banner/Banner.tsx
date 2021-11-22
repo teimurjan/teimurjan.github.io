@@ -29,13 +29,13 @@ const Banner = ({
         }
       `}
       className={className}
-      gap={theme.spacing.medium}
       alignItemsCenter
     >
       <Flex.Item
         css={css`
           flex: 0.7;
           padding-bottom: ${theme.spacing.medium};
+          padding-right: ${theme.spacing.medium};
 
           @media ${theme.screens.medium.mediaUpTo} {
             flex: 0.6;

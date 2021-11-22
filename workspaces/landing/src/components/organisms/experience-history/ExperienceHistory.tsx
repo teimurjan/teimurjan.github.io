@@ -6,7 +6,6 @@ import { prettyRange, theme } from '@teimurjan/utils'
 import { ExperienceHistoryQuery } from '@teimurjan/gql-types'
 import { RichText, ScrollToArea, Typography } from '../../atoms'
 import { Card } from '../../molecules'
-import { useMedia } from '../../../hooks'
 
 const query = graphql`
   query ExperienceHistory {
@@ -39,12 +38,6 @@ const ExperienceHistory = () => {
     gcms: { experiences },
   } = useStaticQuery<ExperienceHistoryQuery>(query)
 
-  const slidesPerView = useMedia(
-    [theme.screens.medium.mediaUpTo, theme.screens.large.mediaUpTo],
-    [1, 2],
-    3
-  )
-
   return (
     <ScrollToArea
       id="experience"
@@ -71,9 +64,17 @@ const ExperienceHistory = () => {
       </Typography.Title>
 
       <Swiper
-        slidesPerView={slidesPerView}
-        spaceBetween={0}
         pagination={{ clickable: true }}
+        slidesPerView={1}
+        spaceBetween={0}
+        breakpoints={{
+          [theme.screens.medium.breakpoint]: {
+            slidesPerView: 2,
+          },
+          [theme.screens.large.breakpoint]: {
+            slidesPerView: 3,
+          },
+        }}
       >
         {experiences.map((experience, index) => {
           return (

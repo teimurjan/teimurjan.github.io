@@ -20,10 +20,18 @@ const GridSection = ({ children, color }: Props) => {
               flex-direction: column;
             }
           `}
-          gap={theme.spacing.large}
         >
-          {React.Children.map(children, (child) => (
-            <Flex.Item key={child?.toString()} flex={1}>
+          {React.Children.map(children, (child, index) => (
+            <Flex.Item
+              css={
+                index > 0 &&
+                css`
+                  padding-left: ${theme.spacing.large};
+                `
+              }
+              key={child?.toString()}
+              flex={1}
+            >
               {child}
             </Flex.Item>
           ))}

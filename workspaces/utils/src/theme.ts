@@ -102,21 +102,25 @@ const theme = {
   screens: {
     small: {
       containerWidth: smallScreenWidth,
+      breakpoint: smallScreenWidth,
       mediaUpTo: `(max-width: ${smallScreenWidth}px)`,
       mediaFrom: `(min-width: ${smallScreenWidth + 1}px)`,
     },
     medium: {
       containerWidth: mediumScreenWidth,
+      breakpoint: mediumScreenWidth + 50,
       mediaUpTo: `(max-width: ${mediumScreenWidth + 50}px)`,
       mediaFrom: `(min-width: ${mediumScreenWidth + 51}px)`,
     },
     large: {
       containerWidth: largeScreenWidth,
+      breakpoint: largeScreenWidth + 100,
       mediaUpTo: `(max-width: ${largeScreenWidth + 100}px)`,
       mediaFrom: `(min-width: ${largeScreenWidth + 101}px)`,
     },
     xlarge: {
       containerWidth: xlargeScreenWidth,
+      breakpoint: xlargeScreenWidth + 100,
       mediaUpTo: `(max-width: ${xlargeScreenWidth + 100}px)`,
       mediaFrom: `(min-width: ${xlargeScreenWidth + 101}px)`,
     },

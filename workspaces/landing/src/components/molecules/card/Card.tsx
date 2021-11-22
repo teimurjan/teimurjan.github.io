@@ -41,11 +41,6 @@ const Card = forwardRef<HTMLDivElement, Props>(
           padding: ${theme.spacing.small} ${theme.spacing.medium};
           box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
           background: ${theme.colors.background[color]};
-          max-width: 500px;
-
-          @media ${theme.screens.medium.mediaUpTo} {
-            max-width: 100%;
-          }
         `}
         className={className}
       >

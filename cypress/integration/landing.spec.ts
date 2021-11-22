@@ -2,7 +2,10 @@ describe('Landing Page', () => {
   it('opens all sections', () => {
     cy.visit('/')
 
-    cy.findByText('Get resume').should('be.visible')
+    // page is rendered
+    cy.findByText('Experience').should('be.visible')
+    // swiper needs some time to initialize
+    cy.wait(500)
 
     cy.percySnapshot('Landing Page', { widths: [700, 1200] })
   })

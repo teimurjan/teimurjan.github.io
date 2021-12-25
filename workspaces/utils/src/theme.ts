@@ -126,6 +126,7 @@ const theme = {
     },
   },
   spacing: {
+    xxsmall: '0.25rem',
     xsmall: '0.5rem',
     small: '1rem',
     medium: '2rem',

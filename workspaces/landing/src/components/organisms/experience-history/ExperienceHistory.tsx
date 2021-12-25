@@ -1,10 +1,12 @@
+import { Fragment } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { css } from '@emotion/react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, { Pagination } from 'swiper'
 import { prettyRange, theme } from '@teimurjan/utils'
 import { ExperienceHistoryQuery } from '@teimurjan/gql-types'
-import { RichText, ScrollToArea, Typography } from '../../atoms'
+import Tooltip from 'rc-tooltip'
+import { RichText, ScrollToArea, Tag, Typography } from '../../atoms'
 import { Card } from '../../molecules'
 
 const query = graphql`
@@ -26,6 +28,8 @@ const query = graphql`
         description {
           html
         }
+        location
+        locationIcon
       }
     }
   }
@@ -67,6 +71,9 @@ const ExperienceHistory = () => {
       </Typography.Title>
 
       <Swiper
+        css={css`
+          margin: 0 -${theme.spacing.small};
+        `}
         pagination={{ clickable: true }}
         slidesPerView={1}
         spaceBetween={0}
@@ -80,30 +87,48 @@ const ExperienceHistory = () => {
         }}
         onBreakpoint={handleSwiperBreakpointChange}
       >
-        {experiences.map((experience, index) => {
+        {experiences.map((experience) => {
           return (
             <SwiperSlide key={experience.id}>
               <Card
                 css={css`
                   margin-top: ${theme.spacing.small};
                   margin-right: ${theme.spacing.small};
+                  margin-left: ${theme.spacing.small};
                   margin-bottom: ${theme.spacing.xlarge};
 
-                  height: 475px;
+                  height: 500px;
 
                   @media ${theme.screens.medium.mediaUpTo} {
                     height: 625px;
                   }
                 `}
-                color={index === 0 ? 'blue' : undefined}
                 imageSrc={experience.logo.url}
                 imageAlt={experience.company}
                 title={experience.position}
-                subtitle1={`at ${experience.company}`}
+                subtitle1={
+                  <Fragment>
+                    at {experience.company}{' '}
+                    <Tooltip
+                      placement="right"
+                      overlay={<span>{experience.location}</span>}
+                      destroyTooltipOnHide
+                    >
+                      <span
+                        css={css`
+                          cursor: default;
+                        `}
+                      >
+                        {experience.locationIcon}
+                      </span>
+                    </Tooltip>
+                  </Fragment>
+                }
                 subtitle2={prettyRange(
                   experience.startDate,
                   experience.endDate
                 )}
+                overlay={!experience.endDate && <Tag color="blue">Now</Tag>}
               >
                 <RichText html={experience.description.html} />
               </Card>

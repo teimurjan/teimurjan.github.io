@@ -993,6 +993,18 @@ export type GraphCms = {
   publications: Array<GraphCms_Publication>
   /** Retrieve multiple publications using the Relay connection interface */
   publicationsConnection: GraphCms_PublicationConnection
+  /** Retrieve a single scheduledOperation */
+  scheduledOperation?: Maybe<GraphCms_ScheduledOperation>
+  /** Retrieve multiple scheduledOperations */
+  scheduledOperations: Array<GraphCms_ScheduledOperation>
+  /** Retrieve multiple scheduledOperations using the Relay connection interface */
+  scheduledOperationsConnection: GraphCms_ScheduledOperationConnection
+  /** Retrieve a single scheduledRelease */
+  scheduledRelease?: Maybe<GraphCms_ScheduledRelease>
+  /** Retrieve multiple scheduledReleases */
+  scheduledReleases: Array<GraphCms_ScheduledRelease>
+  /** Retrieve multiple scheduledReleases using the Relay connection interface */
+  scheduledReleasesConnection: GraphCms_ScheduledReleaseConnection
   /** Retrieve a single skill */
   skill?: Maybe<GraphCms_Skill>
   /** Retrieve document version */
@@ -1261,6 +1273,66 @@ export type GraphCmsPublicationsConnectionArgs = {
   where?: Maybe<GraphCms_PublicationWhereInput>
 }
 
+export type GraphCmsScheduledOperationArgs = {
+  locales?: Array<GraphCms_Locale>
+  stage?: GraphCms_Stage
+  where: GraphCms_ScheduledOperationWhereUniqueInput
+}
+
+export type GraphCmsScheduledOperationsArgs = {
+  after?: Maybe<Scalars['String']>
+  before?: Maybe<Scalars['String']>
+  first?: Maybe<Scalars['Int']>
+  last?: Maybe<Scalars['Int']>
+  locales?: Array<GraphCms_Locale>
+  orderBy?: Maybe<GraphCms_ScheduledOperationOrderByInput>
+  skip?: Maybe<Scalars['Int']>
+  stage?: GraphCms_Stage
+  where?: Maybe<GraphCms_ScheduledOperationWhereInput>
+}
+
+export type GraphCmsScheduledOperationsConnectionArgs = {
+  after?: Maybe<Scalars['String']>
+  before?: Maybe<Scalars['String']>
+  first?: Maybe<Scalars['Int']>
+  last?: Maybe<Scalars['Int']>
+  locales?: Array<GraphCms_Locale>
+  orderBy?: Maybe<GraphCms_ScheduledOperationOrderByInput>
+  skip?: Maybe<Scalars['Int']>
+  stage?: GraphCms_Stage
+  where?: Maybe<GraphCms_ScheduledOperationWhereInput>
+}
+
+export type GraphCmsScheduledReleaseArgs = {
+  locales?: Array<GraphCms_Locale>
+  stage?: GraphCms_Stage
+  where: GraphCms_ScheduledReleaseWhereUniqueInput
+}
+
+export type GraphCmsScheduledReleasesArgs = {
+  after?: Maybe<Scalars['String']>
+  before?: Maybe<Scalars['String']>
+  first?: Maybe<Scalars['Int']>
+  last?: Maybe<Scalars['Int']>
+  locales?: Array<GraphCms_Locale>
+  orderBy?: Maybe<GraphCms_ScheduledReleaseOrderByInput>
+  skip?: Maybe<Scalars['Int']>
+  stage?: GraphCms_Stage
+  where?: Maybe<GraphCms_ScheduledReleaseWhereInput>
+}
+
+export type GraphCmsScheduledReleasesConnectionArgs = {
+  after?: Maybe<Scalars['String']>
+  before?: Maybe<Scalars['String']>
+  first?: Maybe<Scalars['Int']>
+  last?: Maybe<Scalars['Int']>
+  locales?: Array<GraphCms_Locale>
+  orderBy?: Maybe<GraphCms_ScheduledReleaseOrderByInput>
+  skip?: Maybe<Scalars['Int']>
+  stage?: GraphCms_Stage
+  where?: Maybe<GraphCms_ScheduledReleaseWhereInput>
+}
+
 export type GraphCmsSkillArgs = {
   locales?: Array<GraphCms_Locale>
   stage?: GraphCms_Stage
@@ -1395,6 +1467,7 @@ export type GraphCms_Asset = GraphCms_Node & {
   publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** User that last published this document */
   publishedBy?: Maybe<GraphCms_User>
+  scheduledIn: Array<GraphCms_ScheduledOperation>
   /** The file size */
   size?: Maybe<Scalars['Float']>
   /** System stage field */
@@ -1471,6 +1544,17 @@ export type GraphCms_AssetPublishedAtArgs = {
 /** Asset system model */
 export type GraphCms_AssetPublishedByArgs = {
   locales?: Maybe<Array<GraphCms_Locale>>
+}
+
+/** Asset system model */
+export type GraphCms_AssetScheduledInArgs = {
+  after?: Maybe<Scalars['String']>
+  before?: Maybe<Scalars['String']>
+  first?: Maybe<Scalars['Int']>
+  last?: Maybe<Scalars['Int']>
+  locales?: Maybe<Array<GraphCms_Locale>>
+  skip?: Maybe<Scalars['Int']>
+  where?: Maybe<GraphCms_ScheduledOperationWhereInput>
 }
 
 /** Asset system model */
@@ -1632,6 +1716,9 @@ export type GraphCms_AssetManyWhereInput = {
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
+  scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_some?: Maybe<GraphCms_ScheduledOperationWhereInput>
   updatedAt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values greater than the given value. */
   updatedAt_gt?: Maybe<Scalars['GraphCMS_DateTime']>
@@ -1951,6 +2038,9 @@ export type GraphCms_AssetWhereInput = {
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
+  scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_some?: Maybe<GraphCms_ScheduledOperationWhereInput>
   size?: Maybe<Scalars['Float']>
   /** All values greater than the given value. */
   size_gt?: Maybe<Scalars['Float']>
@@ -2032,6 +2122,7 @@ export type GraphCms_Bio = GraphCms_Node & {
   publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** User that last published this document */
   publishedBy?: Maybe<GraphCms_User>
+  scheduledIn: Array<GraphCms_ScheduledOperation>
   /** System stage field */
   stage: GraphCms_Stage
   /** The time the document was updated */
@@ -2058,6 +2149,16 @@ export type GraphCms_BioHistoryArgs = {
 
 export type GraphCms_BioPublishedByArgs = {
   locales?: Maybe<Array<GraphCms_Locale>>
+}
+
+export type GraphCms_BioScheduledInArgs = {
+  after?: Maybe<Scalars['String']>
+  before?: Maybe<Scalars['String']>
+  first?: Maybe<Scalars['Int']>
+  last?: Maybe<Scalars['Int']>
+  locales?: Maybe<Array<GraphCms_Locale>>
+  skip?: Maybe<Scalars['Int']>
+  where?: Maybe<GraphCms_ScheduledOperationWhereInput>
 }
 
 export type GraphCms_BioUpdatedByArgs = {
@@ -2290,6 +2391,9 @@ export type GraphCms_BioManyWhereInput = {
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
+  scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_some?: Maybe<GraphCms_ScheduledOperationWhereInput>
   updatedAt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values greater than the given value. */
   updatedAt_gt?: Maybe<Scalars['GraphCMS_DateTime']>
@@ -2584,6 +2688,9 @@ export type GraphCms_BioWhereInput = {
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
+  scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_some?: Maybe<GraphCms_ScheduledOperationWhereInput>
   updatedAt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values greater than the given value. */
   updatedAt_gt?: Maybe<Scalars['GraphCMS_DateTime']>
@@ -2639,6 +2746,7 @@ export type GraphCms_Conference = GraphCms_Node & {
   publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** User that last published this document */
   publishedBy?: Maybe<GraphCms_User>
+  scheduledIn: Array<GraphCms_ScheduledOperation>
   /** System stage field */
   stage: GraphCms_Stage
   title: Scalars['String']
@@ -2668,6 +2776,16 @@ export type GraphCms_ConferenceHistoryArgs = {
 
 export type GraphCms_ConferencePublishedByArgs = {
   locales?: Maybe<Array<GraphCms_Locale>>
+}
+
+export type GraphCms_ConferenceScheduledInArgs = {
+  after?: Maybe<Scalars['String']>
+  before?: Maybe<Scalars['String']>
+  first?: Maybe<Scalars['Int']>
+  last?: Maybe<Scalars['Int']>
+  locales?: Maybe<Array<GraphCms_Locale>>
+  skip?: Maybe<Scalars['Int']>
+  where?: Maybe<GraphCms_ScheduledOperationWhereInput>
 }
 
 export type GraphCms_ConferenceUpdatedByArgs = {
@@ -2823,6 +2941,9 @@ export type GraphCms_ConferenceManyWhereInput = {
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
+  scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_some?: Maybe<GraphCms_ScheduledOperationWhereInput>
   title?: Maybe<Scalars['String']>
   /** All values containing the given string. */
   title_contains?: Maybe<Scalars['String']>
@@ -3069,6 +3190,9 @@ export type GraphCms_ConferenceWhereInput = {
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
+  scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_some?: Maybe<GraphCms_ScheduledOperationWhereInput>
   title?: Maybe<Scalars['String']>
   /** All values containing the given string. */
   title_contains?: Maybe<Scalars['String']>
@@ -3226,6 +3350,7 @@ export type GraphCms_Education = GraphCms_Node & {
   publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** User that last published this document */
   publishedBy?: Maybe<GraphCms_User>
+  scheduledIn: Array<GraphCms_ScheduledOperation>
   school: Scalars['String']
   /** System stage field */
   stage: GraphCms_Stage
@@ -3254,6 +3379,16 @@ export type GraphCms_EducationHistoryArgs = {
 
 export type GraphCms_EducationPublishedByArgs = {
   locales?: Maybe<Array<GraphCms_Locale>>
+}
+
+export type GraphCms_EducationScheduledInArgs = {
+  after?: Maybe<Scalars['String']>
+  before?: Maybe<Scalars['String']>
+  first?: Maybe<Scalars['Int']>
+  last?: Maybe<Scalars['Int']>
+  locales?: Maybe<Array<GraphCms_Locale>>
+  skip?: Maybe<Scalars['Int']>
+  where?: Maybe<GraphCms_ScheduledOperationWhereInput>
 }
 
 export type GraphCms_EducationUpdatedByArgs = {
@@ -3425,6 +3560,9 @@ export type GraphCms_EducationManyWhereInput = {
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
+  scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_some?: Maybe<GraphCms_ScheduledOperationWhereInput>
   school?: Maybe<Scalars['String']>
   /** All values containing the given string. */
   school_contains?: Maybe<Scalars['String']>
@@ -3690,6 +3828,9 @@ export type GraphCms_EducationWhereInput = {
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
+  scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_some?: Maybe<GraphCms_ScheduledOperationWhereInput>
   school?: Maybe<Scalars['String']>
   /** All values containing the given string. */
   school_contains?: Maybe<Scalars['String']>
@@ -3762,12 +3903,15 @@ export type GraphCms_Experience = GraphCms_Node & {
   history: Array<GraphCms_Version>
   /** The unique identifier */
   id: Scalars['ID']
+  location?: Maybe<Scalars['String']>
+  locationIcon: Scalars['String']
   logo: GraphCms_Asset
   position: Scalars['String']
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** User that last published this document */
   publishedBy?: Maybe<GraphCms_User>
+  scheduledIn: Array<GraphCms_ScheduledOperation>
   /** System stage field */
   stage: GraphCms_Stage
   startDate: Scalars['GraphCMS_Date']
@@ -3801,6 +3945,16 @@ export type GraphCms_ExperiencePublishedByArgs = {
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
+export type GraphCms_ExperienceScheduledInArgs = {
+  after?: Maybe<Scalars['String']>
+  before?: Maybe<Scalars['String']>
+  first?: Maybe<Scalars['Int']>
+  last?: Maybe<Scalars['Int']>
+  locales?: Maybe<Array<GraphCms_Locale>>
+  skip?: Maybe<Scalars['Int']>
+  where?: Maybe<GraphCms_ScheduledOperationWhereInput>
+}
+
 export type GraphCms_ExperienceUpdatedByArgs = {
   locales?: Maybe<Array<GraphCms_Locale>>
 }
@@ -3827,6 +3981,8 @@ export type GraphCms_ExperienceCreateInput = {
   createdAt?: Maybe<Scalars['GraphCMS_DateTime']>
   description: Scalars['GraphCMS_RichTextAST']
   endDate?: Maybe<Scalars['GraphCMS_Date']>
+  location?: Maybe<Scalars['String']>
+  locationIcon: Scalars['String']
   logo: GraphCms_AssetCreateOneInlineInput
   position: Scalars['String']
   startDate: Scalars['GraphCMS_Date']
@@ -3935,6 +4091,44 @@ export type GraphCms_ExperienceManyWhereInput = {
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
   id_starts_with?: Maybe<Scalars['ID']>
+  location?: Maybe<Scalars['String']>
+  locationIcon?: Maybe<Scalars['String']>
+  /** All values containing the given string. */
+  locationIcon_contains?: Maybe<Scalars['String']>
+  /** All values ending with the given string. */
+  locationIcon_ends_with?: Maybe<Scalars['String']>
+  /** All values that are contained in given list. */
+  locationIcon_in?: Maybe<Array<Scalars['String']>>
+  /** All values that are not equal to given value. */
+  locationIcon_not?: Maybe<Scalars['String']>
+  /** All values not containing the given string. */
+  locationIcon_not_contains?: Maybe<Scalars['String']>
+  /** All values not ending with the given string */
+  locationIcon_not_ends_with?: Maybe<Scalars['String']>
+  /** All values that are not contained in given list. */
+  locationIcon_not_in?: Maybe<Array<Scalars['String']>>
+  /** All values not starting with the given string. */
+  locationIcon_not_starts_with?: Maybe<Scalars['String']>
+  /** All values starting with the given string. */
+  locationIcon_starts_with?: Maybe<Scalars['String']>
+  /** All values containing the given string. */
+  location_contains?: Maybe<Scalars['String']>
+  /** All values ending with the given string. */
+  location_ends_with?: Maybe<Scalars['String']>
+  /** All values that are contained in given list. */
+  location_in?: Maybe<Array<Scalars['String']>>
+  /** All values that are not equal to given value. */
+  location_not?: Maybe<Scalars['String']>
+  /** All values not containing the given string. */
+  location_not_contains?: Maybe<Scalars['String']>
+  /** All values not ending with the given string */
+  location_not_ends_with?: Maybe<Scalars['String']>
+  /** All values that are not contained in given list. */
+  location_not_in?: Maybe<Array<Scalars['String']>>
+  /** All values not starting with the given string. */
+  location_not_starts_with?: Maybe<Scalars['String']>
+  /** All values starting with the given string. */
+  location_starts_with?: Maybe<Scalars['String']>
   logo?: Maybe<GraphCms_AssetWhereInput>
   position?: Maybe<Scalars['String']>
   /** All values containing the given string. */
@@ -3971,6 +4165,9 @@ export type GraphCms_ExperienceManyWhereInput = {
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
+  scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_some?: Maybe<GraphCms_ScheduledOperationWhereInput>
   startDate?: Maybe<Scalars['GraphCMS_Date']>
   /** All values greater than the given value. */
   startDate_gt?: Maybe<Scalars['GraphCMS_Date']>
@@ -4013,6 +4210,10 @@ export enum GraphCms_ExperienceOrderByInput {
   endDate_DESC = 'endDate_DESC',
   id_ASC = 'id_ASC',
   id_DESC = 'id_DESC',
+  locationIcon_ASC = 'locationIcon_ASC',
+  locationIcon_DESC = 'locationIcon_DESC',
+  location_ASC = 'location_ASC',
+  location_DESC = 'location_DESC',
   position_ASC = 'position_ASC',
   position_DESC = 'position_DESC',
   publishedAt_ASC = 'publishedAt_ASC',
@@ -4027,6 +4228,8 @@ export type GraphCms_ExperienceUpdateInput = {
   company?: Maybe<Scalars['String']>
   description?: Maybe<Scalars['GraphCMS_RichTextAST']>
   endDate?: Maybe<Scalars['GraphCMS_Date']>
+  location?: Maybe<Scalars['String']>
+  locationIcon?: Maybe<Scalars['String']>
   logo?: Maybe<GraphCms_AssetUpdateOneInlineInput>
   position?: Maybe<Scalars['String']>
   startDate?: Maybe<Scalars['GraphCMS_Date']>
@@ -4053,6 +4256,8 @@ export type GraphCms_ExperienceUpdateManyInput = {
   company?: Maybe<Scalars['String']>
   description?: Maybe<Scalars['GraphCMS_RichTextAST']>
   endDate?: Maybe<Scalars['GraphCMS_Date']>
+  location?: Maybe<Scalars['String']>
+  locationIcon?: Maybe<Scalars['String']>
   position?: Maybe<Scalars['String']>
   startDate?: Maybe<Scalars['GraphCMS_Date']>
 }
@@ -4179,6 +4384,44 @@ export type GraphCms_ExperienceWhereInput = {
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
   id_starts_with?: Maybe<Scalars['ID']>
+  location?: Maybe<Scalars['String']>
+  locationIcon?: Maybe<Scalars['String']>
+  /** All values containing the given string. */
+  locationIcon_contains?: Maybe<Scalars['String']>
+  /** All values ending with the given string. */
+  locationIcon_ends_with?: Maybe<Scalars['String']>
+  /** All values that are contained in given list. */
+  locationIcon_in?: Maybe<Array<Scalars['String']>>
+  /** All values that are not equal to given value. */
+  locationIcon_not?: Maybe<Scalars['String']>
+  /** All values not containing the given string. */
+  locationIcon_not_contains?: Maybe<Scalars['String']>
+  /** All values not ending with the given string */
+  locationIcon_not_ends_with?: Maybe<Scalars['String']>
+  /** All values that are not contained in given list. */
+  locationIcon_not_in?: Maybe<Array<Scalars['String']>>
+  /** All values not starting with the given string. */
+  locationIcon_not_starts_with?: Maybe<Scalars['String']>
+  /** All values starting with the given string. */
+  locationIcon_starts_with?: Maybe<Scalars['String']>
+  /** All values containing the given string. */
+  location_contains?: Maybe<Scalars['String']>
+  /** All values ending with the given string. */
+  location_ends_with?: Maybe<Scalars['String']>
+  /** All values that are contained in given list. */
+  location_in?: Maybe<Array<Scalars['String']>>
+  /** All values that are not equal to given value. */
+  location_not?: Maybe<Scalars['String']>
+  /** All values not containing the given string. */
+  location_not_contains?: Maybe<Scalars['String']>
+  /** All values not ending with the given string */
+  location_not_ends_with?: Maybe<Scalars['String']>
+  /** All values that are not contained in given list. */
+  location_not_in?: Maybe<Array<Scalars['String']>>
+  /** All values not starting with the given string. */
+  location_not_starts_with?: Maybe<Scalars['String']>
+  /** All values starting with the given string. */
+  location_starts_with?: Maybe<Scalars['String']>
   logo?: Maybe<GraphCms_AssetWhereInput>
   position?: Maybe<Scalars['String']>
   /** All values containing the given string. */
@@ -4215,6 +4458,9 @@ export type GraphCms_ExperienceWhereInput = {
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
+  scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_some?: Maybe<GraphCms_ScheduledOperationWhereInput>
   startDate?: Maybe<Scalars['GraphCMS_Date']>
   /** All values greater than the given value. */
   startDate_gt?: Maybe<Scalars['GraphCMS_Date']>
@@ -4296,6 +4542,7 @@ export type GraphCms_Interview = GraphCms_Node & {
   publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** User that last published this document */
   publishedBy?: Maybe<GraphCms_User>
+  scheduledIn: Array<GraphCms_ScheduledOperation>
   /** System stage field */
   stage: GraphCms_Stage
   title: Scalars['String']
@@ -4324,6 +4571,16 @@ export type GraphCms_InterviewHistoryArgs = {
 
 export type GraphCms_InterviewPublishedByArgs = {
   locales?: Maybe<Array<GraphCms_Locale>>
+}
+
+export type GraphCms_InterviewScheduledInArgs = {
+  after?: Maybe<Scalars['String']>
+  before?: Maybe<Scalars['String']>
+  first?: Maybe<Scalars['Int']>
+  last?: Maybe<Scalars['Int']>
+  locales?: Maybe<Array<GraphCms_Locale>>
+  skip?: Maybe<Scalars['Int']>
+  where?: Maybe<GraphCms_ScheduledOperationWhereInput>
 }
 
 export type GraphCms_InterviewUpdatedByArgs = {
@@ -4458,6 +4715,9 @@ export type GraphCms_InterviewManyWhereInput = {
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
+  scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_some?: Maybe<GraphCms_ScheduledOperationWhereInput>
   title?: Maybe<Scalars['String']>
   /** All values containing the given string. */
   title_contains?: Maybe<Scalars['String']>
@@ -4658,6 +4918,9 @@ export type GraphCms_InterviewWhereInput = {
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
+  scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_some?: Maybe<GraphCms_ScheduledOperationWhereInput>
   title?: Maybe<Scalars['String']>
   /** All values containing the given string. */
   title_contains?: Maybe<Scalars['String']>
@@ -4767,6 +5030,7 @@ export type GraphCms_Publication = GraphCms_Node & {
   publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** User that last published this document */
   publishedBy?: Maybe<GraphCms_User>
+  scheduledIn: Array<GraphCms_ScheduledOperation>
   /** System stage field */
   stage: GraphCms_Stage
   title: Scalars['String']
@@ -4794,6 +5058,16 @@ export type GraphCms_PublicationHistoryArgs = {
 
 export type GraphCms_PublicationPublishedByArgs = {
   locales?: Maybe<Array<GraphCms_Locale>>
+}
+
+export type GraphCms_PublicationScheduledInArgs = {
+  after?: Maybe<Scalars['String']>
+  before?: Maybe<Scalars['String']>
+  first?: Maybe<Scalars['Int']>
+  last?: Maybe<Scalars['Int']>
+  locales?: Maybe<Array<GraphCms_Locale>>
+  skip?: Maybe<Scalars['Int']>
+  where?: Maybe<GraphCms_ScheduledOperationWhereInput>
 }
 
 export type GraphCms_PublicationUpdatedByArgs = {
@@ -4943,6 +5217,9 @@ export type GraphCms_PublicationManyWhereInput = {
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
+  scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_some?: Maybe<GraphCms_ScheduledOperationWhereInput>
   title?: Maybe<Scalars['String']>
   /** All values containing the given string. */
   title_contains?: Maybe<Scalars['String']>
@@ -5164,6 +5441,9 @@ export type GraphCms_PublicationWhereInput = {
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
+  scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_some?: Maybe<GraphCms_ScheduledOperationWhereInput>
   title?: Maybe<Scalars['String']>
   /** All values containing the given string. */
   title_contains?: Maybe<Scalars['String']>
@@ -5243,6 +5523,996 @@ export type GraphCms_RichText = {
   text: Scalars['String']
 }
 
+/** Scheduled Operation system model */
+export type GraphCms_ScheduledOperation = GraphCms_Node & {
+  __typename?: 'GraphCMS_ScheduledOperation'
+  affectedDocuments: Array<GraphCms_ScheduledOperationAffectedDocument>
+  /** The time the document was created */
+  createdAt: Scalars['GraphCMS_DateTime']
+  /** User that created this document */
+  createdBy?: Maybe<GraphCms_User>
+  /** Operation description */
+  description?: Maybe<Scalars['String']>
+  /** Get the document in other stages */
+  documentInStages: Array<GraphCms_ScheduledOperation>
+  /** Operation error message */
+  errorMessage?: Maybe<Scalars['String']>
+  /** The unique identifier */
+  id: Scalars['ID']
+  /** The time the document was published. Null on documents in draft stage. */
+  publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** User that last published this document */
+  publishedBy?: Maybe<GraphCms_User>
+  /** Raw operation payload including all details, this field is subject to change */
+  rawPayload: Scalars['GraphCMS_Json']
+  /** The release this operation is scheduled for */
+  release?: Maybe<GraphCms_ScheduledRelease>
+  /** System stage field */
+  stage: GraphCms_Stage
+  /** operation Status */
+  status: GraphCms_ScheduledOperationStatus
+  /** The time the document was updated */
+  updatedAt: Scalars['GraphCMS_DateTime']
+  /** User that last updated this document */
+  updatedBy?: Maybe<GraphCms_User>
+}
+
+/** Scheduled Operation system model */
+export type GraphCms_ScheduledOperationAffectedDocumentsArgs = {
+  after?: Maybe<Scalars['String']>
+  before?: Maybe<Scalars['String']>
+  first?: Maybe<Scalars['Int']>
+  last?: Maybe<Scalars['Int']>
+  locales?: Maybe<Array<GraphCms_Locale>>
+  skip?: Maybe<Scalars['Int']>
+}
+
+/** Scheduled Operation system model */
+export type GraphCms_ScheduledOperationCreatedByArgs = {
+  locales?: Maybe<Array<GraphCms_Locale>>
+}
+
+/** Scheduled Operation system model */
+export type GraphCms_ScheduledOperationDocumentInStagesArgs = {
+  includeCurrent?: Scalars['Boolean']
+  inheritLocale?: Scalars['Boolean']
+  stages?: Array<GraphCms_Stage>
+}
+
+/** Scheduled Operation system model */
+export type GraphCms_ScheduledOperationPublishedByArgs = {
+  locales?: Maybe<Array<GraphCms_Locale>>
+}
+
+/** Scheduled Operation system model */
+export type GraphCms_ScheduledOperationReleaseArgs = {
+  locales?: Maybe<Array<GraphCms_Locale>>
+}
+
+/** Scheduled Operation system model */
+export type GraphCms_ScheduledOperationUpdatedByArgs = {
+  locales?: Maybe<Array<GraphCms_Locale>>
+}
+
+export type GraphCms_ScheduledOperationAffectedDocument =
+  | GraphCms_Asset
+  | GraphCms_Bio
+  | GraphCms_Conference
+  | GraphCms_Education
+  | GraphCms_Experience
+  | GraphCms_Interview
+  | GraphCms_Publication
+  | GraphCms_Skill
+  | GraphCms_VideoEmbed
+
+export type GraphCms_ScheduledOperationConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: Maybe<GraphCms_ConnectPositionInput>
+  /** Document to connect */
+  where: GraphCms_ScheduledOperationWhereUniqueInput
+}
+
+/** A connection to a list of items. */
+export type GraphCms_ScheduledOperationConnection = {
+  __typename?: 'GraphCMS_ScheduledOperationConnection'
+  aggregate: GraphCms_Aggregate
+  /** A list of edges. */
+  edges: Array<GraphCms_ScheduledOperationEdge>
+  /** Information to aid in pagination. */
+  pageInfo: GraphCms_PageInfo
+}
+
+export type GraphCms_ScheduledOperationCreateManyInlineInput = {
+  /** Connect multiple existing ScheduledOperation documents */
+  connect?: Maybe<Array<GraphCms_ScheduledOperationWhereUniqueInput>>
+}
+
+export type GraphCms_ScheduledOperationCreateOneInlineInput = {
+  /** Connect one existing ScheduledOperation document */
+  connect?: Maybe<GraphCms_ScheduledOperationWhereUniqueInput>
+}
+
+/** An edge in a connection. */
+export type GraphCms_ScheduledOperationEdge = {
+  __typename?: 'GraphCMS_ScheduledOperationEdge'
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String']
+  /** The item at the end of the edge. */
+  node: GraphCms_ScheduledOperation
+}
+
+/** Identifies documents */
+export type GraphCms_ScheduledOperationManyWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<GraphCms_ScheduledOperationWhereInput>>
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<GraphCms_ScheduledOperationWhereInput>>
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<GraphCms_ScheduledOperationWhereInput>>
+  /** Contains search across all appropriate fields. */
+  _search?: Maybe<Scalars['String']>
+  createdAt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values greater than the given value. */
+  createdAt_gt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are contained in given list. */
+  createdAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  /** All values less than the given value. */
+  createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values less than or equal the given value. */
+  createdAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are not equal to given value. */
+  createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdBy?: Maybe<GraphCms_UserWhereInput>
+  description?: Maybe<Scalars['String']>
+  /** All values containing the given string. */
+  description_contains?: Maybe<Scalars['String']>
+  /** All values ending with the given string. */
+  description_ends_with?: Maybe<Scalars['String']>
+  /** All values that are contained in given list. */
+  description_in?: Maybe<Array<Scalars['String']>>
+  /** All values that are not equal to given value. */
+  description_not?: Maybe<Scalars['String']>
+  /** All values not containing the given string. */
+  description_not_contains?: Maybe<Scalars['String']>
+  /** All values not ending with the given string */
+  description_not_ends_with?: Maybe<Scalars['String']>
+  /** All values that are not contained in given list. */
+  description_not_in?: Maybe<Array<Scalars['String']>>
+  /** All values not starting with the given string. */
+  description_not_starts_with?: Maybe<Scalars['String']>
+  /** All values starting with the given string. */
+  description_starts_with?: Maybe<Scalars['String']>
+  errorMessage?: Maybe<Scalars['String']>
+  /** All values containing the given string. */
+  errorMessage_contains?: Maybe<Scalars['String']>
+  /** All values ending with the given string. */
+  errorMessage_ends_with?: Maybe<Scalars['String']>
+  /** All values that are contained in given list. */
+  errorMessage_in?: Maybe<Array<Scalars['String']>>
+  /** All values that are not equal to given value. */
+  errorMessage_not?: Maybe<Scalars['String']>
+  /** All values not containing the given string. */
+  errorMessage_not_contains?: Maybe<Scalars['String']>
+  /** All values not ending with the given string */
+  errorMessage_not_ends_with?: Maybe<Scalars['String']>
+  /** All values that are not contained in given list. */
+  errorMessage_not_in?: Maybe<Array<Scalars['String']>>
+  /** All values not starting with the given string. */
+  errorMessage_not_starts_with?: Maybe<Scalars['String']>
+  /** All values starting with the given string. */
+  errorMessage_starts_with?: Maybe<Scalars['String']>
+  id?: Maybe<Scalars['ID']>
+  /** All values containing the given string. */
+  id_contains?: Maybe<Scalars['ID']>
+  /** All values ending with the given string. */
+  id_ends_with?: Maybe<Scalars['ID']>
+  /** All values that are contained in given list. */
+  id_in?: Maybe<Array<Scalars['ID']>>
+  /** All values that are not equal to given value. */
+  id_not?: Maybe<Scalars['ID']>
+  /** All values not containing the given string. */
+  id_not_contains?: Maybe<Scalars['ID']>
+  /** All values not ending with the given string */
+  id_not_ends_with?: Maybe<Scalars['ID']>
+  /** All values that are not contained in given list. */
+  id_not_in?: Maybe<Array<Scalars['ID']>>
+  /** All values not starting with the given string. */
+  id_not_starts_with?: Maybe<Scalars['ID']>
+  /** All values starting with the given string. */
+  id_starts_with?: Maybe<Scalars['ID']>
+  publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values greater than the given value. */
+  publishedAt_gt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are contained in given list. */
+  publishedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  /** All values less than the given value. */
+  publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are not equal to given value. */
+  publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedBy?: Maybe<GraphCms_UserWhereInput>
+  release?: Maybe<GraphCms_ScheduledReleaseWhereInput>
+  status?: Maybe<GraphCms_ScheduledOperationStatus>
+  /** All values that are contained in given list. */
+  status_in?: Maybe<Array<GraphCms_ScheduledOperationStatus>>
+  /** All values that are not equal to given value. */
+  status_not?: Maybe<GraphCms_ScheduledOperationStatus>
+  /** All values that are not contained in given list. */
+  status_not_in?: Maybe<Array<GraphCms_ScheduledOperationStatus>>
+  updatedAt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values greater than the given value. */
+  updatedAt_gt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are contained in given list. */
+  updatedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  /** All values less than the given value. */
+  updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are not equal to given value. */
+  updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedBy?: Maybe<GraphCms_UserWhereInput>
+}
+
+export enum GraphCms_ScheduledOperationOrderByInput {
+  createdAt_ASC = 'createdAt_ASC',
+  createdAt_DESC = 'createdAt_DESC',
+  description_ASC = 'description_ASC',
+  description_DESC = 'description_DESC',
+  errorMessage_ASC = 'errorMessage_ASC',
+  errorMessage_DESC = 'errorMessage_DESC',
+  id_ASC = 'id_ASC',
+  id_DESC = 'id_DESC',
+  publishedAt_ASC = 'publishedAt_ASC',
+  publishedAt_DESC = 'publishedAt_DESC',
+  status_ASC = 'status_ASC',
+  status_DESC = 'status_DESC',
+  updatedAt_ASC = 'updatedAt_ASC',
+  updatedAt_DESC = 'updatedAt_DESC',
+}
+
+/** System Scheduled Operation Status */
+export enum GraphCms_ScheduledOperationStatus {
+  CANCELED = 'CANCELED',
+  COMPLETED = 'COMPLETED',
+  FAILED = 'FAILED',
+  IN_PROGRESS = 'IN_PROGRESS',
+  PENDING = 'PENDING',
+}
+
+export type GraphCms_ScheduledOperationUpdateManyInlineInput = {
+  /** Connect multiple existing ScheduledOperation documents */
+  connect?: Maybe<Array<GraphCms_ScheduledOperationConnectInput>>
+  /** Disconnect multiple ScheduledOperation documents */
+  disconnect?: Maybe<Array<GraphCms_ScheduledOperationWhereUniqueInput>>
+  /** Override currently-connected documents with multiple existing ScheduledOperation documents */
+  set?: Maybe<Array<GraphCms_ScheduledOperationWhereUniqueInput>>
+}
+
+export type GraphCms_ScheduledOperationUpdateOneInlineInput = {
+  /** Connect existing ScheduledOperation document */
+  connect?: Maybe<GraphCms_ScheduledOperationWhereUniqueInput>
+  /** Disconnect currently connected ScheduledOperation document */
+  disconnect?: Maybe<Scalars['Boolean']>
+}
+
+/** Identifies documents */
+export type GraphCms_ScheduledOperationWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<GraphCms_ScheduledOperationWhereInput>>
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<GraphCms_ScheduledOperationWhereInput>>
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<GraphCms_ScheduledOperationWhereInput>>
+  /** Contains search across all appropriate fields. */
+  _search?: Maybe<Scalars['String']>
+  createdAt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values greater than the given value. */
+  createdAt_gt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are contained in given list. */
+  createdAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  /** All values less than the given value. */
+  createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values less than or equal the given value. */
+  createdAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are not equal to given value. */
+  createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdBy?: Maybe<GraphCms_UserWhereInput>
+  description?: Maybe<Scalars['String']>
+  /** All values containing the given string. */
+  description_contains?: Maybe<Scalars['String']>
+  /** All values ending with the given string. */
+  description_ends_with?: Maybe<Scalars['String']>
+  /** All values that are contained in given list. */
+  description_in?: Maybe<Array<Scalars['String']>>
+  /** All values that are not equal to given value. */
+  description_not?: Maybe<Scalars['String']>
+  /** All values not containing the given string. */
+  description_not_contains?: Maybe<Scalars['String']>
+  /** All values not ending with the given string */
+  description_not_ends_with?: Maybe<Scalars['String']>
+  /** All values that are not contained in given list. */
+  description_not_in?: Maybe<Array<Scalars['String']>>
+  /** All values not starting with the given string. */
+  description_not_starts_with?: Maybe<Scalars['String']>
+  /** All values starting with the given string. */
+  description_starts_with?: Maybe<Scalars['String']>
+  errorMessage?: Maybe<Scalars['String']>
+  /** All values containing the given string. */
+  errorMessage_contains?: Maybe<Scalars['String']>
+  /** All values ending with the given string. */
+  errorMessage_ends_with?: Maybe<Scalars['String']>
+  /** All values that are contained in given list. */
+  errorMessage_in?: Maybe<Array<Scalars['String']>>
+  /** All values that are not equal to given value. */
+  errorMessage_not?: Maybe<Scalars['String']>
+  /** All values not containing the given string. */
+  errorMessage_not_contains?: Maybe<Scalars['String']>
+  /** All values not ending with the given string */
+  errorMessage_not_ends_with?: Maybe<Scalars['String']>
+  /** All values that are not contained in given list. */
+  errorMessage_not_in?: Maybe<Array<Scalars['String']>>
+  /** All values not starting with the given string. */
+  errorMessage_not_starts_with?: Maybe<Scalars['String']>
+  /** All values starting with the given string. */
+  errorMessage_starts_with?: Maybe<Scalars['String']>
+  id?: Maybe<Scalars['ID']>
+  /** All values containing the given string. */
+  id_contains?: Maybe<Scalars['ID']>
+  /** All values ending with the given string. */
+  id_ends_with?: Maybe<Scalars['ID']>
+  /** All values that are contained in given list. */
+  id_in?: Maybe<Array<Scalars['ID']>>
+  /** All values that are not equal to given value. */
+  id_not?: Maybe<Scalars['ID']>
+  /** All values not containing the given string. */
+  id_not_contains?: Maybe<Scalars['ID']>
+  /** All values not ending with the given string */
+  id_not_ends_with?: Maybe<Scalars['ID']>
+  /** All values that are not contained in given list. */
+  id_not_in?: Maybe<Array<Scalars['ID']>>
+  /** All values not starting with the given string. */
+  id_not_starts_with?: Maybe<Scalars['ID']>
+  /** All values starting with the given string. */
+  id_starts_with?: Maybe<Scalars['ID']>
+  publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values greater than the given value. */
+  publishedAt_gt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are contained in given list. */
+  publishedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  /** All values less than the given value. */
+  publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are not equal to given value. */
+  publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedBy?: Maybe<GraphCms_UserWhereInput>
+  release?: Maybe<GraphCms_ScheduledReleaseWhereInput>
+  status?: Maybe<GraphCms_ScheduledOperationStatus>
+  /** All values that are contained in given list. */
+  status_in?: Maybe<Array<GraphCms_ScheduledOperationStatus>>
+  /** All values that are not equal to given value. */
+  status_not?: Maybe<GraphCms_ScheduledOperationStatus>
+  /** All values that are not contained in given list. */
+  status_not_in?: Maybe<Array<GraphCms_ScheduledOperationStatus>>
+  updatedAt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values greater than the given value. */
+  updatedAt_gt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are contained in given list. */
+  updatedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  /** All values less than the given value. */
+  updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are not equal to given value. */
+  updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedBy?: Maybe<GraphCms_UserWhereInput>
+}
+
+/** References ScheduledOperation record uniquely */
+export type GraphCms_ScheduledOperationWhereUniqueInput = {
+  id?: Maybe<Scalars['ID']>
+}
+
+/** Scheduled Release system model */
+export type GraphCms_ScheduledRelease = GraphCms_Node & {
+  __typename?: 'GraphCMS_ScheduledRelease'
+  /** The time the document was created */
+  createdAt: Scalars['GraphCMS_DateTime']
+  /** User that created this document */
+  createdBy?: Maybe<GraphCms_User>
+  /** Release description */
+  description?: Maybe<Scalars['String']>
+  /** Get the document in other stages */
+  documentInStages: Array<GraphCms_ScheduledRelease>
+  /** Release error message */
+  errorMessage?: Maybe<Scalars['String']>
+  /** The unique identifier */
+  id: Scalars['ID']
+  /** Whether scheduled release should be run */
+  isActive: Scalars['Boolean']
+  /** Whether scheduled release is implicit */
+  isImplicit: Scalars['Boolean']
+  /** Operations to run with this release */
+  operations: Array<GraphCms_ScheduledOperation>
+  /** The time the document was published. Null on documents in draft stage. */
+  publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** User that last published this document */
+  publishedBy?: Maybe<GraphCms_User>
+  /** Release date and time */
+  releaseAt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** System stage field */
+  stage: GraphCms_Stage
+  /** Release Status */
+  status: GraphCms_ScheduledReleaseStatus
+  /** Release Title */
+  title?: Maybe<Scalars['String']>
+  /** The time the document was updated */
+  updatedAt: Scalars['GraphCMS_DateTime']
+  /** User that last updated this document */
+  updatedBy?: Maybe<GraphCms_User>
+}
+
+/** Scheduled Release system model */
+export type GraphCms_ScheduledReleaseCreatedByArgs = {
+  locales?: Maybe<Array<GraphCms_Locale>>
+}
+
+/** Scheduled Release system model */
+export type GraphCms_ScheduledReleaseDocumentInStagesArgs = {
+  includeCurrent?: Scalars['Boolean']
+  inheritLocale?: Scalars['Boolean']
+  stages?: Array<GraphCms_Stage>
+}
+
+/** Scheduled Release system model */
+export type GraphCms_ScheduledReleaseOperationsArgs = {
+  after?: Maybe<Scalars['String']>
+  before?: Maybe<Scalars['String']>
+  first?: Maybe<Scalars['Int']>
+  last?: Maybe<Scalars['Int']>
+  locales?: Maybe<Array<GraphCms_Locale>>
+  orderBy?: Maybe<GraphCms_ScheduledOperationOrderByInput>
+  skip?: Maybe<Scalars['Int']>
+  where?: Maybe<GraphCms_ScheduledOperationWhereInput>
+}
+
+/** Scheduled Release system model */
+export type GraphCms_ScheduledReleasePublishedByArgs = {
+  locales?: Maybe<Array<GraphCms_Locale>>
+}
+
+/** Scheduled Release system model */
+export type GraphCms_ScheduledReleaseUpdatedByArgs = {
+  locales?: Maybe<Array<GraphCms_Locale>>
+}
+
+export type GraphCms_ScheduledReleaseConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: Maybe<GraphCms_ConnectPositionInput>
+  /** Document to connect */
+  where: GraphCms_ScheduledReleaseWhereUniqueInput
+}
+
+/** A connection to a list of items. */
+export type GraphCms_ScheduledReleaseConnection = {
+  __typename?: 'GraphCMS_ScheduledReleaseConnection'
+  aggregate: GraphCms_Aggregate
+  /** A list of edges. */
+  edges: Array<GraphCms_ScheduledReleaseEdge>
+  /** Information to aid in pagination. */
+  pageInfo: GraphCms_PageInfo
+}
+
+export type GraphCms_ScheduledReleaseCreateInput = {
+  createdAt?: Maybe<Scalars['GraphCMS_DateTime']>
+  description?: Maybe<Scalars['String']>
+  errorMessage?: Maybe<Scalars['String']>
+  isActive?: Maybe<Scalars['Boolean']>
+  releaseAt?: Maybe<Scalars['GraphCMS_DateTime']>
+  title?: Maybe<Scalars['String']>
+  updatedAt?: Maybe<Scalars['GraphCMS_DateTime']>
+}
+
+export type GraphCms_ScheduledReleaseCreateManyInlineInput = {
+  /** Connect multiple existing ScheduledRelease documents */
+  connect?: Maybe<Array<GraphCms_ScheduledReleaseWhereUniqueInput>>
+  /** Create and connect multiple existing ScheduledRelease documents */
+  create?: Maybe<Array<GraphCms_ScheduledReleaseCreateInput>>
+}
+
+export type GraphCms_ScheduledReleaseCreateOneInlineInput = {
+  /** Connect one existing ScheduledRelease document */
+  connect?: Maybe<GraphCms_ScheduledReleaseWhereUniqueInput>
+  /** Create and connect one ScheduledRelease document */
+  create?: Maybe<GraphCms_ScheduledReleaseCreateInput>
+}
+
+/** An edge in a connection. */
+export type GraphCms_ScheduledReleaseEdge = {
+  __typename?: 'GraphCMS_ScheduledReleaseEdge'
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String']
+  /** The item at the end of the edge. */
+  node: GraphCms_ScheduledRelease
+}
+
+/** Identifies documents */
+export type GraphCms_ScheduledReleaseManyWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<GraphCms_ScheduledReleaseWhereInput>>
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<GraphCms_ScheduledReleaseWhereInput>>
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<GraphCms_ScheduledReleaseWhereInput>>
+  /** Contains search across all appropriate fields. */
+  _search?: Maybe<Scalars['String']>
+  createdAt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values greater than the given value. */
+  createdAt_gt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are contained in given list. */
+  createdAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  /** All values less than the given value. */
+  createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values less than or equal the given value. */
+  createdAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are not equal to given value. */
+  createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdBy?: Maybe<GraphCms_UserWhereInput>
+  description?: Maybe<Scalars['String']>
+  /** All values containing the given string. */
+  description_contains?: Maybe<Scalars['String']>
+  /** All values ending with the given string. */
+  description_ends_with?: Maybe<Scalars['String']>
+  /** All values that are contained in given list. */
+  description_in?: Maybe<Array<Scalars['String']>>
+  /** All values that are not equal to given value. */
+  description_not?: Maybe<Scalars['String']>
+  /** All values not containing the given string. */
+  description_not_contains?: Maybe<Scalars['String']>
+  /** All values not ending with the given string */
+  description_not_ends_with?: Maybe<Scalars['String']>
+  /** All values that are not contained in given list. */
+  description_not_in?: Maybe<Array<Scalars['String']>>
+  /** All values not starting with the given string. */
+  description_not_starts_with?: Maybe<Scalars['String']>
+  /** All values starting with the given string. */
+  description_starts_with?: Maybe<Scalars['String']>
+  errorMessage?: Maybe<Scalars['String']>
+  /** All values containing the given string. */
+  errorMessage_contains?: Maybe<Scalars['String']>
+  /** All values ending with the given string. */
+  errorMessage_ends_with?: Maybe<Scalars['String']>
+  /** All values that are contained in given list. */
+  errorMessage_in?: Maybe<Array<Scalars['String']>>
+  /** All values that are not equal to given value. */
+  errorMessage_not?: Maybe<Scalars['String']>
+  /** All values not containing the given string. */
+  errorMessage_not_contains?: Maybe<Scalars['String']>
+  /** All values not ending with the given string */
+  errorMessage_not_ends_with?: Maybe<Scalars['String']>
+  /** All values that are not contained in given list. */
+  errorMessage_not_in?: Maybe<Array<Scalars['String']>>
+  /** All values not starting with the given string. */
+  errorMessage_not_starts_with?: Maybe<Scalars['String']>
+  /** All values starting with the given string. */
+  errorMessage_starts_with?: Maybe<Scalars['String']>
+  id?: Maybe<Scalars['ID']>
+  /** All values containing the given string. */
+  id_contains?: Maybe<Scalars['ID']>
+  /** All values ending with the given string. */
+  id_ends_with?: Maybe<Scalars['ID']>
+  /** All values that are contained in given list. */
+  id_in?: Maybe<Array<Scalars['ID']>>
+  /** All values that are not equal to given value. */
+  id_not?: Maybe<Scalars['ID']>
+  /** All values not containing the given string. */
+  id_not_contains?: Maybe<Scalars['ID']>
+  /** All values not ending with the given string */
+  id_not_ends_with?: Maybe<Scalars['ID']>
+  /** All values that are not contained in given list. */
+  id_not_in?: Maybe<Array<Scalars['ID']>>
+  /** All values not starting with the given string. */
+  id_not_starts_with?: Maybe<Scalars['ID']>
+  /** All values starting with the given string. */
+  id_starts_with?: Maybe<Scalars['ID']>
+  isActive?: Maybe<Scalars['Boolean']>
+  /** All values that are not equal to given value. */
+  isActive_not?: Maybe<Scalars['Boolean']>
+  isImplicit?: Maybe<Scalars['Boolean']>
+  /** All values that are not equal to given value. */
+  isImplicit_not?: Maybe<Scalars['Boolean']>
+  operations_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  operations_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  operations_some?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values greater than the given value. */
+  publishedAt_gt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are contained in given list. */
+  publishedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  /** All values less than the given value. */
+  publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are not equal to given value. */
+  publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedBy?: Maybe<GraphCms_UserWhereInput>
+  releaseAt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values greater than the given value. */
+  releaseAt_gt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values greater than or equal the given value. */
+  releaseAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are contained in given list. */
+  releaseAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  /** All values less than the given value. */
+  releaseAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values less than or equal the given value. */
+  releaseAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are not equal to given value. */
+  releaseAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are not contained in given list. */
+  releaseAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  status?: Maybe<GraphCms_ScheduledReleaseStatus>
+  /** All values that are contained in given list. */
+  status_in?: Maybe<Array<GraphCms_ScheduledReleaseStatus>>
+  /** All values that are not equal to given value. */
+  status_not?: Maybe<GraphCms_ScheduledReleaseStatus>
+  /** All values that are not contained in given list. */
+  status_not_in?: Maybe<Array<GraphCms_ScheduledReleaseStatus>>
+  title?: Maybe<Scalars['String']>
+  /** All values containing the given string. */
+  title_contains?: Maybe<Scalars['String']>
+  /** All values ending with the given string. */
+  title_ends_with?: Maybe<Scalars['String']>
+  /** All values that are contained in given list. */
+  title_in?: Maybe<Array<Scalars['String']>>
+  /** All values that are not equal to given value. */
+  title_not?: Maybe<Scalars['String']>
+  /** All values not containing the given string. */
+  title_not_contains?: Maybe<Scalars['String']>
+  /** All values not ending with the given string */
+  title_not_ends_with?: Maybe<Scalars['String']>
+  /** All values that are not contained in given list. */
+  title_not_in?: Maybe<Array<Scalars['String']>>
+  /** All values not starting with the given string. */
+  title_not_starts_with?: Maybe<Scalars['String']>
+  /** All values starting with the given string. */
+  title_starts_with?: Maybe<Scalars['String']>
+  updatedAt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values greater than the given value. */
+  updatedAt_gt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are contained in given list. */
+  updatedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  /** All values less than the given value. */
+  updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are not equal to given value. */
+  updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedBy?: Maybe<GraphCms_UserWhereInput>
+}
+
+export enum GraphCms_ScheduledReleaseOrderByInput {
+  createdAt_ASC = 'createdAt_ASC',
+  createdAt_DESC = 'createdAt_DESC',
+  description_ASC = 'description_ASC',
+  description_DESC = 'description_DESC',
+  errorMessage_ASC = 'errorMessage_ASC',
+  errorMessage_DESC = 'errorMessage_DESC',
+  id_ASC = 'id_ASC',
+  id_DESC = 'id_DESC',
+  isActive_ASC = 'isActive_ASC',
+  isActive_DESC = 'isActive_DESC',
+  isImplicit_ASC = 'isImplicit_ASC',
+  isImplicit_DESC = 'isImplicit_DESC',
+  publishedAt_ASC = 'publishedAt_ASC',
+  publishedAt_DESC = 'publishedAt_DESC',
+  releaseAt_ASC = 'releaseAt_ASC',
+  releaseAt_DESC = 'releaseAt_DESC',
+  status_ASC = 'status_ASC',
+  status_DESC = 'status_DESC',
+  title_ASC = 'title_ASC',
+  title_DESC = 'title_DESC',
+  updatedAt_ASC = 'updatedAt_ASC',
+  updatedAt_DESC = 'updatedAt_DESC',
+}
+
+/** System Scheduled Release Status */
+export enum GraphCms_ScheduledReleaseStatus {
+  COMPLETED = 'COMPLETED',
+  FAILED = 'FAILED',
+  IN_PROGRESS = 'IN_PROGRESS',
+  PENDING = 'PENDING',
+}
+
+export type GraphCms_ScheduledReleaseUpdateInput = {
+  description?: Maybe<Scalars['String']>
+  errorMessage?: Maybe<Scalars['String']>
+  isActive?: Maybe<Scalars['Boolean']>
+  releaseAt?: Maybe<Scalars['GraphCMS_DateTime']>
+  title?: Maybe<Scalars['String']>
+}
+
+export type GraphCms_ScheduledReleaseUpdateManyInlineInput = {
+  /** Connect multiple existing ScheduledRelease documents */
+  connect?: Maybe<Array<GraphCms_ScheduledReleaseConnectInput>>
+  /** Create and connect multiple ScheduledRelease documents */
+  create?: Maybe<Array<GraphCms_ScheduledReleaseCreateInput>>
+  /** Delete multiple ScheduledRelease documents */
+  delete?: Maybe<Array<GraphCms_ScheduledReleaseWhereUniqueInput>>
+  /** Disconnect multiple ScheduledRelease documents */
+  disconnect?: Maybe<Array<GraphCms_ScheduledReleaseWhereUniqueInput>>
+  /** Override currently-connected documents with multiple existing ScheduledRelease documents */
+  set?: Maybe<Array<GraphCms_ScheduledReleaseWhereUniqueInput>>
+  /** Update multiple ScheduledRelease documents */
+  update?: Maybe<
+    Array<GraphCms_ScheduledReleaseUpdateWithNestedWhereUniqueInput>
+  >
+  /** Upsert multiple ScheduledRelease documents */
+  upsert?: Maybe<
+    Array<GraphCms_ScheduledReleaseUpsertWithNestedWhereUniqueInput>
+  >
+}
+
+export type GraphCms_ScheduledReleaseUpdateManyInput = {
+  description?: Maybe<Scalars['String']>
+  errorMessage?: Maybe<Scalars['String']>
+  isActive?: Maybe<Scalars['Boolean']>
+  releaseAt?: Maybe<Scalars['GraphCMS_DateTime']>
+  title?: Maybe<Scalars['String']>
+}
+
+export type GraphCms_ScheduledReleaseUpdateManyWithNestedWhereInput = {
+  /** Update many input */
+  data: GraphCms_ScheduledReleaseUpdateManyInput
+  /** Document search */
+  where: GraphCms_ScheduledReleaseWhereInput
+}
+
+export type GraphCms_ScheduledReleaseUpdateOneInlineInput = {
+  /** Connect existing ScheduledRelease document */
+  connect?: Maybe<GraphCms_ScheduledReleaseWhereUniqueInput>
+  /** Create and connect one ScheduledRelease document */
+  create?: Maybe<GraphCms_ScheduledReleaseCreateInput>
+  /** Delete currently connected ScheduledRelease document */
+  delete?: Maybe<Scalars['Boolean']>
+  /** Disconnect currently connected ScheduledRelease document */
+  disconnect?: Maybe<Scalars['Boolean']>
+  /** Update single ScheduledRelease document */
+  update?: Maybe<GraphCms_ScheduledReleaseUpdateWithNestedWhereUniqueInput>
+  /** Upsert single ScheduledRelease document */
+  upsert?: Maybe<GraphCms_ScheduledReleaseUpsertWithNestedWhereUniqueInput>
+}
+
+export type GraphCms_ScheduledReleaseUpdateWithNestedWhereUniqueInput = {
+  /** Document to update */
+  data: GraphCms_ScheduledReleaseUpdateInput
+  /** Unique document search */
+  where: GraphCms_ScheduledReleaseWhereUniqueInput
+}
+
+export type GraphCms_ScheduledReleaseUpsertInput = {
+  /** Create document if it didn't exist */
+  create: GraphCms_ScheduledReleaseCreateInput
+  /** Update document if it exists */
+  update: GraphCms_ScheduledReleaseUpdateInput
+}
+
+export type GraphCms_ScheduledReleaseUpsertWithNestedWhereUniqueInput = {
+  /** Upsert data */
+  data: GraphCms_ScheduledReleaseUpsertInput
+  /** Unique document search */
+  where: GraphCms_ScheduledReleaseWhereUniqueInput
+}
+
+/** Identifies documents */
+export type GraphCms_ScheduledReleaseWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<GraphCms_ScheduledReleaseWhereInput>>
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<GraphCms_ScheduledReleaseWhereInput>>
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<GraphCms_ScheduledReleaseWhereInput>>
+  /** Contains search across all appropriate fields. */
+  _search?: Maybe<Scalars['String']>
+  createdAt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values greater than the given value. */
+  createdAt_gt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are contained in given list. */
+  createdAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  /** All values less than the given value. */
+  createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values less than or equal the given value. */
+  createdAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are not equal to given value. */
+  createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdBy?: Maybe<GraphCms_UserWhereInput>
+  description?: Maybe<Scalars['String']>
+  /** All values containing the given string. */
+  description_contains?: Maybe<Scalars['String']>
+  /** All values ending with the given string. */
+  description_ends_with?: Maybe<Scalars['String']>
+  /** All values that are contained in given list. */
+  description_in?: Maybe<Array<Scalars['String']>>
+  /** All values that are not equal to given value. */
+  description_not?: Maybe<Scalars['String']>
+  /** All values not containing the given string. */
+  description_not_contains?: Maybe<Scalars['String']>
+  /** All values not ending with the given string */
+  description_not_ends_with?: Maybe<Scalars['String']>
+  /** All values that are not contained in given list. */
+  description_not_in?: Maybe<Array<Scalars['String']>>
+  /** All values not starting with the given string. */
+  description_not_starts_with?: Maybe<Scalars['String']>
+  /** All values starting with the given string. */
+  description_starts_with?: Maybe<Scalars['String']>
+  errorMessage?: Maybe<Scalars['String']>
+  /** All values containing the given string. */
+  errorMessage_contains?: Maybe<Scalars['String']>
+  /** All values ending with the given string. */
+  errorMessage_ends_with?: Maybe<Scalars['String']>
+  /** All values that are contained in given list. */
+  errorMessage_in?: Maybe<Array<Scalars['String']>>
+  /** All values that are not equal to given value. */
+  errorMessage_not?: Maybe<Scalars['String']>
+  /** All values not containing the given string. */
+  errorMessage_not_contains?: Maybe<Scalars['String']>
+  /** All values not ending with the given string */
+  errorMessage_not_ends_with?: Maybe<Scalars['String']>
+  /** All values that are not contained in given list. */
+  errorMessage_not_in?: Maybe<Array<Scalars['String']>>
+  /** All values not starting with the given string. */
+  errorMessage_not_starts_with?: Maybe<Scalars['String']>
+  /** All values starting with the given string. */
+  errorMessage_starts_with?: Maybe<Scalars['String']>
+  id?: Maybe<Scalars['ID']>
+  /** All values containing the given string. */
+  id_contains?: Maybe<Scalars['ID']>
+  /** All values ending with the given string. */
+  id_ends_with?: Maybe<Scalars['ID']>
+  /** All values that are contained in given list. */
+  id_in?: Maybe<Array<Scalars['ID']>>
+  /** All values that are not equal to given value. */
+  id_not?: Maybe<Scalars['ID']>
+  /** All values not containing the given string. */
+  id_not_contains?: Maybe<Scalars['ID']>
+  /** All values not ending with the given string */
+  id_not_ends_with?: Maybe<Scalars['ID']>
+  /** All values that are not contained in given list. */
+  id_not_in?: Maybe<Array<Scalars['ID']>>
+  /** All values not starting with the given string. */
+  id_not_starts_with?: Maybe<Scalars['ID']>
+  /** All values starting with the given string. */
+  id_starts_with?: Maybe<Scalars['ID']>
+  isActive?: Maybe<Scalars['Boolean']>
+  /** All values that are not equal to given value. */
+  isActive_not?: Maybe<Scalars['Boolean']>
+  isImplicit?: Maybe<Scalars['Boolean']>
+  /** All values that are not equal to given value. */
+  isImplicit_not?: Maybe<Scalars['Boolean']>
+  operations_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  operations_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  operations_some?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values greater than the given value. */
+  publishedAt_gt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are contained in given list. */
+  publishedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  /** All values less than the given value. */
+  publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are not equal to given value. */
+  publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedBy?: Maybe<GraphCms_UserWhereInput>
+  releaseAt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values greater than the given value. */
+  releaseAt_gt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values greater than or equal the given value. */
+  releaseAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are contained in given list. */
+  releaseAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  /** All values less than the given value. */
+  releaseAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values less than or equal the given value. */
+  releaseAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are not equal to given value. */
+  releaseAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are not contained in given list. */
+  releaseAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  status?: Maybe<GraphCms_ScheduledReleaseStatus>
+  /** All values that are contained in given list. */
+  status_in?: Maybe<Array<GraphCms_ScheduledReleaseStatus>>
+  /** All values that are not equal to given value. */
+  status_not?: Maybe<GraphCms_ScheduledReleaseStatus>
+  /** All values that are not contained in given list. */
+  status_not_in?: Maybe<Array<GraphCms_ScheduledReleaseStatus>>
+  title?: Maybe<Scalars['String']>
+  /** All values containing the given string. */
+  title_contains?: Maybe<Scalars['String']>
+  /** All values ending with the given string. */
+  title_ends_with?: Maybe<Scalars['String']>
+  /** All values that are contained in given list. */
+  title_in?: Maybe<Array<Scalars['String']>>
+  /** All values that are not equal to given value. */
+  title_not?: Maybe<Scalars['String']>
+  /** All values not containing the given string. */
+  title_not_contains?: Maybe<Scalars['String']>
+  /** All values not ending with the given string */
+  title_not_ends_with?: Maybe<Scalars['String']>
+  /** All values that are not contained in given list. */
+  title_not_in?: Maybe<Array<Scalars['String']>>
+  /** All values not starting with the given string. */
+  title_not_starts_with?: Maybe<Scalars['String']>
+  /** All values starting with the given string. */
+  title_starts_with?: Maybe<Scalars['String']>
+  updatedAt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values greater than the given value. */
+  updatedAt_gt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are contained in given list. */
+  updatedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  /** All values less than the given value. */
+  updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are not equal to given value. */
+  updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedBy?: Maybe<GraphCms_UserWhereInput>
+}
+
+/** References ScheduledRelease record uniquely */
+export type GraphCms_ScheduledReleaseWhereUniqueInput = {
+  id?: Maybe<Scalars['ID']>
+}
+
 export type GraphCms_Skill = GraphCms_Node & {
   __typename?: 'GraphCMS_Skill'
   /** The time the document was created */
@@ -5260,6 +6530,7 @@ export type GraphCms_Skill = GraphCms_Node & {
   publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** User that last published this document */
   publishedBy?: Maybe<GraphCms_User>
+  scheduledIn: Array<GraphCms_ScheduledOperation>
   /** System stage field */
   stage: GraphCms_Stage
   title: Scalars['String']
@@ -5292,6 +6563,16 @@ export type GraphCms_SkillLogoArgs = {
 
 export type GraphCms_SkillPublishedByArgs = {
   locales?: Maybe<Array<GraphCms_Locale>>
+}
+
+export type GraphCms_SkillScheduledInArgs = {
+  after?: Maybe<Scalars['String']>
+  before?: Maybe<Scalars['String']>
+  first?: Maybe<Scalars['Int']>
+  last?: Maybe<Scalars['Int']>
+  locales?: Maybe<Array<GraphCms_Locale>>
+  skip?: Maybe<Scalars['Int']>
+  where?: Maybe<GraphCms_ScheduledOperationWhereInput>
 }
 
 export type GraphCms_SkillUpdatedByArgs = {
@@ -5408,6 +6689,9 @@ export type GraphCms_SkillManyWhereInput = {
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
+  scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_some?: Maybe<GraphCms_ScheduledOperationWhereInput>
   title?: Maybe<Scalars['String']>
   /** All values containing the given string. */
   title_contains?: Maybe<Scalars['String']>
@@ -5608,6 +6892,9 @@ export type GraphCms_SkillWhereInput = {
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
+  scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_some?: Maybe<GraphCms_ScheduledOperationWhereInput>
   title?: Maybe<Scalars['String']>
   /** All values containing the given string. */
   title_contains?: Maybe<Scalars['String']>
@@ -6082,6 +7369,7 @@ export type GraphCms_VideoEmbed = GraphCms_Node & {
   publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** User that last published this document */
   publishedBy?: Maybe<GraphCms_User>
+  scheduledIn: Array<GraphCms_ScheduledOperation>
   /** System stage field */
   stage: GraphCms_Stage
   /** The time the document was updated */
@@ -6108,6 +7396,16 @@ export type GraphCms_VideoEmbedHistoryArgs = {
 
 export type GraphCms_VideoEmbedPublishedByArgs = {
   locales?: Maybe<Array<GraphCms_Locale>>
+}
+
+export type GraphCms_VideoEmbedScheduledInArgs = {
+  after?: Maybe<Scalars['String']>
+  before?: Maybe<Scalars['String']>
+  first?: Maybe<Scalars['Int']>
+  last?: Maybe<Scalars['Int']>
+  locales?: Maybe<Array<GraphCms_Locale>>
+  skip?: Maybe<Scalars['Int']>
+  where?: Maybe<GraphCms_ScheduledOperationWhereInput>
 }
 
 export type GraphCms_VideoEmbedUpdatedByArgs = {
@@ -6243,6 +7541,9 @@ export type GraphCms_VideoEmbedManyWhereInput = {
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
+  scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_some?: Maybe<GraphCms_ScheduledOperationWhereInput>
   updatedAt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values greater than the given value. */
   updatedAt_gt?: Maybe<Scalars['GraphCMS_DateTime']>
@@ -6426,6 +7727,9 @@ export type GraphCms_VideoEmbedWhereInput = {
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
+  scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
+  scheduledIn_some?: Maybe<GraphCms_ScheduledOperationWhereInput>
   updatedAt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values greater than the given value. */
   updatedAt_gt?: Maybe<Scalars['GraphCMS_DateTime']>
@@ -9682,6 +10986,8 @@ export type ExperienceHistoryQuery = {
       position: string
       startDate: any
       endDate?: any | null | undefined
+      location?: string | null | undefined
+      locationIcon: string
       logo: { __typename?: 'GraphCMS_Asset'; url: string }
       description: { __typename?: 'GraphCMS_RichText'; html: string }
     }>

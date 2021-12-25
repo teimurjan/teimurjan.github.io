@@ -11,9 +11,9 @@ export interface Props extends EmotionProps {
   imageSrc?: string
   imageAlt?: string
   title: string
-  subtitle1: string
+  subtitle1: ReactNode
   subtitle2?: string
-  color?: keyof typeof theme.colors.background
+  overlay?: ReactNode
 }
 
 const Card = forwardRef<HTMLDivElement, Props>(
@@ -27,12 +27,10 @@ const Card = forwardRef<HTMLDivElement, Props>(
       imageAlt,
       subtitle1,
       subtitle2,
-      color = 'beige',
+      overlay,
     },
     ref
   ) => {
-    const textColor = color === 'beige' ? 'blue' : 'beige'
-
     return (
       <div
         id={id}
@@ -40,17 +38,31 @@ const Card = forwardRef<HTMLDivElement, Props>(
         css={css`
           padding: ${theme.spacing.small} ${theme.spacing.medium};
           box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-          background: ${theme.colors.background[color]};
+          background: ${theme.colors.background.beige};
+          position: relative;
         `}
         className={className}
       >
+        {overlay && (
+          <div
+            css={css`
+              position: absolute;
+              right: 0;
+              top: ${theme.spacing.small};
+            `}
+            color="blue"
+          >
+            {overlay}
+          </div>
+        )}
+
         <Flex alignItemsCenter>
           {imageSrc && (
             <Flex.Item>
               <img
                 css={css`
                   max-height: 3.25rem;
-                  margin-right: ${theme.spacing.small};
+                  margin-right: ${theme.spacing.medium};
                 `}
                 src={imageSrc}
                 alt={imageAlt}
@@ -58,12 +70,16 @@ const Card = forwardRef<HTMLDivElement, Props>(
             </Flex.Item>
           )}
 
-          <Flex.Item>
-            <Typography.Title color={textColor} variant="h4">
-              {title}
-            </Typography.Title>
+          <Flex.Item
+            css={
+              overlay &&
+              css`
+                padding-right: ${theme.spacing.medium};
+              `
+            }
+          >
+            <Typography.Title variant="h4">{title}</Typography.Title>
             <Typography.Title
-              color={textColor}
               css={css`
                 margin-bottom: ${theme.spacing.xsmall};
               `}
@@ -71,14 +87,10 @@ const Card = forwardRef<HTMLDivElement, Props>(
             >
               {subtitle1}
             </Typography.Title>
-            {subtitle2 && (
-              <Typography.Text color={textColor}>{subtitle2}</Typography.Text>
-            )}
+            {subtitle2 && <Typography.Text>{subtitle2}</Typography.Text>}
           </Flex.Item>
         </Flex>
-        <Typography.Text color={textColor} container>
-          {children}
-        </Typography.Text>
+        <Typography.Text container>{children}</Typography.Text>
       </div>
     )
   }

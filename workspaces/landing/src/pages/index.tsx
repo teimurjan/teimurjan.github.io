@@ -1,5 +1,6 @@
 import 'swiper/css'
 import 'swiper/css/pagination'
+import 'rc-tooltip/assets/bootstrap.css'
 import { Content, Layout } from '../components/atoms'
 import { Section, GridSection } from '../components/molecules'
 import {

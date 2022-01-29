@@ -10,6 +10,7 @@ export interface Props {
     keyof typeof theme.spacing | undefined,
     keyof typeof theme.spacing | undefined
   ]
+  height?: number | string
 }
 
 const Section = ({

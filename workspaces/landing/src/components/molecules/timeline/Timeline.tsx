@@ -34,7 +34,9 @@ const Timeline = ({ children, hideLine = false }: Props) => (
         position: absolute;
         border-right: 4px solid ${theme.colors.geometry.blueAlpha};
         height: 100%;
-        left: calc(calc(${theme.typography.title.h5.fontSize} / 2) - 2px);
+        left: calc(
+          calc(${theme.typography.title.xlarge.h5.fontSize} / 2) - 2px
+        );
         top: 0;
         transition: transform 500ms
           ${theme.transition.timingFunction.easeInOutCubic};

@@ -33,13 +33,21 @@ const Banner = ({
     >
       <Flex.Item
         css={css`
-          flex: 0.7;
+          flex: 0.6;
           padding-bottom: ${theme.spacing.medium};
           padding-right: ${theme.spacing.medium};
 
-          @media ${theme.screens.medium.mediaUpTo} {
-            flex: 0.6;
+          @media ${theme.screens.small.mediaUpTo} {
+            width: 100%;
             padding-bottom: 0;
+          }
+
+          @media ${theme.screens.medium.mediaUpTo} {
+            flex: 0.5;
+          }
+
+          @media ${theme.screens.large.mediaUpTo} {
+            flex: 0.6;
           }
         `}
       >
@@ -84,6 +92,10 @@ const Banner = ({
           }
 
           @media ${theme.screens.medium.mediaUpTo} {
+            flex: 0.5;
+          }
+
+          @media ${theme.screens.large.mediaUpTo} {
             flex: 0.4;
           }
         `}

@@ -2,7 +2,7 @@ import { Fragment } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { css } from '@emotion/react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import SwiperCore, { Pagination } from 'swiper'
+import SwiperCore, { Pagination, Navigation } from 'swiper'
 import { prettyRange, theme } from '@teimurjan/utils'
 import { ExperienceHistoryQuery } from '@teimurjan/gql-types'
 import Tooltip from 'rc-tooltip'
@@ -35,7 +35,7 @@ const query = graphql`
   }
 `
 
-SwiperCore.use([Pagination])
+SwiperCore.use([Pagination, Navigation])
 
 const handleSwiperBreakpointChange = (swiper: SwiperCore) =>
   swiper.el.setAttribute('data-breakpoint', swiper.currentBreakpoint)
@@ -58,6 +58,52 @@ const ExperienceHistory = () => {
 
         .swiper-pagination-bullet-active {
           background: ${theme.colors.geometry.blue};
+        }
+
+        .swiper-button-prev {
+          position: absolute;
+          left: 1rem;
+          bottom: 0;
+          z-index: 20;
+          /* TODO: polish controls */
+          opacity: 0;
+          transition: opacity 500ms
+            ${theme.transition.timingFunction.easeInOutCubic};
+          cursor: pointer;
+
+          &:after {
+            content: '⬅️';
+            font-size: ${theme.typography.title.large.h2.fontSize};
+          }
+
+          @media ${theme.screens.small.mediaUpTo} {
+            font-size: ${theme.typography.title.large.h3.fontSize};
+          }
+        }
+
+        .swiper-button-next {
+          position: absolute;
+          right: 1rem;
+          bottom: 0;
+          z-index: 20;
+          /* TODO: polish controls */
+          opacity: 0;
+          transition: opacity 500ms
+            ${theme.transition.timingFunction.easeInOutCubic};
+          cursor: pointer;
+
+          &:after {
+            content: '➡️';
+            font-size: ${theme.typography.title.large.h2.fontSize};
+          }
+
+          @media ${theme.screens.small.mediaUpTo} {
+            font-size: ${theme.typography.title.large.h3.fontSize};
+          }
+        }
+
+        .swiper-button-disabled {
+          opacity: 0;
         }
       `}
     >
@@ -86,6 +132,7 @@ const ExperienceHistory = () => {
           },
         }}
         onBreakpoint={handleSwiperBreakpointChange}
+        navigation
       >
         {experiences.map((experience) => {
           return (

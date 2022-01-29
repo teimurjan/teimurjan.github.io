@@ -38,6 +38,9 @@ const IndexBanner = () => {
 
   return (
     <Banner
+      css={css`
+        height: 100%;
+      `}
       title={fullName}
       subtitle={headline}
       description={about}
@@ -49,6 +52,12 @@ const IndexBanner = () => {
       image={
         <Fragment>
           <StaticImage
+            css={css`
+              img {
+                max-height: 100%;
+                width: auto;
+              }
+            `}
             src="../../../assets/images/me.png"
             alt="profile"
             placeholder="tracedSVG"
@@ -56,12 +65,7 @@ const IndexBanner = () => {
             layout="fullWidth"
           />
           <Square
-            sizes={{
-              small: '90vw',
-              medium: '40vw',
-              large: '30vw',
-              xlarge: '30vw',
-            }}
+            size="100%"
             color="blue"
             css={css`
               position: absolute;
@@ -74,17 +78,11 @@ const IndexBanner = () => {
 
               @media ${theme.screens.small.mediaUpTo} {
                 left: 30%;
-                bottom: 15%;
               }
             `}
           />
           <Square
-            sizes={{
-              small: '80vw',
-              medium: '35vw',
-              large: '20vw',
-              xlarge: '15vw',
-            }}
+            size="50%"
             color="blueAlpha"
             css={css`
               position: absolute;
@@ -97,7 +95,6 @@ const IndexBanner = () => {
 
               @media ${theme.screens.small.mediaUpTo} {
                 left: -10%;
-                bottom: 10%;
               }
             `}
           />

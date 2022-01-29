@@ -5,7 +5,7 @@ import { EmotionProps } from '../../../utils'
 
 export interface Props extends EmotionProps {
   children: ReactNode
-  variant: keyof typeof theme.typography.title
+  variant: keyof typeof theme.typography.title.xlarge
   color?: 'blue' | 'beige'
   transform?: 'uppercase' | 'lowercase'
 }
@@ -22,16 +22,21 @@ const Title = ({
   return (
     <Component
       css={css`
-        font-size: ${theme.typography.title[variant].fontSize};
-        line-height: ${theme.typography.title[variant].lineHeight};
+        font-size: ${theme.typography.title.xlarge[variant].fontSize};
+        line-height: ${theme.typography.title.xlarge[variant].lineHeight};
         font-weight: bold;
         color: ${theme.colors.typography[color]};
         text-transform: ${transform};
         margin: 0;
 
-        @media ${theme.screens.medium.mediaUpTo} {
-          font-size: ${theme.typography.titleResponsive[variant].fontSize};
-          line-height: ${theme.typography.titleResponsive[variant].lineHeight};
+        @media ${theme.screens.small.mediaUpTo} {
+          font-size: ${theme.typography.title.large[variant].fontSize};
+          line-height: ${theme.typography.title.large[variant].lineHeight};
+        }
+
+        @media ${theme.screens.large.mediaUpTo} {
+          font-size: ${theme.typography.title.large[variant].fontSize};
+          line-height: ${theme.typography.title.large[variant].lineHeight};
         }
       `}
       className={className}

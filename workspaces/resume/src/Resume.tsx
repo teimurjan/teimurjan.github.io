@@ -41,11 +41,11 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     width: '100%',
-    padding: '0 40px',
+    padding: '0 20px',
   },
   container: {
     backgroundColor: theme.colors.resume.white,
-    padding: '20px 20px',
+    padding: '16px 20px',
     width: '100%',
     height: '100%',
   },

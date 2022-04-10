@@ -11005,6 +11005,48 @@ export type IndexBannerQuery = {
       fullName: string
       headline: string
       about: string
+      location: string
+      phoneNumber: string
+      email: string
+    }>
+    educations: Array<{
+      __typename?: 'GraphCMS_Education'
+      id: string
+      school: string
+      degree?: string | null | undefined
+      areaOfStudy: string
+      startDate: any
+      endDate?: any | null | undefined
+    }>
+    skills: Array<{
+      __typename?: 'GraphCMS_Skill'
+      id: string
+      title: string
+      yearsOfExperience: number
+    }>
+    experiences: Array<{
+      __typename?: 'GraphCMS_Experience'
+      id: string
+      company: string
+      position: string
+      startDate: any
+      endDate?: any | null | undefined
+      description: { __typename?: 'GraphCMS_RichText'; html: string }
+    }>
+    publications: Array<{
+      __typename?: 'GraphCMS_Publication'
+      id: string
+      title: string
+      link: string
+      date: any
+    }>
+    conferences: Array<{
+      __typename?: 'GraphCMS_Conference'
+      id: string
+      title: string
+      topic: string
+      link: string
+      date: any
     }>
   }
 }

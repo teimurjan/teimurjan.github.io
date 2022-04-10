@@ -3,9 +3,11 @@ import { css, keyframes } from '@emotion/react'
 import { Fragment } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { IndexBannerQuery } from '@teimurjan/gql-types'
+import Resume, { PDFDownloadLink } from '@teimurjan/resume'
 import { theme } from '@teimurjan/utils'
 import { Banner } from '../../molecules'
 import { Button, Square } from '../../atoms'
+import { useLazyInitialization } from '../../../hooks'
 
 const roll = (rotation: number) => keyframes`
   0% {
@@ -24,17 +26,62 @@ const query = graphql`
         fullName
         headline
         about
+        location
+        phoneNumber
+        email
+      }
+      educations(orderBy: startDate_DESC) {
+        id
+        school
+        degree
+        areaOfStudy
+        startDate
+        endDate
+      }
+      skills(orderBy: yearsOfExperience_DESC) {
+        id
+        title
+        yearsOfExperience
+      }
+      experiences(orderBy: startDate_DESC) {
+        id
+        company
+        position
+        startDate
+        endDate
+        description {
+          html
+        }
+      }
+      publications {
+        id
+        title
+        link
+        date
+      }
+      conferences {
+        id
+        title
+        topic
+        link
+        date
       }
     }
   }
 `
 
 const IndexBanner = () => {
+  const data = useStaticQuery<IndexBannerQuery>(query)
   const {
     gcms: {
       bios: [{ fullName, headline, about }],
     },
-  } = useStaticQuery<IndexBannerQuery>(query)
+  } = data
+  const { value: shouldGeneratePDFInBrowser, isInitialized } =
+    useLazyInitialization(
+      process.env.NODE_ENV === 'development' && typeof window !== 'undefined',
+      false
+    )
 
   return (
     <Banner
@@ -45,9 +92,33 @@ const IndexBanner = () => {
       subtitle={headline}
       description={about}
       button={
-        <Button.Link type="external" to="/resume.pdf">
-          Get resume
-        </Button.Link>
+        shouldGeneratePDFInBrowser && isInitialized ? (
+          <PDFDownloadLink
+            document={<Resume {...data} />}
+            fileName="resume.pdf"
+          >
+            {({ url, loading }) => (
+              <Button
+                onClick={(e) => {
+                  // Prevent download action to be triggered
+                  e.stopPropagation()
+                  e.preventDefault()
+
+                  if (url) {
+                    window.open(url, '_blank')
+                  }
+                }}
+                disabled={loading}
+              >
+                Get resume
+              </Button>
+            )}
+          </PDFDownloadLink>
+        ) : (
+          <Button.Link type="external" to="/resume.pdf">
+            Get resume
+          </Button.Link>
+        )
       }
       image={
         <Fragment>

@@ -3,9 +3,11 @@ import { theme } from '@teimurjan/utils'
 
 interface Args {
   inverted?: boolean
+  disabled?: boolean
 }
 
-export const buttonCss = ({ inverted }: Args) => css`
+export const buttonCss = ({ inverted, disabled }: Args) => css`
+  pointer-events: ${disabled ? 'none' : 'auto'};
   border: none;
   background: ${inverted
     ? `linear-gradient(to right, ${theme.colors.button.beigeDarken} 50%, ${theme.colors.button.beige} 50%)`

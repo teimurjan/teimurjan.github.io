@@ -1,2 +1,2 @@
 export { default } from './Resume'
-export { renderToFile } from '@react-pdf/renderer'
+export { renderToFile, PDFDownloadLink } from '@react-pdf/renderer'

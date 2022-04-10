@@ -4,14 +4,15 @@ import { buttonCss } from './styles'
 
 export interface Props extends LinkProps {
   inverted?: boolean
+  disabled?: boolean
   to: LinkProps['to']
 }
 
 const ButtonLink = forwardRef<HTMLAnchorElement, Props>(
-  ({ children, inverted = false, ...rest }, ref) => (
+  ({ children, inverted = false, disabled = false, ...rest }, ref) => (
     <Link
       ref={ref}
-      css={buttonCss({ inverted })}
+      css={buttonCss({ inverted, disabled })}
       {...rest}
       color={inverted ? 'blue' : 'beige'}
       inheritFontSize

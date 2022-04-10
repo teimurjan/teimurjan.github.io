@@ -2,7 +2,7 @@ import { Text, View, StyleSheet } from '@react-pdf/renderer'
 import { theme } from '@teimurjan/utils'
 import MapPinIcon from '../map-pin-icon'
 import MailIcon from '../mail-icon'
-import PhoneIcon from '../mail-icon'
+import PhoneIcon from '../phone-icon'
 
 const styles = StyleSheet.create({
   contactsSection: {

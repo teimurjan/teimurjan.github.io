@@ -1,4 +1,5 @@
 {
   "extends": "../../tsconfig.json",
+  "files": ["./svg.d.ts"],
   "include": ["./src", "./config"]
 }

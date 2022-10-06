@@ -1,12 +1,13 @@
-import { StaticImage } from 'gatsby-plugin-image'
 import { css, keyframes } from '@emotion/react'
-import { Fragment } from 'react'
+import { Fragment, Suspense } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
+import { PerspectiveCamera } from '@react-three/drei'
+import { Canvas } from '@react-three/fiber'
 import { IndexBannerQuery } from '@teimurjan/gql-types'
 import Resume, { PDFDownloadLink } from '@teimurjan/resume'
 import { theme } from '@teimurjan/utils'
 import { Banner } from '../../molecules'
-import { Button, Square } from '../../atoms'
+import { Button, Persona, Square } from '../../atoms'
 import { useLazyInitialization } from '../../../hooks'
 
 const roll = (rotation: number) => keyframes`
@@ -122,19 +123,20 @@ const IndexBanner = () => {
       }
       image={
         <Fragment>
-          <StaticImage
-            css={css`
-              img {
-                max-height: 100%;
-                width: auto;
-              }
-            `}
-            src="../../../assets/images/me.png"
-            alt="profile"
-            placeholder="tracedSVG"
-            tracedSVGOptions={{ color: '#05386b' }}
-            layout="fullWidth"
-          />
+          <Canvas
+            style={{
+              height: 600,
+              width: '100%',
+            }}
+          >
+            <ambientLight intensity={1.25} />
+            <ambientLight intensity={0.1} />
+            <directionalLight intensity={0.4} />
+            <PerspectiveCamera makeDefault fov={40} position={[0, 1, 3]} />
+            <Suspense fallback={null}>
+              <Persona />
+            </Suspense>
+          </Canvas>
           <Square
             size="100%"
             color="blue"

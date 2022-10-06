@@ -30,12 +30,9 @@ const PublicationItem = ({ link, title, style = {} }: Props) => {
   return (
     <View style={{ ...style, ...styles.publication }}>
       <View style={styles.listStyleDisc} />
-      <Text style={styles.publicationText}>
-        <Link src={link} style={styles.publicationLink}>
-          {title}
-        </Link>
-        .
-      </Text>
+      <Link src={link} style={styles.publicationLink}>
+        <Text style={styles.publicationText}>{title}.</Text>
+      </Link>
     </View>
   )
 }

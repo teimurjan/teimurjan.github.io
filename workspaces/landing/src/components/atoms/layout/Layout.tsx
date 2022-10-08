@@ -3,7 +3,7 @@ import { ReactNode } from 'react'
 import { Helmet } from 'react-helmet'
 import { useStaticQuery, graphql } from 'gatsby'
 import { SeoQuery } from '@teimurjan/gql-types'
-import { AppContextProvider } from '../../../context'
+import { AppContextProvider, PersonaContextProvider } from '../../../context'
 
 export interface Props {
   children: ReactNode
@@ -78,7 +78,9 @@ const Layout = ({ children }: Props) => {
           }
         `}
       />
-      <AppContextProvider>{children}</AppContextProvider>
+      <AppContextProvider>
+        <PersonaContextProvider>{children}</PersonaContextProvider>
+      </AppContextProvider>
     </div>
   )
 }

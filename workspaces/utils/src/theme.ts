@@ -177,6 +177,7 @@ const theme = {
   },
   transition: {
     timingFunction: {
+      linear: 'linear',
       easeInOutCubic: 'cubic-bezier(0.65, 0, 0.35, 1)',
     },
   },

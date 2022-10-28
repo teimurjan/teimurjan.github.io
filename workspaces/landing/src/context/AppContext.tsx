@@ -15,27 +15,14 @@ interface ProviderProps {
 }
 
 const AppContextProvider = ({ children }: ProviderProps) => {
-  const isDocumentDefined = typeof document !== 'undefined'
   const { visible: experienceVisible, appearedOnce: experienceVisited } =
-    useElementVisibility(
-      isDocumentDefined ? document.getElementById('experience') : null,
-      0.5
-    )
+    useElementVisibility('experience')
   const { visible: skillsVisible, appearedOnce: skillsVisited } =
-    useElementVisibility(
-      isDocumentDefined ? document.getElementById('skills') : null,
-      0.5
-    )
+    useElementVisibility('skills')
   const { visible: educationVisible, appearedOnce: educationVisited } =
-    useElementVisibility(
-      isDocumentDefined ? document.getElementById('education') : null,
-      0.5
-    )
+    useElementVisibility('education')
   const { visible: mediaVisible, appearedOnce: mediaVisited } =
-    useElementVisibility(
-      isDocumentDefined ? document.getElementById('media') : null,
-      0.25
-    )
+    useElementVisibility('media')
 
   const visitedLinks = useMemo(
     () =>

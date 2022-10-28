@@ -1,15 +1,15 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import useLazyInitialization from './use-lazy-initialization'
 
-const useElementVisibility = (
-  element: HTMLElement | null,
-  threshold?: number
-) => {
+const useElementVisibility = (id: string, threshold?: number) => {
   const appearedOnce = useRef(false)
   const [visible, setVisibility] = useState(false)
 
-  if (visible) {
-    appearedOnce.current = true
-  }
+  useEffect(() => {
+    if (visible) {
+      appearedOnce.current = true
+    }
+  }, [visible])
 
   const observer = useMemo(
     () =>
@@ -17,7 +17,7 @@ const useElementVisibility = (
         ? new IntersectionObserver(
             (entries) => {
               for (const entry of entries) {
-                if (entry.target === element) {
+                if (entry.target.id === id) {
                   setVisibility(entry.isIntersecting)
                   break
                 }
@@ -30,16 +30,19 @@ const useElementVisibility = (
     []
   )
 
+  const { value: lazyObserver } = useLazyInitialization(observer, null)
+
   useEffect(() => {
-    if (!observer || !element) {
+    const element = document.getElementById(id)
+    if (!lazyObserver || !element) {
       return
     }
 
-    observer.observe(element)
+    lazyObserver.observe(element)
 
-    return observer.disconnect
+    return lazyObserver.disconnect
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [!!element])
+  }, [lazyObserver])
 
   return { visible, appearedOnce: appearedOnce.current }
 }

@@ -1,4 +1,4 @@
-import { ReactNode, Suspense, useState } from 'react'
+import { ReactNode, useState } from 'react'
 import { PerspectiveCamera } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { usePersonaContext } from '../../../context'
@@ -29,7 +29,7 @@ const PersonaCanvas = ({ render }: Props) => {
       <directionalLight intensity={0.4} />
       <PerspectiveCamera makeDefault fov={40} position={[0, 1, 3]} />
 
-      <Suspense fallback={null}>{render(personaKey.toString())}</Suspense>
+      {render(personaKey.toString())}
     </Canvas>
   )
 }

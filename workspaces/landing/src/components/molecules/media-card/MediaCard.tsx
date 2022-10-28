@@ -65,6 +65,7 @@ const MediaCard = forwardRef<HTMLDivElement, Props>(
                 margin-bottom: ${theme.spacing.small};
                 padding: 0 ${theme.spacing.medium};
               `}
+              container
             >
               {subtitle}
             </Typography.Text>

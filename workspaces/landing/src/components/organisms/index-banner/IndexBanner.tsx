@@ -1,5 +1,5 @@
 import { css, keyframes } from '@emotion/react'
-import { Fragment, useState } from 'react'
+import { Fragment, Suspense, useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { IndexBannerQuery } from '@teimurjan/gql-types'
 import Resume, { PDFDownloadLink } from '@teimurjan/resume'
@@ -69,6 +69,12 @@ const query = graphql`
   }
 `
 
+const renderPersona = (key: string) => (
+  <Suspense fallback={null}>
+    <Persona key={key} />
+  </Suspense>
+)
+
 const IndexBanner = () => {
   const data = useStaticQuery<IndexBannerQuery>(query)
   const {
@@ -121,7 +127,7 @@ const IndexBanner = () => {
       }
       image={
         <Fragment>
-          <PersonaCanvas render={(key) => <Persona key={key} />} />
+          <PersonaCanvas render={renderPersona} />
 
           <Square
             size="100%"

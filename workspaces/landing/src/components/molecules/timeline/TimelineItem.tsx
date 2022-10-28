@@ -32,6 +32,7 @@ const TimelineItem = ({ icon, date, children }: Props) => (
       <Typography.Title
         css={css`
           padding: 0 ${theme.spacing.medium};
+          flex-shrink: 0;
 
           @media ${theme.screens.small.mediaUpTo} {
             padding: 0 0 ${theme.spacing.xsmall} 0;

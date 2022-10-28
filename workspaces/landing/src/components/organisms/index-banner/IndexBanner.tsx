@@ -1,15 +1,12 @@
 import { css, keyframes } from '@emotion/react'
-import { Fragment, Suspense, useState } from 'react'
+import { Fragment, useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import { PerspectiveCamera } from '@react-three/drei'
-import { Canvas } from '@react-three/fiber'
 import { IndexBannerQuery } from '@teimurjan/gql-types'
 import Resume, { PDFDownloadLink } from '@teimurjan/resume'
 import { theme } from '@teimurjan/utils'
 import { Banner } from '../../molecules'
-import { Button, Persona, Square } from '../../atoms'
+import { Button, Persona, Square, PersonaCanvas } from '../../atoms'
 import { useLazyInitialization } from '../../../hooks'
-import { usePersonaContext } from '../../../context'
 
 const roll = (rotation: number) => keyframes`
   0% {
@@ -84,11 +81,6 @@ const IndexBanner = () => {
       process.env.NODE_ENV === 'development' && typeof window !== 'undefined',
       false
     )
-  const [personaKey, setPersonaKey] = useState(0)
-  const setNextPersonaKey = () => {
-    setPersonaKey(personaKey + 1)
-  }
-  const { state } = usePersonaContext()
 
   return (
     <Banner
@@ -129,31 +121,8 @@ const IndexBanner = () => {
       }
       image={
         <Fragment>
-          <Canvas
-            onClick={state === 'idle' ? setNextPersonaKey : undefined}
-            css={
-              state === 'idle'
-                ? css`
-                    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:32px;'><text y='50%'>👋</text></svg>")
-                        16 0,
-                      auto;
-                  `
-                : undefined
-            }
-            style={{
-              height: 600,
-              width: '100%',
-            }}
-          >
-            <ambientLight intensity={1.25} />
-            <ambientLight intensity={0.1} />
-            <directionalLight intensity={0.4} />
-            <PerspectiveCamera makeDefault fov={40} position={[0, 1, 3]} />
+          <PersonaCanvas render={(key) => <Persona key={key} />} />
 
-            <Suspense fallback={null}>
-              <Persona key={personaKey} />
-            </Suspense>
-          </Canvas>
           <Square
             size="100%"
             color="blue"

@@ -1,6 +1,12 @@
 import { createElement, ReactElement } from 'react'
 import webpack from 'webpack'
-import { CreatePagesArgs, CreateWebpackConfigArgs } from 'gatsby'
+import {
+  CreatePagesArgs,
+  CreateWebpackConfigArgs,
+  CreateResolversArgs,
+  CreateSchemaCustomizationArgs,
+} from 'gatsby'
+import { fetch } from 'fetch-opengraph'
 import Resume, { renderToFile } from '@teimurjan/resume'
 import { ResumeSsrQuery } from '@teimurjan/gql-types'
 
@@ -84,4 +90,73 @@ const createPages = async ({ graphql }: CreatePagesArgs) => {
   }
 }
 
-export { onCreateWebpackConfig, createPages }
+const createSchemaCustomization = ({
+  actions,
+  schema,
+}: CreateSchemaCustomizationArgs) => {
+  const typeDefs = [
+    schema.buildObjectType({
+      name: 'Opengraph',
+      interfaces: ['Node'],
+      fields: {
+        description: 'String',
+        twitterImageSrc: 'String',
+        twitterCard: 'String',
+        twitterTitle: 'String',
+        twitterDescription: 'String',
+        ogImage: 'String',
+        ogType: 'String',
+        ogTitle: 'String',
+        ogUrl: 'String',
+        ogDescription: 'String',
+        image: 'String',
+        url: 'String',
+      },
+    }),
+  ]
+
+  actions.createTypes(typeDefs)
+}
+
+const createResolvers = ({ createResolvers }: CreateResolversArgs) => {
+  const resolvers = {
+    GraphCMS_Publication: {
+      opengraph: {
+        type: 'Opengraph!',
+        resolve: async ({ link }: { link: string }) => {
+          const data = await fetch(link)
+          const formatKey = (key: string) => {
+            let newKey = ''
+            let shouldUppercaseNext = false
+            for (const char of key) {
+              if (char !== ':') {
+                if (shouldUppercaseNext) {
+                  newKey += char.toUpperCase()
+                  shouldUppercaseNext = false
+                } else {
+                  newKey += char
+                }
+              } else {
+                shouldUppercaseNext = true
+              }
+            }
+
+            return newKey
+          }
+
+          return Object.entries(data).reduce((acc, [key, value]) => {
+            return { ...acc, [formatKey(key)]: value ?? '' }
+          }, {})
+        },
+      },
+    },
+  }
+  createResolvers(resolvers)
+}
+
+export {
+  onCreateWebpackConfig,
+  createPages,
+  createSchemaCustomization,
+  createResolvers,
+}

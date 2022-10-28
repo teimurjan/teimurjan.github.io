@@ -4,7 +4,8 @@ import { prettyDate, sortByDate, theme } from '@teimurjan/utils'
 import { MediaQuery } from '@teimurjan/gql-types'
 import { Link, ScrollToArea, Typography } from '../../atoms'
 import { useAppContext } from '../../../context'
-import { Timeline } from '../../molecules'
+import { MediaCard, Timeline } from '../../molecules'
+import Flex from '@react-css/flex'
 
 const query = graphql`
   query Media {
@@ -15,6 +16,20 @@ const query = graphql`
         title
         link
         date
+        opengraph {
+          description
+          image
+          ogImage
+          ogDescription
+          ogTitle
+          ogType
+          ogUrl
+          twitterCard
+          twitterDescription
+          twitterImageSrc
+          twitterTitle
+          url
+        }
       }
       conferences {
         __typename
@@ -108,15 +123,47 @@ const Media = () => {
     }
 
     if (item.__typename === 'GraphCMS_Publication') {
+      const title =
+        item.opengraph.ogTitle ?? item.opengraph.twitterTitle ?? item.title
+      const subtitle =
+        item.opengraph.ogDescription ??
+        item.opengraph.twitterDescription ??
+        item.opengraph.description
+      const image =
+        item.opengraph.ogImage ??
+        item.opengraph.twitterImageSrc ??
+        item.opengraph.image
       return (
         <Timeline.Item key={item.id} icon="✏️" date={prettyDate(item.date)}>
-          <Typography.Title variant="h5">
-            {item.title}
-            <br />
-            <Link to={item.link} underline="always">
-              Check it out 🔗
-            </Link>
-          </Typography.Title>
+          {title && subtitle && image ? (
+            <MediaCard
+              title={title}
+              subtitle={
+                <Flex flexDirection="column">
+                  {subtitle}
+                  <Link
+                    css={css`
+                      margin-top: ${theme.spacing.small};
+                    `}
+                    to={item.link}
+                    underline="always"
+                  >
+                    Check it out 🔗
+                  </Link>
+                </Flex>
+              }
+              imageSrc={image}
+            />
+          ) : (
+            <Typography.Title variant="h5">
+              {title}
+              <br />
+              <Link to={item.link} underline="always">
+                Check it out 🔗
+              </Link>
+              <br />
+            </Typography.Title>
+          )}
         </Timeline.Item>
       )
     }

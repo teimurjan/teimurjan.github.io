@@ -19,6 +19,7 @@ export type Scalars = {
   Float: number
   /** A date string, such as 2007-12-03, compliant with the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
   Date: any
+  GatsbyImageData: any
   /** A date string, such as 2007-12-03 (YYYY-MM-DD), compliant with ISO 8601 standard for representation of dates using the Gregorian calendar. */
   GraphCMS_Date: any
   /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the date-timeformat outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representationof dates and times using the Gregorian calendar. */
@@ -79,8 +80,6 @@ export type Directory = Node & {
   birthtime?: Maybe<Scalars['Date']>
   /** @deprecated Use `birthTime` instead */
   birthtimeMs?: Maybe<Scalars['Float']>
-  blksize?: Maybe<Scalars['Int']>
-  blocks?: Maybe<Scalars['Int']>
   changeTime: Scalars['Date']
   children: Array<Node>
   ctime: Scalars['Date']
@@ -210,8 +209,6 @@ export enum DirectoryFieldsEnum {
   birthTime = 'birthTime',
   birthtime = 'birthtime',
   birthtimeMs = 'birthtimeMs',
-  blksize = 'blksize',
-  blocks = 'blocks',
   changeTime = 'changeTime',
   children = 'children',
   children___children = 'children___children',
@@ -221,6 +218,7 @@ export enum DirectoryFieldsEnum {
   children___children___id = 'children___children___id',
   children___children___internal___content = 'children___children___internal___content',
   children___children___internal___contentDigest = 'children___children___internal___contentDigest',
+  children___children___internal___contentFilePath = 'children___children___internal___contentFilePath',
   children___children___internal___description = 'children___children___internal___description',
   children___children___internal___fieldOwners = 'children___children___internal___fieldOwners',
   children___children___internal___ignoreType = 'children___children___internal___ignoreType',
@@ -232,6 +230,7 @@ export enum DirectoryFieldsEnum {
   children___id = 'children___id',
   children___internal___content = 'children___internal___content',
   children___internal___contentDigest = 'children___internal___contentDigest',
+  children___internal___contentFilePath = 'children___internal___contentFilePath',
   children___internal___description = 'children___internal___description',
   children___internal___fieldOwners = 'children___internal___fieldOwners',
   children___internal___ignoreType = 'children___internal___ignoreType',
@@ -244,6 +243,7 @@ export enum DirectoryFieldsEnum {
   children___parent___id = 'children___parent___id',
   children___parent___internal___content = 'children___parent___internal___content',
   children___parent___internal___contentDigest = 'children___parent___internal___contentDigest',
+  children___parent___internal___contentFilePath = 'children___parent___internal___contentFilePath',
   children___parent___internal___description = 'children___parent___internal___description',
   children___parent___internal___fieldOwners = 'children___parent___internal___fieldOwners',
   children___parent___internal___ignoreType = 'children___parent___internal___ignoreType',
@@ -263,6 +263,7 @@ export enum DirectoryFieldsEnum {
   ino = 'ino',
   internal___content = 'internal___content',
   internal___contentDigest = 'internal___contentDigest',
+  internal___contentFilePath = 'internal___contentFilePath',
   internal___description = 'internal___description',
   internal___fieldOwners = 'internal___fieldOwners',
   internal___ignoreType = 'internal___ignoreType',
@@ -282,6 +283,7 @@ export enum DirectoryFieldsEnum {
   parent___children___id = 'parent___children___id',
   parent___children___internal___content = 'parent___children___internal___content',
   parent___children___internal___contentDigest = 'parent___children___internal___contentDigest',
+  parent___children___internal___contentFilePath = 'parent___children___internal___contentFilePath',
   parent___children___internal___description = 'parent___children___internal___description',
   parent___children___internal___fieldOwners = 'parent___children___internal___fieldOwners',
   parent___children___internal___ignoreType = 'parent___children___internal___ignoreType',
@@ -293,6 +295,7 @@ export enum DirectoryFieldsEnum {
   parent___id = 'parent___id',
   parent___internal___content = 'parent___internal___content',
   parent___internal___contentDigest = 'parent___internal___contentDigest',
+  parent___internal___contentFilePath = 'parent___internal___contentFilePath',
   parent___internal___description = 'parent___internal___description',
   parent___internal___fieldOwners = 'parent___internal___fieldOwners',
   parent___internal___ignoreType = 'parent___internal___ignoreType',
@@ -305,6 +308,7 @@ export enum DirectoryFieldsEnum {
   parent___parent___id = 'parent___parent___id',
   parent___parent___internal___content = 'parent___parent___internal___content',
   parent___parent___internal___contentDigest = 'parent___parent___internal___contentDigest',
+  parent___parent___internal___contentFilePath = 'parent___parent___internal___contentFilePath',
   parent___parent___internal___description = 'parent___parent___internal___description',
   parent___parent___internal___fieldOwners = 'parent___parent___internal___fieldOwners',
   parent___parent___internal___ignoreType = 'parent___parent___internal___ignoreType',
@@ -332,8 +336,6 @@ export type DirectoryFilterInput = {
   birthTime?: Maybe<DateQueryOperatorInput>
   birthtime?: Maybe<DateQueryOperatorInput>
   birthtimeMs?: Maybe<FloatQueryOperatorInput>
-  blksize?: Maybe<IntQueryOperatorInput>
-  blocks?: Maybe<IntQueryOperatorInput>
   changeTime?: Maybe<DateQueryOperatorInput>
   children?: Maybe<NodeFilterListInput>
   ctime?: Maybe<DateQueryOperatorInput>
@@ -570,6 +572,7 @@ export enum FileFieldsEnum {
   childImageSharp___children___id = 'childImageSharp___children___id',
   childImageSharp___children___internal___content = 'childImageSharp___children___internal___content',
   childImageSharp___children___internal___contentDigest = 'childImageSharp___children___internal___contentDigest',
+  childImageSharp___children___internal___contentFilePath = 'childImageSharp___children___internal___contentFilePath',
   childImageSharp___children___internal___description = 'childImageSharp___children___internal___description',
   childImageSharp___children___internal___fieldOwners = 'childImageSharp___children___internal___fieldOwners',
   childImageSharp___children___internal___ignoreType = 'childImageSharp___children___internal___ignoreType',
@@ -604,6 +607,7 @@ export enum FileFieldsEnum {
   childImageSharp___id = 'childImageSharp___id',
   childImageSharp___internal___content = 'childImageSharp___internal___content',
   childImageSharp___internal___contentDigest = 'childImageSharp___internal___contentDigest',
+  childImageSharp___internal___contentFilePath = 'childImageSharp___internal___contentFilePath',
   childImageSharp___internal___description = 'childImageSharp___internal___description',
   childImageSharp___internal___fieldOwners = 'childImageSharp___internal___fieldOwners',
   childImageSharp___internal___ignoreType = 'childImageSharp___internal___ignoreType',
@@ -619,6 +623,7 @@ export enum FileFieldsEnum {
   childImageSharp___parent___id = 'childImageSharp___parent___id',
   childImageSharp___parent___internal___content = 'childImageSharp___parent___internal___content',
   childImageSharp___parent___internal___contentDigest = 'childImageSharp___parent___internal___contentDigest',
+  childImageSharp___parent___internal___contentFilePath = 'childImageSharp___parent___internal___contentFilePath',
   childImageSharp___parent___internal___description = 'childImageSharp___parent___internal___description',
   childImageSharp___parent___internal___fieldOwners = 'childImageSharp___parent___internal___fieldOwners',
   childImageSharp___parent___internal___ignoreType = 'childImageSharp___parent___internal___ignoreType',
@@ -642,6 +647,7 @@ export enum FileFieldsEnum {
   childrenImageSharp___children___id = 'childrenImageSharp___children___id',
   childrenImageSharp___children___internal___content = 'childrenImageSharp___children___internal___content',
   childrenImageSharp___children___internal___contentDigest = 'childrenImageSharp___children___internal___contentDigest',
+  childrenImageSharp___children___internal___contentFilePath = 'childrenImageSharp___children___internal___contentFilePath',
   childrenImageSharp___children___internal___description = 'childrenImageSharp___children___internal___description',
   childrenImageSharp___children___internal___fieldOwners = 'childrenImageSharp___children___internal___fieldOwners',
   childrenImageSharp___children___internal___ignoreType = 'childrenImageSharp___children___internal___ignoreType',
@@ -676,6 +682,7 @@ export enum FileFieldsEnum {
   childrenImageSharp___id = 'childrenImageSharp___id',
   childrenImageSharp___internal___content = 'childrenImageSharp___internal___content',
   childrenImageSharp___internal___contentDigest = 'childrenImageSharp___internal___contentDigest',
+  childrenImageSharp___internal___contentFilePath = 'childrenImageSharp___internal___contentFilePath',
   childrenImageSharp___internal___description = 'childrenImageSharp___internal___description',
   childrenImageSharp___internal___fieldOwners = 'childrenImageSharp___internal___fieldOwners',
   childrenImageSharp___internal___ignoreType = 'childrenImageSharp___internal___ignoreType',
@@ -691,6 +698,7 @@ export enum FileFieldsEnum {
   childrenImageSharp___parent___id = 'childrenImageSharp___parent___id',
   childrenImageSharp___parent___internal___content = 'childrenImageSharp___parent___internal___content',
   childrenImageSharp___parent___internal___contentDigest = 'childrenImageSharp___parent___internal___contentDigest',
+  childrenImageSharp___parent___internal___contentFilePath = 'childrenImageSharp___parent___internal___contentFilePath',
   childrenImageSharp___parent___internal___description = 'childrenImageSharp___parent___internal___description',
   childrenImageSharp___parent___internal___fieldOwners = 'childrenImageSharp___parent___internal___fieldOwners',
   childrenImageSharp___parent___internal___ignoreType = 'childrenImageSharp___parent___internal___ignoreType',
@@ -712,6 +720,7 @@ export enum FileFieldsEnum {
   children___children___id = 'children___children___id',
   children___children___internal___content = 'children___children___internal___content',
   children___children___internal___contentDigest = 'children___children___internal___contentDigest',
+  children___children___internal___contentFilePath = 'children___children___internal___contentFilePath',
   children___children___internal___description = 'children___children___internal___description',
   children___children___internal___fieldOwners = 'children___children___internal___fieldOwners',
   children___children___internal___ignoreType = 'children___children___internal___ignoreType',
@@ -723,6 +732,7 @@ export enum FileFieldsEnum {
   children___id = 'children___id',
   children___internal___content = 'children___internal___content',
   children___internal___contentDigest = 'children___internal___contentDigest',
+  children___internal___contentFilePath = 'children___internal___contentFilePath',
   children___internal___description = 'children___internal___description',
   children___internal___fieldOwners = 'children___internal___fieldOwners',
   children___internal___ignoreType = 'children___internal___ignoreType',
@@ -735,6 +745,7 @@ export enum FileFieldsEnum {
   children___parent___id = 'children___parent___id',
   children___parent___internal___content = 'children___parent___internal___content',
   children___parent___internal___contentDigest = 'children___parent___internal___contentDigest',
+  children___parent___internal___contentFilePath = 'children___parent___internal___contentFilePath',
   children___parent___internal___description = 'children___parent___internal___description',
   children___parent___internal___fieldOwners = 'children___parent___internal___fieldOwners',
   children___parent___internal___ignoreType = 'children___parent___internal___ignoreType',
@@ -754,6 +765,7 @@ export enum FileFieldsEnum {
   ino = 'ino',
   internal___content = 'internal___content',
   internal___contentDigest = 'internal___contentDigest',
+  internal___contentFilePath = 'internal___contentFilePath',
   internal___description = 'internal___description',
   internal___fieldOwners = 'internal___fieldOwners',
   internal___ignoreType = 'internal___ignoreType',
@@ -773,6 +785,7 @@ export enum FileFieldsEnum {
   parent___children___id = 'parent___children___id',
   parent___children___internal___content = 'parent___children___internal___content',
   parent___children___internal___contentDigest = 'parent___children___internal___contentDigest',
+  parent___children___internal___contentFilePath = 'parent___children___internal___contentFilePath',
   parent___children___internal___description = 'parent___children___internal___description',
   parent___children___internal___fieldOwners = 'parent___children___internal___fieldOwners',
   parent___children___internal___ignoreType = 'parent___children___internal___ignoreType',
@@ -784,6 +797,7 @@ export enum FileFieldsEnum {
   parent___id = 'parent___id',
   parent___internal___content = 'parent___internal___content',
   parent___internal___contentDigest = 'parent___internal___contentDigest',
+  parent___internal___contentFilePath = 'parent___internal___contentFilePath',
   parent___internal___description = 'parent___internal___description',
   parent___internal___fieldOwners = 'parent___internal___fieldOwners',
   parent___internal___ignoreType = 'parent___internal___ignoreType',
@@ -796,6 +810,7 @@ export enum FileFieldsEnum {
   parent___parent___id = 'parent___parent___id',
   parent___parent___internal___content = 'parent___parent___internal___content',
   parent___parent___internal___contentDigest = 'parent___parent___internal___contentDigest',
+  parent___parent___internal___contentFilePath = 'parent___parent___internal___contentFilePath',
   parent___parent___internal___description = 'parent___parent___internal___description',
   parent___parent___internal___fieldOwners = 'parent___parent___internal___fieldOwners',
   parent___parent___internal___ignoreType = 'parent___parent___internal___ignoreType',
@@ -909,6 +924,13 @@ export type FloatQueryOperatorInput = {
   lte?: Maybe<Scalars['Float']>
   ne?: Maybe<Scalars['Float']>
   nin?: Maybe<Array<Maybe<Scalars['Float']>>>
+}
+
+export type GatsbyImageDataQueryOperatorInput = {
+  eq?: Maybe<Scalars['GatsbyImageData']>
+  in?: Maybe<Array<Maybe<Scalars['GatsbyImageData']>>>
+  ne?: Maybe<Scalars['GatsbyImageData']>
+  nin?: Maybe<Array<Maybe<Scalars['GatsbyImageData']>>>
 }
 
 export enum GatsbyImageFormat {
@@ -1665,7 +1687,7 @@ export type GraphCms_AssetManyWhereInput = {
   /** All values greater than or equal the given value. */
   createdAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  createdAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -1673,15 +1695,18 @@ export type GraphCms_AssetManyWhereInput = {
   /** All values that are not equal to given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  createdAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   createdBy?: Maybe<GraphCms_UserWhereInput>
+  documentInStages_every?: Maybe<GraphCms_AssetWhereStageInput>
+  documentInStages_none?: Maybe<GraphCms_AssetWhereStageInput>
+  documentInStages_some?: Maybe<GraphCms_AssetWhereStageInput>
   id?: Maybe<Scalars['ID']>
   /** All values containing the given string. */
   id_contains?: Maybe<Scalars['ID']>
   /** All values ending with the given string. */
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>
+  id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values that are not equal to given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
@@ -1689,7 +1714,7 @@ export type GraphCms_AssetManyWhereInput = {
   /** All values not ending with the given string */
   id_not_ends_with?: Maybe<Scalars['ID']>
   /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>
+  id_not_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values not starting with the given string. */
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
@@ -1706,7 +1731,7 @@ export type GraphCms_AssetManyWhereInput = {
   /** All values greater than or equal the given value. */
   publishedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  publishedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -1714,7 +1739,7 @@ export type GraphCms_AssetManyWhereInput = {
   /** All values that are not equal to given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
   scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
   scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
@@ -1725,7 +1750,7 @@ export type GraphCms_AssetManyWhereInput = {
   /** All values greater than or equal the given value. */
   updatedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -1733,7 +1758,7 @@ export type GraphCms_AssetManyWhereInput = {
   /** All values that are not equal to given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   updatedBy?: Maybe<GraphCms_UserWhereInput>
 }
 
@@ -1899,6 +1924,12 @@ export type GraphCms_AssetUpsertWithNestedWhereUniqueInput = {
   where: GraphCms_AssetWhereUniqueInput
 }
 
+/** This contains a set of filters that can be used to compare values internally */
+export type GraphCms_AssetWhereComparatorInput = {
+  /** This field can be used to request to check if the entry is outdated by internal comparison */
+  outdated_to?: Maybe<Scalars['Boolean']>
+}
+
 /** Identifies documents */
 export type GraphCms_AssetWhereInput = {
   /** Logical AND on all given filters. */
@@ -1915,7 +1946,7 @@ export type GraphCms_AssetWhereInput = {
   /** All values greater than or equal the given value. */
   createdAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  createdAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -1923,15 +1954,18 @@ export type GraphCms_AssetWhereInput = {
   /** All values that are not equal to given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  createdAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   createdBy?: Maybe<GraphCms_UserWhereInput>
+  documentInStages_every?: Maybe<GraphCms_AssetWhereStageInput>
+  documentInStages_none?: Maybe<GraphCms_AssetWhereStageInput>
+  documentInStages_some?: Maybe<GraphCms_AssetWhereStageInput>
   fileName?: Maybe<Scalars['String']>
   /** All values containing the given string. */
   fileName_contains?: Maybe<Scalars['String']>
   /** All values ending with the given string. */
   fileName_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  fileName_in?: Maybe<Array<Scalars['String']>>
+  fileName_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   fileName_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -1939,7 +1973,7 @@ export type GraphCms_AssetWhereInput = {
   /** All values not ending with the given string */
   fileName_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  fileName_not_in?: Maybe<Array<Scalars['String']>>
+  fileName_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   fileName_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -1950,7 +1984,7 @@ export type GraphCms_AssetWhereInput = {
   /** All values ending with the given string. */
   handle_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  handle_in?: Maybe<Array<Scalars['String']>>
+  handle_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   handle_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -1958,7 +1992,7 @@ export type GraphCms_AssetWhereInput = {
   /** All values not ending with the given string */
   handle_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  handle_not_in?: Maybe<Array<Scalars['String']>>
+  handle_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   handle_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -1969,7 +2003,7 @@ export type GraphCms_AssetWhereInput = {
   /** All values greater than or equal the given value. */
   height_gte?: Maybe<Scalars['Float']>
   /** All values that are contained in given list. */
-  height_in?: Maybe<Array<Scalars['Float']>>
+  height_in?: Maybe<Array<Maybe<Scalars['Float']>>>
   /** All values less than the given value. */
   height_lt?: Maybe<Scalars['Float']>
   /** All values less than or equal the given value. */
@@ -1977,14 +2011,14 @@ export type GraphCms_AssetWhereInput = {
   /** All values that are not equal to given value. */
   height_not?: Maybe<Scalars['Float']>
   /** All values that are not contained in given list. */
-  height_not_in?: Maybe<Array<Scalars['Float']>>
+  height_not_in?: Maybe<Array<Maybe<Scalars['Float']>>>
   id?: Maybe<Scalars['ID']>
   /** All values containing the given string. */
   id_contains?: Maybe<Scalars['ID']>
   /** All values ending with the given string. */
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>
+  id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values that are not equal to given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
@@ -1992,7 +2026,7 @@ export type GraphCms_AssetWhereInput = {
   /** All values not ending with the given string */
   id_not_ends_with?: Maybe<Scalars['ID']>
   /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>
+  id_not_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values not starting with the given string. */
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
@@ -2009,7 +2043,7 @@ export type GraphCms_AssetWhereInput = {
   /** All values ending with the given string. */
   mimeType_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  mimeType_in?: Maybe<Array<Scalars['String']>>
+  mimeType_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   mimeType_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -2017,7 +2051,7 @@ export type GraphCms_AssetWhereInput = {
   /** All values not ending with the given string */
   mimeType_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  mimeType_not_in?: Maybe<Array<Scalars['String']>>
+  mimeType_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   mimeType_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -2028,7 +2062,7 @@ export type GraphCms_AssetWhereInput = {
   /** All values greater than or equal the given value. */
   publishedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  publishedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -2036,7 +2070,7 @@ export type GraphCms_AssetWhereInput = {
   /** All values that are not equal to given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
   scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
   scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
@@ -2047,7 +2081,7 @@ export type GraphCms_AssetWhereInput = {
   /** All values greater than or equal the given value. */
   size_gte?: Maybe<Scalars['Float']>
   /** All values that are contained in given list. */
-  size_in?: Maybe<Array<Scalars['Float']>>
+  size_in?: Maybe<Array<Maybe<Scalars['Float']>>>
   /** All values less than the given value. */
   size_lt?: Maybe<Scalars['Float']>
   /** All values less than or equal the given value. */
@@ -2055,14 +2089,14 @@ export type GraphCms_AssetWhereInput = {
   /** All values that are not equal to given value. */
   size_not?: Maybe<Scalars['Float']>
   /** All values that are not contained in given list. */
-  size_not_in?: Maybe<Array<Scalars['Float']>>
+  size_not_in?: Maybe<Array<Maybe<Scalars['Float']>>>
   updatedAt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values greater than the given value. */
   updatedAt_gt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values greater than or equal the given value. */
   updatedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -2070,7 +2104,7 @@ export type GraphCms_AssetWhereInput = {
   /** All values that are not equal to given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   updatedBy?: Maybe<GraphCms_UserWhereInput>
   width?: Maybe<Scalars['Float']>
   /** All values greater than the given value. */
@@ -2078,7 +2112,7 @@ export type GraphCms_AssetWhereInput = {
   /** All values greater than or equal the given value. */
   width_gte?: Maybe<Scalars['Float']>
   /** All values that are contained in given list. */
-  width_in?: Maybe<Array<Scalars['Float']>>
+  width_in?: Maybe<Array<Maybe<Scalars['Float']>>>
   /** All values less than the given value. */
   width_lt?: Maybe<Scalars['Float']>
   /** All values less than or equal the given value. */
@@ -2086,7 +2120,21 @@ export type GraphCms_AssetWhereInput = {
   /** All values that are not equal to given value. */
   width_not?: Maybe<Scalars['Float']>
   /** All values that are not contained in given list. */
-  width_not_in?: Maybe<Array<Scalars['Float']>>
+  width_not_in?: Maybe<Array<Maybe<Scalars['Float']>>>
+}
+
+/** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
+export type GraphCms_AssetWhereStageInput = {
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<GraphCms_AssetWhereStageInput>>
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<GraphCms_AssetWhereStageInput>>
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<GraphCms_AssetWhereStageInput>>
+  /** This field contains fields which can be set as true or false to specify an internal comparison */
+  compareWithParent?: Maybe<GraphCms_AssetWhereComparatorInput>
+  /** Specify the stage to compare with */
+  stage?: Maybe<GraphCms_Stage>
 }
 
 /** References Asset record uniquely */
@@ -2232,7 +2280,7 @@ export type GraphCms_BioManyWhereInput = {
   /** All values ending with the given string. */
   about_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  about_in?: Maybe<Array<Scalars['String']>>
+  about_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   about_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -2240,7 +2288,7 @@ export type GraphCms_BioManyWhereInput = {
   /** All values not ending with the given string */
   about_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  about_not_in?: Maybe<Array<Scalars['String']>>
+  about_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   about_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -2251,7 +2299,7 @@ export type GraphCms_BioManyWhereInput = {
   /** All values greater than or equal the given value. */
   createdAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  createdAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -2259,15 +2307,18 @@ export type GraphCms_BioManyWhereInput = {
   /** All values that are not equal to given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  createdAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   createdBy?: Maybe<GraphCms_UserWhereInput>
+  documentInStages_every?: Maybe<GraphCms_BioWhereStageInput>
+  documentInStages_none?: Maybe<GraphCms_BioWhereStageInput>
+  documentInStages_some?: Maybe<GraphCms_BioWhereStageInput>
   email?: Maybe<Scalars['String']>
   /** All values containing the given string. */
   email_contains?: Maybe<Scalars['String']>
   /** All values ending with the given string. */
   email_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  email_in?: Maybe<Array<Scalars['String']>>
+  email_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   email_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -2275,7 +2326,7 @@ export type GraphCms_BioManyWhereInput = {
   /** All values not ending with the given string */
   email_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  email_not_in?: Maybe<Array<Scalars['String']>>
+  email_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   email_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -2286,7 +2337,7 @@ export type GraphCms_BioManyWhereInput = {
   /** All values ending with the given string. */
   fullName_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  fullName_in?: Maybe<Array<Scalars['String']>>
+  fullName_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   fullName_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -2294,7 +2345,7 @@ export type GraphCms_BioManyWhereInput = {
   /** All values not ending with the given string */
   fullName_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  fullName_not_in?: Maybe<Array<Scalars['String']>>
+  fullName_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   fullName_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -2305,7 +2356,7 @@ export type GraphCms_BioManyWhereInput = {
   /** All values ending with the given string. */
   headline_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  headline_in?: Maybe<Array<Scalars['String']>>
+  headline_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   headline_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -2313,7 +2364,7 @@ export type GraphCms_BioManyWhereInput = {
   /** All values not ending with the given string */
   headline_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  headline_not_in?: Maybe<Array<Scalars['String']>>
+  headline_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   headline_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -2324,7 +2375,7 @@ export type GraphCms_BioManyWhereInput = {
   /** All values ending with the given string. */
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>
+  id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values that are not equal to given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
@@ -2332,7 +2383,7 @@ export type GraphCms_BioManyWhereInput = {
   /** All values not ending with the given string */
   id_not_ends_with?: Maybe<Scalars['ID']>
   /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>
+  id_not_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values not starting with the given string. */
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
@@ -2343,7 +2394,7 @@ export type GraphCms_BioManyWhereInput = {
   /** All values ending with the given string. */
   location_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  location_in?: Maybe<Array<Scalars['String']>>
+  location_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   location_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -2351,7 +2402,7 @@ export type GraphCms_BioManyWhereInput = {
   /** All values not ending with the given string */
   location_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  location_not_in?: Maybe<Array<Scalars['String']>>
+  location_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   location_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -2362,7 +2413,7 @@ export type GraphCms_BioManyWhereInput = {
   /** All values ending with the given string. */
   phoneNumber_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  phoneNumber_in?: Maybe<Array<Scalars['String']>>
+  phoneNumber_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   phoneNumber_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -2370,7 +2421,7 @@ export type GraphCms_BioManyWhereInput = {
   /** All values not ending with the given string */
   phoneNumber_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  phoneNumber_not_in?: Maybe<Array<Scalars['String']>>
+  phoneNumber_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   phoneNumber_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -2381,7 +2432,7 @@ export type GraphCms_BioManyWhereInput = {
   /** All values greater than or equal the given value. */
   publishedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  publishedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -2389,7 +2440,7 @@ export type GraphCms_BioManyWhereInput = {
   /** All values that are not equal to given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
   scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
   scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
@@ -2400,7 +2451,7 @@ export type GraphCms_BioManyWhereInput = {
   /** All values greater than or equal the given value. */
   updatedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -2408,7 +2459,7 @@ export type GraphCms_BioManyWhereInput = {
   /** All values that are not equal to given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   updatedBy?: Maybe<GraphCms_UserWhereInput>
 }
 
@@ -2513,6 +2564,12 @@ export type GraphCms_BioUpsertWithNestedWhereUniqueInput = {
   where: GraphCms_BioWhereUniqueInput
 }
 
+/** This contains a set of filters that can be used to compare values internally */
+export type GraphCms_BioWhereComparatorInput = {
+  /** This field can be used to request to check if the entry is outdated by internal comparison */
+  outdated_to?: Maybe<Scalars['Boolean']>
+}
+
 /** Identifies documents */
 export type GraphCms_BioWhereInput = {
   /** Logical AND on all given filters. */
@@ -2529,7 +2586,7 @@ export type GraphCms_BioWhereInput = {
   /** All values ending with the given string. */
   about_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  about_in?: Maybe<Array<Scalars['String']>>
+  about_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   about_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -2537,7 +2594,7 @@ export type GraphCms_BioWhereInput = {
   /** All values not ending with the given string */
   about_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  about_not_in?: Maybe<Array<Scalars['String']>>
+  about_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   about_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -2548,7 +2605,7 @@ export type GraphCms_BioWhereInput = {
   /** All values greater than or equal the given value. */
   createdAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  createdAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -2556,15 +2613,18 @@ export type GraphCms_BioWhereInput = {
   /** All values that are not equal to given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  createdAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   createdBy?: Maybe<GraphCms_UserWhereInput>
+  documentInStages_every?: Maybe<GraphCms_BioWhereStageInput>
+  documentInStages_none?: Maybe<GraphCms_BioWhereStageInput>
+  documentInStages_some?: Maybe<GraphCms_BioWhereStageInput>
   email?: Maybe<Scalars['String']>
   /** All values containing the given string. */
   email_contains?: Maybe<Scalars['String']>
   /** All values ending with the given string. */
   email_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  email_in?: Maybe<Array<Scalars['String']>>
+  email_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   email_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -2572,7 +2632,7 @@ export type GraphCms_BioWhereInput = {
   /** All values not ending with the given string */
   email_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  email_not_in?: Maybe<Array<Scalars['String']>>
+  email_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   email_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -2583,7 +2643,7 @@ export type GraphCms_BioWhereInput = {
   /** All values ending with the given string. */
   fullName_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  fullName_in?: Maybe<Array<Scalars['String']>>
+  fullName_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   fullName_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -2591,7 +2651,7 @@ export type GraphCms_BioWhereInput = {
   /** All values not ending with the given string */
   fullName_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  fullName_not_in?: Maybe<Array<Scalars['String']>>
+  fullName_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   fullName_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -2602,7 +2662,7 @@ export type GraphCms_BioWhereInput = {
   /** All values ending with the given string. */
   headline_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  headline_in?: Maybe<Array<Scalars['String']>>
+  headline_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   headline_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -2610,7 +2670,7 @@ export type GraphCms_BioWhereInput = {
   /** All values not ending with the given string */
   headline_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  headline_not_in?: Maybe<Array<Scalars['String']>>
+  headline_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   headline_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -2621,7 +2681,7 @@ export type GraphCms_BioWhereInput = {
   /** All values ending with the given string. */
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>
+  id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values that are not equal to given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
@@ -2629,7 +2689,7 @@ export type GraphCms_BioWhereInput = {
   /** All values not ending with the given string */
   id_not_ends_with?: Maybe<Scalars['ID']>
   /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>
+  id_not_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values not starting with the given string. */
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
@@ -2640,7 +2700,7 @@ export type GraphCms_BioWhereInput = {
   /** All values ending with the given string. */
   location_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  location_in?: Maybe<Array<Scalars['String']>>
+  location_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   location_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -2648,7 +2708,7 @@ export type GraphCms_BioWhereInput = {
   /** All values not ending with the given string */
   location_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  location_not_in?: Maybe<Array<Scalars['String']>>
+  location_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   location_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -2659,7 +2719,7 @@ export type GraphCms_BioWhereInput = {
   /** All values ending with the given string. */
   phoneNumber_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  phoneNumber_in?: Maybe<Array<Scalars['String']>>
+  phoneNumber_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   phoneNumber_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -2667,7 +2727,7 @@ export type GraphCms_BioWhereInput = {
   /** All values not ending with the given string */
   phoneNumber_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  phoneNumber_not_in?: Maybe<Array<Scalars['String']>>
+  phoneNumber_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   phoneNumber_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -2678,7 +2738,7 @@ export type GraphCms_BioWhereInput = {
   /** All values greater than or equal the given value. */
   publishedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  publishedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -2686,7 +2746,7 @@ export type GraphCms_BioWhereInput = {
   /** All values that are not equal to given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
   scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
   scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
@@ -2697,7 +2757,7 @@ export type GraphCms_BioWhereInput = {
   /** All values greater than or equal the given value. */
   updatedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -2705,8 +2765,22 @@ export type GraphCms_BioWhereInput = {
   /** All values that are not equal to given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   updatedBy?: Maybe<GraphCms_UserWhereInput>
+}
+
+/** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
+export type GraphCms_BioWhereStageInput = {
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<GraphCms_BioWhereStageInput>>
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<GraphCms_BioWhereStageInput>>
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<GraphCms_BioWhereStageInput>>
+  /** This field contains fields which can be set as true or false to specify an internal comparison */
+  compareWithParent?: Maybe<GraphCms_BioWhereComparatorInput>
+  /** Specify the stage to compare with */
+  stage?: Maybe<GraphCms_Stage>
 }
 
 /** References Bio record uniquely */
@@ -2862,7 +2936,7 @@ export type GraphCms_ConferenceManyWhereInput = {
   /** All values greater than or equal the given value. */
   createdAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  createdAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -2870,7 +2944,7 @@ export type GraphCms_ConferenceManyWhereInput = {
   /** All values that are not equal to given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  createdAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   createdBy?: Maybe<GraphCms_UserWhereInput>
   date?: Maybe<Scalars['GraphCMS_Date']>
   /** All values greater than the given value. */
@@ -2878,7 +2952,7 @@ export type GraphCms_ConferenceManyWhereInput = {
   /** All values greater than or equal the given value. */
   date_gte?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are contained in given list. */
-  date_in?: Maybe<Array<Scalars['GraphCMS_Date']>>
+  date_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
   /** All values less than the given value. */
   date_lt?: Maybe<Scalars['GraphCMS_Date']>
   /** All values less than or equal the given value. */
@@ -2886,14 +2960,17 @@ export type GraphCms_ConferenceManyWhereInput = {
   /** All values that are not equal to given value. */
   date_not?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are not contained in given list. */
-  date_not_in?: Maybe<Array<Scalars['GraphCMS_Date']>>
+  date_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
+  documentInStages_every?: Maybe<GraphCms_ConferenceWhereStageInput>
+  documentInStages_none?: Maybe<GraphCms_ConferenceWhereStageInput>
+  documentInStages_some?: Maybe<GraphCms_ConferenceWhereStageInput>
   id?: Maybe<Scalars['ID']>
   /** All values containing the given string. */
   id_contains?: Maybe<Scalars['ID']>
   /** All values ending with the given string. */
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>
+  id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values that are not equal to given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
@@ -2901,7 +2978,7 @@ export type GraphCms_ConferenceManyWhereInput = {
   /** All values not ending with the given string */
   id_not_ends_with?: Maybe<Scalars['ID']>
   /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>
+  id_not_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values not starting with the given string. */
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
@@ -2912,7 +2989,7 @@ export type GraphCms_ConferenceManyWhereInput = {
   /** All values ending with the given string. */
   link_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  link_in?: Maybe<Array<Scalars['String']>>
+  link_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   link_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -2920,7 +2997,7 @@ export type GraphCms_ConferenceManyWhereInput = {
   /** All values not ending with the given string */
   link_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  link_not_in?: Maybe<Array<Scalars['String']>>
+  link_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   link_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -2931,7 +3008,7 @@ export type GraphCms_ConferenceManyWhereInput = {
   /** All values greater than or equal the given value. */
   publishedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  publishedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -2939,7 +3016,7 @@ export type GraphCms_ConferenceManyWhereInput = {
   /** All values that are not equal to given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
   scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
   scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
@@ -2950,7 +3027,7 @@ export type GraphCms_ConferenceManyWhereInput = {
   /** All values ending with the given string. */
   title_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  title_in?: Maybe<Array<Scalars['String']>>
+  title_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   title_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -2958,7 +3035,7 @@ export type GraphCms_ConferenceManyWhereInput = {
   /** All values not ending with the given string */
   title_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  title_not_in?: Maybe<Array<Scalars['String']>>
+  title_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   title_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -2969,7 +3046,7 @@ export type GraphCms_ConferenceManyWhereInput = {
   /** All values ending with the given string. */
   topic_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  topic_in?: Maybe<Array<Scalars['String']>>
+  topic_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   topic_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -2977,7 +3054,7 @@ export type GraphCms_ConferenceManyWhereInput = {
   /** All values not ending with the given string */
   topic_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  topic_not_in?: Maybe<Array<Scalars['String']>>
+  topic_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   topic_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -2988,7 +3065,7 @@ export type GraphCms_ConferenceManyWhereInput = {
   /** All values greater than or equal the given value. */
   updatedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -2996,7 +3073,7 @@ export type GraphCms_ConferenceManyWhereInput = {
   /** All values that are not equal to given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   updatedBy?: Maybe<GraphCms_UserWhereInput>
   videoEmbed?: Maybe<GraphCms_VideoEmbedWhereInput>
 }
@@ -3095,6 +3172,12 @@ export type GraphCms_ConferenceUpsertWithNestedWhereUniqueInput = {
   where: GraphCms_ConferenceWhereUniqueInput
 }
 
+/** This contains a set of filters that can be used to compare values internally */
+export type GraphCms_ConferenceWhereComparatorInput = {
+  /** This field can be used to request to check if the entry is outdated by internal comparison */
+  outdated_to?: Maybe<Scalars['Boolean']>
+}
+
 /** Identifies documents */
 export type GraphCms_ConferenceWhereInput = {
   /** Logical AND on all given filters. */
@@ -3111,7 +3194,7 @@ export type GraphCms_ConferenceWhereInput = {
   /** All values greater than or equal the given value. */
   createdAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  createdAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -3119,7 +3202,7 @@ export type GraphCms_ConferenceWhereInput = {
   /** All values that are not equal to given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  createdAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   createdBy?: Maybe<GraphCms_UserWhereInput>
   date?: Maybe<Scalars['GraphCMS_Date']>
   /** All values greater than the given value. */
@@ -3127,7 +3210,7 @@ export type GraphCms_ConferenceWhereInput = {
   /** All values greater than or equal the given value. */
   date_gte?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are contained in given list. */
-  date_in?: Maybe<Array<Scalars['GraphCMS_Date']>>
+  date_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
   /** All values less than the given value. */
   date_lt?: Maybe<Scalars['GraphCMS_Date']>
   /** All values less than or equal the given value. */
@@ -3135,14 +3218,17 @@ export type GraphCms_ConferenceWhereInput = {
   /** All values that are not equal to given value. */
   date_not?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are not contained in given list. */
-  date_not_in?: Maybe<Array<Scalars['GraphCMS_Date']>>
+  date_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
+  documentInStages_every?: Maybe<GraphCms_ConferenceWhereStageInput>
+  documentInStages_none?: Maybe<GraphCms_ConferenceWhereStageInput>
+  documentInStages_some?: Maybe<GraphCms_ConferenceWhereStageInput>
   id?: Maybe<Scalars['ID']>
   /** All values containing the given string. */
   id_contains?: Maybe<Scalars['ID']>
   /** All values ending with the given string. */
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>
+  id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values that are not equal to given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
@@ -3150,7 +3236,7 @@ export type GraphCms_ConferenceWhereInput = {
   /** All values not ending with the given string */
   id_not_ends_with?: Maybe<Scalars['ID']>
   /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>
+  id_not_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values not starting with the given string. */
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
@@ -3161,7 +3247,7 @@ export type GraphCms_ConferenceWhereInput = {
   /** All values ending with the given string. */
   link_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  link_in?: Maybe<Array<Scalars['String']>>
+  link_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   link_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -3169,7 +3255,7 @@ export type GraphCms_ConferenceWhereInput = {
   /** All values not ending with the given string */
   link_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  link_not_in?: Maybe<Array<Scalars['String']>>
+  link_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   link_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -3180,7 +3266,7 @@ export type GraphCms_ConferenceWhereInput = {
   /** All values greater than or equal the given value. */
   publishedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  publishedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -3188,7 +3274,7 @@ export type GraphCms_ConferenceWhereInput = {
   /** All values that are not equal to given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
   scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
   scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
@@ -3199,7 +3285,7 @@ export type GraphCms_ConferenceWhereInput = {
   /** All values ending with the given string. */
   title_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  title_in?: Maybe<Array<Scalars['String']>>
+  title_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   title_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -3207,7 +3293,7 @@ export type GraphCms_ConferenceWhereInput = {
   /** All values not ending with the given string */
   title_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  title_not_in?: Maybe<Array<Scalars['String']>>
+  title_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   title_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -3218,7 +3304,7 @@ export type GraphCms_ConferenceWhereInput = {
   /** All values ending with the given string. */
   topic_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  topic_in?: Maybe<Array<Scalars['String']>>
+  topic_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   topic_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -3226,7 +3312,7 @@ export type GraphCms_ConferenceWhereInput = {
   /** All values not ending with the given string */
   topic_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  topic_not_in?: Maybe<Array<Scalars['String']>>
+  topic_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   topic_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -3237,7 +3323,7 @@ export type GraphCms_ConferenceWhereInput = {
   /** All values greater than or equal the given value. */
   updatedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -3245,9 +3331,23 @@ export type GraphCms_ConferenceWhereInput = {
   /** All values that are not equal to given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   updatedBy?: Maybe<GraphCms_UserWhereInput>
   videoEmbed?: Maybe<GraphCms_VideoEmbedWhereInput>
+}
+
+/** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
+export type GraphCms_ConferenceWhereStageInput = {
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<GraphCms_ConferenceWhereStageInput>>
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<GraphCms_ConferenceWhereStageInput>>
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<GraphCms_ConferenceWhereStageInput>>
+  /** This field contains fields which can be set as true or false to specify an internal comparison */
+  compareWithParent?: Maybe<GraphCms_ConferenceWhereComparatorInput>
+  /** Specify the stage to compare with */
+  stage?: Maybe<GraphCms_Stage>
 }
 
 /** References Conference record uniquely */
@@ -3462,7 +3562,7 @@ export type GraphCms_EducationManyWhereInput = {
   /** All values ending with the given string. */
   areaOfStudy_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  areaOfStudy_in?: Maybe<Array<Scalars['String']>>
+  areaOfStudy_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   areaOfStudy_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -3470,7 +3570,7 @@ export type GraphCms_EducationManyWhereInput = {
   /** All values not ending with the given string */
   areaOfStudy_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  areaOfStudy_not_in?: Maybe<Array<Scalars['String']>>
+  areaOfStudy_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   areaOfStudy_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -3481,7 +3581,7 @@ export type GraphCms_EducationManyWhereInput = {
   /** All values greater than or equal the given value. */
   createdAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  createdAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -3489,7 +3589,7 @@ export type GraphCms_EducationManyWhereInput = {
   /** All values that are not equal to given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  createdAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   createdBy?: Maybe<GraphCms_UserWhereInput>
   degree?: Maybe<Scalars['String']>
   /** All values containing the given string. */
@@ -3497,7 +3597,7 @@ export type GraphCms_EducationManyWhereInput = {
   /** All values ending with the given string. */
   degree_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  degree_in?: Maybe<Array<Scalars['String']>>
+  degree_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   degree_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -3505,18 +3605,21 @@ export type GraphCms_EducationManyWhereInput = {
   /** All values not ending with the given string */
   degree_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  degree_not_in?: Maybe<Array<Scalars['String']>>
+  degree_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   degree_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
   degree_starts_with?: Maybe<Scalars['String']>
+  documentInStages_every?: Maybe<GraphCms_EducationWhereStageInput>
+  documentInStages_none?: Maybe<GraphCms_EducationWhereStageInput>
+  documentInStages_some?: Maybe<GraphCms_EducationWhereStageInput>
   endDate?: Maybe<Scalars['GraphCMS_Date']>
   /** All values greater than the given value. */
   endDate_gt?: Maybe<Scalars['GraphCMS_Date']>
   /** All values greater than or equal the given value. */
   endDate_gte?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are contained in given list. */
-  endDate_in?: Maybe<Array<Scalars['GraphCMS_Date']>>
+  endDate_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
   /** All values less than the given value. */
   endDate_lt?: Maybe<Scalars['GraphCMS_Date']>
   /** All values less than or equal the given value. */
@@ -3524,14 +3627,14 @@ export type GraphCms_EducationManyWhereInput = {
   /** All values that are not equal to given value. */
   endDate_not?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are not contained in given list. */
-  endDate_not_in?: Maybe<Array<Scalars['GraphCMS_Date']>>
+  endDate_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
   id?: Maybe<Scalars['ID']>
   /** All values containing the given string. */
   id_contains?: Maybe<Scalars['ID']>
   /** All values ending with the given string. */
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>
+  id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values that are not equal to given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
@@ -3539,7 +3642,7 @@ export type GraphCms_EducationManyWhereInput = {
   /** All values not ending with the given string */
   id_not_ends_with?: Maybe<Scalars['ID']>
   /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>
+  id_not_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values not starting with the given string. */
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
@@ -3550,7 +3653,7 @@ export type GraphCms_EducationManyWhereInput = {
   /** All values greater than or equal the given value. */
   publishedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  publishedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -3558,7 +3661,7 @@ export type GraphCms_EducationManyWhereInput = {
   /** All values that are not equal to given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
   scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
   scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
@@ -3569,7 +3672,7 @@ export type GraphCms_EducationManyWhereInput = {
   /** All values ending with the given string. */
   school_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  school_in?: Maybe<Array<Scalars['String']>>
+  school_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   school_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -3577,7 +3680,7 @@ export type GraphCms_EducationManyWhereInput = {
   /** All values not ending with the given string */
   school_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  school_not_in?: Maybe<Array<Scalars['String']>>
+  school_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   school_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -3588,7 +3691,7 @@ export type GraphCms_EducationManyWhereInput = {
   /** All values greater than or equal the given value. */
   startDate_gte?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are contained in given list. */
-  startDate_in?: Maybe<Array<Scalars['GraphCMS_Date']>>
+  startDate_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
   /** All values less than the given value. */
   startDate_lt?: Maybe<Scalars['GraphCMS_Date']>
   /** All values less than or equal the given value. */
@@ -3596,14 +3699,14 @@ export type GraphCms_EducationManyWhereInput = {
   /** All values that are not equal to given value. */
   startDate_not?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are not contained in given list. */
-  startDate_not_in?: Maybe<Array<Scalars['GraphCMS_Date']>>
+  startDate_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
   updatedAt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values greater than the given value. */
   updatedAt_gt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values greater than or equal the given value. */
   updatedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -3611,7 +3714,7 @@ export type GraphCms_EducationManyWhereInput = {
   /** All values that are not equal to given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   updatedBy?: Maybe<GraphCms_UserWhereInput>
 }
 
@@ -3714,6 +3817,12 @@ export type GraphCms_EducationUpsertWithNestedWhereUniqueInput = {
   where: GraphCms_EducationWhereUniqueInput
 }
 
+/** This contains a set of filters that can be used to compare values internally */
+export type GraphCms_EducationWhereComparatorInput = {
+  /** This field can be used to request to check if the entry is outdated by internal comparison */
+  outdated_to?: Maybe<Scalars['Boolean']>
+}
+
 /** Identifies documents */
 export type GraphCms_EducationWhereInput = {
   /** Logical AND on all given filters. */
@@ -3730,7 +3839,7 @@ export type GraphCms_EducationWhereInput = {
   /** All values ending with the given string. */
   areaOfStudy_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  areaOfStudy_in?: Maybe<Array<Scalars['String']>>
+  areaOfStudy_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   areaOfStudy_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -3738,7 +3847,7 @@ export type GraphCms_EducationWhereInput = {
   /** All values not ending with the given string */
   areaOfStudy_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  areaOfStudy_not_in?: Maybe<Array<Scalars['String']>>
+  areaOfStudy_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   areaOfStudy_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -3749,7 +3858,7 @@ export type GraphCms_EducationWhereInput = {
   /** All values greater than or equal the given value. */
   createdAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  createdAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -3757,7 +3866,7 @@ export type GraphCms_EducationWhereInput = {
   /** All values that are not equal to given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  createdAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   createdBy?: Maybe<GraphCms_UserWhereInput>
   degree?: Maybe<Scalars['String']>
   /** All values containing the given string. */
@@ -3765,7 +3874,7 @@ export type GraphCms_EducationWhereInput = {
   /** All values ending with the given string. */
   degree_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  degree_in?: Maybe<Array<Scalars['String']>>
+  degree_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   degree_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -3773,18 +3882,21 @@ export type GraphCms_EducationWhereInput = {
   /** All values not ending with the given string */
   degree_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  degree_not_in?: Maybe<Array<Scalars['String']>>
+  degree_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   degree_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
   degree_starts_with?: Maybe<Scalars['String']>
+  documentInStages_every?: Maybe<GraphCms_EducationWhereStageInput>
+  documentInStages_none?: Maybe<GraphCms_EducationWhereStageInput>
+  documentInStages_some?: Maybe<GraphCms_EducationWhereStageInput>
   endDate?: Maybe<Scalars['GraphCMS_Date']>
   /** All values greater than the given value. */
   endDate_gt?: Maybe<Scalars['GraphCMS_Date']>
   /** All values greater than or equal the given value. */
   endDate_gte?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are contained in given list. */
-  endDate_in?: Maybe<Array<Scalars['GraphCMS_Date']>>
+  endDate_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
   /** All values less than the given value. */
   endDate_lt?: Maybe<Scalars['GraphCMS_Date']>
   /** All values less than or equal the given value. */
@@ -3792,14 +3904,14 @@ export type GraphCms_EducationWhereInput = {
   /** All values that are not equal to given value. */
   endDate_not?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are not contained in given list. */
-  endDate_not_in?: Maybe<Array<Scalars['GraphCMS_Date']>>
+  endDate_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
   id?: Maybe<Scalars['ID']>
   /** All values containing the given string. */
   id_contains?: Maybe<Scalars['ID']>
   /** All values ending with the given string. */
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>
+  id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values that are not equal to given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
@@ -3807,7 +3919,7 @@ export type GraphCms_EducationWhereInput = {
   /** All values not ending with the given string */
   id_not_ends_with?: Maybe<Scalars['ID']>
   /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>
+  id_not_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values not starting with the given string. */
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
@@ -3818,7 +3930,7 @@ export type GraphCms_EducationWhereInput = {
   /** All values greater than or equal the given value. */
   publishedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  publishedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -3826,7 +3938,7 @@ export type GraphCms_EducationWhereInput = {
   /** All values that are not equal to given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
   scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
   scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
@@ -3837,7 +3949,7 @@ export type GraphCms_EducationWhereInput = {
   /** All values ending with the given string. */
   school_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  school_in?: Maybe<Array<Scalars['String']>>
+  school_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   school_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -3845,7 +3957,7 @@ export type GraphCms_EducationWhereInput = {
   /** All values not ending with the given string */
   school_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  school_not_in?: Maybe<Array<Scalars['String']>>
+  school_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   school_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -3856,7 +3968,7 @@ export type GraphCms_EducationWhereInput = {
   /** All values greater than or equal the given value. */
   startDate_gte?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are contained in given list. */
-  startDate_in?: Maybe<Array<Scalars['GraphCMS_Date']>>
+  startDate_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
   /** All values less than the given value. */
   startDate_lt?: Maybe<Scalars['GraphCMS_Date']>
   /** All values less than or equal the given value. */
@@ -3864,14 +3976,14 @@ export type GraphCms_EducationWhereInput = {
   /** All values that are not equal to given value. */
   startDate_not?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are not contained in given list. */
-  startDate_not_in?: Maybe<Array<Scalars['GraphCMS_Date']>>
+  startDate_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
   updatedAt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values greater than the given value. */
   updatedAt_gt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values greater than or equal the given value. */
   updatedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -3879,8 +3991,22 @@ export type GraphCms_EducationWhereInput = {
   /** All values that are not equal to given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   updatedBy?: Maybe<GraphCms_UserWhereInput>
+}
+
+/** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
+export type GraphCms_EducationWhereStageInput = {
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<GraphCms_EducationWhereStageInput>>
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<GraphCms_EducationWhereStageInput>>
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<GraphCms_EducationWhereStageInput>>
+  /** This field contains fields which can be set as true or false to specify an internal comparison */
+  compareWithParent?: Maybe<GraphCms_EducationWhereComparatorInput>
+  /** Specify the stage to compare with */
+  stage?: Maybe<GraphCms_Stage>
 }
 
 /** References Education record uniquely */
@@ -4028,7 +4154,7 @@ export type GraphCms_ExperienceManyWhereInput = {
   /** All values ending with the given string. */
   company_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  company_in?: Maybe<Array<Scalars['String']>>
+  company_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   company_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -4036,7 +4162,7 @@ export type GraphCms_ExperienceManyWhereInput = {
   /** All values not ending with the given string */
   company_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  company_not_in?: Maybe<Array<Scalars['String']>>
+  company_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   company_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -4047,7 +4173,7 @@ export type GraphCms_ExperienceManyWhereInput = {
   /** All values greater than or equal the given value. */
   createdAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  createdAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -4055,15 +4181,18 @@ export type GraphCms_ExperienceManyWhereInput = {
   /** All values that are not equal to given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  createdAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   createdBy?: Maybe<GraphCms_UserWhereInput>
+  documentInStages_every?: Maybe<GraphCms_ExperienceWhereStageInput>
+  documentInStages_none?: Maybe<GraphCms_ExperienceWhereStageInput>
+  documentInStages_some?: Maybe<GraphCms_ExperienceWhereStageInput>
   endDate?: Maybe<Scalars['GraphCMS_Date']>
   /** All values greater than the given value. */
   endDate_gt?: Maybe<Scalars['GraphCMS_Date']>
   /** All values greater than or equal the given value. */
   endDate_gte?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are contained in given list. */
-  endDate_in?: Maybe<Array<Scalars['GraphCMS_Date']>>
+  endDate_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
   /** All values less than the given value. */
   endDate_lt?: Maybe<Scalars['GraphCMS_Date']>
   /** All values less than or equal the given value. */
@@ -4071,14 +4200,14 @@ export type GraphCms_ExperienceManyWhereInput = {
   /** All values that are not equal to given value. */
   endDate_not?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are not contained in given list. */
-  endDate_not_in?: Maybe<Array<Scalars['GraphCMS_Date']>>
+  endDate_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
   id?: Maybe<Scalars['ID']>
   /** All values containing the given string. */
   id_contains?: Maybe<Scalars['ID']>
   /** All values ending with the given string. */
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>
+  id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values that are not equal to given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
@@ -4086,7 +4215,7 @@ export type GraphCms_ExperienceManyWhereInput = {
   /** All values not ending with the given string */
   id_not_ends_with?: Maybe<Scalars['ID']>
   /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>
+  id_not_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values not starting with the given string. */
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
@@ -4098,7 +4227,7 @@ export type GraphCms_ExperienceManyWhereInput = {
   /** All values ending with the given string. */
   locationIcon_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  locationIcon_in?: Maybe<Array<Scalars['String']>>
+  locationIcon_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   locationIcon_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -4106,7 +4235,7 @@ export type GraphCms_ExperienceManyWhereInput = {
   /** All values not ending with the given string */
   locationIcon_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  locationIcon_not_in?: Maybe<Array<Scalars['String']>>
+  locationIcon_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   locationIcon_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -4116,7 +4245,7 @@ export type GraphCms_ExperienceManyWhereInput = {
   /** All values ending with the given string. */
   location_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  location_in?: Maybe<Array<Scalars['String']>>
+  location_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   location_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -4124,7 +4253,7 @@ export type GraphCms_ExperienceManyWhereInput = {
   /** All values not ending with the given string */
   location_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  location_not_in?: Maybe<Array<Scalars['String']>>
+  location_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   location_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -4136,7 +4265,7 @@ export type GraphCms_ExperienceManyWhereInput = {
   /** All values ending with the given string. */
   position_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  position_in?: Maybe<Array<Scalars['String']>>
+  position_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   position_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -4144,7 +4273,7 @@ export type GraphCms_ExperienceManyWhereInput = {
   /** All values not ending with the given string */
   position_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  position_not_in?: Maybe<Array<Scalars['String']>>
+  position_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   position_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -4155,7 +4284,7 @@ export type GraphCms_ExperienceManyWhereInput = {
   /** All values greater than or equal the given value. */
   publishedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  publishedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -4163,7 +4292,7 @@ export type GraphCms_ExperienceManyWhereInput = {
   /** All values that are not equal to given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
   scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
   scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
@@ -4174,7 +4303,7 @@ export type GraphCms_ExperienceManyWhereInput = {
   /** All values greater than or equal the given value. */
   startDate_gte?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are contained in given list. */
-  startDate_in?: Maybe<Array<Scalars['GraphCMS_Date']>>
+  startDate_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
   /** All values less than the given value. */
   startDate_lt?: Maybe<Scalars['GraphCMS_Date']>
   /** All values less than or equal the given value. */
@@ -4182,14 +4311,14 @@ export type GraphCms_ExperienceManyWhereInput = {
   /** All values that are not equal to given value. */
   startDate_not?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are not contained in given list. */
-  startDate_not_in?: Maybe<Array<Scalars['GraphCMS_Date']>>
+  startDate_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
   updatedAt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values greater than the given value. */
   updatedAt_gt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values greater than or equal the given value. */
   updatedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -4197,7 +4326,7 @@ export type GraphCms_ExperienceManyWhereInput = {
   /** All values that are not equal to given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   updatedBy?: Maybe<GraphCms_UserWhereInput>
 }
 
@@ -4305,6 +4434,12 @@ export type GraphCms_ExperienceUpsertWithNestedWhereUniqueInput = {
   where: GraphCms_ExperienceWhereUniqueInput
 }
 
+/** This contains a set of filters that can be used to compare values internally */
+export type GraphCms_ExperienceWhereComparatorInput = {
+  /** This field can be used to request to check if the entry is outdated by internal comparison */
+  outdated_to?: Maybe<Scalars['Boolean']>
+}
+
 /** Identifies documents */
 export type GraphCms_ExperienceWhereInput = {
   /** Logical AND on all given filters. */
@@ -4321,7 +4456,7 @@ export type GraphCms_ExperienceWhereInput = {
   /** All values ending with the given string. */
   company_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  company_in?: Maybe<Array<Scalars['String']>>
+  company_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   company_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -4329,7 +4464,7 @@ export type GraphCms_ExperienceWhereInput = {
   /** All values not ending with the given string */
   company_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  company_not_in?: Maybe<Array<Scalars['String']>>
+  company_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   company_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -4340,7 +4475,7 @@ export type GraphCms_ExperienceWhereInput = {
   /** All values greater than or equal the given value. */
   createdAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  createdAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -4348,15 +4483,18 @@ export type GraphCms_ExperienceWhereInput = {
   /** All values that are not equal to given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  createdAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   createdBy?: Maybe<GraphCms_UserWhereInput>
+  documentInStages_every?: Maybe<GraphCms_ExperienceWhereStageInput>
+  documentInStages_none?: Maybe<GraphCms_ExperienceWhereStageInput>
+  documentInStages_some?: Maybe<GraphCms_ExperienceWhereStageInput>
   endDate?: Maybe<Scalars['GraphCMS_Date']>
   /** All values greater than the given value. */
   endDate_gt?: Maybe<Scalars['GraphCMS_Date']>
   /** All values greater than or equal the given value. */
   endDate_gte?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are contained in given list. */
-  endDate_in?: Maybe<Array<Scalars['GraphCMS_Date']>>
+  endDate_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
   /** All values less than the given value. */
   endDate_lt?: Maybe<Scalars['GraphCMS_Date']>
   /** All values less than or equal the given value. */
@@ -4364,14 +4502,14 @@ export type GraphCms_ExperienceWhereInput = {
   /** All values that are not equal to given value. */
   endDate_not?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are not contained in given list. */
-  endDate_not_in?: Maybe<Array<Scalars['GraphCMS_Date']>>
+  endDate_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
   id?: Maybe<Scalars['ID']>
   /** All values containing the given string. */
   id_contains?: Maybe<Scalars['ID']>
   /** All values ending with the given string. */
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>
+  id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values that are not equal to given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
@@ -4379,7 +4517,7 @@ export type GraphCms_ExperienceWhereInput = {
   /** All values not ending with the given string */
   id_not_ends_with?: Maybe<Scalars['ID']>
   /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>
+  id_not_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values not starting with the given string. */
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
@@ -4391,7 +4529,7 @@ export type GraphCms_ExperienceWhereInput = {
   /** All values ending with the given string. */
   locationIcon_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  locationIcon_in?: Maybe<Array<Scalars['String']>>
+  locationIcon_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   locationIcon_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -4399,7 +4537,7 @@ export type GraphCms_ExperienceWhereInput = {
   /** All values not ending with the given string */
   locationIcon_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  locationIcon_not_in?: Maybe<Array<Scalars['String']>>
+  locationIcon_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   locationIcon_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -4409,7 +4547,7 @@ export type GraphCms_ExperienceWhereInput = {
   /** All values ending with the given string. */
   location_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  location_in?: Maybe<Array<Scalars['String']>>
+  location_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   location_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -4417,7 +4555,7 @@ export type GraphCms_ExperienceWhereInput = {
   /** All values not ending with the given string */
   location_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  location_not_in?: Maybe<Array<Scalars['String']>>
+  location_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   location_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -4429,7 +4567,7 @@ export type GraphCms_ExperienceWhereInput = {
   /** All values ending with the given string. */
   position_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  position_in?: Maybe<Array<Scalars['String']>>
+  position_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   position_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -4437,7 +4575,7 @@ export type GraphCms_ExperienceWhereInput = {
   /** All values not ending with the given string */
   position_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  position_not_in?: Maybe<Array<Scalars['String']>>
+  position_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   position_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -4448,7 +4586,7 @@ export type GraphCms_ExperienceWhereInput = {
   /** All values greater than or equal the given value. */
   publishedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  publishedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -4456,7 +4594,7 @@ export type GraphCms_ExperienceWhereInput = {
   /** All values that are not equal to given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
   scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
   scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
@@ -4467,7 +4605,7 @@ export type GraphCms_ExperienceWhereInput = {
   /** All values greater than or equal the given value. */
   startDate_gte?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are contained in given list. */
-  startDate_in?: Maybe<Array<Scalars['GraphCMS_Date']>>
+  startDate_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
   /** All values less than the given value. */
   startDate_lt?: Maybe<Scalars['GraphCMS_Date']>
   /** All values less than or equal the given value. */
@@ -4475,14 +4613,14 @@ export type GraphCms_ExperienceWhereInput = {
   /** All values that are not equal to given value. */
   startDate_not?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are not contained in given list. */
-  startDate_not_in?: Maybe<Array<Scalars['GraphCMS_Date']>>
+  startDate_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
   updatedAt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values greater than the given value. */
   updatedAt_gt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values greater than or equal the given value. */
   updatedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -4490,8 +4628,22 @@ export type GraphCms_ExperienceWhereInput = {
   /** All values that are not equal to given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   updatedBy?: Maybe<GraphCms_UserWhereInput>
+}
+
+/** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
+export type GraphCms_ExperienceWhereStageInput = {
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<GraphCms_ExperienceWhereStageInput>>
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<GraphCms_ExperienceWhereStageInput>>
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<GraphCms_ExperienceWhereStageInput>>
+  /** This field contains fields which can be set as true or false to specify an internal comparison */
+  compareWithParent?: Maybe<GraphCms_ExperienceWhereComparatorInput>
+  /** Specify the stage to compare with */
+  stage?: Maybe<GraphCms_Stage>
 }
 
 /** References Experience record uniquely */
@@ -4655,7 +4807,7 @@ export type GraphCms_InterviewManyWhereInput = {
   /** All values greater than or equal the given value. */
   createdAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  createdAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -4663,7 +4815,7 @@ export type GraphCms_InterviewManyWhereInput = {
   /** All values that are not equal to given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  createdAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   createdBy?: Maybe<GraphCms_UserWhereInput>
   date?: Maybe<Scalars['GraphCMS_Date']>
   /** All values greater than the given value. */
@@ -4671,7 +4823,7 @@ export type GraphCms_InterviewManyWhereInput = {
   /** All values greater than or equal the given value. */
   date_gte?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are contained in given list. */
-  date_in?: Maybe<Array<Scalars['GraphCMS_Date']>>
+  date_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
   /** All values less than the given value. */
   date_lt?: Maybe<Scalars['GraphCMS_Date']>
   /** All values less than or equal the given value. */
@@ -4679,14 +4831,17 @@ export type GraphCms_InterviewManyWhereInput = {
   /** All values that are not equal to given value. */
   date_not?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are not contained in given list. */
-  date_not_in?: Maybe<Array<Scalars['GraphCMS_Date']>>
+  date_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
+  documentInStages_every?: Maybe<GraphCms_InterviewWhereStageInput>
+  documentInStages_none?: Maybe<GraphCms_InterviewWhereStageInput>
+  documentInStages_some?: Maybe<GraphCms_InterviewWhereStageInput>
   id?: Maybe<Scalars['ID']>
   /** All values containing the given string. */
   id_contains?: Maybe<Scalars['ID']>
   /** All values ending with the given string. */
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>
+  id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values that are not equal to given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
@@ -4694,7 +4849,7 @@ export type GraphCms_InterviewManyWhereInput = {
   /** All values not ending with the given string */
   id_not_ends_with?: Maybe<Scalars['ID']>
   /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>
+  id_not_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values not starting with the given string. */
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
@@ -4705,7 +4860,7 @@ export type GraphCms_InterviewManyWhereInput = {
   /** All values greater than or equal the given value. */
   publishedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  publishedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -4713,7 +4868,7 @@ export type GraphCms_InterviewManyWhereInput = {
   /** All values that are not equal to given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
   scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
   scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
@@ -4724,7 +4879,7 @@ export type GraphCms_InterviewManyWhereInput = {
   /** All values ending with the given string. */
   title_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  title_in?: Maybe<Array<Scalars['String']>>
+  title_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   title_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -4732,7 +4887,7 @@ export type GraphCms_InterviewManyWhereInput = {
   /** All values not ending with the given string */
   title_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  title_not_in?: Maybe<Array<Scalars['String']>>
+  title_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   title_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -4743,7 +4898,7 @@ export type GraphCms_InterviewManyWhereInput = {
   /** All values greater than or equal the given value. */
   updatedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -4751,7 +4906,7 @@ export type GraphCms_InterviewManyWhereInput = {
   /** All values that are not equal to given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   updatedBy?: Maybe<GraphCms_UserWhereInput>
   videoEmbed?: Maybe<GraphCms_VideoEmbedWhereInput>
 }
@@ -4842,6 +4997,12 @@ export type GraphCms_InterviewUpsertWithNestedWhereUniqueInput = {
   where: GraphCms_InterviewWhereUniqueInput
 }
 
+/** This contains a set of filters that can be used to compare values internally */
+export type GraphCms_InterviewWhereComparatorInput = {
+  /** This field can be used to request to check if the entry is outdated by internal comparison */
+  outdated_to?: Maybe<Scalars['Boolean']>
+}
+
 /** Identifies documents */
 export type GraphCms_InterviewWhereInput = {
   /** Logical AND on all given filters. */
@@ -4858,7 +5019,7 @@ export type GraphCms_InterviewWhereInput = {
   /** All values greater than or equal the given value. */
   createdAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  createdAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -4866,7 +5027,7 @@ export type GraphCms_InterviewWhereInput = {
   /** All values that are not equal to given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  createdAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   createdBy?: Maybe<GraphCms_UserWhereInput>
   date?: Maybe<Scalars['GraphCMS_Date']>
   /** All values greater than the given value. */
@@ -4874,7 +5035,7 @@ export type GraphCms_InterviewWhereInput = {
   /** All values greater than or equal the given value. */
   date_gte?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are contained in given list. */
-  date_in?: Maybe<Array<Scalars['GraphCMS_Date']>>
+  date_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
   /** All values less than the given value. */
   date_lt?: Maybe<Scalars['GraphCMS_Date']>
   /** All values less than or equal the given value. */
@@ -4882,14 +5043,17 @@ export type GraphCms_InterviewWhereInput = {
   /** All values that are not equal to given value. */
   date_not?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are not contained in given list. */
-  date_not_in?: Maybe<Array<Scalars['GraphCMS_Date']>>
+  date_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
+  documentInStages_every?: Maybe<GraphCms_InterviewWhereStageInput>
+  documentInStages_none?: Maybe<GraphCms_InterviewWhereStageInput>
+  documentInStages_some?: Maybe<GraphCms_InterviewWhereStageInput>
   id?: Maybe<Scalars['ID']>
   /** All values containing the given string. */
   id_contains?: Maybe<Scalars['ID']>
   /** All values ending with the given string. */
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>
+  id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values that are not equal to given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
@@ -4897,7 +5061,7 @@ export type GraphCms_InterviewWhereInput = {
   /** All values not ending with the given string */
   id_not_ends_with?: Maybe<Scalars['ID']>
   /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>
+  id_not_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values not starting with the given string. */
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
@@ -4908,7 +5072,7 @@ export type GraphCms_InterviewWhereInput = {
   /** All values greater than or equal the given value. */
   publishedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  publishedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -4916,7 +5080,7 @@ export type GraphCms_InterviewWhereInput = {
   /** All values that are not equal to given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
   scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
   scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
@@ -4927,7 +5091,7 @@ export type GraphCms_InterviewWhereInput = {
   /** All values ending with the given string. */
   title_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  title_in?: Maybe<Array<Scalars['String']>>
+  title_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   title_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -4935,7 +5099,7 @@ export type GraphCms_InterviewWhereInput = {
   /** All values not ending with the given string */
   title_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  title_not_in?: Maybe<Array<Scalars['String']>>
+  title_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   title_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -4946,7 +5110,7 @@ export type GraphCms_InterviewWhereInput = {
   /** All values greater than or equal the given value. */
   updatedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -4954,9 +5118,23 @@ export type GraphCms_InterviewWhereInput = {
   /** All values that are not equal to given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   updatedBy?: Maybe<GraphCms_UserWhereInput>
   videoEmbed?: Maybe<GraphCms_VideoEmbedWhereInput>
+}
+
+/** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
+export type GraphCms_InterviewWhereStageInput = {
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<GraphCms_InterviewWhereStageInput>>
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<GraphCms_InterviewWhereStageInput>>
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<GraphCms_InterviewWhereStageInput>>
+  /** This field contains fields which can be set as true or false to specify an internal comparison */
+  compareWithParent?: Maybe<GraphCms_InterviewWhereComparatorInput>
+  /** Specify the stage to compare with */
+  stage?: Maybe<GraphCms_Stage>
 }
 
 /** References Interview record uniquely */
@@ -5026,6 +5204,7 @@ export type GraphCms_Publication = GraphCms_Node & {
   /** The unique identifier */
   id: Scalars['ID']
   link: Scalars['String']
+  opengraph: Opengraph
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** User that last published this document */
@@ -5138,7 +5317,7 @@ export type GraphCms_PublicationManyWhereInput = {
   /** All values greater than or equal the given value. */
   createdAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  createdAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -5146,7 +5325,7 @@ export type GraphCms_PublicationManyWhereInput = {
   /** All values that are not equal to given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  createdAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   createdBy?: Maybe<GraphCms_UserWhereInput>
   date?: Maybe<Scalars['GraphCMS_Date']>
   /** All values greater than the given value. */
@@ -5154,7 +5333,7 @@ export type GraphCms_PublicationManyWhereInput = {
   /** All values greater than or equal the given value. */
   date_gte?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are contained in given list. */
-  date_in?: Maybe<Array<Scalars['GraphCMS_Date']>>
+  date_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
   /** All values less than the given value. */
   date_lt?: Maybe<Scalars['GraphCMS_Date']>
   /** All values less than or equal the given value. */
@@ -5162,14 +5341,17 @@ export type GraphCms_PublicationManyWhereInput = {
   /** All values that are not equal to given value. */
   date_not?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are not contained in given list. */
-  date_not_in?: Maybe<Array<Scalars['GraphCMS_Date']>>
+  date_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
+  documentInStages_every?: Maybe<GraphCms_PublicationWhereStageInput>
+  documentInStages_none?: Maybe<GraphCms_PublicationWhereStageInput>
+  documentInStages_some?: Maybe<GraphCms_PublicationWhereStageInput>
   id?: Maybe<Scalars['ID']>
   /** All values containing the given string. */
   id_contains?: Maybe<Scalars['ID']>
   /** All values ending with the given string. */
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>
+  id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values that are not equal to given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
@@ -5177,7 +5359,7 @@ export type GraphCms_PublicationManyWhereInput = {
   /** All values not ending with the given string */
   id_not_ends_with?: Maybe<Scalars['ID']>
   /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>
+  id_not_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values not starting with the given string. */
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
@@ -5188,7 +5370,7 @@ export type GraphCms_PublicationManyWhereInput = {
   /** All values ending with the given string. */
   link_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  link_in?: Maybe<Array<Scalars['String']>>
+  link_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   link_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -5196,7 +5378,7 @@ export type GraphCms_PublicationManyWhereInput = {
   /** All values not ending with the given string */
   link_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  link_not_in?: Maybe<Array<Scalars['String']>>
+  link_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   link_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -5207,7 +5389,7 @@ export type GraphCms_PublicationManyWhereInput = {
   /** All values greater than or equal the given value. */
   publishedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  publishedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -5215,7 +5397,7 @@ export type GraphCms_PublicationManyWhereInput = {
   /** All values that are not equal to given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
   scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
   scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
@@ -5226,7 +5408,7 @@ export type GraphCms_PublicationManyWhereInput = {
   /** All values ending with the given string. */
   title_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  title_in?: Maybe<Array<Scalars['String']>>
+  title_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   title_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -5234,7 +5416,7 @@ export type GraphCms_PublicationManyWhereInput = {
   /** All values not ending with the given string */
   title_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  title_not_in?: Maybe<Array<Scalars['String']>>
+  title_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   title_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -5245,7 +5427,7 @@ export type GraphCms_PublicationManyWhereInput = {
   /** All values greater than or equal the given value. */
   updatedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -5253,7 +5435,7 @@ export type GraphCms_PublicationManyWhereInput = {
   /** All values that are not equal to given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   updatedBy?: Maybe<GraphCms_UserWhereInput>
 }
 
@@ -5346,6 +5528,12 @@ export type GraphCms_PublicationUpsertWithNestedWhereUniqueInput = {
   where: GraphCms_PublicationWhereUniqueInput
 }
 
+/** This contains a set of filters that can be used to compare values internally */
+export type GraphCms_PublicationWhereComparatorInput = {
+  /** This field can be used to request to check if the entry is outdated by internal comparison */
+  outdated_to?: Maybe<Scalars['Boolean']>
+}
+
 /** Identifies documents */
 export type GraphCms_PublicationWhereInput = {
   /** Logical AND on all given filters. */
@@ -5362,7 +5550,7 @@ export type GraphCms_PublicationWhereInput = {
   /** All values greater than or equal the given value. */
   createdAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  createdAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -5370,7 +5558,7 @@ export type GraphCms_PublicationWhereInput = {
   /** All values that are not equal to given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  createdAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   createdBy?: Maybe<GraphCms_UserWhereInput>
   date?: Maybe<Scalars['GraphCMS_Date']>
   /** All values greater than the given value. */
@@ -5378,7 +5566,7 @@ export type GraphCms_PublicationWhereInput = {
   /** All values greater than or equal the given value. */
   date_gte?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are contained in given list. */
-  date_in?: Maybe<Array<Scalars['GraphCMS_Date']>>
+  date_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
   /** All values less than the given value. */
   date_lt?: Maybe<Scalars['GraphCMS_Date']>
   /** All values less than or equal the given value. */
@@ -5386,14 +5574,17 @@ export type GraphCms_PublicationWhereInput = {
   /** All values that are not equal to given value. */
   date_not?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are not contained in given list. */
-  date_not_in?: Maybe<Array<Scalars['GraphCMS_Date']>>
+  date_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
+  documentInStages_every?: Maybe<GraphCms_PublicationWhereStageInput>
+  documentInStages_none?: Maybe<GraphCms_PublicationWhereStageInput>
+  documentInStages_some?: Maybe<GraphCms_PublicationWhereStageInput>
   id?: Maybe<Scalars['ID']>
   /** All values containing the given string. */
   id_contains?: Maybe<Scalars['ID']>
   /** All values ending with the given string. */
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>
+  id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values that are not equal to given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
@@ -5401,7 +5592,7 @@ export type GraphCms_PublicationWhereInput = {
   /** All values not ending with the given string */
   id_not_ends_with?: Maybe<Scalars['ID']>
   /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>
+  id_not_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values not starting with the given string. */
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
@@ -5412,7 +5603,7 @@ export type GraphCms_PublicationWhereInput = {
   /** All values ending with the given string. */
   link_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  link_in?: Maybe<Array<Scalars['String']>>
+  link_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   link_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -5420,7 +5611,7 @@ export type GraphCms_PublicationWhereInput = {
   /** All values not ending with the given string */
   link_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  link_not_in?: Maybe<Array<Scalars['String']>>
+  link_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   link_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -5431,7 +5622,7 @@ export type GraphCms_PublicationWhereInput = {
   /** All values greater than or equal the given value. */
   publishedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  publishedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -5439,7 +5630,7 @@ export type GraphCms_PublicationWhereInput = {
   /** All values that are not equal to given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
   scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
   scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
@@ -5450,7 +5641,7 @@ export type GraphCms_PublicationWhereInput = {
   /** All values ending with the given string. */
   title_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  title_in?: Maybe<Array<Scalars['String']>>
+  title_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   title_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -5458,7 +5649,7 @@ export type GraphCms_PublicationWhereInput = {
   /** All values not ending with the given string */
   title_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  title_not_in?: Maybe<Array<Scalars['String']>>
+  title_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   title_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -5469,7 +5660,7 @@ export type GraphCms_PublicationWhereInput = {
   /** All values greater than or equal the given value. */
   updatedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -5477,8 +5668,22 @@ export type GraphCms_PublicationWhereInput = {
   /** All values that are not equal to given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   updatedBy?: Maybe<GraphCms_UserWhereInput>
+}
+
+/** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
+export type GraphCms_PublicationWhereStageInput = {
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<GraphCms_PublicationWhereStageInput>>
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<GraphCms_PublicationWhereStageInput>>
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<GraphCms_PublicationWhereStageInput>>
+  /** This field contains fields which can be set as true or false to specify an internal comparison */
+  compareWithParent?: Maybe<GraphCms_PublicationWhereComparatorInput>
+  /** Specify the stage to compare with */
+  stage?: Maybe<GraphCms_Stage>
 }
 
 /** References Publication record uniquely */
@@ -5657,7 +5862,7 @@ export type GraphCms_ScheduledOperationManyWhereInput = {
   /** All values greater than or equal the given value. */
   createdAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  createdAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -5665,7 +5870,7 @@ export type GraphCms_ScheduledOperationManyWhereInput = {
   /** All values that are not equal to given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  createdAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   createdBy?: Maybe<GraphCms_UserWhereInput>
   description?: Maybe<Scalars['String']>
   /** All values containing the given string. */
@@ -5673,7 +5878,7 @@ export type GraphCms_ScheduledOperationManyWhereInput = {
   /** All values ending with the given string. */
   description_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  description_in?: Maybe<Array<Scalars['String']>>
+  description_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   description_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -5681,7 +5886,7 @@ export type GraphCms_ScheduledOperationManyWhereInput = {
   /** All values not ending with the given string */
   description_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  description_not_in?: Maybe<Array<Scalars['String']>>
+  description_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   description_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -5692,7 +5897,7 @@ export type GraphCms_ScheduledOperationManyWhereInput = {
   /** All values ending with the given string. */
   errorMessage_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  errorMessage_in?: Maybe<Array<Scalars['String']>>
+  errorMessage_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   errorMessage_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -5700,7 +5905,7 @@ export type GraphCms_ScheduledOperationManyWhereInput = {
   /** All values not ending with the given string */
   errorMessage_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  errorMessage_not_in?: Maybe<Array<Scalars['String']>>
+  errorMessage_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   errorMessage_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -5711,7 +5916,7 @@ export type GraphCms_ScheduledOperationManyWhereInput = {
   /** All values ending with the given string. */
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>
+  id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values that are not equal to given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
@@ -5719,7 +5924,7 @@ export type GraphCms_ScheduledOperationManyWhereInput = {
   /** All values not ending with the given string */
   id_not_ends_with?: Maybe<Scalars['ID']>
   /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>
+  id_not_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values not starting with the given string. */
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
@@ -5730,7 +5935,7 @@ export type GraphCms_ScheduledOperationManyWhereInput = {
   /** All values greater than or equal the given value. */
   publishedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  publishedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -5738,23 +5943,23 @@ export type GraphCms_ScheduledOperationManyWhereInput = {
   /** All values that are not equal to given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
   release?: Maybe<GraphCms_ScheduledReleaseWhereInput>
   status?: Maybe<GraphCms_ScheduledOperationStatus>
   /** All values that are contained in given list. */
-  status_in?: Maybe<Array<GraphCms_ScheduledOperationStatus>>
+  status_in?: Maybe<Array<Maybe<GraphCms_ScheduledOperationStatus>>>
   /** All values that are not equal to given value. */
   status_not?: Maybe<GraphCms_ScheduledOperationStatus>
   /** All values that are not contained in given list. */
-  status_not_in?: Maybe<Array<GraphCms_ScheduledOperationStatus>>
+  status_not_in?: Maybe<Array<Maybe<GraphCms_ScheduledOperationStatus>>>
   updatedAt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values greater than the given value. */
   updatedAt_gt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values greater than or equal the given value. */
   updatedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -5762,7 +5967,7 @@ export type GraphCms_ScheduledOperationManyWhereInput = {
   /** All values that are not equal to given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   updatedBy?: Maybe<GraphCms_UserWhereInput>
 }
 
@@ -5824,7 +6029,7 @@ export type GraphCms_ScheduledOperationWhereInput = {
   /** All values greater than or equal the given value. */
   createdAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  createdAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -5832,7 +6037,7 @@ export type GraphCms_ScheduledOperationWhereInput = {
   /** All values that are not equal to given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  createdAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   createdBy?: Maybe<GraphCms_UserWhereInput>
   description?: Maybe<Scalars['String']>
   /** All values containing the given string. */
@@ -5840,7 +6045,7 @@ export type GraphCms_ScheduledOperationWhereInput = {
   /** All values ending with the given string. */
   description_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  description_in?: Maybe<Array<Scalars['String']>>
+  description_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   description_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -5848,7 +6053,7 @@ export type GraphCms_ScheduledOperationWhereInput = {
   /** All values not ending with the given string */
   description_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  description_not_in?: Maybe<Array<Scalars['String']>>
+  description_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   description_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -5859,7 +6064,7 @@ export type GraphCms_ScheduledOperationWhereInput = {
   /** All values ending with the given string. */
   errorMessage_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  errorMessage_in?: Maybe<Array<Scalars['String']>>
+  errorMessage_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   errorMessage_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -5867,7 +6072,7 @@ export type GraphCms_ScheduledOperationWhereInput = {
   /** All values not ending with the given string */
   errorMessage_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  errorMessage_not_in?: Maybe<Array<Scalars['String']>>
+  errorMessage_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   errorMessage_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -5878,7 +6083,7 @@ export type GraphCms_ScheduledOperationWhereInput = {
   /** All values ending with the given string. */
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>
+  id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values that are not equal to given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
@@ -5886,7 +6091,7 @@ export type GraphCms_ScheduledOperationWhereInput = {
   /** All values not ending with the given string */
   id_not_ends_with?: Maybe<Scalars['ID']>
   /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>
+  id_not_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values not starting with the given string. */
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
@@ -5897,7 +6102,7 @@ export type GraphCms_ScheduledOperationWhereInput = {
   /** All values greater than or equal the given value. */
   publishedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  publishedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -5905,23 +6110,23 @@ export type GraphCms_ScheduledOperationWhereInput = {
   /** All values that are not equal to given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
   release?: Maybe<GraphCms_ScheduledReleaseWhereInput>
   status?: Maybe<GraphCms_ScheduledOperationStatus>
   /** All values that are contained in given list. */
-  status_in?: Maybe<Array<GraphCms_ScheduledOperationStatus>>
+  status_in?: Maybe<Array<Maybe<GraphCms_ScheduledOperationStatus>>>
   /** All values that are not equal to given value. */
   status_not?: Maybe<GraphCms_ScheduledOperationStatus>
   /** All values that are not contained in given list. */
-  status_not_in?: Maybe<Array<GraphCms_ScheduledOperationStatus>>
+  status_not_in?: Maybe<Array<Maybe<GraphCms_ScheduledOperationStatus>>>
   updatedAt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values greater than the given value. */
   updatedAt_gt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values greater than or equal the given value. */
   updatedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -5929,7 +6134,7 @@ export type GraphCms_ScheduledOperationWhereInput = {
   /** All values that are not equal to given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   updatedBy?: Maybe<GraphCms_UserWhereInput>
 }
 
@@ -6077,7 +6282,7 @@ export type GraphCms_ScheduledReleaseManyWhereInput = {
   /** All values greater than or equal the given value. */
   createdAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  createdAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -6085,7 +6290,7 @@ export type GraphCms_ScheduledReleaseManyWhereInput = {
   /** All values that are not equal to given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  createdAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   createdBy?: Maybe<GraphCms_UserWhereInput>
   description?: Maybe<Scalars['String']>
   /** All values containing the given string. */
@@ -6093,7 +6298,7 @@ export type GraphCms_ScheduledReleaseManyWhereInput = {
   /** All values ending with the given string. */
   description_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  description_in?: Maybe<Array<Scalars['String']>>
+  description_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   description_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -6101,7 +6306,7 @@ export type GraphCms_ScheduledReleaseManyWhereInput = {
   /** All values not ending with the given string */
   description_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  description_not_in?: Maybe<Array<Scalars['String']>>
+  description_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   description_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -6112,7 +6317,7 @@ export type GraphCms_ScheduledReleaseManyWhereInput = {
   /** All values ending with the given string. */
   errorMessage_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  errorMessage_in?: Maybe<Array<Scalars['String']>>
+  errorMessage_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   errorMessage_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -6120,7 +6325,7 @@ export type GraphCms_ScheduledReleaseManyWhereInput = {
   /** All values not ending with the given string */
   errorMessage_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  errorMessage_not_in?: Maybe<Array<Scalars['String']>>
+  errorMessage_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   errorMessage_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -6131,7 +6336,7 @@ export type GraphCms_ScheduledReleaseManyWhereInput = {
   /** All values ending with the given string. */
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>
+  id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values that are not equal to given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
@@ -6139,7 +6344,7 @@ export type GraphCms_ScheduledReleaseManyWhereInput = {
   /** All values not ending with the given string */
   id_not_ends_with?: Maybe<Scalars['ID']>
   /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>
+  id_not_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values not starting with the given string. */
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
@@ -6159,7 +6364,7 @@ export type GraphCms_ScheduledReleaseManyWhereInput = {
   /** All values greater than or equal the given value. */
   publishedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  publishedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -6167,7 +6372,7 @@ export type GraphCms_ScheduledReleaseManyWhereInput = {
   /** All values that are not equal to given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
   releaseAt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values greater than the given value. */
@@ -6175,7 +6380,7 @@ export type GraphCms_ScheduledReleaseManyWhereInput = {
   /** All values greater than or equal the given value. */
   releaseAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  releaseAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  releaseAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   releaseAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -6183,21 +6388,21 @@ export type GraphCms_ScheduledReleaseManyWhereInput = {
   /** All values that are not equal to given value. */
   releaseAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  releaseAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  releaseAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   status?: Maybe<GraphCms_ScheduledReleaseStatus>
   /** All values that are contained in given list. */
-  status_in?: Maybe<Array<GraphCms_ScheduledReleaseStatus>>
+  status_in?: Maybe<Array<Maybe<GraphCms_ScheduledReleaseStatus>>>
   /** All values that are not equal to given value. */
   status_not?: Maybe<GraphCms_ScheduledReleaseStatus>
   /** All values that are not contained in given list. */
-  status_not_in?: Maybe<Array<GraphCms_ScheduledReleaseStatus>>
+  status_not_in?: Maybe<Array<Maybe<GraphCms_ScheduledReleaseStatus>>>
   title?: Maybe<Scalars['String']>
   /** All values containing the given string. */
   title_contains?: Maybe<Scalars['String']>
   /** All values ending with the given string. */
   title_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  title_in?: Maybe<Array<Scalars['String']>>
+  title_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   title_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -6205,7 +6410,7 @@ export type GraphCms_ScheduledReleaseManyWhereInput = {
   /** All values not ending with the given string */
   title_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  title_not_in?: Maybe<Array<Scalars['String']>>
+  title_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   title_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -6216,7 +6421,7 @@ export type GraphCms_ScheduledReleaseManyWhereInput = {
   /** All values greater than or equal the given value. */
   updatedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -6224,7 +6429,7 @@ export type GraphCms_ScheduledReleaseManyWhereInput = {
   /** All values that are not equal to given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   updatedBy?: Maybe<GraphCms_UserWhereInput>
 }
 
@@ -6357,7 +6562,7 @@ export type GraphCms_ScheduledReleaseWhereInput = {
   /** All values greater than or equal the given value. */
   createdAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  createdAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -6365,7 +6570,7 @@ export type GraphCms_ScheduledReleaseWhereInput = {
   /** All values that are not equal to given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  createdAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   createdBy?: Maybe<GraphCms_UserWhereInput>
   description?: Maybe<Scalars['String']>
   /** All values containing the given string. */
@@ -6373,7 +6578,7 @@ export type GraphCms_ScheduledReleaseWhereInput = {
   /** All values ending with the given string. */
   description_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  description_in?: Maybe<Array<Scalars['String']>>
+  description_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   description_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -6381,7 +6586,7 @@ export type GraphCms_ScheduledReleaseWhereInput = {
   /** All values not ending with the given string */
   description_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  description_not_in?: Maybe<Array<Scalars['String']>>
+  description_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   description_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -6392,7 +6597,7 @@ export type GraphCms_ScheduledReleaseWhereInput = {
   /** All values ending with the given string. */
   errorMessage_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  errorMessage_in?: Maybe<Array<Scalars['String']>>
+  errorMessage_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   errorMessage_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -6400,7 +6605,7 @@ export type GraphCms_ScheduledReleaseWhereInput = {
   /** All values not ending with the given string */
   errorMessage_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  errorMessage_not_in?: Maybe<Array<Scalars['String']>>
+  errorMessage_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   errorMessage_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -6411,7 +6616,7 @@ export type GraphCms_ScheduledReleaseWhereInput = {
   /** All values ending with the given string. */
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>
+  id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values that are not equal to given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
@@ -6419,7 +6624,7 @@ export type GraphCms_ScheduledReleaseWhereInput = {
   /** All values not ending with the given string */
   id_not_ends_with?: Maybe<Scalars['ID']>
   /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>
+  id_not_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values not starting with the given string. */
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
@@ -6439,7 +6644,7 @@ export type GraphCms_ScheduledReleaseWhereInput = {
   /** All values greater than or equal the given value. */
   publishedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  publishedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -6447,7 +6652,7 @@ export type GraphCms_ScheduledReleaseWhereInput = {
   /** All values that are not equal to given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
   releaseAt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values greater than the given value. */
@@ -6455,7 +6660,7 @@ export type GraphCms_ScheduledReleaseWhereInput = {
   /** All values greater than or equal the given value. */
   releaseAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  releaseAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  releaseAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   releaseAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -6463,21 +6668,21 @@ export type GraphCms_ScheduledReleaseWhereInput = {
   /** All values that are not equal to given value. */
   releaseAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  releaseAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  releaseAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   status?: Maybe<GraphCms_ScheduledReleaseStatus>
   /** All values that are contained in given list. */
-  status_in?: Maybe<Array<GraphCms_ScheduledReleaseStatus>>
+  status_in?: Maybe<Array<Maybe<GraphCms_ScheduledReleaseStatus>>>
   /** All values that are not equal to given value. */
   status_not?: Maybe<GraphCms_ScheduledReleaseStatus>
   /** All values that are not contained in given list. */
-  status_not_in?: Maybe<Array<GraphCms_ScheduledReleaseStatus>>
+  status_not_in?: Maybe<Array<Maybe<GraphCms_ScheduledReleaseStatus>>>
   title?: Maybe<Scalars['String']>
   /** All values containing the given string. */
   title_contains?: Maybe<Scalars['String']>
   /** All values ending with the given string. */
   title_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  title_in?: Maybe<Array<Scalars['String']>>
+  title_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   title_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -6485,7 +6690,7 @@ export type GraphCms_ScheduledReleaseWhereInput = {
   /** All values not ending with the given string */
   title_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  title_not_in?: Maybe<Array<Scalars['String']>>
+  title_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   title_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -6496,7 +6701,7 @@ export type GraphCms_ScheduledReleaseWhereInput = {
   /** All values greater than or equal the given value. */
   updatedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -6504,7 +6709,7 @@ export type GraphCms_ScheduledReleaseWhereInput = {
   /** All values that are not equal to given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   updatedBy?: Maybe<GraphCms_UserWhereInput>
 }
 
@@ -6643,7 +6848,7 @@ export type GraphCms_SkillManyWhereInput = {
   /** All values greater than or equal the given value. */
   createdAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  createdAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -6651,15 +6856,18 @@ export type GraphCms_SkillManyWhereInput = {
   /** All values that are not equal to given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  createdAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   createdBy?: Maybe<GraphCms_UserWhereInput>
+  documentInStages_every?: Maybe<GraphCms_SkillWhereStageInput>
+  documentInStages_none?: Maybe<GraphCms_SkillWhereStageInput>
+  documentInStages_some?: Maybe<GraphCms_SkillWhereStageInput>
   id?: Maybe<Scalars['ID']>
   /** All values containing the given string. */
   id_contains?: Maybe<Scalars['ID']>
   /** All values ending with the given string. */
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>
+  id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values that are not equal to given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
@@ -6667,7 +6875,7 @@ export type GraphCms_SkillManyWhereInput = {
   /** All values not ending with the given string */
   id_not_ends_with?: Maybe<Scalars['ID']>
   /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>
+  id_not_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values not starting with the given string. */
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
@@ -6679,7 +6887,7 @@ export type GraphCms_SkillManyWhereInput = {
   /** All values greater than or equal the given value. */
   publishedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  publishedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -6687,7 +6895,7 @@ export type GraphCms_SkillManyWhereInput = {
   /** All values that are not equal to given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
   scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
   scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
@@ -6698,7 +6906,7 @@ export type GraphCms_SkillManyWhereInput = {
   /** All values ending with the given string. */
   title_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  title_in?: Maybe<Array<Scalars['String']>>
+  title_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   title_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -6706,7 +6914,7 @@ export type GraphCms_SkillManyWhereInput = {
   /** All values not ending with the given string */
   title_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  title_not_in?: Maybe<Array<Scalars['String']>>
+  title_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   title_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -6717,7 +6925,7 @@ export type GraphCms_SkillManyWhereInput = {
   /** All values greater than or equal the given value. */
   updatedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -6725,7 +6933,7 @@ export type GraphCms_SkillManyWhereInput = {
   /** All values that are not equal to given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   updatedBy?: Maybe<GraphCms_UserWhereInput>
   yearsOfExperience?: Maybe<Scalars['Int']>
   /** All values greater than the given value. */
@@ -6733,7 +6941,7 @@ export type GraphCms_SkillManyWhereInput = {
   /** All values greater than or equal the given value. */
   yearsOfExperience_gte?: Maybe<Scalars['Int']>
   /** All values that are contained in given list. */
-  yearsOfExperience_in?: Maybe<Array<Scalars['Int']>>
+  yearsOfExperience_in?: Maybe<Array<Maybe<Scalars['Int']>>>
   /** All values less than the given value. */
   yearsOfExperience_lt?: Maybe<Scalars['Int']>
   /** All values less than or equal the given value. */
@@ -6741,7 +6949,7 @@ export type GraphCms_SkillManyWhereInput = {
   /** All values that are not equal to given value. */
   yearsOfExperience_not?: Maybe<Scalars['Int']>
   /** All values that are not contained in given list. */
-  yearsOfExperience_not_in?: Maybe<Array<Scalars['Int']>>
+  yearsOfExperience_not_in?: Maybe<Array<Maybe<Scalars['Int']>>>
 }
 
 export enum GraphCms_SkillOrderByInput {
@@ -6830,6 +7038,12 @@ export type GraphCms_SkillUpsertWithNestedWhereUniqueInput = {
   where: GraphCms_SkillWhereUniqueInput
 }
 
+/** This contains a set of filters that can be used to compare values internally */
+export type GraphCms_SkillWhereComparatorInput = {
+  /** This field can be used to request to check if the entry is outdated by internal comparison */
+  outdated_to?: Maybe<Scalars['Boolean']>
+}
+
 /** Identifies documents */
 export type GraphCms_SkillWhereInput = {
   /** Logical AND on all given filters. */
@@ -6846,7 +7060,7 @@ export type GraphCms_SkillWhereInput = {
   /** All values greater than or equal the given value. */
   createdAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  createdAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -6854,15 +7068,18 @@ export type GraphCms_SkillWhereInput = {
   /** All values that are not equal to given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  createdAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   createdBy?: Maybe<GraphCms_UserWhereInput>
+  documentInStages_every?: Maybe<GraphCms_SkillWhereStageInput>
+  documentInStages_none?: Maybe<GraphCms_SkillWhereStageInput>
+  documentInStages_some?: Maybe<GraphCms_SkillWhereStageInput>
   id?: Maybe<Scalars['ID']>
   /** All values containing the given string. */
   id_contains?: Maybe<Scalars['ID']>
   /** All values ending with the given string. */
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>
+  id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values that are not equal to given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
@@ -6870,7 +7087,7 @@ export type GraphCms_SkillWhereInput = {
   /** All values not ending with the given string */
   id_not_ends_with?: Maybe<Scalars['ID']>
   /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>
+  id_not_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values not starting with the given string. */
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
@@ -6882,7 +7099,7 @@ export type GraphCms_SkillWhereInput = {
   /** All values greater than or equal the given value. */
   publishedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  publishedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -6890,7 +7107,7 @@ export type GraphCms_SkillWhereInput = {
   /** All values that are not equal to given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
   scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
   scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
@@ -6901,7 +7118,7 @@ export type GraphCms_SkillWhereInput = {
   /** All values ending with the given string. */
   title_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  title_in?: Maybe<Array<Scalars['String']>>
+  title_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   title_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -6909,7 +7126,7 @@ export type GraphCms_SkillWhereInput = {
   /** All values not ending with the given string */
   title_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  title_not_in?: Maybe<Array<Scalars['String']>>
+  title_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   title_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -6920,7 +7137,7 @@ export type GraphCms_SkillWhereInput = {
   /** All values greater than or equal the given value. */
   updatedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -6928,7 +7145,7 @@ export type GraphCms_SkillWhereInput = {
   /** All values that are not equal to given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   updatedBy?: Maybe<GraphCms_UserWhereInput>
   yearsOfExperience?: Maybe<Scalars['Int']>
   /** All values greater than the given value. */
@@ -6936,7 +7153,7 @@ export type GraphCms_SkillWhereInput = {
   /** All values greater than or equal the given value. */
   yearsOfExperience_gte?: Maybe<Scalars['Int']>
   /** All values that are contained in given list. */
-  yearsOfExperience_in?: Maybe<Array<Scalars['Int']>>
+  yearsOfExperience_in?: Maybe<Array<Maybe<Scalars['Int']>>>
   /** All values less than the given value. */
   yearsOfExperience_lt?: Maybe<Scalars['Int']>
   /** All values less than or equal the given value. */
@@ -6944,7 +7161,21 @@ export type GraphCms_SkillWhereInput = {
   /** All values that are not equal to given value. */
   yearsOfExperience_not?: Maybe<Scalars['Int']>
   /** All values that are not contained in given list. */
-  yearsOfExperience_not_in?: Maybe<Array<Scalars['Int']>>
+  yearsOfExperience_not_in?: Maybe<Array<Maybe<Scalars['Int']>>>
+}
+
+/** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
+export type GraphCms_SkillWhereStageInput = {
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<GraphCms_SkillWhereStageInput>>
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<GraphCms_SkillWhereStageInput>>
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<GraphCms_SkillWhereStageInput>>
+  /** This field contains fields which can be set as true or false to specify an internal comparison */
+  compareWithParent?: Maybe<GraphCms_SkillWhereComparatorInput>
+  /** Specify the stage to compare with */
+  stage?: Maybe<GraphCms_Stage>
 }
 
 /** References Skill record uniquely */
@@ -7065,7 +7296,7 @@ export type GraphCms_UserManyWhereInput = {
   /** All values greater than or equal the given value. */
   createdAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  createdAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -7073,14 +7304,17 @@ export type GraphCms_UserManyWhereInput = {
   /** All values that are not equal to given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  createdAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
+  documentInStages_every?: Maybe<GraphCms_UserWhereStageInput>
+  documentInStages_none?: Maybe<GraphCms_UserWhereStageInput>
+  documentInStages_some?: Maybe<GraphCms_UserWhereStageInput>
   id?: Maybe<Scalars['ID']>
   /** All values containing the given string. */
   id_contains?: Maybe<Scalars['ID']>
   /** All values ending with the given string. */
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>
+  id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values that are not equal to given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
@@ -7088,7 +7322,7 @@ export type GraphCms_UserManyWhereInput = {
   /** All values not ending with the given string */
   id_not_ends_with?: Maybe<Scalars['ID']>
   /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>
+  id_not_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values not starting with the given string. */
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
@@ -7098,18 +7332,18 @@ export type GraphCms_UserManyWhereInput = {
   isActive_not?: Maybe<Scalars['Boolean']>
   kind?: Maybe<GraphCms_UserKind>
   /** All values that are contained in given list. */
-  kind_in?: Maybe<Array<GraphCms_UserKind>>
+  kind_in?: Maybe<Array<Maybe<GraphCms_UserKind>>>
   /** All values that are not equal to given value. */
   kind_not?: Maybe<GraphCms_UserKind>
   /** All values that are not contained in given list. */
-  kind_not_in?: Maybe<Array<GraphCms_UserKind>>
+  kind_not_in?: Maybe<Array<Maybe<GraphCms_UserKind>>>
   name?: Maybe<Scalars['String']>
   /** All values containing the given string. */
   name_contains?: Maybe<Scalars['String']>
   /** All values ending with the given string. */
   name_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  name_in?: Maybe<Array<Scalars['String']>>
+  name_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   name_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -7117,7 +7351,7 @@ export type GraphCms_UserManyWhereInput = {
   /** All values not ending with the given string */
   name_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  name_not_in?: Maybe<Array<Scalars['String']>>
+  name_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   name_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -7128,7 +7362,7 @@ export type GraphCms_UserManyWhereInput = {
   /** All values ending with the given string. */
   picture_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  picture_in?: Maybe<Array<Scalars['String']>>
+  picture_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   picture_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -7136,7 +7370,7 @@ export type GraphCms_UserManyWhereInput = {
   /** All values not ending with the given string */
   picture_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  picture_not_in?: Maybe<Array<Scalars['String']>>
+  picture_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   picture_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -7147,7 +7381,7 @@ export type GraphCms_UserManyWhereInput = {
   /** All values greater than or equal the given value. */
   publishedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  publishedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -7155,14 +7389,14 @@ export type GraphCms_UserManyWhereInput = {
   /** All values that are not equal to given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   updatedAt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values greater than the given value. */
   updatedAt_gt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values greater than or equal the given value. */
   updatedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -7170,7 +7404,7 @@ export type GraphCms_UserManyWhereInput = {
   /** All values that are not equal to given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
 }
 
 export enum GraphCms_UserOrderByInput {
@@ -7208,6 +7442,12 @@ export type GraphCms_UserUpdateOneInlineInput = {
   disconnect?: Maybe<Scalars['Boolean']>
 }
 
+/** This contains a set of filters that can be used to compare values internally */
+export type GraphCms_UserWhereComparatorInput = {
+  /** This field can be used to request to check if the entry is outdated by internal comparison */
+  outdated_to?: Maybe<Scalars['Boolean']>
+}
+
 /** Identifies documents */
 export type GraphCms_UserWhereInput = {
   /** Logical AND on all given filters. */
@@ -7224,7 +7464,7 @@ export type GraphCms_UserWhereInput = {
   /** All values greater than or equal the given value. */
   createdAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  createdAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -7232,14 +7472,17 @@ export type GraphCms_UserWhereInput = {
   /** All values that are not equal to given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  createdAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
+  documentInStages_every?: Maybe<GraphCms_UserWhereStageInput>
+  documentInStages_none?: Maybe<GraphCms_UserWhereStageInput>
+  documentInStages_some?: Maybe<GraphCms_UserWhereStageInput>
   id?: Maybe<Scalars['ID']>
   /** All values containing the given string. */
   id_contains?: Maybe<Scalars['ID']>
   /** All values ending with the given string. */
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>
+  id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values that are not equal to given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
@@ -7247,7 +7490,7 @@ export type GraphCms_UserWhereInput = {
   /** All values not ending with the given string */
   id_not_ends_with?: Maybe<Scalars['ID']>
   /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>
+  id_not_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values not starting with the given string. */
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
@@ -7257,18 +7500,18 @@ export type GraphCms_UserWhereInput = {
   isActive_not?: Maybe<Scalars['Boolean']>
   kind?: Maybe<GraphCms_UserKind>
   /** All values that are contained in given list. */
-  kind_in?: Maybe<Array<GraphCms_UserKind>>
+  kind_in?: Maybe<Array<Maybe<GraphCms_UserKind>>>
   /** All values that are not equal to given value. */
   kind_not?: Maybe<GraphCms_UserKind>
   /** All values that are not contained in given list. */
-  kind_not_in?: Maybe<Array<GraphCms_UserKind>>
+  kind_not_in?: Maybe<Array<Maybe<GraphCms_UserKind>>>
   name?: Maybe<Scalars['String']>
   /** All values containing the given string. */
   name_contains?: Maybe<Scalars['String']>
   /** All values ending with the given string. */
   name_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  name_in?: Maybe<Array<Scalars['String']>>
+  name_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   name_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -7276,7 +7519,7 @@ export type GraphCms_UserWhereInput = {
   /** All values not ending with the given string */
   name_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  name_not_in?: Maybe<Array<Scalars['String']>>
+  name_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   name_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -7287,7 +7530,7 @@ export type GraphCms_UserWhereInput = {
   /** All values ending with the given string. */
   picture_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  picture_in?: Maybe<Array<Scalars['String']>>
+  picture_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   picture_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -7295,7 +7538,7 @@ export type GraphCms_UserWhereInput = {
   /** All values not ending with the given string */
   picture_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  picture_not_in?: Maybe<Array<Scalars['String']>>
+  picture_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   picture_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -7306,7 +7549,7 @@ export type GraphCms_UserWhereInput = {
   /** All values greater than or equal the given value. */
   publishedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  publishedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -7314,14 +7557,14 @@ export type GraphCms_UserWhereInput = {
   /** All values that are not equal to given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   updatedAt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values greater than the given value. */
   updatedAt_gt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values greater than or equal the given value. */
   updatedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -7329,7 +7572,21 @@ export type GraphCms_UserWhereInput = {
   /** All values that are not equal to given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
+}
+
+/** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
+export type GraphCms_UserWhereStageInput = {
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<GraphCms_UserWhereStageInput>>
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<GraphCms_UserWhereStageInput>>
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<GraphCms_UserWhereStageInput>>
+  /** This field contains fields which can be set as true or false to specify an internal comparison */
+  compareWithParent?: Maybe<GraphCms_UserWhereComparatorInput>
+  /** Specify the stage to compare with */
+  stage?: Maybe<GraphCms_Stage>
 }
 
 /** References User record uniquely */
@@ -7477,7 +7734,7 @@ export type GraphCms_VideoEmbedManyWhereInput = {
   /** All values greater than or equal the given value. */
   createdAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  createdAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -7485,15 +7742,18 @@ export type GraphCms_VideoEmbedManyWhereInput = {
   /** All values that are not equal to given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  createdAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   createdBy?: Maybe<GraphCms_UserWhereInput>
+  documentInStages_every?: Maybe<GraphCms_VideoEmbedWhereStageInput>
+  documentInStages_none?: Maybe<GraphCms_VideoEmbedWhereStageInput>
+  documentInStages_some?: Maybe<GraphCms_VideoEmbedWhereStageInput>
   id?: Maybe<Scalars['ID']>
   /** All values containing the given string. */
   id_contains?: Maybe<Scalars['ID']>
   /** All values ending with the given string. */
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>
+  id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values that are not equal to given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
@@ -7501,7 +7761,7 @@ export type GraphCms_VideoEmbedManyWhereInput = {
   /** All values not ending with the given string */
   id_not_ends_with?: Maybe<Scalars['ID']>
   /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>
+  id_not_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values not starting with the given string. */
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
@@ -7512,7 +7772,7 @@ export type GraphCms_VideoEmbedManyWhereInput = {
   /** All values ending with the given string. */
   link_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  link_in?: Maybe<Array<Scalars['String']>>
+  link_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   link_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -7520,7 +7780,7 @@ export type GraphCms_VideoEmbedManyWhereInput = {
   /** All values not ending with the given string */
   link_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  link_not_in?: Maybe<Array<Scalars['String']>>
+  link_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   link_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -7531,7 +7791,7 @@ export type GraphCms_VideoEmbedManyWhereInput = {
   /** All values greater than or equal the given value. */
   publishedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  publishedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -7539,7 +7799,7 @@ export type GraphCms_VideoEmbedManyWhereInput = {
   /** All values that are not equal to given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
   scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
   scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
@@ -7550,7 +7810,7 @@ export type GraphCms_VideoEmbedManyWhereInput = {
   /** All values greater than or equal the given value. */
   updatedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -7558,7 +7818,7 @@ export type GraphCms_VideoEmbedManyWhereInput = {
   /** All values that are not equal to given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   updatedBy?: Maybe<GraphCms_UserWhereInput>
 }
 
@@ -7647,6 +7907,12 @@ export type GraphCms_VideoEmbedUpsertWithNestedWhereUniqueInput = {
   where: GraphCms_VideoEmbedWhereUniqueInput
 }
 
+/** This contains a set of filters that can be used to compare values internally */
+export type GraphCms_VideoEmbedWhereComparatorInput = {
+  /** This field can be used to request to check if the entry is outdated by internal comparison */
+  outdated_to?: Maybe<Scalars['Boolean']>
+}
+
 /** Identifies documents */
 export type GraphCms_VideoEmbedWhereInput = {
   /** Logical AND on all given filters. */
@@ -7663,7 +7929,7 @@ export type GraphCms_VideoEmbedWhereInput = {
   /** All values greater than or equal the given value. */
   createdAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  createdAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -7671,15 +7937,18 @@ export type GraphCms_VideoEmbedWhereInput = {
   /** All values that are not equal to given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  createdAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   createdBy?: Maybe<GraphCms_UserWhereInput>
+  documentInStages_every?: Maybe<GraphCms_VideoEmbedWhereStageInput>
+  documentInStages_none?: Maybe<GraphCms_VideoEmbedWhereStageInput>
+  documentInStages_some?: Maybe<GraphCms_VideoEmbedWhereStageInput>
   id?: Maybe<Scalars['ID']>
   /** All values containing the given string. */
   id_contains?: Maybe<Scalars['ID']>
   /** All values ending with the given string. */
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
-  id_in?: Maybe<Array<Scalars['ID']>>
+  id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values that are not equal to given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
@@ -7687,7 +7956,7 @@ export type GraphCms_VideoEmbedWhereInput = {
   /** All values not ending with the given string */
   id_not_ends_with?: Maybe<Scalars['ID']>
   /** All values that are not contained in given list. */
-  id_not_in?: Maybe<Array<Scalars['ID']>>
+  id_not_in?: Maybe<Array<Maybe<Scalars['ID']>>>
   /** All values not starting with the given string. */
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
@@ -7698,7 +7967,7 @@ export type GraphCms_VideoEmbedWhereInput = {
   /** All values ending with the given string. */
   link_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
-  link_in?: Maybe<Array<Scalars['String']>>
+  link_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values that are not equal to given value. */
   link_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
@@ -7706,7 +7975,7 @@ export type GraphCms_VideoEmbedWhereInput = {
   /** All values not ending with the given string */
   link_not_ends_with?: Maybe<Scalars['String']>
   /** All values that are not contained in given list. */
-  link_not_in?: Maybe<Array<Scalars['String']>>
+  link_not_in?: Maybe<Array<Maybe<Scalars['String']>>>
   /** All values not starting with the given string. */
   link_not_starts_with?: Maybe<Scalars['String']>
   /** All values starting with the given string. */
@@ -7717,7 +7986,7 @@ export type GraphCms_VideoEmbedWhereInput = {
   /** All values greater than or equal the given value. */
   publishedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  publishedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -7725,7 +7994,7 @@ export type GraphCms_VideoEmbedWhereInput = {
   /** All values that are not equal to given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  publishedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
   scheduledIn_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
   scheduledIn_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
@@ -7736,7 +8005,7 @@ export type GraphCms_VideoEmbedWhereInput = {
   /** All values greater than or equal the given value. */
   updatedAt_gte?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   /** All values less than the given value. */
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
@@ -7744,8 +8013,22 @@ export type GraphCms_VideoEmbedWhereInput = {
   /** All values that are not equal to given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<Array<Scalars['GraphCMS_DateTime']>>
+  updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   updatedBy?: Maybe<GraphCms_UserWhereInput>
+}
+
+/** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
+export type GraphCms_VideoEmbedWhereStageInput = {
+  /** Logical AND on all given filters. */
+  AND?: Maybe<Array<GraphCms_VideoEmbedWhereStageInput>>
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<Array<GraphCms_VideoEmbedWhereStageInput>>
+  /** Logical OR on all given filters. */
+  OR?: Maybe<Array<GraphCms_VideoEmbedWhereStageInput>>
+  /** This field contains fields which can be set as true or false to specify an internal comparison */
+  compareWithParent?: Maybe<GraphCms_VideoEmbedWhereComparatorInput>
+  /** Specify the stage to compare with */
+  stage?: Maybe<GraphCms_Stage>
 }
 
 /** References VideoEmbed record uniquely */
@@ -7797,6 +8080,8 @@ export enum GraphCms__MutationKind {
   deleteMany = 'deleteMany',
   publish = 'publish',
   publishMany = 'publishMany',
+  schedulePublish = 'schedulePublish',
+  scheduleUnpublish = 'scheduleUnpublish',
   unpublish = 'unpublish',
   unpublishMany = 'unpublishMany',
   update = 'update',
@@ -7891,6 +8176,7 @@ export enum GraphQlSourceFieldsEnum {
   children___children___id = 'children___children___id',
   children___children___internal___content = 'children___children___internal___content',
   children___children___internal___contentDigest = 'children___children___internal___contentDigest',
+  children___children___internal___contentFilePath = 'children___children___internal___contentFilePath',
   children___children___internal___description = 'children___children___internal___description',
   children___children___internal___fieldOwners = 'children___children___internal___fieldOwners',
   children___children___internal___ignoreType = 'children___children___internal___ignoreType',
@@ -7902,6 +8188,7 @@ export enum GraphQlSourceFieldsEnum {
   children___id = 'children___id',
   children___internal___content = 'children___internal___content',
   children___internal___contentDigest = 'children___internal___contentDigest',
+  children___internal___contentFilePath = 'children___internal___contentFilePath',
   children___internal___description = 'children___internal___description',
   children___internal___fieldOwners = 'children___internal___fieldOwners',
   children___internal___ignoreType = 'children___internal___ignoreType',
@@ -7914,6 +8201,7 @@ export enum GraphQlSourceFieldsEnum {
   children___parent___id = 'children___parent___id',
   children___parent___internal___content = 'children___parent___internal___content',
   children___parent___internal___contentDigest = 'children___parent___internal___contentDigest',
+  children___parent___internal___contentFilePath = 'children___parent___internal___contentFilePath',
   children___parent___internal___description = 'children___parent___internal___description',
   children___parent___internal___fieldOwners = 'children___parent___internal___fieldOwners',
   children___parent___internal___ignoreType = 'children___parent___internal___ignoreType',
@@ -7926,6 +8214,7 @@ export enum GraphQlSourceFieldsEnum {
   id = 'id',
   internal___content = 'internal___content',
   internal___contentDigest = 'internal___contentDigest',
+  internal___contentFilePath = 'internal___contentFilePath',
   internal___description = 'internal___description',
   internal___fieldOwners = 'internal___fieldOwners',
   internal___ignoreType = 'internal___ignoreType',
@@ -7939,6 +8228,7 @@ export enum GraphQlSourceFieldsEnum {
   parent___children___id = 'parent___children___id',
   parent___children___internal___content = 'parent___children___internal___content',
   parent___children___internal___contentDigest = 'parent___children___internal___contentDigest',
+  parent___children___internal___contentFilePath = 'parent___children___internal___contentFilePath',
   parent___children___internal___description = 'parent___children___internal___description',
   parent___children___internal___fieldOwners = 'parent___children___internal___fieldOwners',
   parent___children___internal___ignoreType = 'parent___children___internal___ignoreType',
@@ -7950,6 +8240,7 @@ export enum GraphQlSourceFieldsEnum {
   parent___id = 'parent___id',
   parent___internal___content = 'parent___internal___content',
   parent___internal___contentDigest = 'parent___internal___contentDigest',
+  parent___internal___contentFilePath = 'parent___internal___contentFilePath',
   parent___internal___description = 'parent___internal___description',
   parent___internal___fieldOwners = 'parent___internal___fieldOwners',
   parent___internal___ignoreType = 'parent___internal___ignoreType',
@@ -7962,6 +8253,7 @@ export enum GraphQlSourceFieldsEnum {
   parent___parent___id = 'parent___parent___id',
   parent___parent___internal___content = 'parent___parent___internal___content',
   parent___parent___internal___contentDigest = 'parent___parent___internal___contentDigest',
+  parent___parent___internal___contentFilePath = 'parent___parent___internal___contentFilePath',
   parent___parent___internal___description = 'parent___parent___internal___description',
   parent___parent___internal___fieldOwners = 'parent___parent___internal___fieldOwners',
   parent___parent___internal___ignoreType = 'parent___parent___internal___ignoreType',
@@ -8024,15 +8316,6 @@ export type GraphQlSourceSortInput = {
   order?: Maybe<Array<Maybe<SortOrderEnum>>>
 }
 
-export enum HeadingsMdx {
-  h1 = 'h1',
-  h2 = 'h2',
-  h3 = 'h3',
-  h4 = 'h4',
-  h5 = 'h5',
-  h6 = 'h6',
-}
-
 export enum ImageCropFocus {
   ATTENTION = 'ATTENTION',
   CENTER = 'CENTER',
@@ -8082,7 +8365,7 @@ export type ImageSharp = Node & {
   children: Array<Node>
   fixed?: Maybe<ImageSharpFixed>
   fluid?: Maybe<ImageSharpFluid>
-  gatsbyImageData: Scalars['JSON']
+  gatsbyImageData: Scalars['GatsbyImageData']
   id: Scalars['ID']
   internal: Internal
   original?: Maybe<ImageSharpOriginal>
@@ -8230,6 +8513,7 @@ export enum ImageSharpFieldsEnum {
   children___children___id = 'children___children___id',
   children___children___internal___content = 'children___children___internal___content',
   children___children___internal___contentDigest = 'children___children___internal___contentDigest',
+  children___children___internal___contentFilePath = 'children___children___internal___contentFilePath',
   children___children___internal___description = 'children___children___internal___description',
   children___children___internal___fieldOwners = 'children___children___internal___fieldOwners',
   children___children___internal___ignoreType = 'children___children___internal___ignoreType',
@@ -8241,6 +8525,7 @@ export enum ImageSharpFieldsEnum {
   children___id = 'children___id',
   children___internal___content = 'children___internal___content',
   children___internal___contentDigest = 'children___internal___contentDigest',
+  children___internal___contentFilePath = 'children___internal___contentFilePath',
   children___internal___description = 'children___internal___description',
   children___internal___fieldOwners = 'children___internal___fieldOwners',
   children___internal___ignoreType = 'children___internal___ignoreType',
@@ -8253,6 +8538,7 @@ export enum ImageSharpFieldsEnum {
   children___parent___id = 'children___parent___id',
   children___parent___internal___content = 'children___parent___internal___content',
   children___parent___internal___contentDigest = 'children___parent___internal___contentDigest',
+  children___parent___internal___contentFilePath = 'children___parent___internal___contentFilePath',
   children___parent___internal___description = 'children___parent___internal___description',
   children___parent___internal___fieldOwners = 'children___parent___internal___fieldOwners',
   children___parent___internal___ignoreType = 'children___parent___internal___ignoreType',
@@ -8287,6 +8573,7 @@ export enum ImageSharpFieldsEnum {
   id = 'id',
   internal___content = 'internal___content',
   internal___contentDigest = 'internal___contentDigest',
+  internal___contentFilePath = 'internal___contentFilePath',
   internal___description = 'internal___description',
   internal___fieldOwners = 'internal___fieldOwners',
   internal___ignoreType = 'internal___ignoreType',
@@ -8303,6 +8590,7 @@ export enum ImageSharpFieldsEnum {
   parent___children___id = 'parent___children___id',
   parent___children___internal___content = 'parent___children___internal___content',
   parent___children___internal___contentDigest = 'parent___children___internal___contentDigest',
+  parent___children___internal___contentFilePath = 'parent___children___internal___contentFilePath',
   parent___children___internal___description = 'parent___children___internal___description',
   parent___children___internal___fieldOwners = 'parent___children___internal___fieldOwners',
   parent___children___internal___ignoreType = 'parent___children___internal___ignoreType',
@@ -8314,6 +8602,7 @@ export enum ImageSharpFieldsEnum {
   parent___id = 'parent___id',
   parent___internal___content = 'parent___internal___content',
   parent___internal___contentDigest = 'parent___internal___contentDigest',
+  parent___internal___contentFilePath = 'parent___internal___contentFilePath',
   parent___internal___description = 'parent___internal___description',
   parent___internal___fieldOwners = 'parent___internal___fieldOwners',
   parent___internal___ignoreType = 'parent___internal___ignoreType',
@@ -8326,6 +8615,7 @@ export enum ImageSharpFieldsEnum {
   parent___parent___id = 'parent___parent___id',
   parent___parent___internal___content = 'parent___parent___internal___content',
   parent___parent___internal___contentDigest = 'parent___parent___internal___contentDigest',
+  parent___parent___internal___contentFilePath = 'parent___parent___internal___contentFilePath',
   parent___parent___internal___description = 'parent___parent___internal___description',
   parent___parent___internal___fieldOwners = 'parent___parent___internal___fieldOwners',
   parent___parent___internal___ignoreType = 'parent___parent___internal___ignoreType',
@@ -8346,7 +8636,7 @@ export type ImageSharpFilterInput = {
   children?: Maybe<NodeFilterListInput>
   fixed?: Maybe<ImageSharpFixedFilterInput>
   fluid?: Maybe<ImageSharpFluidFilterInput>
-  gatsbyImageData?: Maybe<JsonQueryOperatorInput>
+  gatsbyImageData?: Maybe<GatsbyImageDataQueryOperatorInput>
   id?: Maybe<StringQueryOperatorInput>
   internal?: Maybe<InternalFilterInput>
   original?: Maybe<ImageSharpOriginalFilterInput>
@@ -8505,6 +8795,7 @@ export type Internal = {
   __typename?: 'Internal'
   content?: Maybe<Scalars['String']>
   contentDigest: Scalars['String']
+  contentFilePath?: Maybe<Scalars['String']>
   description?: Maybe<Scalars['String']>
   fieldOwners?: Maybe<Array<Maybe<Scalars['String']>>>
   ignoreType?: Maybe<Scalars['Boolean']>
@@ -8516,6 +8807,7 @@ export type Internal = {
 export type InternalFilterInput = {
   content?: Maybe<StringQueryOperatorInput>
   contentDigest?: Maybe<StringQueryOperatorInput>
+  contentFilePath?: Maybe<StringQueryOperatorInput>
   description?: Maybe<StringQueryOperatorInput>
   fieldOwners?: Maybe<StringQueryOperatorInput>
   ignoreType?: Maybe<BooleanQueryOperatorInput>
@@ -8659,6 +8951,7 @@ export enum MarkdownRemarkFieldsEnum {
   children___children___id = 'children___children___id',
   children___children___internal___content = 'children___children___internal___content',
   children___children___internal___contentDigest = 'children___children___internal___contentDigest',
+  children___children___internal___contentFilePath = 'children___children___internal___contentFilePath',
   children___children___internal___description = 'children___children___internal___description',
   children___children___internal___fieldOwners = 'children___children___internal___fieldOwners',
   children___children___internal___ignoreType = 'children___children___internal___ignoreType',
@@ -8670,6 +8963,7 @@ export enum MarkdownRemarkFieldsEnum {
   children___id = 'children___id',
   children___internal___content = 'children___internal___content',
   children___internal___contentDigest = 'children___internal___contentDigest',
+  children___internal___contentFilePath = 'children___internal___contentFilePath',
   children___internal___description = 'children___internal___description',
   children___internal___fieldOwners = 'children___internal___fieldOwners',
   children___internal___ignoreType = 'children___internal___ignoreType',
@@ -8682,6 +8976,7 @@ export enum MarkdownRemarkFieldsEnum {
   children___parent___id = 'children___parent___id',
   children___parent___internal___content = 'children___parent___internal___content',
   children___parent___internal___contentDigest = 'children___parent___internal___contentDigest',
+  children___parent___internal___contentFilePath = 'children___parent___internal___contentFilePath',
   children___parent___internal___description = 'children___parent___internal___description',
   children___parent___internal___fieldOwners = 'children___parent___internal___fieldOwners',
   children___parent___internal___ignoreType = 'children___parent___internal___ignoreType',
@@ -8701,6 +8996,7 @@ export enum MarkdownRemarkFieldsEnum {
   id = 'id',
   internal___content = 'internal___content',
   internal___contentDigest = 'internal___contentDigest',
+  internal___contentFilePath = 'internal___contentFilePath',
   internal___description = 'internal___description',
   internal___fieldOwners = 'internal___fieldOwners',
   internal___ignoreType = 'internal___ignoreType',
@@ -8714,6 +9010,7 @@ export enum MarkdownRemarkFieldsEnum {
   parent___children___id = 'parent___children___id',
   parent___children___internal___content = 'parent___children___internal___content',
   parent___children___internal___contentDigest = 'parent___children___internal___contentDigest',
+  parent___children___internal___contentFilePath = 'parent___children___internal___contentFilePath',
   parent___children___internal___description = 'parent___children___internal___description',
   parent___children___internal___fieldOwners = 'parent___children___internal___fieldOwners',
   parent___children___internal___ignoreType = 'parent___children___internal___ignoreType',
@@ -8725,6 +9022,7 @@ export enum MarkdownRemarkFieldsEnum {
   parent___id = 'parent___id',
   parent___internal___content = 'parent___internal___content',
   parent___internal___contentDigest = 'parent___internal___contentDigest',
+  parent___internal___contentFilePath = 'parent___internal___contentFilePath',
   parent___internal___description = 'parent___internal___description',
   parent___internal___fieldOwners = 'parent___internal___fieldOwners',
   parent___internal___ignoreType = 'parent___internal___ignoreType',
@@ -8737,6 +9035,7 @@ export enum MarkdownRemarkFieldsEnum {
   parent___parent___id = 'parent___parent___id',
   parent___parent___internal___content = 'parent___parent___internal___content',
   parent___parent___internal___contentDigest = 'parent___parent___internal___contentDigest',
+  parent___parent___internal___contentFilePath = 'parent___parent___internal___contentFilePath',
   parent___parent___internal___description = 'parent___parent___internal___description',
   parent___parent___internal___fieldOwners = 'parent___parent___internal___fieldOwners',
   parent___parent___internal___ignoreType = 'parent___parent___internal___ignoreType',
@@ -8824,31 +9123,16 @@ export type MarkdownWordCountFilterInput = {
 
 export type Mdx = Node & {
   __typename?: 'Mdx'
-  body: Scalars['String']
   children: Array<Node>
-  excerpt: Scalars['String']
-  fileAbsolutePath: Scalars['String']
-  frontmatter?: Maybe<MdxFrontmatter>
-  headings?: Maybe<Array<Maybe<MdxHeadingMdx>>>
-  html?: Maybe<Scalars['String']>
+  excerpt?: Maybe<Scalars['String']>
   id: Scalars['ID']
   internal: Internal
-  mdxAST?: Maybe<Scalars['JSON']>
   parent?: Maybe<Node>
-  rawBody: Scalars['String']
-  slug?: Maybe<Scalars['String']>
   tableOfContents?: Maybe<Scalars['JSON']>
-  timeToRead?: Maybe<Scalars['Int']>
-  wordCount?: Maybe<MdxWordCount>
 }
 
 export type MdxExcerptArgs = {
   pruneLength?: Maybe<Scalars['Int']>
-  truncate?: Maybe<Scalars['Boolean']>
-}
-
-export type MdxHeadingsArgs = {
-  depth?: Maybe<HeadingsMdx>
 }
 
 export type MdxTableOfContentsArgs = {
@@ -8898,7 +9182,6 @@ export type MdxEdge = {
 }
 
 export enum MdxFieldsEnum {
-  body = 'body',
   children = 'children',
   children___children = 'children___children',
   children___children___children = 'children___children___children',
@@ -8907,6 +9190,7 @@ export enum MdxFieldsEnum {
   children___children___id = 'children___children___id',
   children___children___internal___content = 'children___children___internal___content',
   children___children___internal___contentDigest = 'children___children___internal___contentDigest',
+  children___children___internal___contentFilePath = 'children___children___internal___contentFilePath',
   children___children___internal___description = 'children___children___internal___description',
   children___children___internal___fieldOwners = 'children___children___internal___fieldOwners',
   children___children___internal___ignoreType = 'children___children___internal___ignoreType',
@@ -8918,6 +9202,7 @@ export enum MdxFieldsEnum {
   children___id = 'children___id',
   children___internal___content = 'children___internal___content',
   children___internal___contentDigest = 'children___internal___contentDigest',
+  children___internal___contentFilePath = 'children___internal___contentFilePath',
   children___internal___description = 'children___internal___description',
   children___internal___fieldOwners = 'children___internal___fieldOwners',
   children___internal___ignoreType = 'children___internal___ignoreType',
@@ -8930,6 +9215,7 @@ export enum MdxFieldsEnum {
   children___parent___id = 'children___parent___id',
   children___parent___internal___content = 'children___parent___internal___content',
   children___parent___internal___contentDigest = 'children___parent___internal___contentDigest',
+  children___parent___internal___contentFilePath = 'children___parent___internal___contentFilePath',
   children___parent___internal___description = 'children___parent___internal___description',
   children___parent___internal___fieldOwners = 'children___parent___internal___fieldOwners',
   children___parent___internal___ignoreType = 'children___parent___internal___ignoreType',
@@ -8939,22 +9225,16 @@ export enum MdxFieldsEnum {
   children___parent___parent___children = 'children___parent___parent___children',
   children___parent___parent___id = 'children___parent___parent___id',
   excerpt = 'excerpt',
-  fileAbsolutePath = 'fileAbsolutePath',
-  frontmatter___title = 'frontmatter___title',
-  headings = 'headings',
-  headings___depth = 'headings___depth',
-  headings___value = 'headings___value',
-  html = 'html',
   id = 'id',
   internal___content = 'internal___content',
   internal___contentDigest = 'internal___contentDigest',
+  internal___contentFilePath = 'internal___contentFilePath',
   internal___description = 'internal___description',
   internal___fieldOwners = 'internal___fieldOwners',
   internal___ignoreType = 'internal___ignoreType',
   internal___mediaType = 'internal___mediaType',
   internal___owner = 'internal___owner',
   internal___type = 'internal___type',
-  mdxAST = 'mdxAST',
   parent___children = 'parent___children',
   parent___children___children = 'parent___children___children',
   parent___children___children___children = 'parent___children___children___children',
@@ -8962,6 +9242,7 @@ export enum MdxFieldsEnum {
   parent___children___id = 'parent___children___id',
   parent___children___internal___content = 'parent___children___internal___content',
   parent___children___internal___contentDigest = 'parent___children___internal___contentDigest',
+  parent___children___internal___contentFilePath = 'parent___children___internal___contentFilePath',
   parent___children___internal___description = 'parent___children___internal___description',
   parent___children___internal___fieldOwners = 'parent___children___internal___fieldOwners',
   parent___children___internal___ignoreType = 'parent___children___internal___ignoreType',
@@ -8973,6 +9254,7 @@ export enum MdxFieldsEnum {
   parent___id = 'parent___id',
   parent___internal___content = 'parent___internal___content',
   parent___internal___contentDigest = 'parent___internal___contentDigest',
+  parent___internal___contentFilePath = 'parent___internal___contentFilePath',
   parent___internal___description = 'parent___internal___description',
   parent___internal___fieldOwners = 'parent___internal___fieldOwners',
   parent___internal___ignoreType = 'parent___internal___ignoreType',
@@ -8985,6 +9267,7 @@ export enum MdxFieldsEnum {
   parent___parent___id = 'parent___parent___id',
   parent___parent___internal___content = 'parent___parent___internal___content',
   parent___parent___internal___contentDigest = 'parent___parent___internal___contentDigest',
+  parent___parent___internal___contentFilePath = 'parent___parent___internal___contentFilePath',
   parent___parent___internal___description = 'parent___parent___internal___description',
   parent___parent___internal___fieldOwners = 'parent___parent___internal___fieldOwners',
   parent___parent___internal___ignoreType = 'parent___parent___internal___ignoreType',
@@ -8993,41 +9276,16 @@ export enum MdxFieldsEnum {
   parent___parent___internal___type = 'parent___parent___internal___type',
   parent___parent___parent___children = 'parent___parent___parent___children',
   parent___parent___parent___id = 'parent___parent___parent___id',
-  rawBody = 'rawBody',
-  slug = 'slug',
   tableOfContents = 'tableOfContents',
-  timeToRead = 'timeToRead',
-  wordCount___paragraphs = 'wordCount___paragraphs',
-  wordCount___sentences = 'wordCount___sentences',
-  wordCount___words = 'wordCount___words',
 }
 
 export type MdxFilterInput = {
-  body?: Maybe<StringQueryOperatorInput>
   children?: Maybe<NodeFilterListInput>
   excerpt?: Maybe<StringQueryOperatorInput>
-  fileAbsolutePath?: Maybe<StringQueryOperatorInput>
-  frontmatter?: Maybe<MdxFrontmatterFilterInput>
-  headings?: Maybe<MdxHeadingMdxFilterListInput>
-  html?: Maybe<StringQueryOperatorInput>
   id?: Maybe<StringQueryOperatorInput>
   internal?: Maybe<InternalFilterInput>
-  mdxAST?: Maybe<JsonQueryOperatorInput>
   parent?: Maybe<NodeFilterInput>
-  rawBody?: Maybe<StringQueryOperatorInput>
-  slug?: Maybe<StringQueryOperatorInput>
   tableOfContents?: Maybe<JsonQueryOperatorInput>
-  timeToRead?: Maybe<IntQueryOperatorInput>
-  wordCount?: Maybe<MdxWordCountFilterInput>
-}
-
-export type MdxFrontmatter = {
-  __typename?: 'MdxFrontmatter'
-  title: Scalars['String']
-}
-
-export type MdxFrontmatterFilterInput = {
-  title?: Maybe<StringQueryOperatorInput>
 }
 
 export type MdxGroupConnection = {
@@ -9067,37 +9325,9 @@ export type MdxGroupConnectionSumArgs = {
   field: MdxFieldsEnum
 }
 
-export type MdxHeadingMdx = {
-  __typename?: 'MdxHeadingMdx'
-  depth?: Maybe<Scalars['Int']>
-  value?: Maybe<Scalars['String']>
-}
-
-export type MdxHeadingMdxFilterInput = {
-  depth?: Maybe<IntQueryOperatorInput>
-  value?: Maybe<StringQueryOperatorInput>
-}
-
-export type MdxHeadingMdxFilterListInput = {
-  elemMatch?: Maybe<MdxHeadingMdxFilterInput>
-}
-
 export type MdxSortInput = {
   fields?: Maybe<Array<Maybe<MdxFieldsEnum>>>
   order?: Maybe<Array<Maybe<SortOrderEnum>>>
-}
-
-export type MdxWordCount = {
-  __typename?: 'MdxWordCount'
-  paragraphs?: Maybe<Scalars['Int']>
-  sentences?: Maybe<Scalars['Int']>
-  words?: Maybe<Scalars['Int']>
-}
-
-export type MdxWordCountFilterInput = {
-  paragraphs?: Maybe<IntQueryOperatorInput>
-  sentences?: Maybe<IntQueryOperatorInput>
-  words?: Maybe<IntQueryOperatorInput>
 }
 
 /** Node Interface */
@@ -9117,6 +9347,237 @@ export type NodeFilterInput = {
 
 export type NodeFilterListInput = {
   elemMatch?: Maybe<NodeFilterInput>
+}
+
+export type Opengraph = Node & {
+  __typename?: 'Opengraph'
+  children: Array<Node>
+  description?: Maybe<Scalars['String']>
+  id: Scalars['ID']
+  image?: Maybe<Scalars['String']>
+  internal: Internal
+  ogDescription?: Maybe<Scalars['String']>
+  ogImage?: Maybe<Scalars['String']>
+  ogTitle?: Maybe<Scalars['String']>
+  ogType?: Maybe<Scalars['String']>
+  ogUrl?: Maybe<Scalars['String']>
+  parent?: Maybe<Node>
+  twitterCard?: Maybe<Scalars['String']>
+  twitterDescription?: Maybe<Scalars['String']>
+  twitterImageSrc?: Maybe<Scalars['String']>
+  twitterTitle?: Maybe<Scalars['String']>
+  url?: Maybe<Scalars['String']>
+}
+
+export type OpengraphConnection = {
+  __typename?: 'OpengraphConnection'
+  distinct: Array<Scalars['String']>
+  edges: Array<OpengraphEdge>
+  group: Array<OpengraphGroupConnection>
+  max?: Maybe<Scalars['Float']>
+  min?: Maybe<Scalars['Float']>
+  nodes: Array<Opengraph>
+  pageInfo: PageInfo
+  sum?: Maybe<Scalars['Float']>
+  totalCount: Scalars['Int']
+}
+
+export type OpengraphConnectionDistinctArgs = {
+  field: OpengraphFieldsEnum
+}
+
+export type OpengraphConnectionGroupArgs = {
+  field: OpengraphFieldsEnum
+  limit?: Maybe<Scalars['Int']>
+  skip?: Maybe<Scalars['Int']>
+}
+
+export type OpengraphConnectionMaxArgs = {
+  field: OpengraphFieldsEnum
+}
+
+export type OpengraphConnectionMinArgs = {
+  field: OpengraphFieldsEnum
+}
+
+export type OpengraphConnectionSumArgs = {
+  field: OpengraphFieldsEnum
+}
+
+export type OpengraphEdge = {
+  __typename?: 'OpengraphEdge'
+  next?: Maybe<Opengraph>
+  node: Opengraph
+  previous?: Maybe<Opengraph>
+}
+
+export enum OpengraphFieldsEnum {
+  children = 'children',
+  children___children = 'children___children',
+  children___children___children = 'children___children___children',
+  children___children___children___children = 'children___children___children___children',
+  children___children___children___id = 'children___children___children___id',
+  children___children___id = 'children___children___id',
+  children___children___internal___content = 'children___children___internal___content',
+  children___children___internal___contentDigest = 'children___children___internal___contentDigest',
+  children___children___internal___contentFilePath = 'children___children___internal___contentFilePath',
+  children___children___internal___description = 'children___children___internal___description',
+  children___children___internal___fieldOwners = 'children___children___internal___fieldOwners',
+  children___children___internal___ignoreType = 'children___children___internal___ignoreType',
+  children___children___internal___mediaType = 'children___children___internal___mediaType',
+  children___children___internal___owner = 'children___children___internal___owner',
+  children___children___internal___type = 'children___children___internal___type',
+  children___children___parent___children = 'children___children___parent___children',
+  children___children___parent___id = 'children___children___parent___id',
+  children___id = 'children___id',
+  children___internal___content = 'children___internal___content',
+  children___internal___contentDigest = 'children___internal___contentDigest',
+  children___internal___contentFilePath = 'children___internal___contentFilePath',
+  children___internal___description = 'children___internal___description',
+  children___internal___fieldOwners = 'children___internal___fieldOwners',
+  children___internal___ignoreType = 'children___internal___ignoreType',
+  children___internal___mediaType = 'children___internal___mediaType',
+  children___internal___owner = 'children___internal___owner',
+  children___internal___type = 'children___internal___type',
+  children___parent___children = 'children___parent___children',
+  children___parent___children___children = 'children___parent___children___children',
+  children___parent___children___id = 'children___parent___children___id',
+  children___parent___id = 'children___parent___id',
+  children___parent___internal___content = 'children___parent___internal___content',
+  children___parent___internal___contentDigest = 'children___parent___internal___contentDigest',
+  children___parent___internal___contentFilePath = 'children___parent___internal___contentFilePath',
+  children___parent___internal___description = 'children___parent___internal___description',
+  children___parent___internal___fieldOwners = 'children___parent___internal___fieldOwners',
+  children___parent___internal___ignoreType = 'children___parent___internal___ignoreType',
+  children___parent___internal___mediaType = 'children___parent___internal___mediaType',
+  children___parent___internal___owner = 'children___parent___internal___owner',
+  children___parent___internal___type = 'children___parent___internal___type',
+  children___parent___parent___children = 'children___parent___parent___children',
+  children___parent___parent___id = 'children___parent___parent___id',
+  description = 'description',
+  id = 'id',
+  image = 'image',
+  internal___content = 'internal___content',
+  internal___contentDigest = 'internal___contentDigest',
+  internal___contentFilePath = 'internal___contentFilePath',
+  internal___description = 'internal___description',
+  internal___fieldOwners = 'internal___fieldOwners',
+  internal___ignoreType = 'internal___ignoreType',
+  internal___mediaType = 'internal___mediaType',
+  internal___owner = 'internal___owner',
+  internal___type = 'internal___type',
+  ogDescription = 'ogDescription',
+  ogImage = 'ogImage',
+  ogTitle = 'ogTitle',
+  ogType = 'ogType',
+  ogUrl = 'ogUrl',
+  parent___children = 'parent___children',
+  parent___children___children = 'parent___children___children',
+  parent___children___children___children = 'parent___children___children___children',
+  parent___children___children___id = 'parent___children___children___id',
+  parent___children___id = 'parent___children___id',
+  parent___children___internal___content = 'parent___children___internal___content',
+  parent___children___internal___contentDigest = 'parent___children___internal___contentDigest',
+  parent___children___internal___contentFilePath = 'parent___children___internal___contentFilePath',
+  parent___children___internal___description = 'parent___children___internal___description',
+  parent___children___internal___fieldOwners = 'parent___children___internal___fieldOwners',
+  parent___children___internal___ignoreType = 'parent___children___internal___ignoreType',
+  parent___children___internal___mediaType = 'parent___children___internal___mediaType',
+  parent___children___internal___owner = 'parent___children___internal___owner',
+  parent___children___internal___type = 'parent___children___internal___type',
+  parent___children___parent___children = 'parent___children___parent___children',
+  parent___children___parent___id = 'parent___children___parent___id',
+  parent___id = 'parent___id',
+  parent___internal___content = 'parent___internal___content',
+  parent___internal___contentDigest = 'parent___internal___contentDigest',
+  parent___internal___contentFilePath = 'parent___internal___contentFilePath',
+  parent___internal___description = 'parent___internal___description',
+  parent___internal___fieldOwners = 'parent___internal___fieldOwners',
+  parent___internal___ignoreType = 'parent___internal___ignoreType',
+  parent___internal___mediaType = 'parent___internal___mediaType',
+  parent___internal___owner = 'parent___internal___owner',
+  parent___internal___type = 'parent___internal___type',
+  parent___parent___children = 'parent___parent___children',
+  parent___parent___children___children = 'parent___parent___children___children',
+  parent___parent___children___id = 'parent___parent___children___id',
+  parent___parent___id = 'parent___parent___id',
+  parent___parent___internal___content = 'parent___parent___internal___content',
+  parent___parent___internal___contentDigest = 'parent___parent___internal___contentDigest',
+  parent___parent___internal___contentFilePath = 'parent___parent___internal___contentFilePath',
+  parent___parent___internal___description = 'parent___parent___internal___description',
+  parent___parent___internal___fieldOwners = 'parent___parent___internal___fieldOwners',
+  parent___parent___internal___ignoreType = 'parent___parent___internal___ignoreType',
+  parent___parent___internal___mediaType = 'parent___parent___internal___mediaType',
+  parent___parent___internal___owner = 'parent___parent___internal___owner',
+  parent___parent___internal___type = 'parent___parent___internal___type',
+  parent___parent___parent___children = 'parent___parent___parent___children',
+  parent___parent___parent___id = 'parent___parent___parent___id',
+  twitterCard = 'twitterCard',
+  twitterDescription = 'twitterDescription',
+  twitterImageSrc = 'twitterImageSrc',
+  twitterTitle = 'twitterTitle',
+  url = 'url',
+}
+
+export type OpengraphFilterInput = {
+  children?: Maybe<NodeFilterListInput>
+  description?: Maybe<StringQueryOperatorInput>
+  id?: Maybe<StringQueryOperatorInput>
+  image?: Maybe<StringQueryOperatorInput>
+  internal?: Maybe<InternalFilterInput>
+  ogDescription?: Maybe<StringQueryOperatorInput>
+  ogImage?: Maybe<StringQueryOperatorInput>
+  ogTitle?: Maybe<StringQueryOperatorInput>
+  ogType?: Maybe<StringQueryOperatorInput>
+  ogUrl?: Maybe<StringQueryOperatorInput>
+  parent?: Maybe<NodeFilterInput>
+  twitterCard?: Maybe<StringQueryOperatorInput>
+  twitterDescription?: Maybe<StringQueryOperatorInput>
+  twitterImageSrc?: Maybe<StringQueryOperatorInput>
+  twitterTitle?: Maybe<StringQueryOperatorInput>
+  url?: Maybe<StringQueryOperatorInput>
+}
+
+export type OpengraphGroupConnection = {
+  __typename?: 'OpengraphGroupConnection'
+  distinct: Array<Scalars['String']>
+  edges: Array<OpengraphEdge>
+  field: Scalars['String']
+  fieldValue?: Maybe<Scalars['String']>
+  group: Array<OpengraphGroupConnection>
+  max?: Maybe<Scalars['Float']>
+  min?: Maybe<Scalars['Float']>
+  nodes: Array<Opengraph>
+  pageInfo: PageInfo
+  sum?: Maybe<Scalars['Float']>
+  totalCount: Scalars['Int']
+}
+
+export type OpengraphGroupConnectionDistinctArgs = {
+  field: OpengraphFieldsEnum
+}
+
+export type OpengraphGroupConnectionGroupArgs = {
+  field: OpengraphFieldsEnum
+  limit?: Maybe<Scalars['Int']>
+  skip?: Maybe<Scalars['Int']>
+}
+
+export type OpengraphGroupConnectionMaxArgs = {
+  field: OpengraphFieldsEnum
+}
+
+export type OpengraphGroupConnectionMinArgs = {
+  field: OpengraphFieldsEnum
+}
+
+export type OpengraphGroupConnectionSumArgs = {
+  field: OpengraphFieldsEnum
+}
+
+export type OpengraphSortInput = {
+  fields?: Maybe<Array<Maybe<OpengraphFieldsEnum>>>
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>
 }
 
 export type PngOptions = {
@@ -9164,6 +9625,7 @@ export type Query = {
   allImageSharp: ImageSharpConnection
   allMarkdownRemark: MarkdownRemarkConnection
   allMdx: MdxConnection
+  allOpengraph: OpengraphConnection
   allSite: SiteConnection
   allSiteBuildMetadata: SiteBuildMetadataConnection
   allSiteFunction: SiteFunctionConnection
@@ -9176,6 +9638,7 @@ export type Query = {
   imageSharp?: Maybe<ImageSharp>
   markdownRemark?: Maybe<MarkdownRemark>
   mdx?: Maybe<Mdx>
+  opengraph?: Maybe<Opengraph>
   site?: Maybe<Site>
   siteBuildMetadata?: Maybe<SiteBuildMetadata>
   siteFunction?: Maybe<SiteFunction>
@@ -9225,6 +9688,13 @@ export type QueryAllMdxArgs = {
   sort?: Maybe<MdxSortInput>
 }
 
+export type QueryAllOpengraphArgs = {
+  filter?: Maybe<OpengraphFilterInput>
+  limit?: Maybe<Scalars['Int']>
+  skip?: Maybe<Scalars['Int']>
+  sort?: Maybe<OpengraphSortInput>
+}
+
 export type QueryAllSiteArgs = {
   filter?: Maybe<SiteFilterInput>
   limit?: Maybe<Scalars['Int']>
@@ -9269,8 +9739,6 @@ export type QueryDirectoryArgs = {
   birthTime?: Maybe<DateQueryOperatorInput>
   birthtime?: Maybe<DateQueryOperatorInput>
   birthtimeMs?: Maybe<FloatQueryOperatorInput>
-  blksize?: Maybe<IntQueryOperatorInput>
-  blocks?: Maybe<IntQueryOperatorInput>
   changeTime?: Maybe<DateQueryOperatorInput>
   children?: Maybe<NodeFilterListInput>
   ctime?: Maybe<DateQueryOperatorInput>
@@ -9356,7 +9824,7 @@ export type QueryImageSharpArgs = {
   children?: Maybe<NodeFilterListInput>
   fixed?: Maybe<ImageSharpFixedFilterInput>
   fluid?: Maybe<ImageSharpFluidFilterInput>
-  gatsbyImageData?: Maybe<JsonQueryOperatorInput>
+  gatsbyImageData?: Maybe<GatsbyImageDataQueryOperatorInput>
   id?: Maybe<StringQueryOperatorInput>
   internal?: Maybe<InternalFilterInput>
   original?: Maybe<ImageSharpOriginalFilterInput>
@@ -9380,35 +9848,47 @@ export type QueryMarkdownRemarkArgs = {
 }
 
 export type QueryMdxArgs = {
-  body?: Maybe<StringQueryOperatorInput>
   children?: Maybe<NodeFilterListInput>
   excerpt?: Maybe<StringQueryOperatorInput>
-  fileAbsolutePath?: Maybe<StringQueryOperatorInput>
-  frontmatter?: Maybe<MdxFrontmatterFilterInput>
-  headings?: Maybe<MdxHeadingMdxFilterListInput>
-  html?: Maybe<StringQueryOperatorInput>
   id?: Maybe<StringQueryOperatorInput>
   internal?: Maybe<InternalFilterInput>
-  mdxAST?: Maybe<JsonQueryOperatorInput>
   parent?: Maybe<NodeFilterInput>
-  rawBody?: Maybe<StringQueryOperatorInput>
-  slug?: Maybe<StringQueryOperatorInput>
   tableOfContents?: Maybe<JsonQueryOperatorInput>
-  timeToRead?: Maybe<IntQueryOperatorInput>
-  wordCount?: Maybe<MdxWordCountFilterInput>
+}
+
+export type QueryOpengraphArgs = {
+  children?: Maybe<NodeFilterListInput>
+  description?: Maybe<StringQueryOperatorInput>
+  id?: Maybe<StringQueryOperatorInput>
+  image?: Maybe<StringQueryOperatorInput>
+  internal?: Maybe<InternalFilterInput>
+  ogDescription?: Maybe<StringQueryOperatorInput>
+  ogImage?: Maybe<StringQueryOperatorInput>
+  ogTitle?: Maybe<StringQueryOperatorInput>
+  ogType?: Maybe<StringQueryOperatorInput>
+  ogUrl?: Maybe<StringQueryOperatorInput>
+  parent?: Maybe<NodeFilterInput>
+  twitterCard?: Maybe<StringQueryOperatorInput>
+  twitterDescription?: Maybe<StringQueryOperatorInput>
+  twitterImageSrc?: Maybe<StringQueryOperatorInput>
+  twitterTitle?: Maybe<StringQueryOperatorInput>
+  url?: Maybe<StringQueryOperatorInput>
 }
 
 export type QuerySiteArgs = {
   buildTime?: Maybe<DateQueryOperatorInput>
   children?: Maybe<NodeFilterListInput>
+  graphqlTypegen?: Maybe<BooleanQueryOperatorInput>
   host?: Maybe<StringQueryOperatorInput>
   id?: Maybe<StringQueryOperatorInput>
   internal?: Maybe<InternalFilterInput>
+  jsxRuntime?: Maybe<StringQueryOperatorInput>
   parent?: Maybe<NodeFilterInput>
   pathPrefix?: Maybe<StringQueryOperatorInput>
   polyfill?: Maybe<BooleanQueryOperatorInput>
   port?: Maybe<IntQueryOperatorInput>
   siteMetadata?: Maybe<SiteSiteMetadataFilterInput>
+  trailingSlash?: Maybe<StringQueryOperatorInput>
 }
 
 export type QuerySiteBuildMetadataArgs = {
@@ -9440,12 +9920,11 @@ export type QuerySitePageArgs = {
   id?: Maybe<StringQueryOperatorInput>
   internal?: Maybe<InternalFilterInput>
   internalComponentName?: Maybe<StringQueryOperatorInput>
-  isCreatedByStatefulCreatePages?: Maybe<BooleanQueryOperatorInput>
   matchPath?: Maybe<StringQueryOperatorInput>
+  pageContext?: Maybe<JsonQueryOperatorInput>
   parent?: Maybe<NodeFilterInput>
   path?: Maybe<StringQueryOperatorInput>
   pluginCreator?: Maybe<SitePluginFilterInput>
-  pluginCreatorId?: Maybe<StringQueryOperatorInput>
 }
 
 export type QuerySitePluginArgs = {
@@ -9455,10 +9934,10 @@ export type QuerySitePluginArgs = {
   internal?: Maybe<InternalFilterInput>
   name?: Maybe<StringQueryOperatorInput>
   nodeAPIs?: Maybe<StringQueryOperatorInput>
-  packageJson?: Maybe<SitePluginPackageJsonFilterInput>
+  packageJson?: Maybe<JsonQueryOperatorInput>
   parent?: Maybe<NodeFilterInput>
   pluginFilepath?: Maybe<StringQueryOperatorInput>
-  pluginOptions?: Maybe<SitePluginPluginOptionsFilterInput>
+  pluginOptions?: Maybe<JsonQueryOperatorInput>
   resolve?: Maybe<StringQueryOperatorInput>
   ssrAPIs?: Maybe<StringQueryOperatorInput>
   version?: Maybe<StringQueryOperatorInput>
@@ -9468,14 +9947,17 @@ export type Site = Node & {
   __typename?: 'Site'
   buildTime?: Maybe<Scalars['Date']>
   children: Array<Node>
+  graphqlTypegen?: Maybe<Scalars['Boolean']>
   host?: Maybe<Scalars['String']>
   id: Scalars['ID']
   internal: Internal
+  jsxRuntime?: Maybe<Scalars['String']>
   parent?: Maybe<Node>
   pathPrefix?: Maybe<Scalars['String']>
   polyfill?: Maybe<Scalars['Boolean']>
   port?: Maybe<Scalars['Int']>
   siteMetadata?: Maybe<SiteSiteMetadata>
+  trailingSlash?: Maybe<Scalars['String']>
 }
 
 export type SiteBuildTimeArgs = {
@@ -9553,6 +10035,7 @@ export enum SiteBuildMetadataFieldsEnum {
   children___children___id = 'children___children___id',
   children___children___internal___content = 'children___children___internal___content',
   children___children___internal___contentDigest = 'children___children___internal___contentDigest',
+  children___children___internal___contentFilePath = 'children___children___internal___contentFilePath',
   children___children___internal___description = 'children___children___internal___description',
   children___children___internal___fieldOwners = 'children___children___internal___fieldOwners',
   children___children___internal___ignoreType = 'children___children___internal___ignoreType',
@@ -9564,6 +10047,7 @@ export enum SiteBuildMetadataFieldsEnum {
   children___id = 'children___id',
   children___internal___content = 'children___internal___content',
   children___internal___contentDigest = 'children___internal___contentDigest',
+  children___internal___contentFilePath = 'children___internal___contentFilePath',
   children___internal___description = 'children___internal___description',
   children___internal___fieldOwners = 'children___internal___fieldOwners',
   children___internal___ignoreType = 'children___internal___ignoreType',
@@ -9576,6 +10060,7 @@ export enum SiteBuildMetadataFieldsEnum {
   children___parent___id = 'children___parent___id',
   children___parent___internal___content = 'children___parent___internal___content',
   children___parent___internal___contentDigest = 'children___parent___internal___contentDigest',
+  children___parent___internal___contentFilePath = 'children___parent___internal___contentFilePath',
   children___parent___internal___description = 'children___parent___internal___description',
   children___parent___internal___fieldOwners = 'children___parent___internal___fieldOwners',
   children___parent___internal___ignoreType = 'children___parent___internal___ignoreType',
@@ -9587,6 +10072,7 @@ export enum SiteBuildMetadataFieldsEnum {
   id = 'id',
   internal___content = 'internal___content',
   internal___contentDigest = 'internal___contentDigest',
+  internal___contentFilePath = 'internal___contentFilePath',
   internal___description = 'internal___description',
   internal___fieldOwners = 'internal___fieldOwners',
   internal___ignoreType = 'internal___ignoreType',
@@ -9600,6 +10086,7 @@ export enum SiteBuildMetadataFieldsEnum {
   parent___children___id = 'parent___children___id',
   parent___children___internal___content = 'parent___children___internal___content',
   parent___children___internal___contentDigest = 'parent___children___internal___contentDigest',
+  parent___children___internal___contentFilePath = 'parent___children___internal___contentFilePath',
   parent___children___internal___description = 'parent___children___internal___description',
   parent___children___internal___fieldOwners = 'parent___children___internal___fieldOwners',
   parent___children___internal___ignoreType = 'parent___children___internal___ignoreType',
@@ -9611,6 +10098,7 @@ export enum SiteBuildMetadataFieldsEnum {
   parent___id = 'parent___id',
   parent___internal___content = 'parent___internal___content',
   parent___internal___contentDigest = 'parent___internal___contentDigest',
+  parent___internal___contentFilePath = 'parent___internal___contentFilePath',
   parent___internal___description = 'parent___internal___description',
   parent___internal___fieldOwners = 'parent___internal___fieldOwners',
   parent___internal___ignoreType = 'parent___internal___ignoreType',
@@ -9623,6 +10111,7 @@ export enum SiteBuildMetadataFieldsEnum {
   parent___parent___id = 'parent___parent___id',
   parent___parent___internal___content = 'parent___parent___internal___content',
   parent___parent___internal___contentDigest = 'parent___parent___internal___contentDigest',
+  parent___parent___internal___contentFilePath = 'parent___parent___internal___contentFilePath',
   parent___parent___internal___description = 'parent___parent___internal___description',
   parent___parent___internal___fieldOwners = 'parent___parent___internal___fieldOwners',
   parent___parent___internal___ignoreType = 'parent___parent___internal___ignoreType',
@@ -9735,6 +10224,7 @@ export enum SiteFieldsEnum {
   children___children___id = 'children___children___id',
   children___children___internal___content = 'children___children___internal___content',
   children___children___internal___contentDigest = 'children___children___internal___contentDigest',
+  children___children___internal___contentFilePath = 'children___children___internal___contentFilePath',
   children___children___internal___description = 'children___children___internal___description',
   children___children___internal___fieldOwners = 'children___children___internal___fieldOwners',
   children___children___internal___ignoreType = 'children___children___internal___ignoreType',
@@ -9746,6 +10236,7 @@ export enum SiteFieldsEnum {
   children___id = 'children___id',
   children___internal___content = 'children___internal___content',
   children___internal___contentDigest = 'children___internal___contentDigest',
+  children___internal___contentFilePath = 'children___internal___contentFilePath',
   children___internal___description = 'children___internal___description',
   children___internal___fieldOwners = 'children___internal___fieldOwners',
   children___internal___ignoreType = 'children___internal___ignoreType',
@@ -9758,6 +10249,7 @@ export enum SiteFieldsEnum {
   children___parent___id = 'children___parent___id',
   children___parent___internal___content = 'children___parent___internal___content',
   children___parent___internal___contentDigest = 'children___parent___internal___contentDigest',
+  children___parent___internal___contentFilePath = 'children___parent___internal___contentFilePath',
   children___parent___internal___description = 'children___parent___internal___description',
   children___parent___internal___fieldOwners = 'children___parent___internal___fieldOwners',
   children___parent___internal___ignoreType = 'children___parent___internal___ignoreType',
@@ -9766,16 +10258,19 @@ export enum SiteFieldsEnum {
   children___parent___internal___type = 'children___parent___internal___type',
   children___parent___parent___children = 'children___parent___parent___children',
   children___parent___parent___id = 'children___parent___parent___id',
+  graphqlTypegen = 'graphqlTypegen',
   host = 'host',
   id = 'id',
   internal___content = 'internal___content',
   internal___contentDigest = 'internal___contentDigest',
+  internal___contentFilePath = 'internal___contentFilePath',
   internal___description = 'internal___description',
   internal___fieldOwners = 'internal___fieldOwners',
   internal___ignoreType = 'internal___ignoreType',
   internal___mediaType = 'internal___mediaType',
   internal___owner = 'internal___owner',
   internal___type = 'internal___type',
+  jsxRuntime = 'jsxRuntime',
   parent___children = 'parent___children',
   parent___children___children = 'parent___children___children',
   parent___children___children___children = 'parent___children___children___children',
@@ -9783,6 +10278,7 @@ export enum SiteFieldsEnum {
   parent___children___id = 'parent___children___id',
   parent___children___internal___content = 'parent___children___internal___content',
   parent___children___internal___contentDigest = 'parent___children___internal___contentDigest',
+  parent___children___internal___contentFilePath = 'parent___children___internal___contentFilePath',
   parent___children___internal___description = 'parent___children___internal___description',
   parent___children___internal___fieldOwners = 'parent___children___internal___fieldOwners',
   parent___children___internal___ignoreType = 'parent___children___internal___ignoreType',
@@ -9794,6 +10290,7 @@ export enum SiteFieldsEnum {
   parent___id = 'parent___id',
   parent___internal___content = 'parent___internal___content',
   parent___internal___contentDigest = 'parent___internal___contentDigest',
+  parent___internal___contentFilePath = 'parent___internal___contentFilePath',
   parent___internal___description = 'parent___internal___description',
   parent___internal___fieldOwners = 'parent___internal___fieldOwners',
   parent___internal___ignoreType = 'parent___internal___ignoreType',
@@ -9806,6 +10303,7 @@ export enum SiteFieldsEnum {
   parent___parent___id = 'parent___parent___id',
   parent___parent___internal___content = 'parent___parent___internal___content',
   parent___parent___internal___contentDigest = 'parent___parent___internal___contentDigest',
+  parent___parent___internal___contentFilePath = 'parent___parent___internal___contentFilePath',
   parent___parent___internal___description = 'parent___parent___internal___description',
   parent___parent___internal___fieldOwners = 'parent___parent___internal___fieldOwners',
   parent___parent___internal___ignoreType = 'parent___parent___internal___ignoreType',
@@ -9821,19 +10319,23 @@ export enum SiteFieldsEnum {
   siteMetadata___image = 'siteMetadata___image',
   siteMetadata___siteUrl = 'siteMetadata___siteUrl',
   siteMetadata___title = 'siteMetadata___title',
+  trailingSlash = 'trailingSlash',
 }
 
 export type SiteFilterInput = {
   buildTime?: Maybe<DateQueryOperatorInput>
   children?: Maybe<NodeFilterListInput>
+  graphqlTypegen?: Maybe<BooleanQueryOperatorInput>
   host?: Maybe<StringQueryOperatorInput>
   id?: Maybe<StringQueryOperatorInput>
   internal?: Maybe<InternalFilterInput>
+  jsxRuntime?: Maybe<StringQueryOperatorInput>
   parent?: Maybe<NodeFilterInput>
   pathPrefix?: Maybe<StringQueryOperatorInput>
   polyfill?: Maybe<BooleanQueryOperatorInput>
   port?: Maybe<IntQueryOperatorInput>
   siteMetadata?: Maybe<SiteSiteMetadataFilterInput>
+  trailingSlash?: Maybe<StringQueryOperatorInput>
 }
 
 export type SiteFunction = Node & {
@@ -9903,6 +10405,7 @@ export enum SiteFunctionFieldsEnum {
   children___children___id = 'children___children___id',
   children___children___internal___content = 'children___children___internal___content',
   children___children___internal___contentDigest = 'children___children___internal___contentDigest',
+  children___children___internal___contentFilePath = 'children___children___internal___contentFilePath',
   children___children___internal___description = 'children___children___internal___description',
   children___children___internal___fieldOwners = 'children___children___internal___fieldOwners',
   children___children___internal___ignoreType = 'children___children___internal___ignoreType',
@@ -9914,6 +10417,7 @@ export enum SiteFunctionFieldsEnum {
   children___id = 'children___id',
   children___internal___content = 'children___internal___content',
   children___internal___contentDigest = 'children___internal___contentDigest',
+  children___internal___contentFilePath = 'children___internal___contentFilePath',
   children___internal___description = 'children___internal___description',
   children___internal___fieldOwners = 'children___internal___fieldOwners',
   children___internal___ignoreType = 'children___internal___ignoreType',
@@ -9926,6 +10430,7 @@ export enum SiteFunctionFieldsEnum {
   children___parent___id = 'children___parent___id',
   children___parent___internal___content = 'children___parent___internal___content',
   children___parent___internal___contentDigest = 'children___parent___internal___contentDigest',
+  children___parent___internal___contentFilePath = 'children___parent___internal___contentFilePath',
   children___parent___internal___description = 'children___parent___internal___description',
   children___parent___internal___fieldOwners = 'children___parent___internal___fieldOwners',
   children___parent___internal___ignoreType = 'children___parent___internal___ignoreType',
@@ -9938,6 +10443,7 @@ export enum SiteFunctionFieldsEnum {
   id = 'id',
   internal___content = 'internal___content',
   internal___contentDigest = 'internal___contentDigest',
+  internal___contentFilePath = 'internal___contentFilePath',
   internal___description = 'internal___description',
   internal___fieldOwners = 'internal___fieldOwners',
   internal___ignoreType = 'internal___ignoreType',
@@ -9954,6 +10460,7 @@ export enum SiteFunctionFieldsEnum {
   parent___children___id = 'parent___children___id',
   parent___children___internal___content = 'parent___children___internal___content',
   parent___children___internal___contentDigest = 'parent___children___internal___contentDigest',
+  parent___children___internal___contentFilePath = 'parent___children___internal___contentFilePath',
   parent___children___internal___description = 'parent___children___internal___description',
   parent___children___internal___fieldOwners = 'parent___children___internal___fieldOwners',
   parent___children___internal___ignoreType = 'parent___children___internal___ignoreType',
@@ -9965,6 +10472,7 @@ export enum SiteFunctionFieldsEnum {
   parent___id = 'parent___id',
   parent___internal___content = 'parent___internal___content',
   parent___internal___contentDigest = 'parent___internal___contentDigest',
+  parent___internal___contentFilePath = 'parent___internal___contentFilePath',
   parent___internal___description = 'parent___internal___description',
   parent___internal___fieldOwners = 'parent___internal___fieldOwners',
   parent___internal___ignoreType = 'parent___internal___ignoreType',
@@ -9977,6 +10485,7 @@ export enum SiteFunctionFieldsEnum {
   parent___parent___id = 'parent___parent___id',
   parent___parent___internal___content = 'parent___parent___internal___content',
   parent___parent___internal___contentDigest = 'parent___parent___internal___contentDigest',
+  parent___parent___internal___contentFilePath = 'parent___parent___internal___contentFilePath',
   parent___parent___internal___description = 'parent___parent___internal___description',
   parent___parent___internal___fieldOwners = 'parent___parent___internal___fieldOwners',
   parent___parent___internal___ignoreType = 'parent___parent___internal___ignoreType',
@@ -10090,12 +10599,11 @@ export type SitePage = Node & {
   id: Scalars['ID']
   internal: Internal
   internalComponentName: Scalars['String']
-  isCreatedByStatefulCreatePages?: Maybe<Scalars['Boolean']>
   matchPath?: Maybe<Scalars['String']>
+  pageContext?: Maybe<Scalars['JSON']>
   parent?: Maybe<Node>
   path: Scalars['String']
   pluginCreator?: Maybe<SitePlugin>
-  pluginCreatorId?: Maybe<Scalars['String']>
 }
 
 export type SitePageConnection = {
@@ -10149,6 +10657,7 @@ export enum SitePageFieldsEnum {
   children___children___id = 'children___children___id',
   children___children___internal___content = 'children___children___internal___content',
   children___children___internal___contentDigest = 'children___children___internal___contentDigest',
+  children___children___internal___contentFilePath = 'children___children___internal___contentFilePath',
   children___children___internal___description = 'children___children___internal___description',
   children___children___internal___fieldOwners = 'children___children___internal___fieldOwners',
   children___children___internal___ignoreType = 'children___children___internal___ignoreType',
@@ -10160,6 +10669,7 @@ export enum SitePageFieldsEnum {
   children___id = 'children___id',
   children___internal___content = 'children___internal___content',
   children___internal___contentDigest = 'children___internal___contentDigest',
+  children___internal___contentFilePath = 'children___internal___contentFilePath',
   children___internal___description = 'children___internal___description',
   children___internal___fieldOwners = 'children___internal___fieldOwners',
   children___internal___ignoreType = 'children___internal___ignoreType',
@@ -10172,6 +10682,7 @@ export enum SitePageFieldsEnum {
   children___parent___id = 'children___parent___id',
   children___parent___internal___content = 'children___parent___internal___content',
   children___parent___internal___contentDigest = 'children___parent___internal___contentDigest',
+  children___parent___internal___contentFilePath = 'children___parent___internal___contentFilePath',
   children___parent___internal___description = 'children___parent___internal___description',
   children___parent___internal___fieldOwners = 'children___parent___internal___fieldOwners',
   children___parent___internal___ignoreType = 'children___parent___internal___ignoreType',
@@ -10186,14 +10697,15 @@ export enum SitePageFieldsEnum {
   internalComponentName = 'internalComponentName',
   internal___content = 'internal___content',
   internal___contentDigest = 'internal___contentDigest',
+  internal___contentFilePath = 'internal___contentFilePath',
   internal___description = 'internal___description',
   internal___fieldOwners = 'internal___fieldOwners',
   internal___ignoreType = 'internal___ignoreType',
   internal___mediaType = 'internal___mediaType',
   internal___owner = 'internal___owner',
   internal___type = 'internal___type',
-  isCreatedByStatefulCreatePages = 'isCreatedByStatefulCreatePages',
   matchPath = 'matchPath',
+  pageContext = 'pageContext',
   parent___children = 'parent___children',
   parent___children___children = 'parent___children___children',
   parent___children___children___children = 'parent___children___children___children',
@@ -10201,6 +10713,7 @@ export enum SitePageFieldsEnum {
   parent___children___id = 'parent___children___id',
   parent___children___internal___content = 'parent___children___internal___content',
   parent___children___internal___contentDigest = 'parent___children___internal___contentDigest',
+  parent___children___internal___contentFilePath = 'parent___children___internal___contentFilePath',
   parent___children___internal___description = 'parent___children___internal___description',
   parent___children___internal___fieldOwners = 'parent___children___internal___fieldOwners',
   parent___children___internal___ignoreType = 'parent___children___internal___ignoreType',
@@ -10212,6 +10725,7 @@ export enum SitePageFieldsEnum {
   parent___id = 'parent___id',
   parent___internal___content = 'parent___internal___content',
   parent___internal___contentDigest = 'parent___internal___contentDigest',
+  parent___internal___contentFilePath = 'parent___internal___contentFilePath',
   parent___internal___description = 'parent___internal___description',
   parent___internal___fieldOwners = 'parent___internal___fieldOwners',
   parent___internal___ignoreType = 'parent___internal___ignoreType',
@@ -10224,6 +10738,7 @@ export enum SitePageFieldsEnum {
   parent___parent___id = 'parent___parent___id',
   parent___parent___internal___content = 'parent___parent___internal___content',
   parent___parent___internal___contentDigest = 'parent___parent___internal___contentDigest',
+  parent___parent___internal___contentFilePath = 'parent___parent___internal___contentFilePath',
   parent___parent___internal___description = 'parent___parent___internal___description',
   parent___parent___internal___fieldOwners = 'parent___parent___internal___fieldOwners',
   parent___parent___internal___ignoreType = 'parent___parent___internal___ignoreType',
@@ -10233,7 +10748,6 @@ export enum SitePageFieldsEnum {
   parent___parent___parent___children = 'parent___parent___parent___children',
   parent___parent___parent___id = 'parent___parent___parent___id',
   path = 'path',
-  pluginCreatorId = 'pluginCreatorId',
   pluginCreator___browserAPIs = 'pluginCreator___browserAPIs',
   pluginCreator___children = 'pluginCreator___children',
   pluginCreator___children___children = 'pluginCreator___children___children',
@@ -10242,6 +10756,7 @@ export enum SitePageFieldsEnum {
   pluginCreator___children___id = 'pluginCreator___children___id',
   pluginCreator___children___internal___content = 'pluginCreator___children___internal___content',
   pluginCreator___children___internal___contentDigest = 'pluginCreator___children___internal___contentDigest',
+  pluginCreator___children___internal___contentFilePath = 'pluginCreator___children___internal___contentFilePath',
   pluginCreator___children___internal___description = 'pluginCreator___children___internal___description',
   pluginCreator___children___internal___fieldOwners = 'pluginCreator___children___internal___fieldOwners',
   pluginCreator___children___internal___ignoreType = 'pluginCreator___children___internal___ignoreType',
@@ -10253,6 +10768,7 @@ export enum SitePageFieldsEnum {
   pluginCreator___id = 'pluginCreator___id',
   pluginCreator___internal___content = 'pluginCreator___internal___content',
   pluginCreator___internal___contentDigest = 'pluginCreator___internal___contentDigest',
+  pluginCreator___internal___contentFilePath = 'pluginCreator___internal___contentFilePath',
   pluginCreator___internal___description = 'pluginCreator___internal___description',
   pluginCreator___internal___fieldOwners = 'pluginCreator___internal___fieldOwners',
   pluginCreator___internal___ignoreType = 'pluginCreator___internal___ignoreType',
@@ -10261,28 +10777,14 @@ export enum SitePageFieldsEnum {
   pluginCreator___internal___type = 'pluginCreator___internal___type',
   pluginCreator___name = 'pluginCreator___name',
   pluginCreator___nodeAPIs = 'pluginCreator___nodeAPIs',
-  pluginCreator___packageJson___author = 'pluginCreator___packageJson___author',
-  pluginCreator___packageJson___dependencies = 'pluginCreator___packageJson___dependencies',
-  pluginCreator___packageJson___dependencies___name = 'pluginCreator___packageJson___dependencies___name',
-  pluginCreator___packageJson___dependencies___version = 'pluginCreator___packageJson___dependencies___version',
-  pluginCreator___packageJson___description = 'pluginCreator___packageJson___description',
-  pluginCreator___packageJson___devDependencies = 'pluginCreator___packageJson___devDependencies',
-  pluginCreator___packageJson___devDependencies___name = 'pluginCreator___packageJson___devDependencies___name',
-  pluginCreator___packageJson___devDependencies___version = 'pluginCreator___packageJson___devDependencies___version',
-  pluginCreator___packageJson___keywords = 'pluginCreator___packageJson___keywords',
-  pluginCreator___packageJson___license = 'pluginCreator___packageJson___license',
-  pluginCreator___packageJson___main = 'pluginCreator___packageJson___main',
-  pluginCreator___packageJson___name = 'pluginCreator___packageJson___name',
-  pluginCreator___packageJson___peerDependencies = 'pluginCreator___packageJson___peerDependencies',
-  pluginCreator___packageJson___peerDependencies___name = 'pluginCreator___packageJson___peerDependencies___name',
-  pluginCreator___packageJson___peerDependencies___version = 'pluginCreator___packageJson___peerDependencies___version',
-  pluginCreator___packageJson___version = 'pluginCreator___packageJson___version',
+  pluginCreator___packageJson = 'pluginCreator___packageJson',
   pluginCreator___parent___children = 'pluginCreator___parent___children',
   pluginCreator___parent___children___children = 'pluginCreator___parent___children___children',
   pluginCreator___parent___children___id = 'pluginCreator___parent___children___id',
   pluginCreator___parent___id = 'pluginCreator___parent___id',
   pluginCreator___parent___internal___content = 'pluginCreator___parent___internal___content',
   pluginCreator___parent___internal___contentDigest = 'pluginCreator___parent___internal___contentDigest',
+  pluginCreator___parent___internal___contentFilePath = 'pluginCreator___parent___internal___contentFilePath',
   pluginCreator___parent___internal___description = 'pluginCreator___parent___internal___description',
   pluginCreator___parent___internal___fieldOwners = 'pluginCreator___parent___internal___fieldOwners',
   pluginCreator___parent___internal___ignoreType = 'pluginCreator___parent___internal___ignoreType',
@@ -10292,46 +10794,7 @@ export enum SitePageFieldsEnum {
   pluginCreator___parent___parent___children = 'pluginCreator___parent___parent___children',
   pluginCreator___parent___parent___id = 'pluginCreator___parent___parent___id',
   pluginCreator___pluginFilepath = 'pluginCreator___pluginFilepath',
-  pluginCreator___pluginOptions___allExtensions = 'pluginCreator___pluginOptions___allExtensions',
-  pluginCreator___pluginOptions___anonymize = 'pluginCreator___pluginOptions___anonymize',
-  pluginCreator___pluginOptions___autoLabel = 'pluginCreator___pluginOptions___autoLabel',
-  pluginCreator___pluginOptions___base64Width = 'pluginCreator___pluginOptions___base64Width',
-  pluginCreator___pluginOptions___cacheDigest = 'pluginCreator___pluginOptions___cacheDigest',
-  pluginCreator___pluginOptions___cache_busting_mode = 'pluginCreator___pluginOptions___cache_busting_mode',
-  pluginCreator___pluginOptions___createLinkInHead = 'pluginCreator___pluginOptions___createLinkInHead',
-  pluginCreator___pluginOptions___crossOrigin = 'pluginCreator___pluginOptions___crossOrigin',
-  pluginCreator___pluginOptions___cssPropOptimization = 'pluginCreator___pluginOptions___cssPropOptimization',
-  pluginCreator___pluginOptions___defaultQuality = 'pluginCreator___pluginOptions___defaultQuality',
-  pluginCreator___pluginOptions___display = 'pluginCreator___pluginOptions___display',
-  pluginCreator___pluginOptions___enableWebVitalsTracking = 'pluginCreator___pluginOptions___enableWebVitalsTracking',
-  pluginCreator___pluginOptions___entryLimit = 'pluginCreator___pluginOptions___entryLimit',
-  pluginCreator___pluginOptions___extensions = 'pluginCreator___pluginOptions___extensions',
-  pluginCreator___pluginOptions___failOnError = 'pluginCreator___pluginOptions___failOnError',
-  pluginCreator___pluginOptions___fieldName = 'pluginCreator___pluginOptions___fieldName',
-  pluginCreator___pluginOptions___fonts = 'pluginCreator___pluginOptions___fonts',
-  pluginCreator___pluginOptions___head = 'pluginCreator___pluginOptions___head',
-  pluginCreator___pluginOptions___icon = 'pluginCreator___pluginOptions___icon',
-  pluginCreator___pluginOptions___include_favicon = 'pluginCreator___pluginOptions___include_favicon',
-  pluginCreator___pluginOptions___isTSX = 'pluginCreator___pluginOptions___isTSX',
-  pluginCreator___pluginOptions___jsxPragma = 'pluginCreator___pluginOptions___jsxPragma',
-  pluginCreator___pluginOptions___labelFormat = 'pluginCreator___pluginOptions___labelFormat',
-  pluginCreator___pluginOptions___legacy = 'pluginCreator___pluginOptions___legacy',
-  pluginCreator___pluginOptions___lessBabel = 'pluginCreator___pluginOptions___lessBabel',
-  pluginCreator___pluginOptions___mediaTypes = 'pluginCreator___pluginOptions___mediaTypes',
-  pluginCreator___pluginOptions___name = 'pluginCreator___pluginOptions___name',
-  pluginCreator___pluginOptions___output = 'pluginCreator___pluginOptions___output',
-  pluginCreator___pluginOptions___pageTransitionDelay = 'pluginCreator___pluginOptions___pageTransitionDelay',
-  pluginCreator___pluginOptions___path = 'pluginCreator___pluginOptions___path',
-  pluginCreator___pluginOptions___pathCheck = 'pluginCreator___pluginOptions___pathCheck',
-  pluginCreator___pluginOptions___query = 'pluginCreator___pluginOptions___query',
-  pluginCreator___pluginOptions___respectDNT = 'pluginCreator___pluginOptions___respectDNT',
-  pluginCreator___pluginOptions___root = 'pluginCreator___pluginOptions___root',
-  pluginCreator___pluginOptions___sourceMap = 'pluginCreator___pluginOptions___sourceMap',
-  pluginCreator___pluginOptions___stripMetadata = 'pluginCreator___pluginOptions___stripMetadata',
-  pluginCreator___pluginOptions___theme_color_in_head = 'pluginCreator___pluginOptions___theme_color_in_head',
-  pluginCreator___pluginOptions___trackingId = 'pluginCreator___pluginOptions___trackingId',
-  pluginCreator___pluginOptions___typeName = 'pluginCreator___pluginOptions___typeName',
-  pluginCreator___pluginOptions___url = 'pluginCreator___pluginOptions___url',
+  pluginCreator___pluginOptions = 'pluginCreator___pluginOptions',
   pluginCreator___resolve = 'pluginCreator___resolve',
   pluginCreator___ssrAPIs = 'pluginCreator___ssrAPIs',
   pluginCreator___version = 'pluginCreator___version',
@@ -10344,12 +10807,11 @@ export type SitePageFilterInput = {
   id?: Maybe<StringQueryOperatorInput>
   internal?: Maybe<InternalFilterInput>
   internalComponentName?: Maybe<StringQueryOperatorInput>
-  isCreatedByStatefulCreatePages?: Maybe<BooleanQueryOperatorInput>
   matchPath?: Maybe<StringQueryOperatorInput>
+  pageContext?: Maybe<JsonQueryOperatorInput>
   parent?: Maybe<NodeFilterInput>
   path?: Maybe<StringQueryOperatorInput>
   pluginCreator?: Maybe<SitePluginFilterInput>
-  pluginCreatorId?: Maybe<StringQueryOperatorInput>
 }
 
 export type SitePageGroupConnection = {
@@ -10402,10 +10864,10 @@ export type SitePlugin = Node & {
   internal: Internal
   name?: Maybe<Scalars['String']>
   nodeAPIs?: Maybe<Array<Maybe<Scalars['String']>>>
-  packageJson?: Maybe<SitePluginPackageJson>
+  packageJson?: Maybe<Scalars['JSON']>
   parent?: Maybe<Node>
   pluginFilepath?: Maybe<Scalars['String']>
-  pluginOptions?: Maybe<SitePluginPluginOptions>
+  pluginOptions?: Maybe<Scalars['JSON']>
   resolve?: Maybe<Scalars['String']>
   ssrAPIs?: Maybe<Array<Maybe<Scalars['String']>>>
   version?: Maybe<Scalars['String']>
@@ -10463,6 +10925,7 @@ export enum SitePluginFieldsEnum {
   children___children___id = 'children___children___id',
   children___children___internal___content = 'children___children___internal___content',
   children___children___internal___contentDigest = 'children___children___internal___contentDigest',
+  children___children___internal___contentFilePath = 'children___children___internal___contentFilePath',
   children___children___internal___description = 'children___children___internal___description',
   children___children___internal___fieldOwners = 'children___children___internal___fieldOwners',
   children___children___internal___ignoreType = 'children___children___internal___ignoreType',
@@ -10474,6 +10937,7 @@ export enum SitePluginFieldsEnum {
   children___id = 'children___id',
   children___internal___content = 'children___internal___content',
   children___internal___contentDigest = 'children___internal___contentDigest',
+  children___internal___contentFilePath = 'children___internal___contentFilePath',
   children___internal___description = 'children___internal___description',
   children___internal___fieldOwners = 'children___internal___fieldOwners',
   children___internal___ignoreType = 'children___internal___ignoreType',
@@ -10486,6 +10950,7 @@ export enum SitePluginFieldsEnum {
   children___parent___id = 'children___parent___id',
   children___parent___internal___content = 'children___parent___internal___content',
   children___parent___internal___contentDigest = 'children___parent___internal___contentDigest',
+  children___parent___internal___contentFilePath = 'children___parent___internal___contentFilePath',
   children___parent___internal___description = 'children___parent___internal___description',
   children___parent___internal___fieldOwners = 'children___parent___internal___fieldOwners',
   children___parent___internal___ignoreType = 'children___parent___internal___ignoreType',
@@ -10497,6 +10962,7 @@ export enum SitePluginFieldsEnum {
   id = 'id',
   internal___content = 'internal___content',
   internal___contentDigest = 'internal___contentDigest',
+  internal___contentFilePath = 'internal___contentFilePath',
   internal___description = 'internal___description',
   internal___fieldOwners = 'internal___fieldOwners',
   internal___ignoreType = 'internal___ignoreType',
@@ -10505,22 +10971,7 @@ export enum SitePluginFieldsEnum {
   internal___type = 'internal___type',
   name = 'name',
   nodeAPIs = 'nodeAPIs',
-  packageJson___author = 'packageJson___author',
-  packageJson___dependencies = 'packageJson___dependencies',
-  packageJson___dependencies___name = 'packageJson___dependencies___name',
-  packageJson___dependencies___version = 'packageJson___dependencies___version',
-  packageJson___description = 'packageJson___description',
-  packageJson___devDependencies = 'packageJson___devDependencies',
-  packageJson___devDependencies___name = 'packageJson___devDependencies___name',
-  packageJson___devDependencies___version = 'packageJson___devDependencies___version',
-  packageJson___keywords = 'packageJson___keywords',
-  packageJson___license = 'packageJson___license',
-  packageJson___main = 'packageJson___main',
-  packageJson___name = 'packageJson___name',
-  packageJson___peerDependencies = 'packageJson___peerDependencies',
-  packageJson___peerDependencies___name = 'packageJson___peerDependencies___name',
-  packageJson___peerDependencies___version = 'packageJson___peerDependencies___version',
-  packageJson___version = 'packageJson___version',
+  packageJson = 'packageJson',
   parent___children = 'parent___children',
   parent___children___children = 'parent___children___children',
   parent___children___children___children = 'parent___children___children___children',
@@ -10528,6 +10979,7 @@ export enum SitePluginFieldsEnum {
   parent___children___id = 'parent___children___id',
   parent___children___internal___content = 'parent___children___internal___content',
   parent___children___internal___contentDigest = 'parent___children___internal___contentDigest',
+  parent___children___internal___contentFilePath = 'parent___children___internal___contentFilePath',
   parent___children___internal___description = 'parent___children___internal___description',
   parent___children___internal___fieldOwners = 'parent___children___internal___fieldOwners',
   parent___children___internal___ignoreType = 'parent___children___internal___ignoreType',
@@ -10539,6 +10991,7 @@ export enum SitePluginFieldsEnum {
   parent___id = 'parent___id',
   parent___internal___content = 'parent___internal___content',
   parent___internal___contentDigest = 'parent___internal___contentDigest',
+  parent___internal___contentFilePath = 'parent___internal___contentFilePath',
   parent___internal___description = 'parent___internal___description',
   parent___internal___fieldOwners = 'parent___internal___fieldOwners',
   parent___internal___ignoreType = 'parent___internal___ignoreType',
@@ -10551,6 +11004,7 @@ export enum SitePluginFieldsEnum {
   parent___parent___id = 'parent___parent___id',
   parent___parent___internal___content = 'parent___parent___internal___content',
   parent___parent___internal___contentDigest = 'parent___parent___internal___contentDigest',
+  parent___parent___internal___contentFilePath = 'parent___parent___internal___contentFilePath',
   parent___parent___internal___description = 'parent___parent___internal___description',
   parent___parent___internal___fieldOwners = 'parent___parent___internal___fieldOwners',
   parent___parent___internal___ignoreType = 'parent___parent___internal___ignoreType',
@@ -10560,46 +11014,7 @@ export enum SitePluginFieldsEnum {
   parent___parent___parent___children = 'parent___parent___parent___children',
   parent___parent___parent___id = 'parent___parent___parent___id',
   pluginFilepath = 'pluginFilepath',
-  pluginOptions___allExtensions = 'pluginOptions___allExtensions',
-  pluginOptions___anonymize = 'pluginOptions___anonymize',
-  pluginOptions___autoLabel = 'pluginOptions___autoLabel',
-  pluginOptions___base64Width = 'pluginOptions___base64Width',
-  pluginOptions___cacheDigest = 'pluginOptions___cacheDigest',
-  pluginOptions___cache_busting_mode = 'pluginOptions___cache_busting_mode',
-  pluginOptions___createLinkInHead = 'pluginOptions___createLinkInHead',
-  pluginOptions___crossOrigin = 'pluginOptions___crossOrigin',
-  pluginOptions___cssPropOptimization = 'pluginOptions___cssPropOptimization',
-  pluginOptions___defaultQuality = 'pluginOptions___defaultQuality',
-  pluginOptions___display = 'pluginOptions___display',
-  pluginOptions___enableWebVitalsTracking = 'pluginOptions___enableWebVitalsTracking',
-  pluginOptions___entryLimit = 'pluginOptions___entryLimit',
-  pluginOptions___extensions = 'pluginOptions___extensions',
-  pluginOptions___failOnError = 'pluginOptions___failOnError',
-  pluginOptions___fieldName = 'pluginOptions___fieldName',
-  pluginOptions___fonts = 'pluginOptions___fonts',
-  pluginOptions___head = 'pluginOptions___head',
-  pluginOptions___icon = 'pluginOptions___icon',
-  pluginOptions___include_favicon = 'pluginOptions___include_favicon',
-  pluginOptions___isTSX = 'pluginOptions___isTSX',
-  pluginOptions___jsxPragma = 'pluginOptions___jsxPragma',
-  pluginOptions___labelFormat = 'pluginOptions___labelFormat',
-  pluginOptions___legacy = 'pluginOptions___legacy',
-  pluginOptions___lessBabel = 'pluginOptions___lessBabel',
-  pluginOptions___mediaTypes = 'pluginOptions___mediaTypes',
-  pluginOptions___name = 'pluginOptions___name',
-  pluginOptions___output = 'pluginOptions___output',
-  pluginOptions___pageTransitionDelay = 'pluginOptions___pageTransitionDelay',
-  pluginOptions___path = 'pluginOptions___path',
-  pluginOptions___pathCheck = 'pluginOptions___pathCheck',
-  pluginOptions___query = 'pluginOptions___query',
-  pluginOptions___respectDNT = 'pluginOptions___respectDNT',
-  pluginOptions___root = 'pluginOptions___root',
-  pluginOptions___sourceMap = 'pluginOptions___sourceMap',
-  pluginOptions___stripMetadata = 'pluginOptions___stripMetadata',
-  pluginOptions___theme_color_in_head = 'pluginOptions___theme_color_in_head',
-  pluginOptions___trackingId = 'pluginOptions___trackingId',
-  pluginOptions___typeName = 'pluginOptions___typeName',
-  pluginOptions___url = 'pluginOptions___url',
+  pluginOptions = 'pluginOptions',
   resolve = 'resolve',
   ssrAPIs = 'ssrAPIs',
   version = 'version',
@@ -10612,10 +11027,10 @@ export type SitePluginFilterInput = {
   internal?: Maybe<InternalFilterInput>
   name?: Maybe<StringQueryOperatorInput>
   nodeAPIs?: Maybe<StringQueryOperatorInput>
-  packageJson?: Maybe<SitePluginPackageJsonFilterInput>
+  packageJson?: Maybe<JsonQueryOperatorInput>
   parent?: Maybe<NodeFilterInput>
   pluginFilepath?: Maybe<StringQueryOperatorInput>
-  pluginOptions?: Maybe<SitePluginPluginOptionsFilterInput>
+  pluginOptions?: Maybe<JsonQueryOperatorInput>
   resolve?: Maybe<StringQueryOperatorInput>
   ssrAPIs?: Maybe<StringQueryOperatorInput>
   version?: Maybe<StringQueryOperatorInput>
@@ -10656,165 +11071,6 @@ export type SitePluginGroupConnectionMinArgs = {
 
 export type SitePluginGroupConnectionSumArgs = {
   field: SitePluginFieldsEnum
-}
-
-export type SitePluginPackageJson = {
-  __typename?: 'SitePluginPackageJson'
-  author?: Maybe<Scalars['String']>
-  dependencies?: Maybe<Array<Maybe<SitePluginPackageJsonDependencies>>>
-  description?: Maybe<Scalars['String']>
-  devDependencies?: Maybe<Array<Maybe<SitePluginPackageJsonDevDependencies>>>
-  keywords?: Maybe<Array<Maybe<Scalars['String']>>>
-  license?: Maybe<Scalars['String']>
-  main?: Maybe<Scalars['String']>
-  name?: Maybe<Scalars['String']>
-  peerDependencies?: Maybe<Array<Maybe<SitePluginPackageJsonPeerDependencies>>>
-  version?: Maybe<Scalars['String']>
-}
-
-export type SitePluginPackageJsonDependencies = {
-  __typename?: 'SitePluginPackageJsonDependencies'
-  name?: Maybe<Scalars['String']>
-  version?: Maybe<Scalars['String']>
-}
-
-export type SitePluginPackageJsonDependenciesFilterInput = {
-  name?: Maybe<StringQueryOperatorInput>
-  version?: Maybe<StringQueryOperatorInput>
-}
-
-export type SitePluginPackageJsonDependenciesFilterListInput = {
-  elemMatch?: Maybe<SitePluginPackageJsonDependenciesFilterInput>
-}
-
-export type SitePluginPackageJsonDevDependencies = {
-  __typename?: 'SitePluginPackageJsonDevDependencies'
-  name?: Maybe<Scalars['String']>
-  version?: Maybe<Scalars['String']>
-}
-
-export type SitePluginPackageJsonDevDependenciesFilterInput = {
-  name?: Maybe<StringQueryOperatorInput>
-  version?: Maybe<StringQueryOperatorInput>
-}
-
-export type SitePluginPackageJsonDevDependenciesFilterListInput = {
-  elemMatch?: Maybe<SitePluginPackageJsonDevDependenciesFilterInput>
-}
-
-export type SitePluginPackageJsonFilterInput = {
-  author?: Maybe<StringQueryOperatorInput>
-  dependencies?: Maybe<SitePluginPackageJsonDependenciesFilterListInput>
-  description?: Maybe<StringQueryOperatorInput>
-  devDependencies?: Maybe<SitePluginPackageJsonDevDependenciesFilterListInput>
-  keywords?: Maybe<StringQueryOperatorInput>
-  license?: Maybe<StringQueryOperatorInput>
-  main?: Maybe<StringQueryOperatorInput>
-  name?: Maybe<StringQueryOperatorInput>
-  peerDependencies?: Maybe<SitePluginPackageJsonPeerDependenciesFilterListInput>
-  version?: Maybe<StringQueryOperatorInput>
-}
-
-export type SitePluginPackageJsonPeerDependencies = {
-  __typename?: 'SitePluginPackageJsonPeerDependencies'
-  name?: Maybe<Scalars['String']>
-  version?: Maybe<Scalars['String']>
-}
-
-export type SitePluginPackageJsonPeerDependenciesFilterInput = {
-  name?: Maybe<StringQueryOperatorInput>
-  version?: Maybe<StringQueryOperatorInput>
-}
-
-export type SitePluginPackageJsonPeerDependenciesFilterListInput = {
-  elemMatch?: Maybe<SitePluginPackageJsonPeerDependenciesFilterInput>
-}
-
-export type SitePluginPluginOptions = {
-  __typename?: 'SitePluginPluginOptions'
-  allExtensions?: Maybe<Scalars['Boolean']>
-  anonymize?: Maybe<Scalars['Boolean']>
-  autoLabel?: Maybe<Scalars['String']>
-  base64Width?: Maybe<Scalars['Int']>
-  cacheDigest?: Maybe<Scalars['String']>
-  cache_busting_mode?: Maybe<Scalars['String']>
-  createLinkInHead?: Maybe<Scalars['Boolean']>
-  crossOrigin?: Maybe<Scalars['String']>
-  cssPropOptimization?: Maybe<Scalars['Boolean']>
-  defaultQuality?: Maybe<Scalars['Int']>
-  display?: Maybe<Scalars['String']>
-  enableWebVitalsTracking?: Maybe<Scalars['Boolean']>
-  entryLimit?: Maybe<Scalars['Int']>
-  extensions?: Maybe<Array<Maybe<Scalars['String']>>>
-  failOnError?: Maybe<Scalars['Boolean']>
-  fieldName?: Maybe<Scalars['String']>
-  fonts?: Maybe<Array<Maybe<Scalars['String']>>>
-  head?: Maybe<Scalars['Boolean']>
-  icon?: Maybe<Scalars['String']>
-  include_favicon?: Maybe<Scalars['Boolean']>
-  isTSX?: Maybe<Scalars['Boolean']>
-  jsxPragma?: Maybe<Scalars['String']>
-  labelFormat?: Maybe<Scalars['String']>
-  legacy?: Maybe<Scalars['Boolean']>
-  lessBabel?: Maybe<Scalars['Boolean']>
-  mediaTypes?: Maybe<Array<Maybe<Scalars['String']>>>
-  name?: Maybe<Scalars['String']>
-  output?: Maybe<Scalars['String']>
-  pageTransitionDelay?: Maybe<Scalars['Int']>
-  path?: Maybe<Scalars['String']>
-  pathCheck?: Maybe<Scalars['Boolean']>
-  query?: Maybe<Scalars['String']>
-  respectDNT?: Maybe<Scalars['Boolean']>
-  root?: Maybe<Scalars['String']>
-  sourceMap?: Maybe<Scalars['Boolean']>
-  stripMetadata?: Maybe<Scalars['Boolean']>
-  theme_color_in_head?: Maybe<Scalars['Boolean']>
-  trackingId?: Maybe<Scalars['String']>
-  typeName?: Maybe<Scalars['String']>
-  url?: Maybe<Scalars['String']>
-}
-
-export type SitePluginPluginOptionsFilterInput = {
-  allExtensions?: Maybe<BooleanQueryOperatorInput>
-  anonymize?: Maybe<BooleanQueryOperatorInput>
-  autoLabel?: Maybe<StringQueryOperatorInput>
-  base64Width?: Maybe<IntQueryOperatorInput>
-  cacheDigest?: Maybe<StringQueryOperatorInput>
-  cache_busting_mode?: Maybe<StringQueryOperatorInput>
-  createLinkInHead?: Maybe<BooleanQueryOperatorInput>
-  crossOrigin?: Maybe<StringQueryOperatorInput>
-  cssPropOptimization?: Maybe<BooleanQueryOperatorInput>
-  defaultQuality?: Maybe<IntQueryOperatorInput>
-  display?: Maybe<StringQueryOperatorInput>
-  enableWebVitalsTracking?: Maybe<BooleanQueryOperatorInput>
-  entryLimit?: Maybe<IntQueryOperatorInput>
-  extensions?: Maybe<StringQueryOperatorInput>
-  failOnError?: Maybe<BooleanQueryOperatorInput>
-  fieldName?: Maybe<StringQueryOperatorInput>
-  fonts?: Maybe<StringQueryOperatorInput>
-  head?: Maybe<BooleanQueryOperatorInput>
-  icon?: Maybe<StringQueryOperatorInput>
-  include_favicon?: Maybe<BooleanQueryOperatorInput>
-  isTSX?: Maybe<BooleanQueryOperatorInput>
-  jsxPragma?: Maybe<StringQueryOperatorInput>
-  labelFormat?: Maybe<StringQueryOperatorInput>
-  legacy?: Maybe<BooleanQueryOperatorInput>
-  lessBabel?: Maybe<BooleanQueryOperatorInput>
-  mediaTypes?: Maybe<StringQueryOperatorInput>
-  name?: Maybe<StringQueryOperatorInput>
-  output?: Maybe<StringQueryOperatorInput>
-  pageTransitionDelay?: Maybe<IntQueryOperatorInput>
-  path?: Maybe<StringQueryOperatorInput>
-  pathCheck?: Maybe<BooleanQueryOperatorInput>
-  query?: Maybe<StringQueryOperatorInput>
-  respectDNT?: Maybe<BooleanQueryOperatorInput>
-  root?: Maybe<StringQueryOperatorInput>
-  sourceMap?: Maybe<BooleanQueryOperatorInput>
-  stripMetadata?: Maybe<BooleanQueryOperatorInput>
-  theme_color_in_head?: Maybe<BooleanQueryOperatorInput>
-  trackingId?: Maybe<StringQueryOperatorInput>
-  typeName?: Maybe<StringQueryOperatorInput>
-  url?: Maybe<StringQueryOperatorInput>
 }
 
 export type SitePluginSortInput = {
@@ -11063,6 +11319,21 @@ export type MediaQuery = {
       title: string
       link: string
       date: any
+      opengraph: {
+        __typename?: 'Opengraph'
+        description?: string | null | undefined
+        image?: string | null | undefined
+        ogImage?: string | null | undefined
+        ogDescription?: string | null | undefined
+        ogTitle?: string | null | undefined
+        ogType?: string | null | undefined
+        ogUrl?: string | null | undefined
+        twitterCard?: string | null | undefined
+        twitterDescription?: string | null | undefined
+        twitterImageSrc?: string | null | undefined
+        twitterTitle?: string | null | undefined
+        url?: string | null | undefined
+      }
     }>
     conferences: Array<{
       __typename: 'GraphCMS_Conference'

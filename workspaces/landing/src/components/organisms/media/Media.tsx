@@ -227,7 +227,7 @@ const Media = () => {
       >
         Activity
       </Typography.Title>
-      <Timeline hideLine={!visitedLinks.has('media')}>
+      <Timeline hideLine={!visitedLinks.has('activity')}>
         {mediaItems.map(renderItem)}
       </Timeline>
     </ScrollToArea>

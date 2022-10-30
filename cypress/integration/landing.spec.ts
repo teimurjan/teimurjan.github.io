@@ -11,8 +11,8 @@ describe('Landing Page', () => {
   })
 
   it('scrolls to an anchor section', () => {
-    cy.visit('/#media')
+    cy.visit('/#activity')
 
-    cy.get('#media ~ h2').should('be.visible')
+    cy.get('#activity ~ h2').should('be.visible')
   })
 })

@@ -2,7 +2,7 @@ import { createContext, ReactNode, useContext, useMemo } from 'react'
 import { useElementVisibility } from '../hooks'
 
 interface ContextValue {
-  activeLink?: 'experience' | 'skills' | 'education' | 'media'
+  activeLink?: 'experience' | 'skills' | 'education' | 'activity'
   visitedLinks: Set<string>
 }
 
@@ -21,8 +21,8 @@ const AppContextProvider = ({ children }: ProviderProps) => {
     useElementVisibility('skills')
   const { visible: educationVisible, appearedOnce: educationVisited } =
     useElementVisibility('education')
-  const { visible: mediaVisible, appearedOnce: mediaVisited } =
-    useElementVisibility('media')
+  const { visible: activityVisible, appearedOnce: activityVisited } =
+    useElementVisibility('activity')
 
   const visitedLinks = useMemo(
     () =>
@@ -31,20 +31,20 @@ const AppContextProvider = ({ children }: ProviderProps) => {
           experienceVisited && 'experience',
           skillsVisited && 'skills',
           educationVisited && 'education',
-          mediaVisited && 'media',
+          activityVisited && 'activity',
         ].filter(Boolean) as string[]
       ),
-    [experienceVisited, skillsVisited, educationVisited, mediaVisited]
+    [experienceVisited, skillsVisited, educationVisited, activityVisited]
   )
 
   const activeLink = useMemo(() => {
     if (experienceVisible) return 'experience'
     if (skillsVisible) return 'skills'
     if (educationVisible) return 'education'
-    if (mediaVisible) return 'media'
+    if (activityVisible) return 'activity'
 
     return undefined
-  }, [experienceVisible, skillsVisible, educationVisible, mediaVisible])
+  }, [experienceVisible, skillsVisible, educationVisible, activityVisible])
 
   return (
     <AppContext.Provider value={{ activeLink, visitedLinks }}>

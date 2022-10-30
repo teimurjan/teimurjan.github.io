@@ -3,14 +3,16 @@ import { css } from '@emotion/react'
 import Flex from '@react-css/flex'
 import { theme } from '@teimurjan/utils'
 import TimelineItem from './TimelineItem'
+import { EmotionProps } from '../../../utils'
 
-export interface Props {
+export interface Props extends EmotionProps {
   children: ReactNode
   hideLine?: boolean
 }
 
-const Timeline = ({ children, hideLine = false }: Props) => (
+const Timeline = ({ className, children, hideLine = false }: Props) => (
   <Flex
+    className={className}
     css={css`
       position: relative;
     `}
@@ -22,6 +24,7 @@ const Timeline = ({ children, hideLine = false }: Props) => (
           margin-bottom: ${index === React.Children.count(children) - 1
             ? 0
             : theme.spacing.xlarge};
+          flex: 1;
 
           z-index: 1;
         `}

@@ -26,7 +26,9 @@ const GridSection = ({ children, color }: Props) => {
               css={
                 index > 0 &&
                 css`
-                  padding-left: ${theme.spacing.large};
+                  @media ${theme.screens.small.mediaFrom} {
+                    padding-left: ${theme.spacing.large};
+                  }
                 `
               }
               key={child?.toString()}

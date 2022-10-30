@@ -119,36 +119,45 @@ const createSchemaCustomization = ({
 }
 
 const createResolvers = ({ createResolvers }: CreateResolversArgs) => {
+  const getOpengraphResolver = <T>(
+    getLink: (data: T) => string | undefined
+  ) => ({
+    type: 'Opengraph!',
+    resolve: async (data: T) => {
+      const link = getLink(data)
+      if (!link) {
+        return {}
+      }
+
+      const opengraphData = await fetch(link)
+      const formatKey = (key: string) => {
+        let newKey = ''
+        let shouldUppercaseNext = false
+        for (const char of key) {
+          if (char !== ':') {
+            if (shouldUppercaseNext) {
+              newKey += char.toUpperCase()
+              shouldUppercaseNext = false
+            } else {
+              newKey += char
+            }
+          } else {
+            shouldUppercaseNext = true
+          }
+        }
+
+        return newKey
+      }
+
+      return Object.entries(opengraphData).reduce((acc, [key, value]) => {
+        return { ...acc, [formatKey(key)]: value ?? '' }
+      }, {})
+    },
+  })
+
   const resolvers = {
     GraphCMS_Publication: {
-      opengraph: {
-        type: 'Opengraph!',
-        resolve: async ({ link }: { link: string }) => {
-          const data = await fetch(link)
-          const formatKey = (key: string) => {
-            let newKey = ''
-            let shouldUppercaseNext = false
-            for (const char of key) {
-              if (char !== ':') {
-                if (shouldUppercaseNext) {
-                  newKey += char.toUpperCase()
-                  shouldUppercaseNext = false
-                } else {
-                  newKey += char
-                }
-              } else {
-                shouldUppercaseNext = true
-              }
-            }
-
-            return newKey
-          }
-
-          return Object.entries(data).reduce((acc, [key, value]) => {
-            return { ...acc, [formatKey(key)]: value ?? '' }
-          }, {})
-        },
-      },
+      opengraph: getOpengraphResolver<{ link: string }>(({ link }) => link),
     },
   }
   createResolvers(resolvers)

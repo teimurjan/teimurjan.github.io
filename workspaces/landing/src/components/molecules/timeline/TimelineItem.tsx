@@ -3,15 +3,16 @@ import Flex from '@react-css/flex'
 import { ReactNode } from 'react'
 import { theme } from '@teimurjan/utils'
 import { Typography } from '../../atoms'
+import { EmotionProps } from '../../../utils'
 
-export interface Props {
+export interface Props extends EmotionProps {
   icon: ReactNode
   date: string
   children: ReactNode
 }
 
-const TimelineItem = ({ icon, date, children }: Props) => (
-  <Flex>
+const TimelineItem = ({ className, icon, date, children }: Props) => (
+  <Flex className={className}>
     <Typography.Title
       variant="h5"
       css={css`
@@ -23,6 +24,7 @@ const TimelineItem = ({ icon, date, children }: Props) => (
     </Typography.Title>
     <Flex
       css={css`
+        flex: 1;
         @media ${theme.screens.small.mediaUpTo} {
           padding-left: ${theme.spacing.small};
           flex-direction: column;
@@ -42,7 +44,7 @@ const TimelineItem = ({ icon, date, children }: Props) => (
       >
         {date}
       </Typography.Title>
-      <Flex.Item>{children}</Flex.Item>
+      <Flex.Item flex={1}>{children}</Flex.Item>
     </Flex>
   </Flex>
 )

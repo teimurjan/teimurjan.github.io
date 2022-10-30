@@ -1,11 +1,12 @@
 import { css } from '@emotion/react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { prettyDate, sortByDate, theme } from '@teimurjan/utils'
-import { MediaQuery } from '@teimurjan/gql-types'
+import { GraphCms_VideoEmbed, MediaQuery } from '@teimurjan/gql-types'
 import { Link, ScrollToArea, Typography } from '../../atoms'
 import { useAppContext } from '../../../context'
 import { MediaCard, Timeline } from '../../molecules'
 import Flex from '@react-css/flex'
+import { Fragment, ReactNode } from 'react'
 
 const query = graphql`
   query Media {
@@ -38,6 +39,9 @@ const query = graphql`
         topic
         link
         date
+        image {
+          url
+        }
         videoEmbed {
           link
           iframeOptions
@@ -70,53 +74,107 @@ const Media = () => {
     ...interviews,
   ])
 
+  const renderLink = (link: string) => (
+    <Link
+      css={css`
+        margin-top: ${theme.spacing.small};
+      `}
+      to={link}
+      underline="always"
+    >
+      Check it out 🔗
+    </Link>
+  )
+
+  const renderMinified = (text: string, link: ReactNode) => (
+    <Typography.Title variant="h5">
+      {text}
+      <br />
+      {link}
+    </Typography.Title>
+  )
+
+  const renderVideoEmbed = (
+    title: string,
+    videoEmbed:
+      | Pick<GraphCms_VideoEmbed, 'link' | 'iframeOptions'>
+      | undefined
+      | null
+  ) =>
+    videoEmbed ? (
+      <iframe
+        title={title}
+        css={css`
+          display: block;
+          width: 100%;
+        `}
+        src={videoEmbed.link}
+        {...videoEmbed.iframeOptions}
+      />
+    ) : undefined
+
+  const renderImage = (src: string, title: string) => (
+    <img
+      css={css`
+        width: 100%;
+        display: block;
+      `}
+      src={src}
+      alt={title}
+    />
+  )
+
   const renderItem = (item: typeof mediaItems[0]) => {
-    if (item.__typename === 'GraphCMS_Conference') {
+    if (item.__typename === 'GraphCMS_Interview') {
+      const link = item.videoEmbed && renderLink(item.videoEmbed.link)
+      const media = renderVideoEmbed(item.title, item.videoEmbed)
+
       return (
-        <Timeline.Item key={item.id} icon="🎙" date={prettyDate(item.date)}>
-          <Typography.Title variant="h5">
-            {item.title}
-            <br />
-            <Link to={item.link} underline="always">
-              {item.topic} at {item.title}
-            </Link>
-          </Typography.Title>
-          {item.videoEmbed && (
-            <iframe
-              title={item.title}
-              css={css`
-                display: block;
-                margin-top: ${theme.spacing.small};
-              `}
-              src={item.videoEmbed?.link}
-              {...item.videoEmbed?.iframeOptions}
-            />
+        <Timeline.Item
+          css={css`
+            flex: 1;
+          `}
+          key={item.id}
+          icon="📺"
+          date={prettyDate(item.date)}
+        >
+          {media ? (
+            <MediaCard title={item.title} media={media} subtitle={link} />
+          ) : (
+            renderMinified(item.title, link)
           )}
         </Timeline.Item>
       )
     }
 
-    if (item.__typename === 'GraphCMS_Interview') {
+    if (item.__typename === 'GraphCMS_Conference') {
+      const link = renderLink(item.link ?? item.videoEmbed?.link)
+      const videoMedia = renderVideoEmbed(item.title, item.videoEmbed)
+      const imageMedia = item.image && renderImage(item.image.url, item.title)
+      const media = imageMedia || videoMedia
+
       return (
-        <Timeline.Item key={item.id} icon="📺" date={prettyDate(item.date)}>
-          <Typography.Title
-            variant="h5"
-            css={css`
-              margin-bottom: auto;
-            `}
-          >
-            TV: {item.title}
-          </Typography.Title>
-          {item.videoEmbed && (
-            <iframe
-              title={item.title}
-              css={css`
-                display: block;
-                margin-top: ${theme.spacing.small};
-              `}
-              src={item.videoEmbed?.link}
-              {...item.videoEmbed?.iframeOptions}
+        <Timeline.Item
+          css={css`
+            flex: 1;
+          `}
+          key={item.id}
+          icon="🎙"
+          date={prettyDate(item.date)}
+        >
+          {media ? (
+            <MediaCard
+              title={item.topic}
+              media={media}
+              subtitle={
+                <Fragment>
+                  Public speech at <b>{item.title}</b>.<br />
+                  {link}
+                </Fragment>
+              }
             />
+          ) : (
+            renderMinified(item.title, link)
           )}
         </Timeline.Item>
       )
@@ -133,6 +191,9 @@ const Media = () => {
         item.opengraph.ogImage ??
         item.opengraph.twitterImageSrc ??
         item.opengraph.image
+
+      const link = renderLink(item.link)
+
       return (
         <Timeline.Item key={item.id} icon="✏️" date={prettyDate(item.date)}>
           {title && subtitle && image ? (
@@ -141,28 +202,13 @@ const Media = () => {
               subtitle={
                 <Flex flexDirection="column">
                   {subtitle}
-                  <Link
-                    css={css`
-                      margin-top: ${theme.spacing.small};
-                    `}
-                    to={item.link}
-                    underline="always"
-                  >
-                    Check it out 🔗
-                  </Link>
+                  {link}
                 </Flex>
               }
-              imageSrc={image}
+              media={renderImage(image, title)}
             />
           ) : (
-            <Typography.Title variant="h5">
-              {title}
-              <br />
-              <Link to={item.link} underline="always">
-                Check it out 🔗
-              </Link>
-              <br />
-            </Typography.Title>
+            renderMinified(title, link)
           )}
         </Timeline.Item>
       )
@@ -172,14 +218,14 @@ const Media = () => {
   }
 
   return (
-    <ScrollToArea id="media" scrollOffset={-120}>
+    <ScrollToArea id="activity" scrollOffset={-120}>
       <Typography.Title
         css={css`
           margin-bottom: ${theme.spacing.medium};
         `}
         variant="h2"
       >
-        Media
+        Activity
       </Typography.Title>
       <Timeline hideLine={!visitedLinks.has('media')}>
         {mediaItems.map(renderItem)}

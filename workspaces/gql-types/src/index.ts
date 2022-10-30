@@ -1477,6 +1477,7 @@ export type GraphCms_Asset = GraphCms_Node & {
   history: Array<GraphCms_Version>
   /** The unique identifier */
   id: Scalars['ID']
+  imageConference: Array<GraphCms_Conference>
   /** System Locale field */
   locale: GraphCms_Locale
   /** Get the other localizations for this document */
@@ -1526,6 +1527,18 @@ export type GraphCms_AssetHistoryArgs = {
   limit?: Scalars['Int']
   skip?: Scalars['Int']
   stageOverride?: Maybe<GraphCms_Stage>
+}
+
+/** Asset system model */
+export type GraphCms_AssetImageConferenceArgs = {
+  after?: Maybe<Scalars['String']>
+  before?: Maybe<Scalars['String']>
+  first?: Maybe<Scalars['Int']>
+  last?: Maybe<Scalars['Int']>
+  locales?: Maybe<Array<GraphCms_Locale>>
+  orderBy?: Maybe<GraphCms_ConferenceOrderByInput>
+  skip?: Maybe<Scalars['Int']>
+  where?: Maybe<GraphCms_ConferenceWhereInput>
 }
 
 /** Asset system model */
@@ -1616,6 +1629,7 @@ export type GraphCms_AssetCreateInput = {
   fileName: Scalars['String']
   handle: Scalars['String']
   height?: Maybe<Scalars['Float']>
+  imageConference?: Maybe<GraphCms_ConferenceCreateManyInlineInput>
   /** Inline mutations for managing document localizations excluding the default locale */
   localizations?: Maybe<GraphCms_AssetCreateLocalizationsInput>
   logoExperience?: Maybe<GraphCms_ExperienceCreateManyInlineInput>
@@ -1719,6 +1733,9 @@ export type GraphCms_AssetManyWhereInput = {
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
   id_starts_with?: Maybe<Scalars['ID']>
+  imageConference_every?: Maybe<GraphCms_ConferenceWhereInput>
+  imageConference_none?: Maybe<GraphCms_ConferenceWhereInput>
+  imageConference_some?: Maybe<GraphCms_ConferenceWhereInput>
   logoExperience_every?: Maybe<GraphCms_ExperienceWhereInput>
   logoExperience_none?: Maybe<GraphCms_ExperienceWhereInput>
   logoExperience_some?: Maybe<GraphCms_ExperienceWhereInput>
@@ -1797,6 +1814,7 @@ export type GraphCms_AssetUpdateInput = {
   fileName?: Maybe<Scalars['String']>
   handle?: Maybe<Scalars['String']>
   height?: Maybe<Scalars['Float']>
+  imageConference?: Maybe<GraphCms_ConferenceUpdateManyInlineInput>
   /** Manage document localizations */
   localizations?: Maybe<GraphCms_AssetUpdateLocalizationsInput>
   logoExperience?: Maybe<GraphCms_ExperienceUpdateManyInlineInput>
@@ -2031,6 +2049,9 @@ export type GraphCms_AssetWhereInput = {
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
   id_starts_with?: Maybe<Scalars['ID']>
+  imageConference_every?: Maybe<GraphCms_ConferenceWhereInput>
+  imageConference_none?: Maybe<GraphCms_ConferenceWhereInput>
+  imageConference_some?: Maybe<GraphCms_ConferenceWhereInput>
   logoExperience_every?: Maybe<GraphCms_ExperienceWhereInput>
   logoExperience_none?: Maybe<GraphCms_ExperienceWhereInput>
   logoExperience_some?: Maybe<GraphCms_ExperienceWhereInput>
@@ -2815,6 +2836,7 @@ export type GraphCms_Conference = GraphCms_Node & {
   history: Array<GraphCms_Version>
   /** The unique identifier */
   id: Scalars['ID']
+  image?: Maybe<GraphCms_Asset>
   link: Scalars['String']
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
@@ -2846,6 +2868,10 @@ export type GraphCms_ConferenceHistoryArgs = {
   limit?: Scalars['Int']
   skip?: Scalars['Int']
   stageOverride?: Maybe<GraphCms_Stage>
+}
+
+export type GraphCms_ConferenceImageArgs = {
+  locales?: Maybe<Array<GraphCms_Locale>>
 }
 
 export type GraphCms_ConferencePublishedByArgs = {
@@ -2890,6 +2916,7 @@ export type GraphCms_ConferenceConnection = {
 export type GraphCms_ConferenceCreateInput = {
   createdAt?: Maybe<Scalars['GraphCMS_DateTime']>
   date: Scalars['GraphCMS_Date']
+  image?: Maybe<GraphCms_AssetCreateOneInlineInput>
   link: Scalars['String']
   title: Scalars['String']
   topic: Scalars['String']
@@ -2983,6 +3010,7 @@ export type GraphCms_ConferenceManyWhereInput = {
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
   id_starts_with?: Maybe<Scalars['ID']>
+  image?: Maybe<GraphCms_AssetWhereInput>
   link?: Maybe<Scalars['String']>
   /** All values containing the given string. */
   link_contains?: Maybe<Scalars['String']>
@@ -3099,6 +3127,7 @@ export enum GraphCms_ConferenceOrderByInput {
 
 export type GraphCms_ConferenceUpdateInput = {
   date?: Maybe<Scalars['GraphCMS_Date']>
+  image?: Maybe<GraphCms_AssetUpdateOneInlineInput>
   link?: Maybe<Scalars['String']>
   title?: Maybe<Scalars['String']>
   topic?: Maybe<Scalars['String']>
@@ -3241,6 +3270,7 @@ export type GraphCms_ConferenceWhereInput = {
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
   id_starts_with?: Maybe<Scalars['ID']>
+  image?: Maybe<GraphCms_AssetWhereInput>
   link?: Maybe<Scalars['String']>
   /** All values containing the given string. */
   link_contains?: Maybe<Scalars['String']>
@@ -11342,6 +11372,7 @@ export type MediaQuery = {
       topic: string
       link: string
       date: any
+      image?: { __typename?: 'GraphCMS_Asset'; url: string } | null | undefined
       videoEmbed?:
         | {
             __typename?: 'GraphCMS_VideoEmbed'

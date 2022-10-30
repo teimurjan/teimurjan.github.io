@@ -4,7 +4,7 @@ export enum Anchor {
   Experience = 'experience',
   Skills = 'skills',
   Education = 'education',
-  Media = 'media',
+  Media = 'activity',
 }
 
 export const navigateToAnchor = (anchor: string) => {

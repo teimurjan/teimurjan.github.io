@@ -7,16 +7,15 @@ import { Typography } from '../../atoms'
 import { useMedia } from '../../../hooks'
 
 export interface Props extends EmotionProps {
-  imageSrc?: string
-  imageAlt?: string
+  media?: ReactNode
   title: string
-  subtitle: ReactNode
+  subtitle?: ReactNode
 }
 
 const MediaCard = forwardRef<HTMLDivElement, Props>(
-  ({ className, children, title, imageSrc, imageAlt, subtitle }, ref) => {
+  ({ className, children, title, media, subtitle }, ref) => {
     const flexDirection = useMedia(
-      [theme.screens.medium.mediaFrom],
+      [theme.screens.large.mediaFrom],
       ['row' as const],
       'column' as const
     )
@@ -30,28 +29,26 @@ const MediaCard = forwardRef<HTMLDivElement, Props>(
         className={className}
       >
         <Flex flexDirection={flexDirection}>
-          {imageSrc && (
+          {media && (
             <Flex.Item
               css={css`
                 max-width: 100%;
 
-                @media (${theme.screens.medium.mediaFrom}) {
+                @media (${theme.screens.large.mediaFrom}) {
                   flex-shrink: 0;
                   flex-basis: 500px;
                 }
               `}
             >
-              <img
-                css={css`
-                  width: 100%;
-                  display: block;
-                `}
-                src={imageSrc}
-                alt={imageAlt}
-              />
+              {media}
             </Flex.Item>
           )}
-          <Flex flexDirection="column">
+          <Flex
+            css={css`
+              flex: 1;
+            `}
+            flexDirection="column"
+          >
             <Typography.Title
               css={css`
                 padding: ${theme.spacing.small} ${theme.spacing.medium};
@@ -60,15 +57,17 @@ const MediaCard = forwardRef<HTMLDivElement, Props>(
             >
               {title}
             </Typography.Title>
-            <Typography.Text
-              css={css`
-                margin-bottom: ${theme.spacing.small};
-                padding: 0 ${theme.spacing.medium};
-              `}
-              container
-            >
-              {subtitle}
-            </Typography.Text>
+            {subtitle && (
+              <Typography.Text
+                css={css`
+                  margin-bottom: ${theme.spacing.small};
+                  padding: 0 ${theme.spacing.medium};
+                `}
+                container
+              >
+                {subtitle}
+              </Typography.Text>
+            )}
           </Flex>
         </Flex>
         <Typography.Text container>{children}</Typography.Text>

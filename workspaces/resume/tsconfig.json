@@ -1,4 +1,5 @@
 {
   "extends": "../../tsconfig.json",
+  "files": ["./ttf.d.ts"],
   "include": ["./src"]
 }

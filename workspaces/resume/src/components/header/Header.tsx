@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: theme.colors.resume.green,
     width: '100%',
-    padding: '20px 20px 0 20px',
+    padding: '16px 16px 0 16px',
     textAlign: 'center',
     textTransform: 'uppercase',
     fontFamily: 'ShareTechMono',
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 30,
   },
-  headerSubtitle: { fontSize: 14 },
+  headerSubtitle: { fontSize: 14, marginTop: 8 },
 })
 
 interface Props {

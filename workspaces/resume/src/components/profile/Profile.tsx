@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     textDecoration: 'underline',
     textTransform: 'uppercase',
     textAlign: 'center',
-    marginBottom: 15,
+    marginBottom: 12,
   },
   profileText: {
     textAlign: 'center',

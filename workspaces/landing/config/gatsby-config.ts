@@ -2,7 +2,7 @@ import path from 'path'
 
 const ASSETS_PATH = path.resolve('./src/assets/')
 const GRAPH_CMS_URL =
-  'https://api-eu-central-1.graphcms.com/v2/ckuqwop6l1gvq01xqb8y0dsj3/master'
+  'https://api-eu-central-1.hygraph.com/v2/ckuqwop6l1gvq01xqb8y0dsj3/master'
 
 module.exports = {
   siteMetadata: {

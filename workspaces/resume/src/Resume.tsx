@@ -1,4 +1,3 @@
-import { resolve } from 'path'
 import {
   Page,
   Text,
@@ -22,14 +21,18 @@ import SkillItem from './components/skill-item'
 import PublicationItem from './components/publication-item'
 import ConferenceItem from './components/conference-item'
 import ExperienceItem from './components/experience-item'
+import ShareTechTTF from './assets/fonts/ShareTech-Regular.ttf'
+import ShareTechMonoTTF from './assets/fonts/ShareTechMono-Regular.ttf'
 
 Font.register({
   family: 'ShareTech',
-  src: resolve(__dirname, './assets/fonts/ShareTech-Regular.ttf'),
+  format: 'truetype',
+  src: ShareTechTTF,
 })
 Font.register({
   family: 'ShareTechMono',
-  src: resolve(__dirname, './assets/fonts/ShareTechMono-Regular.ttf'),
+  format: 'truetype',
+  src: ShareTechMonoTTF,
 })
 
 const styles = StyleSheet.create({
@@ -41,13 +44,14 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     width: '100%',
-    padding: '0 20px',
+    padding: '0 16px',
   },
   container: {
     backgroundColor: theme.colors.resume.white,
     padding: '16px 20px',
     width: '100%',
     height: '100%',
+    marginBottom: 16,
   },
   horizontalDivider: {
     height: 1,

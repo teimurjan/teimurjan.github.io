@@ -1,5 +1,5 @@
 import { css, keyframes } from '@emotion/react'
-import { Fragment, Suspense, useState } from 'react'
+import { Fragment, Suspense } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { IndexBannerQuery } from '@teimurjan/gql-types'
 import Resume, { PDFDownloadLink } from '@teimurjan/resume'

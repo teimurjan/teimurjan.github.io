@@ -16,8 +16,8 @@ const onCreateWebpackConfig = ({ actions }: CreateWebpackConfigArgs) => {
       fallback: {
         stream: 'stream-browserify',
         zlib: 'browserify-zlib',
-        util: require.resolve('util/'),
-        assert: require.resolve('assert/'),
+        util: require.resolve('util'),
+        assert: require.resolve('assert'),
         path: require.resolve('path-browserify'),
       },
     },

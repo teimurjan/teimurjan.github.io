@@ -1,11 +1,4 @@
-import {
-  Page,
-  Text,
-  View,
-  Document,
-  StyleSheet,
-  Font,
-} from '@react-pdf/renderer'
+import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer'
 import {
   calculatePercentage,
   prettyRange,
@@ -13,27 +6,14 @@ import {
   theme,
 } from '@teimurjan/utils'
 import { ResumeSsrQuery } from '@teimurjan/gql-types'
-import Header from './components/header'
-import Contacts from './components/contacts'
-import Profile from './components/profile'
-import EducationItem from './components/education-item'
-import SkillItem from './components/skill-item'
-import PublicationItem from './components/publication-item'
-import ConferenceItem from './components/conference-item'
-import ExperienceItem from './components/experience-item'
-import ShareTechTTF from './assets/fonts/ShareTech-Regular.ttf'
-import ShareTechMonoTTF from './assets/fonts/ShareTechMono-Regular.ttf'
-
-Font.register({
-  family: 'ShareTech',
-  format: 'truetype',
-  src: ShareTechTTF,
-})
-Font.register({
-  family: 'ShareTechMono',
-  format: 'truetype',
-  src: ShareTechMonoTTF,
-})
+import Header from '../header'
+import Contacts from '../contacts'
+import Profile from '../profile'
+import EducationItem from '../education-item'
+import SkillItem from '../skill-item'
+import PublicationItem from '../publication-item'
+import ConferenceItem from '../conference-item'
+import ExperienceItem from '../experience-item'
 
 const styles = StyleSheet.create({
   page: {

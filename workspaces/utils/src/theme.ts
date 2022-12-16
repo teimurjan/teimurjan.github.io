@@ -10,39 +10,74 @@ const mediumScreenWidth = 1000
 const largeScreenWidth = 1400
 const xlargeScreenWidth = 1700
 
-const theme = {
-  colors: {
-    resume: {
-      green: '#96D3AC',
-      black: '#252525',
-      darkGrey: '#777777',
-      grey: '#E8E8E8',
-      white: '#FDFDFD',
-    },
-    typography: {
-      blue: blue.hex(),
-      beige: beige.hex(),
-    },
-    link: {
-      blue: blue.hex(),
-      beige: beige.hex(),
-    },
-    background: {
-      green: green.hex(),
-      blue: blue.hex(),
-      beige: beige.hex(),
-    },
-    button: {
-      blue: blue.hex(),
-      blueDarken: blue.darken(0.25).hex(),
-      beige: beige.hex(),
-      beigeDarken: beigeDark.hex(),
-    },
-    geometry: {
-      blue: blue.hex(),
-      blueAlpha: blue.alpha(0.5).rgb().string(),
-    },
+type ColorMap = {
+  resume: {
+    green: string
+    black: string
+    darkGrey: string
+    grey: string
+    white: string
+  }
+  typography: {
+    blue: string
+    beige: string
+  }
+  link: {
+    blue: string
+    beige: string
+  }
+  background: {
+    green: string
+    blue: string
+    beige: string
+  }
+  button: {
+    blue: string
+    blueDarken: string
+    beige: string
+    beigeDarken: string
+  }
+  geometry: {
+    blue: string
+    blueAlpha: string
+  }
+}
+
+const lightColorMap: ColorMap = {
+  resume: {
+    green: '#96D3AC',
+    black: '#252525',
+    darkGrey: '#777777',
+    grey: '#E8E8E8',
+    white: '#FDFDFD',
   },
+  typography: {
+    blue: blue.hex(),
+    beige: beige.hex(),
+  },
+  link: {
+    blue: blue.hex(),
+    beige: beige.hex(),
+  },
+  background: {
+    green: green.hex(),
+    blue: blue.hex(),
+    beige: beige.hex(),
+  },
+  button: {
+    blue: blue.hex(),
+    blueDarken: blue.darken(0.25).hex(),
+    beige: beige.hex(),
+    beigeDarken: beigeDark.hex(),
+  },
+  geometry: {
+    blue: blue.hex(),
+    blueAlpha: blue.alpha(0.5).rgb().string(),
+  },
+}
+
+const theme = {
+  colors: lightColorMap,
   typography: {
     text: {
       small: {

@@ -17,7 +17,7 @@ const Text = ({
   children,
   className,
 }: Props) => {
-  const Component = (container ? 'div' : variant) as keyof JSX.IntrinsicElements
+  const Component = container ? 'div' : variant
 
   return (
     <Component

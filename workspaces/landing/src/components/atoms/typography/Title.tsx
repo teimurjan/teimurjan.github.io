@@ -17,7 +17,7 @@ const Title = ({
   transform,
   className,
 }: Props) => {
-  const Component = variant as keyof JSX.IntrinsicElements
+  const Component = variant
 
   return (
     <Component

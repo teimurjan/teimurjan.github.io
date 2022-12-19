@@ -3,7 +3,7 @@ import { theme } from '@teimurjan/utils'
 
 const styles = StyleSheet.create({
   profileTitle: {
-    color: theme.colors.resume.black,
+    color: theme.colors.resume.dark3,
     fontSize: 16,
     textDecoration: 'underline',
     textTransform: 'uppercase',

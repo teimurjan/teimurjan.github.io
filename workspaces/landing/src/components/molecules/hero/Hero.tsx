@@ -14,7 +14,7 @@ const Hero = ({ title }: Props) => {
         margin-top: ${theme.spacing.xlarge};
       `}
     >
-      <Typography.Title variant="h1" transform="uppercase" color="beige">
+      <Typography.Title variant="h1" transform="uppercase" color="light">
         {title}
       </Typography.Title>
     </Container>

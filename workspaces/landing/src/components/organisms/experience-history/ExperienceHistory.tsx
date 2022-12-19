@@ -53,11 +53,11 @@ const ExperienceHistory = () => {
         .swiper-pagination-bullet {
           width: 1rem;
           height: 1rem;
-          background: ${theme.colors.geometry.blueAlpha};
+          background: ${theme.colors.geometry.light};
         }
 
         .swiper-pagination-bullet-active {
-          background: ${theme.colors.geometry.blue};
+          background: ${theme.colors.geometry.dark};
         }
 
         .swiper-button-prev {
@@ -175,7 +175,7 @@ const ExperienceHistory = () => {
                   experience.startDate,
                   experience.endDate
                 )}
-                overlay={!experience.endDate && <Tag color="blue">Now</Tag>}
+                overlay={!experience.endDate && <Tag color="dark2">Now</Tag>}
               >
                 <RichText html={experience.description.html} />
               </Card>

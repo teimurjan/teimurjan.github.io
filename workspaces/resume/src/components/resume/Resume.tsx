@@ -17,9 +17,9 @@ import ExperienceItem from '../experience-item'
 
 const styles = StyleSheet.create({
   page: {
-    backgroundColor: theme.colors.resume.grey,
+    backgroundColor: theme.colors.resume.dark,
     fontFamily: 'ShareTech',
-    color: theme.colors.resume.black,
+    color: theme.colors.resume.dark3,
     fontSize: 10,
   },
   wrapper: {
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     padding: '0 16px',
   },
   container: {
-    backgroundColor: theme.colors.resume.white,
+    backgroundColor: theme.colors.resume.light,
     padding: '16px 20px',
     width: '100%',
     height: '100%',
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   horizontalDivider: {
     height: 1,
     width: '100%',
-    backgroundColor: theme.colors.resume.black,
+    backgroundColor: theme.colors.resume.dark3,
     margin: '15px 0',
   },
   layout: {
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   title: {
-    color: theme.colors.resume.black,
+    color: theme.colors.resume.dark3,
     fontSize: 16,
     textDecoration: 'underline',
     textTransform: 'uppercase',
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     top: 0,
     height: '100%',
     width: 1,
-    backgroundColor: theme.colors.resume.black,
+    backgroundColor: theme.colors.resume.dark3,
   },
   itemSmall: {
     marginBottom: 2.5,

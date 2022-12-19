@@ -1,83 +1,12 @@
-import Color from 'color'
-
-const blue = new Color('#05386b')
-const beige = new Color('#edf5f1')
-const beigeDark = new Color('#e0e1e0')
-const green = new Color('#5cdb95')
+import lightColors from './light-colors'
 
 const smallScreenWidth = 700
 const mediumScreenWidth = 1000
 const largeScreenWidth = 1400
 const xlargeScreenWidth = 1700
 
-type ColorMap = {
-  resume: {
-    green: string
-    black: string
-    darkGrey: string
-    grey: string
-    white: string
-  }
-  typography: {
-    blue: string
-    beige: string
-  }
-  link: {
-    blue: string
-    beige: string
-  }
-  background: {
-    green: string
-    blue: string
-    beige: string
-  }
-  button: {
-    blue: string
-    blueDarken: string
-    beige: string
-    beigeDarken: string
-  }
-  geometry: {
-    blue: string
-    blueAlpha: string
-  }
-}
-
-const lightColorMap: ColorMap = {
-  resume: {
-    green: '#96D3AC',
-    black: '#252525',
-    darkGrey: '#777777',
-    grey: '#E8E8E8',
-    white: '#FDFDFD',
-  },
-  typography: {
-    blue: blue.hex(),
-    beige: beige.hex(),
-  },
-  link: {
-    blue: blue.hex(),
-    beige: beige.hex(),
-  },
-  background: {
-    green: green.hex(),
-    blue: blue.hex(),
-    beige: beige.hex(),
-  },
-  button: {
-    blue: blue.hex(),
-    blueDarken: blue.darken(0.25).hex(),
-    beige: beige.hex(),
-    beigeDarken: beigeDark.hex(),
-  },
-  geometry: {
-    blue: blue.hex(),
-    blueAlpha: blue.alpha(0.5).rgb().string(),
-  },
-}
-
 const theme = {
-  colors: lightColorMap,
+  colors: lightColors,
   typography: {
     text: {
       small: {
@@ -217,5 +146,7 @@ const theme = {
     },
   },
 }
+
+export type { Colors } from './types'
 
 export default theme

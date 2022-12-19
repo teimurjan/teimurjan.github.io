@@ -10,17 +10,17 @@ export const buttonCss = ({ inverted, disabled }: Args) => css`
   pointer-events: ${disabled ? 'none' : 'auto'};
   border: none;
   background: ${inverted
-    ? `linear-gradient(to right, ${theme.colors.button.beigeDarken} 50%, ${theme.colors.button.beige} 50%)`
-    : `linear-gradient(to right, ${theme.colors.button.blueDarken} 50%, ${theme.colors.button.blue} 50%)`};
+    ? `linear-gradient(to right, ${theme.colors.button.light2} 50%, ${theme.colors.button.light} 50%)`
+    : `linear-gradient(to right, ${theme.colors.button.dark2} 50%, ${theme.colors.button.dark} 50%)`};
   background-size: 200% 100%;
   background-position: 100% bottom;
   text-transform: uppercase;
   font-weight: bold;
   color: ${inverted
-    ? theme.colors.typography.blue
-    : theme.colors.typography.beige};
+    ? theme.colors.typography.dark
+    : theme.colors.typography.light};
   border: 2px solid
-    ${inverted ? theme.colors.typography.beige : theme.colors.typography.blue};
+    ${inverted ? theme.colors.typography.light : theme.colors.typography.dark};
   font-size: ${theme.typography.text.small.fontSize};
   line-height: ${theme.typography.text.small.lineHeight};
   padding: ${theme.spacing.xsmall} ${theme.spacing.small};
@@ -31,7 +31,7 @@ export const buttonCss = ({ inverted, disabled }: Args) => css`
   &:hover {
     background-position: left bottom;
     border-color: ${inverted
-      ? theme.colors.button.beigeDarken
-      : theme.colors.button.blueDarken};
+      ? theme.colors.button.light2
+      : theme.colors.button.dark2};
   }
 `

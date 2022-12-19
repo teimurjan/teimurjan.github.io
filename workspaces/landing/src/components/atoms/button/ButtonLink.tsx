@@ -14,7 +14,7 @@ const ButtonLink = forwardRef<HTMLAnchorElement, Props>(
       ref={ref}
       css={buttonCss({ inverted, disabled })}
       {...rest}
-      color={inverted ? 'blue' : 'beige'}
+      color={inverted ? 'dark' : 'light'}
       inheritFontSize
       underline="none"
     >

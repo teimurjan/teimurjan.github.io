@@ -131,7 +131,7 @@ const IndexBanner = () => {
 
           <Square
             size="100%"
-            color="blue"
+            color="dark"
             css={css`
               position: absolute;
               z-index: -1;
@@ -148,7 +148,7 @@ const IndexBanner = () => {
           />
           <Square
             size="50%"
-            color="blueAlpha"
+            color="light"
             css={css`
               position: absolute;
               z-index: -1;

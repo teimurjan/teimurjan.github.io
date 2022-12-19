@@ -1,17 +1,17 @@
 import { ReactNode } from 'react'
 import { css } from '@emotion/react'
-import { theme } from '@teimurjan/utils'
+import { Colors, theme } from '@teimurjan/utils'
 import { EmotionProps } from '../../../utils'
 
 export interface Props extends EmotionProps {
   children: ReactNode
   variant: keyof typeof theme.typography.title.xlarge
-  color?: 'blue' | 'beige'
+  color?: keyof Colors['typography']
   transform?: 'uppercase' | 'lowercase'
 }
 
 const Title = ({
-  color = 'blue',
+  color = 'dark',
   variant,
   children,
   transform,

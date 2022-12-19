@@ -23,8 +23,8 @@ const MediaCard = forwardRef<HTMLDivElement, Props>(
       <div
         ref={ref}
         css={css`
-          box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-          background: ${theme.colors.background.beige};
+          box-shadow: ${theme.colors.background.outline} 0px 5px 15px;
+          background: ${theme.colors.background.light};
         `}
         className={className}
       >

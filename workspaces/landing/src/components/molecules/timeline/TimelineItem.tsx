@@ -16,7 +16,7 @@ const TimelineItem = ({ className, icon, date, children }: Props) => (
     <Typography.Title
       variant="h5"
       css={css`
-        background: ${theme.colors.background.beige};
+        background: ${theme.colors.background.light};
         margin-bottom: auto;
       `}
     >

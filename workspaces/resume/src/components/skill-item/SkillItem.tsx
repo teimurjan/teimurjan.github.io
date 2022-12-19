@@ -8,14 +8,14 @@ const styles = StyleSheet.create({
   },
   skillProgress: {
     height: 5,
-    backgroundColor: theme.colors.resume.grey,
+    backgroundColor: theme.colors.resume.dark,
     borderRadius: 5,
     position: 'relative',
     width: '100%',
   },
   skillProgressInner: {
     height: '100%',
-    backgroundColor: theme.colors.resume.black,
+    backgroundColor: theme.colors.resume.dark3,
     borderRadius: 5,
     position: 'absolute',
     left: 0,

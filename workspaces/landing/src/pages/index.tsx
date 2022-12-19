@@ -18,17 +18,17 @@ const IndexPage = () => {
     <Layout>
       <TopNavigation />
       <Content>
-        <Section color="green" spacings={['medium', undefined]}>
+        <Section color="dark" spacings={['medium', undefined]}>
           <IndexBanner />
         </Section>
-        <Section color="beige">
+        <Section color="light">
           <ExperienceHistory />
         </Section>
-        <GridSection color="beige">
+        <GridSection color="light">
           <Skills />
           <Education />
         </GridSection>
-        <Section color="beige" spacings={['medium', 'large']}>
+        <Section color="light" spacings={['medium', 'large']}>
           <Media />
         </Section>
       </Content>

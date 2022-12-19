@@ -35,7 +35,7 @@ const Timeline = ({ className, children, hideLine = false }: Props) => (
     <div
       css={css`
         position: absolute;
-        border-right: 4px solid ${theme.colors.geometry.blueAlpha};
+        border-right: 4px solid ${theme.colors.geometry.light};
         height: 100%;
         left: calc(
           calc(${theme.typography.title.xlarge.h5.fontSize} / 2) - 2px

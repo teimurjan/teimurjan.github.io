@@ -6,17 +6,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   publicationLink: {
-    color: theme.colors.resume.black,
+    color: theme.colors.resume.dark3,
     textDecoration: 'none',
   },
   conferenceTitle: {
-    color: theme.colors.resume.darkGrey,
+    color: theme.colors.resume.dark2,
   },
   listStyleDisc: {
     width: 2,
     height: 2,
     borderRadius: 1,
-    backgroundColor: theme.colors.resume.black,
+    backgroundColor: theme.colors.resume.dark3,
     marginRight: 5,
     marginTop: 5,
   },

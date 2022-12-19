@@ -6,7 +6,7 @@ import { Background, Button, Container, Link, Typography } from '../../atoms'
 const Footer = () => {
   return (
     <Background
-      color="blue"
+      color="dark2"
       css={css`
         padding: ${theme.spacing.large} 0;
       `}
@@ -25,7 +25,7 @@ const Footer = () => {
         >
           <Flex.Item>
             <Typography.Title
-              color="beige"
+              color="light"
               css={css`
                 margin-bottom: ${theme.spacing.small};
               `}
@@ -33,7 +33,7 @@ const Footer = () => {
             >
               Do you want to connect?
             </Typography.Title>
-            <Typography.Text color="beige">
+            <Typography.Text color="light">
               Despite the fact that I might be busy, I'm open to any
               offers/collaboartions and would be happy to reply.
             </Typography.Text>
@@ -45,20 +45,20 @@ const Footer = () => {
           </Flex.Item>
         </Flex>
         <Flex gap={theme.spacing.medium} justifySpaceBetween>
-          <Typography.Text color="beige">
+          <Typography.Text color="light">
             {new Date().getFullYear()} Teimur Gasanov
           </Typography.Text>
           <Flex.Item>
             <Flex gap={theme.spacing.medium}>
               <Link
-                color="beige"
+                color="light"
                 to="https://github.com/teimurjan"
                 underline="always"
               >
                 GitHub
               </Link>
               <Link
-                color="beige"
+                color="light"
                 to="https://www.linkedin.com/in/teimur-gasanov"
                 underline="always"
               >

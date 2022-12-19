@@ -1,17 +1,17 @@
 import { ReactNode } from 'react'
 import { css } from '@emotion/react'
-import { theme } from '@teimurjan/utils'
+import { Colors, theme } from '@teimurjan/utils'
 import { EmotionProps } from '../../../utils'
 
 export interface Props extends EmotionProps {
   children: ReactNode
   variant?: keyof typeof theme.typography.text
-  color?: 'blue' | 'beige'
+  color?: keyof Colors['typography']
   container?: boolean
 }
 
 const Text = ({
-  color = 'blue',
+  color = 'dark',
   variant = 'p',
   container,
   children,

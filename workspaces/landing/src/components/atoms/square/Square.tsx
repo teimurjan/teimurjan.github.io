@@ -1,10 +1,10 @@
 import { css } from '@emotion/react'
-import { theme } from '@teimurjan/utils'
+import { Colors, theme } from '@teimurjan/utils'
 import { EmotionProps } from '../../../utils'
 
 export interface Props extends EmotionProps {
   size: string
-  color: keyof typeof theme.colors.geometry
+  color: keyof Colors['geometry']
 }
 
 const Square = ({ className, size, color }: Props) => (

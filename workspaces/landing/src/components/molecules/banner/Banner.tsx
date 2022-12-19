@@ -56,7 +56,7 @@ const Banner = ({
             margin-bottom: ${theme.spacing.small};
           `}
           variant="h1"
-          color="beige"
+          color="light"
           transform="uppercase"
         >
           {title}
@@ -66,7 +66,7 @@ const Banner = ({
             margin-bottom: ${theme.spacing.small};
           `}
           variant="h3"
-          color="beige"
+          color="light"
         >
           {subtitle}
         </Typography.Title>

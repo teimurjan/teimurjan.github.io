@@ -79,8 +79,8 @@ const ButtonSelect = ({
         >
           <div
             css={css`
-              box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-              background: ${theme.colors.background.beige};
+              box-shadow: ${theme.colors.background.outline} 0px 5px 15px;
+              background: ${theme.colors.background.light};
               text-transform: uppercase;
               transition: all 300ms
                 ${theme.transition.timingFunction.easeInOutCubic};
@@ -112,7 +112,7 @@ const ButtonSelect = ({
                   setOpen(false)
                 }}
               >
-                <Typography.Text variant="small" color="blue">
+                <Typography.Text variant="small" color="dark">
                   {option.label}
                 </Typography.Text>
               </div>

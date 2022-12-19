@@ -7,7 +7,7 @@ const NotFoundPage = () => {
     <Layout>
       <TopNavigation />
       <Content>
-        <FullPageSection color="green">
+        <FullPageSection color="dark">
           <Hero title="404 - Not found" />
         </FullPageSection>
       </Content>

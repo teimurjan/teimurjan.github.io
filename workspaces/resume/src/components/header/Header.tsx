@@ -3,7 +3,7 @@ import { theme } from '@teimurjan/utils'
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: theme.colors.resume.green,
+    backgroundColor: theme.colors.resume.accent,
     width: '100%',
     padding: '16px 16px 0 16px',
     textAlign: 'center',
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     width: '100%',
     padding: '10px 40px',
-    backgroundColor: theme.colors.resume.white,
+    backgroundColor: theme.colors.resume.light,
   },
   headerTitle: {
     fontSize: 30,

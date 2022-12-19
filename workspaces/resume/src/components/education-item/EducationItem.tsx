@@ -3,10 +3,10 @@ import { theme } from '@teimurjan/utils'
 
 const styles = StyleSheet.create({
   educationDates: {
-    color: theme.colors.resume.darkGrey,
+    color: theme.colors.resume.dark2,
   },
   educationSchool: {
-    color: theme.colors.resume.darkGrey,
+    color: theme.colors.resume.dark2,
   },
   education: {},
   educationDegree: {

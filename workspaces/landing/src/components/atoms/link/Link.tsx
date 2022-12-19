@@ -2,20 +2,20 @@ import { Link as GatsbyLink, GatsbyLinkProps } from 'gatsby'
 import { MouseEventHandler, useCallback, useMemo, useRef } from 'react'
 import { css } from '@emotion/react'
 import { EmotionProps, navigateToAnchor } from '../../../utils'
-import { theme } from '@teimurjan/utils'
+import { Colors, theme } from '@teimurjan/utils'
 
 export interface Props
   extends EmotionProps,
     GatsbyLinkProps<Record<string, never>> {
   inheritFontSize?: boolean
-  color?: keyof typeof theme.colors.link
+  color?: keyof Colors['link']
   underline?: 'none' | 'hover' | 'always'
   type?: 'anchor' | 'external' | 'internal'
 }
 
 const linkCss = ({
   inheritFontSize,
-  color = 'blue',
+  color = 'dark',
   underline,
 }: Pick<Props, 'inheritFontSize' | 'color' | 'underline'>) => css`
   font-size: ${inheritFontSize ? 'inherit' : theme.typography.text.p.fontSize};
@@ -56,7 +56,7 @@ const Link = ({
   className,
   onClick,
   inheritFontSize = false,
-  color = 'blue',
+  color = 'dark',
   underline = 'hover',
   rel = 'noopener noreferrer',
   target = '_blank',

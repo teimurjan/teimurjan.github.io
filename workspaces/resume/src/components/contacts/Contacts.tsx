@@ -8,17 +8,17 @@ const styles = StyleSheet.create({
   contactsSection: {
     padding: '10px 40px',
     width: '100%',
-    backgroundColor: theme.colors.resume.black,
+    backgroundColor: theme.colors.resume.dark3,
   },
   contactsContainer: {
     width: '100%',
-    color: theme.colors.resume.white,
+    color: theme.colors.resume.light,
     alignItems: 'center',
     flexDirection: 'row',
   },
   contact: {
     flex: 1,
-    color: theme.colors.resume.white,
+    color: theme.colors.resume.light,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',

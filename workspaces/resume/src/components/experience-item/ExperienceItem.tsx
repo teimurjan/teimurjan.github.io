@@ -4,10 +4,10 @@ import { theme } from '@teimurjan/utils'
 
 const styles = StyleSheet.create({
   experienceDates: {
-    color: theme.colors.resume.darkGrey,
+    color: theme.colors.resume.dark2,
   },
   experienceCompany: {
-    color: theme.colors.resume.darkGrey,
+    color: theme.colors.resume.dark2,
   },
   experience: {
     position: 'relative',
@@ -19,19 +19,19 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: -20,
     top: 2.5,
-    border: `2px solid ${theme.colors.resume.green}`,
+    border: `2px solid ${theme.colors.resume.accent}`,
     borderRadius: 5.5,
     width: 11,
     height: 11,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: theme.colors.resume.white,
+    backgroundColor: theme.colors.resume.light,
   },
   experienceIconInner: {
     borderRadius: 2.5,
     width: 5,
     height: 5,
-    backgroundColor: theme.colors.resume.green,
+    backgroundColor: theme.colors.resume.accent,
   },
   experienceLine: {
     position: 'absolute',
@@ -39,11 +39,11 @@ const styles = StyleSheet.create({
     top: 0,
     height: '100%',
     width: 1,
-    backgroundColor: theme.colors.resume.black,
+    backgroundColor: theme.colors.resume.dark3,
   },
   experienceDescription: {
     fontSize: 10,
-    backgroundColor: theme.colors.resume.darkGrey,
+    backgroundColor: theme.colors.resume.dark2,
   },
 })
 

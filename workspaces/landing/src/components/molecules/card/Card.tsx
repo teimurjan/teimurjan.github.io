@@ -3,7 +3,7 @@ import Flex from '@react-css/flex'
 import { forwardRef, ReactNode } from 'react'
 import { theme } from '@teimurjan/utils'
 import { EmotionProps } from '../../../utils'
-import { Typography } from '../../atoms'
+import { Background, Typography } from '../../atoms'
 
 export interface Props extends EmotionProps {
   children: ReactNode
@@ -37,23 +37,23 @@ const Card = forwardRef<HTMLDivElement, Props>(
         ref={ref}
         css={css`
           padding: ${theme.spacing.small} ${theme.spacing.medium};
-          box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-          background: ${theme.colors.background.beige};
+          box-shadow: ${theme.colors.background.outline} 0px 5px 15px;
+          background: ${theme.colors.background.light};
           position: relative;
         `}
         className={className}
       >
         {overlay && (
-          <div
+          <Background
             css={css`
               position: absolute;
               right: 0;
               top: ${theme.spacing.small};
             `}
-            color="blue"
+            color="dark"
           >
             {overlay}
-          </div>
+          </Background>
         )}
 
         <Flex alignItemsCenter>

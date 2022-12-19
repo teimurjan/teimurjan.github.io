@@ -74,9 +74,10 @@ const TopNavigation = () => {
         width: 100%;
         z-index: 10;
         background: ${shouldInvert
-          ? theme.colors.background.beige
-          : theme.colors.background.green};
-        box-shadow: ${shouldInvert && '0 3px 5px rgba(57, 63, 72, 0.3)'};
+          ? theme.colors.background.light
+          : theme.colors.background.dark};
+        box-shadow: ${shouldInvert &&
+        `0 3px 5px ${theme.colors.background.outline}`};
         transition: all 200ms ${theme.transition.timingFunction.easeInOutCubic};
         padding: ${theme.spacing.small} 0;
       `}

@@ -13,7 +13,7 @@ const Progress = ({ className, percentage, fullWidth }: Props) => (
     css={css`
       height: 0.75rem;
       width: ${fullWidth ? '100%' : '24rem'};
-      background: ${theme.colors.geometry.blueAlpha};
+      background: ${theme.colors.geometry.light};
       position: relative;
       border-radius: ${theme.border.radius.small};
     `}
@@ -30,7 +30,7 @@ const Progress = ({ className, percentage, fullWidth }: Props) => (
         transition: transform 500ms
           ${theme.transition.timingFunction.easeInOutCubic};
         transition-delay: 300ms;
-        background: ${theme.colors.geometry.blue};
+        background: ${theme.colors.geometry.dark};
         border-radius: ${theme.border.radius.small};
       `}
     />

@@ -9,7 +9,7 @@ export interface Props extends EmotionProps {
 }
 
 const Tag = ({ className, children, color }: Props) => {
-  const textColor = color === 'beige' ? 'blue' : 'beige'
+  const textColor = color === 'light' ? 'dark' : 'light'
 
   return (
     <span

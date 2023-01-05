@@ -8,11 +8,13 @@ const styles = StyleSheet.create({
   },
   experienceCompany: {
     color: theme.colors.resume.dark2,
+    textDecoration: 'underline',
   },
   experience: {
     position: 'relative',
   },
-  experiencePosition: {
+  experiencePositionCompany: {
+    flexDirection: 'row',
     margin: '1.25px 0',
   },
   experienceIcon: {
@@ -68,8 +70,10 @@ const ExperienceItem = ({
         <View style={styles.experienceIconInner} />
       </View>
       <Text style={styles.experienceDates}>{dates}</Text>
-      <Text style={styles.experiencePosition}>{position}</Text>
-      <Text style={styles.experienceCompany}>{company}</Text>
+      <View style={styles.experiencePositionCompany}>
+        <Text>{position}&nbsp;</Text>
+        <Text style={styles.experienceCompany}>at {company}</Text>
+      </View>
       <Html
         style={styles.experienceDescription}
         stylesheet={{

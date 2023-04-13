@@ -52,6 +52,9 @@ module.exports = {
         typeName: 'GraphCMS',
         fieldName: 'gcms',
         url: GRAPH_CMS_URL,
+        dataLoaderOptions: {
+          batch: false,
+        },
       },
     },
     {

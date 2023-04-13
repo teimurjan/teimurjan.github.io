@@ -12,7 +12,7 @@
     "@react-pdf/renderer": "^3.0.0",
     "react": "^18.0.2",
     "react-dom": "^18.0.2",
-    "react-pdf-html": "^1.1.4",
+    "react-pdf-html": "^1.1.18",
     "@teimurjan/utils": "1.0.0",
     "@teimurjan/gql-types": "1.0.0"
   }

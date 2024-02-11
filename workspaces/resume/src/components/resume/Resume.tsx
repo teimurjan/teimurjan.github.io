@@ -1,24 +1,18 @@
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer'
 import {
-  calculatePercentage,
+  YEAR_DATE_FORMAT,
   prettyRange,
   sortByDate,
   theme,
 } from '@teimurjan/utils'
 import { ResumeSsrQuery } from '@teimurjan/gql-types'
 import Header from '../header'
-import Contacts from '../contacts'
-import Profile from '../profile'
-import EducationItem from '../education-item'
-import SkillItem from '../skill-item'
-import PublicationItem from '../publication-item'
-import ConferenceItem from '../conference-item'
-import ExperienceItem from '../experience-item'
+import ResumeItem from '../resume-item'
 
 const styles = StyleSheet.create({
   page: {
     backgroundColor: theme.colors.resume.dark,
-    fontFamily: 'ShareTech',
+    fontFamily: 'Helvetica',
     color: theme.colors.resume.dark3,
     fontSize: 10,
   },
@@ -27,8 +21,7 @@ const styles = StyleSheet.create({
     padding: '0 16px',
   },
   container: {
-    backgroundColor: theme.colors.resume.light,
-    padding: '16px 20px',
+    padding: '0 16px',
     width: '100%',
     height: '100%',
     marginBottom: 16,
@@ -37,51 +30,39 @@ const styles = StyleSheet.create({
     height: 1,
     width: '100%',
     backgroundColor: theme.colors.resume.dark3,
-    margin: '15px 0',
+    margin: '10px 0',
   },
   layout: {
     flexDirection: 'row',
   },
-  layoutSmallItem: {
-    flexBasis: '35%',
-    paddingRight: 10,
+  layoutLeft: {
+    flexBasis: '61%',
+    marginRight: '4%',
   },
-  layoutLargeItem: {
-    flexBasis: '65%',
-    paddingLeft: 30,
-    position: 'relative',
-  },
+  layoutRight: { flexBasis: '35%' },
   title: {
     color: theme.colors.resume.dark3,
-    fontSize: 16,
-    textDecoration: 'underline',
+    fontSize: 14,
     textTransform: 'uppercase',
-    marginBottom: 10,
+    fontFamily: 'Helvetica-Bold',
+    marginBottom: 8,
   },
-  section: {
-    paddingBottom: 15,
-    position: 'relative',
+  itemMarginBottomSmall: {
+    marginBottom: 4,
   },
-  verticalDivider: {
-    position: 'absolute',
-    left: 15,
-    top: 0,
-    height: '100%',
-    width: 1,
-    backgroundColor: theme.colors.resume.dark3,
+  itemMarginBottom: {
+    marginBottom: 8,
   },
-  itemSmall: {
-    marginBottom: 2.5,
+  skills: {
+    flexDirection: 'row',
   },
-  item: {
-    marginBottom: 5,
-  },
-  itemLarge: {
-    marginBottom: 10,
+  skillsCol: {
+    flex: 1,
+    flexDirection: 'column',
   },
 })
 
-const getItemStyle = (
+const getItemMarginStyle = (
   style: Record<string, unknown>,
   index: number,
   itemsCount: number
@@ -101,103 +82,121 @@ const Resume = ({
   return (
     <Document {...rest}>
       <Page size="A4" style={styles.page}>
-        <Header title={fullName} subtitle={headline} />
-        <Contacts location={location} email={email} phoneNumber={phoneNumber} />
+        <Header
+          title={fullName}
+          subtitle={headline}
+          location={location}
+          email={email}
+          phoneNumber={phoneNumber}
+        />
+
         <View style={styles.wrapper}>
           <View style={styles.container}>
-            <Profile title="Profile" text={about} />
+            <Text>{about}</Text>
+
             <View style={styles.horizontalDivider} />
             <View style={styles.layout}>
-              <View style={styles.layoutSmallItem}>
+              <View style={styles.layoutLeft}>
+                <Text style={styles.title}>Work Experience</Text>
+                {experiences.map((experience, index) => (
+                  <ResumeItem
+                    key={experience.id}
+                    title={experience.position}
+                    dates={prettyRange(
+                      experience.startDate,
+                      experience.endDate,
+                      YEAR_DATE_FORMAT
+                    )}
+                    subtitle={experience.company}
+                    description={experience.description.html}
+                    style={getItemMarginStyle(
+                      styles.itemMarginBottom,
+                      index,
+                      experiences.length
+                    )}
+                  />
+                ))}
+
+                <View style={styles.horizontalDivider} />
+
                 <Text style={styles.title}>Education</Text>
-                <View style={styles.section}>
+                <View>
                   {educations.map((education, index) => (
-                    <EducationItem
+                    <ResumeItem
                       key={education.id}
                       dates={prettyRange(
                         education.startDate,
-                        education.endDate
+                        education.endDate,
+                        YEAR_DATE_FORMAT
                       )}
-                      degree={`${education.degree} in ${education.areaOfStudy}`}
-                      school={education.school}
-                      style={getItemStyle(
-                        styles.item,
+                      title={`${education.degree} in ${education.areaOfStudy}`}
+                      subtitle={education.school}
+                      style={getItemMarginStyle(
+                        styles.itemMarginBottom,
                         index,
                         educations.length
                       )}
                     />
                   ))}
                 </View>
-                <Text style={styles.title}>Skills</Text>
-                <View style={styles.section}>
-                  {skills.map((skill, index) => {
-                    const percentage = calculatePercentage(
-                      skills,
-                      'yearsOfExperience',
-                      skill
-                    )
+              </View>
 
-                    return (
-                      <SkillItem
-                        key={skill.id}
-                        title={skill.title}
-                        percentage={percentage}
-                        style={getItemStyle(styles.item, index, skills.length)}
-                      />
-                    )
-                  })}
+              <View style={styles.layoutRight}>
+                <Text style={styles.title}>Skills</Text>
+                <View style={styles.skills}>
+                  <View style={styles.skillsCol}>
+                    {skills.slice(0, skills.length / 2).map((skill) => (
+                      <Text key={skill.id} style={styles.itemMarginBottomSmall}>
+                        {skill.title}
+                      </Text>
+                    ))}
+                  </View>
+                  <View style={styles.skillsCol}>
+                    {skills.slice(skills.length / 2).map((skill) => (
+                      <Text key={skill.id} style={styles.itemMarginBottomSmall}>
+                        {skill.title}
+                      </Text>
+                    ))}
+                  </View>
                 </View>
+
+                <View style={styles.horizontalDivider} />
+
                 <Text style={styles.title}>Publications</Text>
-                <View style={styles.section}>
+                <View>
                   {sortByDate(publications).map((publication, index) => (
-                    <PublicationItem
+                    <ResumeItem
                       key={publication.id}
                       title={publication.title}
-                      link={publication.link}
-                      style={getItemStyle(
-                        styles.itemSmall,
+                      subtitle={new URL(publication.link).hostname
+                        .replace('www.', '')
+                        .replace('.com', '')}
+                      style={getItemMarginStyle(
+                        styles.itemMarginBottomSmall,
                         index,
-                        skills.length
+                        publications.length
                       )}
                     />
                   ))}
                 </View>
+
+                <View style={styles.horizontalDivider} />
+
                 <Text style={styles.title}>Conferences</Text>
-                <View style={styles.section}>
+                <View>
                   {sortByDate(conferences).map((conference, index) => (
-                    <ConferenceItem
+                    <ResumeItem
                       key={conference.id}
-                      topic={conference.topic}
-                      title={conference.title}
-                      style={getItemStyle(
-                        styles.itemSmall,
+                      title={conference.topic}
+                      subtitle={conference.title}
+                      style={getItemMarginStyle(
+                        styles.itemMarginBottomSmall,
                         index,
-                        skills.length
+                        publications.length
                       )}
                     />
                   ))}
                 </View>
-              </View>
-              <View style={styles.layoutLargeItem}>
-                <Text style={styles.title}>Experience</Text>
-                <View style={styles.verticalDivider} />
-                {experiences.map((experience, index) => (
-                  <ExperienceItem
-                    key={experience.id}
-                    position={experience.position}
-                    dates={prettyRange(
-                      experience.startDate,
-                      experience.endDate
-                    )}
-                    company={experience.company}
-                    description={experience.description.html}
-                    style={getItemStyle(
-                      styles.itemLarge,
-                      index,
-                      experiences.length
-                    )}
-                  />
-                ))}
               </View>
             </View>
           </View>

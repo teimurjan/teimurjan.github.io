@@ -4,19 +4,19 @@ import { theme } from '@teimurjan/utils'
 const styles = StyleSheet.create({
   skill: {},
   skillLabel: {
-    marginBottom: 2.5,
+    marginBottom: 4,
   },
   skillProgress: {
-    height: 5,
-    backgroundColor: theme.colors.resume.dark,
-    borderRadius: 5,
+    height: 4,
+    backgroundColor: theme.colors.resume.dark2,
+    borderRadius: 4,
     position: 'relative',
     width: '100%',
   },
   skillProgressInner: {
     height: '100%',
     backgroundColor: theme.colors.resume.dark3,
-    borderRadius: 5,
+    borderRadius: 4,
     position: 'absolute',
     left: 0,
     top: 0,

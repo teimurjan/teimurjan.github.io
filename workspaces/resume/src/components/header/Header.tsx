@@ -1,22 +1,17 @@
 import { Text, View, StyleSheet } from '@react-pdf/renderer'
-import { theme } from '@teimurjan/utils'
+import Contacts from '../contacts'
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: theme.colors.resume.accent,
     width: '100%',
-    padding: '16px 16px 0 16px',
-    textAlign: 'center',
-    textTransform: 'uppercase',
-    fontFamily: 'ShareTechMono',
-  },
-  headerContainer: {
-    width: '100%',
-    padding: '10px 40px',
-    backgroundColor: theme.colors.resume.light,
+    fontFamily: 'Helvetica',
+    padding: '16px 32px',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   headerTitle: {
-    fontSize: 30,
+    fontFamily: 'Helvetica-Bold',
+    fontSize: 24,
   },
   headerSubtitle: { fontSize: 14, marginTop: 8 },
 })
@@ -24,15 +19,20 @@ const styles = StyleSheet.create({
 interface Props {
   title: string
   subtitle: string
+  location: string
+  email: string
+  phoneNumber: string
 }
 
-const Header = ({ title, subtitle }: Props) => {
+const Header = ({ title, subtitle, location, email, phoneNumber }: Props) => {
   return (
     <View style={styles.header}>
-      <View style={styles.headerContainer}>
+      <View>
         <Text style={styles.headerTitle}>{title}</Text>
         <Text style={styles.headerSubtitle}>{subtitle}</Text>
       </View>
+
+      <Contacts location={location} email={email} phoneNumber={phoneNumber} />
     </View>
   )
 }

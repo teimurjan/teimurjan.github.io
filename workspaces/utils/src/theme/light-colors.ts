@@ -7,7 +7,7 @@ const green = new Color('#5cdb95')
 
 export const lightColors: Colors = {
   resume: {
-    accent: '#96D3AC',
+    accent: green.hex(),
     dark3: '#252525',
     dark2: '#777777',
     dark: '#E8E8E8',

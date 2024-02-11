@@ -70,6 +70,20 @@ const createPages = async ({ graphql }: CreatePagesArgs) => {
           title
           link
           date
+          opengraph {
+            description
+            image
+            ogImage
+            ogDescription
+            ogTitle
+            ogType
+            ogUrl
+            twitterCard
+            twitterDescription
+            twitterImageSrc
+            twitterTitle
+            url
+          }
         }
         conferences {
           id

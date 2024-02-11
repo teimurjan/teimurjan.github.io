@@ -172,25 +172,25 @@ export type DirectoryConnection = {
 }
 
 export type DirectoryConnectionDistinctArgs = {
-  field: DirectoryFieldsEnum
+  field: DirectoryFieldSelector
 }
 
 export type DirectoryConnectionGroupArgs = {
-  field: DirectoryFieldsEnum
+  field: DirectoryFieldSelector
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
 }
 
 export type DirectoryConnectionMaxArgs = {
-  field: DirectoryFieldsEnum
+  field: DirectoryFieldSelector
 }
 
 export type DirectoryConnectionMinArgs = {
-  field: DirectoryFieldsEnum
+  field: DirectoryFieldSelector
 }
 
 export type DirectoryConnectionSumArgs = {
-  field: DirectoryFieldsEnum
+  field: DirectoryFieldSelector
 }
 
 export type DirectoryEdge = {
@@ -200,131 +200,42 @@ export type DirectoryEdge = {
   previous?: Maybe<Directory>
 }
 
-export enum DirectoryFieldsEnum {
-  absolutePath = 'absolutePath',
-  accessTime = 'accessTime',
-  atime = 'atime',
-  atimeMs = 'atimeMs',
-  base = 'base',
-  birthTime = 'birthTime',
-  birthtime = 'birthtime',
-  birthtimeMs = 'birthtimeMs',
-  changeTime = 'changeTime',
-  children = 'children',
-  children___children = 'children___children',
-  children___children___children = 'children___children___children',
-  children___children___children___children = 'children___children___children___children',
-  children___children___children___id = 'children___children___children___id',
-  children___children___id = 'children___children___id',
-  children___children___internal___content = 'children___children___internal___content',
-  children___children___internal___contentDigest = 'children___children___internal___contentDigest',
-  children___children___internal___contentFilePath = 'children___children___internal___contentFilePath',
-  children___children___internal___description = 'children___children___internal___description',
-  children___children___internal___fieldOwners = 'children___children___internal___fieldOwners',
-  children___children___internal___ignoreType = 'children___children___internal___ignoreType',
-  children___children___internal___mediaType = 'children___children___internal___mediaType',
-  children___children___internal___owner = 'children___children___internal___owner',
-  children___children___internal___type = 'children___children___internal___type',
-  children___children___parent___children = 'children___children___parent___children',
-  children___children___parent___id = 'children___children___parent___id',
-  children___id = 'children___id',
-  children___internal___content = 'children___internal___content',
-  children___internal___contentDigest = 'children___internal___contentDigest',
-  children___internal___contentFilePath = 'children___internal___contentFilePath',
-  children___internal___description = 'children___internal___description',
-  children___internal___fieldOwners = 'children___internal___fieldOwners',
-  children___internal___ignoreType = 'children___internal___ignoreType',
-  children___internal___mediaType = 'children___internal___mediaType',
-  children___internal___owner = 'children___internal___owner',
-  children___internal___type = 'children___internal___type',
-  children___parent___children = 'children___parent___children',
-  children___parent___children___children = 'children___parent___children___children',
-  children___parent___children___id = 'children___parent___children___id',
-  children___parent___id = 'children___parent___id',
-  children___parent___internal___content = 'children___parent___internal___content',
-  children___parent___internal___contentDigest = 'children___parent___internal___contentDigest',
-  children___parent___internal___contentFilePath = 'children___parent___internal___contentFilePath',
-  children___parent___internal___description = 'children___parent___internal___description',
-  children___parent___internal___fieldOwners = 'children___parent___internal___fieldOwners',
-  children___parent___internal___ignoreType = 'children___parent___internal___ignoreType',
-  children___parent___internal___mediaType = 'children___parent___internal___mediaType',
-  children___parent___internal___owner = 'children___parent___internal___owner',
-  children___parent___internal___type = 'children___parent___internal___type',
-  children___parent___parent___children = 'children___parent___parent___children',
-  children___parent___parent___id = 'children___parent___parent___id',
-  ctime = 'ctime',
-  ctimeMs = 'ctimeMs',
-  dev = 'dev',
-  dir = 'dir',
-  ext = 'ext',
-  extension = 'extension',
-  gid = 'gid',
-  id = 'id',
-  ino = 'ino',
-  internal___content = 'internal___content',
-  internal___contentDigest = 'internal___contentDigest',
-  internal___contentFilePath = 'internal___contentFilePath',
-  internal___description = 'internal___description',
-  internal___fieldOwners = 'internal___fieldOwners',
-  internal___ignoreType = 'internal___ignoreType',
-  internal___mediaType = 'internal___mediaType',
-  internal___owner = 'internal___owner',
-  internal___type = 'internal___type',
-  mode = 'mode',
-  modifiedTime = 'modifiedTime',
-  mtime = 'mtime',
-  mtimeMs = 'mtimeMs',
-  name = 'name',
-  nlink = 'nlink',
-  parent___children = 'parent___children',
-  parent___children___children = 'parent___children___children',
-  parent___children___children___children = 'parent___children___children___children',
-  parent___children___children___id = 'parent___children___children___id',
-  parent___children___id = 'parent___children___id',
-  parent___children___internal___content = 'parent___children___internal___content',
-  parent___children___internal___contentDigest = 'parent___children___internal___contentDigest',
-  parent___children___internal___contentFilePath = 'parent___children___internal___contentFilePath',
-  parent___children___internal___description = 'parent___children___internal___description',
-  parent___children___internal___fieldOwners = 'parent___children___internal___fieldOwners',
-  parent___children___internal___ignoreType = 'parent___children___internal___ignoreType',
-  parent___children___internal___mediaType = 'parent___children___internal___mediaType',
-  parent___children___internal___owner = 'parent___children___internal___owner',
-  parent___children___internal___type = 'parent___children___internal___type',
-  parent___children___parent___children = 'parent___children___parent___children',
-  parent___children___parent___id = 'parent___children___parent___id',
-  parent___id = 'parent___id',
-  parent___internal___content = 'parent___internal___content',
-  parent___internal___contentDigest = 'parent___internal___contentDigest',
-  parent___internal___contentFilePath = 'parent___internal___contentFilePath',
-  parent___internal___description = 'parent___internal___description',
-  parent___internal___fieldOwners = 'parent___internal___fieldOwners',
-  parent___internal___ignoreType = 'parent___internal___ignoreType',
-  parent___internal___mediaType = 'parent___internal___mediaType',
-  parent___internal___owner = 'parent___internal___owner',
-  parent___internal___type = 'parent___internal___type',
-  parent___parent___children = 'parent___parent___children',
-  parent___parent___children___children = 'parent___parent___children___children',
-  parent___parent___children___id = 'parent___parent___children___id',
-  parent___parent___id = 'parent___parent___id',
-  parent___parent___internal___content = 'parent___parent___internal___content',
-  parent___parent___internal___contentDigest = 'parent___parent___internal___contentDigest',
-  parent___parent___internal___contentFilePath = 'parent___parent___internal___contentFilePath',
-  parent___parent___internal___description = 'parent___parent___internal___description',
-  parent___parent___internal___fieldOwners = 'parent___parent___internal___fieldOwners',
-  parent___parent___internal___ignoreType = 'parent___parent___internal___ignoreType',
-  parent___parent___internal___mediaType = 'parent___parent___internal___mediaType',
-  parent___parent___internal___owner = 'parent___parent___internal___owner',
-  parent___parent___internal___type = 'parent___parent___internal___type',
-  parent___parent___parent___children = 'parent___parent___parent___children',
-  parent___parent___parent___id = 'parent___parent___parent___id',
-  prettySize = 'prettySize',
-  rdev = 'rdev',
-  relativeDirectory = 'relativeDirectory',
-  relativePath = 'relativePath',
-  root = 'root',
-  size = 'size',
-  sourceInstanceName = 'sourceInstanceName',
-  uid = 'uid',
+export type DirectoryFieldSelector = {
+  absolutePath?: Maybe<FieldSelectorEnum>
+  accessTime?: Maybe<FieldSelectorEnum>
+  atime?: Maybe<FieldSelectorEnum>
+  atimeMs?: Maybe<FieldSelectorEnum>
+  base?: Maybe<FieldSelectorEnum>
+  birthTime?: Maybe<FieldSelectorEnum>
+  birthtime?: Maybe<FieldSelectorEnum>
+  birthtimeMs?: Maybe<FieldSelectorEnum>
+  changeTime?: Maybe<FieldSelectorEnum>
+  children?: Maybe<NodeFieldSelector>
+  ctime?: Maybe<FieldSelectorEnum>
+  ctimeMs?: Maybe<FieldSelectorEnum>
+  dev?: Maybe<FieldSelectorEnum>
+  dir?: Maybe<FieldSelectorEnum>
+  ext?: Maybe<FieldSelectorEnum>
+  extension?: Maybe<FieldSelectorEnum>
+  gid?: Maybe<FieldSelectorEnum>
+  id?: Maybe<FieldSelectorEnum>
+  ino?: Maybe<FieldSelectorEnum>
+  internal?: Maybe<InternalFieldSelector>
+  mode?: Maybe<FieldSelectorEnum>
+  modifiedTime?: Maybe<FieldSelectorEnum>
+  mtime?: Maybe<FieldSelectorEnum>
+  mtimeMs?: Maybe<FieldSelectorEnum>
+  name?: Maybe<FieldSelectorEnum>
+  nlink?: Maybe<FieldSelectorEnum>
+  parent?: Maybe<NodeFieldSelector>
+  prettySize?: Maybe<FieldSelectorEnum>
+  rdev?: Maybe<FieldSelectorEnum>
+  relativeDirectory?: Maybe<FieldSelectorEnum>
+  relativePath?: Maybe<FieldSelectorEnum>
+  root?: Maybe<FieldSelectorEnum>
+  size?: Maybe<FieldSelectorEnum>
+  sourceInstanceName?: Maybe<FieldSelectorEnum>
+  uid?: Maybe<FieldSelectorEnum>
 }
 
 export type DirectoryFilterInput = {
@@ -381,36 +292,73 @@ export type DirectoryGroupConnection = {
 }
 
 export type DirectoryGroupConnectionDistinctArgs = {
-  field: DirectoryFieldsEnum
+  field: DirectoryFieldSelector
 }
 
 export type DirectoryGroupConnectionGroupArgs = {
-  field: DirectoryFieldsEnum
+  field: DirectoryFieldSelector
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
 }
 
 export type DirectoryGroupConnectionMaxArgs = {
-  field: DirectoryFieldsEnum
+  field: DirectoryFieldSelector
 }
 
 export type DirectoryGroupConnectionMinArgs = {
-  field: DirectoryFieldsEnum
+  field: DirectoryFieldSelector
 }
 
 export type DirectoryGroupConnectionSumArgs = {
-  field: DirectoryFieldsEnum
+  field: DirectoryFieldSelector
 }
 
 export type DirectorySortInput = {
-  fields?: Maybe<Array<Maybe<DirectoryFieldsEnum>>>
-  order?: Maybe<Array<Maybe<SortOrderEnum>>>
+  absolutePath?: Maybe<SortOrderEnum>
+  accessTime?: Maybe<SortOrderEnum>
+  atime?: Maybe<SortOrderEnum>
+  atimeMs?: Maybe<SortOrderEnum>
+  base?: Maybe<SortOrderEnum>
+  birthTime?: Maybe<SortOrderEnum>
+  birthtime?: Maybe<SortOrderEnum>
+  birthtimeMs?: Maybe<SortOrderEnum>
+  changeTime?: Maybe<SortOrderEnum>
+  children?: Maybe<NodeSortInput>
+  ctime?: Maybe<SortOrderEnum>
+  ctimeMs?: Maybe<SortOrderEnum>
+  dev?: Maybe<SortOrderEnum>
+  dir?: Maybe<SortOrderEnum>
+  ext?: Maybe<SortOrderEnum>
+  extension?: Maybe<SortOrderEnum>
+  gid?: Maybe<SortOrderEnum>
+  id?: Maybe<SortOrderEnum>
+  ino?: Maybe<SortOrderEnum>
+  internal?: Maybe<InternalSortInput>
+  mode?: Maybe<SortOrderEnum>
+  modifiedTime?: Maybe<SortOrderEnum>
+  mtime?: Maybe<SortOrderEnum>
+  mtimeMs?: Maybe<SortOrderEnum>
+  name?: Maybe<SortOrderEnum>
+  nlink?: Maybe<SortOrderEnum>
+  parent?: Maybe<NodeSortInput>
+  prettySize?: Maybe<SortOrderEnum>
+  rdev?: Maybe<SortOrderEnum>
+  relativeDirectory?: Maybe<SortOrderEnum>
+  relativePath?: Maybe<SortOrderEnum>
+  root?: Maybe<SortOrderEnum>
+  size?: Maybe<SortOrderEnum>
+  sourceInstanceName?: Maybe<SortOrderEnum>
+  uid?: Maybe<SortOrderEnum>
 }
 
 export type DuotoneGradient = {
   highlight: Scalars['String']
   opacity?: Maybe<Scalars['Int']>
   shadow: Scalars['String']
+}
+
+export enum FieldSelectorEnum {
+  SELECT = 'SELECT',
 }
 
 export type File = Node & {
@@ -525,25 +473,25 @@ export type FileConnection = {
 }
 
 export type FileConnectionDistinctArgs = {
-  field: FileFieldsEnum
+  field: FileFieldSelector
 }
 
 export type FileConnectionGroupArgs = {
-  field: FileFieldsEnum
+  field: FileFieldSelector
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
 }
 
 export type FileConnectionMaxArgs = {
-  field: FileFieldsEnum
+  field: FileFieldSelector
 }
 
 export type FileConnectionMinArgs = {
-  field: FileFieldsEnum
+  field: FileFieldSelector
 }
 
 export type FileConnectionSumArgs = {
-  field: FileFieldsEnum
+  field: FileFieldSelector
 }
 
 export type FileEdge = {
@@ -553,281 +501,47 @@ export type FileEdge = {
   previous?: Maybe<File>
 }
 
-export enum FileFieldsEnum {
-  absolutePath = 'absolutePath',
-  accessTime = 'accessTime',
-  atime = 'atime',
-  atimeMs = 'atimeMs',
-  base = 'base',
-  birthTime = 'birthTime',
-  birthtime = 'birthtime',
-  birthtimeMs = 'birthtimeMs',
-  blksize = 'blksize',
-  blocks = 'blocks',
-  changeTime = 'changeTime',
-  childImageSharp___children = 'childImageSharp___children',
-  childImageSharp___children___children = 'childImageSharp___children___children',
-  childImageSharp___children___children___children = 'childImageSharp___children___children___children',
-  childImageSharp___children___children___id = 'childImageSharp___children___children___id',
-  childImageSharp___children___id = 'childImageSharp___children___id',
-  childImageSharp___children___internal___content = 'childImageSharp___children___internal___content',
-  childImageSharp___children___internal___contentDigest = 'childImageSharp___children___internal___contentDigest',
-  childImageSharp___children___internal___contentFilePath = 'childImageSharp___children___internal___contentFilePath',
-  childImageSharp___children___internal___description = 'childImageSharp___children___internal___description',
-  childImageSharp___children___internal___fieldOwners = 'childImageSharp___children___internal___fieldOwners',
-  childImageSharp___children___internal___ignoreType = 'childImageSharp___children___internal___ignoreType',
-  childImageSharp___children___internal___mediaType = 'childImageSharp___children___internal___mediaType',
-  childImageSharp___children___internal___owner = 'childImageSharp___children___internal___owner',
-  childImageSharp___children___internal___type = 'childImageSharp___children___internal___type',
-  childImageSharp___children___parent___children = 'childImageSharp___children___parent___children',
-  childImageSharp___children___parent___id = 'childImageSharp___children___parent___id',
-  childImageSharp___fixed___aspectRatio = 'childImageSharp___fixed___aspectRatio',
-  childImageSharp___fixed___base64 = 'childImageSharp___fixed___base64',
-  childImageSharp___fixed___height = 'childImageSharp___fixed___height',
-  childImageSharp___fixed___originalName = 'childImageSharp___fixed___originalName',
-  childImageSharp___fixed___src = 'childImageSharp___fixed___src',
-  childImageSharp___fixed___srcSet = 'childImageSharp___fixed___srcSet',
-  childImageSharp___fixed___srcSetWebp = 'childImageSharp___fixed___srcSetWebp',
-  childImageSharp___fixed___srcWebp = 'childImageSharp___fixed___srcWebp',
-  childImageSharp___fixed___tracedSVG = 'childImageSharp___fixed___tracedSVG',
-  childImageSharp___fixed___width = 'childImageSharp___fixed___width',
-  childImageSharp___fluid___aspectRatio = 'childImageSharp___fluid___aspectRatio',
-  childImageSharp___fluid___base64 = 'childImageSharp___fluid___base64',
-  childImageSharp___fluid___originalImg = 'childImageSharp___fluid___originalImg',
-  childImageSharp___fluid___originalName = 'childImageSharp___fluid___originalName',
-  childImageSharp___fluid___presentationHeight = 'childImageSharp___fluid___presentationHeight',
-  childImageSharp___fluid___presentationWidth = 'childImageSharp___fluid___presentationWidth',
-  childImageSharp___fluid___sizes = 'childImageSharp___fluid___sizes',
-  childImageSharp___fluid___src = 'childImageSharp___fluid___src',
-  childImageSharp___fluid___srcSet = 'childImageSharp___fluid___srcSet',
-  childImageSharp___fluid___srcSetWebp = 'childImageSharp___fluid___srcSetWebp',
-  childImageSharp___fluid___srcWebp = 'childImageSharp___fluid___srcWebp',
-  childImageSharp___fluid___tracedSVG = 'childImageSharp___fluid___tracedSVG',
-  childImageSharp___gatsbyImageData = 'childImageSharp___gatsbyImageData',
-  childImageSharp___id = 'childImageSharp___id',
-  childImageSharp___internal___content = 'childImageSharp___internal___content',
-  childImageSharp___internal___contentDigest = 'childImageSharp___internal___contentDigest',
-  childImageSharp___internal___contentFilePath = 'childImageSharp___internal___contentFilePath',
-  childImageSharp___internal___description = 'childImageSharp___internal___description',
-  childImageSharp___internal___fieldOwners = 'childImageSharp___internal___fieldOwners',
-  childImageSharp___internal___ignoreType = 'childImageSharp___internal___ignoreType',
-  childImageSharp___internal___mediaType = 'childImageSharp___internal___mediaType',
-  childImageSharp___internal___owner = 'childImageSharp___internal___owner',
-  childImageSharp___internal___type = 'childImageSharp___internal___type',
-  childImageSharp___original___height = 'childImageSharp___original___height',
-  childImageSharp___original___src = 'childImageSharp___original___src',
-  childImageSharp___original___width = 'childImageSharp___original___width',
-  childImageSharp___parent___children = 'childImageSharp___parent___children',
-  childImageSharp___parent___children___children = 'childImageSharp___parent___children___children',
-  childImageSharp___parent___children___id = 'childImageSharp___parent___children___id',
-  childImageSharp___parent___id = 'childImageSharp___parent___id',
-  childImageSharp___parent___internal___content = 'childImageSharp___parent___internal___content',
-  childImageSharp___parent___internal___contentDigest = 'childImageSharp___parent___internal___contentDigest',
-  childImageSharp___parent___internal___contentFilePath = 'childImageSharp___parent___internal___contentFilePath',
-  childImageSharp___parent___internal___description = 'childImageSharp___parent___internal___description',
-  childImageSharp___parent___internal___fieldOwners = 'childImageSharp___parent___internal___fieldOwners',
-  childImageSharp___parent___internal___ignoreType = 'childImageSharp___parent___internal___ignoreType',
-  childImageSharp___parent___internal___mediaType = 'childImageSharp___parent___internal___mediaType',
-  childImageSharp___parent___internal___owner = 'childImageSharp___parent___internal___owner',
-  childImageSharp___parent___internal___type = 'childImageSharp___parent___internal___type',
-  childImageSharp___parent___parent___children = 'childImageSharp___parent___parent___children',
-  childImageSharp___parent___parent___id = 'childImageSharp___parent___parent___id',
-  childImageSharp___resize___aspectRatio = 'childImageSharp___resize___aspectRatio',
-  childImageSharp___resize___height = 'childImageSharp___resize___height',
-  childImageSharp___resize___originalName = 'childImageSharp___resize___originalName',
-  childImageSharp___resize___src = 'childImageSharp___resize___src',
-  childImageSharp___resize___tracedSVG = 'childImageSharp___resize___tracedSVG',
-  childImageSharp___resize___width = 'childImageSharp___resize___width',
-  children = 'children',
-  childrenImageSharp = 'childrenImageSharp',
-  childrenImageSharp___children = 'childrenImageSharp___children',
-  childrenImageSharp___children___children = 'childrenImageSharp___children___children',
-  childrenImageSharp___children___children___children = 'childrenImageSharp___children___children___children',
-  childrenImageSharp___children___children___id = 'childrenImageSharp___children___children___id',
-  childrenImageSharp___children___id = 'childrenImageSharp___children___id',
-  childrenImageSharp___children___internal___content = 'childrenImageSharp___children___internal___content',
-  childrenImageSharp___children___internal___contentDigest = 'childrenImageSharp___children___internal___contentDigest',
-  childrenImageSharp___children___internal___contentFilePath = 'childrenImageSharp___children___internal___contentFilePath',
-  childrenImageSharp___children___internal___description = 'childrenImageSharp___children___internal___description',
-  childrenImageSharp___children___internal___fieldOwners = 'childrenImageSharp___children___internal___fieldOwners',
-  childrenImageSharp___children___internal___ignoreType = 'childrenImageSharp___children___internal___ignoreType',
-  childrenImageSharp___children___internal___mediaType = 'childrenImageSharp___children___internal___mediaType',
-  childrenImageSharp___children___internal___owner = 'childrenImageSharp___children___internal___owner',
-  childrenImageSharp___children___internal___type = 'childrenImageSharp___children___internal___type',
-  childrenImageSharp___children___parent___children = 'childrenImageSharp___children___parent___children',
-  childrenImageSharp___children___parent___id = 'childrenImageSharp___children___parent___id',
-  childrenImageSharp___fixed___aspectRatio = 'childrenImageSharp___fixed___aspectRatio',
-  childrenImageSharp___fixed___base64 = 'childrenImageSharp___fixed___base64',
-  childrenImageSharp___fixed___height = 'childrenImageSharp___fixed___height',
-  childrenImageSharp___fixed___originalName = 'childrenImageSharp___fixed___originalName',
-  childrenImageSharp___fixed___src = 'childrenImageSharp___fixed___src',
-  childrenImageSharp___fixed___srcSet = 'childrenImageSharp___fixed___srcSet',
-  childrenImageSharp___fixed___srcSetWebp = 'childrenImageSharp___fixed___srcSetWebp',
-  childrenImageSharp___fixed___srcWebp = 'childrenImageSharp___fixed___srcWebp',
-  childrenImageSharp___fixed___tracedSVG = 'childrenImageSharp___fixed___tracedSVG',
-  childrenImageSharp___fixed___width = 'childrenImageSharp___fixed___width',
-  childrenImageSharp___fluid___aspectRatio = 'childrenImageSharp___fluid___aspectRatio',
-  childrenImageSharp___fluid___base64 = 'childrenImageSharp___fluid___base64',
-  childrenImageSharp___fluid___originalImg = 'childrenImageSharp___fluid___originalImg',
-  childrenImageSharp___fluid___originalName = 'childrenImageSharp___fluid___originalName',
-  childrenImageSharp___fluid___presentationHeight = 'childrenImageSharp___fluid___presentationHeight',
-  childrenImageSharp___fluid___presentationWidth = 'childrenImageSharp___fluid___presentationWidth',
-  childrenImageSharp___fluid___sizes = 'childrenImageSharp___fluid___sizes',
-  childrenImageSharp___fluid___src = 'childrenImageSharp___fluid___src',
-  childrenImageSharp___fluid___srcSet = 'childrenImageSharp___fluid___srcSet',
-  childrenImageSharp___fluid___srcSetWebp = 'childrenImageSharp___fluid___srcSetWebp',
-  childrenImageSharp___fluid___srcWebp = 'childrenImageSharp___fluid___srcWebp',
-  childrenImageSharp___fluid___tracedSVG = 'childrenImageSharp___fluid___tracedSVG',
-  childrenImageSharp___gatsbyImageData = 'childrenImageSharp___gatsbyImageData',
-  childrenImageSharp___id = 'childrenImageSharp___id',
-  childrenImageSharp___internal___content = 'childrenImageSharp___internal___content',
-  childrenImageSharp___internal___contentDigest = 'childrenImageSharp___internal___contentDigest',
-  childrenImageSharp___internal___contentFilePath = 'childrenImageSharp___internal___contentFilePath',
-  childrenImageSharp___internal___description = 'childrenImageSharp___internal___description',
-  childrenImageSharp___internal___fieldOwners = 'childrenImageSharp___internal___fieldOwners',
-  childrenImageSharp___internal___ignoreType = 'childrenImageSharp___internal___ignoreType',
-  childrenImageSharp___internal___mediaType = 'childrenImageSharp___internal___mediaType',
-  childrenImageSharp___internal___owner = 'childrenImageSharp___internal___owner',
-  childrenImageSharp___internal___type = 'childrenImageSharp___internal___type',
-  childrenImageSharp___original___height = 'childrenImageSharp___original___height',
-  childrenImageSharp___original___src = 'childrenImageSharp___original___src',
-  childrenImageSharp___original___width = 'childrenImageSharp___original___width',
-  childrenImageSharp___parent___children = 'childrenImageSharp___parent___children',
-  childrenImageSharp___parent___children___children = 'childrenImageSharp___parent___children___children',
-  childrenImageSharp___parent___children___id = 'childrenImageSharp___parent___children___id',
-  childrenImageSharp___parent___id = 'childrenImageSharp___parent___id',
-  childrenImageSharp___parent___internal___content = 'childrenImageSharp___parent___internal___content',
-  childrenImageSharp___parent___internal___contentDigest = 'childrenImageSharp___parent___internal___contentDigest',
-  childrenImageSharp___parent___internal___contentFilePath = 'childrenImageSharp___parent___internal___contentFilePath',
-  childrenImageSharp___parent___internal___description = 'childrenImageSharp___parent___internal___description',
-  childrenImageSharp___parent___internal___fieldOwners = 'childrenImageSharp___parent___internal___fieldOwners',
-  childrenImageSharp___parent___internal___ignoreType = 'childrenImageSharp___parent___internal___ignoreType',
-  childrenImageSharp___parent___internal___mediaType = 'childrenImageSharp___parent___internal___mediaType',
-  childrenImageSharp___parent___internal___owner = 'childrenImageSharp___parent___internal___owner',
-  childrenImageSharp___parent___internal___type = 'childrenImageSharp___parent___internal___type',
-  childrenImageSharp___parent___parent___children = 'childrenImageSharp___parent___parent___children',
-  childrenImageSharp___parent___parent___id = 'childrenImageSharp___parent___parent___id',
-  childrenImageSharp___resize___aspectRatio = 'childrenImageSharp___resize___aspectRatio',
-  childrenImageSharp___resize___height = 'childrenImageSharp___resize___height',
-  childrenImageSharp___resize___originalName = 'childrenImageSharp___resize___originalName',
-  childrenImageSharp___resize___src = 'childrenImageSharp___resize___src',
-  childrenImageSharp___resize___tracedSVG = 'childrenImageSharp___resize___tracedSVG',
-  childrenImageSharp___resize___width = 'childrenImageSharp___resize___width',
-  children___children = 'children___children',
-  children___children___children = 'children___children___children',
-  children___children___children___children = 'children___children___children___children',
-  children___children___children___id = 'children___children___children___id',
-  children___children___id = 'children___children___id',
-  children___children___internal___content = 'children___children___internal___content',
-  children___children___internal___contentDigest = 'children___children___internal___contentDigest',
-  children___children___internal___contentFilePath = 'children___children___internal___contentFilePath',
-  children___children___internal___description = 'children___children___internal___description',
-  children___children___internal___fieldOwners = 'children___children___internal___fieldOwners',
-  children___children___internal___ignoreType = 'children___children___internal___ignoreType',
-  children___children___internal___mediaType = 'children___children___internal___mediaType',
-  children___children___internal___owner = 'children___children___internal___owner',
-  children___children___internal___type = 'children___children___internal___type',
-  children___children___parent___children = 'children___children___parent___children',
-  children___children___parent___id = 'children___children___parent___id',
-  children___id = 'children___id',
-  children___internal___content = 'children___internal___content',
-  children___internal___contentDigest = 'children___internal___contentDigest',
-  children___internal___contentFilePath = 'children___internal___contentFilePath',
-  children___internal___description = 'children___internal___description',
-  children___internal___fieldOwners = 'children___internal___fieldOwners',
-  children___internal___ignoreType = 'children___internal___ignoreType',
-  children___internal___mediaType = 'children___internal___mediaType',
-  children___internal___owner = 'children___internal___owner',
-  children___internal___type = 'children___internal___type',
-  children___parent___children = 'children___parent___children',
-  children___parent___children___children = 'children___parent___children___children',
-  children___parent___children___id = 'children___parent___children___id',
-  children___parent___id = 'children___parent___id',
-  children___parent___internal___content = 'children___parent___internal___content',
-  children___parent___internal___contentDigest = 'children___parent___internal___contentDigest',
-  children___parent___internal___contentFilePath = 'children___parent___internal___contentFilePath',
-  children___parent___internal___description = 'children___parent___internal___description',
-  children___parent___internal___fieldOwners = 'children___parent___internal___fieldOwners',
-  children___parent___internal___ignoreType = 'children___parent___internal___ignoreType',
-  children___parent___internal___mediaType = 'children___parent___internal___mediaType',
-  children___parent___internal___owner = 'children___parent___internal___owner',
-  children___parent___internal___type = 'children___parent___internal___type',
-  children___parent___parent___children = 'children___parent___parent___children',
-  children___parent___parent___id = 'children___parent___parent___id',
-  ctime = 'ctime',
-  ctimeMs = 'ctimeMs',
-  dev = 'dev',
-  dir = 'dir',
-  ext = 'ext',
-  extension = 'extension',
-  gid = 'gid',
-  id = 'id',
-  ino = 'ino',
-  internal___content = 'internal___content',
-  internal___contentDigest = 'internal___contentDigest',
-  internal___contentFilePath = 'internal___contentFilePath',
-  internal___description = 'internal___description',
-  internal___fieldOwners = 'internal___fieldOwners',
-  internal___ignoreType = 'internal___ignoreType',
-  internal___mediaType = 'internal___mediaType',
-  internal___owner = 'internal___owner',
-  internal___type = 'internal___type',
-  mode = 'mode',
-  modifiedTime = 'modifiedTime',
-  mtime = 'mtime',
-  mtimeMs = 'mtimeMs',
-  name = 'name',
-  nlink = 'nlink',
-  parent___children = 'parent___children',
-  parent___children___children = 'parent___children___children',
-  parent___children___children___children = 'parent___children___children___children',
-  parent___children___children___id = 'parent___children___children___id',
-  parent___children___id = 'parent___children___id',
-  parent___children___internal___content = 'parent___children___internal___content',
-  parent___children___internal___contentDigest = 'parent___children___internal___contentDigest',
-  parent___children___internal___contentFilePath = 'parent___children___internal___contentFilePath',
-  parent___children___internal___description = 'parent___children___internal___description',
-  parent___children___internal___fieldOwners = 'parent___children___internal___fieldOwners',
-  parent___children___internal___ignoreType = 'parent___children___internal___ignoreType',
-  parent___children___internal___mediaType = 'parent___children___internal___mediaType',
-  parent___children___internal___owner = 'parent___children___internal___owner',
-  parent___children___internal___type = 'parent___children___internal___type',
-  parent___children___parent___children = 'parent___children___parent___children',
-  parent___children___parent___id = 'parent___children___parent___id',
-  parent___id = 'parent___id',
-  parent___internal___content = 'parent___internal___content',
-  parent___internal___contentDigest = 'parent___internal___contentDigest',
-  parent___internal___contentFilePath = 'parent___internal___contentFilePath',
-  parent___internal___description = 'parent___internal___description',
-  parent___internal___fieldOwners = 'parent___internal___fieldOwners',
-  parent___internal___ignoreType = 'parent___internal___ignoreType',
-  parent___internal___mediaType = 'parent___internal___mediaType',
-  parent___internal___owner = 'parent___internal___owner',
-  parent___internal___type = 'parent___internal___type',
-  parent___parent___children = 'parent___parent___children',
-  parent___parent___children___children = 'parent___parent___children___children',
-  parent___parent___children___id = 'parent___parent___children___id',
-  parent___parent___id = 'parent___parent___id',
-  parent___parent___internal___content = 'parent___parent___internal___content',
-  parent___parent___internal___contentDigest = 'parent___parent___internal___contentDigest',
-  parent___parent___internal___contentFilePath = 'parent___parent___internal___contentFilePath',
-  parent___parent___internal___description = 'parent___parent___internal___description',
-  parent___parent___internal___fieldOwners = 'parent___parent___internal___fieldOwners',
-  parent___parent___internal___ignoreType = 'parent___parent___internal___ignoreType',
-  parent___parent___internal___mediaType = 'parent___parent___internal___mediaType',
-  parent___parent___internal___owner = 'parent___parent___internal___owner',
-  parent___parent___internal___type = 'parent___parent___internal___type',
-  parent___parent___parent___children = 'parent___parent___parent___children',
-  parent___parent___parent___id = 'parent___parent___parent___id',
-  prettySize = 'prettySize',
-  publicURL = 'publicURL',
-  rdev = 'rdev',
-  relativeDirectory = 'relativeDirectory',
-  relativePath = 'relativePath',
-  root = 'root',
-  size = 'size',
-  sourceInstanceName = 'sourceInstanceName',
-  uid = 'uid',
+export type FileFieldSelector = {
+  absolutePath?: Maybe<FieldSelectorEnum>
+  accessTime?: Maybe<FieldSelectorEnum>
+  atime?: Maybe<FieldSelectorEnum>
+  atimeMs?: Maybe<FieldSelectorEnum>
+  base?: Maybe<FieldSelectorEnum>
+  birthTime?: Maybe<FieldSelectorEnum>
+  birthtime?: Maybe<FieldSelectorEnum>
+  birthtimeMs?: Maybe<FieldSelectorEnum>
+  blksize?: Maybe<FieldSelectorEnum>
+  blocks?: Maybe<FieldSelectorEnum>
+  changeTime?: Maybe<FieldSelectorEnum>
+  childImageSharp?: Maybe<ImageSharpFieldSelector>
+  children?: Maybe<NodeFieldSelector>
+  childrenImageSharp?: Maybe<ImageSharpFieldSelector>
+  ctime?: Maybe<FieldSelectorEnum>
+  ctimeMs?: Maybe<FieldSelectorEnum>
+  dev?: Maybe<FieldSelectorEnum>
+  dir?: Maybe<FieldSelectorEnum>
+  ext?: Maybe<FieldSelectorEnum>
+  extension?: Maybe<FieldSelectorEnum>
+  gid?: Maybe<FieldSelectorEnum>
+  id?: Maybe<FieldSelectorEnum>
+  ino?: Maybe<FieldSelectorEnum>
+  internal?: Maybe<InternalFieldSelector>
+  mode?: Maybe<FieldSelectorEnum>
+  modifiedTime?: Maybe<FieldSelectorEnum>
+  mtime?: Maybe<FieldSelectorEnum>
+  mtimeMs?: Maybe<FieldSelectorEnum>
+  name?: Maybe<FieldSelectorEnum>
+  nlink?: Maybe<FieldSelectorEnum>
+  parent?: Maybe<NodeFieldSelector>
+  prettySize?: Maybe<FieldSelectorEnum>
+  publicURL?: Maybe<FieldSelectorEnum>
+  rdev?: Maybe<FieldSelectorEnum>
+  relativeDirectory?: Maybe<FieldSelectorEnum>
+  relativePath?: Maybe<FieldSelectorEnum>
+  root?: Maybe<FieldSelectorEnum>
+  size?: Maybe<FieldSelectorEnum>
+  sourceInstanceName?: Maybe<FieldSelectorEnum>
+  uid?: Maybe<FieldSelectorEnum>
 }
 
 export type FileFilterInput = {
@@ -889,30 +603,68 @@ export type FileGroupConnection = {
 }
 
 export type FileGroupConnectionDistinctArgs = {
-  field: FileFieldsEnum
+  field: FileFieldSelector
 }
 
 export type FileGroupConnectionGroupArgs = {
-  field: FileFieldsEnum
+  field: FileFieldSelector
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
 }
 
 export type FileGroupConnectionMaxArgs = {
-  field: FileFieldsEnum
+  field: FileFieldSelector
 }
 
 export type FileGroupConnectionMinArgs = {
-  field: FileFieldsEnum
+  field: FileFieldSelector
 }
 
 export type FileGroupConnectionSumArgs = {
-  field: FileFieldsEnum
+  field: FileFieldSelector
 }
 
 export type FileSortInput = {
-  fields?: Maybe<Array<Maybe<FileFieldsEnum>>>
-  order?: Maybe<Array<Maybe<SortOrderEnum>>>
+  absolutePath?: Maybe<SortOrderEnum>
+  accessTime?: Maybe<SortOrderEnum>
+  atime?: Maybe<SortOrderEnum>
+  atimeMs?: Maybe<SortOrderEnum>
+  base?: Maybe<SortOrderEnum>
+  birthTime?: Maybe<SortOrderEnum>
+  birthtime?: Maybe<SortOrderEnum>
+  birthtimeMs?: Maybe<SortOrderEnum>
+  blksize?: Maybe<SortOrderEnum>
+  blocks?: Maybe<SortOrderEnum>
+  changeTime?: Maybe<SortOrderEnum>
+  childImageSharp?: Maybe<ImageSharpSortInput>
+  children?: Maybe<NodeSortInput>
+  childrenImageSharp?: Maybe<ImageSharpSortInput>
+  ctime?: Maybe<SortOrderEnum>
+  ctimeMs?: Maybe<SortOrderEnum>
+  dev?: Maybe<SortOrderEnum>
+  dir?: Maybe<SortOrderEnum>
+  ext?: Maybe<SortOrderEnum>
+  extension?: Maybe<SortOrderEnum>
+  gid?: Maybe<SortOrderEnum>
+  id?: Maybe<SortOrderEnum>
+  ino?: Maybe<SortOrderEnum>
+  internal?: Maybe<InternalSortInput>
+  mode?: Maybe<SortOrderEnum>
+  modifiedTime?: Maybe<SortOrderEnum>
+  mtime?: Maybe<SortOrderEnum>
+  mtimeMs?: Maybe<SortOrderEnum>
+  name?: Maybe<SortOrderEnum>
+  nlink?: Maybe<SortOrderEnum>
+  parent?: Maybe<NodeSortInput>
+  prettySize?: Maybe<SortOrderEnum>
+  publicURL?: Maybe<SortOrderEnum>
+  rdev?: Maybe<SortOrderEnum>
+  relativeDirectory?: Maybe<SortOrderEnum>
+  relativePath?: Maybe<SortOrderEnum>
+  root?: Maybe<SortOrderEnum>
+  size?: Maybe<SortOrderEnum>
+  sourceInstanceName?: Maybe<SortOrderEnum>
+  uid?: Maybe<SortOrderEnum>
 }
 
 export type FloatQueryOperatorInput = {
@@ -1512,6 +1264,7 @@ export type GraphCms_AssetCreatedAtArgs = {
 
 /** Asset system model */
 export type GraphCms_AssetCreatedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
@@ -1534,6 +1287,7 @@ export type GraphCms_AssetImageConferenceArgs = {
   after?: Maybe<Scalars['String']>
   before?: Maybe<Scalars['String']>
   first?: Maybe<Scalars['Int']>
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   last?: Maybe<Scalars['Int']>
   locales?: Maybe<Array<GraphCms_Locale>>
   orderBy?: Maybe<GraphCms_ConferenceOrderByInput>
@@ -1552,6 +1306,7 @@ export type GraphCms_AssetLogoExperienceArgs = {
   after?: Maybe<Scalars['String']>
   before?: Maybe<Scalars['String']>
   first?: Maybe<Scalars['Int']>
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   last?: Maybe<Scalars['Int']>
   locales?: Maybe<Array<GraphCms_Locale>>
   orderBy?: Maybe<GraphCms_ExperienceOrderByInput>
@@ -1564,6 +1319,7 @@ export type GraphCms_AssetLogoSkillArgs = {
   after?: Maybe<Scalars['String']>
   before?: Maybe<Scalars['String']>
   first?: Maybe<Scalars['Int']>
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   last?: Maybe<Scalars['Int']>
   locales?: Maybe<Array<GraphCms_Locale>>
   orderBy?: Maybe<GraphCms_SkillOrderByInput>
@@ -1578,6 +1334,7 @@ export type GraphCms_AssetPublishedAtArgs = {
 
 /** Asset system model */
 export type GraphCms_AssetPublishedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
@@ -1586,6 +1343,7 @@ export type GraphCms_AssetScheduledInArgs = {
   after?: Maybe<Scalars['String']>
   before?: Maybe<Scalars['String']>
   first?: Maybe<Scalars['Int']>
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   last?: Maybe<Scalars['Int']>
   locales?: Maybe<Array<GraphCms_Locale>>
   skip?: Maybe<Scalars['Int']>
@@ -1599,6 +1357,7 @@ export type GraphCms_AssetUpdatedAtArgs = {
 
 /** Asset system model */
 export type GraphCms_AssetUpdatedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
@@ -1706,7 +1465,7 @@ export type GraphCms_AssetManyWhereInput = {
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   createdAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -1721,7 +1480,7 @@ export type GraphCms_AssetManyWhereInput = {
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
   id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
   id_not_contains?: Maybe<Scalars['ID']>
@@ -1753,7 +1512,7 @@ export type GraphCms_AssetManyWhereInput = {
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   publishedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -1772,7 +1531,7 @@ export type GraphCms_AssetManyWhereInput = {
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   updatedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -1969,7 +1728,7 @@ export type GraphCms_AssetWhereInput = {
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   createdAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -1984,7 +1743,7 @@ export type GraphCms_AssetWhereInput = {
   fileName_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   fileName_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   fileName_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   fileName_not_contains?: Maybe<Scalars['String']>
@@ -2003,7 +1762,7 @@ export type GraphCms_AssetWhereInput = {
   handle_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   handle_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   handle_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   handle_not_contains?: Maybe<Scalars['String']>
@@ -2026,7 +1785,7 @@ export type GraphCms_AssetWhereInput = {
   height_lt?: Maybe<Scalars['Float']>
   /** All values less than or equal the given value. */
   height_lte?: Maybe<Scalars['Float']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   height_not?: Maybe<Scalars['Float']>
   /** All values that are not contained in given list. */
   height_not_in?: Maybe<Array<Maybe<Scalars['Float']>>>
@@ -2037,7 +1796,7 @@ export type GraphCms_AssetWhereInput = {
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
   id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
   id_not_contains?: Maybe<Scalars['ID']>
@@ -2065,7 +1824,7 @@ export type GraphCms_AssetWhereInput = {
   mimeType_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   mimeType_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   mimeType_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   mimeType_not_contains?: Maybe<Scalars['String']>
@@ -2088,7 +1847,7 @@ export type GraphCms_AssetWhereInput = {
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   publishedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -2107,7 +1866,7 @@ export type GraphCms_AssetWhereInput = {
   size_lt?: Maybe<Scalars['Float']>
   /** All values less than or equal the given value. */
   size_lte?: Maybe<Scalars['Float']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   size_not?: Maybe<Scalars['Float']>
   /** All values that are not contained in given list. */
   size_not_in?: Maybe<Array<Maybe<Scalars['Float']>>>
@@ -2122,7 +1881,7 @@ export type GraphCms_AssetWhereInput = {
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   updatedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -2138,7 +1897,7 @@ export type GraphCms_AssetWhereInput = {
   width_lt?: Maybe<Scalars['Float']>
   /** All values less than or equal the given value. */
   width_lte?: Maybe<Scalars['Float']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   width_not?: Maybe<Scalars['Float']>
   /** All values that are not contained in given list. */
   width_not_in?: Maybe<Array<Maybe<Scalars['Float']>>>
@@ -2201,6 +1960,7 @@ export type GraphCms_Bio = GraphCms_Node & {
 }
 
 export type GraphCms_BioCreatedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
@@ -2217,6 +1977,7 @@ export type GraphCms_BioHistoryArgs = {
 }
 
 export type GraphCms_BioPublishedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
@@ -2224,6 +1985,7 @@ export type GraphCms_BioScheduledInArgs = {
   after?: Maybe<Scalars['String']>
   before?: Maybe<Scalars['String']>
   first?: Maybe<Scalars['Int']>
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   last?: Maybe<Scalars['Int']>
   locales?: Maybe<Array<GraphCms_Locale>>
   skip?: Maybe<Scalars['Int']>
@@ -2231,6 +1993,7 @@ export type GraphCms_BioScheduledInArgs = {
 }
 
 export type GraphCms_BioUpdatedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
@@ -2302,7 +2065,7 @@ export type GraphCms_BioManyWhereInput = {
   about_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   about_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   about_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   about_not_contains?: Maybe<Scalars['String']>
@@ -2325,7 +2088,7 @@ export type GraphCms_BioManyWhereInput = {
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   createdAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -2340,7 +2103,7 @@ export type GraphCms_BioManyWhereInput = {
   email_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   email_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   email_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   email_not_contains?: Maybe<Scalars['String']>
@@ -2359,7 +2122,7 @@ export type GraphCms_BioManyWhereInput = {
   fullName_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   fullName_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   fullName_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   fullName_not_contains?: Maybe<Scalars['String']>
@@ -2378,7 +2141,7 @@ export type GraphCms_BioManyWhereInput = {
   headline_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   headline_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   headline_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   headline_not_contains?: Maybe<Scalars['String']>
@@ -2397,7 +2160,7 @@ export type GraphCms_BioManyWhereInput = {
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
   id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
   id_not_contains?: Maybe<Scalars['ID']>
@@ -2416,7 +2179,7 @@ export type GraphCms_BioManyWhereInput = {
   location_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   location_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   location_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   location_not_contains?: Maybe<Scalars['String']>
@@ -2435,7 +2198,7 @@ export type GraphCms_BioManyWhereInput = {
   phoneNumber_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   phoneNumber_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   phoneNumber_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   phoneNumber_not_contains?: Maybe<Scalars['String']>
@@ -2458,7 +2221,7 @@ export type GraphCms_BioManyWhereInput = {
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   publishedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -2477,7 +2240,7 @@ export type GraphCms_BioManyWhereInput = {
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   updatedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -2608,7 +2371,7 @@ export type GraphCms_BioWhereInput = {
   about_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   about_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   about_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   about_not_contains?: Maybe<Scalars['String']>
@@ -2631,7 +2394,7 @@ export type GraphCms_BioWhereInput = {
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   createdAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -2646,7 +2409,7 @@ export type GraphCms_BioWhereInput = {
   email_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   email_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   email_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   email_not_contains?: Maybe<Scalars['String']>
@@ -2665,7 +2428,7 @@ export type GraphCms_BioWhereInput = {
   fullName_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   fullName_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   fullName_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   fullName_not_contains?: Maybe<Scalars['String']>
@@ -2684,7 +2447,7 @@ export type GraphCms_BioWhereInput = {
   headline_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   headline_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   headline_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   headline_not_contains?: Maybe<Scalars['String']>
@@ -2703,7 +2466,7 @@ export type GraphCms_BioWhereInput = {
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
   id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
   id_not_contains?: Maybe<Scalars['ID']>
@@ -2722,7 +2485,7 @@ export type GraphCms_BioWhereInput = {
   location_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   location_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   location_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   location_not_contains?: Maybe<Scalars['String']>
@@ -2741,7 +2504,7 @@ export type GraphCms_BioWhereInput = {
   phoneNumber_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   phoneNumber_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   phoneNumber_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   phoneNumber_not_contains?: Maybe<Scalars['String']>
@@ -2764,7 +2527,7 @@ export type GraphCms_BioWhereInput = {
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   publishedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -2783,7 +2546,7 @@ export type GraphCms_BioWhereInput = {
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   updatedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -2855,6 +2618,7 @@ export type GraphCms_Conference = GraphCms_Node & {
 }
 
 export type GraphCms_ConferenceCreatedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
@@ -2871,10 +2635,12 @@ export type GraphCms_ConferenceHistoryArgs = {
 }
 
 export type GraphCms_ConferenceImageArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
 export type GraphCms_ConferencePublishedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
@@ -2882,6 +2648,7 @@ export type GraphCms_ConferenceScheduledInArgs = {
   after?: Maybe<Scalars['String']>
   before?: Maybe<Scalars['String']>
   first?: Maybe<Scalars['Int']>
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   last?: Maybe<Scalars['Int']>
   locales?: Maybe<Array<GraphCms_Locale>>
   skip?: Maybe<Scalars['Int']>
@@ -2889,10 +2656,12 @@ export type GraphCms_ConferenceScheduledInArgs = {
 }
 
 export type GraphCms_ConferenceUpdatedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
 export type GraphCms_ConferenceVideoEmbedArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
@@ -2968,7 +2737,7 @@ export type GraphCms_ConferenceManyWhereInput = {
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   createdAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -2984,7 +2753,7 @@ export type GraphCms_ConferenceManyWhereInput = {
   date_lt?: Maybe<Scalars['GraphCMS_Date']>
   /** All values less than or equal the given value. */
   date_lte?: Maybe<Scalars['GraphCMS_Date']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   date_not?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are not contained in given list. */
   date_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
@@ -2998,7 +2767,7 @@ export type GraphCms_ConferenceManyWhereInput = {
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
   id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
   id_not_contains?: Maybe<Scalars['ID']>
@@ -3018,7 +2787,7 @@ export type GraphCms_ConferenceManyWhereInput = {
   link_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   link_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   link_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   link_not_contains?: Maybe<Scalars['String']>
@@ -3041,7 +2810,7 @@ export type GraphCms_ConferenceManyWhereInput = {
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   publishedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -3056,7 +2825,7 @@ export type GraphCms_ConferenceManyWhereInput = {
   title_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   title_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   title_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   title_not_contains?: Maybe<Scalars['String']>
@@ -3075,7 +2844,7 @@ export type GraphCms_ConferenceManyWhereInput = {
   topic_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   topic_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   topic_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   topic_not_contains?: Maybe<Scalars['String']>
@@ -3098,7 +2867,7 @@ export type GraphCms_ConferenceManyWhereInput = {
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   updatedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -3228,7 +2997,7 @@ export type GraphCms_ConferenceWhereInput = {
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   createdAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -3244,7 +3013,7 @@ export type GraphCms_ConferenceWhereInput = {
   date_lt?: Maybe<Scalars['GraphCMS_Date']>
   /** All values less than or equal the given value. */
   date_lte?: Maybe<Scalars['GraphCMS_Date']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   date_not?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are not contained in given list. */
   date_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
@@ -3258,7 +3027,7 @@ export type GraphCms_ConferenceWhereInput = {
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
   id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
   id_not_contains?: Maybe<Scalars['ID']>
@@ -3278,7 +3047,7 @@ export type GraphCms_ConferenceWhereInput = {
   link_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   link_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   link_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   link_not_contains?: Maybe<Scalars['String']>
@@ -3301,7 +3070,7 @@ export type GraphCms_ConferenceWhereInput = {
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   publishedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -3316,7 +3085,7 @@ export type GraphCms_ConferenceWhereInput = {
   title_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   title_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   title_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   title_not_contains?: Maybe<Scalars['String']>
@@ -3335,7 +3104,7 @@ export type GraphCms_ConferenceWhereInput = {
   topic_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   topic_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   topic_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   topic_not_contains?: Maybe<Scalars['String']>
@@ -3358,7 +3127,7 @@ export type GraphCms_ConferenceWhereInput = {
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   updatedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -3492,6 +3261,7 @@ export type GraphCms_Education = GraphCms_Node & {
 }
 
 export type GraphCms_EducationCreatedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
@@ -3508,6 +3278,7 @@ export type GraphCms_EducationHistoryArgs = {
 }
 
 export type GraphCms_EducationPublishedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
@@ -3515,6 +3286,7 @@ export type GraphCms_EducationScheduledInArgs = {
   after?: Maybe<Scalars['String']>
   before?: Maybe<Scalars['String']>
   first?: Maybe<Scalars['Int']>
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   last?: Maybe<Scalars['Int']>
   locales?: Maybe<Array<GraphCms_Locale>>
   skip?: Maybe<Scalars['Int']>
@@ -3522,6 +3294,7 @@ export type GraphCms_EducationScheduledInArgs = {
 }
 
 export type GraphCms_EducationUpdatedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
@@ -3593,7 +3366,7 @@ export type GraphCms_EducationManyWhereInput = {
   areaOfStudy_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   areaOfStudy_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   areaOfStudy_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   areaOfStudy_not_contains?: Maybe<Scalars['String']>
@@ -3616,7 +3389,7 @@ export type GraphCms_EducationManyWhereInput = {
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   createdAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -3628,7 +3401,7 @@ export type GraphCms_EducationManyWhereInput = {
   degree_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   degree_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   degree_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   degree_not_contains?: Maybe<Scalars['String']>
@@ -3654,7 +3427,7 @@ export type GraphCms_EducationManyWhereInput = {
   endDate_lt?: Maybe<Scalars['GraphCMS_Date']>
   /** All values less than or equal the given value. */
   endDate_lte?: Maybe<Scalars['GraphCMS_Date']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   endDate_not?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are not contained in given list. */
   endDate_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
@@ -3665,7 +3438,7 @@ export type GraphCms_EducationManyWhereInput = {
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
   id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
   id_not_contains?: Maybe<Scalars['ID']>
@@ -3688,7 +3461,7 @@ export type GraphCms_EducationManyWhereInput = {
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   publishedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -3703,7 +3476,7 @@ export type GraphCms_EducationManyWhereInput = {
   school_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   school_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   school_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   school_not_contains?: Maybe<Scalars['String']>
@@ -3726,7 +3499,7 @@ export type GraphCms_EducationManyWhereInput = {
   startDate_lt?: Maybe<Scalars['GraphCMS_Date']>
   /** All values less than or equal the given value. */
   startDate_lte?: Maybe<Scalars['GraphCMS_Date']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   startDate_not?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are not contained in given list. */
   startDate_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
@@ -3741,7 +3514,7 @@ export type GraphCms_EducationManyWhereInput = {
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   updatedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -3870,7 +3643,7 @@ export type GraphCms_EducationWhereInput = {
   areaOfStudy_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   areaOfStudy_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   areaOfStudy_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   areaOfStudy_not_contains?: Maybe<Scalars['String']>
@@ -3893,7 +3666,7 @@ export type GraphCms_EducationWhereInput = {
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   createdAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -3905,7 +3678,7 @@ export type GraphCms_EducationWhereInput = {
   degree_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   degree_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   degree_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   degree_not_contains?: Maybe<Scalars['String']>
@@ -3931,7 +3704,7 @@ export type GraphCms_EducationWhereInput = {
   endDate_lt?: Maybe<Scalars['GraphCMS_Date']>
   /** All values less than or equal the given value. */
   endDate_lte?: Maybe<Scalars['GraphCMS_Date']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   endDate_not?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are not contained in given list. */
   endDate_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
@@ -3942,7 +3715,7 @@ export type GraphCms_EducationWhereInput = {
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
   id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
   id_not_contains?: Maybe<Scalars['ID']>
@@ -3965,7 +3738,7 @@ export type GraphCms_EducationWhereInput = {
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   publishedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -3980,7 +3753,7 @@ export type GraphCms_EducationWhereInput = {
   school_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   school_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   school_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   school_not_contains?: Maybe<Scalars['String']>
@@ -4003,7 +3776,7 @@ export type GraphCms_EducationWhereInput = {
   startDate_lt?: Maybe<Scalars['GraphCMS_Date']>
   /** All values less than or equal the given value. */
   startDate_lte?: Maybe<Scalars['GraphCMS_Date']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   startDate_not?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are not contained in given list. */
   startDate_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
@@ -4018,7 +3791,7 @@ export type GraphCms_EducationWhereInput = {
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   updatedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -4078,6 +3851,7 @@ export type GraphCms_Experience = GraphCms_Node & {
 }
 
 export type GraphCms_ExperienceCreatedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
@@ -4094,10 +3868,12 @@ export type GraphCms_ExperienceHistoryArgs = {
 }
 
 export type GraphCms_ExperienceLogoArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
 export type GraphCms_ExperiencePublishedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
@@ -4105,6 +3881,7 @@ export type GraphCms_ExperienceScheduledInArgs = {
   after?: Maybe<Scalars['String']>
   before?: Maybe<Scalars['String']>
   first?: Maybe<Scalars['Int']>
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   last?: Maybe<Scalars['Int']>
   locales?: Maybe<Array<GraphCms_Locale>>
   skip?: Maybe<Scalars['Int']>
@@ -4112,6 +3889,7 @@ export type GraphCms_ExperienceScheduledInArgs = {
 }
 
 export type GraphCms_ExperienceUpdatedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
@@ -4185,7 +3963,7 @@ export type GraphCms_ExperienceManyWhereInput = {
   company_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   company_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   company_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   company_not_contains?: Maybe<Scalars['String']>
@@ -4208,7 +3986,7 @@ export type GraphCms_ExperienceManyWhereInput = {
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   createdAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -4227,7 +4005,7 @@ export type GraphCms_ExperienceManyWhereInput = {
   endDate_lt?: Maybe<Scalars['GraphCMS_Date']>
   /** All values less than or equal the given value. */
   endDate_lte?: Maybe<Scalars['GraphCMS_Date']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   endDate_not?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are not contained in given list. */
   endDate_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
@@ -4238,7 +4016,7 @@ export type GraphCms_ExperienceManyWhereInput = {
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
   id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
   id_not_contains?: Maybe<Scalars['ID']>
@@ -4258,7 +4036,7 @@ export type GraphCms_ExperienceManyWhereInput = {
   locationIcon_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   locationIcon_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   locationIcon_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   locationIcon_not_contains?: Maybe<Scalars['String']>
@@ -4276,7 +4054,7 @@ export type GraphCms_ExperienceManyWhereInput = {
   location_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   location_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   location_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   location_not_contains?: Maybe<Scalars['String']>
@@ -4296,7 +4074,7 @@ export type GraphCms_ExperienceManyWhereInput = {
   position_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   position_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   position_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   position_not_contains?: Maybe<Scalars['String']>
@@ -4319,7 +4097,7 @@ export type GraphCms_ExperienceManyWhereInput = {
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   publishedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -4338,7 +4116,7 @@ export type GraphCms_ExperienceManyWhereInput = {
   startDate_lt?: Maybe<Scalars['GraphCMS_Date']>
   /** All values less than or equal the given value. */
   startDate_lte?: Maybe<Scalars['GraphCMS_Date']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   startDate_not?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are not contained in given list. */
   startDate_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
@@ -4353,7 +4131,7 @@ export type GraphCms_ExperienceManyWhereInput = {
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   updatedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -4487,7 +4265,7 @@ export type GraphCms_ExperienceWhereInput = {
   company_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   company_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   company_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   company_not_contains?: Maybe<Scalars['String']>
@@ -4510,7 +4288,7 @@ export type GraphCms_ExperienceWhereInput = {
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   createdAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -4529,7 +4307,7 @@ export type GraphCms_ExperienceWhereInput = {
   endDate_lt?: Maybe<Scalars['GraphCMS_Date']>
   /** All values less than or equal the given value. */
   endDate_lte?: Maybe<Scalars['GraphCMS_Date']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   endDate_not?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are not contained in given list. */
   endDate_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
@@ -4540,7 +4318,7 @@ export type GraphCms_ExperienceWhereInput = {
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
   id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
   id_not_contains?: Maybe<Scalars['ID']>
@@ -4560,7 +4338,7 @@ export type GraphCms_ExperienceWhereInput = {
   locationIcon_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   locationIcon_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   locationIcon_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   locationIcon_not_contains?: Maybe<Scalars['String']>
@@ -4578,7 +4356,7 @@ export type GraphCms_ExperienceWhereInput = {
   location_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   location_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   location_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   location_not_contains?: Maybe<Scalars['String']>
@@ -4598,7 +4376,7 @@ export type GraphCms_ExperienceWhereInput = {
   position_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   position_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   position_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   position_not_contains?: Maybe<Scalars['String']>
@@ -4621,7 +4399,7 @@ export type GraphCms_ExperienceWhereInput = {
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   publishedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -4640,7 +4418,7 @@ export type GraphCms_ExperienceWhereInput = {
   startDate_lt?: Maybe<Scalars['GraphCMS_Date']>
   /** All values less than or equal the given value. */
   startDate_lte?: Maybe<Scalars['GraphCMS_Date']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   startDate_not?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are not contained in given list. */
   startDate_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
@@ -4655,7 +4433,7 @@ export type GraphCms_ExperienceWhereInput = {
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   updatedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -4736,6 +4514,7 @@ export type GraphCms_Interview = GraphCms_Node & {
 }
 
 export type GraphCms_InterviewCreatedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
@@ -4752,6 +4531,7 @@ export type GraphCms_InterviewHistoryArgs = {
 }
 
 export type GraphCms_InterviewPublishedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
@@ -4759,6 +4539,7 @@ export type GraphCms_InterviewScheduledInArgs = {
   after?: Maybe<Scalars['String']>
   before?: Maybe<Scalars['String']>
   first?: Maybe<Scalars['Int']>
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   last?: Maybe<Scalars['Int']>
   locales?: Maybe<Array<GraphCms_Locale>>
   skip?: Maybe<Scalars['Int']>
@@ -4766,10 +4547,12 @@ export type GraphCms_InterviewScheduledInArgs = {
 }
 
 export type GraphCms_InterviewUpdatedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
 export type GraphCms_InterviewVideoEmbedArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
@@ -4842,7 +4625,7 @@ export type GraphCms_InterviewManyWhereInput = {
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   createdAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -4858,7 +4641,7 @@ export type GraphCms_InterviewManyWhereInput = {
   date_lt?: Maybe<Scalars['GraphCMS_Date']>
   /** All values less than or equal the given value. */
   date_lte?: Maybe<Scalars['GraphCMS_Date']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   date_not?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are not contained in given list. */
   date_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
@@ -4872,7 +4655,7 @@ export type GraphCms_InterviewManyWhereInput = {
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
   id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
   id_not_contains?: Maybe<Scalars['ID']>
@@ -4895,7 +4678,7 @@ export type GraphCms_InterviewManyWhereInput = {
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   publishedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -4910,7 +4693,7 @@ export type GraphCms_InterviewManyWhereInput = {
   title_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   title_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   title_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   title_not_contains?: Maybe<Scalars['String']>
@@ -4933,7 +4716,7 @@ export type GraphCms_InterviewManyWhereInput = {
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   updatedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -5054,7 +4837,7 @@ export type GraphCms_InterviewWhereInput = {
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   createdAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -5070,7 +4853,7 @@ export type GraphCms_InterviewWhereInput = {
   date_lt?: Maybe<Scalars['GraphCMS_Date']>
   /** All values less than or equal the given value. */
   date_lte?: Maybe<Scalars['GraphCMS_Date']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   date_not?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are not contained in given list. */
   date_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
@@ -5084,7 +4867,7 @@ export type GraphCms_InterviewWhereInput = {
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
   id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
   id_not_contains?: Maybe<Scalars['ID']>
@@ -5107,7 +4890,7 @@ export type GraphCms_InterviewWhereInput = {
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   publishedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -5122,7 +4905,7 @@ export type GraphCms_InterviewWhereInput = {
   title_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   title_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   title_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   title_not_contains?: Maybe<Scalars['String']>
@@ -5145,7 +4928,7 @@ export type GraphCms_InterviewWhereInput = {
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   updatedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -5250,6 +5033,7 @@ export type GraphCms_Publication = GraphCms_Node & {
 }
 
 export type GraphCms_PublicationCreatedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
@@ -5266,6 +5050,7 @@ export type GraphCms_PublicationHistoryArgs = {
 }
 
 export type GraphCms_PublicationPublishedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
@@ -5273,6 +5058,7 @@ export type GraphCms_PublicationScheduledInArgs = {
   after?: Maybe<Scalars['String']>
   before?: Maybe<Scalars['String']>
   first?: Maybe<Scalars['Int']>
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   last?: Maybe<Scalars['Int']>
   locales?: Maybe<Array<GraphCms_Locale>>
   skip?: Maybe<Scalars['Int']>
@@ -5280,6 +5066,7 @@ export type GraphCms_PublicationScheduledInArgs = {
 }
 
 export type GraphCms_PublicationUpdatedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
@@ -5352,7 +5139,7 @@ export type GraphCms_PublicationManyWhereInput = {
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   createdAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -5368,7 +5155,7 @@ export type GraphCms_PublicationManyWhereInput = {
   date_lt?: Maybe<Scalars['GraphCMS_Date']>
   /** All values less than or equal the given value. */
   date_lte?: Maybe<Scalars['GraphCMS_Date']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   date_not?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are not contained in given list. */
   date_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
@@ -5382,7 +5169,7 @@ export type GraphCms_PublicationManyWhereInput = {
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
   id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
   id_not_contains?: Maybe<Scalars['ID']>
@@ -5401,7 +5188,7 @@ export type GraphCms_PublicationManyWhereInput = {
   link_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   link_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   link_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   link_not_contains?: Maybe<Scalars['String']>
@@ -5424,7 +5211,7 @@ export type GraphCms_PublicationManyWhereInput = {
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   publishedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -5439,7 +5226,7 @@ export type GraphCms_PublicationManyWhereInput = {
   title_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   title_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   title_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   title_not_contains?: Maybe<Scalars['String']>
@@ -5462,7 +5249,7 @@ export type GraphCms_PublicationManyWhereInput = {
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   updatedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -5585,7 +5372,7 @@ export type GraphCms_PublicationWhereInput = {
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   createdAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -5601,7 +5388,7 @@ export type GraphCms_PublicationWhereInput = {
   date_lt?: Maybe<Scalars['GraphCMS_Date']>
   /** All values less than or equal the given value. */
   date_lte?: Maybe<Scalars['GraphCMS_Date']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   date_not?: Maybe<Scalars['GraphCMS_Date']>
   /** All values that are not contained in given list. */
   date_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_Date']>>>
@@ -5615,7 +5402,7 @@ export type GraphCms_PublicationWhereInput = {
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
   id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
   id_not_contains?: Maybe<Scalars['ID']>
@@ -5634,7 +5421,7 @@ export type GraphCms_PublicationWhereInput = {
   link_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   link_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   link_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   link_not_contains?: Maybe<Scalars['String']>
@@ -5657,7 +5444,7 @@ export type GraphCms_PublicationWhereInput = {
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   publishedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -5672,7 +5459,7 @@ export type GraphCms_PublicationWhereInput = {
   title_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   title_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   title_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   title_not_contains?: Maybe<Scalars['String']>
@@ -5695,7 +5482,7 @@ export type GraphCms_PublicationWhereInput = {
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   updatedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -5797,6 +5584,7 @@ export type GraphCms_ScheduledOperationAffectedDocumentsArgs = {
   after?: Maybe<Scalars['String']>
   before?: Maybe<Scalars['String']>
   first?: Maybe<Scalars['Int']>
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   last?: Maybe<Scalars['Int']>
   locales?: Maybe<Array<GraphCms_Locale>>
   skip?: Maybe<Scalars['Int']>
@@ -5804,6 +5592,7 @@ export type GraphCms_ScheduledOperationAffectedDocumentsArgs = {
 
 /** Scheduled Operation system model */
 export type GraphCms_ScheduledOperationCreatedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
@@ -5816,16 +5605,19 @@ export type GraphCms_ScheduledOperationDocumentInStagesArgs = {
 
 /** Scheduled Operation system model */
 export type GraphCms_ScheduledOperationPublishedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
 /** Scheduled Operation system model */
 export type GraphCms_ScheduledOperationReleaseArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
 /** Scheduled Operation system model */
 export type GraphCms_ScheduledOperationUpdatedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
@@ -5897,7 +5689,7 @@ export type GraphCms_ScheduledOperationManyWhereInput = {
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   createdAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -5909,7 +5701,7 @@ export type GraphCms_ScheduledOperationManyWhereInput = {
   description_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   description_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   description_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   description_not_contains?: Maybe<Scalars['String']>
@@ -5928,7 +5720,7 @@ export type GraphCms_ScheduledOperationManyWhereInput = {
   errorMessage_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   errorMessage_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   errorMessage_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   errorMessage_not_contains?: Maybe<Scalars['String']>
@@ -5947,7 +5739,7 @@ export type GraphCms_ScheduledOperationManyWhereInput = {
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
   id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
   id_not_contains?: Maybe<Scalars['ID']>
@@ -5970,16 +5762,25 @@ export type GraphCms_ScheduledOperationManyWhereInput = {
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   publishedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
+  /** All values containing the given json path. */
+  rawPayload_json_path_exists?: Maybe<Scalars['String']>
+  /**
+   * Recursively tries to find the provided JSON scalar value inside the field.
+   * It does use an exact match when comparing values.
+   * If you pass `null` as value the filter will be ignored.
+   * Note: This filter fails if you try to look for a non scalar JSON value!
+   */
+  rawPayload_value_recursive?: Maybe<Scalars['GraphCMS_Json']>
   release?: Maybe<GraphCms_ScheduledReleaseWhereInput>
   status?: Maybe<GraphCms_ScheduledOperationStatus>
   /** All values that are contained in given list. */
   status_in?: Maybe<Array<Maybe<GraphCms_ScheduledOperationStatus>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   status_not?: Maybe<GraphCms_ScheduledOperationStatus>
   /** All values that are not contained in given list. */
   status_not_in?: Maybe<Array<Maybe<GraphCms_ScheduledOperationStatus>>>
@@ -5994,7 +5795,7 @@ export type GraphCms_ScheduledOperationManyWhereInput = {
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   updatedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -6064,7 +5865,7 @@ export type GraphCms_ScheduledOperationWhereInput = {
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   createdAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -6076,7 +5877,7 @@ export type GraphCms_ScheduledOperationWhereInput = {
   description_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   description_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   description_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   description_not_contains?: Maybe<Scalars['String']>
@@ -6095,7 +5896,7 @@ export type GraphCms_ScheduledOperationWhereInput = {
   errorMessage_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   errorMessage_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   errorMessage_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   errorMessage_not_contains?: Maybe<Scalars['String']>
@@ -6114,7 +5915,7 @@ export type GraphCms_ScheduledOperationWhereInput = {
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
   id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
   id_not_contains?: Maybe<Scalars['ID']>
@@ -6137,16 +5938,25 @@ export type GraphCms_ScheduledOperationWhereInput = {
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   publishedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   publishedBy?: Maybe<GraphCms_UserWhereInput>
+  /** All values containing the given json path. */
+  rawPayload_json_path_exists?: Maybe<Scalars['String']>
+  /**
+   * Recursively tries to find the provided JSON scalar value inside the field.
+   * It does use an exact match when comparing values.
+   * If you pass `null` as value the filter will be ignored.
+   * Note: This filter fails if you try to look for a non scalar JSON value!
+   */
+  rawPayload_value_recursive?: Maybe<Scalars['GraphCMS_Json']>
   release?: Maybe<GraphCms_ScheduledReleaseWhereInput>
   status?: Maybe<GraphCms_ScheduledOperationStatus>
   /** All values that are contained in given list. */
   status_in?: Maybe<Array<Maybe<GraphCms_ScheduledOperationStatus>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   status_not?: Maybe<GraphCms_ScheduledOperationStatus>
   /** All values that are not contained in given list. */
   status_not_in?: Maybe<Array<Maybe<GraphCms_ScheduledOperationStatus>>>
@@ -6161,7 +5971,7 @@ export type GraphCms_ScheduledOperationWhereInput = {
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   updatedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -6214,6 +6024,7 @@ export type GraphCms_ScheduledRelease = GraphCms_Node & {
 
 /** Scheduled Release system model */
 export type GraphCms_ScheduledReleaseCreatedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
@@ -6229,6 +6040,7 @@ export type GraphCms_ScheduledReleaseOperationsArgs = {
   after?: Maybe<Scalars['String']>
   before?: Maybe<Scalars['String']>
   first?: Maybe<Scalars['Int']>
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   last?: Maybe<Scalars['Int']>
   locales?: Maybe<Array<GraphCms_Locale>>
   orderBy?: Maybe<GraphCms_ScheduledOperationOrderByInput>
@@ -6238,11 +6050,13 @@ export type GraphCms_ScheduledReleaseOperationsArgs = {
 
 /** Scheduled Release system model */
 export type GraphCms_ScheduledReleasePublishedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
 /** Scheduled Release system model */
 export type GraphCms_ScheduledReleaseUpdatedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
@@ -6317,7 +6131,7 @@ export type GraphCms_ScheduledReleaseManyWhereInput = {
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   createdAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -6329,7 +6143,7 @@ export type GraphCms_ScheduledReleaseManyWhereInput = {
   description_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   description_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   description_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   description_not_contains?: Maybe<Scalars['String']>
@@ -6348,7 +6162,7 @@ export type GraphCms_ScheduledReleaseManyWhereInput = {
   errorMessage_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   errorMessage_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   errorMessage_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   errorMessage_not_contains?: Maybe<Scalars['String']>
@@ -6367,7 +6181,7 @@ export type GraphCms_ScheduledReleaseManyWhereInput = {
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
   id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
   id_not_contains?: Maybe<Scalars['ID']>
@@ -6380,10 +6194,10 @@ export type GraphCms_ScheduledReleaseManyWhereInput = {
   /** All values starting with the given string. */
   id_starts_with?: Maybe<Scalars['ID']>
   isActive?: Maybe<Scalars['Boolean']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   isActive_not?: Maybe<Scalars['Boolean']>
   isImplicit?: Maybe<Scalars['Boolean']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   isImplicit_not?: Maybe<Scalars['Boolean']>
   operations_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
   operations_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
@@ -6399,7 +6213,7 @@ export type GraphCms_ScheduledReleaseManyWhereInput = {
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   publishedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -6415,14 +6229,14 @@ export type GraphCms_ScheduledReleaseManyWhereInput = {
   releaseAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   releaseAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   releaseAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   releaseAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   status?: Maybe<GraphCms_ScheduledReleaseStatus>
   /** All values that are contained in given list. */
   status_in?: Maybe<Array<Maybe<GraphCms_ScheduledReleaseStatus>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   status_not?: Maybe<GraphCms_ScheduledReleaseStatus>
   /** All values that are not contained in given list. */
   status_not_in?: Maybe<Array<Maybe<GraphCms_ScheduledReleaseStatus>>>
@@ -6433,7 +6247,7 @@ export type GraphCms_ScheduledReleaseManyWhereInput = {
   title_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   title_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   title_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   title_not_contains?: Maybe<Scalars['String']>
@@ -6456,7 +6270,7 @@ export type GraphCms_ScheduledReleaseManyWhereInput = {
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   updatedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -6597,7 +6411,7 @@ export type GraphCms_ScheduledReleaseWhereInput = {
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   createdAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -6609,7 +6423,7 @@ export type GraphCms_ScheduledReleaseWhereInput = {
   description_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   description_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   description_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   description_not_contains?: Maybe<Scalars['String']>
@@ -6628,7 +6442,7 @@ export type GraphCms_ScheduledReleaseWhereInput = {
   errorMessage_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   errorMessage_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   errorMessage_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   errorMessage_not_contains?: Maybe<Scalars['String']>
@@ -6647,7 +6461,7 @@ export type GraphCms_ScheduledReleaseWhereInput = {
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
   id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
   id_not_contains?: Maybe<Scalars['ID']>
@@ -6660,10 +6474,10 @@ export type GraphCms_ScheduledReleaseWhereInput = {
   /** All values starting with the given string. */
   id_starts_with?: Maybe<Scalars['ID']>
   isActive?: Maybe<Scalars['Boolean']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   isActive_not?: Maybe<Scalars['Boolean']>
   isImplicit?: Maybe<Scalars['Boolean']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   isImplicit_not?: Maybe<Scalars['Boolean']>
   operations_every?: Maybe<GraphCms_ScheduledOperationWhereInput>
   operations_none?: Maybe<GraphCms_ScheduledOperationWhereInput>
@@ -6679,7 +6493,7 @@ export type GraphCms_ScheduledReleaseWhereInput = {
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   publishedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -6695,14 +6509,14 @@ export type GraphCms_ScheduledReleaseWhereInput = {
   releaseAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   releaseAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   releaseAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   releaseAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
   status?: Maybe<GraphCms_ScheduledReleaseStatus>
   /** All values that are contained in given list. */
   status_in?: Maybe<Array<Maybe<GraphCms_ScheduledReleaseStatus>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   status_not?: Maybe<GraphCms_ScheduledReleaseStatus>
   /** All values that are not contained in given list. */
   status_not_in?: Maybe<Array<Maybe<GraphCms_ScheduledReleaseStatus>>>
@@ -6713,7 +6527,7 @@ export type GraphCms_ScheduledReleaseWhereInput = {
   title_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   title_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   title_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   title_not_contains?: Maybe<Scalars['String']>
@@ -6736,7 +6550,7 @@ export type GraphCms_ScheduledReleaseWhereInput = {
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   updatedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -6777,6 +6591,7 @@ export type GraphCms_Skill = GraphCms_Node & {
 }
 
 export type GraphCms_SkillCreatedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
@@ -6793,10 +6608,12 @@ export type GraphCms_SkillHistoryArgs = {
 }
 
 export type GraphCms_SkillLogoArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
 export type GraphCms_SkillPublishedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
@@ -6804,6 +6621,7 @@ export type GraphCms_SkillScheduledInArgs = {
   after?: Maybe<Scalars['String']>
   before?: Maybe<Scalars['String']>
   first?: Maybe<Scalars['Int']>
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   last?: Maybe<Scalars['Int']>
   locales?: Maybe<Array<GraphCms_Locale>>
   skip?: Maybe<Scalars['Int']>
@@ -6811,6 +6629,7 @@ export type GraphCms_SkillScheduledInArgs = {
 }
 
 export type GraphCms_SkillUpdatedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
@@ -6883,7 +6702,7 @@ export type GraphCms_SkillManyWhereInput = {
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   createdAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -6898,7 +6717,7 @@ export type GraphCms_SkillManyWhereInput = {
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
   id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
   id_not_contains?: Maybe<Scalars['ID']>
@@ -6922,7 +6741,7 @@ export type GraphCms_SkillManyWhereInput = {
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   publishedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -6937,7 +6756,7 @@ export type GraphCms_SkillManyWhereInput = {
   title_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   title_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   title_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   title_not_contains?: Maybe<Scalars['String']>
@@ -6960,7 +6779,7 @@ export type GraphCms_SkillManyWhereInput = {
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   updatedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -6976,7 +6795,7 @@ export type GraphCms_SkillManyWhereInput = {
   yearsOfExperience_lt?: Maybe<Scalars['Int']>
   /** All values less than or equal the given value. */
   yearsOfExperience_lte?: Maybe<Scalars['Int']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   yearsOfExperience_not?: Maybe<Scalars['Int']>
   /** All values that are not contained in given list. */
   yearsOfExperience_not_in?: Maybe<Array<Maybe<Scalars['Int']>>>
@@ -7095,7 +6914,7 @@ export type GraphCms_SkillWhereInput = {
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   createdAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -7110,7 +6929,7 @@ export type GraphCms_SkillWhereInput = {
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
   id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
   id_not_contains?: Maybe<Scalars['ID']>
@@ -7134,7 +6953,7 @@ export type GraphCms_SkillWhereInput = {
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   publishedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -7149,7 +6968,7 @@ export type GraphCms_SkillWhereInput = {
   title_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   title_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   title_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   title_not_contains?: Maybe<Scalars['String']>
@@ -7172,7 +6991,7 @@ export type GraphCms_SkillWhereInput = {
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   updatedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -7188,7 +7007,7 @@ export type GraphCms_SkillWhereInput = {
   yearsOfExperience_lt?: Maybe<Scalars['Int']>
   /** All values less than or equal the given value. */
   yearsOfExperience_lte?: Maybe<Scalars['Int']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   yearsOfExperience_not?: Maybe<Scalars['Int']>
   /** All values that are not contained in given list. */
   yearsOfExperience_not_in?: Maybe<Array<Maybe<Scalars['Int']>>>
@@ -7331,7 +7150,7 @@ export type GraphCms_UserManyWhereInput = {
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   createdAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -7345,7 +7164,7 @@ export type GraphCms_UserManyWhereInput = {
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
   id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
   id_not_contains?: Maybe<Scalars['ID']>
@@ -7358,12 +7177,12 @@ export type GraphCms_UserManyWhereInput = {
   /** All values starting with the given string. */
   id_starts_with?: Maybe<Scalars['ID']>
   isActive?: Maybe<Scalars['Boolean']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   isActive_not?: Maybe<Scalars['Boolean']>
   kind?: Maybe<GraphCms_UserKind>
   /** All values that are contained in given list. */
   kind_in?: Maybe<Array<Maybe<GraphCms_UserKind>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   kind_not?: Maybe<GraphCms_UserKind>
   /** All values that are not contained in given list. */
   kind_not_in?: Maybe<Array<Maybe<GraphCms_UserKind>>>
@@ -7374,7 +7193,7 @@ export type GraphCms_UserManyWhereInput = {
   name_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   name_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   name_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   name_not_contains?: Maybe<Scalars['String']>
@@ -7393,7 +7212,7 @@ export type GraphCms_UserManyWhereInput = {
   picture_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   picture_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   picture_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   picture_not_contains?: Maybe<Scalars['String']>
@@ -7416,7 +7235,7 @@ export type GraphCms_UserManyWhereInput = {
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   publishedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -7431,7 +7250,7 @@ export type GraphCms_UserManyWhereInput = {
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   updatedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -7499,7 +7318,7 @@ export type GraphCms_UserWhereInput = {
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   createdAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -7513,7 +7332,7 @@ export type GraphCms_UserWhereInput = {
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
   id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
   id_not_contains?: Maybe<Scalars['ID']>
@@ -7526,12 +7345,12 @@ export type GraphCms_UserWhereInput = {
   /** All values starting with the given string. */
   id_starts_with?: Maybe<Scalars['ID']>
   isActive?: Maybe<Scalars['Boolean']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   isActive_not?: Maybe<Scalars['Boolean']>
   kind?: Maybe<GraphCms_UserKind>
   /** All values that are contained in given list. */
   kind_in?: Maybe<Array<Maybe<GraphCms_UserKind>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   kind_not?: Maybe<GraphCms_UserKind>
   /** All values that are not contained in given list. */
   kind_not_in?: Maybe<Array<Maybe<GraphCms_UserKind>>>
@@ -7542,7 +7361,7 @@ export type GraphCms_UserWhereInput = {
   name_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   name_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   name_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   name_not_contains?: Maybe<Scalars['String']>
@@ -7561,7 +7380,7 @@ export type GraphCms_UserWhereInput = {
   picture_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   picture_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   picture_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   picture_not_contains?: Maybe<Scalars['String']>
@@ -7584,7 +7403,7 @@ export type GraphCms_UserWhereInput = {
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   publishedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -7599,7 +7418,7 @@ export type GraphCms_UserWhereInput = {
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   updatedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -7666,6 +7485,7 @@ export type GraphCms_VideoEmbed = GraphCms_Node & {
 }
 
 export type GraphCms_VideoEmbedCreatedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
@@ -7682,6 +7502,7 @@ export type GraphCms_VideoEmbedHistoryArgs = {
 }
 
 export type GraphCms_VideoEmbedPublishedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
@@ -7689,6 +7510,7 @@ export type GraphCms_VideoEmbedScheduledInArgs = {
   after?: Maybe<Scalars['String']>
   before?: Maybe<Scalars['String']>
   first?: Maybe<Scalars['Int']>
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   last?: Maybe<Scalars['Int']>
   locales?: Maybe<Array<GraphCms_Locale>>
   skip?: Maybe<Scalars['Int']>
@@ -7696,6 +7518,7 @@ export type GraphCms_VideoEmbedScheduledInArgs = {
 }
 
 export type GraphCms_VideoEmbedUpdatedByArgs = {
+  forceParentLocale?: Maybe<Scalars['Boolean']>
   locales?: Maybe<Array<GraphCms_Locale>>
 }
 
@@ -7769,7 +7592,7 @@ export type GraphCms_VideoEmbedManyWhereInput = {
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   createdAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -7784,7 +7607,7 @@ export type GraphCms_VideoEmbedManyWhereInput = {
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
   id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
   id_not_contains?: Maybe<Scalars['ID']>
@@ -7796,6 +7619,15 @@ export type GraphCms_VideoEmbedManyWhereInput = {
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
   id_starts_with?: Maybe<Scalars['ID']>
+  /** All values containing the given json path. */
+  iframeOptions_json_path_exists?: Maybe<Scalars['String']>
+  /**
+   * Recursively tries to find the provided JSON scalar value inside the field.
+   * It does use an exact match when comparing values.
+   * If you pass `null` as value the filter will be ignored.
+   * Note: This filter fails if you try to look for a non scalar JSON value!
+   */
+  iframeOptions_value_recursive?: Maybe<Scalars['GraphCMS_Json']>
   link?: Maybe<Scalars['String']>
   /** All values containing the given string. */
   link_contains?: Maybe<Scalars['String']>
@@ -7803,7 +7635,7 @@ export type GraphCms_VideoEmbedManyWhereInput = {
   link_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   link_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   link_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   link_not_contains?: Maybe<Scalars['String']>
@@ -7826,7 +7658,7 @@ export type GraphCms_VideoEmbedManyWhereInput = {
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   publishedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -7845,7 +7677,7 @@ export type GraphCms_VideoEmbedManyWhereInput = {
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   updatedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -7964,7 +7796,7 @@ export type GraphCms_VideoEmbedWhereInput = {
   createdAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   createdAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   createdAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   createdAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -7979,7 +7811,7 @@ export type GraphCms_VideoEmbedWhereInput = {
   id_ends_with?: Maybe<Scalars['ID']>
   /** All values that are contained in given list. */
   id_in?: Maybe<Array<Maybe<Scalars['ID']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   id_not?: Maybe<Scalars['ID']>
   /** All values not containing the given string. */
   id_not_contains?: Maybe<Scalars['ID']>
@@ -7991,6 +7823,15 @@ export type GraphCms_VideoEmbedWhereInput = {
   id_not_starts_with?: Maybe<Scalars['ID']>
   /** All values starting with the given string. */
   id_starts_with?: Maybe<Scalars['ID']>
+  /** All values containing the given json path. */
+  iframeOptions_json_path_exists?: Maybe<Scalars['String']>
+  /**
+   * Recursively tries to find the provided JSON scalar value inside the field.
+   * It does use an exact match when comparing values.
+   * If you pass `null` as value the filter will be ignored.
+   * Note: This filter fails if you try to look for a non scalar JSON value!
+   */
+  iframeOptions_value_recursive?: Maybe<Scalars['GraphCMS_Json']>
   link?: Maybe<Scalars['String']>
   /** All values containing the given string. */
   link_contains?: Maybe<Scalars['String']>
@@ -7998,7 +7839,7 @@ export type GraphCms_VideoEmbedWhereInput = {
   link_ends_with?: Maybe<Scalars['String']>
   /** All values that are contained in given list. */
   link_in?: Maybe<Array<Maybe<Scalars['String']>>>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   link_not?: Maybe<Scalars['String']>
   /** All values not containing the given string. */
   link_not_contains?: Maybe<Scalars['String']>
@@ -8021,7 +7862,7 @@ export type GraphCms_VideoEmbedWhereInput = {
   publishedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   publishedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   publishedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   publishedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -8040,7 +7881,7 @@ export type GraphCms_VideoEmbedWhereInput = {
   updatedAt_lt?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values less than or equal the given value. */
   updatedAt_lte?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** All values that are not equal to given value. */
+  /** Any other value that exists and is not equal to the given value. */
   updatedAt_not?: Maybe<Scalars['GraphCMS_DateTime']>
   /** All values that are not contained in given list. */
   updatedAt_not_in?: Maybe<Array<Maybe<Scalars['GraphCMS_DateTime']>>>
@@ -8080,6 +7921,8 @@ export enum GraphCms__FilterKind {
   gt = 'gt',
   gte = 'gte',
   in = 'in',
+  json_path_exists = 'json_path_exists',
+  json_value_recursive = 'json_value_recursive',
   lt = 'lt',
   lte = 'lte',
   not_contains = 'not_contains',
@@ -8092,6 +7935,11 @@ export enum GraphCms__FilterKind {
   relational_some = 'relational_some',
   search = 'search',
   starts_with = 'starts_with',
+  union_empty = 'union_empty',
+  union_every = 'union_every',
+  union_none = 'union_none',
+  union_single = 'union_single',
+  union_some = 'union_some',
 }
 
 export enum GraphCms__MutationInputFieldKind {
@@ -8169,25 +8017,25 @@ export type GraphQlSourceConnection = {
 }
 
 export type GraphQlSourceConnectionDistinctArgs = {
-  field: GraphQlSourceFieldsEnum
+  field: GraphQlSourceFieldSelector
 }
 
 export type GraphQlSourceConnectionGroupArgs = {
-  field: GraphQlSourceFieldsEnum
+  field: GraphQlSourceFieldSelector
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
 }
 
 export type GraphQlSourceConnectionMaxArgs = {
-  field: GraphQlSourceFieldsEnum
+  field: GraphQlSourceFieldSelector
 }
 
 export type GraphQlSourceConnectionMinArgs = {
-  field: GraphQlSourceFieldsEnum
+  field: GraphQlSourceFieldSelector
 }
 
 export type GraphQlSourceConnectionSumArgs = {
-  field: GraphQlSourceFieldsEnum
+  field: GraphQlSourceFieldSelector
 }
 
 export type GraphQlSourceEdge = {
@@ -8197,102 +8045,13 @@ export type GraphQlSourceEdge = {
   previous?: Maybe<GraphQlSource>
 }
 
-export enum GraphQlSourceFieldsEnum {
-  children = 'children',
-  children___children = 'children___children',
-  children___children___children = 'children___children___children',
-  children___children___children___children = 'children___children___children___children',
-  children___children___children___id = 'children___children___children___id',
-  children___children___id = 'children___children___id',
-  children___children___internal___content = 'children___children___internal___content',
-  children___children___internal___contentDigest = 'children___children___internal___contentDigest',
-  children___children___internal___contentFilePath = 'children___children___internal___contentFilePath',
-  children___children___internal___description = 'children___children___internal___description',
-  children___children___internal___fieldOwners = 'children___children___internal___fieldOwners',
-  children___children___internal___ignoreType = 'children___children___internal___ignoreType',
-  children___children___internal___mediaType = 'children___children___internal___mediaType',
-  children___children___internal___owner = 'children___children___internal___owner',
-  children___children___internal___type = 'children___children___internal___type',
-  children___children___parent___children = 'children___children___parent___children',
-  children___children___parent___id = 'children___children___parent___id',
-  children___id = 'children___id',
-  children___internal___content = 'children___internal___content',
-  children___internal___contentDigest = 'children___internal___contentDigest',
-  children___internal___contentFilePath = 'children___internal___contentFilePath',
-  children___internal___description = 'children___internal___description',
-  children___internal___fieldOwners = 'children___internal___fieldOwners',
-  children___internal___ignoreType = 'children___internal___ignoreType',
-  children___internal___mediaType = 'children___internal___mediaType',
-  children___internal___owner = 'children___internal___owner',
-  children___internal___type = 'children___internal___type',
-  children___parent___children = 'children___parent___children',
-  children___parent___children___children = 'children___parent___children___children',
-  children___parent___children___id = 'children___parent___children___id',
-  children___parent___id = 'children___parent___id',
-  children___parent___internal___content = 'children___parent___internal___content',
-  children___parent___internal___contentDigest = 'children___parent___internal___contentDigest',
-  children___parent___internal___contentFilePath = 'children___parent___internal___contentFilePath',
-  children___parent___internal___description = 'children___parent___internal___description',
-  children___parent___internal___fieldOwners = 'children___parent___internal___fieldOwners',
-  children___parent___internal___ignoreType = 'children___parent___internal___ignoreType',
-  children___parent___internal___mediaType = 'children___parent___internal___mediaType',
-  children___parent___internal___owner = 'children___parent___internal___owner',
-  children___parent___internal___type = 'children___parent___internal___type',
-  children___parent___parent___children = 'children___parent___parent___children',
-  children___parent___parent___id = 'children___parent___parent___id',
-  fieldName = 'fieldName',
-  id = 'id',
-  internal___content = 'internal___content',
-  internal___contentDigest = 'internal___contentDigest',
-  internal___contentFilePath = 'internal___contentFilePath',
-  internal___description = 'internal___description',
-  internal___fieldOwners = 'internal___fieldOwners',
-  internal___ignoreType = 'internal___ignoreType',
-  internal___mediaType = 'internal___mediaType',
-  internal___owner = 'internal___owner',
-  internal___type = 'internal___type',
-  parent___children = 'parent___children',
-  parent___children___children = 'parent___children___children',
-  parent___children___children___children = 'parent___children___children___children',
-  parent___children___children___id = 'parent___children___children___id',
-  parent___children___id = 'parent___children___id',
-  parent___children___internal___content = 'parent___children___internal___content',
-  parent___children___internal___contentDigest = 'parent___children___internal___contentDigest',
-  parent___children___internal___contentFilePath = 'parent___children___internal___contentFilePath',
-  parent___children___internal___description = 'parent___children___internal___description',
-  parent___children___internal___fieldOwners = 'parent___children___internal___fieldOwners',
-  parent___children___internal___ignoreType = 'parent___children___internal___ignoreType',
-  parent___children___internal___mediaType = 'parent___children___internal___mediaType',
-  parent___children___internal___owner = 'parent___children___internal___owner',
-  parent___children___internal___type = 'parent___children___internal___type',
-  parent___children___parent___children = 'parent___children___parent___children',
-  parent___children___parent___id = 'parent___children___parent___id',
-  parent___id = 'parent___id',
-  parent___internal___content = 'parent___internal___content',
-  parent___internal___contentDigest = 'parent___internal___contentDigest',
-  parent___internal___contentFilePath = 'parent___internal___contentFilePath',
-  parent___internal___description = 'parent___internal___description',
-  parent___internal___fieldOwners = 'parent___internal___fieldOwners',
-  parent___internal___ignoreType = 'parent___internal___ignoreType',
-  parent___internal___mediaType = 'parent___internal___mediaType',
-  parent___internal___owner = 'parent___internal___owner',
-  parent___internal___type = 'parent___internal___type',
-  parent___parent___children = 'parent___parent___children',
-  parent___parent___children___children = 'parent___parent___children___children',
-  parent___parent___children___id = 'parent___parent___children___id',
-  parent___parent___id = 'parent___parent___id',
-  parent___parent___internal___content = 'parent___parent___internal___content',
-  parent___parent___internal___contentDigest = 'parent___parent___internal___contentDigest',
-  parent___parent___internal___contentFilePath = 'parent___parent___internal___contentFilePath',
-  parent___parent___internal___description = 'parent___parent___internal___description',
-  parent___parent___internal___fieldOwners = 'parent___parent___internal___fieldOwners',
-  parent___parent___internal___ignoreType = 'parent___parent___internal___ignoreType',
-  parent___parent___internal___mediaType = 'parent___parent___internal___mediaType',
-  parent___parent___internal___owner = 'parent___parent___internal___owner',
-  parent___parent___internal___type = 'parent___parent___internal___type',
-  parent___parent___parent___children = 'parent___parent___parent___children',
-  parent___parent___parent___id = 'parent___parent___parent___id',
-  typeName = 'typeName',
+export type GraphQlSourceFieldSelector = {
+  children?: Maybe<NodeFieldSelector>
+  fieldName?: Maybe<FieldSelectorEnum>
+  id?: Maybe<FieldSelectorEnum>
+  internal?: Maybe<InternalFieldSelector>
+  parent?: Maybe<NodeFieldSelector>
+  typeName?: Maybe<FieldSelectorEnum>
 }
 
 export type GraphQlSourceFilterInput = {
@@ -8320,30 +8079,34 @@ export type GraphQlSourceGroupConnection = {
 }
 
 export type GraphQlSourceGroupConnectionDistinctArgs = {
-  field: GraphQlSourceFieldsEnum
+  field: GraphQlSourceFieldSelector
 }
 
 export type GraphQlSourceGroupConnectionGroupArgs = {
-  field: GraphQlSourceFieldsEnum
+  field: GraphQlSourceFieldSelector
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
 }
 
 export type GraphQlSourceGroupConnectionMaxArgs = {
-  field: GraphQlSourceFieldsEnum
+  field: GraphQlSourceFieldSelector
 }
 
 export type GraphQlSourceGroupConnectionMinArgs = {
-  field: GraphQlSourceFieldsEnum
+  field: GraphQlSourceFieldSelector
 }
 
 export type GraphQlSourceGroupConnectionSumArgs = {
-  field: GraphQlSourceFieldsEnum
+  field: GraphQlSourceFieldSelector
 }
 
 export type GraphQlSourceSortInput = {
-  fields?: Maybe<Array<Maybe<GraphQlSourceFieldsEnum>>>
-  order?: Maybe<Array<Maybe<SortOrderEnum>>>
+  children?: Maybe<NodeSortInput>
+  fieldName?: Maybe<SortOrderEnum>
+  id?: Maybe<SortOrderEnum>
+  internal?: Maybe<InternalSortInput>
+  parent?: Maybe<NodeSortInput>
+  typeName?: Maybe<SortOrderEnum>
 }
 
 export enum ImageCropFocus {
@@ -8506,25 +8269,25 @@ export type ImageSharpConnection = {
 }
 
 export type ImageSharpConnectionDistinctArgs = {
-  field: ImageSharpFieldsEnum
+  field: ImageSharpFieldSelector
 }
 
 export type ImageSharpConnectionGroupArgs = {
-  field: ImageSharpFieldsEnum
+  field: ImageSharpFieldSelector
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
 }
 
 export type ImageSharpConnectionMaxArgs = {
-  field: ImageSharpFieldsEnum
+  field: ImageSharpFieldSelector
 }
 
 export type ImageSharpConnectionMinArgs = {
-  field: ImageSharpFieldsEnum
+  field: ImageSharpFieldSelector
 }
 
 export type ImageSharpConnectionSumArgs = {
-  field: ImageSharpFieldsEnum
+  field: ImageSharpFieldSelector
 }
 
 export type ImageSharpEdge = {
@@ -8534,132 +8297,16 @@ export type ImageSharpEdge = {
   previous?: Maybe<ImageSharp>
 }
 
-export enum ImageSharpFieldsEnum {
-  children = 'children',
-  children___children = 'children___children',
-  children___children___children = 'children___children___children',
-  children___children___children___children = 'children___children___children___children',
-  children___children___children___id = 'children___children___children___id',
-  children___children___id = 'children___children___id',
-  children___children___internal___content = 'children___children___internal___content',
-  children___children___internal___contentDigest = 'children___children___internal___contentDigest',
-  children___children___internal___contentFilePath = 'children___children___internal___contentFilePath',
-  children___children___internal___description = 'children___children___internal___description',
-  children___children___internal___fieldOwners = 'children___children___internal___fieldOwners',
-  children___children___internal___ignoreType = 'children___children___internal___ignoreType',
-  children___children___internal___mediaType = 'children___children___internal___mediaType',
-  children___children___internal___owner = 'children___children___internal___owner',
-  children___children___internal___type = 'children___children___internal___type',
-  children___children___parent___children = 'children___children___parent___children',
-  children___children___parent___id = 'children___children___parent___id',
-  children___id = 'children___id',
-  children___internal___content = 'children___internal___content',
-  children___internal___contentDigest = 'children___internal___contentDigest',
-  children___internal___contentFilePath = 'children___internal___contentFilePath',
-  children___internal___description = 'children___internal___description',
-  children___internal___fieldOwners = 'children___internal___fieldOwners',
-  children___internal___ignoreType = 'children___internal___ignoreType',
-  children___internal___mediaType = 'children___internal___mediaType',
-  children___internal___owner = 'children___internal___owner',
-  children___internal___type = 'children___internal___type',
-  children___parent___children = 'children___parent___children',
-  children___parent___children___children = 'children___parent___children___children',
-  children___parent___children___id = 'children___parent___children___id',
-  children___parent___id = 'children___parent___id',
-  children___parent___internal___content = 'children___parent___internal___content',
-  children___parent___internal___contentDigest = 'children___parent___internal___contentDigest',
-  children___parent___internal___contentFilePath = 'children___parent___internal___contentFilePath',
-  children___parent___internal___description = 'children___parent___internal___description',
-  children___parent___internal___fieldOwners = 'children___parent___internal___fieldOwners',
-  children___parent___internal___ignoreType = 'children___parent___internal___ignoreType',
-  children___parent___internal___mediaType = 'children___parent___internal___mediaType',
-  children___parent___internal___owner = 'children___parent___internal___owner',
-  children___parent___internal___type = 'children___parent___internal___type',
-  children___parent___parent___children = 'children___parent___parent___children',
-  children___parent___parent___id = 'children___parent___parent___id',
-  fixed___aspectRatio = 'fixed___aspectRatio',
-  fixed___base64 = 'fixed___base64',
-  fixed___height = 'fixed___height',
-  fixed___originalName = 'fixed___originalName',
-  fixed___src = 'fixed___src',
-  fixed___srcSet = 'fixed___srcSet',
-  fixed___srcSetWebp = 'fixed___srcSetWebp',
-  fixed___srcWebp = 'fixed___srcWebp',
-  fixed___tracedSVG = 'fixed___tracedSVG',
-  fixed___width = 'fixed___width',
-  fluid___aspectRatio = 'fluid___aspectRatio',
-  fluid___base64 = 'fluid___base64',
-  fluid___originalImg = 'fluid___originalImg',
-  fluid___originalName = 'fluid___originalName',
-  fluid___presentationHeight = 'fluid___presentationHeight',
-  fluid___presentationWidth = 'fluid___presentationWidth',
-  fluid___sizes = 'fluid___sizes',
-  fluid___src = 'fluid___src',
-  fluid___srcSet = 'fluid___srcSet',
-  fluid___srcSetWebp = 'fluid___srcSetWebp',
-  fluid___srcWebp = 'fluid___srcWebp',
-  fluid___tracedSVG = 'fluid___tracedSVG',
-  gatsbyImageData = 'gatsbyImageData',
-  id = 'id',
-  internal___content = 'internal___content',
-  internal___contentDigest = 'internal___contentDigest',
-  internal___contentFilePath = 'internal___contentFilePath',
-  internal___description = 'internal___description',
-  internal___fieldOwners = 'internal___fieldOwners',
-  internal___ignoreType = 'internal___ignoreType',
-  internal___mediaType = 'internal___mediaType',
-  internal___owner = 'internal___owner',
-  internal___type = 'internal___type',
-  original___height = 'original___height',
-  original___src = 'original___src',
-  original___width = 'original___width',
-  parent___children = 'parent___children',
-  parent___children___children = 'parent___children___children',
-  parent___children___children___children = 'parent___children___children___children',
-  parent___children___children___id = 'parent___children___children___id',
-  parent___children___id = 'parent___children___id',
-  parent___children___internal___content = 'parent___children___internal___content',
-  parent___children___internal___contentDigest = 'parent___children___internal___contentDigest',
-  parent___children___internal___contentFilePath = 'parent___children___internal___contentFilePath',
-  parent___children___internal___description = 'parent___children___internal___description',
-  parent___children___internal___fieldOwners = 'parent___children___internal___fieldOwners',
-  parent___children___internal___ignoreType = 'parent___children___internal___ignoreType',
-  parent___children___internal___mediaType = 'parent___children___internal___mediaType',
-  parent___children___internal___owner = 'parent___children___internal___owner',
-  parent___children___internal___type = 'parent___children___internal___type',
-  parent___children___parent___children = 'parent___children___parent___children',
-  parent___children___parent___id = 'parent___children___parent___id',
-  parent___id = 'parent___id',
-  parent___internal___content = 'parent___internal___content',
-  parent___internal___contentDigest = 'parent___internal___contentDigest',
-  parent___internal___contentFilePath = 'parent___internal___contentFilePath',
-  parent___internal___description = 'parent___internal___description',
-  parent___internal___fieldOwners = 'parent___internal___fieldOwners',
-  parent___internal___ignoreType = 'parent___internal___ignoreType',
-  parent___internal___mediaType = 'parent___internal___mediaType',
-  parent___internal___owner = 'parent___internal___owner',
-  parent___internal___type = 'parent___internal___type',
-  parent___parent___children = 'parent___parent___children',
-  parent___parent___children___children = 'parent___parent___children___children',
-  parent___parent___children___id = 'parent___parent___children___id',
-  parent___parent___id = 'parent___parent___id',
-  parent___parent___internal___content = 'parent___parent___internal___content',
-  parent___parent___internal___contentDigest = 'parent___parent___internal___contentDigest',
-  parent___parent___internal___contentFilePath = 'parent___parent___internal___contentFilePath',
-  parent___parent___internal___description = 'parent___parent___internal___description',
-  parent___parent___internal___fieldOwners = 'parent___parent___internal___fieldOwners',
-  parent___parent___internal___ignoreType = 'parent___parent___internal___ignoreType',
-  parent___parent___internal___mediaType = 'parent___parent___internal___mediaType',
-  parent___parent___internal___owner = 'parent___parent___internal___owner',
-  parent___parent___internal___type = 'parent___parent___internal___type',
-  parent___parent___parent___children = 'parent___parent___parent___children',
-  parent___parent___parent___id = 'parent___parent___parent___id',
-  resize___aspectRatio = 'resize___aspectRatio',
-  resize___height = 'resize___height',
-  resize___originalName = 'resize___originalName',
-  resize___src = 'resize___src',
-  resize___tracedSVG = 'resize___tracedSVG',
-  resize___width = 'resize___width',
+export type ImageSharpFieldSelector = {
+  children?: Maybe<NodeFieldSelector>
+  fixed?: Maybe<ImageSharpFixedFieldSelector>
+  fluid?: Maybe<ImageSharpFluidFieldSelector>
+  gatsbyImageData?: Maybe<FieldSelectorEnum>
+  id?: Maybe<FieldSelectorEnum>
+  internal?: Maybe<InternalFieldSelector>
+  original?: Maybe<ImageSharpOriginalFieldSelector>
+  parent?: Maybe<NodeFieldSelector>
+  resize?: Maybe<ImageSharpResizeFieldSelector>
 }
 
 export type ImageSharpFilterInput = {
@@ -8692,6 +8339,19 @@ export type ImageSharpFixed = {
   width: Scalars['Float']
 }
 
+export type ImageSharpFixedFieldSelector = {
+  aspectRatio?: Maybe<FieldSelectorEnum>
+  base64?: Maybe<FieldSelectorEnum>
+  height?: Maybe<FieldSelectorEnum>
+  originalName?: Maybe<FieldSelectorEnum>
+  src?: Maybe<FieldSelectorEnum>
+  srcSet?: Maybe<FieldSelectorEnum>
+  srcSetWebp?: Maybe<FieldSelectorEnum>
+  srcWebp?: Maybe<FieldSelectorEnum>
+  tracedSVG?: Maybe<FieldSelectorEnum>
+  width?: Maybe<FieldSelectorEnum>
+}
+
 export type ImageSharpFixedFilterInput = {
   aspectRatio?: Maybe<FloatQueryOperatorInput>
   base64?: Maybe<StringQueryOperatorInput>
@@ -8703,6 +8363,19 @@ export type ImageSharpFixedFilterInput = {
   srcWebp?: Maybe<StringQueryOperatorInput>
   tracedSVG?: Maybe<StringQueryOperatorInput>
   width?: Maybe<FloatQueryOperatorInput>
+}
+
+export type ImageSharpFixedSortInput = {
+  aspectRatio?: Maybe<SortOrderEnum>
+  base64?: Maybe<SortOrderEnum>
+  height?: Maybe<SortOrderEnum>
+  originalName?: Maybe<SortOrderEnum>
+  src?: Maybe<SortOrderEnum>
+  srcSet?: Maybe<SortOrderEnum>
+  srcSetWebp?: Maybe<SortOrderEnum>
+  srcWebp?: Maybe<SortOrderEnum>
+  tracedSVG?: Maybe<SortOrderEnum>
+  width?: Maybe<SortOrderEnum>
 }
 
 export type ImageSharpFluid = {
@@ -8721,6 +8394,21 @@ export type ImageSharpFluid = {
   tracedSVG?: Maybe<Scalars['String']>
 }
 
+export type ImageSharpFluidFieldSelector = {
+  aspectRatio?: Maybe<FieldSelectorEnum>
+  base64?: Maybe<FieldSelectorEnum>
+  originalImg?: Maybe<FieldSelectorEnum>
+  originalName?: Maybe<FieldSelectorEnum>
+  presentationHeight?: Maybe<FieldSelectorEnum>
+  presentationWidth?: Maybe<FieldSelectorEnum>
+  sizes?: Maybe<FieldSelectorEnum>
+  src?: Maybe<FieldSelectorEnum>
+  srcSet?: Maybe<FieldSelectorEnum>
+  srcSetWebp?: Maybe<FieldSelectorEnum>
+  srcWebp?: Maybe<FieldSelectorEnum>
+  tracedSVG?: Maybe<FieldSelectorEnum>
+}
+
 export type ImageSharpFluidFilterInput = {
   aspectRatio?: Maybe<FloatQueryOperatorInput>
   base64?: Maybe<StringQueryOperatorInput>
@@ -8734,6 +8422,21 @@ export type ImageSharpFluidFilterInput = {
   srcSetWebp?: Maybe<StringQueryOperatorInput>
   srcWebp?: Maybe<StringQueryOperatorInput>
   tracedSVG?: Maybe<StringQueryOperatorInput>
+}
+
+export type ImageSharpFluidSortInput = {
+  aspectRatio?: Maybe<SortOrderEnum>
+  base64?: Maybe<SortOrderEnum>
+  originalImg?: Maybe<SortOrderEnum>
+  originalName?: Maybe<SortOrderEnum>
+  presentationHeight?: Maybe<SortOrderEnum>
+  presentationWidth?: Maybe<SortOrderEnum>
+  sizes?: Maybe<SortOrderEnum>
+  src?: Maybe<SortOrderEnum>
+  srcSet?: Maybe<SortOrderEnum>
+  srcSetWebp?: Maybe<SortOrderEnum>
+  srcWebp?: Maybe<SortOrderEnum>
+  tracedSVG?: Maybe<SortOrderEnum>
 }
 
 export type ImageSharpGroupConnection = {
@@ -8752,25 +8455,25 @@ export type ImageSharpGroupConnection = {
 }
 
 export type ImageSharpGroupConnectionDistinctArgs = {
-  field: ImageSharpFieldsEnum
+  field: ImageSharpFieldSelector
 }
 
 export type ImageSharpGroupConnectionGroupArgs = {
-  field: ImageSharpFieldsEnum
+  field: ImageSharpFieldSelector
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
 }
 
 export type ImageSharpGroupConnectionMaxArgs = {
-  field: ImageSharpFieldsEnum
+  field: ImageSharpFieldSelector
 }
 
 export type ImageSharpGroupConnectionMinArgs = {
-  field: ImageSharpFieldsEnum
+  field: ImageSharpFieldSelector
 }
 
 export type ImageSharpGroupConnectionSumArgs = {
-  field: ImageSharpFieldsEnum
+  field: ImageSharpFieldSelector
 }
 
 export type ImageSharpOriginal = {
@@ -8780,10 +8483,22 @@ export type ImageSharpOriginal = {
   width?: Maybe<Scalars['Float']>
 }
 
+export type ImageSharpOriginalFieldSelector = {
+  height?: Maybe<FieldSelectorEnum>
+  src?: Maybe<FieldSelectorEnum>
+  width?: Maybe<FieldSelectorEnum>
+}
+
 export type ImageSharpOriginalFilterInput = {
   height?: Maybe<FloatQueryOperatorInput>
   src?: Maybe<StringQueryOperatorInput>
   width?: Maybe<FloatQueryOperatorInput>
+}
+
+export type ImageSharpOriginalSortInput = {
+  height?: Maybe<SortOrderEnum>
+  src?: Maybe<SortOrderEnum>
+  width?: Maybe<SortOrderEnum>
 }
 
 export type ImageSharpResize = {
@@ -8796,6 +8511,15 @@ export type ImageSharpResize = {
   width?: Maybe<Scalars['Int']>
 }
 
+export type ImageSharpResizeFieldSelector = {
+  aspectRatio?: Maybe<FieldSelectorEnum>
+  height?: Maybe<FieldSelectorEnum>
+  originalName?: Maybe<FieldSelectorEnum>
+  src?: Maybe<FieldSelectorEnum>
+  tracedSVG?: Maybe<FieldSelectorEnum>
+  width?: Maybe<FieldSelectorEnum>
+}
+
 export type ImageSharpResizeFilterInput = {
   aspectRatio?: Maybe<FloatQueryOperatorInput>
   height?: Maybe<IntQueryOperatorInput>
@@ -8805,9 +8529,25 @@ export type ImageSharpResizeFilterInput = {
   width?: Maybe<IntQueryOperatorInput>
 }
 
+export type ImageSharpResizeSortInput = {
+  aspectRatio?: Maybe<SortOrderEnum>
+  height?: Maybe<SortOrderEnum>
+  originalName?: Maybe<SortOrderEnum>
+  src?: Maybe<SortOrderEnum>
+  tracedSVG?: Maybe<SortOrderEnum>
+  width?: Maybe<SortOrderEnum>
+}
+
 export type ImageSharpSortInput = {
-  fields?: Maybe<Array<Maybe<ImageSharpFieldsEnum>>>
-  order?: Maybe<Array<Maybe<SortOrderEnum>>>
+  children?: Maybe<NodeSortInput>
+  fixed?: Maybe<ImageSharpFixedSortInput>
+  fluid?: Maybe<ImageSharpFluidSortInput>
+  gatsbyImageData?: Maybe<SortOrderEnum>
+  id?: Maybe<SortOrderEnum>
+  internal?: Maybe<InternalSortInput>
+  original?: Maybe<ImageSharpOriginalSortInput>
+  parent?: Maybe<NodeSortInput>
+  resize?: Maybe<ImageSharpResizeSortInput>
 }
 
 export type IntQueryOperatorInput = {
@@ -8834,6 +8574,18 @@ export type Internal = {
   type: Scalars['String']
 }
 
+export type InternalFieldSelector = {
+  content?: Maybe<FieldSelectorEnum>
+  contentDigest?: Maybe<FieldSelectorEnum>
+  contentFilePath?: Maybe<FieldSelectorEnum>
+  description?: Maybe<FieldSelectorEnum>
+  fieldOwners?: Maybe<FieldSelectorEnum>
+  ignoreType?: Maybe<FieldSelectorEnum>
+  mediaType?: Maybe<FieldSelectorEnum>
+  owner?: Maybe<FieldSelectorEnum>
+  type?: Maybe<FieldSelectorEnum>
+}
+
 export type InternalFilterInput = {
   content?: Maybe<StringQueryOperatorInput>
   contentDigest?: Maybe<StringQueryOperatorInput>
@@ -8844,6 +8596,18 @@ export type InternalFilterInput = {
   mediaType?: Maybe<StringQueryOperatorInput>
   owner?: Maybe<StringQueryOperatorInput>
   type?: Maybe<StringQueryOperatorInput>
+}
+
+export type InternalSortInput = {
+  content?: Maybe<SortOrderEnum>
+  contentDigest?: Maybe<SortOrderEnum>
+  contentFilePath?: Maybe<SortOrderEnum>
+  description?: Maybe<SortOrderEnum>
+  fieldOwners?: Maybe<SortOrderEnum>
+  ignoreType?: Maybe<SortOrderEnum>
+  mediaType?: Maybe<SortOrderEnum>
+  owner?: Maybe<SortOrderEnum>
+  type?: Maybe<SortOrderEnum>
 }
 
 export type JpgOptions = {
@@ -8873,6 +8637,12 @@ export type MarkdownHeading = {
   value?: Maybe<Scalars['String']>
 }
 
+export type MarkdownHeadingFieldSelector = {
+  depth?: Maybe<FieldSelectorEnum>
+  id?: Maybe<FieldSelectorEnum>
+  value?: Maybe<FieldSelectorEnum>
+}
+
 export type MarkdownHeadingFilterInput = {
   depth?: Maybe<IntQueryOperatorInput>
   id?: Maybe<StringQueryOperatorInput>
@@ -8890,6 +8660,12 @@ export enum MarkdownHeadingLevels {
   h4 = 'h4',
   h5 = 'h5',
   h6 = 'h6',
+}
+
+export type MarkdownHeadingSortInput = {
+  depth?: Maybe<SortOrderEnum>
+  id?: Maybe<SortOrderEnum>
+  value?: Maybe<SortOrderEnum>
 }
 
 export type MarkdownRemark = Node & {
@@ -8944,25 +8720,25 @@ export type MarkdownRemarkConnection = {
 }
 
 export type MarkdownRemarkConnectionDistinctArgs = {
-  field: MarkdownRemarkFieldsEnum
+  field: MarkdownRemarkFieldSelector
 }
 
 export type MarkdownRemarkConnectionGroupArgs = {
-  field: MarkdownRemarkFieldsEnum
+  field: MarkdownRemarkFieldSelector
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
 }
 
 export type MarkdownRemarkConnectionMaxArgs = {
-  field: MarkdownRemarkFieldsEnum
+  field: MarkdownRemarkFieldSelector
 }
 
 export type MarkdownRemarkConnectionMinArgs = {
-  field: MarkdownRemarkFieldsEnum
+  field: MarkdownRemarkFieldSelector
 }
 
 export type MarkdownRemarkConnectionSumArgs = {
-  field: MarkdownRemarkFieldsEnum
+  field: MarkdownRemarkFieldSelector
 }
 
 export type MarkdownRemarkEdge = {
@@ -8972,113 +8748,19 @@ export type MarkdownRemarkEdge = {
   previous?: Maybe<MarkdownRemark>
 }
 
-export enum MarkdownRemarkFieldsEnum {
-  children = 'children',
-  children___children = 'children___children',
-  children___children___children = 'children___children___children',
-  children___children___children___children = 'children___children___children___children',
-  children___children___children___id = 'children___children___children___id',
-  children___children___id = 'children___children___id',
-  children___children___internal___content = 'children___children___internal___content',
-  children___children___internal___contentDigest = 'children___children___internal___contentDigest',
-  children___children___internal___contentFilePath = 'children___children___internal___contentFilePath',
-  children___children___internal___description = 'children___children___internal___description',
-  children___children___internal___fieldOwners = 'children___children___internal___fieldOwners',
-  children___children___internal___ignoreType = 'children___children___internal___ignoreType',
-  children___children___internal___mediaType = 'children___children___internal___mediaType',
-  children___children___internal___owner = 'children___children___internal___owner',
-  children___children___internal___type = 'children___children___internal___type',
-  children___children___parent___children = 'children___children___parent___children',
-  children___children___parent___id = 'children___children___parent___id',
-  children___id = 'children___id',
-  children___internal___content = 'children___internal___content',
-  children___internal___contentDigest = 'children___internal___contentDigest',
-  children___internal___contentFilePath = 'children___internal___contentFilePath',
-  children___internal___description = 'children___internal___description',
-  children___internal___fieldOwners = 'children___internal___fieldOwners',
-  children___internal___ignoreType = 'children___internal___ignoreType',
-  children___internal___mediaType = 'children___internal___mediaType',
-  children___internal___owner = 'children___internal___owner',
-  children___internal___type = 'children___internal___type',
-  children___parent___children = 'children___parent___children',
-  children___parent___children___children = 'children___parent___children___children',
-  children___parent___children___id = 'children___parent___children___id',
-  children___parent___id = 'children___parent___id',
-  children___parent___internal___content = 'children___parent___internal___content',
-  children___parent___internal___contentDigest = 'children___parent___internal___contentDigest',
-  children___parent___internal___contentFilePath = 'children___parent___internal___contentFilePath',
-  children___parent___internal___description = 'children___parent___internal___description',
-  children___parent___internal___fieldOwners = 'children___parent___internal___fieldOwners',
-  children___parent___internal___ignoreType = 'children___parent___internal___ignoreType',
-  children___parent___internal___mediaType = 'children___parent___internal___mediaType',
-  children___parent___internal___owner = 'children___parent___internal___owner',
-  children___parent___internal___type = 'children___parent___internal___type',
-  children___parent___parent___children = 'children___parent___parent___children',
-  children___parent___parent___id = 'children___parent___parent___id',
-  excerpt = 'excerpt',
-  excerptAst = 'excerptAst',
-  headings = 'headings',
-  headings___depth = 'headings___depth',
-  headings___id = 'headings___id',
-  headings___value = 'headings___value',
-  html = 'html',
-  htmlAst = 'htmlAst',
-  id = 'id',
-  internal___content = 'internal___content',
-  internal___contentDigest = 'internal___contentDigest',
-  internal___contentFilePath = 'internal___contentFilePath',
-  internal___description = 'internal___description',
-  internal___fieldOwners = 'internal___fieldOwners',
-  internal___ignoreType = 'internal___ignoreType',
-  internal___mediaType = 'internal___mediaType',
-  internal___owner = 'internal___owner',
-  internal___type = 'internal___type',
-  parent___children = 'parent___children',
-  parent___children___children = 'parent___children___children',
-  parent___children___children___children = 'parent___children___children___children',
-  parent___children___children___id = 'parent___children___children___id',
-  parent___children___id = 'parent___children___id',
-  parent___children___internal___content = 'parent___children___internal___content',
-  parent___children___internal___contentDigest = 'parent___children___internal___contentDigest',
-  parent___children___internal___contentFilePath = 'parent___children___internal___contentFilePath',
-  parent___children___internal___description = 'parent___children___internal___description',
-  parent___children___internal___fieldOwners = 'parent___children___internal___fieldOwners',
-  parent___children___internal___ignoreType = 'parent___children___internal___ignoreType',
-  parent___children___internal___mediaType = 'parent___children___internal___mediaType',
-  parent___children___internal___owner = 'parent___children___internal___owner',
-  parent___children___internal___type = 'parent___children___internal___type',
-  parent___children___parent___children = 'parent___children___parent___children',
-  parent___children___parent___id = 'parent___children___parent___id',
-  parent___id = 'parent___id',
-  parent___internal___content = 'parent___internal___content',
-  parent___internal___contentDigest = 'parent___internal___contentDigest',
-  parent___internal___contentFilePath = 'parent___internal___contentFilePath',
-  parent___internal___description = 'parent___internal___description',
-  parent___internal___fieldOwners = 'parent___internal___fieldOwners',
-  parent___internal___ignoreType = 'parent___internal___ignoreType',
-  parent___internal___mediaType = 'parent___internal___mediaType',
-  parent___internal___owner = 'parent___internal___owner',
-  parent___internal___type = 'parent___internal___type',
-  parent___parent___children = 'parent___parent___children',
-  parent___parent___children___children = 'parent___parent___children___children',
-  parent___parent___children___id = 'parent___parent___children___id',
-  parent___parent___id = 'parent___parent___id',
-  parent___parent___internal___content = 'parent___parent___internal___content',
-  parent___parent___internal___contentDigest = 'parent___parent___internal___contentDigest',
-  parent___parent___internal___contentFilePath = 'parent___parent___internal___contentFilePath',
-  parent___parent___internal___description = 'parent___parent___internal___description',
-  parent___parent___internal___fieldOwners = 'parent___parent___internal___fieldOwners',
-  parent___parent___internal___ignoreType = 'parent___parent___internal___ignoreType',
-  parent___parent___internal___mediaType = 'parent___parent___internal___mediaType',
-  parent___parent___internal___owner = 'parent___parent___internal___owner',
-  parent___parent___internal___type = 'parent___parent___internal___type',
-  parent___parent___parent___children = 'parent___parent___parent___children',
-  parent___parent___parent___id = 'parent___parent___parent___id',
-  tableOfContents = 'tableOfContents',
-  timeToRead = 'timeToRead',
-  wordCount___paragraphs = 'wordCount___paragraphs',
-  wordCount___sentences = 'wordCount___sentences',
-  wordCount___words = 'wordCount___words',
+export type MarkdownRemarkFieldSelector = {
+  children?: Maybe<NodeFieldSelector>
+  excerpt?: Maybe<FieldSelectorEnum>
+  excerptAst?: Maybe<FieldSelectorEnum>
+  headings?: Maybe<MarkdownHeadingFieldSelector>
+  html?: Maybe<FieldSelectorEnum>
+  htmlAst?: Maybe<FieldSelectorEnum>
+  id?: Maybe<FieldSelectorEnum>
+  internal?: Maybe<InternalFieldSelector>
+  parent?: Maybe<NodeFieldSelector>
+  tableOfContents?: Maybe<FieldSelectorEnum>
+  timeToRead?: Maybe<FieldSelectorEnum>
+  wordCount?: Maybe<MarkdownWordCountFieldSelector>
 }
 
 export type MarkdownRemarkFilterInput = {
@@ -9112,30 +8794,40 @@ export type MarkdownRemarkGroupConnection = {
 }
 
 export type MarkdownRemarkGroupConnectionDistinctArgs = {
-  field: MarkdownRemarkFieldsEnum
+  field: MarkdownRemarkFieldSelector
 }
 
 export type MarkdownRemarkGroupConnectionGroupArgs = {
-  field: MarkdownRemarkFieldsEnum
+  field: MarkdownRemarkFieldSelector
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
 }
 
 export type MarkdownRemarkGroupConnectionMaxArgs = {
-  field: MarkdownRemarkFieldsEnum
+  field: MarkdownRemarkFieldSelector
 }
 
 export type MarkdownRemarkGroupConnectionMinArgs = {
-  field: MarkdownRemarkFieldsEnum
+  field: MarkdownRemarkFieldSelector
 }
 
 export type MarkdownRemarkGroupConnectionSumArgs = {
-  field: MarkdownRemarkFieldsEnum
+  field: MarkdownRemarkFieldSelector
 }
 
 export type MarkdownRemarkSortInput = {
-  fields?: Maybe<Array<Maybe<MarkdownRemarkFieldsEnum>>>
-  order?: Maybe<Array<Maybe<SortOrderEnum>>>
+  children?: Maybe<NodeSortInput>
+  excerpt?: Maybe<SortOrderEnum>
+  excerptAst?: Maybe<SortOrderEnum>
+  headings?: Maybe<MarkdownHeadingSortInput>
+  html?: Maybe<SortOrderEnum>
+  htmlAst?: Maybe<SortOrderEnum>
+  id?: Maybe<SortOrderEnum>
+  internal?: Maybe<InternalSortInput>
+  parent?: Maybe<NodeSortInput>
+  tableOfContents?: Maybe<SortOrderEnum>
+  timeToRead?: Maybe<SortOrderEnum>
+  wordCount?: Maybe<MarkdownWordCountSortInput>
 }
 
 export type MarkdownWordCount = {
@@ -9145,219 +8837,22 @@ export type MarkdownWordCount = {
   words?: Maybe<Scalars['Int']>
 }
 
+export type MarkdownWordCountFieldSelector = {
+  paragraphs?: Maybe<FieldSelectorEnum>
+  sentences?: Maybe<FieldSelectorEnum>
+  words?: Maybe<FieldSelectorEnum>
+}
+
 export type MarkdownWordCountFilterInput = {
   paragraphs?: Maybe<IntQueryOperatorInput>
   sentences?: Maybe<IntQueryOperatorInput>
   words?: Maybe<IntQueryOperatorInput>
 }
 
-export type Mdx = Node & {
-  __typename?: 'Mdx'
-  children: Array<Node>
-  excerpt?: Maybe<Scalars['String']>
-  id: Scalars['ID']
-  internal: Internal
-  parent?: Maybe<Node>
-  tableOfContents?: Maybe<Scalars['JSON']>
-}
-
-export type MdxExcerptArgs = {
-  pruneLength?: Maybe<Scalars['Int']>
-}
-
-export type MdxTableOfContentsArgs = {
-  maxDepth?: Maybe<Scalars['Int']>
-}
-
-export type MdxConnection = {
-  __typename?: 'MdxConnection'
-  distinct: Array<Scalars['String']>
-  edges: Array<MdxEdge>
-  group: Array<MdxGroupConnection>
-  max?: Maybe<Scalars['Float']>
-  min?: Maybe<Scalars['Float']>
-  nodes: Array<Mdx>
-  pageInfo: PageInfo
-  sum?: Maybe<Scalars['Float']>
-  totalCount: Scalars['Int']
-}
-
-export type MdxConnectionDistinctArgs = {
-  field: MdxFieldsEnum
-}
-
-export type MdxConnectionGroupArgs = {
-  field: MdxFieldsEnum
-  limit?: Maybe<Scalars['Int']>
-  skip?: Maybe<Scalars['Int']>
-}
-
-export type MdxConnectionMaxArgs = {
-  field: MdxFieldsEnum
-}
-
-export type MdxConnectionMinArgs = {
-  field: MdxFieldsEnum
-}
-
-export type MdxConnectionSumArgs = {
-  field: MdxFieldsEnum
-}
-
-export type MdxEdge = {
-  __typename?: 'MdxEdge'
-  next?: Maybe<Mdx>
-  node: Mdx
-  previous?: Maybe<Mdx>
-}
-
-export enum MdxFieldsEnum {
-  children = 'children',
-  children___children = 'children___children',
-  children___children___children = 'children___children___children',
-  children___children___children___children = 'children___children___children___children',
-  children___children___children___id = 'children___children___children___id',
-  children___children___id = 'children___children___id',
-  children___children___internal___content = 'children___children___internal___content',
-  children___children___internal___contentDigest = 'children___children___internal___contentDigest',
-  children___children___internal___contentFilePath = 'children___children___internal___contentFilePath',
-  children___children___internal___description = 'children___children___internal___description',
-  children___children___internal___fieldOwners = 'children___children___internal___fieldOwners',
-  children___children___internal___ignoreType = 'children___children___internal___ignoreType',
-  children___children___internal___mediaType = 'children___children___internal___mediaType',
-  children___children___internal___owner = 'children___children___internal___owner',
-  children___children___internal___type = 'children___children___internal___type',
-  children___children___parent___children = 'children___children___parent___children',
-  children___children___parent___id = 'children___children___parent___id',
-  children___id = 'children___id',
-  children___internal___content = 'children___internal___content',
-  children___internal___contentDigest = 'children___internal___contentDigest',
-  children___internal___contentFilePath = 'children___internal___contentFilePath',
-  children___internal___description = 'children___internal___description',
-  children___internal___fieldOwners = 'children___internal___fieldOwners',
-  children___internal___ignoreType = 'children___internal___ignoreType',
-  children___internal___mediaType = 'children___internal___mediaType',
-  children___internal___owner = 'children___internal___owner',
-  children___internal___type = 'children___internal___type',
-  children___parent___children = 'children___parent___children',
-  children___parent___children___children = 'children___parent___children___children',
-  children___parent___children___id = 'children___parent___children___id',
-  children___parent___id = 'children___parent___id',
-  children___parent___internal___content = 'children___parent___internal___content',
-  children___parent___internal___contentDigest = 'children___parent___internal___contentDigest',
-  children___parent___internal___contentFilePath = 'children___parent___internal___contentFilePath',
-  children___parent___internal___description = 'children___parent___internal___description',
-  children___parent___internal___fieldOwners = 'children___parent___internal___fieldOwners',
-  children___parent___internal___ignoreType = 'children___parent___internal___ignoreType',
-  children___parent___internal___mediaType = 'children___parent___internal___mediaType',
-  children___parent___internal___owner = 'children___parent___internal___owner',
-  children___parent___internal___type = 'children___parent___internal___type',
-  children___parent___parent___children = 'children___parent___parent___children',
-  children___parent___parent___id = 'children___parent___parent___id',
-  excerpt = 'excerpt',
-  id = 'id',
-  internal___content = 'internal___content',
-  internal___contentDigest = 'internal___contentDigest',
-  internal___contentFilePath = 'internal___contentFilePath',
-  internal___description = 'internal___description',
-  internal___fieldOwners = 'internal___fieldOwners',
-  internal___ignoreType = 'internal___ignoreType',
-  internal___mediaType = 'internal___mediaType',
-  internal___owner = 'internal___owner',
-  internal___type = 'internal___type',
-  parent___children = 'parent___children',
-  parent___children___children = 'parent___children___children',
-  parent___children___children___children = 'parent___children___children___children',
-  parent___children___children___id = 'parent___children___children___id',
-  parent___children___id = 'parent___children___id',
-  parent___children___internal___content = 'parent___children___internal___content',
-  parent___children___internal___contentDigest = 'parent___children___internal___contentDigest',
-  parent___children___internal___contentFilePath = 'parent___children___internal___contentFilePath',
-  parent___children___internal___description = 'parent___children___internal___description',
-  parent___children___internal___fieldOwners = 'parent___children___internal___fieldOwners',
-  parent___children___internal___ignoreType = 'parent___children___internal___ignoreType',
-  parent___children___internal___mediaType = 'parent___children___internal___mediaType',
-  parent___children___internal___owner = 'parent___children___internal___owner',
-  parent___children___internal___type = 'parent___children___internal___type',
-  parent___children___parent___children = 'parent___children___parent___children',
-  parent___children___parent___id = 'parent___children___parent___id',
-  parent___id = 'parent___id',
-  parent___internal___content = 'parent___internal___content',
-  parent___internal___contentDigest = 'parent___internal___contentDigest',
-  parent___internal___contentFilePath = 'parent___internal___contentFilePath',
-  parent___internal___description = 'parent___internal___description',
-  parent___internal___fieldOwners = 'parent___internal___fieldOwners',
-  parent___internal___ignoreType = 'parent___internal___ignoreType',
-  parent___internal___mediaType = 'parent___internal___mediaType',
-  parent___internal___owner = 'parent___internal___owner',
-  parent___internal___type = 'parent___internal___type',
-  parent___parent___children = 'parent___parent___children',
-  parent___parent___children___children = 'parent___parent___children___children',
-  parent___parent___children___id = 'parent___parent___children___id',
-  parent___parent___id = 'parent___parent___id',
-  parent___parent___internal___content = 'parent___parent___internal___content',
-  parent___parent___internal___contentDigest = 'parent___parent___internal___contentDigest',
-  parent___parent___internal___contentFilePath = 'parent___parent___internal___contentFilePath',
-  parent___parent___internal___description = 'parent___parent___internal___description',
-  parent___parent___internal___fieldOwners = 'parent___parent___internal___fieldOwners',
-  parent___parent___internal___ignoreType = 'parent___parent___internal___ignoreType',
-  parent___parent___internal___mediaType = 'parent___parent___internal___mediaType',
-  parent___parent___internal___owner = 'parent___parent___internal___owner',
-  parent___parent___internal___type = 'parent___parent___internal___type',
-  parent___parent___parent___children = 'parent___parent___parent___children',
-  parent___parent___parent___id = 'parent___parent___parent___id',
-  tableOfContents = 'tableOfContents',
-}
-
-export type MdxFilterInput = {
-  children?: Maybe<NodeFilterListInput>
-  excerpt?: Maybe<StringQueryOperatorInput>
-  id?: Maybe<StringQueryOperatorInput>
-  internal?: Maybe<InternalFilterInput>
-  parent?: Maybe<NodeFilterInput>
-  tableOfContents?: Maybe<JsonQueryOperatorInput>
-}
-
-export type MdxGroupConnection = {
-  __typename?: 'MdxGroupConnection'
-  distinct: Array<Scalars['String']>
-  edges: Array<MdxEdge>
-  field: Scalars['String']
-  fieldValue?: Maybe<Scalars['String']>
-  group: Array<MdxGroupConnection>
-  max?: Maybe<Scalars['Float']>
-  min?: Maybe<Scalars['Float']>
-  nodes: Array<Mdx>
-  pageInfo: PageInfo
-  sum?: Maybe<Scalars['Float']>
-  totalCount: Scalars['Int']
-}
-
-export type MdxGroupConnectionDistinctArgs = {
-  field: MdxFieldsEnum
-}
-
-export type MdxGroupConnectionGroupArgs = {
-  field: MdxFieldsEnum
-  limit?: Maybe<Scalars['Int']>
-  skip?: Maybe<Scalars['Int']>
-}
-
-export type MdxGroupConnectionMaxArgs = {
-  field: MdxFieldsEnum
-}
-
-export type MdxGroupConnectionMinArgs = {
-  field: MdxFieldsEnum
-}
-
-export type MdxGroupConnectionSumArgs = {
-  field: MdxFieldsEnum
-}
-
-export type MdxSortInput = {
-  fields?: Maybe<Array<Maybe<MdxFieldsEnum>>>
-  order?: Maybe<Array<Maybe<SortOrderEnum>>>
+export type MarkdownWordCountSortInput = {
+  paragraphs?: Maybe<SortOrderEnum>
+  sentences?: Maybe<SortOrderEnum>
+  words?: Maybe<SortOrderEnum>
 }
 
 /** Node Interface */
@@ -9366,6 +8861,13 @@ export type Node = {
   id: Scalars['ID']
   internal: Internal
   parent?: Maybe<Node>
+}
+
+export type NodeFieldSelector = {
+  children?: Maybe<NodeFieldSelector>
+  id?: Maybe<FieldSelectorEnum>
+  internal?: Maybe<InternalFieldSelector>
+  parent?: Maybe<NodeFieldSelector>
 }
 
 export type NodeFilterInput = {
@@ -9377,6 +8879,13 @@ export type NodeFilterInput = {
 
 export type NodeFilterListInput = {
   elemMatch?: Maybe<NodeFilterInput>
+}
+
+export type NodeSortInput = {
+  children?: Maybe<NodeSortInput>
+  id?: Maybe<SortOrderEnum>
+  internal?: Maybe<InternalSortInput>
+  parent?: Maybe<NodeSortInput>
 }
 
 export type Opengraph = Node & {
@@ -9413,25 +8922,25 @@ export type OpengraphConnection = {
 }
 
 export type OpengraphConnectionDistinctArgs = {
-  field: OpengraphFieldsEnum
+  field: OpengraphFieldSelector
 }
 
 export type OpengraphConnectionGroupArgs = {
-  field: OpengraphFieldsEnum
+  field: OpengraphFieldSelector
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
 }
 
 export type OpengraphConnectionMaxArgs = {
-  field: OpengraphFieldsEnum
+  field: OpengraphFieldSelector
 }
 
 export type OpengraphConnectionMinArgs = {
-  field: OpengraphFieldsEnum
+  field: OpengraphFieldSelector
 }
 
 export type OpengraphConnectionSumArgs = {
-  field: OpengraphFieldsEnum
+  field: OpengraphFieldSelector
 }
 
 export type OpengraphEdge = {
@@ -9441,112 +8950,23 @@ export type OpengraphEdge = {
   previous?: Maybe<Opengraph>
 }
 
-export enum OpengraphFieldsEnum {
-  children = 'children',
-  children___children = 'children___children',
-  children___children___children = 'children___children___children',
-  children___children___children___children = 'children___children___children___children',
-  children___children___children___id = 'children___children___children___id',
-  children___children___id = 'children___children___id',
-  children___children___internal___content = 'children___children___internal___content',
-  children___children___internal___contentDigest = 'children___children___internal___contentDigest',
-  children___children___internal___contentFilePath = 'children___children___internal___contentFilePath',
-  children___children___internal___description = 'children___children___internal___description',
-  children___children___internal___fieldOwners = 'children___children___internal___fieldOwners',
-  children___children___internal___ignoreType = 'children___children___internal___ignoreType',
-  children___children___internal___mediaType = 'children___children___internal___mediaType',
-  children___children___internal___owner = 'children___children___internal___owner',
-  children___children___internal___type = 'children___children___internal___type',
-  children___children___parent___children = 'children___children___parent___children',
-  children___children___parent___id = 'children___children___parent___id',
-  children___id = 'children___id',
-  children___internal___content = 'children___internal___content',
-  children___internal___contentDigest = 'children___internal___contentDigest',
-  children___internal___contentFilePath = 'children___internal___contentFilePath',
-  children___internal___description = 'children___internal___description',
-  children___internal___fieldOwners = 'children___internal___fieldOwners',
-  children___internal___ignoreType = 'children___internal___ignoreType',
-  children___internal___mediaType = 'children___internal___mediaType',
-  children___internal___owner = 'children___internal___owner',
-  children___internal___type = 'children___internal___type',
-  children___parent___children = 'children___parent___children',
-  children___parent___children___children = 'children___parent___children___children',
-  children___parent___children___id = 'children___parent___children___id',
-  children___parent___id = 'children___parent___id',
-  children___parent___internal___content = 'children___parent___internal___content',
-  children___parent___internal___contentDigest = 'children___parent___internal___contentDigest',
-  children___parent___internal___contentFilePath = 'children___parent___internal___contentFilePath',
-  children___parent___internal___description = 'children___parent___internal___description',
-  children___parent___internal___fieldOwners = 'children___parent___internal___fieldOwners',
-  children___parent___internal___ignoreType = 'children___parent___internal___ignoreType',
-  children___parent___internal___mediaType = 'children___parent___internal___mediaType',
-  children___parent___internal___owner = 'children___parent___internal___owner',
-  children___parent___internal___type = 'children___parent___internal___type',
-  children___parent___parent___children = 'children___parent___parent___children',
-  children___parent___parent___id = 'children___parent___parent___id',
-  description = 'description',
-  id = 'id',
-  image = 'image',
-  internal___content = 'internal___content',
-  internal___contentDigest = 'internal___contentDigest',
-  internal___contentFilePath = 'internal___contentFilePath',
-  internal___description = 'internal___description',
-  internal___fieldOwners = 'internal___fieldOwners',
-  internal___ignoreType = 'internal___ignoreType',
-  internal___mediaType = 'internal___mediaType',
-  internal___owner = 'internal___owner',
-  internal___type = 'internal___type',
-  ogDescription = 'ogDescription',
-  ogImage = 'ogImage',
-  ogTitle = 'ogTitle',
-  ogType = 'ogType',
-  ogUrl = 'ogUrl',
-  parent___children = 'parent___children',
-  parent___children___children = 'parent___children___children',
-  parent___children___children___children = 'parent___children___children___children',
-  parent___children___children___id = 'parent___children___children___id',
-  parent___children___id = 'parent___children___id',
-  parent___children___internal___content = 'parent___children___internal___content',
-  parent___children___internal___contentDigest = 'parent___children___internal___contentDigest',
-  parent___children___internal___contentFilePath = 'parent___children___internal___contentFilePath',
-  parent___children___internal___description = 'parent___children___internal___description',
-  parent___children___internal___fieldOwners = 'parent___children___internal___fieldOwners',
-  parent___children___internal___ignoreType = 'parent___children___internal___ignoreType',
-  parent___children___internal___mediaType = 'parent___children___internal___mediaType',
-  parent___children___internal___owner = 'parent___children___internal___owner',
-  parent___children___internal___type = 'parent___children___internal___type',
-  parent___children___parent___children = 'parent___children___parent___children',
-  parent___children___parent___id = 'parent___children___parent___id',
-  parent___id = 'parent___id',
-  parent___internal___content = 'parent___internal___content',
-  parent___internal___contentDigest = 'parent___internal___contentDigest',
-  parent___internal___contentFilePath = 'parent___internal___contentFilePath',
-  parent___internal___description = 'parent___internal___description',
-  parent___internal___fieldOwners = 'parent___internal___fieldOwners',
-  parent___internal___ignoreType = 'parent___internal___ignoreType',
-  parent___internal___mediaType = 'parent___internal___mediaType',
-  parent___internal___owner = 'parent___internal___owner',
-  parent___internal___type = 'parent___internal___type',
-  parent___parent___children = 'parent___parent___children',
-  parent___parent___children___children = 'parent___parent___children___children',
-  parent___parent___children___id = 'parent___parent___children___id',
-  parent___parent___id = 'parent___parent___id',
-  parent___parent___internal___content = 'parent___parent___internal___content',
-  parent___parent___internal___contentDigest = 'parent___parent___internal___contentDigest',
-  parent___parent___internal___contentFilePath = 'parent___parent___internal___contentFilePath',
-  parent___parent___internal___description = 'parent___parent___internal___description',
-  parent___parent___internal___fieldOwners = 'parent___parent___internal___fieldOwners',
-  parent___parent___internal___ignoreType = 'parent___parent___internal___ignoreType',
-  parent___parent___internal___mediaType = 'parent___parent___internal___mediaType',
-  parent___parent___internal___owner = 'parent___parent___internal___owner',
-  parent___parent___internal___type = 'parent___parent___internal___type',
-  parent___parent___parent___children = 'parent___parent___parent___children',
-  parent___parent___parent___id = 'parent___parent___parent___id',
-  twitterCard = 'twitterCard',
-  twitterDescription = 'twitterDescription',
-  twitterImageSrc = 'twitterImageSrc',
-  twitterTitle = 'twitterTitle',
-  url = 'url',
+export type OpengraphFieldSelector = {
+  children?: Maybe<NodeFieldSelector>
+  description?: Maybe<FieldSelectorEnum>
+  id?: Maybe<FieldSelectorEnum>
+  image?: Maybe<FieldSelectorEnum>
+  internal?: Maybe<InternalFieldSelector>
+  ogDescription?: Maybe<FieldSelectorEnum>
+  ogImage?: Maybe<FieldSelectorEnum>
+  ogTitle?: Maybe<FieldSelectorEnum>
+  ogType?: Maybe<FieldSelectorEnum>
+  ogUrl?: Maybe<FieldSelectorEnum>
+  parent?: Maybe<NodeFieldSelector>
+  twitterCard?: Maybe<FieldSelectorEnum>
+  twitterDescription?: Maybe<FieldSelectorEnum>
+  twitterImageSrc?: Maybe<FieldSelectorEnum>
+  twitterTitle?: Maybe<FieldSelectorEnum>
+  url?: Maybe<FieldSelectorEnum>
 }
 
 export type OpengraphFilterInput = {
@@ -9584,30 +9004,44 @@ export type OpengraphGroupConnection = {
 }
 
 export type OpengraphGroupConnectionDistinctArgs = {
-  field: OpengraphFieldsEnum
+  field: OpengraphFieldSelector
 }
 
 export type OpengraphGroupConnectionGroupArgs = {
-  field: OpengraphFieldsEnum
+  field: OpengraphFieldSelector
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
 }
 
 export type OpengraphGroupConnectionMaxArgs = {
-  field: OpengraphFieldsEnum
+  field: OpengraphFieldSelector
 }
 
 export type OpengraphGroupConnectionMinArgs = {
-  field: OpengraphFieldsEnum
+  field: OpengraphFieldSelector
 }
 
 export type OpengraphGroupConnectionSumArgs = {
-  field: OpengraphFieldsEnum
+  field: OpengraphFieldSelector
 }
 
 export type OpengraphSortInput = {
-  fields?: Maybe<Array<Maybe<OpengraphFieldsEnum>>>
-  order?: Maybe<Array<Maybe<SortOrderEnum>>>
+  children?: Maybe<NodeSortInput>
+  description?: Maybe<SortOrderEnum>
+  id?: Maybe<SortOrderEnum>
+  image?: Maybe<SortOrderEnum>
+  internal?: Maybe<InternalSortInput>
+  ogDescription?: Maybe<SortOrderEnum>
+  ogImage?: Maybe<SortOrderEnum>
+  ogTitle?: Maybe<SortOrderEnum>
+  ogType?: Maybe<SortOrderEnum>
+  ogUrl?: Maybe<SortOrderEnum>
+  parent?: Maybe<NodeSortInput>
+  twitterCard?: Maybe<SortOrderEnum>
+  twitterDescription?: Maybe<SortOrderEnum>
+  twitterImageSrc?: Maybe<SortOrderEnum>
+  twitterTitle?: Maybe<SortOrderEnum>
+  url?: Maybe<SortOrderEnum>
 }
 
 export type PngOptions = {
@@ -9654,7 +9088,6 @@ export type Query = {
   allGraphQlSource: GraphQlSourceConnection
   allImageSharp: ImageSharpConnection
   allMarkdownRemark: MarkdownRemarkConnection
-  allMdx: MdxConnection
   allOpengraph: OpengraphConnection
   allSite: SiteConnection
   allSiteBuildMetadata: SiteBuildMetadataConnection
@@ -9667,7 +9100,6 @@ export type Query = {
   graphQlSource?: Maybe<GraphQlSource>
   imageSharp?: Maybe<ImageSharp>
   markdownRemark?: Maybe<MarkdownRemark>
-  mdx?: Maybe<Mdx>
   opengraph?: Maybe<Opengraph>
   site?: Maybe<Site>
   siteBuildMetadata?: Maybe<SiteBuildMetadata>
@@ -9680,84 +9112,77 @@ export type QueryAllDirectoryArgs = {
   filter?: Maybe<DirectoryFilterInput>
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
-  sort?: Maybe<DirectorySortInput>
+  sort?: Maybe<Array<Maybe<DirectorySortInput>>>
 }
 
 export type QueryAllFileArgs = {
   filter?: Maybe<FileFilterInput>
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
-  sort?: Maybe<FileSortInput>
+  sort?: Maybe<Array<Maybe<FileSortInput>>>
 }
 
 export type QueryAllGraphQlSourceArgs = {
   filter?: Maybe<GraphQlSourceFilterInput>
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
-  sort?: Maybe<GraphQlSourceSortInput>
+  sort?: Maybe<Array<Maybe<GraphQlSourceSortInput>>>
 }
 
 export type QueryAllImageSharpArgs = {
   filter?: Maybe<ImageSharpFilterInput>
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
-  sort?: Maybe<ImageSharpSortInput>
+  sort?: Maybe<Array<Maybe<ImageSharpSortInput>>>
 }
 
 export type QueryAllMarkdownRemarkArgs = {
   filter?: Maybe<MarkdownRemarkFilterInput>
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
-  sort?: Maybe<MarkdownRemarkSortInput>
-}
-
-export type QueryAllMdxArgs = {
-  filter?: Maybe<MdxFilterInput>
-  limit?: Maybe<Scalars['Int']>
-  skip?: Maybe<Scalars['Int']>
-  sort?: Maybe<MdxSortInput>
+  sort?: Maybe<Array<Maybe<MarkdownRemarkSortInput>>>
 }
 
 export type QueryAllOpengraphArgs = {
   filter?: Maybe<OpengraphFilterInput>
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
-  sort?: Maybe<OpengraphSortInput>
+  sort?: Maybe<Array<Maybe<OpengraphSortInput>>>
 }
 
 export type QueryAllSiteArgs = {
   filter?: Maybe<SiteFilterInput>
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
-  sort?: Maybe<SiteSortInput>
+  sort?: Maybe<Array<Maybe<SiteSortInput>>>
 }
 
 export type QueryAllSiteBuildMetadataArgs = {
   filter?: Maybe<SiteBuildMetadataFilterInput>
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
-  sort?: Maybe<SiteBuildMetadataSortInput>
+  sort?: Maybe<Array<Maybe<SiteBuildMetadataSortInput>>>
 }
 
 export type QueryAllSiteFunctionArgs = {
   filter?: Maybe<SiteFunctionFilterInput>
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
-  sort?: Maybe<SiteFunctionSortInput>
+  sort?: Maybe<Array<Maybe<SiteFunctionSortInput>>>
 }
 
 export type QueryAllSitePageArgs = {
   filter?: Maybe<SitePageFilterInput>
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
-  sort?: Maybe<SitePageSortInput>
+  sort?: Maybe<Array<Maybe<SitePageSortInput>>>
 }
 
 export type QueryAllSitePluginArgs = {
   filter?: Maybe<SitePluginFilterInput>
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
-  sort?: Maybe<SitePluginSortInput>
+  sort?: Maybe<Array<Maybe<SitePluginSortInput>>>
 }
 
 export type QueryDirectoryArgs = {
@@ -9875,15 +9300,6 @@ export type QueryMarkdownRemarkArgs = {
   tableOfContents?: Maybe<StringQueryOperatorInput>
   timeToRead?: Maybe<IntQueryOperatorInput>
   wordCount?: Maybe<MarkdownWordCountFilterInput>
-}
-
-export type QueryMdxArgs = {
-  children?: Maybe<NodeFilterListInput>
-  excerpt?: Maybe<StringQueryOperatorInput>
-  id?: Maybe<StringQueryOperatorInput>
-  internal?: Maybe<InternalFilterInput>
-  parent?: Maybe<NodeFilterInput>
-  tableOfContents?: Maybe<JsonQueryOperatorInput>
 }
 
 export type QueryOpengraphArgs = {
@@ -10027,25 +9443,25 @@ export type SiteBuildMetadataConnection = {
 }
 
 export type SiteBuildMetadataConnectionDistinctArgs = {
-  field: SiteBuildMetadataFieldsEnum
+  field: SiteBuildMetadataFieldSelector
 }
 
 export type SiteBuildMetadataConnectionGroupArgs = {
-  field: SiteBuildMetadataFieldsEnum
+  field: SiteBuildMetadataFieldSelector
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
 }
 
 export type SiteBuildMetadataConnectionMaxArgs = {
-  field: SiteBuildMetadataFieldsEnum
+  field: SiteBuildMetadataFieldSelector
 }
 
 export type SiteBuildMetadataConnectionMinArgs = {
-  field: SiteBuildMetadataFieldsEnum
+  field: SiteBuildMetadataFieldSelector
 }
 
 export type SiteBuildMetadataConnectionSumArgs = {
-  field: SiteBuildMetadataFieldsEnum
+  field: SiteBuildMetadataFieldSelector
 }
 
 export type SiteBuildMetadataEdge = {
@@ -10055,101 +9471,12 @@ export type SiteBuildMetadataEdge = {
   previous?: Maybe<SiteBuildMetadata>
 }
 
-export enum SiteBuildMetadataFieldsEnum {
-  buildTime = 'buildTime',
-  children = 'children',
-  children___children = 'children___children',
-  children___children___children = 'children___children___children',
-  children___children___children___children = 'children___children___children___children',
-  children___children___children___id = 'children___children___children___id',
-  children___children___id = 'children___children___id',
-  children___children___internal___content = 'children___children___internal___content',
-  children___children___internal___contentDigest = 'children___children___internal___contentDigest',
-  children___children___internal___contentFilePath = 'children___children___internal___contentFilePath',
-  children___children___internal___description = 'children___children___internal___description',
-  children___children___internal___fieldOwners = 'children___children___internal___fieldOwners',
-  children___children___internal___ignoreType = 'children___children___internal___ignoreType',
-  children___children___internal___mediaType = 'children___children___internal___mediaType',
-  children___children___internal___owner = 'children___children___internal___owner',
-  children___children___internal___type = 'children___children___internal___type',
-  children___children___parent___children = 'children___children___parent___children',
-  children___children___parent___id = 'children___children___parent___id',
-  children___id = 'children___id',
-  children___internal___content = 'children___internal___content',
-  children___internal___contentDigest = 'children___internal___contentDigest',
-  children___internal___contentFilePath = 'children___internal___contentFilePath',
-  children___internal___description = 'children___internal___description',
-  children___internal___fieldOwners = 'children___internal___fieldOwners',
-  children___internal___ignoreType = 'children___internal___ignoreType',
-  children___internal___mediaType = 'children___internal___mediaType',
-  children___internal___owner = 'children___internal___owner',
-  children___internal___type = 'children___internal___type',
-  children___parent___children = 'children___parent___children',
-  children___parent___children___children = 'children___parent___children___children',
-  children___parent___children___id = 'children___parent___children___id',
-  children___parent___id = 'children___parent___id',
-  children___parent___internal___content = 'children___parent___internal___content',
-  children___parent___internal___contentDigest = 'children___parent___internal___contentDigest',
-  children___parent___internal___contentFilePath = 'children___parent___internal___contentFilePath',
-  children___parent___internal___description = 'children___parent___internal___description',
-  children___parent___internal___fieldOwners = 'children___parent___internal___fieldOwners',
-  children___parent___internal___ignoreType = 'children___parent___internal___ignoreType',
-  children___parent___internal___mediaType = 'children___parent___internal___mediaType',
-  children___parent___internal___owner = 'children___parent___internal___owner',
-  children___parent___internal___type = 'children___parent___internal___type',
-  children___parent___parent___children = 'children___parent___parent___children',
-  children___parent___parent___id = 'children___parent___parent___id',
-  id = 'id',
-  internal___content = 'internal___content',
-  internal___contentDigest = 'internal___contentDigest',
-  internal___contentFilePath = 'internal___contentFilePath',
-  internal___description = 'internal___description',
-  internal___fieldOwners = 'internal___fieldOwners',
-  internal___ignoreType = 'internal___ignoreType',
-  internal___mediaType = 'internal___mediaType',
-  internal___owner = 'internal___owner',
-  internal___type = 'internal___type',
-  parent___children = 'parent___children',
-  parent___children___children = 'parent___children___children',
-  parent___children___children___children = 'parent___children___children___children',
-  parent___children___children___id = 'parent___children___children___id',
-  parent___children___id = 'parent___children___id',
-  parent___children___internal___content = 'parent___children___internal___content',
-  parent___children___internal___contentDigest = 'parent___children___internal___contentDigest',
-  parent___children___internal___contentFilePath = 'parent___children___internal___contentFilePath',
-  parent___children___internal___description = 'parent___children___internal___description',
-  parent___children___internal___fieldOwners = 'parent___children___internal___fieldOwners',
-  parent___children___internal___ignoreType = 'parent___children___internal___ignoreType',
-  parent___children___internal___mediaType = 'parent___children___internal___mediaType',
-  parent___children___internal___owner = 'parent___children___internal___owner',
-  parent___children___internal___type = 'parent___children___internal___type',
-  parent___children___parent___children = 'parent___children___parent___children',
-  parent___children___parent___id = 'parent___children___parent___id',
-  parent___id = 'parent___id',
-  parent___internal___content = 'parent___internal___content',
-  parent___internal___contentDigest = 'parent___internal___contentDigest',
-  parent___internal___contentFilePath = 'parent___internal___contentFilePath',
-  parent___internal___description = 'parent___internal___description',
-  parent___internal___fieldOwners = 'parent___internal___fieldOwners',
-  parent___internal___ignoreType = 'parent___internal___ignoreType',
-  parent___internal___mediaType = 'parent___internal___mediaType',
-  parent___internal___owner = 'parent___internal___owner',
-  parent___internal___type = 'parent___internal___type',
-  parent___parent___children = 'parent___parent___children',
-  parent___parent___children___children = 'parent___parent___children___children',
-  parent___parent___children___id = 'parent___parent___children___id',
-  parent___parent___id = 'parent___parent___id',
-  parent___parent___internal___content = 'parent___parent___internal___content',
-  parent___parent___internal___contentDigest = 'parent___parent___internal___contentDigest',
-  parent___parent___internal___contentFilePath = 'parent___parent___internal___contentFilePath',
-  parent___parent___internal___description = 'parent___parent___internal___description',
-  parent___parent___internal___fieldOwners = 'parent___parent___internal___fieldOwners',
-  parent___parent___internal___ignoreType = 'parent___parent___internal___ignoreType',
-  parent___parent___internal___mediaType = 'parent___parent___internal___mediaType',
-  parent___parent___internal___owner = 'parent___parent___internal___owner',
-  parent___parent___internal___type = 'parent___parent___internal___type',
-  parent___parent___parent___children = 'parent___parent___parent___children',
-  parent___parent___parent___id = 'parent___parent___parent___id',
+export type SiteBuildMetadataFieldSelector = {
+  buildTime?: Maybe<FieldSelectorEnum>
+  children?: Maybe<NodeFieldSelector>
+  id?: Maybe<FieldSelectorEnum>
+  internal?: Maybe<InternalFieldSelector>
+  parent?: Maybe<NodeFieldSelector>
 }
 
 export type SiteBuildMetadataFilterInput = {
@@ -10176,30 +9503,33 @@ export type SiteBuildMetadataGroupConnection = {
 }
 
 export type SiteBuildMetadataGroupConnectionDistinctArgs = {
-  field: SiteBuildMetadataFieldsEnum
+  field: SiteBuildMetadataFieldSelector
 }
 
 export type SiteBuildMetadataGroupConnectionGroupArgs = {
-  field: SiteBuildMetadataFieldsEnum
+  field: SiteBuildMetadataFieldSelector
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
 }
 
 export type SiteBuildMetadataGroupConnectionMaxArgs = {
-  field: SiteBuildMetadataFieldsEnum
+  field: SiteBuildMetadataFieldSelector
 }
 
 export type SiteBuildMetadataGroupConnectionMinArgs = {
-  field: SiteBuildMetadataFieldsEnum
+  field: SiteBuildMetadataFieldSelector
 }
 
 export type SiteBuildMetadataGroupConnectionSumArgs = {
-  field: SiteBuildMetadataFieldsEnum
+  field: SiteBuildMetadataFieldSelector
 }
 
 export type SiteBuildMetadataSortInput = {
-  fields?: Maybe<Array<Maybe<SiteBuildMetadataFieldsEnum>>>
-  order?: Maybe<Array<Maybe<SortOrderEnum>>>
+  buildTime?: Maybe<SortOrderEnum>
+  children?: Maybe<NodeSortInput>
+  id?: Maybe<SortOrderEnum>
+  internal?: Maybe<InternalSortInput>
+  parent?: Maybe<NodeSortInput>
 }
 
 export type SiteConnection = {
@@ -10216,25 +9546,25 @@ export type SiteConnection = {
 }
 
 export type SiteConnectionDistinctArgs = {
-  field: SiteFieldsEnum
+  field: SiteFieldSelector
 }
 
 export type SiteConnectionGroupArgs = {
-  field: SiteFieldsEnum
+  field: SiteFieldSelector
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
 }
 
 export type SiteConnectionMaxArgs = {
-  field: SiteFieldsEnum
+  field: SiteFieldSelector
 }
 
 export type SiteConnectionMinArgs = {
-  field: SiteFieldsEnum
+  field: SiteFieldSelector
 }
 
 export type SiteConnectionSumArgs = {
-  field: SiteFieldsEnum
+  field: SiteFieldSelector
 }
 
 export type SiteEdge = {
@@ -10244,112 +9574,20 @@ export type SiteEdge = {
   previous?: Maybe<Site>
 }
 
-export enum SiteFieldsEnum {
-  buildTime = 'buildTime',
-  children = 'children',
-  children___children = 'children___children',
-  children___children___children = 'children___children___children',
-  children___children___children___children = 'children___children___children___children',
-  children___children___children___id = 'children___children___children___id',
-  children___children___id = 'children___children___id',
-  children___children___internal___content = 'children___children___internal___content',
-  children___children___internal___contentDigest = 'children___children___internal___contentDigest',
-  children___children___internal___contentFilePath = 'children___children___internal___contentFilePath',
-  children___children___internal___description = 'children___children___internal___description',
-  children___children___internal___fieldOwners = 'children___children___internal___fieldOwners',
-  children___children___internal___ignoreType = 'children___children___internal___ignoreType',
-  children___children___internal___mediaType = 'children___children___internal___mediaType',
-  children___children___internal___owner = 'children___children___internal___owner',
-  children___children___internal___type = 'children___children___internal___type',
-  children___children___parent___children = 'children___children___parent___children',
-  children___children___parent___id = 'children___children___parent___id',
-  children___id = 'children___id',
-  children___internal___content = 'children___internal___content',
-  children___internal___contentDigest = 'children___internal___contentDigest',
-  children___internal___contentFilePath = 'children___internal___contentFilePath',
-  children___internal___description = 'children___internal___description',
-  children___internal___fieldOwners = 'children___internal___fieldOwners',
-  children___internal___ignoreType = 'children___internal___ignoreType',
-  children___internal___mediaType = 'children___internal___mediaType',
-  children___internal___owner = 'children___internal___owner',
-  children___internal___type = 'children___internal___type',
-  children___parent___children = 'children___parent___children',
-  children___parent___children___children = 'children___parent___children___children',
-  children___parent___children___id = 'children___parent___children___id',
-  children___parent___id = 'children___parent___id',
-  children___parent___internal___content = 'children___parent___internal___content',
-  children___parent___internal___contentDigest = 'children___parent___internal___contentDigest',
-  children___parent___internal___contentFilePath = 'children___parent___internal___contentFilePath',
-  children___parent___internal___description = 'children___parent___internal___description',
-  children___parent___internal___fieldOwners = 'children___parent___internal___fieldOwners',
-  children___parent___internal___ignoreType = 'children___parent___internal___ignoreType',
-  children___parent___internal___mediaType = 'children___parent___internal___mediaType',
-  children___parent___internal___owner = 'children___parent___internal___owner',
-  children___parent___internal___type = 'children___parent___internal___type',
-  children___parent___parent___children = 'children___parent___parent___children',
-  children___parent___parent___id = 'children___parent___parent___id',
-  graphqlTypegen = 'graphqlTypegen',
-  host = 'host',
-  id = 'id',
-  internal___content = 'internal___content',
-  internal___contentDigest = 'internal___contentDigest',
-  internal___contentFilePath = 'internal___contentFilePath',
-  internal___description = 'internal___description',
-  internal___fieldOwners = 'internal___fieldOwners',
-  internal___ignoreType = 'internal___ignoreType',
-  internal___mediaType = 'internal___mediaType',
-  internal___owner = 'internal___owner',
-  internal___type = 'internal___type',
-  jsxRuntime = 'jsxRuntime',
-  parent___children = 'parent___children',
-  parent___children___children = 'parent___children___children',
-  parent___children___children___children = 'parent___children___children___children',
-  parent___children___children___id = 'parent___children___children___id',
-  parent___children___id = 'parent___children___id',
-  parent___children___internal___content = 'parent___children___internal___content',
-  parent___children___internal___contentDigest = 'parent___children___internal___contentDigest',
-  parent___children___internal___contentFilePath = 'parent___children___internal___contentFilePath',
-  parent___children___internal___description = 'parent___children___internal___description',
-  parent___children___internal___fieldOwners = 'parent___children___internal___fieldOwners',
-  parent___children___internal___ignoreType = 'parent___children___internal___ignoreType',
-  parent___children___internal___mediaType = 'parent___children___internal___mediaType',
-  parent___children___internal___owner = 'parent___children___internal___owner',
-  parent___children___internal___type = 'parent___children___internal___type',
-  parent___children___parent___children = 'parent___children___parent___children',
-  parent___children___parent___id = 'parent___children___parent___id',
-  parent___id = 'parent___id',
-  parent___internal___content = 'parent___internal___content',
-  parent___internal___contentDigest = 'parent___internal___contentDigest',
-  parent___internal___contentFilePath = 'parent___internal___contentFilePath',
-  parent___internal___description = 'parent___internal___description',
-  parent___internal___fieldOwners = 'parent___internal___fieldOwners',
-  parent___internal___ignoreType = 'parent___internal___ignoreType',
-  parent___internal___mediaType = 'parent___internal___mediaType',
-  parent___internal___owner = 'parent___internal___owner',
-  parent___internal___type = 'parent___internal___type',
-  parent___parent___children = 'parent___parent___children',
-  parent___parent___children___children = 'parent___parent___children___children',
-  parent___parent___children___id = 'parent___parent___children___id',
-  parent___parent___id = 'parent___parent___id',
-  parent___parent___internal___content = 'parent___parent___internal___content',
-  parent___parent___internal___contentDigest = 'parent___parent___internal___contentDigest',
-  parent___parent___internal___contentFilePath = 'parent___parent___internal___contentFilePath',
-  parent___parent___internal___description = 'parent___parent___internal___description',
-  parent___parent___internal___fieldOwners = 'parent___parent___internal___fieldOwners',
-  parent___parent___internal___ignoreType = 'parent___parent___internal___ignoreType',
-  parent___parent___internal___mediaType = 'parent___parent___internal___mediaType',
-  parent___parent___internal___owner = 'parent___parent___internal___owner',
-  parent___parent___internal___type = 'parent___parent___internal___type',
-  parent___parent___parent___children = 'parent___parent___parent___children',
-  parent___parent___parent___id = 'parent___parent___parent___id',
-  pathPrefix = 'pathPrefix',
-  polyfill = 'polyfill',
-  port = 'port',
-  siteMetadata___description = 'siteMetadata___description',
-  siteMetadata___image = 'siteMetadata___image',
-  siteMetadata___siteUrl = 'siteMetadata___siteUrl',
-  siteMetadata___title = 'siteMetadata___title',
-  trailingSlash = 'trailingSlash',
+export type SiteFieldSelector = {
+  buildTime?: Maybe<FieldSelectorEnum>
+  children?: Maybe<NodeFieldSelector>
+  graphqlTypegen?: Maybe<FieldSelectorEnum>
+  host?: Maybe<FieldSelectorEnum>
+  id?: Maybe<FieldSelectorEnum>
+  internal?: Maybe<InternalFieldSelector>
+  jsxRuntime?: Maybe<FieldSelectorEnum>
+  parent?: Maybe<NodeFieldSelector>
+  pathPrefix?: Maybe<FieldSelectorEnum>
+  polyfill?: Maybe<FieldSelectorEnum>
+  port?: Maybe<FieldSelectorEnum>
+  siteMetadata?: Maybe<SiteSiteMetadataFieldSelector>
+  trailingSlash?: Maybe<FieldSelectorEnum>
 }
 
 export type SiteFilterInput = {
@@ -10397,25 +9635,25 @@ export type SiteFunctionConnection = {
 }
 
 export type SiteFunctionConnectionDistinctArgs = {
-  field: SiteFunctionFieldsEnum
+  field: SiteFunctionFieldSelector
 }
 
 export type SiteFunctionConnectionGroupArgs = {
-  field: SiteFunctionFieldsEnum
+  field: SiteFunctionFieldSelector
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
 }
 
 export type SiteFunctionConnectionMaxArgs = {
-  field: SiteFunctionFieldsEnum
+  field: SiteFunctionFieldSelector
 }
 
 export type SiteFunctionConnectionMinArgs = {
-  field: SiteFunctionFieldsEnum
+  field: SiteFunctionFieldSelector
 }
 
 export type SiteFunctionConnectionSumArgs = {
-  field: SiteFunctionFieldsEnum
+  field: SiteFunctionFieldSelector
 }
 
 export type SiteFunctionEdge = {
@@ -10425,107 +9663,18 @@ export type SiteFunctionEdge = {
   previous?: Maybe<SiteFunction>
 }
 
-export enum SiteFunctionFieldsEnum {
-  absoluteCompiledFilePath = 'absoluteCompiledFilePath',
-  children = 'children',
-  children___children = 'children___children',
-  children___children___children = 'children___children___children',
-  children___children___children___children = 'children___children___children___children',
-  children___children___children___id = 'children___children___children___id',
-  children___children___id = 'children___children___id',
-  children___children___internal___content = 'children___children___internal___content',
-  children___children___internal___contentDigest = 'children___children___internal___contentDigest',
-  children___children___internal___contentFilePath = 'children___children___internal___contentFilePath',
-  children___children___internal___description = 'children___children___internal___description',
-  children___children___internal___fieldOwners = 'children___children___internal___fieldOwners',
-  children___children___internal___ignoreType = 'children___children___internal___ignoreType',
-  children___children___internal___mediaType = 'children___children___internal___mediaType',
-  children___children___internal___owner = 'children___children___internal___owner',
-  children___children___internal___type = 'children___children___internal___type',
-  children___children___parent___children = 'children___children___parent___children',
-  children___children___parent___id = 'children___children___parent___id',
-  children___id = 'children___id',
-  children___internal___content = 'children___internal___content',
-  children___internal___contentDigest = 'children___internal___contentDigest',
-  children___internal___contentFilePath = 'children___internal___contentFilePath',
-  children___internal___description = 'children___internal___description',
-  children___internal___fieldOwners = 'children___internal___fieldOwners',
-  children___internal___ignoreType = 'children___internal___ignoreType',
-  children___internal___mediaType = 'children___internal___mediaType',
-  children___internal___owner = 'children___internal___owner',
-  children___internal___type = 'children___internal___type',
-  children___parent___children = 'children___parent___children',
-  children___parent___children___children = 'children___parent___children___children',
-  children___parent___children___id = 'children___parent___children___id',
-  children___parent___id = 'children___parent___id',
-  children___parent___internal___content = 'children___parent___internal___content',
-  children___parent___internal___contentDigest = 'children___parent___internal___contentDigest',
-  children___parent___internal___contentFilePath = 'children___parent___internal___contentFilePath',
-  children___parent___internal___description = 'children___parent___internal___description',
-  children___parent___internal___fieldOwners = 'children___parent___internal___fieldOwners',
-  children___parent___internal___ignoreType = 'children___parent___internal___ignoreType',
-  children___parent___internal___mediaType = 'children___parent___internal___mediaType',
-  children___parent___internal___owner = 'children___parent___internal___owner',
-  children___parent___internal___type = 'children___parent___internal___type',
-  children___parent___parent___children = 'children___parent___parent___children',
-  children___parent___parent___id = 'children___parent___parent___id',
-  functionRoute = 'functionRoute',
-  id = 'id',
-  internal___content = 'internal___content',
-  internal___contentDigest = 'internal___contentDigest',
-  internal___contentFilePath = 'internal___contentFilePath',
-  internal___description = 'internal___description',
-  internal___fieldOwners = 'internal___fieldOwners',
-  internal___ignoreType = 'internal___ignoreType',
-  internal___mediaType = 'internal___mediaType',
-  internal___owner = 'internal___owner',
-  internal___type = 'internal___type',
-  matchPath = 'matchPath',
-  originalAbsoluteFilePath = 'originalAbsoluteFilePath',
-  originalRelativeFilePath = 'originalRelativeFilePath',
-  parent___children = 'parent___children',
-  parent___children___children = 'parent___children___children',
-  parent___children___children___children = 'parent___children___children___children',
-  parent___children___children___id = 'parent___children___children___id',
-  parent___children___id = 'parent___children___id',
-  parent___children___internal___content = 'parent___children___internal___content',
-  parent___children___internal___contentDigest = 'parent___children___internal___contentDigest',
-  parent___children___internal___contentFilePath = 'parent___children___internal___contentFilePath',
-  parent___children___internal___description = 'parent___children___internal___description',
-  parent___children___internal___fieldOwners = 'parent___children___internal___fieldOwners',
-  parent___children___internal___ignoreType = 'parent___children___internal___ignoreType',
-  parent___children___internal___mediaType = 'parent___children___internal___mediaType',
-  parent___children___internal___owner = 'parent___children___internal___owner',
-  parent___children___internal___type = 'parent___children___internal___type',
-  parent___children___parent___children = 'parent___children___parent___children',
-  parent___children___parent___id = 'parent___children___parent___id',
-  parent___id = 'parent___id',
-  parent___internal___content = 'parent___internal___content',
-  parent___internal___contentDigest = 'parent___internal___contentDigest',
-  parent___internal___contentFilePath = 'parent___internal___contentFilePath',
-  parent___internal___description = 'parent___internal___description',
-  parent___internal___fieldOwners = 'parent___internal___fieldOwners',
-  parent___internal___ignoreType = 'parent___internal___ignoreType',
-  parent___internal___mediaType = 'parent___internal___mediaType',
-  parent___internal___owner = 'parent___internal___owner',
-  parent___internal___type = 'parent___internal___type',
-  parent___parent___children = 'parent___parent___children',
-  parent___parent___children___children = 'parent___parent___children___children',
-  parent___parent___children___id = 'parent___parent___children___id',
-  parent___parent___id = 'parent___parent___id',
-  parent___parent___internal___content = 'parent___parent___internal___content',
-  parent___parent___internal___contentDigest = 'parent___parent___internal___contentDigest',
-  parent___parent___internal___contentFilePath = 'parent___parent___internal___contentFilePath',
-  parent___parent___internal___description = 'parent___parent___internal___description',
-  parent___parent___internal___fieldOwners = 'parent___parent___internal___fieldOwners',
-  parent___parent___internal___ignoreType = 'parent___parent___internal___ignoreType',
-  parent___parent___internal___mediaType = 'parent___parent___internal___mediaType',
-  parent___parent___internal___owner = 'parent___parent___internal___owner',
-  parent___parent___internal___type = 'parent___parent___internal___type',
-  parent___parent___parent___children = 'parent___parent___parent___children',
-  parent___parent___parent___id = 'parent___parent___parent___id',
-  pluginName = 'pluginName',
-  relativeCompiledFilePath = 'relativeCompiledFilePath',
+export type SiteFunctionFieldSelector = {
+  absoluteCompiledFilePath?: Maybe<FieldSelectorEnum>
+  children?: Maybe<NodeFieldSelector>
+  functionRoute?: Maybe<FieldSelectorEnum>
+  id?: Maybe<FieldSelectorEnum>
+  internal?: Maybe<InternalFieldSelector>
+  matchPath?: Maybe<FieldSelectorEnum>
+  originalAbsoluteFilePath?: Maybe<FieldSelectorEnum>
+  originalRelativeFilePath?: Maybe<FieldSelectorEnum>
+  parent?: Maybe<NodeFieldSelector>
+  pluginName?: Maybe<FieldSelectorEnum>
+  relativeCompiledFilePath?: Maybe<FieldSelectorEnum>
 }
 
 export type SiteFunctionFilterInput = {
@@ -10558,30 +9707,39 @@ export type SiteFunctionGroupConnection = {
 }
 
 export type SiteFunctionGroupConnectionDistinctArgs = {
-  field: SiteFunctionFieldsEnum
+  field: SiteFunctionFieldSelector
 }
 
 export type SiteFunctionGroupConnectionGroupArgs = {
-  field: SiteFunctionFieldsEnum
+  field: SiteFunctionFieldSelector
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
 }
 
 export type SiteFunctionGroupConnectionMaxArgs = {
-  field: SiteFunctionFieldsEnum
+  field: SiteFunctionFieldSelector
 }
 
 export type SiteFunctionGroupConnectionMinArgs = {
-  field: SiteFunctionFieldsEnum
+  field: SiteFunctionFieldSelector
 }
 
 export type SiteFunctionGroupConnectionSumArgs = {
-  field: SiteFunctionFieldsEnum
+  field: SiteFunctionFieldSelector
 }
 
 export type SiteFunctionSortInput = {
-  fields?: Maybe<Array<Maybe<SiteFunctionFieldsEnum>>>
-  order?: Maybe<Array<Maybe<SortOrderEnum>>>
+  absoluteCompiledFilePath?: Maybe<SortOrderEnum>
+  children?: Maybe<NodeSortInput>
+  functionRoute?: Maybe<SortOrderEnum>
+  id?: Maybe<SortOrderEnum>
+  internal?: Maybe<InternalSortInput>
+  matchPath?: Maybe<SortOrderEnum>
+  originalAbsoluteFilePath?: Maybe<SortOrderEnum>
+  originalRelativeFilePath?: Maybe<SortOrderEnum>
+  parent?: Maybe<NodeSortInput>
+  pluginName?: Maybe<SortOrderEnum>
+  relativeCompiledFilePath?: Maybe<SortOrderEnum>
 }
 
 export type SiteGroupConnection = {
@@ -10600,25 +9758,25 @@ export type SiteGroupConnection = {
 }
 
 export type SiteGroupConnectionDistinctArgs = {
-  field: SiteFieldsEnum
+  field: SiteFieldSelector
 }
 
 export type SiteGroupConnectionGroupArgs = {
-  field: SiteFieldsEnum
+  field: SiteFieldSelector
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
 }
 
 export type SiteGroupConnectionMaxArgs = {
-  field: SiteFieldsEnum
+  field: SiteFieldSelector
 }
 
 export type SiteGroupConnectionMinArgs = {
-  field: SiteFieldsEnum
+  field: SiteFieldSelector
 }
 
 export type SiteGroupConnectionSumArgs = {
-  field: SiteFieldsEnum
+  field: SiteFieldSelector
 }
 
 export type SitePage = Node & {
@@ -10650,25 +9808,25 @@ export type SitePageConnection = {
 }
 
 export type SitePageConnectionDistinctArgs = {
-  field: SitePageFieldsEnum
+  field: SitePageFieldSelector
 }
 
 export type SitePageConnectionGroupArgs = {
-  field: SitePageFieldsEnum
+  field: SitePageFieldSelector
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
 }
 
 export type SitePageConnectionMaxArgs = {
-  field: SitePageFieldsEnum
+  field: SitePageFieldSelector
 }
 
 export type SitePageConnectionMinArgs = {
-  field: SitePageFieldsEnum
+  field: SitePageFieldSelector
 }
 
 export type SitePageConnectionSumArgs = {
-  field: SitePageFieldsEnum
+  field: SitePageFieldSelector
 }
 
 export type SitePageEdge = {
@@ -10678,156 +9836,18 @@ export type SitePageEdge = {
   previous?: Maybe<SitePage>
 }
 
-export enum SitePageFieldsEnum {
-  children = 'children',
-  children___children = 'children___children',
-  children___children___children = 'children___children___children',
-  children___children___children___children = 'children___children___children___children',
-  children___children___children___id = 'children___children___children___id',
-  children___children___id = 'children___children___id',
-  children___children___internal___content = 'children___children___internal___content',
-  children___children___internal___contentDigest = 'children___children___internal___contentDigest',
-  children___children___internal___contentFilePath = 'children___children___internal___contentFilePath',
-  children___children___internal___description = 'children___children___internal___description',
-  children___children___internal___fieldOwners = 'children___children___internal___fieldOwners',
-  children___children___internal___ignoreType = 'children___children___internal___ignoreType',
-  children___children___internal___mediaType = 'children___children___internal___mediaType',
-  children___children___internal___owner = 'children___children___internal___owner',
-  children___children___internal___type = 'children___children___internal___type',
-  children___children___parent___children = 'children___children___parent___children',
-  children___children___parent___id = 'children___children___parent___id',
-  children___id = 'children___id',
-  children___internal___content = 'children___internal___content',
-  children___internal___contentDigest = 'children___internal___contentDigest',
-  children___internal___contentFilePath = 'children___internal___contentFilePath',
-  children___internal___description = 'children___internal___description',
-  children___internal___fieldOwners = 'children___internal___fieldOwners',
-  children___internal___ignoreType = 'children___internal___ignoreType',
-  children___internal___mediaType = 'children___internal___mediaType',
-  children___internal___owner = 'children___internal___owner',
-  children___internal___type = 'children___internal___type',
-  children___parent___children = 'children___parent___children',
-  children___parent___children___children = 'children___parent___children___children',
-  children___parent___children___id = 'children___parent___children___id',
-  children___parent___id = 'children___parent___id',
-  children___parent___internal___content = 'children___parent___internal___content',
-  children___parent___internal___contentDigest = 'children___parent___internal___contentDigest',
-  children___parent___internal___contentFilePath = 'children___parent___internal___contentFilePath',
-  children___parent___internal___description = 'children___parent___internal___description',
-  children___parent___internal___fieldOwners = 'children___parent___internal___fieldOwners',
-  children___parent___internal___ignoreType = 'children___parent___internal___ignoreType',
-  children___parent___internal___mediaType = 'children___parent___internal___mediaType',
-  children___parent___internal___owner = 'children___parent___internal___owner',
-  children___parent___internal___type = 'children___parent___internal___type',
-  children___parent___parent___children = 'children___parent___parent___children',
-  children___parent___parent___id = 'children___parent___parent___id',
-  component = 'component',
-  componentChunkName = 'componentChunkName',
-  id = 'id',
-  internalComponentName = 'internalComponentName',
-  internal___content = 'internal___content',
-  internal___contentDigest = 'internal___contentDigest',
-  internal___contentFilePath = 'internal___contentFilePath',
-  internal___description = 'internal___description',
-  internal___fieldOwners = 'internal___fieldOwners',
-  internal___ignoreType = 'internal___ignoreType',
-  internal___mediaType = 'internal___mediaType',
-  internal___owner = 'internal___owner',
-  internal___type = 'internal___type',
-  matchPath = 'matchPath',
-  pageContext = 'pageContext',
-  parent___children = 'parent___children',
-  parent___children___children = 'parent___children___children',
-  parent___children___children___children = 'parent___children___children___children',
-  parent___children___children___id = 'parent___children___children___id',
-  parent___children___id = 'parent___children___id',
-  parent___children___internal___content = 'parent___children___internal___content',
-  parent___children___internal___contentDigest = 'parent___children___internal___contentDigest',
-  parent___children___internal___contentFilePath = 'parent___children___internal___contentFilePath',
-  parent___children___internal___description = 'parent___children___internal___description',
-  parent___children___internal___fieldOwners = 'parent___children___internal___fieldOwners',
-  parent___children___internal___ignoreType = 'parent___children___internal___ignoreType',
-  parent___children___internal___mediaType = 'parent___children___internal___mediaType',
-  parent___children___internal___owner = 'parent___children___internal___owner',
-  parent___children___internal___type = 'parent___children___internal___type',
-  parent___children___parent___children = 'parent___children___parent___children',
-  parent___children___parent___id = 'parent___children___parent___id',
-  parent___id = 'parent___id',
-  parent___internal___content = 'parent___internal___content',
-  parent___internal___contentDigest = 'parent___internal___contentDigest',
-  parent___internal___contentFilePath = 'parent___internal___contentFilePath',
-  parent___internal___description = 'parent___internal___description',
-  parent___internal___fieldOwners = 'parent___internal___fieldOwners',
-  parent___internal___ignoreType = 'parent___internal___ignoreType',
-  parent___internal___mediaType = 'parent___internal___mediaType',
-  parent___internal___owner = 'parent___internal___owner',
-  parent___internal___type = 'parent___internal___type',
-  parent___parent___children = 'parent___parent___children',
-  parent___parent___children___children = 'parent___parent___children___children',
-  parent___parent___children___id = 'parent___parent___children___id',
-  parent___parent___id = 'parent___parent___id',
-  parent___parent___internal___content = 'parent___parent___internal___content',
-  parent___parent___internal___contentDigest = 'parent___parent___internal___contentDigest',
-  parent___parent___internal___contentFilePath = 'parent___parent___internal___contentFilePath',
-  parent___parent___internal___description = 'parent___parent___internal___description',
-  parent___parent___internal___fieldOwners = 'parent___parent___internal___fieldOwners',
-  parent___parent___internal___ignoreType = 'parent___parent___internal___ignoreType',
-  parent___parent___internal___mediaType = 'parent___parent___internal___mediaType',
-  parent___parent___internal___owner = 'parent___parent___internal___owner',
-  parent___parent___internal___type = 'parent___parent___internal___type',
-  parent___parent___parent___children = 'parent___parent___parent___children',
-  parent___parent___parent___id = 'parent___parent___parent___id',
-  path = 'path',
-  pluginCreator___browserAPIs = 'pluginCreator___browserAPIs',
-  pluginCreator___children = 'pluginCreator___children',
-  pluginCreator___children___children = 'pluginCreator___children___children',
-  pluginCreator___children___children___children = 'pluginCreator___children___children___children',
-  pluginCreator___children___children___id = 'pluginCreator___children___children___id',
-  pluginCreator___children___id = 'pluginCreator___children___id',
-  pluginCreator___children___internal___content = 'pluginCreator___children___internal___content',
-  pluginCreator___children___internal___contentDigest = 'pluginCreator___children___internal___contentDigest',
-  pluginCreator___children___internal___contentFilePath = 'pluginCreator___children___internal___contentFilePath',
-  pluginCreator___children___internal___description = 'pluginCreator___children___internal___description',
-  pluginCreator___children___internal___fieldOwners = 'pluginCreator___children___internal___fieldOwners',
-  pluginCreator___children___internal___ignoreType = 'pluginCreator___children___internal___ignoreType',
-  pluginCreator___children___internal___mediaType = 'pluginCreator___children___internal___mediaType',
-  pluginCreator___children___internal___owner = 'pluginCreator___children___internal___owner',
-  pluginCreator___children___internal___type = 'pluginCreator___children___internal___type',
-  pluginCreator___children___parent___children = 'pluginCreator___children___parent___children',
-  pluginCreator___children___parent___id = 'pluginCreator___children___parent___id',
-  pluginCreator___id = 'pluginCreator___id',
-  pluginCreator___internal___content = 'pluginCreator___internal___content',
-  pluginCreator___internal___contentDigest = 'pluginCreator___internal___contentDigest',
-  pluginCreator___internal___contentFilePath = 'pluginCreator___internal___contentFilePath',
-  pluginCreator___internal___description = 'pluginCreator___internal___description',
-  pluginCreator___internal___fieldOwners = 'pluginCreator___internal___fieldOwners',
-  pluginCreator___internal___ignoreType = 'pluginCreator___internal___ignoreType',
-  pluginCreator___internal___mediaType = 'pluginCreator___internal___mediaType',
-  pluginCreator___internal___owner = 'pluginCreator___internal___owner',
-  pluginCreator___internal___type = 'pluginCreator___internal___type',
-  pluginCreator___name = 'pluginCreator___name',
-  pluginCreator___nodeAPIs = 'pluginCreator___nodeAPIs',
-  pluginCreator___packageJson = 'pluginCreator___packageJson',
-  pluginCreator___parent___children = 'pluginCreator___parent___children',
-  pluginCreator___parent___children___children = 'pluginCreator___parent___children___children',
-  pluginCreator___parent___children___id = 'pluginCreator___parent___children___id',
-  pluginCreator___parent___id = 'pluginCreator___parent___id',
-  pluginCreator___parent___internal___content = 'pluginCreator___parent___internal___content',
-  pluginCreator___parent___internal___contentDigest = 'pluginCreator___parent___internal___contentDigest',
-  pluginCreator___parent___internal___contentFilePath = 'pluginCreator___parent___internal___contentFilePath',
-  pluginCreator___parent___internal___description = 'pluginCreator___parent___internal___description',
-  pluginCreator___parent___internal___fieldOwners = 'pluginCreator___parent___internal___fieldOwners',
-  pluginCreator___parent___internal___ignoreType = 'pluginCreator___parent___internal___ignoreType',
-  pluginCreator___parent___internal___mediaType = 'pluginCreator___parent___internal___mediaType',
-  pluginCreator___parent___internal___owner = 'pluginCreator___parent___internal___owner',
-  pluginCreator___parent___internal___type = 'pluginCreator___parent___internal___type',
-  pluginCreator___parent___parent___children = 'pluginCreator___parent___parent___children',
-  pluginCreator___parent___parent___id = 'pluginCreator___parent___parent___id',
-  pluginCreator___pluginFilepath = 'pluginCreator___pluginFilepath',
-  pluginCreator___pluginOptions = 'pluginCreator___pluginOptions',
-  pluginCreator___resolve = 'pluginCreator___resolve',
-  pluginCreator___ssrAPIs = 'pluginCreator___ssrAPIs',
-  pluginCreator___version = 'pluginCreator___version',
+export type SitePageFieldSelector = {
+  children?: Maybe<NodeFieldSelector>
+  component?: Maybe<FieldSelectorEnum>
+  componentChunkName?: Maybe<FieldSelectorEnum>
+  id?: Maybe<FieldSelectorEnum>
+  internal?: Maybe<InternalFieldSelector>
+  internalComponentName?: Maybe<FieldSelectorEnum>
+  matchPath?: Maybe<FieldSelectorEnum>
+  pageContext?: Maybe<FieldSelectorEnum>
+  parent?: Maybe<NodeFieldSelector>
+  path?: Maybe<FieldSelectorEnum>
+  pluginCreator?: Maybe<SitePluginFieldSelector>
 }
 
 export type SitePageFilterInput = {
@@ -10860,30 +9880,39 @@ export type SitePageGroupConnection = {
 }
 
 export type SitePageGroupConnectionDistinctArgs = {
-  field: SitePageFieldsEnum
+  field: SitePageFieldSelector
 }
 
 export type SitePageGroupConnectionGroupArgs = {
-  field: SitePageFieldsEnum
+  field: SitePageFieldSelector
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
 }
 
 export type SitePageGroupConnectionMaxArgs = {
-  field: SitePageFieldsEnum
+  field: SitePageFieldSelector
 }
 
 export type SitePageGroupConnectionMinArgs = {
-  field: SitePageFieldsEnum
+  field: SitePageFieldSelector
 }
 
 export type SitePageGroupConnectionSumArgs = {
-  field: SitePageFieldsEnum
+  field: SitePageFieldSelector
 }
 
 export type SitePageSortInput = {
-  fields?: Maybe<Array<Maybe<SitePageFieldsEnum>>>
-  order?: Maybe<Array<Maybe<SortOrderEnum>>>
+  children?: Maybe<NodeSortInput>
+  component?: Maybe<SortOrderEnum>
+  componentChunkName?: Maybe<SortOrderEnum>
+  id?: Maybe<SortOrderEnum>
+  internal?: Maybe<InternalSortInput>
+  internalComponentName?: Maybe<SortOrderEnum>
+  matchPath?: Maybe<SortOrderEnum>
+  pageContext?: Maybe<SortOrderEnum>
+  parent?: Maybe<NodeSortInput>
+  path?: Maybe<SortOrderEnum>
+  pluginCreator?: Maybe<SitePluginSortInput>
 }
 
 export type SitePlugin = Node & {
@@ -10917,25 +9946,25 @@ export type SitePluginConnection = {
 }
 
 export type SitePluginConnectionDistinctArgs = {
-  field: SitePluginFieldsEnum
+  field: SitePluginFieldSelector
 }
 
 export type SitePluginConnectionGroupArgs = {
-  field: SitePluginFieldsEnum
+  field: SitePluginFieldSelector
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
 }
 
 export type SitePluginConnectionMaxArgs = {
-  field: SitePluginFieldsEnum
+  field: SitePluginFieldSelector
 }
 
 export type SitePluginConnectionMinArgs = {
-  field: SitePluginFieldsEnum
+  field: SitePluginFieldSelector
 }
 
 export type SitePluginConnectionSumArgs = {
-  field: SitePluginFieldsEnum
+  field: SitePluginFieldSelector
 }
 
 export type SitePluginEdge = {
@@ -10945,109 +9974,20 @@ export type SitePluginEdge = {
   previous?: Maybe<SitePlugin>
 }
 
-export enum SitePluginFieldsEnum {
-  browserAPIs = 'browserAPIs',
-  children = 'children',
-  children___children = 'children___children',
-  children___children___children = 'children___children___children',
-  children___children___children___children = 'children___children___children___children',
-  children___children___children___id = 'children___children___children___id',
-  children___children___id = 'children___children___id',
-  children___children___internal___content = 'children___children___internal___content',
-  children___children___internal___contentDigest = 'children___children___internal___contentDigest',
-  children___children___internal___contentFilePath = 'children___children___internal___contentFilePath',
-  children___children___internal___description = 'children___children___internal___description',
-  children___children___internal___fieldOwners = 'children___children___internal___fieldOwners',
-  children___children___internal___ignoreType = 'children___children___internal___ignoreType',
-  children___children___internal___mediaType = 'children___children___internal___mediaType',
-  children___children___internal___owner = 'children___children___internal___owner',
-  children___children___internal___type = 'children___children___internal___type',
-  children___children___parent___children = 'children___children___parent___children',
-  children___children___parent___id = 'children___children___parent___id',
-  children___id = 'children___id',
-  children___internal___content = 'children___internal___content',
-  children___internal___contentDigest = 'children___internal___contentDigest',
-  children___internal___contentFilePath = 'children___internal___contentFilePath',
-  children___internal___description = 'children___internal___description',
-  children___internal___fieldOwners = 'children___internal___fieldOwners',
-  children___internal___ignoreType = 'children___internal___ignoreType',
-  children___internal___mediaType = 'children___internal___mediaType',
-  children___internal___owner = 'children___internal___owner',
-  children___internal___type = 'children___internal___type',
-  children___parent___children = 'children___parent___children',
-  children___parent___children___children = 'children___parent___children___children',
-  children___parent___children___id = 'children___parent___children___id',
-  children___parent___id = 'children___parent___id',
-  children___parent___internal___content = 'children___parent___internal___content',
-  children___parent___internal___contentDigest = 'children___parent___internal___contentDigest',
-  children___parent___internal___contentFilePath = 'children___parent___internal___contentFilePath',
-  children___parent___internal___description = 'children___parent___internal___description',
-  children___parent___internal___fieldOwners = 'children___parent___internal___fieldOwners',
-  children___parent___internal___ignoreType = 'children___parent___internal___ignoreType',
-  children___parent___internal___mediaType = 'children___parent___internal___mediaType',
-  children___parent___internal___owner = 'children___parent___internal___owner',
-  children___parent___internal___type = 'children___parent___internal___type',
-  children___parent___parent___children = 'children___parent___parent___children',
-  children___parent___parent___id = 'children___parent___parent___id',
-  id = 'id',
-  internal___content = 'internal___content',
-  internal___contentDigest = 'internal___contentDigest',
-  internal___contentFilePath = 'internal___contentFilePath',
-  internal___description = 'internal___description',
-  internal___fieldOwners = 'internal___fieldOwners',
-  internal___ignoreType = 'internal___ignoreType',
-  internal___mediaType = 'internal___mediaType',
-  internal___owner = 'internal___owner',
-  internal___type = 'internal___type',
-  name = 'name',
-  nodeAPIs = 'nodeAPIs',
-  packageJson = 'packageJson',
-  parent___children = 'parent___children',
-  parent___children___children = 'parent___children___children',
-  parent___children___children___children = 'parent___children___children___children',
-  parent___children___children___id = 'parent___children___children___id',
-  parent___children___id = 'parent___children___id',
-  parent___children___internal___content = 'parent___children___internal___content',
-  parent___children___internal___contentDigest = 'parent___children___internal___contentDigest',
-  parent___children___internal___contentFilePath = 'parent___children___internal___contentFilePath',
-  parent___children___internal___description = 'parent___children___internal___description',
-  parent___children___internal___fieldOwners = 'parent___children___internal___fieldOwners',
-  parent___children___internal___ignoreType = 'parent___children___internal___ignoreType',
-  parent___children___internal___mediaType = 'parent___children___internal___mediaType',
-  parent___children___internal___owner = 'parent___children___internal___owner',
-  parent___children___internal___type = 'parent___children___internal___type',
-  parent___children___parent___children = 'parent___children___parent___children',
-  parent___children___parent___id = 'parent___children___parent___id',
-  parent___id = 'parent___id',
-  parent___internal___content = 'parent___internal___content',
-  parent___internal___contentDigest = 'parent___internal___contentDigest',
-  parent___internal___contentFilePath = 'parent___internal___contentFilePath',
-  parent___internal___description = 'parent___internal___description',
-  parent___internal___fieldOwners = 'parent___internal___fieldOwners',
-  parent___internal___ignoreType = 'parent___internal___ignoreType',
-  parent___internal___mediaType = 'parent___internal___mediaType',
-  parent___internal___owner = 'parent___internal___owner',
-  parent___internal___type = 'parent___internal___type',
-  parent___parent___children = 'parent___parent___children',
-  parent___parent___children___children = 'parent___parent___children___children',
-  parent___parent___children___id = 'parent___parent___children___id',
-  parent___parent___id = 'parent___parent___id',
-  parent___parent___internal___content = 'parent___parent___internal___content',
-  parent___parent___internal___contentDigest = 'parent___parent___internal___contentDigest',
-  parent___parent___internal___contentFilePath = 'parent___parent___internal___contentFilePath',
-  parent___parent___internal___description = 'parent___parent___internal___description',
-  parent___parent___internal___fieldOwners = 'parent___parent___internal___fieldOwners',
-  parent___parent___internal___ignoreType = 'parent___parent___internal___ignoreType',
-  parent___parent___internal___mediaType = 'parent___parent___internal___mediaType',
-  parent___parent___internal___owner = 'parent___parent___internal___owner',
-  parent___parent___internal___type = 'parent___parent___internal___type',
-  parent___parent___parent___children = 'parent___parent___parent___children',
-  parent___parent___parent___id = 'parent___parent___parent___id',
-  pluginFilepath = 'pluginFilepath',
-  pluginOptions = 'pluginOptions',
-  resolve = 'resolve',
-  ssrAPIs = 'ssrAPIs',
-  version = 'version',
+export type SitePluginFieldSelector = {
+  browserAPIs?: Maybe<FieldSelectorEnum>
+  children?: Maybe<NodeFieldSelector>
+  id?: Maybe<FieldSelectorEnum>
+  internal?: Maybe<InternalFieldSelector>
+  name?: Maybe<FieldSelectorEnum>
+  nodeAPIs?: Maybe<FieldSelectorEnum>
+  packageJson?: Maybe<FieldSelectorEnum>
+  parent?: Maybe<NodeFieldSelector>
+  pluginFilepath?: Maybe<FieldSelectorEnum>
+  pluginOptions?: Maybe<FieldSelectorEnum>
+  resolve?: Maybe<FieldSelectorEnum>
+  ssrAPIs?: Maybe<FieldSelectorEnum>
+  version?: Maybe<FieldSelectorEnum>
 }
 
 export type SitePluginFilterInput = {
@@ -11082,30 +10022,41 @@ export type SitePluginGroupConnection = {
 }
 
 export type SitePluginGroupConnectionDistinctArgs = {
-  field: SitePluginFieldsEnum
+  field: SitePluginFieldSelector
 }
 
 export type SitePluginGroupConnectionGroupArgs = {
-  field: SitePluginFieldsEnum
+  field: SitePluginFieldSelector
   limit?: Maybe<Scalars['Int']>
   skip?: Maybe<Scalars['Int']>
 }
 
 export type SitePluginGroupConnectionMaxArgs = {
-  field: SitePluginFieldsEnum
+  field: SitePluginFieldSelector
 }
 
 export type SitePluginGroupConnectionMinArgs = {
-  field: SitePluginFieldsEnum
+  field: SitePluginFieldSelector
 }
 
 export type SitePluginGroupConnectionSumArgs = {
-  field: SitePluginFieldsEnum
+  field: SitePluginFieldSelector
 }
 
 export type SitePluginSortInput = {
-  fields?: Maybe<Array<Maybe<SitePluginFieldsEnum>>>
-  order?: Maybe<Array<Maybe<SortOrderEnum>>>
+  browserAPIs?: Maybe<SortOrderEnum>
+  children?: Maybe<NodeSortInput>
+  id?: Maybe<SortOrderEnum>
+  internal?: Maybe<InternalSortInput>
+  name?: Maybe<SortOrderEnum>
+  nodeAPIs?: Maybe<SortOrderEnum>
+  packageJson?: Maybe<SortOrderEnum>
+  parent?: Maybe<NodeSortInput>
+  pluginFilepath?: Maybe<SortOrderEnum>
+  pluginOptions?: Maybe<SortOrderEnum>
+  resolve?: Maybe<SortOrderEnum>
+  ssrAPIs?: Maybe<SortOrderEnum>
+  version?: Maybe<SortOrderEnum>
 }
 
 export type SiteSiteMetadata = {
@@ -11116,6 +10067,13 @@ export type SiteSiteMetadata = {
   title?: Maybe<Scalars['String']>
 }
 
+export type SiteSiteMetadataFieldSelector = {
+  description?: Maybe<FieldSelectorEnum>
+  image?: Maybe<FieldSelectorEnum>
+  siteUrl?: Maybe<FieldSelectorEnum>
+  title?: Maybe<FieldSelectorEnum>
+}
+
 export type SiteSiteMetadataFilterInput = {
   description?: Maybe<StringQueryOperatorInput>
   image?: Maybe<StringQueryOperatorInput>
@@ -11123,9 +10081,27 @@ export type SiteSiteMetadataFilterInput = {
   title?: Maybe<StringQueryOperatorInput>
 }
 
+export type SiteSiteMetadataSortInput = {
+  description?: Maybe<SortOrderEnum>
+  image?: Maybe<SortOrderEnum>
+  siteUrl?: Maybe<SortOrderEnum>
+  title?: Maybe<SortOrderEnum>
+}
+
 export type SiteSortInput = {
-  fields?: Maybe<Array<Maybe<SiteFieldsEnum>>>
-  order?: Maybe<Array<Maybe<SortOrderEnum>>>
+  buildTime?: Maybe<SortOrderEnum>
+  children?: Maybe<NodeSortInput>
+  graphqlTypegen?: Maybe<SortOrderEnum>
+  host?: Maybe<SortOrderEnum>
+  id?: Maybe<SortOrderEnum>
+  internal?: Maybe<InternalSortInput>
+  jsxRuntime?: Maybe<SortOrderEnum>
+  parent?: Maybe<NodeSortInput>
+  pathPrefix?: Maybe<SortOrderEnum>
+  polyfill?: Maybe<SortOrderEnum>
+  port?: Maybe<SortOrderEnum>
+  siteMetadata?: Maybe<SiteSiteMetadataSortInput>
+  trailingSlash?: Maybe<SortOrderEnum>
 }
 
 export enum SortOrderEnum {
@@ -11200,6 +10176,21 @@ export type ResumeSsrQuery = {
       title: string
       link: string
       date: any
+      opengraph: {
+        __typename?: 'Opengraph'
+        description?: string | null | undefined
+        image?: string | null | undefined
+        ogImage?: string | null | undefined
+        ogDescription?: string | null | undefined
+        ogTitle?: string | null | undefined
+        ogType?: string | null | undefined
+        ogUrl?: string | null | undefined
+        twitterCard?: string | null | undefined
+        twitterDescription?: string | null | undefined
+        twitterImageSrc?: string | null | undefined
+        twitterTitle?: string | null | undefined
+        url?: string | null | undefined
+      }
     }>
     conferences: Array<{
       __typename?: 'GraphCMS_Conference'

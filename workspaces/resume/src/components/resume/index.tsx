@@ -1,23 +1,10 @@
-import { resolve } from 'path'
-import { Font } from '@react-pdf/renderer'
 import { ResumeSsrQuery } from '@teimurjan/gql-types'
+import { Font } from '@react-pdf/renderer'
 import Resume from './Resume'
 
-Font.register({
-  family: 'ShareTech',
-  format: 'truetype',
-  src:
-    typeof window === 'undefined'
-      ? resolve(__dirname, '../../assets/fonts/ShareTech-Regular.ttf')
-      : '/assets/fonts/ShareTech-Regular.ttf',
-})
-Font.register({
-  family: 'ShareTechMono',
-  format: 'truetype',
-  src:
-    typeof window === 'undefined'
-      ? resolve(__dirname, '../../assets/fonts/ShareTechMono-Regular.ttf')
-      : '/assets/fonts/ShareTechMono-Regular.ttf',
+Font.registerEmojiSource({
+  format: 'png',
+  url: 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/',
 })
 
 const ResumeNode = (props: ResumeSsrQuery) => <Resume {...props} />

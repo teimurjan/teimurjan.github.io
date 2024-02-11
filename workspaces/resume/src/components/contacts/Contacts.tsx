@@ -1,30 +1,18 @@
 import { Text, View, StyleSheet } from '@react-pdf/renderer'
-import { theme } from '@teimurjan/utils'
-import MapPinIcon from '../map-pin-icon'
-import MailIcon from '../mail-icon'
-import PhoneIcon from '../phone-icon'
 
 const styles = StyleSheet.create({
-  contactsSection: {
-    padding: '10px 40px',
-    width: '100%',
-    backgroundColor: theme.colors.resume.dark3,
-  },
   contactsContainer: {
-    width: '100%',
-    color: theme.colors.resume.light,
-    alignItems: 'center',
-    flexDirection: 'row',
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
   },
   contact: {
-    flex: 1,
-    color: theme.colors.resume.light,
     flexDirection: 'row',
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'flex-end',
+    marginTop: 2,
   },
   contactIcon: {
-    marginRight: 5,
+    marginLeft: 5,
   },
 })
 
@@ -35,20 +23,15 @@ interface Props {
 }
 
 const Contacts = ({ location, email, phoneNumber }: Props) => (
-  <View style={styles.contactsSection}>
-    <View style={styles.contactsContainer}>
-      <View style={styles.contact}>
-        <MapPinIcon style={styles.contactIcon} />
-        <Text>{location}</Text>
-      </View>
-      <View style={styles.contact}>
-        <MailIcon style={styles.contactIcon} />
-        <Text>{email}</Text>
-      </View>
-      <View style={styles.contact}>
-        <PhoneIcon style={styles.contactIcon} />
-        <Text>{phoneNumber}</Text>
-      </View>
+  <View style={styles.contactsContainer}>
+    <View style={styles.contact}>
+      <Text>{location} 📍</Text>
+    </View>
+    <View style={styles.contact}>
+      <Text>{email} ✉️</Text>
+    </View>
+    <View style={styles.contact}>
+      <Text>{phoneNumber} 📞</Text>
     </View>
   </View>
 )

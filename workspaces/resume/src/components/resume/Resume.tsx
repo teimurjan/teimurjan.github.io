@@ -11,7 +11,7 @@ import ResumeItem from '../resume-item'
 
 const styles = StyleSheet.create({
   page: {
-    backgroundColor: theme.colors.resume.dark,
+    backgroundColor: theme.colors.resume.light,
     fontFamily: 'Helvetica',
     color: theme.colors.resume.dark3,
     fontSize: 10,

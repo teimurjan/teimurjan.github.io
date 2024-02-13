@@ -1,9 +1,7 @@
 export type Colors = {
   resume: {
-    accent: string
     dark3: string
     dark2: string
-    dark: string
     light: string
   }
   typography: {

@@ -9,6 +9,10 @@ import {
 import { fetch } from 'fetch-opengraph'
 import Resume, { renderToFile } from '@teimurjan/resume'
 import { ResumeSsrQuery } from '@teimurjan/gql-types'
+import puppeteer from 'puppeteer-extra'
+import StealthPlugin from 'puppeteer-extra-plugin-stealth'
+
+puppeteer.use(StealthPlugin())
 
 const onCreateWebpackConfig = ({ actions }: CreateWebpackConfigArgs) => {
   actions.setWebpackConfig({
@@ -132,6 +136,88 @@ const createSchemaCustomization = ({
   actions.createTypes(typeDefs)
 }
 
+const fetchOpengraph = async (link: string) => {
+  const browser = await puppeteer.launch({ headless: true })
+  const page = await browser.newPage()
+
+  try {
+    await page.goto(link, {
+      waitUntil: 'networkidle2',
+    })
+
+    const openGraphData = await page.evaluate(() => {
+      const metaTags = Array.from(document.querySelectorAll('meta'))
+      const ogData: Record<string, string | null> = {
+        description: null,
+        twitterImageSrc: null,
+        twitterCard: null,
+        twitterTitle: null,
+        twitterDescription: null,
+        ogImage: null,
+        ogType: null,
+        ogTitle: null,
+        ogUrl: null,
+        ogDescription: null,
+        image: null,
+        url: null,
+      }
+
+      metaTags.forEach((tag) => {
+        const property =
+          tag.getAttribute('property') || tag.getAttribute('name')
+        const content = tag.getAttribute('content')
+
+        switch (property) {
+          case 'og:description':
+            ogData.ogDescription = content
+            break
+          case 'og:image':
+            ogData.ogImage = content
+            break
+          case 'og:type':
+            ogData.ogType = content
+            break
+          case 'og:title':
+            ogData.ogTitle = content
+            break
+          case 'og:url':
+            ogData.ogUrl = content
+            break
+          case 'twitter:image:src':
+            ogData.twitterImageSrc = content
+            break
+          case 'twitter:card':
+            ogData.twitterCard = content
+            break
+          case 'twitter:title':
+            ogData.twitterTitle = content
+            break
+          case 'twitter:description':
+            ogData.twitterDescription = content
+            break
+          case 'description':
+            ogData.description = content
+            break
+          case 'image':
+            ogData.image = content
+            break
+          case 'url':
+            ogData.url = content
+            break
+        }
+      })
+
+      return ogData
+    })
+
+    await browser.close()
+    return openGraphData
+  } catch (error) {
+    await browser.close()
+    throw error
+  }
+}
+
 const createResolvers = ({ createResolvers }: CreateResolversArgs) => {
   const getOpengraphResolver = <T>(
     getLink: (data: T) => string | undefined
@@ -143,7 +229,7 @@ const createResolvers = ({ createResolvers }: CreateResolversArgs) => {
         return {}
       }
 
-      const opengraphData = await fetch(link)
+      const opengraphData = await fetchOpengraph(link)
       const formatKey = (key: string) => {
         let newKey = ''
         let shouldUppercaseNext = false

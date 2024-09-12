@@ -6,7 +6,6 @@ import {
   CreateResolversArgs,
   CreateSchemaCustomizationArgs,
 } from 'gatsby'
-import { fetch } from 'fetch-opengraph'
 import Resume, { renderToFile } from '@teimurjan/resume'
 import { ResumeSsrQuery } from '@teimurjan/gql-types'
 import puppeteer from 'puppeteer-extra'

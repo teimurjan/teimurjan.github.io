@@ -13,9 +13,10 @@ module.exports = {
     'gatsby-plugin-emotion',
     'gatsby-plugin-image',
     {
-      resolve: 'gatsby-plugin-google-analytics',
+      resolve: `gatsby-plugin-umami`,
       options: {
-        trackingId: 'UA-145378647-1',
+        websiteId: 'f312ce9d-5eb0-4a08-8331-320723dfdaed',
+        srcUrl: 'https://cloud.umami.is/script.js',
       },
     },
     'gatsby-plugin-react-helmet',

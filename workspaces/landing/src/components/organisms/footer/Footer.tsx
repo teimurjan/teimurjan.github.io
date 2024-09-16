@@ -64,6 +64,13 @@ const Footer = () => {
               >
                 LinkedIn
               </Link>
+              <Link
+                color="light"
+                to="https://www.toptal.com/resume/teimur-gasanov"
+                underline="always"
+              >
+                Toptal
+              </Link>
             </Flex>
           </Flex.Item>
         </Flex>

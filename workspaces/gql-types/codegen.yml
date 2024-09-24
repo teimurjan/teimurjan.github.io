@@ -15,4 +15,5 @@ config:
     enumValues: keep
 hooks:
   afterAllFileWrite:
-    - prettier --write
+    - yarn -T run prettier --write .
+    

@@ -1,4 +1,5 @@
 import { createElement, ReactElement } from 'react'
+import path from 'node:path'
 import webpack from 'webpack'
 import {
   CreatePagesArgs,
@@ -16,6 +17,12 @@ puppeteer.use(StealthPlugin())
 const onCreateWebpackConfig = ({ actions }: CreateWebpackConfigArgs) => {
   actions.setWebpackConfig({
     resolve: {
+      alias: {
+        '@babel/runtime': path.resolve(
+          __dirname,
+          '../../../node_modules/@babel/runtime',
+        ),
+      },
       fallback: {
         stream: 'stream-browserify',
         zlib: 'browserify-zlib',
@@ -35,7 +42,7 @@ const onCreateWebpackConfig = ({ actions }: CreateWebpackConfigArgs) => {
 
 const createPages = async ({ graphql }: CreatePagesArgs) => {
   const query = await graphql<ResumeSsrQuery>(`
-    query ResumeSSR {
+    query ResumeSsr {
       gcms {
         bios {
           fullName
@@ -73,20 +80,6 @@ const createPages = async ({ graphql }: CreatePagesArgs) => {
           title
           link
           date
-          opengraph {
-            description
-            image
-            ogImage
-            ogDescription
-            ogTitle
-            ogType
-            ogUrl
-            twitterCard
-            twitterDescription
-            twitterImageSrc
-            twitterTitle
-            url
-          }
         }
         conferences {
           id
@@ -102,7 +95,7 @@ const createPages = async ({ graphql }: CreatePagesArgs) => {
   if (query.data) {
     await renderToFile(
       createElement(Resume, query.data) as ReactElement,
-      './static/resume.pdf'
+      './static/resume.pdf',
     )
   }
 }
@@ -212,14 +205,29 @@ const fetchOpengraph = async (link: string) => {
     await browser.close()
     return openGraphData
   } catch (error) {
+    console.error(error)
     await browser.close()
-    throw error
+    const ogData: Record<string, string | null> = {
+      description: null,
+      twitterImageSrc: null,
+      twitterCard: null,
+      twitterTitle: null,
+      twitterDescription: null,
+      ogImage: null,
+      ogType: null,
+      ogTitle: null,
+      ogUrl: null,
+      ogDescription: null,
+      image: null,
+      url: null,
+    }
+    return ogData
   }
 }
 
 const createResolvers = ({ createResolvers }: CreateResolversArgs) => {
   const getOpengraphResolver = <T>(
-    getLink: (data: T) => string | undefined
+    getLink: (data: T) => string | undefined,
   ) => ({
     type: 'Opengraph!',
     resolve: async (data: T) => {

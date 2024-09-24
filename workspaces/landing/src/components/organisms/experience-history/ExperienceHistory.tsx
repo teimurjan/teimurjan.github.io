@@ -35,6 +35,8 @@ const query = graphql`
   }
 `
 
+// It's not a hook
+// eslint-disable-next-line react-hooks/rules-of-hooks
 SwiperCore.use([Pagination, Navigation])
 
 const handleSwiperBreakpointChange = (swiper: SwiperCore) =>

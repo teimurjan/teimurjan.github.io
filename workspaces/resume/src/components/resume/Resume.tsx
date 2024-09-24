@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
 const getItemMarginStyle = (
   style: Record<string, unknown>,
   index: number,
-  itemsCount: number
+  itemsCount: number,
 ) => (index + 1 === itemsCount ? undefined : style)
 
 const Resume = ({
@@ -105,14 +105,14 @@ const Resume = ({
                     dates={prettyRange(
                       experience.startDate,
                       experience.endDate,
-                      YEAR_DATE_FORMAT
+                      YEAR_DATE_FORMAT,
                     )}
                     subtitle={experience.company}
                     description={experience.description.html}
                     style={getItemMarginStyle(
                       styles.itemMarginBottom,
                       index,
-                      experiences.length
+                      experiences.length,
                     )}
                   />
                 ))}
@@ -127,14 +127,14 @@ const Resume = ({
                       dates={prettyRange(
                         education.startDate,
                         education.endDate,
-                        YEAR_DATE_FORMAT
+                        YEAR_DATE_FORMAT,
                       )}
                       title={`${education.degree} in ${education.areaOfStudy}`}
                       subtitle={education.school}
                       style={getItemMarginStyle(
                         styles.itemMarginBottom,
                         index,
-                        educations.length
+                        educations.length,
                       )}
                     />
                   ))}
@@ -174,7 +174,7 @@ const Resume = ({
                       style={getItemMarginStyle(
                         styles.itemMarginBottomSmall,
                         index,
-                        publications.length
+                        publications.length,
                       )}
                     />
                   ))}
@@ -192,7 +192,7 @@ const Resume = ({
                       style={getItemMarginStyle(
                         styles.itemMarginBottomSmall,
                         index,
-                        publications.length
+                        publications.length,
                       )}
                     />
                   ))}

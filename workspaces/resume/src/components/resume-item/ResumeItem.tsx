@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
   },
   experienceDescription: {
     fontSize: 10,
-    backgroundColor: theme.colors.resume.dark2,
   },
 })
 

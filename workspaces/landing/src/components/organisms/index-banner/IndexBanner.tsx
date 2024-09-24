@@ -85,7 +85,7 @@ const IndexBanner = () => {
   const { value: shouldGeneratePDFInBrowser, isInitialized } =
     useLazyInitialization(
       process.env.NODE_ENV === 'development' && typeof window !== 'undefined',
-      false
+      false,
     )
 
   return (
@@ -102,6 +102,7 @@ const IndexBanner = () => {
             document={<Resume {...data} />}
             fileName="resume.pdf"
           >
+            {/* @ts-expect-error typing issue coming from the lib */}
             {({ url, loading }) => (
               <Button
                 onClick={(e) => {

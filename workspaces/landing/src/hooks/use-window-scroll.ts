@@ -4,7 +4,7 @@ const useWindowScroll = () => {
   const [scrollTop, setScrollTop] = useState(0)
 
   useEffect(() => {
-    if (typeof window !== undefined) {
+    if (typeof window !== 'undefined') {
       const listener = () => {
         setScrollTop(window.scrollY)
       }

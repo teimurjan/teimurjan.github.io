@@ -741,6 +741,8 @@ export type GraphCms = {
   educations: Array<GraphCms_Education>
   /** Retrieve multiple educations using the Relay connection interface */
   educationsConnection: GraphCms_EducationConnection
+  /** Fetches an object given its ID */
+  entities?: Maybe<Array<GraphCms_Entity>>
   /** Retrieve a single experience */
   experience?: Maybe<GraphCms_Experience>
   /** Retrieve document version */
@@ -937,6 +939,11 @@ export type GraphCmsEducationsConnectionArgs = {
   skip?: Maybe<Scalars['Int']>
   stage?: GraphCms_Stage
   where?: Maybe<GraphCms_EducationWhereInput>
+}
+
+export type GraphCmsEntitiesArgs = {
+  locales?: Maybe<Array<GraphCms_Locale>>
+  where: Array<GraphCms_EntityWhereInput>
 }
 
 export type GraphCmsExperienceArgs = {
@@ -1211,51 +1218,52 @@ export type GraphCms_Aggregate = {
 }
 
 /** Asset system model */
-export type GraphCms_Asset = GraphCms_Node & {
-  __typename?: 'GraphCMS_Asset'
-  /** The time the document was created */
-  createdAt: Scalars['GraphCMS_DateTime']
-  /** User that created this document */
-  createdBy?: Maybe<GraphCms_User>
-  /** Get the document in other stages */
-  documentInStages: Array<GraphCms_Asset>
-  /** The file name */
-  fileName: Scalars['String']
-  /** The file handle */
-  handle: Scalars['String']
-  /** The height of the file */
-  height?: Maybe<Scalars['Float']>
-  /** List of Asset versions */
-  history: Array<GraphCms_Version>
-  /** The unique identifier */
-  id: Scalars['ID']
-  imageConference: Array<GraphCms_Conference>
-  /** System Locale field */
-  locale: GraphCms_Locale
-  /** Get the other localizations for this document */
-  localizations: Array<GraphCms_Asset>
-  logoExperience: Array<GraphCms_Experience>
-  logoSkill: Array<GraphCms_Skill>
-  /** The mime type of the file */
-  mimeType?: Maybe<Scalars['String']>
-  /** The time the document was published. Null on documents in draft stage. */
-  publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** User that last published this document */
-  publishedBy?: Maybe<GraphCms_User>
-  scheduledIn: Array<GraphCms_ScheduledOperation>
-  /** The file size */
-  size?: Maybe<Scalars['Float']>
-  /** System stage field */
-  stage: GraphCms_Stage
-  /** The time the document was updated */
-  updatedAt: Scalars['GraphCMS_DateTime']
-  /** User that last updated this document */
-  updatedBy?: Maybe<GraphCms_User>
-  /** Get the url for the asset with provided transformations applied. */
-  url: Scalars['String']
-  /** The file width */
-  width?: Maybe<Scalars['Float']>
-}
+export type GraphCms_Asset = GraphCms_Entity &
+  GraphCms_Node & {
+    __typename?: 'GraphCMS_Asset'
+    /** The time the document was created */
+    createdAt: Scalars['GraphCMS_DateTime']
+    /** User that created this document */
+    createdBy?: Maybe<GraphCms_User>
+    /** Get the document in other stages */
+    documentInStages: Array<GraphCms_Asset>
+    /** The file name */
+    fileName: Scalars['String']
+    /** The file handle */
+    handle: Scalars['String']
+    /** The height of the file */
+    height?: Maybe<Scalars['Float']>
+    /** List of Asset versions */
+    history: Array<GraphCms_Version>
+    /** The unique identifier */
+    id: Scalars['ID']
+    imageConference: Array<GraphCms_Conference>
+    /** System Locale field */
+    locale: GraphCms_Locale
+    /** Get the other localizations for this document */
+    localizations: Array<GraphCms_Asset>
+    logoExperience: Array<GraphCms_Experience>
+    logoSkill: Array<GraphCms_Skill>
+    /** The mime type of the file */
+    mimeType?: Maybe<Scalars['String']>
+    /** The time the document was published. Null on documents in draft stage. */
+    publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
+    /** User that last published this document */
+    publishedBy?: Maybe<GraphCms_User>
+    scheduledIn: Array<GraphCms_ScheduledOperation>
+    /** The file size */
+    size?: Maybe<Scalars['Float']>
+    /** System stage field */
+    stage: GraphCms_Stage
+    /** The time the document was updated */
+    updatedAt: Scalars['GraphCMS_DateTime']
+    /** User that last updated this document */
+    updatedBy?: Maybe<GraphCms_User>
+    /** Get the url for the asset with provided transformations applied. */
+    url: Scalars['String']
+    /** The file width */
+    width?: Maybe<Scalars['Float']>
+  }
 
 /** Asset system model */
 export type GraphCms_AssetCreatedAtArgs = {
@@ -1928,36 +1936,37 @@ export type GraphCms_BatchPayload = {
   count: Scalars['GraphCMS_Long']
 }
 
-export type GraphCms_Bio = GraphCms_Node & {
-  __typename?: 'GraphCMS_Bio'
-  about: Scalars['String']
-  /** The time the document was created */
-  createdAt: Scalars['GraphCMS_DateTime']
-  /** User that created this document */
-  createdBy?: Maybe<GraphCms_User>
-  /** Get the document in other stages */
-  documentInStages: Array<GraphCms_Bio>
-  email: Scalars['String']
-  fullName: Scalars['String']
-  headline: Scalars['String']
-  /** List of Bio versions */
-  history: Array<GraphCms_Version>
-  /** The unique identifier */
-  id: Scalars['ID']
-  location: Scalars['String']
-  phoneNumber: Scalars['String']
-  /** The time the document was published. Null on documents in draft stage. */
-  publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** User that last published this document */
-  publishedBy?: Maybe<GraphCms_User>
-  scheduledIn: Array<GraphCms_ScheduledOperation>
-  /** System stage field */
-  stage: GraphCms_Stage
-  /** The time the document was updated */
-  updatedAt: Scalars['GraphCMS_DateTime']
-  /** User that last updated this document */
-  updatedBy?: Maybe<GraphCms_User>
-}
+export type GraphCms_Bio = GraphCms_Entity &
+  GraphCms_Node & {
+    __typename?: 'GraphCMS_Bio'
+    about: Scalars['String']
+    /** The time the document was created */
+    createdAt: Scalars['GraphCMS_DateTime']
+    /** User that created this document */
+    createdBy?: Maybe<GraphCms_User>
+    /** Get the document in other stages */
+    documentInStages: Array<GraphCms_Bio>
+    email: Scalars['String']
+    fullName: Scalars['String']
+    headline: Scalars['String']
+    /** List of Bio versions */
+    history: Array<GraphCms_Version>
+    /** The unique identifier */
+    id: Scalars['ID']
+    location: Scalars['String']
+    phoneNumber: Scalars['String']
+    /** The time the document was published. Null on documents in draft stage. */
+    publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
+    /** User that last published this document */
+    publishedBy?: Maybe<GraphCms_User>
+    scheduledIn: Array<GraphCms_ScheduledOperation>
+    /** System stage field */
+    stage: GraphCms_Stage
+    /** The time the document was updated */
+    updatedAt: Scalars['GraphCMS_DateTime']
+    /** User that last updated this document */
+    updatedBy?: Maybe<GraphCms_User>
+  }
 
 export type GraphCms_BioCreatedByArgs = {
   forceParentLocale?: Maybe<Scalars['Boolean']>
@@ -2586,36 +2595,37 @@ export type GraphCms_ColorInput = {
   rgba?: Maybe<GraphCms_RgbaInput>
 }
 
-export type GraphCms_Conference = GraphCms_Node & {
-  __typename?: 'GraphCMS_Conference'
-  /** The time the document was created */
-  createdAt: Scalars['GraphCMS_DateTime']
-  /** User that created this document */
-  createdBy?: Maybe<GraphCms_User>
-  date: Scalars['GraphCMS_Date']
-  /** Get the document in other stages */
-  documentInStages: Array<GraphCms_Conference>
-  /** List of Conference versions */
-  history: Array<GraphCms_Version>
-  /** The unique identifier */
-  id: Scalars['ID']
-  image?: Maybe<GraphCms_Asset>
-  link: Scalars['String']
-  /** The time the document was published. Null on documents in draft stage. */
-  publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** User that last published this document */
-  publishedBy?: Maybe<GraphCms_User>
-  scheduledIn: Array<GraphCms_ScheduledOperation>
-  /** System stage field */
-  stage: GraphCms_Stage
-  title: Scalars['String']
-  topic: Scalars['String']
-  /** The time the document was updated */
-  updatedAt: Scalars['GraphCMS_DateTime']
-  /** User that last updated this document */
-  updatedBy?: Maybe<GraphCms_User>
-  videoEmbed?: Maybe<GraphCms_VideoEmbed>
-}
+export type GraphCms_Conference = GraphCms_Entity &
+  GraphCms_Node & {
+    __typename?: 'GraphCMS_Conference'
+    /** The time the document was created */
+    createdAt: Scalars['GraphCMS_DateTime']
+    /** User that created this document */
+    createdBy?: Maybe<GraphCms_User>
+    date: Scalars['GraphCMS_Date']
+    /** Get the document in other stages */
+    documentInStages: Array<GraphCms_Conference>
+    /** List of Conference versions */
+    history: Array<GraphCms_Version>
+    /** The unique identifier */
+    id: Scalars['ID']
+    image?: Maybe<GraphCms_Asset>
+    link: Scalars['String']
+    /** The time the document was published. Null on documents in draft stage. */
+    publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
+    /** User that last published this document */
+    publishedBy?: Maybe<GraphCms_User>
+    scheduledIn: Array<GraphCms_ScheduledOperation>
+    /** System stage field */
+    stage: GraphCms_Stage
+    title: Scalars['String']
+    topic: Scalars['String']
+    /** The time the document was updated */
+    updatedAt: Scalars['GraphCMS_DateTime']
+    /** User that last updated this document */
+    updatedBy?: Maybe<GraphCms_User>
+    videoEmbed?: Maybe<GraphCms_VideoEmbed>
+  }
 
 export type GraphCms_ConferenceCreatedByArgs = {
   forceParentLocale?: Maybe<Scalars['Boolean']>
@@ -3229,36 +3239,37 @@ export type GraphCms_DocumentVersion = {
   stage: GraphCms_Stage
 }
 
-export type GraphCms_Education = GraphCms_Node & {
-  __typename?: 'GraphCMS_Education'
-  areaOfStudy: Scalars['String']
-  /** The time the document was created */
-  createdAt: Scalars['GraphCMS_DateTime']
-  /** User that created this document */
-  createdBy?: Maybe<GraphCms_User>
-  degree?: Maybe<Scalars['String']>
-  description: GraphCms_RichText
-  /** Get the document in other stages */
-  documentInStages: Array<GraphCms_Education>
-  endDate?: Maybe<Scalars['GraphCMS_Date']>
-  /** List of Education versions */
-  history: Array<GraphCms_Version>
-  /** The unique identifier */
-  id: Scalars['ID']
-  /** The time the document was published. Null on documents in draft stage. */
-  publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** User that last published this document */
-  publishedBy?: Maybe<GraphCms_User>
-  scheduledIn: Array<GraphCms_ScheduledOperation>
-  school: Scalars['String']
-  /** System stage field */
-  stage: GraphCms_Stage
-  startDate: Scalars['GraphCMS_Date']
-  /** The time the document was updated */
-  updatedAt: Scalars['GraphCMS_DateTime']
-  /** User that last updated this document */
-  updatedBy?: Maybe<GraphCms_User>
-}
+export type GraphCms_Education = GraphCms_Entity &
+  GraphCms_Node & {
+    __typename?: 'GraphCMS_Education'
+    areaOfStudy: Scalars['String']
+    /** The time the document was created */
+    createdAt: Scalars['GraphCMS_DateTime']
+    /** User that created this document */
+    createdBy?: Maybe<GraphCms_User>
+    degree?: Maybe<Scalars['String']>
+    description: GraphCms_RichText
+    /** Get the document in other stages */
+    documentInStages: Array<GraphCms_Education>
+    endDate?: Maybe<Scalars['GraphCMS_Date']>
+    /** List of Education versions */
+    history: Array<GraphCms_Version>
+    /** The unique identifier */
+    id: Scalars['ID']
+    /** The time the document was published. Null on documents in draft stage. */
+    publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
+    /** User that last published this document */
+    publishedBy?: Maybe<GraphCms_User>
+    scheduledIn: Array<GraphCms_ScheduledOperation>
+    school: Scalars['String']
+    /** System stage field */
+    stage: GraphCms_Stage
+    startDate: Scalars['GraphCMS_Date']
+    /** The time the document was updated */
+    updatedAt: Scalars['GraphCMS_DateTime']
+    /** User that last updated this document */
+    updatedBy?: Maybe<GraphCms_User>
+  }
 
 export type GraphCms_EducationCreatedByArgs = {
   forceParentLocale?: Maybe<Scalars['Boolean']>
@@ -3817,38 +3828,77 @@ export type GraphCms_EducationWhereUniqueInput = {
   id?: Maybe<Scalars['ID']>
 }
 
-export type GraphCms_Experience = GraphCms_Node & {
-  __typename?: 'GraphCMS_Experience'
-  company: Scalars['String']
-  /** The time the document was created */
-  createdAt: Scalars['GraphCMS_DateTime']
-  /** User that created this document */
-  createdBy?: Maybe<GraphCms_User>
-  description: GraphCms_RichText
-  /** Get the document in other stages */
-  documentInStages: Array<GraphCms_Experience>
-  endDate?: Maybe<Scalars['GraphCMS_Date']>
-  /** List of Experience versions */
-  history: Array<GraphCms_Version>
-  /** The unique identifier */
+/** An object with an ID */
+export type GraphCms_Entity = {
+  /** The id of the object. */
   id: Scalars['ID']
-  location?: Maybe<Scalars['String']>
-  locationIcon: Scalars['String']
-  logo: GraphCms_Asset
-  position: Scalars['String']
-  /** The time the document was published. Null on documents in draft stage. */
-  publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** User that last published this document */
-  publishedBy?: Maybe<GraphCms_User>
-  scheduledIn: Array<GraphCms_ScheduledOperation>
-  /** System stage field */
+  /** The Stage of an object */
   stage: GraphCms_Stage
-  startDate: Scalars['GraphCMS_Date']
-  /** The time the document was updated */
-  updatedAt: Scalars['GraphCMS_DateTime']
-  /** User that last updated this document */
-  updatedBy?: Maybe<GraphCms_User>
 }
+
+/** This enumeration holds all typenames that implement the Entity interface. Components and models implement the Entity interface. */
+export enum GraphCms_EntityTypeName {
+  /** Asset system model */
+  Asset = 'Asset',
+  Bio = 'Bio',
+  Conference = 'Conference',
+  Education = 'Education',
+  Experience = 'Experience',
+  Interview = 'Interview',
+  Publication = 'Publication',
+  /** Scheduled Operation system model */
+  ScheduledOperation = 'ScheduledOperation',
+  /** Scheduled Release system model */
+  ScheduledRelease = 'ScheduledRelease',
+  Skill = 'Skill',
+  /** User system model */
+  User = 'User',
+  VideoEmbed = 'VideoEmbed',
+}
+
+/** Allows to specify input to query models and components directly */
+export type GraphCms_EntityWhereInput = {
+  /** The ID of an object */
+  id: Scalars['ID']
+  locale?: Maybe<GraphCms_Locale>
+  stage: GraphCms_Stage
+  /** The Type name of an object */
+  typename: GraphCms_EntityTypeName
+}
+
+export type GraphCms_Experience = GraphCms_Entity &
+  GraphCms_Node & {
+    __typename?: 'GraphCMS_Experience'
+    company: Scalars['String']
+    /** The time the document was created */
+    createdAt: Scalars['GraphCMS_DateTime']
+    /** User that created this document */
+    createdBy?: Maybe<GraphCms_User>
+    description: GraphCms_RichText
+    /** Get the document in other stages */
+    documentInStages: Array<GraphCms_Experience>
+    endDate?: Maybe<Scalars['GraphCMS_Date']>
+    /** List of Experience versions */
+    history: Array<GraphCms_Version>
+    /** The unique identifier */
+    id: Scalars['ID']
+    location?: Maybe<Scalars['String']>
+    locationIcon: Scalars['String']
+    logo: GraphCms_Asset
+    position: Scalars['String']
+    /** The time the document was published. Null on documents in draft stage. */
+    publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
+    /** User that last published this document */
+    publishedBy?: Maybe<GraphCms_User>
+    scheduledIn: Array<GraphCms_ScheduledOperation>
+    /** System stage field */
+    stage: GraphCms_Stage
+    startDate: Scalars['GraphCMS_Date']
+    /** The time the document was updated */
+    updatedAt: Scalars['GraphCMS_DateTime']
+    /** User that last updated this document */
+    updatedBy?: Maybe<GraphCms_User>
+  }
 
 export type GraphCms_ExperienceCreatedByArgs = {
   forceParentLocale?: Maybe<Scalars['Boolean']>
@@ -4485,33 +4535,34 @@ export type GraphCms_ImageTransformationInput = {
   resize?: Maybe<GraphCms_ImageResizeInput>
 }
 
-export type GraphCms_Interview = GraphCms_Node & {
-  __typename?: 'GraphCMS_Interview'
-  /** The time the document was created */
-  createdAt: Scalars['GraphCMS_DateTime']
-  /** User that created this document */
-  createdBy?: Maybe<GraphCms_User>
-  date: Scalars['GraphCMS_Date']
-  /** Get the document in other stages */
-  documentInStages: Array<GraphCms_Interview>
-  /** List of Interview versions */
-  history: Array<GraphCms_Version>
-  /** The unique identifier */
-  id: Scalars['ID']
-  /** The time the document was published. Null on documents in draft stage. */
-  publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** User that last published this document */
-  publishedBy?: Maybe<GraphCms_User>
-  scheduledIn: Array<GraphCms_ScheduledOperation>
-  /** System stage field */
-  stage: GraphCms_Stage
-  title: Scalars['String']
-  /** The time the document was updated */
-  updatedAt: Scalars['GraphCMS_DateTime']
-  /** User that last updated this document */
-  updatedBy?: Maybe<GraphCms_User>
-  videoEmbed?: Maybe<GraphCms_VideoEmbed>
-}
+export type GraphCms_Interview = GraphCms_Entity &
+  GraphCms_Node & {
+    __typename?: 'GraphCMS_Interview'
+    /** The time the document was created */
+    createdAt: Scalars['GraphCMS_DateTime']
+    /** User that created this document */
+    createdBy?: Maybe<GraphCms_User>
+    date: Scalars['GraphCMS_Date']
+    /** Get the document in other stages */
+    documentInStages: Array<GraphCms_Interview>
+    /** List of Interview versions */
+    history: Array<GraphCms_Version>
+    /** The unique identifier */
+    id: Scalars['ID']
+    /** The time the document was published. Null on documents in draft stage. */
+    publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
+    /** User that last published this document */
+    publishedBy?: Maybe<GraphCms_User>
+    scheduledIn: Array<GraphCms_ScheduledOperation>
+    /** System stage field */
+    stage: GraphCms_Stage
+    title: Scalars['String']
+    /** The time the document was updated */
+    updatedAt: Scalars['GraphCMS_DateTime']
+    /** User that last updated this document */
+    updatedBy?: Maybe<GraphCms_User>
+    videoEmbed?: Maybe<GraphCms_VideoEmbed>
+  }
 
 export type GraphCms_InterviewCreatedByArgs = {
   forceParentLocale?: Maybe<Scalars['Boolean']>
@@ -5003,34 +5054,35 @@ export type GraphCms_PageInfo = {
   startCursor?: Maybe<Scalars['String']>
 }
 
-export type GraphCms_Publication = GraphCms_Node & {
-  __typename?: 'GraphCMS_Publication'
-  /** The time the document was created */
-  createdAt: Scalars['GraphCMS_DateTime']
-  /** User that created this document */
-  createdBy?: Maybe<GraphCms_User>
-  date: Scalars['GraphCMS_Date']
-  /** Get the document in other stages */
-  documentInStages: Array<GraphCms_Publication>
-  /** List of Publication versions */
-  history: Array<GraphCms_Version>
-  /** The unique identifier */
-  id: Scalars['ID']
-  link: Scalars['String']
-  opengraph: Opengraph
-  /** The time the document was published. Null on documents in draft stage. */
-  publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** User that last published this document */
-  publishedBy?: Maybe<GraphCms_User>
-  scheduledIn: Array<GraphCms_ScheduledOperation>
-  /** System stage field */
-  stage: GraphCms_Stage
-  title: Scalars['String']
-  /** The time the document was updated */
-  updatedAt: Scalars['GraphCMS_DateTime']
-  /** User that last updated this document */
-  updatedBy?: Maybe<GraphCms_User>
-}
+export type GraphCms_Publication = GraphCms_Entity &
+  GraphCms_Node & {
+    __typename?: 'GraphCMS_Publication'
+    /** The time the document was created */
+    createdAt: Scalars['GraphCMS_DateTime']
+    /** User that created this document */
+    createdBy?: Maybe<GraphCms_User>
+    date: Scalars['GraphCMS_Date']
+    /** Get the document in other stages */
+    documentInStages: Array<GraphCms_Publication>
+    /** List of Publication versions */
+    history: Array<GraphCms_Version>
+    /** The unique identifier */
+    id: Scalars['ID']
+    link: Scalars['String']
+    opengraph: Opengraph
+    /** The time the document was published. Null on documents in draft stage. */
+    publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
+    /** User that last published this document */
+    publishedBy?: Maybe<GraphCms_User>
+    scheduledIn: Array<GraphCms_ScheduledOperation>
+    /** System stage field */
+    stage: GraphCms_Stage
+    title: Scalars['String']
+    /** The time the document was updated */
+    updatedAt: Scalars['GraphCMS_DateTime']
+    /** User that last updated this document */
+    updatedBy?: Maybe<GraphCms_User>
+  }
 
 export type GraphCms_PublicationCreatedByArgs = {
   forceParentLocale?: Maybe<Scalars['Boolean']>
@@ -5546,38 +5598,39 @@ export type GraphCms_RichText = {
 }
 
 /** Scheduled Operation system model */
-export type GraphCms_ScheduledOperation = GraphCms_Node & {
-  __typename?: 'GraphCMS_ScheduledOperation'
-  affectedDocuments: Array<GraphCms_ScheduledOperationAffectedDocument>
-  /** The time the document was created */
-  createdAt: Scalars['GraphCMS_DateTime']
-  /** User that created this document */
-  createdBy?: Maybe<GraphCms_User>
-  /** Operation description */
-  description?: Maybe<Scalars['String']>
-  /** Get the document in other stages */
-  documentInStages: Array<GraphCms_ScheduledOperation>
-  /** Operation error message */
-  errorMessage?: Maybe<Scalars['String']>
-  /** The unique identifier */
-  id: Scalars['ID']
-  /** The time the document was published. Null on documents in draft stage. */
-  publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** User that last published this document */
-  publishedBy?: Maybe<GraphCms_User>
-  /** Raw operation payload including all details, this field is subject to change */
-  rawPayload: Scalars['GraphCMS_Json']
-  /** The release this operation is scheduled for */
-  release?: Maybe<GraphCms_ScheduledRelease>
-  /** System stage field */
-  stage: GraphCms_Stage
-  /** operation Status */
-  status: GraphCms_ScheduledOperationStatus
-  /** The time the document was updated */
-  updatedAt: Scalars['GraphCMS_DateTime']
-  /** User that last updated this document */
-  updatedBy?: Maybe<GraphCms_User>
-}
+export type GraphCms_ScheduledOperation = GraphCms_Entity &
+  GraphCms_Node & {
+    __typename?: 'GraphCMS_ScheduledOperation'
+    affectedDocuments: Array<GraphCms_ScheduledOperationAffectedDocument>
+    /** The time the document was created */
+    createdAt: Scalars['GraphCMS_DateTime']
+    /** User that created this document */
+    createdBy?: Maybe<GraphCms_User>
+    /** Operation description */
+    description?: Maybe<Scalars['String']>
+    /** Get the document in other stages */
+    documentInStages: Array<GraphCms_ScheduledOperation>
+    /** Operation error message */
+    errorMessage?: Maybe<Scalars['String']>
+    /** The unique identifier */
+    id: Scalars['ID']
+    /** The time the document was published. Null on documents in draft stage. */
+    publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
+    /** User that last published this document */
+    publishedBy?: Maybe<GraphCms_User>
+    /** Raw operation payload including all details, this field is subject to change */
+    rawPayload: Scalars['GraphCMS_Json']
+    /** The release this operation is scheduled for */
+    release?: Maybe<GraphCms_ScheduledRelease>
+    /** System stage field */
+    stage: GraphCms_Stage
+    /** operation Status */
+    status: GraphCms_ScheduledOperationStatus
+    /** The time the document was updated */
+    updatedAt: Scalars['GraphCMS_DateTime']
+    /** User that last updated this document */
+    updatedBy?: Maybe<GraphCms_User>
+  }
 
 /** Scheduled Operation system model */
 export type GraphCms_ScheduledOperationAffectedDocumentsArgs = {
@@ -5984,43 +6037,44 @@ export type GraphCms_ScheduledOperationWhereUniqueInput = {
 }
 
 /** Scheduled Release system model */
-export type GraphCms_ScheduledRelease = GraphCms_Node & {
-  __typename?: 'GraphCMS_ScheduledRelease'
-  /** The time the document was created */
-  createdAt: Scalars['GraphCMS_DateTime']
-  /** User that created this document */
-  createdBy?: Maybe<GraphCms_User>
-  /** Release description */
-  description?: Maybe<Scalars['String']>
-  /** Get the document in other stages */
-  documentInStages: Array<GraphCms_ScheduledRelease>
-  /** Release error message */
-  errorMessage?: Maybe<Scalars['String']>
-  /** The unique identifier */
-  id: Scalars['ID']
-  /** Whether scheduled release should be run */
-  isActive: Scalars['Boolean']
-  /** Whether scheduled release is implicit */
-  isImplicit: Scalars['Boolean']
-  /** Operations to run with this release */
-  operations: Array<GraphCms_ScheduledOperation>
-  /** The time the document was published. Null on documents in draft stage. */
-  publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** User that last published this document */
-  publishedBy?: Maybe<GraphCms_User>
-  /** Release date and time */
-  releaseAt?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** System stage field */
-  stage: GraphCms_Stage
-  /** Release Status */
-  status: GraphCms_ScheduledReleaseStatus
-  /** Release Title */
-  title?: Maybe<Scalars['String']>
-  /** The time the document was updated */
-  updatedAt: Scalars['GraphCMS_DateTime']
-  /** User that last updated this document */
-  updatedBy?: Maybe<GraphCms_User>
-}
+export type GraphCms_ScheduledRelease = GraphCms_Entity &
+  GraphCms_Node & {
+    __typename?: 'GraphCMS_ScheduledRelease'
+    /** The time the document was created */
+    createdAt: Scalars['GraphCMS_DateTime']
+    /** User that created this document */
+    createdBy?: Maybe<GraphCms_User>
+    /** Release description */
+    description?: Maybe<Scalars['String']>
+    /** Get the document in other stages */
+    documentInStages: Array<GraphCms_ScheduledRelease>
+    /** Release error message */
+    errorMessage?: Maybe<Scalars['String']>
+    /** The unique identifier */
+    id: Scalars['ID']
+    /** Whether scheduled release should be run */
+    isActive: Scalars['Boolean']
+    /** Whether scheduled release is implicit */
+    isImplicit: Scalars['Boolean']
+    /** Operations to run with this release */
+    operations: Array<GraphCms_ScheduledOperation>
+    /** The time the document was published. Null on documents in draft stage. */
+    publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
+    /** User that last published this document */
+    publishedBy?: Maybe<GraphCms_User>
+    /** Release date and time */
+    releaseAt?: Maybe<Scalars['GraphCMS_DateTime']>
+    /** System stage field */
+    stage: GraphCms_Stage
+    /** Release Status */
+    status: GraphCms_ScheduledReleaseStatus
+    /** Release Title */
+    title?: Maybe<Scalars['String']>
+    /** The time the document was updated */
+    updatedAt: Scalars['GraphCMS_DateTime']
+    /** User that last updated this document */
+    updatedBy?: Maybe<GraphCms_User>
+  }
 
 /** Scheduled Release system model */
 export type GraphCms_ScheduledReleaseCreatedByArgs = {
@@ -6562,33 +6616,34 @@ export type GraphCms_ScheduledReleaseWhereUniqueInput = {
   id?: Maybe<Scalars['ID']>
 }
 
-export type GraphCms_Skill = GraphCms_Node & {
-  __typename?: 'GraphCMS_Skill'
-  /** The time the document was created */
-  createdAt: Scalars['GraphCMS_DateTime']
-  /** User that created this document */
-  createdBy?: Maybe<GraphCms_User>
-  /** Get the document in other stages */
-  documentInStages: Array<GraphCms_Skill>
-  /** List of Skill versions */
-  history: Array<GraphCms_Version>
-  /** The unique identifier */
-  id: Scalars['ID']
-  logo: GraphCms_Asset
-  /** The time the document was published. Null on documents in draft stage. */
-  publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** User that last published this document */
-  publishedBy?: Maybe<GraphCms_User>
-  scheduledIn: Array<GraphCms_ScheduledOperation>
-  /** System stage field */
-  stage: GraphCms_Stage
-  title: Scalars['String']
-  /** The time the document was updated */
-  updatedAt: Scalars['GraphCMS_DateTime']
-  /** User that last updated this document */
-  updatedBy?: Maybe<GraphCms_User>
-  yearsOfExperience: Scalars['Int']
-}
+export type GraphCms_Skill = GraphCms_Entity &
+  GraphCms_Node & {
+    __typename?: 'GraphCMS_Skill'
+    /** The time the document was created */
+    createdAt: Scalars['GraphCMS_DateTime']
+    /** User that created this document */
+    createdBy?: Maybe<GraphCms_User>
+    /** Get the document in other stages */
+    documentInStages: Array<GraphCms_Skill>
+    /** List of Skill versions */
+    history: Array<GraphCms_Version>
+    /** The unique identifier */
+    id: Scalars['ID']
+    logo: GraphCms_Asset
+    /** The time the document was published. Null on documents in draft stage. */
+    publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
+    /** User that last published this document */
+    publishedBy?: Maybe<GraphCms_User>
+    scheduledIn: Array<GraphCms_ScheduledOperation>
+    /** System stage field */
+    stage: GraphCms_Stage
+    title: Scalars['String']
+    /** The time the document was updated */
+    updatedAt: Scalars['GraphCMS_DateTime']
+    /** User that last updated this document */
+    updatedBy?: Maybe<GraphCms_User>
+    yearsOfExperience: Scalars['Int']
+  }
 
 export type GraphCms_SkillCreatedByArgs = {
   forceParentLocale?: Maybe<Scalars['Boolean']>
@@ -7054,29 +7109,30 @@ export type GraphCms_UnpublishLocaleInput = {
 }
 
 /** User system model */
-export type GraphCms_User = GraphCms_Node & {
-  __typename?: 'GraphCMS_User'
-  /** The time the document was created */
-  createdAt: Scalars['GraphCMS_DateTime']
-  /** Get the document in other stages */
-  documentInStages: Array<GraphCms_User>
-  /** The unique identifier */
-  id: Scalars['ID']
-  /** Flag to determine if user is active or not */
-  isActive: Scalars['Boolean']
-  /** User Kind. Can be either MEMBER, PAT or PUBLIC */
-  kind: GraphCms_UserKind
-  /** The username */
-  name: Scalars['String']
-  /** Profile Picture url */
-  picture?: Maybe<Scalars['String']>
-  /** The time the document was published. Null on documents in draft stage. */
-  publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** System stage field */
-  stage: GraphCms_Stage
-  /** The time the document was updated */
-  updatedAt: Scalars['GraphCMS_DateTime']
-}
+export type GraphCms_User = GraphCms_Entity &
+  GraphCms_Node & {
+    __typename?: 'GraphCMS_User'
+    /** The time the document was created */
+    createdAt: Scalars['GraphCMS_DateTime']
+    /** Get the document in other stages */
+    documentInStages: Array<GraphCms_User>
+    /** The unique identifier */
+    id: Scalars['ID']
+    /** Flag to determine if user is active or not */
+    isActive: Scalars['Boolean']
+    /** User Kind. Can be either MEMBER, PAT or PUBLIC */
+    kind: GraphCms_UserKind
+    /** The username */
+    name: Scalars['String']
+    /** Profile Picture url */
+    picture?: Maybe<Scalars['String']>
+    /** The time the document was published. Null on documents in draft stage. */
+    publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
+    /** System stage field */
+    stage: GraphCms_Stage
+    /** The time the document was updated */
+    updatedAt: Scalars['GraphCMS_DateTime']
+  }
 
 /** User system model */
 export type GraphCms_UserDocumentInStagesArgs = {
@@ -7457,32 +7513,33 @@ export type GraphCms_VersionWhereInput = {
   stage: GraphCms_Stage
 }
 
-export type GraphCms_VideoEmbed = GraphCms_Node & {
-  __typename?: 'GraphCMS_VideoEmbed'
-  /** The time the document was created */
-  createdAt: Scalars['GraphCMS_DateTime']
-  /** User that created this document */
-  createdBy?: Maybe<GraphCms_User>
-  /** Get the document in other stages */
-  documentInStages: Array<GraphCms_VideoEmbed>
-  /** List of VideoEmbed versions */
-  history: Array<GraphCms_Version>
-  /** The unique identifier */
-  id: Scalars['ID']
-  iframeOptions?: Maybe<Scalars['GraphCMS_Json']>
-  link: Scalars['String']
-  /** The time the document was published. Null on documents in draft stage. */
-  publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
-  /** User that last published this document */
-  publishedBy?: Maybe<GraphCms_User>
-  scheduledIn: Array<GraphCms_ScheduledOperation>
-  /** System stage field */
-  stage: GraphCms_Stage
-  /** The time the document was updated */
-  updatedAt: Scalars['GraphCMS_DateTime']
-  /** User that last updated this document */
-  updatedBy?: Maybe<GraphCms_User>
-}
+export type GraphCms_VideoEmbed = GraphCms_Entity &
+  GraphCms_Node & {
+    __typename?: 'GraphCMS_VideoEmbed'
+    /** The time the document was created */
+    createdAt: Scalars['GraphCMS_DateTime']
+    /** User that created this document */
+    createdBy?: Maybe<GraphCms_User>
+    /** Get the document in other stages */
+    documentInStages: Array<GraphCms_VideoEmbed>
+    /** List of VideoEmbed versions */
+    history: Array<GraphCms_Version>
+    /** The unique identifier */
+    id: Scalars['ID']
+    iframeOptions?: Maybe<Scalars['GraphCMS_Json']>
+    link: Scalars['String']
+    /** The time the document was published. Null on documents in draft stage. */
+    publishedAt?: Maybe<Scalars['GraphCMS_DateTime']>
+    /** User that last published this document */
+    publishedBy?: Maybe<GraphCms_User>
+    scheduledIn: Array<GraphCms_ScheduledOperation>
+    /** System stage field */
+    stage: GraphCms_Stage
+    /** The time the document was updated */
+    updatedAt: Scalars['GraphCMS_DateTime']
+    /** User that last updated this document */
+    updatedBy?: Maybe<GraphCms_User>
+  }
 
 export type GraphCms_VideoEmbedCreatedByArgs = {
   forceParentLocale?: Maybe<Scalars['Boolean']>
@@ -10176,21 +10233,6 @@ export type ResumeSsrQuery = {
       title: string
       link: string
       date: any
-      opengraph: {
-        __typename?: 'Opengraph'
-        description?: string | null | undefined
-        image?: string | null | undefined
-        ogImage?: string | null | undefined
-        ogDescription?: string | null | undefined
-        ogTitle?: string | null | undefined
-        ogType?: string | null | undefined
-        ogUrl?: string | null | undefined
-        twitterCard?: string | null | undefined
-        twitterDescription?: string | null | undefined
-        twitterImageSrc?: string | null | undefined
-        twitterTitle?: string | null | undefined
-        url?: string | null | undefined
-      }
     }>
     conferences: Array<{
       __typename?: 'GraphCMS_Conference'

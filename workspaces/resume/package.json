@@ -1,19 +1,25 @@
 {
   "name": "@teimurjan/resume",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "private": true,
   "description": "Resume component",
   "author": "Teimur Gasanov",
   "main": "./src/index.ts",
-  "scripts": {
-    "typecheck": "tsc --noEmit"
-  },
   "dependencies": {
-    "@react-pdf/renderer": "^3.0.0",
-    "react": "^18.0.2",
-    "react-dom": "^18.0.2",
-    "react-pdf-html": "^1.1.18",
-    "@teimurjan/utils": "1.0.0",
-    "@teimurjan/gql-types": "1.0.0"
-  }
+    "@react-pdf/renderer": "^3.4.5",
+    "@teimurjan/gql-types": "workspace:*",
+    "@teimurjan/utils": "workspace:*",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-pdf-html": "^2.1.2"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.23",
+    "@types/react-dom": "^18.2.8",
+    "typescript": "^5.4.3"
+  },
+  "engines": {
+    "node": ">=18.18.0"
+  },
+  "packageManager": "yarn@4.4.0"
 }

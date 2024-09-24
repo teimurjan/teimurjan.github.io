@@ -1,23 +1,25 @@
 import { css } from '@emotion/react'
 import Flex from '@react-css/flex'
-import { forwardRef, ReactNode } from 'react'
+import { forwardRef, PropsWithChildren, ReactNode } from 'react'
 import { theme } from '@teimurjan/utils'
 import { EmotionProps } from '../../../utils'
 import { Typography } from '../../atoms'
 import { useMedia } from '../../../hooks'
 
-export interface Props extends EmotionProps {
-  media?: ReactNode
-  title: string
-  subtitle?: ReactNode
-}
+export type Props = PropsWithChildren<
+  EmotionProps & {
+    media?: ReactNode
+    title: string
+    subtitle?: ReactNode
+  }
+>
 
 const MediaCard = forwardRef<HTMLDivElement, Props>(
   ({ className, children, title, media, subtitle }, ref) => {
     const flexDirection = useMedia(
       [theme.screens.large.mediaFrom],
       ['row' as const],
-      'column' as const
+      'column' as const,
     )
     return (
       <div
@@ -73,7 +75,7 @@ const MediaCard = forwardRef<HTMLDivElement, Props>(
         <Typography.Text container>{children}</Typography.Text>
       </div>
     )
-  }
+  },
 )
 
 export default MediaCard

@@ -1,6 +1,6 @@
 {
-  "name": "teimurjan",
-  "version": "1.0.0",
+  "name": "@teimurjan/root",
+  "version": "0.0.0",
   "private": true,
   "description": "Monorepo root for the tools related to my peronsality",
   "author": "Teimur Gasanov",
@@ -11,29 +11,34 @@
     "serve": "yarn workspace @teimurjan/landing serve",
     "clean": "yarn workspace @teimurjan/landing clean",
     "codegen": "yarn workspace @teimurjan/gql-types codegen",
-    "typecheck": "yarn workspaces run typecheck",
+    "typecheck": "yarn workspaces foreach -A run tsc --noEmit",
     "lint": "eslint workspaces/*/src"
   },
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.0.0",
-    "@typescript-eslint/parser": "^4.0.0",
-    "babel-eslint": "^10.0.0",
-    "eslint": "^7.5.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-config-react-app": "^6.0.0",
-    "eslint-plugin-flowtype": "^5.2.0",
-    "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-jsx-a11y": "^6.3.1",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-react": "^7.20.3",
-    "eslint-plugin-react-hooks": "^4.0.8",
-    "prettier": "^2.4.1",
-    "typescript": "^4.4.4"
+    "@yarnpkg/types": "^4.0.0-rc.51",
+    "compare-versions": "^6.1.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.11.0",
+    "@typescript-eslint/parser": "^8.6.0",
+    "eslint": "^9.11.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react": "^7.36.1",
+    "eslint-plugin-react-hooks": "5.1.0-rc-e4953922-20240919",
+    "globals": "^15.9.0",
+    "prettier": "^3.2.5",
+    "typescript-eslint": "^8.6.0"
   },
   "resolutions": {
-    "graphql": "^15.8.0"
+    "graphql": "15.8.0",
+    "@types/react": "18.2.23",
+    "@types/react-dom": "18.2.8"
   },
   "workspaces": [
-    "workspaces/*"
-  ]
+    "workspaces/**"
+  ],
+  "engines": {
+    "node": ">=18.18.0"
+  },
+  "packageManager": "yarn@4.4.0"
 }

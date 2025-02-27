@@ -6,6 +6,7 @@ import 'react-tooltip/dist/react-tooltip.css'
 import './globals.css'
 import { VisibilityContextProvider } from '@/context/VisibilityContext'
 import { Anchor } from '@/utils'
+import Script from 'next/script'
 
 const roboto = Roboto_Mono({
   weight: ['100', '300', '400', '500', '700'],
@@ -47,6 +48,11 @@ const Layout = ({
 }>) => {
   return (
     <html lang="en">
+      <Script
+        defer
+        src="https://cloud.umami.is/script.js"
+        data-website-id="f312ce9d-5eb0-4a08-8331-320723dfdaed"
+      />
       <body className={roboto.className}>
         <VisibilityContextProvider initialIds={initialVisibilityIds}>
           <PersonaContextProvider>{children}</PersonaContextProvider>

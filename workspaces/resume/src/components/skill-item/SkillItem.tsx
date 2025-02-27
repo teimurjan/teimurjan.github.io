@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet } from '@react-pdf/renderer'
+import { Text, View, StyleSheet, Styles } from '@react-pdf/renderer'
 import { theme } from '@teimurjan/utils'
 
 const styles = StyleSheet.create({
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
 interface Props {
   title: string
   percentage: number
-  style?: Record<string, unknown>
+  style?: Styles
 }
 
 const SkillItem = ({ title, percentage, style = {} }: Props) => {

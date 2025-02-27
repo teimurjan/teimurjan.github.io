@@ -1,13 +1,20 @@
-import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer'
+import {
+  Page,
+  Text,
+  View,
+  Document,
+  StyleSheet,
+  Styles,
+} from '@react-pdf/renderer'
 import {
   YEAR_DATE_FORMAT,
   prettyRange,
   sortByDate,
   theme,
 } from '@teimurjan/utils'
-import { ResumeSsrQuery } from '@teimurjan/gql-types'
 import Header from '../header'
 import ResumeItem from '../resume-item'
+import { ResumeQuery } from '@teimurjan/gql-types'
 
 const styles = StyleSheet.create({
   page: {
@@ -63,22 +70,20 @@ const styles = StyleSheet.create({
 })
 
 const getItemMarginStyle = (
-  style: Record<string, unknown>,
+  style: { marginBottom: number },
   index: number,
   itemsCount: number,
-) => (index + 1 === itemsCount ? undefined : style)
+) => (index + 1 === itemsCount ? undefined : style) as Styles | undefined
 
 const Resume = ({
-  gcms: {
-    bios: [{ fullName, headline, about, location, phoneNumber, email }],
-    educations,
-    skills,
-    experiences,
-    publications,
-    conferences,
-    ...rest
-  },
-}: ResumeSsrQuery) => {
+  bios: [{ fullName, headline, about, location, phoneNumber, email }],
+  educations,
+  skills,
+  experiences,
+  publications,
+  conferences,
+  ...rest
+}: ResumeQuery) => {
   return (
     <Document {...rest}>
       <Page size="A4" style={styles.page}>

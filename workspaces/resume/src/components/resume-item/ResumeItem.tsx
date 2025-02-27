@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet } from '@react-pdf/renderer'
+import { Text, View, StyleSheet, Styles } from '@react-pdf/renderer'
 import Html from 'react-pdf-html'
 import { theme } from '@teimurjan/utils'
 
@@ -30,7 +30,7 @@ interface Props {
   title: string
   subtitle?: string
   description?: string
-  style?: Record<string, unknown>
+  style?: Styles
 }
 
 const ResumeItem = ({

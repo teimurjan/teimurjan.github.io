@@ -1,0 +1,46 @@
+query Resume {
+  bios {
+    fullName
+    headline
+    about
+    location
+    phoneNumber
+    email
+  }
+  educations(orderBy: startDate_DESC) {
+    id
+    school
+    degree
+    areaOfStudy
+    startDate
+    endDate
+  }
+  skills(orderBy: yearsOfExperience_DESC) {
+    id
+    title
+    yearsOfExperience
+  }
+  experiences(orderBy: startDate_DESC) {
+    id
+    company
+    position
+    startDate
+    endDate
+    description {
+      html
+    }
+  }
+  publications {
+    id
+    title
+    link
+    date
+  }
+  conferences {
+    id
+    title
+    topic
+    link
+    date
+  }
+}

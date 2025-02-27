@@ -1,0 +1,34 @@
+query Media {
+  publications {
+    __typename
+    id
+    title
+    link
+    date
+  }
+  conferences {
+    __typename
+    id
+    title
+    topic
+    link
+    date
+    image {
+      url
+    }
+    videoEmbed {
+      link
+      iframeOptions
+    }
+  }
+  interviews {
+    __typename
+    id
+    title
+    date
+    videoEmbed {
+      link
+      iframeOptions
+    }
+  }
+}

@@ -1,80 +1,19 @@
-import { ResumeSsrQuery } from '@teimurjan/gql-types'
+import { ResumeQuery } from '@teimurjan/gql-types'
 import { useEffect, useRef, useState } from 'react'
 import { JSONEditor, Mode } from 'vanilla-jsoneditor/standalone.js'
 import Resume, { PDFDownloadLink } from '@teimurjan/resume'
-
-const GRAPH_CMS_URL =
-  'https://api-eu-central-1.hygraph.com/v2/ckuqwop6l1gvq01xqb8y0dsj3/master'
+import gqlClient from './gql-client'
 
 const JSON_EDITOR_ID = 'editor'
 
-const loadResume = async () => {
-  const response = await fetch(GRAPH_CMS_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      query: `
-        query ResumeSsr {
-          bios {
-            fullName
-            headline
-            about
-            location
-            phoneNumber
-            email
-          }
-          educations(orderBy: startDate_DESC) {
-            id
-            school
-            degree
-            areaOfStudy
-            startDate
-            endDate
-          }
-          skills(orderBy: yearsOfExperience_DESC) {
-            id
-            title
-            yearsOfExperience
-          }
-          experiences(orderBy: startDate_DESC) {
-            id
-            company
-            position
-            startDate
-            endDate
-            description {
-              html
-            }
-          }
-          publications {
-            id
-            title
-            link
-            date
-          }
-          conferences {
-            id
-            title
-            topic
-            link
-            date
-          }
-        }
-      `,
-    }),
-  })
-
-  return (await response.json()) as { data: ResumeSsrQuery['gcms'] }
-}
+const loadResume = async () => await gqlClient.Resume()
 
 function App() {
   const hasDataLoadStartedRef = useRef(false)
   const jsonEditorRef = useRef<JSONEditor>()
 
-  const [data, setData] = useState<ResumeSsrQuery['gcms']>()
-  const [customData, setCustomData] = useState<ResumeSsrQuery['gcms']>()
+  const [data, setData] = useState<ResumeQuery>()
+  const [customData, setCustomData] = useState<ResumeQuery>()
   const [_error, setError] = useState<unknown>()
   const [_isLoading, setIsLoading] = useState(false)
 
@@ -83,7 +22,7 @@ function App() {
       return () => {}
     }
 
-    const initEditor = (initData: ResumeSsrQuery['gcms']) => {
+    const initEditor = (initData: ResumeQuery) => {
       const target = document.getElementById(JSON_EDITOR_ID)
       if (!target) {
         return
@@ -98,12 +37,10 @@ function App() {
           content: { json: initData },
           onChange: (updatedContent) => {
             if ('json' in updatedContent) {
-              setCustomData(updatedContent.json as ResumeSsrQuery['gcms'])
+              setCustomData(updatedContent.json as ResumeQuery)
             }
             if ('text' in updatedContent) {
-              setCustomData(
-                JSON.parse(updatedContent.text) as ResumeSsrQuery['gcms'],
-              )
+              setCustomData(JSON.parse(updatedContent.text) as ResumeQuery)
             }
           },
         },
@@ -114,7 +51,7 @@ function App() {
       setIsLoading(true)
 
       try {
-        const { data } = await loadResume()
+        const data = await loadResume()
         setData(data)
         setCustomData(data)
 
@@ -155,10 +92,9 @@ function App() {
       <div className="inline-flex fixed bottom-8 right-8">
         {customData && (
           <PDFDownloadLink
-            document={<Resume gcms={customData} />}
+            document={<Resume {...customData} />}
             fileName="resume.pdf"
           >
-            {/* @ts-expect-error typing issue coming from the lib */}
             {({ url, loading }) => (
               <button
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"

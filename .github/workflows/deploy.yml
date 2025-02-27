@@ -4,12 +4,14 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "workspaces/**"
+  
   workflow_dispatch:
-
-  # Allows external webhook trigger
-  repository_dispatch:
-    types:
-      - webhook
+    
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   deploy:
@@ -22,7 +24,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
-          node-version: '18.18.0'
+          node-version: '20.18.1'
           cache: 'yarn'
 
       - name: Install packages
@@ -36,4 +38,4 @@ jobs:
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./workspaces/landing/public
+          publish_dir: ./workspaces/website/out

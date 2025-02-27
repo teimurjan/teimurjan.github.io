@@ -1,0 +1,6 @@
+query Seo {
+  bios {
+    fullName
+    headline
+  }
+}

@@ -1,4 +1,4 @@
-import { ResumeSsrQuery } from '@teimurjan/gql-types'
+import { ResumeQuery } from '@teimurjan/gql-types'
 import { Font } from '@react-pdf/renderer'
 import Resume from './Resume'
 
@@ -7,6 +7,6 @@ Font.registerEmojiSource({
   url: 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/',
 })
 
-const ResumeNode = (props: ResumeSsrQuery) => <Resume {...props} />
+const Resume_ = (props: ResumeQuery) => <Resume {...props} />
 
-export default ResumeNode
+export default Resume_

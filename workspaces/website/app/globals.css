@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family:
+    Roboto Mono,
+    sans-serif;
+}
+
+html {
+  @apply scroll-smooth;
+}
+
+body {
+  @apply m-0 overflow-x-hidden;
+}
+
+iframe {
+  @apply max-w-full border-0;
+}
+
+ul {
+  @apply pl-4 list-disc;
+}
+

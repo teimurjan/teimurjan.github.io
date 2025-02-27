@@ -1,0 +1,10 @@
+query Skills {
+  skills(orderBy: yearsOfExperience_DESC) {
+    id
+    title
+    yearsOfExperience
+    logo {
+      url
+    }
+  }
+}

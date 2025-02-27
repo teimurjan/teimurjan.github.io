@@ -12,23 +12,24 @@
   "dependencies": {
     "@teimurjan/gql-types": "workspace:*",
     "@teimurjan/resume": "workspace:*",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "graphql-request": "^7.1.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "vanilla-jsoneditor": "^0.23.8"
   },
   "devDependencies": {
-    "@types/react": "^18.2.23",
-    "@types/react-dom": "^18.2.8",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.20",
     "globals": "^15.9.0",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.12",
-    "typescript": "^5.4.3",
+    "typescript": "^5.7.3",
     "vite": "^5.4.1"
   },
   "engines": {
-    "node": ">=18.18.0"
+    "node": ">=20.18.1"
   },
   "packageManager": "yarn@4.4.0"
 }

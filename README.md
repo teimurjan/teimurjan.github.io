@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://teimurjan.dev">
-    <img alt="Gatsby" src="./workspaces/landing/src/assets/images/logo.png" width="200" />
+    <img alt="Gatsby" src="./workspaces/website/src/assets/images/logo.png" width="200" />
   </a>
 </p>
 <h1 align="center">
@@ -53,7 +53,7 @@ Hey! 👋 This repository contains the source code for my personal website hoste
 GitHub Actions is mechanism reponsible for the deployments. There is a workflow file [deploy.yml](./.github/workflows/deploy.yml) that starts when the code or data are changed.
 
 <div align="center">
-  <img alt="Gatsby" src="./images/deployment.png" width="1000" />
+  <img alt="Gatsby" src="./docs/images/deployment.png" width="1000" />
 </div>
 
 ## ➡️ Plans

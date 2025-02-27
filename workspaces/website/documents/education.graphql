@@ -1,0 +1,13 @@
+query Education {
+  educations(orderBy: startDate_DESC) {
+    id
+    school
+    degree
+    description {
+      html
+    }
+    areaOfStudy
+    startDate
+    endDate
+  }
+}

@@ -1,8 +1,8 @@
-import { Svg, Path } from '@react-pdf/renderer'
+import { Svg, Path, Styles } from '@react-pdf/renderer'
 import { theme } from '@teimurjan/utils'
 
 interface Props {
-  style?: Record<string, unknown>
+  style?: Styles
 }
 
 const PhoneIcon = ({ style }: Props) => (

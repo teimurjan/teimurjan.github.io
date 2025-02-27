@@ -16,7 +16,6 @@ const useElementVisibility = (id: string, threshold?: number) => {
       new IntersectionObserver(
         (entries) => {
           for (const entry of entries) {
-            console.log(entry.target.id, entry.isIntersecting, id)
             if (entry.target.id === id) {
               setVisibility(entry.isIntersecting)
             }

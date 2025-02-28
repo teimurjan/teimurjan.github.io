@@ -19,7 +19,12 @@ const Media = async () => {
   ])
 
   const renderLink = (link: string) => (
-    <Link className="mt-2 underline" href={link}>
+    <Link
+      className="mt-2 underline"
+      href={link}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       Check it out 🔗
     </Link>
   )

@@ -1,7 +1,6 @@
 import { Fragment } from 'react'
-import Resume, { PDFDownloadLink } from '@teimurjan/resume'
-import { Banner } from '../../molecules'
-import { Button, PersonaCanvas, Background } from '../../atoms'
+import { Banner, ResumeButton } from '../../molecules'
+import { PersonaCanvas, Background } from '../../atoms'
 import gqlClient from '@/gql-client'
 
 const IndexBanner = async () => {
@@ -11,6 +10,7 @@ const IndexBanner = async () => {
   } = data
   const shouldGeneratePDFInBrowser =
     process.env.NODE_ENV === 'development' && typeof window !== 'undefined'
+  console.log(shouldGeneratePDFInBrowser)
 
   return (
     <Banner
@@ -18,31 +18,7 @@ const IndexBanner = async () => {
       title={fullName}
       subtitle={headline}
       description={about}
-      button={
-        shouldGeneratePDFInBrowser ? (
-          <PDFDownloadLink
-            document={<Resume {...data} />}
-            fileName="resume.pdf"
-          >
-            {({ url, loading }) => (
-              <Button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  e.preventDefault()
-                  if (url) {
-                    window.open(url, '_blank')
-                  }
-                }}
-                disabled={loading}
-              >
-                Get resume
-              </Button>
-            )}
-          </PDFDownloadLink>
-        ) : (
-          <Button.Link href="/resume.pdf">Get resume</Button.Link>
-        )
-      }
+      button={<ResumeButton data={data} />}
       image={
         <Fragment>
           <PersonaCanvas />

@@ -29,6 +29,8 @@ const Footer = () => {
               color="light"
               href="https://github.com/teimurjan"
               underline="always"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               GitHub
             </Link>
@@ -36,6 +38,8 @@ const Footer = () => {
               color="light"
               href="https://www.linkedin.com/in/teimur-gasanov"
               underline="always"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               LinkedIn
             </Link>
@@ -43,6 +47,8 @@ const Footer = () => {
               color="light"
               href="https://www.toptal.com/resume/teimur-gasanov"
               underline="always"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               Toptal
             </Link>

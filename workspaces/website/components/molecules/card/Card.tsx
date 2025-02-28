@@ -39,7 +39,7 @@ const Card = forwardRef<HTMLDivElement, Props>(
           {image && (
             <div className="h-[3.25rem]">
               <Image
-                className="w-auto h-full"
+                className="w-full"
                 src={image.src}
                 alt={image.alt}
                 width={0}

@@ -173,9 +173,7 @@ const Resume = ({
                     <ResumeItem
                       key={publication.id}
                       title={publication.title}
-                      subtitle={new URL(publication.link).hostname
-                        .replace('www.', '')
-                        .replace('.com', '')}
+                      subtitle={new URL(publication.link)}
                       style={getItemMarginStyle(
                         styles.itemMarginBottomSmall,
                         index,

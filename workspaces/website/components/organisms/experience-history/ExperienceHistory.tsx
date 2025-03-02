@@ -8,8 +8,7 @@ import { Anchor } from '@/utils'
 const ExperienceHistory = async () => {
   const { experiences } = await gqlClient.ExperienceHistory()
   return (
-    <div>
-      <span id={Anchor.Experience} />
+    <div id={Anchor.Experience}>
       <Typography.Title className="mb-8" variant="h2">
         Experience
       </Typography.Title>

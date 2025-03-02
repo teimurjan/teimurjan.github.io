@@ -6,24 +6,43 @@ import {
   useEffect,
   useContext,
   PropsWithChildren,
+  useCallback,
 } from 'react'
 
+type ElementToCheck = {
+  id: string
+  threshold: number
+}
+
 const VisibilityContext = createContext({
-  registerElement: (_id: string) => {},
-  unregisterElement: (_id: string) => {},
-  visibleIds: [] as string[],
+  registerElement: (_element: ElementToCheck) => {},
+  unregisterElement: (_element: ElementToCheck) => {},
+  isElementVisible: (_id: string) => false as boolean,
 })
 
-export const VisibilityContextProvider = ({
-  initialIds,
-  children,
-}: PropsWithChildren<{ initialIds: string[] }>) => {
-  const [visibleIds, setVisibleIds] = useState<string[]>([])
-  const elementsRef = useRef(new Map())
-  const observerRef = useRef<IntersectionObserver | null>(null)
+type ProviderProps = PropsWithChildren<{
+  elements: ElementToCheck[]
+}>
 
-  useEffect(() => {
-    observerRef.current = new IntersectionObserver(
+export const VisibilityContextProvider = ({
+  elements,
+  children,
+}: ProviderProps) => {
+  const [visibilityById, setVisibilityById] = useState<Record<string, boolean>>(
+    {},
+  )
+  const elementsByIdRef = useRef(new Map())
+  const observerByThresholdRef = useRef(new Map<string, IntersectionObserver>())
+
+  const getObserver = useCallback((threshold: number) => {
+    const existingObserver = observerByThresholdRef.current.get(
+      threshold.toString(),
+    )
+    if (existingObserver) {
+      return existingObserver
+    }
+
+    const newObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           const id = entry.target.id
@@ -31,64 +50,75 @@ export const VisibilityContextProvider = ({
             return
           }
 
-          if (entry.isIntersecting) {
-            setVisibleIds((prev) => (prev.includes(id) ? prev : [...prev, id]))
-          } else {
-            setVisibleIds((prev) => prev.filter((item) => item !== id))
-          }
+          setVisibilityById((prev) => ({ ...prev, [id]: entry.isIntersecting }))
         })
       },
-      { threshold: 0.5 },
+      { threshold },
     )
 
-    elementsRef.current.forEach((element) => {
-      observerRef.current?.observe(element)
-    })
+    observerByThresholdRef.current.set(threshold.toString(), newObserver)
+    return newObserver
+  }, [])
 
+  useEffect(() => {
     return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect()
+      if (observerByThresholdRef.current) {
+        observerByThresholdRef.current.values().forEach((observer) => {
+          observer.disconnect()
+        })
       }
     }
   }, [])
 
-  const registerElement = (id: string) => {
-    const element = document.getElementById(id)
-    if (!element) {
-      return
-    }
+  const registerElement = useCallback(
+    ({ id, threshold }: ElementToCheck) => {
+      const element = document.getElementById(id)
+      if (!element) {
+        return
+      }
 
-    elementsRef.current.set(id, element)
-    element.dataset.visibilityId = id
-    if (observerRef.current) {
-      observerRef.current.observe(element)
-    }
-  }
+      const observer = getObserver(threshold)
+      if (observer) {
+        observer.observe(element)
+        elementsByIdRef.current.set(id, element)
+      }
+    },
+    [getObserver],
+  )
 
-  const unregisterElement = (id: string) => {
-    const element = elementsRef.current.get(id)
-    if (element && observerRef.current) {
-      observerRef.current.unobserve(element)
-    }
-    elementsRef.current.delete(id)
-    setVisibleIds((prev) => prev.filter((item) => item !== id))
-  }
+  const unregisterElement = useCallback(
+    ({ id, threshold }: ElementToCheck) => {
+      const element = elementsByIdRef.current.get(id)
+      const observer = getObserver(threshold)
+      if (element && observer) {
+        observer.unobserve(element)
+      }
+      elementsByIdRef.current.delete(id)
+      setVisibilityById((prev) => ({ ...prev, [id]: false }))
+    },
+    [getObserver],
+  )
 
   useEffect(() => {
-    initialIds.forEach((id) => {
-      registerElement(id)
+    elements.forEach((element) => {
+      registerElement(element)
     })
 
     return () => {
-      initialIds.forEach((id) => {
-        unregisterElement(id)
+      elements.forEach((element) => {
+        unregisterElement(element)
       })
     }
-  }, [initialIds])
+  }, [elements, registerElement, unregisterElement])
+
+  const isElementVisible = useCallback(
+    (id: string) => visibilityById[id] ?? false,
+    [visibilityById],
+  )
 
   return (
     <VisibilityContext.Provider
-      value={{ registerElement, unregisterElement, visibleIds }}
+      value={{ registerElement, unregisterElement, isElementVisible }}
     >
       {children}
     </VisibilityContext.Provider>

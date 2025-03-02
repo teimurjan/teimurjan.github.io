@@ -20,10 +20,11 @@ const Media = async () => {
 
   const renderLink = (link: string) => (
     <Link
-      className="mt-2 underline"
+      className="mt-2"
       href={link}
       target="_blank"
       rel="noopener noreferrer"
+      underline="always"
     >
       Check it out 🔗
     </Link>
@@ -124,8 +125,7 @@ const Media = async () => {
   }
 
   return (
-    <div>
-      <span id={Anchor.Media} />
+    <div id={Anchor.Media}>
       <Typography.Title className="mb-8" variant="h2">
         Activity
       </Typography.Title>

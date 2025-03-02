@@ -15,8 +15,7 @@ const Skills = async () => {
   const { skills } = await gqlClient.Skills()
 
   return (
-    <div>
-      <span id={Anchor.Skills} />
+    <div id={Anchor.Skills}>
       <Typography.Title className="mb-8" variant="h2">
         Skills
       </Typography.Title>

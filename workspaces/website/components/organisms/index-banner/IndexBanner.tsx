@@ -8,9 +8,6 @@ const IndexBanner = async () => {
   const {
     bios: [{ fullName, headline, about }],
   } = data
-  const shouldGeneratePDFInBrowser =
-    process.env.NODE_ENV === 'development' && typeof window !== 'undefined'
-  console.log(shouldGeneratePDFInBrowser)
 
   return (
     <Banner

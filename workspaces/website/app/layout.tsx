@@ -39,7 +39,24 @@ export async function generateMetadata(_props: Props): Promise<Metadata> {
   }
 }
 
-const initialVisibilityIds = Object.values(Anchor)
+const elementsToCheckVisibility = [
+  {
+    id: Anchor.Experience,
+    threshold: 0.5,
+  },
+  {
+    id: Anchor.Skills,
+    threshold: 0.5,
+  },
+  {
+    id: Anchor.Education,
+    threshold: 0.5,
+  },
+  {
+    id: Anchor.Media,
+    threshold: 0.25,
+  },
+]
 
 const Layout = ({
   children,
@@ -54,7 +71,7 @@ const Layout = ({
         data-website-id="f312ce9d-5eb0-4a08-8331-320723dfdaed"
       />
       <body className={roboto.className}>
-        <VisibilityContextProvider initialIds={initialVisibilityIds}>
+        <VisibilityContextProvider elements={elementsToCheckVisibility}>
           <PersonaContextProvider>{children}</PersonaContextProvider>
         </VisibilityContextProvider>
       </body>

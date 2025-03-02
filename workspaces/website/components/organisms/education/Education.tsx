@@ -8,8 +8,7 @@ const Education = async () => {
   const { educations } = await gqlClient.Education()
 
   return (
-    <div className="pr-2">
-      <span id={Anchor.Education} />
+    <div className="pr-2" id={Anchor.Education}>
       <Typography.Title className="mb-8" variant="h2">
         Education
       </Typography.Title>

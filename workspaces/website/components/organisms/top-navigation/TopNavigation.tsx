@@ -28,13 +28,13 @@ const navItems = [
 ]
 
 const TopNavigation = () => {
-  const { visibleIds } = useVisibilityContext()
+  const { isElementVisible } = useVisibilityContext()
   const scrollTop = useWindowScroll()
   const shouldInvert = scrollTop > 20
   const router = useRouter()
 
   const firstVisibleNavItem = navItems.find((item) =>
-    visibleIds.includes(item.value),
+    isElementVisible(item.value),
   )
 
   return (

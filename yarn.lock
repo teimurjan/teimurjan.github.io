@@ -3808,6 +3808,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@teimurjan/functions@workspace:workspaces/functions":
+  version: 0.0.0-use.local
+  resolution: "@teimurjan/functions@workspace:workspaces/functions"
+  dependencies:
+    "@types/node": "npm:^20"
+    "@vercel/node": "npm:^5.1.10"
+    typescript: "npm:^5.7.3"
+  languageName: unknown
+  linkType: soft
+
 "@teimurjan/gql-types@workspace:*, @teimurjan/gql-types@workspace:workspaces/gql-types":
   version: 0.0.0-use.local
   resolution: "@teimurjan/gql-types@workspace:workspaces/gql-types"

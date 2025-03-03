@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'workspaces/website/api/**'
+      - 'workspaces/functions/**'
   workflow_dispatch:
 
 jobs:

@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://teimurjan.dev">
-    <img alt="Gatsby" src="./workspaces/website/src/assets/images/logo.png" width="200" />
+    <img alt="logo" src="./workspaces/website/assets/images/logo.png" width="200" />
   </a>
 </p>
 <h1 align="center">
@@ -10,9 +10,7 @@
 </h1>
 <div align="center">
 
-![](https://github.com/teimurjan/teimurjan.github.io/actions/workflows/test.yml/badge.svg)
 ![](https://github.com/teimurjan/teimurjan.github.io/actions/workflows/deploy.yml/badge.svg)
-[![This project is using Percy.io for visual regression testing.](https://percy.io/static/images/percy-badge.svg)](https://percy.io/b3c6e6d8/teimurjan.dev)
 
 </div>
 
@@ -20,7 +18,7 @@ Hey! 👋 This repository contains the source code for my personal website hoste
 
 ## 🤷 What makes this project special?
 
-1. Tech stack: [GraphCMS](https://graphcms.com/) + [Gatsby](https://www.gatsbyjs.com/) + [TypeScript](https://www.typescriptlang.org/).
+1. Tech stack: [GraphCMS](https://graphcms.com/) + [Next](https://nextjs.org/) + [TypeScript](https://www.typescriptlang.org/).
 2. [Atomic Design Methodology](https://atomicdesign.bradfrost.com/).
 3. [GraphQL TypeScript codegen](https://www.graphql-code-generator.com/).
 4. Resume generation on website start/build via [react-pdf](https://react-pdf.org/).
@@ -29,23 +27,24 @@ Hey! 👋 This repository contains the source code for my personal website hoste
 
 ## 🚀 Quick start
 
-1.  **Run locally**
+1.  **Install dependencies**
     ```shell
-    yarn start
+    yarn
     ```
 
-2.  **Build**
-
+2.  **Run locally**
     ```shell
-    yarn build
+    yarn workspace @teimurjan/website start
     ```
 
-3.  **Generate GraphQL typings**
-
-    Run the project locally so Gatsby's GraphQL API is available. After that run:
-
+3.  **Build**
     ```shell
-    yarn codegen
+    yarn workspace @teimurjan/website build
+    ```
+
+4.  **Generate GraphQL typings**
+    ```shell
+    yarn workspace @teimurjan/gql-types codegen
     ```
 
 ## ✈️ Deployment
@@ -53,13 +52,12 @@ Hey! 👋 This repository contains the source code for my personal website hoste
 GitHub Actions is mechanism reponsible for the deployments. There is a workflow file [deploy.yml](./.github/workflows/deploy.yml) that starts when the code or data are changed.
 
 <div align="center">
-  <img alt="Gatsby" src="./docs/images/deployment.png" width="1000" />
+  <img alt="deployment" src="./docs/images/deployment.png" width="1000" />
 </div>
 
 ## ➡️ Plans
 
 - [x] Automatic deployment via serverless function when a GraphCMS entity changes.
-- [ ] Extra data fethcing from LinkedIn (recommendations, skills, endorsements, etc.).
 
 ## 🙏 Contribution
 

@@ -33,7 +33,7 @@ jobs:
         run: yarn workspace @teimurjan/website generate-opengraph:ci
       
       - name: Generate resume
-        run: yarn workspace @teimurjan/website generate-resumse
+        run: yarn workspace @teimurjan/website generate-resume
 
       - name: Build
         run: yarn workspace @teimurjan/website build

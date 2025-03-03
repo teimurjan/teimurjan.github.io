@@ -3832,9 +3832,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@teimurjan/profile-readmie@workspace:workspaces/profile-readme":
+"@teimurjan/profile-readme@workspace:workspaces/profile-readme":
   version: 0.0.0-use.local
-  resolution: "@teimurjan/profile-readmie@workspace:workspaces/profile-readme"
+  resolution: "@teimurjan/profile-readme@workspace:workspaces/profile-readme"
   dependencies:
     "@teimurjan/gql-types": "workspace:*"
     tsx: "npm:^4.19.3"

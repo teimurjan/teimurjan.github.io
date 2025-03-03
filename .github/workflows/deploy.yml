@@ -38,17 +38,17 @@ jobs:
       - name: Generate resume
         run: yarn workspace @teimurjan/website generate-resume
 
-      - name: Build
-        run: yarn workspace @teimurjan/website build
-
-      - name: Generate README
+      - name: Generate readme
         run: yarn workspace @teimurjan/profile-readme generate-readme
 
-      - name: Upload README artifact
+      - name: Upload readme artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.GENERATED_README_KEY }}
           path: workspaces/profile-readme/README.md
+
+      - name: Build
+        run: yarn workspace @teimurjan/website build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
@@ -63,7 +63,7 @@ jobs:
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
-      - name: Download README artifact
+      - name: Download readme artifact
         uses: actions/download-artifact@v4
         with:
           name: ${{ env.GENERATED_README_KEY }}

@@ -11,6 +11,8 @@
 <div align="center">
 
 ![](https://github.com/teimurjan/teimurjan.github.io/actions/workflows/deploy.yml/badge.svg)
+![](https://github.com/teimurjan/teimurjan.github.io/actions/workflows/deploy-readme.yml/badge.svg)
+![](https://github.com/teimurjan/teimurjan.github.io/actions/workflows/deploy-serverless.yml/badge.svg)
 
 </div>
 

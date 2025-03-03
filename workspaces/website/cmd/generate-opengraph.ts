@@ -1,6 +1,7 @@
 import puppeteer, { Browser } from 'puppeteer'
 import path from 'path'
 import fs from 'fs'
+import prettier from 'prettier'
 
 import gqlClient from '../gql-client'
 
@@ -108,24 +109,53 @@ const getOpengraph = async (link: string, browser: Browser) => {
 }
 
 const main = async () => {
+  console.log('generate-opengraph: generating opengraphs...')
+
+  console.log('generate-opengraph: getting publications...')
   const publicationLinks = await getPublicationLinks()
+
+  console.log('generate-opengraph: launching puppeteer...')
   const browser = await puppeteer.launch({ headless: false })
 
   const opengraphs: Record<string, OpengraphData> = {}
   for (const link of publicationLinks) {
+    console.log(`generate-opengraph: getting opengraph for ${link}...`)
     opengraphs[link] = await getOpengraph(link, browser)
   }
 
-  const outputPath = path.parse(
-    path.resolve(__dirname, '../__generated__/opengraphs.ts'),
-  )
-  if (!fs.existsSync(outputPath.dir)) {
-    fs.mkdirSync(outputPath.dir)
+  const outputPath = path.resolve(__dirname, '../__generated__/opengraphs.ts')
+  const parsedOutputPath = path.parse(outputPath)
+  if (!fs.existsSync(parsedOutputPath.dir)) {
+    console.log('generate-opengraph: output folder missing, creating...')
+    fs.mkdirSync(parsedOutputPath.dir)
   }
-  const output = `export default ${JSON.stringify(opengraphs, null, 2)} as Record<string, Record<string, string | null>>`
-  fs.writeFileSync(path.join(outputPath.dir, outputPath.base), output)
+  const rawOutput = `export default ${JSON.stringify(opengraphs, null, 2)} as Record<string, Record<string, string | null>>`
 
+  console.log('generate-opengraph: formatting output...')
+  const prettierRcPath = path.resolve(__dirname, '../../../.prettierrc.mjs')
+  const prettierConfig = await prettier.resolveConfig(prettierRcPath)
+
+  const output = prettierConfig
+    ? await prettier.format(rawOutput, {
+        ...prettierConfig,
+        parser: 'typescript',
+      })
+    : rawOutput
+
+  if (fs.existsSync(outputPath)) {
+    const existingContent = fs.readFileSync(outputPath, 'utf-8')
+    if (existingContent !== output) {
+      console.log('generate-opengraph: content changed, updating file...')
+      fs.writeFileSync(outputPath, output)
+    } else {
+      console.log('generate-opengraph: content did not change, skipping...')
+    }
+  }
+
+  console.log('generate-opengraph: closing puppeteer...')
   await browser.close()
+
+  console.log('generate-opengraph: generated successfully')
 }
 
 main()

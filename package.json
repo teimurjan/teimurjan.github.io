@@ -5,8 +5,9 @@
   "description": "Monorepo root for the tools related to my peronsality",
   "author": "Teimur Gasanov",
   "scripts": {
-    "develop": "yarn workspace @teimurjan/website dev",
-    "start": "yarn workspace @teimurjan/website develop",
+    "dev": "yarn workspace @teimurjan/website dev",
+    "start": "yarn workspace @teimurjan/website start",
+    "generate": "yarn workspace @teimurjan/website generate",
     "build": "yarn workspace @teimurjan/website build",
     "serve": "yarn workspace @teimurjan/website npx serve out",
     "codegen": "yarn workspace @teimurjan/gql-types codegen",

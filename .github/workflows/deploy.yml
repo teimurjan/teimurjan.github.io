@@ -23,17 +23,15 @@ jobs:
           node-version: '20.18.1'
           cache: 'yarn'
 
-      - name: Install packages
-        run: yarn install
-
       - name: Install xvfb (Virtual Display) # puppeteer needs that
         run: sudo apt-get install -y xvfb
 
-      - name: Generate opengraph
-        run: yarn generate-opengraph
+      - name: Install packages
+        run: yarn install
 
-      - name: Generate resume
-        run: yarn generate-resume
+
+      - name: Generate opengraph & resume
+        run: yarn generate
 
       - name: Build
         run: yarn build

@@ -26,8 +26,8 @@ jobs:
       - name: Install packages
         run: yarn install
 
-      - name: Generate data
-        run: yarn generate
+      - name: Generate resume
+        run: yarn generate-resume
 
       - name: Build
         run: yarn build

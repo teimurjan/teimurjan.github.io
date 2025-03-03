@@ -38,9 +38,46 @@ jobs:
       - name: Build
         run: yarn workspace @teimurjan/website build
 
+      - name: Generate README
+        run: yarn workspace @teimurjan/profile-readme generate-readme
+
+      - name: Upload README artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: generated-readme
+          path: workspaces/profile-readme/README.md
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./workspaces/website/out
+
+  deploy-profile:
+    runs-on: ubuntu-20.04
+    needs: deploy
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+    steps:
+      - name: Download README artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: generated-readme
+
+      - name: Clone teimurjan repo
+        run: |
+          git clone https://x-access-token:${{ secrets.TEIMURJAN_REPO_TOKEN }}@github.com/teimurjan/teimurjan.git
+
+      - name: Copy README.md to teimurjan
+        run: |
+          cp workspaces/profile-readme/README.md teimurjan/README.md
+
+      - name: Commit and push changes to teimurjan
+        working-directory: teimurjan
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "Update README.md content from teimurjan.github.io" || echo "No changes to commit"
+          git push origin HEAD:main

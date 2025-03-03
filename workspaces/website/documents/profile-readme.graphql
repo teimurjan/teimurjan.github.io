@@ -1,0 +1,54 @@
+query ProfileReadme {
+  bios {
+    fullName
+    headline
+    about
+    location
+    phoneNumber
+    email
+  }
+  experiences(orderBy: startDate_DESC) {
+    id
+    company
+    position
+    startDate
+    endDate
+    location
+    locationIcon
+    description {
+      html
+    }
+    logo {
+      url(
+        transformation: {
+          image: { resize: { width: 200, height: 200, fit: clip } }
+        }
+      )
+    }
+  }
+  publications {
+    id
+    title
+    link
+    date
+  }
+  conferences {
+    id
+    title
+    topic
+    link
+    date
+    videoEmbed {
+      link
+    }
+  }
+  interviews {
+    id
+    title
+    date
+    videoEmbed {
+      link
+      iframeOptions
+    }
+  }
+}

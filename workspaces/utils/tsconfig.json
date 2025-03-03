@@ -3,7 +3,6 @@
     "module": "commonjs",
     "target": "esnext",
     "jsx": "preserve",
-    "jsxImportSource": "@emotion/react",
     "lib": ["dom", "es2015", "es2017"],
     "strict": true,
     "noEmit": true,

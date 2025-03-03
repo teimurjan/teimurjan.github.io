@@ -3832,6 +3832,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@teimurjan/profile-readmie@workspace:workspaces/profile-readme":
+  version: 0.0.0-use.local
+  resolution: "@teimurjan/profile-readmie@workspace:workspaces/profile-readme"
+  dependencies:
+    "@teimurjan/gql-types": "workspace:*"
+    tsx: "npm:^4.19.3"
+    typescript: "npm:^5.7.3"
+  languageName: unknown
+  linkType: soft
+
 "@teimurjan/resume-customizer@workspace:workspaces/resume-customizer":
   version: 0.0.0-use.local
   resolution: "@teimurjan/resume-customizer@workspace:workspaces/resume-customizer"

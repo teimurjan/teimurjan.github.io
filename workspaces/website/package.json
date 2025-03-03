@@ -22,6 +22,7 @@
     "@react-three/fiber": "^9.0.4",
     "@teimurjan/gql-types": "workspace:*",
     "@teimurjan/resume": "workspace:*",
+    "@vercel/node": "^5.1.10",
     "class-variance-authority": "^0.7.1",
     "classnames": "^2.5.1",
     "embla-carousel-react": "^8.5.2",

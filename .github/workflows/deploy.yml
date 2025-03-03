@@ -9,16 +9,19 @@ on:
 
   workflow_dispatch:
 
+  repository_dispatch:
+    types: [cms_content_updated]
+
 jobs:
   deploy:
     runs-on: ubuntu-20.04
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: '20.18.1'
           cache: 'yarn'
@@ -26,12 +29,12 @@ jobs:
       - name: Install xvfb (Virtual Display) # puppeteer needs that
         run: sudo apt-get install -y xvfb
 
-      - name: Install packages
+      - name: Install dependencies
         run: yarn install
 
       - name: Generate opengraph
         run: yarn workspace @teimurjan/website generate-opengraph:ci
-      
+
       - name: Generate resume
         run: yarn workspace @teimurjan/website generate-resume
 

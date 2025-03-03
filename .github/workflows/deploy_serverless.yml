@@ -1,0 +1,31 @@
+name: Deploy Serverless
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'workspaces/website/api/**'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.18.1'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: npx vercel --prod --token ${{ env.VERCEL_TOKEN }} --cwd ./api
+        working-directory: workspaces/website

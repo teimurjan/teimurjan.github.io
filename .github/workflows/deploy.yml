@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - "workspaces/**"
-  
+      - 'workspaces/**'
+
   workflow_dispatch:
 
 jobs:
@@ -25,6 +25,12 @@ jobs:
 
       - name: Install packages
         run: yarn install
+
+      - name: Install xvfb (Virtual Display) # puppeteer needs that
+        run: sudo apt-get install -y xvfb
+
+      - name: Generate opengraph
+        run: yarn generate-opengraph
 
       - name: Generate resume
         run: yarn generate-resume

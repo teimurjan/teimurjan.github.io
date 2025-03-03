@@ -115,7 +115,10 @@ const main = async () => {
   const publicationLinks = await getPublicationLinks()
 
   console.log('generate-opengraph: launching puppeteer...')
-  const browser = await puppeteer.launch({ headless: false })
+  const browser = await puppeteer.launch({
+    headless: false,
+    args: ['--disable-gpu', '--no-sandbox'],
+  })
 
   const opengraphs: Record<string, OpengraphData> = {}
   for (const link of publicationLinks) {

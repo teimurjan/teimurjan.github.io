@@ -11,7 +11,8 @@
     "lint": "next lint",
     "generate": "yarn generate-resume && yarn generate-opengraph",
     "generate-resume": "tsx --tsconfig ../resume/tsconfig.json ./cmd/generate-resume.ts",
-    "generate-opengraph": "tsx ./cmd/generate-opengraph.ts"
+    "generate-opengraph": "tsx ./cmd/generate-opengraph.ts",
+    "generate-opengraph:ci": "xvfb-run --auto-servernum tsx ./cmd/generate-opengraph.ts"
   },
   "dependencies": {
     "@floating-ui/react": "^0.27.4",

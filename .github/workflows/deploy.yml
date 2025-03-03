@@ -29,12 +29,14 @@ jobs:
       - name: Install packages
         run: yarn install
 
-
-      - name: Generate opengraph & resume
-        run: yarn generate
+      - name: Generate opengraph
+        run: yarn workspace @teimurjan/website generate-opengraph:ci
+      
+      - name: Generate resume
+        run: yarn workspace @teimurjan/website generate-resumse
 
       - name: Build
-        run: yarn build
+        run: yarn workspace @teimurjan/website build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

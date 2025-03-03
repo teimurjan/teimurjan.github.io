@@ -22,7 +22,7 @@ jobs:
           cache: 'yarn'
 
       - name: Install dependencies
-        run: yarn focus @teimurjan/profile-readme
+        run: yarn
 
       - name: Generate readme
         run: yarn workspace @teimurjan/profile-readme generate-readme

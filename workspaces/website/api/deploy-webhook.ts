@@ -28,7 +28,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         Authorization: `Bearer ${GITHUB_TOKEN}`,
         Accept: 'application/vnd.github.v3+json',
       },
-      body: JSON.stringify({ event_type: 'cms_content_updated' }),
+      body: JSON.stringify({ event_type: 'content_updated' }),
     })
 
     if (!response.ok) {

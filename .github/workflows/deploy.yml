@@ -6,11 +6,12 @@ on:
       - main
     paths:
       - 'workspaces/**'
+      - '!workspaces/website/api/**'
 
   workflow_dispatch:
 
   repository_dispatch:
-    types: [cms_content_updated]
+    types: [content_updated]
 
 jobs:
   deploy:

@@ -9,12 +9,9 @@ on:
       - '!workspaces/functions/**'
   workflow_dispatch:
 
-env:
-  GENERATED_README_KEY: readme
-
 jobs:
   deploy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
@@ -30,22 +27,13 @@ jobs:
         run: sudo apt-get install -y xvfb
 
       - name: Install dependencies
-        run: yarn install
+        run: yarn
 
       - name: Generate opengraph
         run: yarn workspace @teimurjan/website generate-opengraph:ci
 
       - name: Generate resume
         run: yarn workspace @teimurjan/website generate-resume
-
-      - name: Generate readme
-        run: yarn workspace @teimurjan/profile-readme generate-readme
-
-      - name: Upload readme artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ env.GENERATED_README_KEY }}
-          path: workspaces/profile-readme/README.md
 
       - name: Build
         run: yarn workspace @teimurjan/website build
@@ -56,31 +44,3 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./workspaces/website/out
-
-  deploy-profile:
-    runs-on: ubuntu-20.04
-    needs: deploy
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
-    steps:
-      - name: Download readme artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: ${{ env.GENERATED_README_KEY }}
-
-      - name: Clone teimurjan repo
-        run: |
-          git clone https://x-access-token:${{ secrets.TEIMURJAN_REPO_TOKEN }}@github.com/teimurjan/teimurjan.git
-
-      - name: Copy readme to teimurjan
-        run: |
-          cp README.md teimurjan/README.md
-
-      - name: Commit and push changes to teimurjan
-        working-directory: teimurjan
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add README.md
-          git commit -m "Update README.md content from teimurjan.github.io" || echo "No changes to commit"
-          git push origin HEAD:main

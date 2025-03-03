@@ -9,6 +9,9 @@ on:
       - '!workspaces/functions/**'
   workflow_dispatch:
 
+env:
+  GENERATED_README_KEY: readme
+
 jobs:
   deploy:
     runs-on: ubuntu-20.04
@@ -42,9 +45,9 @@ jobs:
         run: yarn workspace @teimurjan/profile-readme generate-readme
 
       - name: Upload README artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: generated-readme
+          name: ${{ env.GENERATED_README_KEY }}
           path: workspaces/profile-readme/README.md
 
       - name: Deploy
@@ -61,9 +64,9 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - name: Download README artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
-          name: generated-readme
+          name: ${{ env.GENERATED_README_KEY }}
 
       - name: Clone teimurjan repo
         run: |

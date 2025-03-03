@@ -72,9 +72,9 @@ jobs:
         run: |
           git clone https://x-access-token:${{ secrets.TEIMURJAN_REPO_TOKEN }}@github.com/teimurjan/teimurjan.git
 
-      - name: Copy README.md to teimurjan
+      - name: Copy readme to teimurjan
         run: |
-          cp workspaces/profile-readme/README.md teimurjan/README.md
+          cp README.md teimurjan/README.md
 
       - name: Commit and push changes to teimurjan
         working-directory: teimurjan

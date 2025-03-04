@@ -121,9 +121,9 @@ const Resume = ({
                     )}
                   />
                 ))}
+              </View>
 
-                <View style={styles.horizontalDivider} />
-
+              <View style={styles.layoutRight}>
                 <Text style={styles.title}>Education</Text>
                 <View>
                   {educations.map((education, index) => (
@@ -134,7 +134,7 @@ const Resume = ({
                         education.endDate,
                         YEAR_DATE_FORMAT,
                       )}
-                      title={`${education.degree} in ${education.areaOfStudy}`}
+                      title={`${education.degree}\nin ${education.areaOfStudy}`}
                       subtitle={education.school}
                       style={getItemMarginStyle(
                         styles.itemMarginBottom,
@@ -144,9 +144,9 @@ const Resume = ({
                     />
                   ))}
                 </View>
-              </View>
 
-              <View style={styles.layoutRight}>
+                <View style={styles.horizontalDivider} />
+
                 <Text style={styles.title}>Skills</Text>
                 <View style={styles.skills}>
                   <View style={styles.skillsCol}>

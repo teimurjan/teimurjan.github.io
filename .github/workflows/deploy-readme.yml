@@ -35,7 +35,7 @@ jobs:
 
       - name: Copy readme to teimurjan
         run: |
-          cp README.md teimurjan/README.md
+          cp workspaces/profile-readme/README.md teimurjan/README.md
 
       - name: Commit and push changes to teimurjan
         working-directory: teimurjan

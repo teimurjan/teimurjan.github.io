@@ -36,7 +36,7 @@ Hey! 👋 This repository contains the source code for my personal website hoste
 
 2.  **Run locally**
     ```shell
-    yarn workspace @teimurjan/website start
+    yarn workspace @teimurjan/website dev
     ```
 
 3.  **Build**
@@ -46,7 +46,7 @@ Hey! 👋 This repository contains the source code for my personal website hoste
 
 4.  **Generate GraphQL typings**
     ```shell
-    yarn workspace @teimurjan/gql-types codegen
+    yarn workspace @teimurjan/gql-client codegen
     ```
 
 ## ✈️ Deployment

@@ -20,7 +20,7 @@
     "@popperjs/core": "^2.11.8",
     "@react-three/drei": "^10.0.2",
     "@react-three/fiber": "^9.0.4",
-    "@teimurjan/gql-types": "workspace:*",
+    "@teimurjan/gql-client": "workspace:*",
     "@teimurjan/resume": "workspace:*",
     "@vercel/node": "^5.1.10",
     "class-variance-authority": "^0.7.1",

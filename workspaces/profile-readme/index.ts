@@ -1,11 +1,16 @@
 import fs from 'fs'
 import path from 'path'
 
-import gqlClient from './gql-client'
+import { getClient } from '@teimurjan/gql-client'
 
 const index = async () => {
   const lines: string[] = []
 
+  if (!process.env.HYGRAPH_URL) {
+    throw new Error('HYGRAPH_URL is not defined')
+  }
+
+  const gqlClient = getClient(process.env.HYGRAPH_URL)
   const data = await gqlClient.ProfileReadme()
 
   lines.push(`### Hi there 👋\n`)

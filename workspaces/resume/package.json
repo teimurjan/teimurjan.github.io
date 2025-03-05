@@ -7,7 +7,7 @@
   "main": "./src/index.ts",
   "dependencies": {
     "@react-pdf/renderer": "^4.2.2",
-    "@teimurjan/gql-types": "workspace:*",
+    "@teimurjan/gql-client": "workspace:*",
     "@teimurjan/utils": "workspace:*",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

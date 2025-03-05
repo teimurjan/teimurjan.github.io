@@ -1,5 +1,5 @@
 import { calculatePercentage } from '@teimurjan/utils'
-import { Skill } from '@teimurjan/gql-types'
+import { Skill } from '@teimurjan/gql-client'
 import { Typography } from '../../atoms'
 import { InformativeProgress } from '../../molecules'
 import gqlClient from '@/gql-client'

@@ -1,6 +1,6 @@
 import { Button } from '@/components/atoms'
 import { ResumeButtonLive } from '@/components/atoms'
-import { ResumeQuery } from '@teimurjan/gql-types'
+import { ResumeQuery } from '@teimurjan/gql-client'
 
 export type Props = {
   data: ResumeQuery

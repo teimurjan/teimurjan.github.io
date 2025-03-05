@@ -1,4 +1,4 @@
-import { ResumeQuery } from '@teimurjan/gql-types'
+import { ResumeQuery } from '../../../../gql-client/src'
 import { Font } from '@react-pdf/renderer'
 import Resume from './Resume'
 

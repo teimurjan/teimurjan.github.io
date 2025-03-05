@@ -1,7 +1,7 @@
 'use client'
 import { Button } from '@/components/atoms'
 import { useIsClient } from '@/hooks'
-import { ResumeQuery } from '@teimurjan/gql-types'
+import { ResumeQuery } from '@teimurjan/gql-client'
 import Resume, { PDFDownloadLink } from '@teimurjan/resume'
 
 export type Props = {

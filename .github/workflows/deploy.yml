@@ -36,6 +36,8 @@ jobs:
         run: yarn workspace @teimurjan/website generate-resume
 
       - name: Build
+        env:
+          NEXT_PUBLIC_HYGRAPH_URL: ${{ env.HYGRAPH_URL }}
         run: yarn workspace @teimurjan/website build
 
       - name: Deploy

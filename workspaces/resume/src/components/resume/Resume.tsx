@@ -14,7 +14,7 @@ import {
 } from '@teimurjan/utils'
 import Header from '../header'
 import ResumeItem from '../resume-item'
-import { ResumeQuery } from '@teimurjan/gql-types'
+import { ResumeQuery } from '../../../../gql-client/src'
 
 const styles = StyleSheet.create({
   page: {

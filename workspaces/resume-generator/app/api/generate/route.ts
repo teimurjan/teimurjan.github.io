@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     Given the following job description: "${parsed.data.jobDescription}"
     and the following JSON data for my resume: ${JSON.stringify(parsed.data.resume)},
     update the experience descriptions, skills & bios in the JSON data to match the job description without structure change.
-    Also create a concise, unique and unusual cover letter written in simple words using a bit of emojis.
+    Also create a concise, unusual cover letter with a touching hook in the beginning written in simple words using a bit of emojis.
     Do not include anything except JSON object with keys "resume" and "coverletter" in the response.
   `
     const completion = await client.chat.completions.create({

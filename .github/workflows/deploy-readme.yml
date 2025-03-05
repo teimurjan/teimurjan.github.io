@@ -25,9 +25,7 @@ jobs:
         run: yarn
 
       - name: Generate readme
-        env:
-          HYGRAPH_URL: ${{ env.HYGRAPH_URL }}
-        run: yarn workspace @teimurjan/profile-readme generate-readme
+        run: env HYGRAPH_URL=${{ env.HYGRAPH_URL }} yarn workspace @teimurjan/profile-readme generate-readme
   
       - name: Clone teimurjan repo
         run: |

@@ -30,19 +30,13 @@ jobs:
         run: yarn
 
       - name: Generate opengraph
-        env:
-          NEXT_PUBLIC_HYGRAPH_URL: ${{ env.HYGRAPH_URL }}
-        run: yarn workspace @teimurjan/website generate-opengraph:ci
+        run: env NEXT_PUBLIC_HYGRAPH_URL=${{ env.HYGRAPH_URL }} yarn workspace @teimurjan/website generate-opengraph:ci
 
       - name: Generate resume
-        env:
-          NEXT_PUBLIC_HYGRAPH_URL: ${{ env.HYGRAPH_URL }}
-        run: yarn workspace @teimurjan/website generate-resume
+        run: env NEXT_PUBLIC_HYGRAPH_URL=${{ env.HYGRAPH_URL }} yarn workspace @teimurjan/website generate-resume
 
       - name: Build
-        env:
-          NEXT_PUBLIC_HYGRAPH_URL: ${{ env.HYGRAPH_URL }}
-        run: yarn workspace @teimurjan/website build
+        run: env NEXT_PUBLIC_HYGRAPH_URL=${{ env.HYGRAPH_URL }} yarn workspace @teimurjan/website build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

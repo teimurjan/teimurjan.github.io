@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }} 
+    env:
+      HYGRAPH_URL: ${{ vars.HYGRAPH_URL }}
     steps:
       - uses: actions/checkout@v4
 
@@ -25,7 +27,7 @@ jobs:
         run: yarn
 
       - name: Generate readme
-        run: env HYGRAPH_URL=${{ env.HYGRAPH_URL }} yarn workspace @teimurjan/profile-readme generate-readme
+        run: yarn workspace @teimurjan/profile-readme generate-readme
   
       - name: Clone teimurjan repo
         run: |

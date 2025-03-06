@@ -26,11 +26,28 @@ interface Props {
 
 type FormValues = z.infer<typeof generateFormSchema>
 
+type GeneratedData = {
+  resume: ResumeQuery
+  coverletter: string
+}
+
+const GENERATED_DATA_LS_KEY = 'generatedData'
+const getCachedGeneratedData = () => {
+  try {
+    const cachedData = localStorage.getItem(GENERATED_DATA_LS_KEY)
+    return cachedData ? JSON.parse(cachedData) : undefined
+  } catch (_e) {
+    return undefined
+  }
+}
+const cacheGeneratedData = (data: GeneratedData) => {
+  localStorage.setItem(GENERATED_DATA_LS_KEY, JSON.stringify(data))
+}
+
 export const GenerateForm = ({ data }: Props) => {
-  const [generatedData, setGeneratedData] = useState<{
-    resume: ResumeQuery
-    coverletter: string
-  }>()
+  const [generatedData, setGeneratedData] = useState<GeneratedData | undefined>(
+    getCachedGeneratedData(),
+  )
 
   const form = useForm<FormValues>({
     resolver: zodResolver(generateFormSchema),
@@ -52,7 +69,9 @@ export const GenerateForm = ({ data }: Props) => {
         }),
       })
       if (response.ok) {
-        setGeneratedData(await response.json())
+        const newGeneratedData = await response.json()
+        setGeneratedData(newGeneratedData)
+        cacheGeneratedData(newGeneratedData)
       } else {
         throw new Error()
       }
@@ -65,6 +84,15 @@ export const GenerateForm = ({ data }: Props) => {
     if (generatedData) {
       navigator.clipboard.writeText(generatedData.coverletter)
       toast('Cover letter copied to clipboard')
+    }
+  }
+
+  const handleCopyGeneratedResumeData = () => {
+    if (generatedData) {
+      navigator.clipboard.writeText(
+        JSON.stringify(generatedData.resume, null, 2),
+      )
+      toast('Generated resume data copied to clipboard')
     }
   }
 
@@ -132,6 +160,14 @@ export const GenerateForm = ({ data }: Props) => {
                 </Button>
               )}
             </PDFDownloadLink>
+
+            <Button
+              className="cursor-pointer flex-1"
+              variant="secondary"
+              onClick={handleCopyGeneratedResumeData}
+            >
+              Copy generated resume data
+            </Button>
 
             <Button
               className="cursor-pointer flex-1"

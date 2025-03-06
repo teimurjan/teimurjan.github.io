@@ -21,18 +21,36 @@ export async function POST(request: NextRequest) {
     }
 
     const prompt = `
-    Given the following job description: "${parsed.data.jobDescription}"
-    and the following JSON data for my resume: ${JSON.stringify(parsed.data.resume)},
-    update the experience descriptions, skills & bios in the JSON data to match the job description without structure change.
-    Also create a concise, unusual cover letter with a touching hook in the beginning written in simple words using a bit of emojis.
-    Do not include anything except JSON object with keys "resume" and "coverletter" in the response.
-  `
+    I am applying for the following job:
+    "${parsed.data.jobDescription}"
+    
+    This is the current JSON data for my resume:
+    ${JSON.stringify(parsed.data.resume)}
+    
+    I need you to do the following:
+    1. Update the experiences' descriptions and skills to match the job.
+    2. Update the most recent experience's job title to match the job.
+    3. Update the bio headline to reflect the job position.
+    4. Create a short, unusual cover letter that starts with a bold, emotionally resonant hook to capture attention. Make sure the cover letter feels natural and personal by:
+      - Using plain, everyday language with a conversational tone.
+      - Including a small personal detail or anecdote to add authenticity.
+      - Allowing for a bit of informal phrasing or minor imperfections that reflect real human writing.
+      - Keeping it 3-5 sentences long and adding 1-2 emojis sparingly.
+    
+    Criteria:
+    1. Do not change the structure of the JSON data.
+    2. The last 3 experiences should have at least 3 bullet points each.
+    3. The resume language must be active, results-focused, and written in a natural, human tone.
+    4. Ensure there is no plagiarism.
+    5. Respond with a JSON object that has keys "resume" (value will be the updated JSON structure) and "coverletter" (value will be a string) only.
+    `;
     const completion = await client.chat.completions.create({
       model: 'gpt-4o',
       messages: [
         {
           role: 'system',
-          content: 'You are a helpful assistant for resume generation.',
+          content:
+            "You're a first-class resume creator with expert knowledge in updating resumes, bios, and cover letters. You always craft natural, engaging, and precise content that highlights measurable achievements.",
         },
         { role: 'user', content: prompt },
       ],

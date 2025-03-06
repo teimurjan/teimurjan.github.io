@@ -19,35 +19,38 @@ import Resume, { PDFDownloadLink } from '@teimurjan/resume'
 import { useState } from 'react'
 import { toast } from 'sonner'
 import { Loader2 } from 'lucide-react'
+import {
+  JobApplication,
+  useAddJobApplication,
+  useJobApplications,
+  useRemoveJobApplication,
+} from '@/db/db'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '../ui/table'
+import { Separator } from '../ui/separator'
 
 interface Props {
   data: ResumeQuery
 }
 
+type GeneratedData = Pick<JobApplication, 'resume' | 'coverLetter'>
+
 type FormValues = z.infer<typeof generateFormSchema>
 
-type GeneratedData = {
-  resume: ResumeQuery
-  coverletter: string
-}
-
-const GENERATED_DATA_LS_KEY = 'generatedData'
-const getCachedGeneratedData = () => {
-  try {
-    const cachedData = localStorage.getItem(GENERATED_DATA_LS_KEY)
-    return cachedData ? JSON.parse(cachedData) : undefined
-  } catch (_e) {
-    return undefined
-  }
-}
-const cacheGeneratedData = (data: GeneratedData) => {
-  localStorage.setItem(GENERATED_DATA_LS_KEY, JSON.stringify(data))
-}
-
 export const GenerateForm = ({ data }: Props) => {
-  const [generatedData, setGeneratedData] = useState<GeneratedData | undefined>(
-    getCachedGeneratedData(),
-  )
+  const jobApplications = useJobApplications()
+  const addJobApplication = useAddJobApplication()
+  const removeJobApplication = useRemoveJobApplication()
+
+  const [generatedData, setGeneratedData] = useState<
+    GeneratedData | undefined
+  >()
 
   const form = useForm<FormValues>({
     resolver: zodResolver(generateFormSchema),
@@ -69,9 +72,13 @@ export const GenerateForm = ({ data }: Props) => {
         }),
       })
       if (response.ok) {
-        const newGeneratedData = await response.json()
+        const newGeneratedData = (await response.json()) as GeneratedData
         setGeneratedData(newGeneratedData)
-        cacheGeneratedData(newGeneratedData)
+        addJobApplication({
+          ...newGeneratedData,
+          jobDescription: values.jobDescription,
+          createdAt: new Date(),
+        })
       } else {
         throw new Error()
       }
@@ -82,7 +89,7 @@ export const GenerateForm = ({ data }: Props) => {
 
   const handleCopyCoverLetter = () => {
     if (generatedData) {
-      navigator.clipboard.writeText(generatedData.coverletter)
+      navigator.clipboard.writeText(generatedData.coverLetter)
       toast('Cover letter copied to clipboard')
     }
   }
@@ -177,6 +184,75 @@ export const GenerateForm = ({ data }: Props) => {
               Copy cover letter
             </Button>
           </div>
+        )}
+
+        {jobApplications && jobApplications.length > 0 && (
+          <>
+            <Separator />
+            <h4>Recent applications</h4>
+            <Table className="flex-1 overflow-auto">
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Headline</TableHead>
+                  <TableHead>Job Application</TableHead>
+                  <TableHead>Created At</TableHead>
+                  <TableHead className="text-right">Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {jobApplications.map((jobApplication) => {
+                  const handleRestoreClick = () => {
+                    form.setValue(
+                      'jobDescription',
+                      jobApplication.jobDescription,
+                    )
+                    setGeneratedData({
+                      resume: jobApplication.resume,
+                      coverLetter: jobApplication.coverLetter,
+                    })
+                  }
+                  const handleRemoveClick = () => {
+                    if (jobApplication.id) {
+                      removeJobApplication(jobApplication.id)
+                    }
+                  }
+
+                  return (
+                    <TableRow key={jobApplication.createdAt.getTime()}>
+                      <TableCell>
+                        {jobApplication.resume.bios[0].headline}
+                      </TableCell>
+                      <TableCell>
+                        {jobApplication.jobDescription.slice(0, 80)}...
+                      </TableCell>
+                      <TableCell>
+                        {new Intl.DateTimeFormat('en-US').format(
+                          jobApplication.createdAt,
+                        )}
+                      </TableCell>
+                      <TableCell className="text-right">
+                        <Button
+                          className="cursor-pointer"
+                          onClick={handleRestoreClick}
+                        >
+                          Restore
+                        </Button>
+                        {jobApplication.id && (
+                          <Button
+                            className="cursor-pointer ml-2"
+                            variant="destructive"
+                            onClick={handleRemoveClick}
+                          >
+                            Remove
+                          </Button>
+                        )}
+                      </TableCell>
+                    </TableRow>
+                  )
+                })}
+              </TableBody>
+            </Table>
+          </>
         )}
       </div>
     </Form>

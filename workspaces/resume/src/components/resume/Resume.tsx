@@ -14,7 +14,7 @@ import {
 } from '@teimurjan/utils'
 import Header from '../header'
 import ResumeItem from '../resume-item'
-import { ResumeQuery } from '../../../../gql-client/src'
+import { ResumeProps } from './types'
 
 const styles = StyleSheet.create({
   page: {
@@ -82,10 +82,10 @@ const Resume = ({
   experiences,
   publications,
   conferences,
-  ...rest
-}: ResumeQuery) => {
+  config = { skills: 'column' },
+}: ResumeProps) => {
   return (
-    <Document {...rest}>
+    <Document>
       <Page size="A4" style={styles.page}>
         <Header
           title={fullName}
@@ -149,20 +149,36 @@ const Resume = ({
 
                 <Text style={styles.title}>Skills</Text>
                 <View style={styles.skills}>
-                  <View style={styles.skillsCol}>
-                    {skills.slice(0, skills.length / 2).map((skill) => (
-                      <Text key={skill.id} style={styles.itemMarginBottomSmall}>
-                        {skill.title}
+                  {config.skills === 'column' ? (
+                    <>
+                      <View style={styles.skillsCol}>
+                        {skills.slice(0, skills.length / 2).map((skill) => (
+                          <Text
+                            key={skill.id}
+                            style={styles.itemMarginBottomSmall}
+                          >
+                            {skill.title}
+                          </Text>
+                        ))}
+                      </View>
+                      <View style={styles.skillsCol}>
+                        {skills.slice(skills.length / 2).map((skill) => (
+                          <Text
+                            key={skill.id}
+                            style={styles.itemMarginBottomSmall}
+                          >
+                            {skill.title}
+                          </Text>
+                        ))}
+                      </View>
+                    </>
+                  ) : (
+                    <View style={styles.skillsCol}>
+                      <Text>
+                        {skills.map((skill) => skill.title).join(', ')}
                       </Text>
-                    ))}
-                  </View>
-                  <View style={styles.skillsCol}>
-                    {skills.slice(skills.length / 2).map((skill) => (
-                      <Text key={skill.id} style={styles.itemMarginBottomSmall}>
-                        {skill.title}
-                      </Text>
-                    ))}
-                  </View>
+                    </View>
+                  )}
                 </View>
 
                 <View style={styles.horizontalDivider} />

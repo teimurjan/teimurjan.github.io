@@ -19,7 +19,7 @@ db.version(1).stores({
 })
 
 export const useJobApplications = () => {
-  return useLiveQuery(() => db.jobApplications.toArray())
+  return useLiveQuery(() => db.jobApplications.reverse().toArray())
 }
 
 export const useAddJobApplication = () => {

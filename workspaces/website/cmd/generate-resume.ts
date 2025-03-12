@@ -1,4 +1,4 @@
-import Resume, { renderToFile } from '@teimurjan/resume'
+import { Resume, renderToFile } from '@teimurjan/resume'
 import gqlClient from '../gql-client'
 import { createElement, ReactElement } from 'react'
 import path from 'path'

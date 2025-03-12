@@ -15,7 +15,6 @@ import {
   FormLabel,
   FormMessage,
 } from '../ui/form'
-import Resume, { PDFDownloadLink } from '@teimurjan/resume'
 import { useState } from 'react'
 import { toast } from 'sonner'
 import { Loader2 } from 'lucide-react'
@@ -34,6 +33,7 @@ import {
   TableRow,
 } from '../ui/table'
 import { Separator } from '../ui/separator'
+import { useResume } from '@teimurjan/resume'
 
 interface Props {
   data: ResumeQuery
@@ -58,6 +58,8 @@ export const GenerateForm = ({ data }: Props) => {
       resume: data,
     },
   })
+
+  const { openResume } = useResume(generatedData?.resume)
 
   const handleSubmit = async (values: FormValues) => {
     try {
@@ -142,31 +144,19 @@ export const GenerateForm = ({ data }: Props) => {
 
         {generatedData && (
           <div className="flex gap-4">
-            <PDFDownloadLink
-              className="flex-1"
-              document={<Resume {...generatedData.resume} />}
-              fileName="resume.pdf"
-            >
-              {({ url, loading }) => (
-                <Button
-                  className="cursor-pointer w-full"
-                  onClick={(e) => {
-                    // Prevent download action to be triggered
-                    e.stopPropagation()
-                    e.preventDefault()
+            <Button
+              className="cursor-pointer w-full"
+              onClick={(e) => {
+                // Prevent download action to be triggered
+                e.stopPropagation()
+                e.preventDefault()
 
-                    if (url) {
-                      window.open(url, '_blank')
-                    }
-                  }}
-                  disabled={loading}
-                  variant="secondary"
-                >
-                  {loading && <Loader2 className="animate-spin" />}
-                  Get resume
-                </Button>
-              )}
-            </PDFDownloadLink>
+                openResume()
+              }}
+              variant="secondary"
+            >
+              Get resume
+            </Button>
 
             <Button
               className="cursor-pointer flex-1"

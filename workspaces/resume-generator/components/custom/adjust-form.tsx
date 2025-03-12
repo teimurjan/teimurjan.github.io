@@ -1,12 +1,13 @@
 'use client'
 import { ResumeQuery } from '@teimurjan/gql-client'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { JSONEditor, Mode } from 'vanilla-jsoneditor/standalone.js'
-import Resume, { PDFDownloadLink } from '@teimurjan/resume'
 import { useDebounce } from 'use-debounce'
-import { Button } from '@/components/ui/button'
 import 'vanilla-jsoneditor/themes/jse-theme-dark.css'
-import { Loader2 } from 'lucide-react'
+import { Switch } from '../ui/switch'
+import { Label } from '../ui/label'
+import { useResume } from '@teimurjan/resume'
+import { Button } from '../ui/button'
 
 const JSON_EDITOR_ID = 'editor'
 
@@ -19,6 +20,16 @@ export const AdjustForm = ({ data }: Props) => {
 
   const [customData, setCustomData] = useState<ResumeQuery>(data)
   const [debouncedCustomData] = useDebounce(customData, 500)
+  const [skillsInRow, setSkillsInRow] = useState(true)
+
+  const downloadResumeProps = useMemo(
+    () => ({
+      ...debouncedCustomData,
+      config: { skills: skillsInRow ? 'row' : 'column' } as const,
+    }),
+    [debouncedCustomData, skillsInRow],
+  )
+  const { openResume } = useResume(downloadResumeProps)
 
   useEffect(() => {
     const target = document.getElementById(JSON_EDITOR_ID)
@@ -54,35 +65,24 @@ export const AdjustForm = ({ data }: Props) => {
 
   return (
     <div className="flex h-full flex-col gap-4">
+      <div className="flex-0">
+        <div className="flex items-center space-x-2">
+          <Switch
+            id="skills-in-row"
+            onCheckedChange={setSkillsInRow}
+            checked={skillsInRow}
+          />
+          <Label htmlFor="skills-in-row">Skills Horizontal</Label>
+        </div>
+      </div>
+
       <div className="flex-1 h-full overflow-auto text-sm">
         <div id={JSON_EDITOR_ID} className="jse-theme-dark" />
       </div>
 
-      {debouncedCustomData && (
-        <PDFDownloadLink
-          document={<Resume {...debouncedCustomData} />}
-          fileName="resume.pdf"
-        >
-          {({ url, loading }) => (
-            <Button
-              className="cursor-pointer w-full"
-              onClick={(e) => {
-                // Prevent download action to be triggered
-                e.stopPropagation()
-                e.preventDefault()
-
-                if (url) {
-                  window.open(url, '_blank')
-                }
-              }}
-              disabled={loading}
-            >
-              {loading && <Loader2 className="animate-spin" />}
-              Get Resume
-            </Button>
-          )}
-        </PDFDownloadLink>
-      )}
+      <Button className="w-full" onClick={() => openResume()}>
+        Get resume
+      </Button>
     </div>
   )
 }

@@ -1,5 +1,3 @@
-export { default } from './components/resume'
-export { PDFDownloadLink } from '@react-pdf/renderer'
+export { useResume } from './hooks'
+export { default as Resume } from './components/resume'
 export { renderToFile } from '@react-pdf/renderer'
-export { renderToBuffer } from '@react-pdf/renderer'
-export { renderToStream } from '@react-pdf/renderer'

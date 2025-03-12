@@ -34,6 +34,8 @@ import {
 } from '../ui/table'
 import { Separator } from '../ui/separator'
 import { useResume } from '@teimurjan/resume'
+import { useRouter } from 'next/navigation'
+import { Timestamp } from 'firebase/firestore'
 
 interface Props {
   data: ResumeQuery
@@ -44,6 +46,7 @@ type GeneratedData = Pick<JobApplication, 'resume' | 'coverLetter'>
 type FormValues = z.infer<typeof generateFormSchema>
 
 export const GenerateForm = ({ data }: Props) => {
+  const router = useRouter()
   const jobApplications = useJobApplications()
   const addJobApplication = useAddJobApplication()
   const removeJobApplication = useRemoveJobApplication()
@@ -79,7 +82,7 @@ export const GenerateForm = ({ data }: Props) => {
         addJobApplication({
           ...newGeneratedData,
           jobDescription: values.jobDescription,
-          createdAt: new Date(),
+          createdAt: Timestamp.now(),
         })
       } else {
         throw new Error()
@@ -93,15 +96,6 @@ export const GenerateForm = ({ data }: Props) => {
     if (generatedData) {
       navigator.clipboard.writeText(generatedData.coverLetter)
       toast('Cover letter copied to clipboard')
-    }
-  }
-
-  const handleCopyGeneratedResumeData = () => {
-    if (generatedData) {
-      navigator.clipboard.writeText(
-        JSON.stringify(generatedData.resume, null, 2),
-      )
-      toast('Generated resume data copied to clipboard')
     }
   }
 
@@ -145,7 +139,7 @@ export const GenerateForm = ({ data }: Props) => {
         {generatedData && (
           <div className="flex gap-4">
             <Button
-              className="cursor-pointer w-full"
+              className="cursor-pointer flex-1"
               onClick={(e) => {
                 // Prevent download action to be triggered
                 e.stopPropagation()
@@ -156,14 +150,6 @@ export const GenerateForm = ({ data }: Props) => {
               variant="secondary"
             >
               Get resume
-            </Button>
-
-            <Button
-              className="cursor-pointer flex-1"
-              variant="secondary"
-              onClick={handleCopyGeneratedResumeData}
-            >
-              Copy generated resume data
             </Button>
 
             <Button
@@ -208,7 +194,7 @@ export const GenerateForm = ({ data }: Props) => {
                   }
 
                   return (
-                    <TableRow key={jobApplication.createdAt.getTime()}>
+                    <TableRow key={jobApplication.id}>
                       <TableCell>
                         {jobApplication.resume.bios[0].headline}
                       </TableCell>
@@ -217,7 +203,7 @@ export const GenerateForm = ({ data }: Props) => {
                       </TableCell>
                       <TableCell>
                         {new Intl.DateTimeFormat('en-US').format(
-                          jobApplication.createdAt,
+                          new Date(jobApplication.createdAt.toMillis()),
                         )}
                       </TableCell>
                       <TableCell className="text-right">
@@ -229,7 +215,18 @@ export const GenerateForm = ({ data }: Props) => {
                         </Button>
                         {jobApplication.id && (
                           <Button
-                            className="cursor-pointer ml-2"
+                            className="cursor-pointer mx-2"
+                            variant="secondary"
+                            onClick={() => {
+                              router.push(`/adjust/${jobApplication.id}`)
+                            }}
+                          >
+                            Customize
+                          </Button>
+                        )}
+                        {jobApplication.id && (
+                          <Button
+                            className="cursor-pointer"
                             variant="destructive"
                             onClick={handleRemoveClick}
                           >

@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontFamily: 'Helvetica-Bold',
-    fontSize: 24,
+    fontSize: 20,
   },
   headerSubtitle: { fontSize: 14, marginTop: 8 },
 })

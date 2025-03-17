@@ -37,7 +37,7 @@ const Layout = ({
           enableSystem
           disableTransitionOnChange
         >
-          <header className="flex items-center px-2 h-16 shadow">
+          <header className="flex items-center px-2 h-16 shadow container mx-auto">
             <HeaderMenu />
           </header>
 

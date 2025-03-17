@@ -7,6 +7,10 @@ Font.registerEmojiSource({
   url: 'https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/',
 })
 
+Font.registerHyphenationCallback((word: string) => {
+  return [word]
+})
+
 const Resume_ = (props: ResumeProps) => <Resume {...props} />
 
 export default Resume_

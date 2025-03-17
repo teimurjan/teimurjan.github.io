@@ -10,6 +10,7 @@ import {
   query,
   orderBy,
   Timestamp,
+  updateDoc,
 } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 
@@ -77,6 +78,13 @@ export const useAddJobApplication = () => {
     const { id, ...rest } = data
     const docRef = await addDoc(collection(db, 'jobApplications'), rest)
     return docRef.id
+  }
+}
+
+export const useUpdateJobApplication = () => {
+  return async (id: string, data: Partial<JobApplication>) => {
+    const docRef = doc(db, 'jobApplications', id)
+    await updateDoc(docRef, data)
   }
 }
 

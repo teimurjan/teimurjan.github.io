@@ -12,10 +12,10 @@ export const bioSchema = z.object({
 export const educationSchema = z.object({
   id: z.string().nonempty('ID is required'),
   school: z.string().nonempty('School is required'),
-  degree: z.string().nonempty('Degree is required').nullable(),
+  degree: z.string().nullable().optional(),
   areaOfStudy: z.string().nonempty('Area of study is required'),
   startDate: z.string().nonempty('Start date is required'),
-  endDate: z.string().nonempty('End date is required'),
+  endDate: z.string().nullable().optional(),
 })
 
 export const skillSchema = z.object({
@@ -36,8 +36,7 @@ export const experienceSchema = z.object({
   company: z.string().nonempty('Company is required'),
   position: z.string().nonempty('Position is required'),
   startDate: z.string().nonempty('Start date is required'),
-  // endDate can be a string or null (e.g., for current positions)
-  endDate: z.string().nullable(),
+  endDate: z.string().optional().nullable(),
   description: descriptionSchema,
 })
 

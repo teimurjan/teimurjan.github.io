@@ -4,7 +4,14 @@ import gqlClient from '@/gql-client'
 const Adjust = async () => {
   const data = await gqlClient.Resume()
 
-  return <AdjustForm data={data} />
+  return (
+    <AdjustForm
+      application={{
+        resume: data,
+        coverLetter: '',
+      }}
+    />
+  )
 }
 
 export default Adjust

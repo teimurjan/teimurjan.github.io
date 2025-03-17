@@ -1,14 +1,11 @@
 'use client'
 import { Button } from '@/components/atoms'
-import { ResumeQuery } from '@teimurjan/gql-client'
-import { useResume } from '@teimurjan/resume'
+import { useResume, type ResumeProps } from '@teimurjan/resume'
 
-export type Props = {
-  data: ResumeQuery
-}
+export type Props = ResumeProps
 
-const ResumeButtonLive = ({ data }: Props) => {
-  const { openResume } = useResume(data)
+const ResumeButtonLive = (resumeProps: Props) => {
+  const { openResume } = useResume(resumeProps)
   return (
     <Button
       onClick={(e) => {

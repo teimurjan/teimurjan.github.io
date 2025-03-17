@@ -49,10 +49,10 @@ const styles = StyleSheet.create({
   layoutRight: { flexBasis: '35%' },
   title: {
     color: theme.colors.resume.dark3,
-    fontSize: 14,
+    fontSize: 12,
     textTransform: 'uppercase',
     fontFamily: 'Helvetica-Bold',
-    marginBottom: 8,
+    marginBottom: 4,
   },
   itemMarginBottomSmall: {
     marginBottom: 4,
@@ -82,7 +82,7 @@ const Resume = ({
   experiences,
   publications,
   conferences,
-  config = { skills: 'column' },
+  config = { skills: 'row' },
 }: ResumeProps) => {
   return (
     <Document>

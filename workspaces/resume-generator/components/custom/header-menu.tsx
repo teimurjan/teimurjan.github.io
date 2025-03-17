@@ -10,18 +10,28 @@ import Link from 'next/link'
 
 export const HeaderMenu = () => {
   return (
-    <NavigationMenu>
+    <NavigationMenu className="-mx-6">
       <NavigationMenuList>
         <NavigationMenuItem>
           <Link href="/" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Generate Resume 🪄
+              Applications 📄
             </NavigationMenuLink>
           </Link>
+        </NavigationMenuItem>
 
+        <NavigationMenuItem>
+          <Link href="/generate" legacyBehavior passHref>
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              Generator 🪄
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
+
+        <NavigationMenuItem>
           <Link href="/adjust" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Manually Adjust Resume 🛠️
+              Customizer 🛠️
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>

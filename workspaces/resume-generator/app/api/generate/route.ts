@@ -21,28 +21,24 @@ export async function POST(request: NextRequest) {
     }
 
     const prompt = `
-    I am applying for the following job:
-    "${parsed.data.jobDescription}"
+    I am applying for the following job: ${parsed.data.jobDescription}
     
-    This is the current JSON data for my resume:
-    ${JSON.stringify(parsed.data.resume)}
+    I have the following JSON data for my resume: ${JSON.stringify(parsed.data.resume)}
     
-    I need you to do the following:
-    1. Update the experiences' descriptions and skills to match the job.
-      - 3 most recent experiences should have at least 3 bullet points each
-      - The language must be active, results-focused, and written in a natural, human tone
-    2. Update the most recent experience's job title to match the job.
-    3. Update the bio headline to reflect the job position.
+    I need you to:
+    1. Update the experiences.
+      - Do not remove any experience
+      - Most recent experiences' descriptions should have 3-4 bullet points
+      - Update 1-2 experiences' descriptions to match the job using active, results-focused, and written in a natural, human tone language.
+    2. Update skills to match the job.
+    3. Update the bio headline and about to reflect the job position.
     4. Create a short, unusual cover letter with a bold emotionally resonant hook to grab attention. The cover letter should feel very personal and written in a spontaneous, off-the-cuff manner by:
       - Using plain, everyday language and a conversational tone.
       - Using max 1-2 commas and 0 dashes even if they're required grammarly.
       - Allowing for natural hesitations or slight imperfections that show real human writing.
       - Keeping it to 4-5 sentences. Use 1-2 emoji if it feels natural.
       - Structuring it randomly, with no set format or structure.
-    
-    Output:
-    1. Do not change the structure of the JSON data.
-    2. Respond with a JSON object that has keys "resume" (value will be the updated JSON structure) and "coverLetter" (value will be a string) only.
+    5. Respond with a JSON object that has keys "resume" (value will be the updated JSON structure) and "coverLetter" (value will be a string) only. Do not change the structure of the JSON data.
     `
     const completion = await client.chat.completions.create({
       model: 'gpt-4o',
@@ -50,7 +46,7 @@ export async function POST(request: NextRequest) {
         {
           role: 'system',
           content:
-            "You're a seasoned resume creator with deep expertise in updating resumes, bios, and cover letters. You craft genuine, engaging, and results-driven content that highlights measurable achievements in a warm, authentic tone—just like a real person would write.",
+            "You're a resume creator with deep expertise in updating resumes, bios, and cover letters.",
         },
         { role: 'user', content: prompt },
       ],

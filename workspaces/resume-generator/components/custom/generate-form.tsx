@@ -1,5 +1,4 @@
 'use client'
-import { ResumeQuery } from '@teimurjan/gql-client'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import 'vanilla-jsoneditor/themes/jse-theme-dark.css'
@@ -17,70 +16,55 @@ import {
 } from '../ui/form'
 import { useState } from 'react'
 import { toast } from 'sonner'
-import { Loader2 } from 'lucide-react'
-import {
-  JobApplication,
-  useAddJobApplication,
-  useJobApplications,
-  useRemoveJobApplication,
-} from '@/db/db'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '../ui/table'
-import { Separator } from '../ui/separator'
+import { Copy, ExternalLink, Loader2, PartyPopper } from 'lucide-react'
+import { JobApplication, useAddJobApplication } from '@/db/db'
 import { useResume } from '@teimurjan/resume'
-import { useRouter } from 'next/navigation'
 import { Timestamp } from 'firebase/firestore'
+import { cn } from '@/lib/utils'
+
+type GeneratedApplication = Pick<JobApplication, 'resume' | 'coverLetter'>
 
 interface Props {
-  data: ResumeQuery
+  application: Pick<JobApplication, 'resume'>
+  className?: string
 }
-
-type GeneratedData = Pick<JobApplication, 'resume' | 'coverLetter'>
 
 type FormValues = z.infer<typeof generateFormSchema>
 
-export const GenerateForm = ({ data }: Props) => {
-  const router = useRouter()
-  const jobApplications = useJobApplications()
+export const GenerateForm = ({ application, className }: Props) => {
   const addJobApplication = useAddJobApplication()
-  const removeJobApplication = useRemoveJobApplication()
 
-  const [generatedData, setGeneratedData] = useState<
-    GeneratedData | undefined
-  >()
+  const [generatedApplication, setGeneratedApplication] = useState<
+    GeneratedApplication | undefined
+  >(undefined)
 
   const form = useForm<FormValues>({
     resolver: zodResolver(generateFormSchema),
     defaultValues: {
-      resume: data,
+      resume: application.resume,
     },
   })
 
-  const { openResume } = useResume(generatedData?.resume)
+  const { openResume } = useResume(generatedApplication?.resume)
 
   const handleSubmit = async (values: FormValues) => {
     try {
-      setGeneratedData(undefined)
+      setGeneratedApplication(undefined)
 
       const response = await fetch('/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           jobDescription: values.jobDescription,
-          resume: data,
+          resume: application.resume,
         }),
       })
       if (response.ok) {
-        const newGeneratedData = (await response.json()) as GeneratedData
-        setGeneratedData(newGeneratedData)
+        const newGeneratedApplication =
+          (await response.json()) as GeneratedApplication
+        setGeneratedApplication(newGeneratedApplication)
         addJobApplication({
-          ...newGeneratedData,
+          ...newGeneratedApplication,
           jobDescription: values.jobDescription,
           createdAt: Timestamp.now(),
         })
@@ -92,156 +76,78 @@ export const GenerateForm = ({ data }: Props) => {
     }
   }
 
-  const handleCopyCoverLetter = () => {
-    if (generatedData) {
-      navigator.clipboard.writeText(generatedData.coverLetter)
-      toast('Cover letter copied to clipboard')
-    }
-  }
-
   return (
     <Form {...form}>
-      <div className="flex h-full flex-col gap-4">
-        <form
-          className="flex flex-col gap-4"
-          onSubmit={form.handleSubmit(handleSubmit)}
-        >
-          <FormField
-            control={form.control}
-            name="jobDescription"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Job description</FormLabel>
-                <FormControl>
-                  <Textarea
-                    placeholder="Enter job description"
-                    className="h-[50vh]"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+      <form
+        className={cn('flex flex-col gap-4', className)}
+        onSubmit={form.handleSubmit(handleSubmit)}
+      >
+        <FormField
+          control={form.control}
+          name="jobDescription"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className='text-base'>Job description</FormLabel>
+              <FormControl>
+                <Textarea
+                  placeholder="Enter job description"
+                  className="h-[50vh]"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
+        <div className="flex gap-4">
           <Button
-            className="cursor-pointer"
+            className="flex-1"
             type="submit"
             disabled={form.formState.isSubmitting}
           >
             {form.formState.isSubmitting && (
               <Loader2 className="animate-spin" />
             )}
-            {generatedData ? 'Regenerate' : 'Generate'} resume
+            Generate <PartyPopper />
           </Button>
-        </form>
 
-        {generatedData && (
-          <div className="flex gap-4">
+          {generatedApplication?.resume && (
             <Button
-              className="cursor-pointer flex-1"
+              className="flex-1"
               onClick={(e) => {
                 // Prevent download action to be triggered
-                e.stopPropagation()
                 e.preventDefault()
 
                 openResume()
               }}
               variant="secondary"
             >
-              Get resume
+              Resume <ExternalLink />
             </Button>
+          )}
 
+          {generatedApplication?.coverLetter && (
             <Button
-              className="cursor-pointer flex-1"
+              className="flex-1"
               variant="secondary"
-              onClick={handleCopyCoverLetter}
-            >
-              Copy cover letter
-            </Button>
-          </div>
-        )}
+              onClick={(e) => {
+                // Prevent download action to be triggered
+                e.preventDefault()
 
-        {jobApplications && jobApplications.length > 0 && (
-          <>
-            <Separator />
-            <h4>Recent applications</h4>
-            <Table className="flex-1 overflow-auto">
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Headline</TableHead>
-                  <TableHead>Job Application</TableHead>
-                  <TableHead>Created At</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {jobApplications.map((jobApplication) => {
-                  const handleRestoreClick = () => {
-                    form.setValue(
-                      'jobDescription',
-                      jobApplication.jobDescription,
-                    )
-                    setGeneratedData({
-                      resume: jobApplication.resume,
-                      coverLetter: jobApplication.coverLetter,
-                    })
-                  }
-                  const handleRemoveClick = () => {
-                    if (jobApplication.id) {
-                      removeJobApplication(jobApplication.id)
-                    }
-                  }
-
-                  return (
-                    <TableRow key={jobApplication.id}>
-                      <TableCell>
-                        {jobApplication.resume.bios[0].headline}
-                      </TableCell>
-                      <TableCell>
-                        {jobApplication.jobDescription.slice(0, 80)}...
-                      </TableCell>
-                      <TableCell>
-                        {new Intl.DateTimeFormat('en-US').format(
-                          new Date(jobApplication.createdAt.toMillis()),
-                        )}
-                      </TableCell>
-                      <TableCell className="text-right">
-                        <Button
-                          className="cursor-pointer"
-                          onClick={handleRestoreClick}
-                        >
-                          Restore
-                        </Button>
-                        {jobApplication.id && (
-                          <Button
-                            className="cursor-pointer mx-2"
-                            variant="secondary"
-                            onClick={() => {
-                              router.push(`/adjust/${jobApplication.id}`)
-                            }}
-                          >
-                            Customize
-                          </Button>
-                        )}
-                        {jobApplication.id && (
-                          <Button
-                            className="cursor-pointer"
-                            variant="destructive"
-                            onClick={handleRemoveClick}
-                          >
-                            Remove
-                          </Button>
-                        )}
-                      </TableCell>
-                    </TableRow>
+                if (generatedApplication) {
+                  navigator.clipboard.writeText(
+                    generatedApplication.coverLetter,
                   )
-                })}
-              </TableBody>
-            </Table>
-          </>
-        )}
-      </div>
+                  toast('Cover letter copied to clipboard')
+                }
+              }}
+            >
+              Cover Letter <Copy />
+            </Button>
+          )}
+        </div>
+      </form>
     </Form>
   )
 }

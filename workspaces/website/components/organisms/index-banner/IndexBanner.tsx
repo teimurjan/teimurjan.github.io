@@ -15,7 +15,7 @@ const IndexBanner = async () => {
       title={fullName}
       subtitle={headline}
       description={about}
-      button={<ResumeButton data={data} />}
+      button={<ResumeButton {...data} />}
       image={
         <Fragment>
           <PersonaCanvas />

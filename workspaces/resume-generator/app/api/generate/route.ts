@@ -25,20 +25,47 @@ export async function POST(request: NextRequest) {
     
     I have the following JSON data for my resume: ${JSON.stringify(parsed.data.resume)}
     
-    I need you to:
-    1. Update the experiences.
-      - Do not remove any experience
-      - Most recent experiences' descriptions should have 3-4 bullet points
-      - Update 1-2 experiences' descriptions to match the job using active, results-focused, and written in a natural, human tone language.
-    2. Update skills to match the job.
-    3. Update the bio headline and about to reflect the job position.
-    4. Create a short, unusual cover letter with a bold emotionally resonant hook to grab attention. The cover letter should feel very personal and written in a spontaneous, off-the-cuff manner by:
-      - Using plain, everyday language and a conversational tone.
-      - Using max 1-2 commas and 0 dashes even if they're required grammarly.
-      - Allowing for natural hesitations or slight imperfections that show real human writing.
-      - Keeping it to 4-5 sentences. Use 1-2 emoji if it feels natural.
-      - Structuring it randomly, with no set format or structure.
-    5. Respond with a JSON object that has keys "resume" (value will be the updated JSON structure) and "coverLetter" (value will be a string) only. Do not change the structure of the JSON data.
+    I need you to optimize my resume and create a cover letter that will maximize my chances of getting an interview. Please:
+
+    1. Enhance the experiences section:
+      - Keep all existing experiences intact
+      - For the 2-3 most recent roles, craft 3-4 impactful bullet points that:
+        * Lead with strong action verbs
+        * Quantify achievements with metrics where possible (%, $, team size, etc.)
+        * Highlight outcomes and business impact
+        * Incorporate relevant keywords from the job description
+      - Tailor 2-3 older experiences to subtly echo job requirements while maintaining authenticity
+      - Ensure all descriptions demonstrate problem-solving, leadership, and innovation
+
+    2. Optimize skills section:
+      - Prioritize technical and soft skills mentioned in the job posting
+      - Add any relevant complementary skills that strengthen my candidacy
+      - Remove skills that aren't relevant to this role
+      - Order skills logically by category/domain
+
+    3. Craft a compelling personal brand:
+      - Create a punchy headline that positions me perfectly for this role
+      - Write an "about" section that:
+        * Tells a coherent career story
+        * Highlights my unique value proposition
+        * Demonstrates cultural fit
+        * Incorporates 2-3 key requirements from the job
+
+    4. Generate an attention-grabbing cover letter that:
+      - Opens with an unexpected, emotionally resonant hook
+      - Uses conversational, human language (like you're talking to a friend)
+      - Includes natural pauses and authentic voice
+      - Keeps structure loose and organic (4-5 sentences max)
+      - Strategically uses 1-2 emoji to add personality
+      - Focuses on connection over formality
+      - Avoids complex punctuation (max 1-2 commas, no dashes)
+      - Ends with energy and enthusiasm
+
+    5. Return only a JSON object with:
+      - "resume": The enhanced resume data maintaining the original structure
+      - "coverLetter": The compelling cover letter as a string
+
+    Important: Maintain authenticity while optimizing for impact. The goal is to present my true experience in the most compelling way possible for this specific role.
     `
     const completion = await client.chat.completions.create({
       model: 'gpt-4o',

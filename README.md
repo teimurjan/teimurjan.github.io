@@ -12,7 +12,6 @@
 
 ![](https://github.com/teimurjan/teimurjan.github.io/actions/workflows/deploy.yml/badge.svg)
 ![](https://github.com/teimurjan/teimurjan.github.io/actions/workflows/deploy-readme.yml/badge.svg)
-![](https://github.com/teimurjan/teimurjan.github.io/actions/workflows/deploy-serverless.yml/badge.svg)
 
 </div>
 
@@ -20,7 +19,7 @@ Hey! 👋 This repository contains the source code for my personal website hoste
 
 ## 🤷 What makes this project special?
 
-1. Tech stack: [GraphCMS](https://graphcms.com/) + [Next](https://nextjs.org/) + [TypeScript](https://www.typescriptlang.org/).
+1. Tech stack: [Hygraph](https://hygraph.com/) + [Next](https://nextjs.org/) + [TypeScript](https://www.typescriptlang.org/).
 2. [Atomic Design Methodology](https://atomicdesign.bradfrost.com/).
 3. [GraphQL TypeScript codegen](https://www.graphql-code-generator.com/).
 4. Resume generation on website start/build via [react-pdf](https://react-pdf.org/).
@@ -59,7 +58,7 @@ GitHub Actions is mechanism reponsible for the deployments. There is a workflow 
 
 ## ➡️ Plans
 
-- [x] Automatic deployment via serverless function when a GraphCMS entity changes.
+- [x] Automatic deployment via serverless function when a Hygraph entity changes.
 
 ## 🙏 Contribution
 

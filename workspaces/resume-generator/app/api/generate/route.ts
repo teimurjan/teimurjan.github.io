@@ -30,12 +30,10 @@ export async function POST(request: NextRequest) {
     1. Enhance the experiences section:
       - Keep all existing experiences intact
       - For the 2-3 most recent roles, craft 3-4 impactful bullet points that:
+        * Incorporate relevant keywords from the job description
         * Lead with strong action verbs
         * Quantify achievements with metrics where possible (%, $, team size, etc.)
         * Highlight outcomes and business impact
-        * Incorporate relevant keywords from the job description
-      - Tailor 2-3 older experiences to subtly echo job requirements while maintaining authenticity
-      - Ensure all descriptions demonstrate problem-solving, leadership, and innovation
 
     2. Optimize skills section:
       - Prioritize technical and soft skills mentioned in the job posting
@@ -62,7 +60,7 @@ export async function POST(request: NextRequest) {
       - Ends with energy and enthusiasm
 
     5. Return only a JSON object with:
-      - "resume": The enhanced resume data maintaining the original structure
+      - "resume": The enhanced resume data maintaining the original structure (important: do not change the original structure)
       - "coverLetter": The compelling cover letter as a string
 
     Important: Maintain authenticity while optimizing for impact. The goal is to present my true experience in the most compelling way possible for this specific role.

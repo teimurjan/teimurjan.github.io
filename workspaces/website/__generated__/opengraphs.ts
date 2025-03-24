@@ -17,20 +17,16 @@ export default {
     url: null,
   },
   'https://www.toptal.com/data-science/machine-learning-number-recognition': {
-    description:
-      'This article demonstrates how you can create an app capable of recognizing handwritten digits in under an hour, using Python and React.',
+    description: null,
     twitterImageSrc: null,
-    twitterCard: 'summary_large_image',
+    twitterCard: null,
     twitterTitle: null,
     twitterDescription: null,
-    ogImage:
-      'https://bs-uploads.toptal.io/blackfish-uploads/components/open_graph_image/8958869/og_image/optimized/image_1-ce90274e2478c82a09b07ba664d59d3a.png',
-    ogType: 'article',
-    ogTitle: 'Machine Learning Digit Recognition Tutorial | Toptal®',
-    ogUrl:
-      'https://www.toptal.com/data-science/machine-learning-number-recognition',
-    ogDescription:
-      'Machine learning and computer vision are not new concepts, yet the availability of new tools and datasets is bringing them to a wider audience. Here is how you can create an app capable of recognizing handwritten digits in less than an hour. #ML #MachineLearning #ComputerVision',
+    ogImage: null,
+    ogType: null,
+    ogTitle: null,
+    ogUrl: null,
+    ogDescription: null,
     image: null,
     url: null,
   },
@@ -88,6 +84,27 @@ export default {
       ogUrl: null,
       ogDescription:
         'Explore modern CV management through React, Gatsby, and Hygraph CRM integration. Dive into automation with react-pdf and redefine digital personal branding.',
+      image: null,
+      url: null,
+    },
+  'https://hackernoon.com/building-a-robust-jsts-monorepo-best-practices-with-yarn-nx-and-changesets':
+    {
+      description:
+        'Build a robust JS/TS monorepo with Yarn v4, NX & Changesets. Organize apps, features & libs, and automate CI/CD for efficient development workflows.',
+      twitterImageSrc: null,
+      twitterCard: 'summary_large_image',
+      twitterTitle:
+        'Building a Robust JS/TS Monorepo: Best Practices with Yarn, NX and Changesets | HackerNoon',
+      twitterDescription:
+        'Build a robust JS/TS monorepo with Yarn v4, NX & Changesets. Organize apps, features & libs, and automate CI/CD for efficient development workflows.',
+      ogImage:
+        'https://hackernoon.imgix.net/images/e62dXSoL6FdWx9wUA9Lka0OQw8A3-qm03o3i.png',
+      ogType: null,
+      ogTitle:
+        'Building a Robust JS/TS Monorepo: Best Practices with Yarn, NX and Changesets | HackerNoon',
+      ogUrl: null,
+      ogDescription:
+        'Build a robust JS/TS monorepo with Yarn v4, NX & Changesets. Organize apps, features & libs, and automate CI/CD for efficient development workflows.',
       image: null,
       url: null,
     },

@@ -18,12 +18,12 @@ interface ProviderProps {
 
 const PersonaContextProvider = ({ children }: ProviderProps) => {
   const isLoaded = useThreeModelLoaded('/persona.glb')
-  const [state, setState] = useState<ContextValue['state']>(
-    isLoaded ? 'idle' : 'loading',
-  )
+  const [state, setState] = useState<ContextValue['state']>('idle')
 
   return (
-    <PersonaContext.Provider value={{ state, setState }}>
+    <PersonaContext.Provider
+      value={{ state: isLoaded ? state : 'loading', setState }}
+    >
       {children}
     </PersonaContext.Provider>
   )

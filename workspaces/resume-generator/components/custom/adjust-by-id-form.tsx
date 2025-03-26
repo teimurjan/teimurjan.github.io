@@ -51,7 +51,7 @@ export const AdjustByIdForm = ({ id }: Props) => {
           onClick={() => {
             if (application) {
               navigator.clipboard.writeText(application.jobDescription)
-              toast('Description copied to clipboard')
+              toast('Description copied to clipboard ✅')
             }
           }}
         >

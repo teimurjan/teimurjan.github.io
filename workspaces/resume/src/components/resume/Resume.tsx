@@ -10,17 +10,17 @@ import {
   YEAR_DATE_FORMAT,
   prettyRange,
   sortByDate,
-  theme,
 } from '@teimurjan/utils'
+import theme from '../../theme'
 import Header from '../header'
 import ResumeItem from '../resume-item'
 import { ResumeProps } from './types'
 
 const styles = StyleSheet.create({
   page: {
-    backgroundColor: theme.colors.resume.light,
+    backgroundColor: theme.colors.light,
     fontFamily: 'Helvetica',
-    color: theme.colors.resume.dark3,
+    color: theme.colors.dark3,
     fontSize: 10,
   },
   wrapper: {
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   horizontalDivider: {
     height: 1,
     width: '100%',
-    backgroundColor: theme.colors.resume.dark3,
+    backgroundColor: theme.colors.dark3,
     margin: '10px 0',
   },
   layout: {
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   },
   layoutRight: { flexBasis: '35%' },
   title: {
-    color: theme.colors.resume.dark3,
+    color: theme.colors.dark3,
     fontSize: 12,
     textTransform: 'uppercase',
     fontFamily: 'Helvetica-Bold',

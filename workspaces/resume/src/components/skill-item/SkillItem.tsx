@@ -1,5 +1,5 @@
 import { Text, View, StyleSheet, Styles } from '@react-pdf/renderer'
-import { theme } from '@teimurjan/utils'
+import theme from '../../theme'
 
 const styles = StyleSheet.create({
   skill: {},
@@ -8,14 +8,14 @@ const styles = StyleSheet.create({
   },
   skillProgress: {
     height: 4,
-    backgroundColor: theme.colors.resume.dark2,
+    backgroundColor: theme.colors.dark2,
     borderRadius: 4,
     position: 'relative',
     width: '100%',
   },
   skillProgressInner: {
     height: '100%',
-    backgroundColor: theme.colors.resume.dark3,
+    backgroundColor: theme.colors.dark3,
     borderRadius: 4,
     position: 'absolute',
     left: 0,

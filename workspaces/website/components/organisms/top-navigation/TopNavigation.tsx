@@ -3,7 +3,7 @@ import NextLink from 'next/link'
 import classNames from 'classnames'
 import { useWindowScroll } from '@/hooks'
 import { useRouter } from 'next/navigation'
-import { Logo, Container, Background, Link } from '../../atoms'
+import { Logo, Container, Background, Link, ThemeToggle } from '../../atoms'
 import { ButtonSelect } from '../../molecules'
 import { Anchor } from '../../../utils'
 import { useVisibilityContext } from '@/context'
@@ -41,7 +41,7 @@ const TopNavigation = () => {
     <Background
       color={shouldInvert ? 'light' : 'dark'}
       className={classNames(
-        'fixed left-0 top-0 w-full z-30 transition-all duration-200',
+        'fixed left-0 top-0 w-full z-30',
         shouldInvert && 'shadow',
       )}
     >
@@ -63,13 +63,16 @@ const TopNavigation = () => {
                 {item.label}
               </Link>
             ))}
+            <ThemeToggle />
           </div>
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center gap-4">
             <ButtonSelect
               options={navItems}
               onChange={(id) => router.push(`/#${id}`)}
               placeholder="Navigate"
             />
+
+            <ThemeToggle />
           </div>
         </div>
       </Container>

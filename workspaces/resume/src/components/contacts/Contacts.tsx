@@ -28,7 +28,7 @@ const Contacts = ({ location, email, phoneNumber }: Props) => (
       <Text>{location} 📍</Text>
     </View>
     <View style={styles.contact}>
-      <Text>{email} ✉️</Text>
+      <Text>{email} 📫</Text>
     </View>
     <View style={styles.contact}>
       <Text>{phoneNumber} 📞</Text>

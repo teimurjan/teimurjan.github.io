@@ -14,13 +14,12 @@ import {
   FormLabel,
   FormMessage,
 } from '../ui/form'
-import { useState } from 'react'
 import { toast } from 'sonner'
-import { Copy, ExternalLink, Loader2, PartyPopper } from 'lucide-react'
+import { Loader2, PartyPopper } from 'lucide-react'
 import { JobApplication, useAddJobApplication } from '@/db/db'
-import { useResume } from '@teimurjan/resume'
 import { Timestamp } from 'firebase/firestore'
 import { cn } from '@/lib/utils'
+import { useRouter } from 'next/navigation'
 
 type GeneratedApplication = Pick<JobApplication, 'resume' | 'coverLetter'>
 
@@ -33,10 +32,7 @@ type FormValues = z.infer<typeof generateFormSchema>
 
 export const GenerateForm = ({ application, className }: Props) => {
   const addJobApplication = useAddJobApplication()
-
-  const [generatedApplication, setGeneratedApplication] = useState<
-    GeneratedApplication | undefined
-  >(undefined)
+  const router = useRouter()
 
   const form = useForm<FormValues>({
     resolver: zodResolver(generateFormSchema),
@@ -45,12 +41,8 @@ export const GenerateForm = ({ application, className }: Props) => {
     },
   })
 
-  const { openResume } = useResume(generatedApplication?.resume)
-
   const handleSubmit = async (values: FormValues) => {
     try {
-      setGeneratedApplication(undefined)
-
       const response = await fetch('/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -62,12 +54,12 @@ export const GenerateForm = ({ application, className }: Props) => {
       if (response.ok) {
         const newGeneratedApplication =
           (await response.json()) as GeneratedApplication
-        setGeneratedApplication(newGeneratedApplication)
-        addJobApplication({
+        const newApplicationId = await addJobApplication({
           ...newGeneratedApplication,
           jobDescription: values.jobDescription,
           createdAt: Timestamp.now(),
         })
+        router.push(`/adjust/${newApplicationId}`)
       } else {
         throw new Error()
       }
@@ -87,7 +79,7 @@ export const GenerateForm = ({ application, className }: Props) => {
           name="jobDescription"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className='text-base'>Job description</FormLabel>
+              <FormLabel className="text-base">Job description</FormLabel>
               <FormControl>
                 <Textarea
                   placeholder="Enter job description"
@@ -111,41 +103,6 @@ export const GenerateForm = ({ application, className }: Props) => {
             )}
             Generate <PartyPopper />
           </Button>
-
-          {generatedApplication?.resume && (
-            <Button
-              className="flex-1"
-              onClick={(e) => {
-                // Prevent download action to be triggered
-                e.preventDefault()
-
-                openResume()
-              }}
-              variant="secondary"
-            >
-              Resume <ExternalLink />
-            </Button>
-          )}
-
-          {generatedApplication?.coverLetter && (
-            <Button
-              className="flex-1"
-              variant="secondary"
-              onClick={(e) => {
-                // Prevent download action to be triggered
-                e.preventDefault()
-
-                if (generatedApplication) {
-                  navigator.clipboard.writeText(
-                    generatedApplication.coverLetter,
-                  )
-                  toast('Cover letter copied to clipboard')
-                }
-              }}
-            >
-              Cover Letter <Copy />
-            </Button>
-          )}
         </div>
       </form>
     </Form>

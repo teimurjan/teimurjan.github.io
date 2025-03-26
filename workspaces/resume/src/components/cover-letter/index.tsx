@@ -1,6 +1,5 @@
 import { Font } from '@react-pdf/renderer'
-import Resume from './Resume'
-import { ResumeProps } from './types'
+import CoverLetter, { CoverLetterProps } from './CoverLetter'
 
 Font.registerEmojiSource({
   format: 'png',
@@ -11,8 +10,8 @@ Font.registerHyphenationCallback((word: string) => {
   return [word]
 })
 
-const Resume_ = (props: ResumeProps) => <Resume {...props} />
+const CoverLetter_ = (props: CoverLetterProps) => <CoverLetter {...props} />
 
-export default Resume_
+export default CoverLetter_
 
-export type { ResumeProps }
+export type { CoverLetterProps }

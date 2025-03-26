@@ -25,7 +25,7 @@ const Card = forwardRef<HTMLDivElement, Props>(
         id={id}
         ref={ref}
         className={classNames(
-          'relative px-8 py-4 shadow-lg bg-white',
+          'relative px-8 py-4 shadow-lg bg-light2',
           className,
         )}
       >

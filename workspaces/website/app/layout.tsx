@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Roboto_Mono } from 'next/font/google'
 import gqlClient from '@/gql-client'
-import { PersonaContextProvider } from '@/context'
+import { PersonaContextProvider, ThemeContextProvider } from '@/context'
 import 'react-tooltip/dist/react-tooltip.css'
 import './globals.css'
 import { VisibilityContextProvider } from '@/context/VisibilityContext'
@@ -64,16 +64,22 @@ const Layout = ({
   children: React.ReactNode
 }>) => {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <Script
         defer
         src="https://cloud.umami.is/script.js"
         data-website-id="f312ce9d-5eb0-4a08-8331-320723dfdaed"
       />
       <body className={roboto.className}>
-        <VisibilityContextProvider elements={elementsToCheckVisibility}>
-          <PersonaContextProvider>{children}</PersonaContextProvider>
-        </VisibilityContextProvider>
+        <ThemeContextProvider
+          defaultTheme="light"
+          enableSystem={false}
+          enableColorScheme={false}
+        >
+          <VisibilityContextProvider elements={elementsToCheckVisibility}>
+            <PersonaContextProvider>{children}</PersonaContextProvider>
+          </VisibilityContextProvider>
+        </ThemeContextProvider>
       </body>
     </html>
   )

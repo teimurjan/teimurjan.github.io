@@ -2,14 +2,14 @@
 import { ResumeQuery } from '@teimurjan/gql-client'
 import { useEffect, useRef } from 'react'
 import { JSONEditor, Mode } from 'vanilla-jsoneditor/standalone.js'
-import { ExternalLink, Save } from 'lucide-react'
+import { Copy, ExternalLink, Save } from 'lucide-react'
 import { useForm, useWatch } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import 'vanilla-jsoneditor/themes/jse-theme-dark.css'
 import { Switch } from '../ui/switch'
 import { Label } from '../ui/label'
-import { useResume } from '@teimurjan/resume'
+import { useCoverLetter, useResume } from '@teimurjan/resume'
 import { Button } from '../ui/button'
 import { JobApplication } from '@/db/db'
 import { Textarea } from '../ui/textarea'
@@ -22,6 +22,7 @@ import {
   FormLabel,
   FormMessage,
 } from '../ui/form'
+import { toast } from 'sonner'
 
 const JSON_EDITOR_ID = 'editor'
 
@@ -46,10 +47,17 @@ export const AdjustForm = ({ application, onSave }: Props) => {
 
   const formConfigValue = useWatch({ control: form.control, name: 'config' })
   const formResumeValue = useWatch({ control: form.control, name: 'resume' })
+  const formCoverLetterValue = useWatch({
+    control: form.control,
+    name: 'coverLetter',
+  })
 
   const { openResume } = useResume({
     config: formConfigValue,
     ...formResumeValue,
+  })
+  const { openCoverLetter } = useCoverLetter({
+    children: formCoverLetterValue,
   })
 
   useEffect(() => {
@@ -95,7 +103,34 @@ export const AdjustForm = ({ application, onSave }: Props) => {
       >
         <div className="flex flex-col flex-1 overflow-hidden text-sm">
           <div className="flex items-center justify-between gap-4 mb-4">
-            <Label className='text-base'>Resume Data</Label>
+            <Label className="text-base">
+              Resume Data{' '}
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={(e) => {
+                  // Prevent submit action to be triggered
+                  e.preventDefault()
+
+                  navigator.clipboard.writeText(JSON.stringify(formResumeValue))
+                  toast('Resume data copied to clipboard ✅')
+                }}
+              >
+                <Copy />
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={(e) => {
+                  // Prevent submit action to be triggered
+                  e.preventDefault()
+
+                  openResume()
+                }}
+              >
+                <ExternalLink />
+              </Button>
+            </Label>
             <FormField
               control={form.control}
               name="config.skills"
@@ -124,7 +159,10 @@ export const AdjustForm = ({ application, onSave }: Props) => {
               )}
             />
           </div>
-          <div id={JSON_EDITOR_ID} className="jse-theme-dark flex-1 overflow-auto" />
+          <div
+            id={JSON_EDITOR_ID}
+            className="jse-theme-dark flex-1 overflow-auto"
+          />
         </div>
 
         {application.coverLetter && (
@@ -133,7 +171,34 @@ export const AdjustForm = ({ application, onSave }: Props) => {
             name="coverLetter"
             render={({ field }) => (
               <FormItem className="flex flex-col">
-                <FormLabel className="flex-0 text-base">Cover Letter</FormLabel>
+                <FormLabel className="flex-0 text-base">
+                  Cover Letter{' '}
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={(e) => {
+                      // Prevent submit action to be triggered
+                      e.preventDefault()
+
+                      navigator.clipboard.writeText(field.value)
+                      toast('Cover letter copied to clipboard ✅')
+                    }}
+                  >
+                    <Copy />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={(e) => {
+                      // Prevent submit action to be triggered
+                      e.preventDefault()
+
+                      openCoverLetter()
+                    }}
+                  >
+                    <ExternalLink />
+                  </Button>
+                </FormLabel>
                 <FormControl className="flex-1">
                   <Textarea {...field} />
                 </FormControl>
@@ -144,23 +209,8 @@ export const AdjustForm = ({ application, onSave }: Props) => {
         )}
 
         <div className="flex items-center gap-4">
-          <Button
-            className="flex-1"
-            onClick={(e) => {
-              // Prevent save action to be triggered
-              e.preventDefault()
-
-              openResume()
-            }}
-          >
-            Resume <ExternalLink />
-          </Button>
           {onSave && (
-            <Button
-              variant="secondary"
-              className="flex-1"
-              type="submit"
-            >
+            <Button variant="secondary" className="flex-1" type="submit">
               Save <Save />
             </Button>
           )}

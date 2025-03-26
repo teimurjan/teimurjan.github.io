@@ -1,4 +1,3 @@
-import { theme } from '@teimurjan/utils'
 import type { Config } from 'tailwindcss'
 
 export default {
@@ -13,20 +12,26 @@ export default {
         'double-x': '200% 100%',
       },
       textColor: {
-        ...theme.colors.typography,
+        dark: 'var(--text-dark)',
+        light: 'var(--text-light)',
       },
       backgroundColor: {
-        ...theme.colors.background,
+        dark: 'var(--bg-dark)',
+        dark2: 'var(--bg-dark2)',
+        light: 'var(--bg-light)',
+        light2: 'var(--bg-light2)',
+        outline: 'var(--bg-outline)',
       },
       colors: {
         geometry: {
-          ...theme.colors.geometry,
+          dark: 'var(--geometry-dark)',
+          light: 'var(--geometry-light)',
         },
       },
       borderColor: {
-        ...theme.colors.typography,
+        dark: 'var(--border-dark)',
+        light: 'var(--border-light)',
       },
-
       keyframes: {
         rolllg: {
           '0%': { transform: 'translateX(-100vw)' },
@@ -38,8 +43,8 @@ export default {
         },
       },
       backgroundImage: {
-        'button-dark': `linear-gradient(to right, ${theme.colors.button.dark2} 50%, ${theme.colors.button.dark} 50%)`,
-        'button-light': `linear-gradient(to right, ${theme.colors.button.light2} 50%, ${theme.colors.button.light} 50%)`,
+        'button-dark': 'var(--button-gradient-dark)',
+        'button-light': 'var(--button-gradient-light)',
       },
     },
   },

@@ -1,17 +1,17 @@
 import { Text, View, StyleSheet, Styles, Link } from '@react-pdf/renderer'
 import Html from 'react-pdf-html'
-import { theme } from '@teimurjan/utils'
+import theme from '../../theme'
 
 const styles = StyleSheet.create({
   experienceTitle: {
     fontFamily: 'Helvetica-Bold',
   },
   experienceDates: {
-    color: theme.colors.resume.dark2,
+    color: theme.colors.dark2,
     fontFamily: 'Helvetica-Bold',
   },
   experienceSubtitle: {
-    color: theme.colors.resume.dark2,
+    color: theme.colors.dark2,
     fontFamily: 'Helvetica-Bold',
     marginTop: '2px',
     textTransform: 'capitalize',

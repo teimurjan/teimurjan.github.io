@@ -1,0 +1,39 @@
+:root {
+  --text-dark: #05386b;
+  --text-light: #edf5f1;
+  
+  --bg-dark: #5cdb95;
+  --bg-dark2: #05386b;
+  --bg-light: #edf5f1;
+  --bg-light2: #f9f9f9;
+  --bg-outline: rgba(0, 0, 0, 0.35);
+  
+  --geometry-dark: #05386b;
+  --geometry-light: rgba(5, 56, 107, 0.5);
+  
+  --border-dark: #05386b;
+  --border-light: #edf5f1;
+  
+  --button-gradient-dark: linear-gradient(to right, #03223f 50%, #05386b 50%);
+  --button-gradient-light: linear-gradient(to right, #d5e7e2 50%, #edf5f1 50%);
+}
+
+[data-theme='dark'] {
+  --text-dark: #f2f2f2;
+  --text-light: #ffffff;
+  
+  --bg-dark: #000519;
+  --bg-dark2: #020B1C;
+  --bg-light: #000f26;
+  --bg-light2: #0b203e;
+  --bg-outline: rgba(255, 255, 255, 0.35);
+  
+  --geometry-dark: #0a386c;
+  --geometry-light: rgba(23, 47, 75, 0.5);
+  
+  --border-dark: #4A90E2;
+  --border-light: #020B1C;
+  
+  --button-gradient-dark: linear-gradient(to right, #376caa 50%, #4A90E2 50%);
+  --button-gradient-light: linear-gradient(to right, #0c4fb3 50%, #5084e4 50%);
+} 

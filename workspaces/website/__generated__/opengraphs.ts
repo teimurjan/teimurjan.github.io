@@ -17,16 +17,20 @@ export default {
     url: null,
   },
   'https://www.toptal.com/data-science/machine-learning-number-recognition': {
-    description: null,
+    description:
+      'This article demonstrates how you can create an app capable of recognizing handwritten digits in under an hour, using Python and React.',
     twitterImageSrc: null,
-    twitterCard: null,
+    twitterCard: 'summary_large_image',
     twitterTitle: null,
     twitterDescription: null,
-    ogImage: null,
-    ogType: null,
-    ogTitle: null,
-    ogUrl: null,
-    ogDescription: null,
+    ogImage:
+      'https://bs-uploads.toptal.io/blackfish-uploads/components/open_graph_image/8958869/og_image/optimized/image_1-ce90274e2478c82a09b07ba664d59d3a.png',
+    ogType: 'article',
+    ogTitle: 'Machine Learning Digit Recognition Tutorial | Toptal®',
+    ogUrl:
+      'https://www.toptal.com/data-science/machine-learning-number-recognition',
+    ogDescription:
+      'Machine learning and computer vision are not new concepts, yet the availability of new tools and datasets is bringing them to a wider audience. Here is how you can create an app capable of recognizing handwritten digits in less than an hour. #ML #MachineLearning #ComputerVision',
     image: null,
     url: null,
   },

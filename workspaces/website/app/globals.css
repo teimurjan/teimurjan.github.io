@@ -1,3 +1,4 @@
+@import './theme.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,6 +7,8 @@
   font-family:
     Roboto Mono,
     sans-serif;
+
+  @apply transition-all duration-200;
 }
 
 html {
@@ -23,4 +26,3 @@ iframe {
 ul {
   @apply pl-4 list-disc;
 }
-

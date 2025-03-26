@@ -123,6 +123,8 @@ const main = async () => {
   const opengraphs: Record<string, OpengraphData> = {}
   for (const link of publicationLinks) {
     console.log(`generate-opengraph: getting opengraph for ${link}...`)
+    // Wait for 1 second to avoid spamming the server
+    await new Promise((resolve) => setTimeout(resolve, 1000))
     opengraphs[link] = await getOpengraph(link, browser)
   }
 

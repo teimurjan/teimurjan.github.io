@@ -12,7 +12,7 @@ export type Props = PropsWithChildren<{
 const MediaCard = forwardRef<HTMLDivElement, Props>(
   ({ className, children, title, media, subtitle }, ref) => {
     return (
-      <div ref={ref} className={classNames('bg-white shadow-lg', className)}>
+      <div ref={ref} className={classNames('bg-light2 shadow-lg', className)}>
         <div className="flex flex-col lg:flex-row">
           {media && (
             <div className="w-full lg:flex-shrink-0 lg:w-[500px]">{media}</div>

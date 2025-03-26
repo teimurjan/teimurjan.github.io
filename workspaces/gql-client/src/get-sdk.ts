@@ -9667,6 +9667,11 @@ export enum _SystemDateTimeFieldVariation {
   Localization = 'localization'
 }
 
+export type BioQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type BioQuery = { __typename?: 'Query', bios: Array<{ __typename?: 'Bio', fullName: string, headline: string, location: string, about: string, phoneNumber: string, email: string }> };
+
 export type EducationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -9692,17 +9697,24 @@ export type ResumeQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type ResumeQuery = { __typename?: 'Query', bios: Array<{ __typename?: 'Bio', fullName: string, headline: string, about: string, location: string, phoneNumber: string, email: string }>, educations: Array<{ __typename?: 'Education', id: string, school: string, degree?: string | null, areaOfStudy: string, startDate: any, endDate?: any | null }>, skills: Array<{ __typename?: 'Skill', id: string, title: string, yearsOfExperience: number }>, experiences: Array<{ __typename?: 'Experience', id: string, company: string, position: string, startDate: any, endDate?: any | null, description: { __typename?: 'RichText', html: string } }>, publications: Array<{ __typename?: 'Publication', id: string, title: string, link: string, date: any }>, conferences: Array<{ __typename?: 'Conference', id: string, title: string, topic: string, link: string, date: any }> };
 
-export type SeoQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type SeoQuery = { __typename?: 'Query', bios: Array<{ __typename?: 'Bio', fullName: string, headline: string }> };
-
 export type SkillsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type SkillsQuery = { __typename?: 'Query', skills: Array<{ __typename?: 'Skill', id: string, title: string, yearsOfExperience: number, logo: { __typename?: 'Asset', url: string } }> };
 
 
+export const BioDocument = gql`
+    query Bio {
+  bios {
+    fullName
+    headline
+    location
+    about
+    phoneNumber
+    email
+  }
+}
+    `;
 export const EducationDocument = gql`
     query Education {
   educations(orderBy: startDate_DESC) {
@@ -9875,14 +9887,6 @@ export const ResumeDocument = gql`
   }
 }
     `;
-export const SeoDocument = gql`
-    query Seo {
-  bios {
-    fullName
-    headline
-  }
-}
-    `;
 export const SkillsDocument = gql`
     query Skills {
   skills(orderBy: yearsOfExperience_DESC) {
@@ -9903,6 +9907,9 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    Bio(variables?: BioQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<BioQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<BioQuery>(BioDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Bio', 'query', variables);
+    },
     Education(variables?: EducationQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<EducationQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<EducationQuery>(EducationDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Education', 'query', variables);
     },
@@ -9917,9 +9924,6 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     Resume(variables?: ResumeQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ResumeQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ResumeQuery>(ResumeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Resume', 'query', variables);
-    },
-    Seo(variables?: SeoQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<SeoQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<SeoQuery>(SeoDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Seo', 'query', variables);
     },
     Skills(variables?: SkillsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<SkillsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<SkillsQuery>(SkillsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Skills', 'query', variables);

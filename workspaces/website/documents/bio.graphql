@@ -1,0 +1,10 @@
+query Bio {
+  bios {
+    fullName
+    headline
+    location
+    about
+    phoneNumber
+    email
+  }
+}

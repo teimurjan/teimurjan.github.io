@@ -1,6 +1,12 @@
+import gqlClient from '@/gql-client'
 import { Background, Button, Container, Link, Typography } from '../../atoms'
 
-const Footer = () => {
+const Footer = async () => {
+  const data = await gqlClient.Resume()
+  const {
+    bios: [{ email, fullName }],
+  } = data
+
   return (
     <Background color="dark2" className="py-8">
       <Container>
@@ -15,14 +21,14 @@ const Footer = () => {
             </Typography.Text>
           </div>
           <div>
-            <Button.Link href="mailto:teymurgg321@gmail.com" color="light">
+            <Button.Link href={`mailto:${email}`} color="light">
               Send me an email
             </Button.Link>
           </div>
         </div>
         <div className="flex justify-between gap-4">
           <Typography.Text color="light">
-            {new Date().getFullYear()} Teimur Gasanov
+            {new Date().getFullYear()} {fullName}
           </Typography.Text>
           <div className="flex gap-4">
             <Link

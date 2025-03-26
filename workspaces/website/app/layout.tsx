@@ -18,7 +18,7 @@ type Props = object
 export async function generateMetadata(_props: Props): Promise<Metadata> {
   const {
     bios: [{ fullName, headline }],
-  } = await gqlClient.Seo()
+  } = await gqlClient.Bio()
 
   return {
     title: fullName,

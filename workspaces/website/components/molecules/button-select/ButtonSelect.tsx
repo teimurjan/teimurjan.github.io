@@ -58,11 +58,11 @@ const ButtonSelect = ({
         ref={refs.setReference}
         {...getReferenceProps()}
       >
-        {selectedOption ? selectedOption.label : placeholder} ⬇️
+        {selectedOption ? selectedOption.label : placeholder}
       </Button>
 
       <div
-        className="dropdown-menu shadow-lg bg-light origin-top transition-all"
+        className="dropdown-menu shadow-lg bg-light2 origin-top transition-all"
         ref={refs.setFloating}
         style={{
           ...floatingStyles,
@@ -74,7 +74,7 @@ const ButtonSelect = ({
         {options.map((option) => (
           <div
             key={option.key}
-            className="px-3 py-2 hover:bg-gray-100 cursor-pointer uppercase text-sm"
+            className="px-3 py-2 hover:bg-light cursor-pointer uppercase text-sm"
             onClick={() => {
               onChange(option.value)
               setOpen(false)

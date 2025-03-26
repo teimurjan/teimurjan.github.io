@@ -69,7 +69,7 @@ const TopNavigation = () => {
             <ButtonSelect
               options={navItems}
               onChange={(id) => router.push(`/#${id}`)}
-              placeholder="Navigate"
+              placeholder="Menu"
             />
 
             <ThemeToggle />

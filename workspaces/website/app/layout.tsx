@@ -24,15 +24,15 @@ export async function generateMetadata(_props: Props): Promise<Metadata> {
     title: fullName,
     description: headline,
     metadataBase: URL.parse('https://teimurjan.dev'),
-    icons: ['/seo.png'],
+    icons: ['/logo.webp'],
     openGraph: {
-      images: ['/seo.png'],
+      images: ['/logo.webp'],
       title: fullName,
       description: headline,
       url: 'https://teimurjan.dev',
     },
     twitter: {
-      images: ['/seo.png'],
+      images: ['/logo.webp'],
       card: 'summary_large_image',
       title: fullName,
     },

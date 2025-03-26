@@ -37,12 +37,12 @@ const index = async () => {
   lines.push(`|-|-|-|`)
 
   const publications: string[] = []
-  data.publications.forEach((publication) => {
+  data.publications.reverse().forEach((publication) => {
     publications.push(`[${publication.title}](${publication.link})`)
   })
 
   const conferences: string[] = []
-  data.conferences.forEach((conference) => {
+  data.conferences.reverse().forEach((conference) => {
     conferences.push(
       `[${conference.title} - ${conference.topic}](${
         conference.videoEmbed?.link || conference.link
@@ -51,7 +51,7 @@ const index = async () => {
   })
 
   const interviews: string[] = []
-  data.interviews.forEach((interview) => {
+  data.interviews.reverse().forEach((interview) => {
     interviews.push(`[${interview.title}](${interview.videoEmbed?.link ?? ''})`)
   })
 

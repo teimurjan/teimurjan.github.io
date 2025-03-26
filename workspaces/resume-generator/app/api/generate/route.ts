@@ -38,6 +38,7 @@ export async function POST(request: NextRequest) {
     2. Optimize skills section:
       - Prioritize technical and soft skills mentioned in the job posting
       - Add any relevant complementary skills that strengthen my candidacy
+      - Add id to each new skill
       - Remove skills that aren't relevant to this role
       - Order skills logically by category/domain
 
@@ -60,7 +61,7 @@ export async function POST(request: NextRequest) {
       - Ends with energy and enthusiasm
 
     5. Return only a JSON object with:
-      - "resume": The enhanced resume data maintaining the original structure (important: do not change the original structure)
+      - "resume": The enhanced resume data maintaining the original structure (important: do not change the original structure or remove any fields)
       - "coverLetter": The compelling cover letter as a string
 
     Important: Maintain authenticity while optimizing for impact. The goal is to present my true experience in the most compelling way possible for this specific role.

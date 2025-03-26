@@ -4,6 +4,7 @@ import './globals.css'
 import { HeaderMenu } from '@/components/custom/header-menu'
 import { ThemeProvider } from '@/providers/theme-provider'
 import { Toaster } from '@/components/ui/sonner'
+import { QueryProvider } from '@/providers/query-provider'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -30,21 +31,23 @@ const Layout = ({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Toaster />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <header className="flex items-center px-2 h-16 shadow container mx-auto">
-            <HeaderMenu />
-          </header>
+        <QueryProvider>
+          <Toaster />
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <header className="flex items-center px-2 h-16 shadow container mx-auto">
+              <HeaderMenu />
+            </header>
 
-          <main className="py-4 h-[calc(100vh-4rem)] overflow-hidden container mx-auto">
-            {children}
-          </main>
-        </ThemeProvider>
+            <main className="py-4 h-[calc(100vh-4rem)] overflow-hidden container mx-auto">
+              {children}
+            </main>
+          </ThemeProvider>
+        </QueryProvider>
       </body>
     </html>
   )

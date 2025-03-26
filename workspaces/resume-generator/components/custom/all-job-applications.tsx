@@ -1,6 +1,6 @@
 'use client'
 
-import { useJobApplications } from '@/db/db'
+import { useJobApplications } from '@/db/queries'
 import { JobApplicationsTable } from './job-applications-table'
 
 interface Props {
@@ -8,11 +8,12 @@ interface Props {
 }
 
 export const AllJobApplications = ({ className }: Props) => {
-  const jobApplications = useJobApplications()
+  const { data: jobApplications = [], isLoading } = useJobApplications()
   return (
     <JobApplicationsTable
       className={className}
       jobApplications={jobApplications}
+      loading={isLoading}
     />
   )
 }

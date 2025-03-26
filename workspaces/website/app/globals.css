@@ -8,11 +8,11 @@
     Roboto Mono,
     sans-serif;
 
-  @apply transition-all duration-200;
+  @apply transition-colors;
 }
 
 html {
-  @apply scroll-smooth;
+  @apply scroll-smooth bg-light;
 }
 
 body {

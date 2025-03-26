@@ -77,7 +77,10 @@ export const AdjustForm = ({ application, onSave }: Props) => {
           if ('json' in updatedContent) {
             form.setValue('resume', updatedContent.json as ResumeQuery)
           }
-          if ('text' in updatedContent) {
+          if (
+            'text' in updatedContent &&
+            typeof updatedContent.text === 'string'
+          ) {
             form.setValue(
               'resume',
               JSON.parse(updatedContent.text) as ResumeQuery,
@@ -136,22 +139,45 @@ export const AdjustForm = ({ application, onSave }: Props) => {
               name="config.skills"
               render={({ field }) => (
                 <FormItem>
-                  <FormControl className="flex items-center space-x-2">
-                    <div>
-                      <Switch
-                        id="skills-in-row"
-                        className="cursor-pointer"
-                        checked={field.value === 'row'}
-                        onCheckedChange={(checked) =>
-                          form.setValue(
-                            'config.skills',
-                            checked ? 'row' : 'column',
-                          )
-                        }
-                      />
-                      <Label htmlFor="skills-in-row" className="cursor-pointer">
-                        Skills Horizontal
-                      </Label>
+                  <FormControl>
+                    <div className="flex items-center space-x-4">
+                      <div className="flex items-center gap-2">
+                        <Switch
+                          id="skills-in-row"
+                          className="cursor-pointer"
+                          checked={field.value === 'row'}
+                          onCheckedChange={(checked) =>
+                            form.setValue(
+                              'config.skills',
+                              checked ? 'row' : 'column',
+                            )
+                          }
+                        />
+                        <Label
+                          htmlFor="skills-in-row"
+                          className="cursor-pointer"
+                        >
+                          Skills Horizontal
+                        </Label>
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        <Switch
+                          id="tree-mode"
+                          className="cursor-pointer"
+                          defaultChecked
+                          onCheckedChange={(checked) => {
+                            if (jsonEditorRef.current) {
+                              jsonEditorRef.current.updateProps({
+                                mode: checked ? Mode.tree : Mode.text,
+                              })
+                            }
+                          }}
+                        />
+                        <Label htmlFor="tree-mode" className="cursor-pointer">
+                          Tree Mode
+                        </Label>
+                      </div>
                     </div>
                   </FormControl>
                   <FormMessage />

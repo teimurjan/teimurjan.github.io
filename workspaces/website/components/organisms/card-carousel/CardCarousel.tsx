@@ -8,7 +8,7 @@ interface CardCarouselProps {
 }
 
 const CardCarousel = ({ children }: CardCarouselProps) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel()
+  const [emblaRef, emblaApi] = useEmblaCarousel({ dragFree: true })
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [scrollProgress, setScrollProgress] = useState(0)
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([])

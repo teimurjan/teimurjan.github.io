@@ -1,28 +1,25 @@
 'use client'
 import { AdjustForm } from '@/components/custom/adjust-form'
-import {
-  JobApplication,
-  useJobApplication,
-  useUpdateJobApplication,
-} from '@/db/db'
+import { JobApplication } from '@/db/db'
 import { useCallback } from 'react'
 import { toast } from 'sonner'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
 import { Button } from '../ui/button'
 import { Copy } from 'lucide-react'
+import { useJobApplication, useUpdateJobApplication } from '@/db/queries'
 
 interface Props {
   id: string
 }
 
 export const AdjustByIdForm = ({ id }: Props) => {
-  const application = useJobApplication(id)
-  const updateJobApplication = useUpdateJobApplication()
+  const { data: application } = useJobApplication(id)
+  const { mutateAsync: updateJobApplication } = useUpdateJobApplication()
 
   const handleSave = useCallback(
     async (newApplication: Pick<JobApplication, 'resume' | 'coverLetter'>) => {
-      await updateJobApplication(id, newApplication)
-      toast('Application updated successfully')
+      await updateJobApplication({ id, data: newApplication })
+      toast('Application updated successfully ✅')
     },
     [id, updateJobApplication],
   )
@@ -34,12 +31,8 @@ export const AdjustByIdForm = ({ id }: Props) => {
   return (
     <Tabs defaultValue="resume" className="w-full h-full">
       <TabsList className="w-full">
-        <TabsTrigger value="resume">
-          Resume
-        </TabsTrigger>
-        <TabsTrigger value="description">
-          Description
-        </TabsTrigger>
+        <TabsTrigger value="resume">Resume</TabsTrigger>
+        <TabsTrigger value="description">Description</TabsTrigger>
       </TabsList>
       <TabsContent value="resume" className="overflow-hidden mt-2">
         <AdjustForm application={application} onSave={handleSave} />

@@ -13,16 +13,16 @@ const MediaCard = forwardRef<HTMLDivElement, Props>(
   ({ className, children, title, media, subtitle }, ref) => {
     return (
       <div ref={ref} className={classNames('bg-light2 shadow-lg', className)}>
-        <div className="flex flex-col lg:flex-row">
+        <div className="flex flex-col xl:flex-row">
           {media && (
-            <div className="w-full lg:flex-shrink-0 lg:w-[500px]">{media}</div>
+            <div className="w-full xl:flex-shrink-0 xl:basis-[500px]">{media}</div>
           )}
-          <div className="flex flex-col flex-1">
-            <Typography.Title className="p-2 lg:p-4" variant="h5">
+          <div className="flex flex-col flex-1 py-4 xl:py-2 px-4">
+            <Typography.Title variant="h5">
               {title}
             </Typography.Title>
             {subtitle && (
-              <Typography.Text className="mb-2 px-4" container>
+              <Typography.Text className="mt-2" container>
                 {subtitle}
               </Typography.Text>
             )}

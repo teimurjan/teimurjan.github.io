@@ -16,10 +16,11 @@ import {
 } from '../ui/form'
 import { toast } from 'sonner'
 import { Loader2, PartyPopper } from 'lucide-react'
-import { JobApplication, useAddJobApplication } from '@/db/db'
+import { JobApplication } from '@/db/db'
 import { Timestamp } from 'firebase/firestore'
 import { cn } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
+import { useAddJobApplication } from '@/db/queries'
 
 type GeneratedApplication = Pick<JobApplication, 'resume' | 'coverLetter'>
 
@@ -31,7 +32,7 @@ interface Props {
 type FormValues = z.infer<typeof generateFormSchema>
 
 export const GenerateForm = ({ application, className }: Props) => {
-  const addJobApplication = useAddJobApplication()
+  const { mutateAsync: addJobApplication } = useAddJobApplication()
   const router = useRouter()
 
   const form = useForm<FormValues>({

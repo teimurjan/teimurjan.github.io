@@ -1,4 +1,4 @@
-import { JobApplication, useRemoveJobApplication } from '@/db/db'
+import { JobApplication } from '@/db/db'
 import {
   Table,
   TableHeader,
@@ -9,7 +9,7 @@ import {
 } from '../ui/table'
 import { Button } from '../ui/button'
 import { useRouter } from 'next/navigation'
-import { ExternalLink, Trash } from 'lucide-react'
+import { ExternalLink, Loader2, Trash } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
 import {
@@ -22,17 +22,58 @@ import {
   AlertDialogAction,
   AlertDialogFooter,
 } from '../ui/alert-dialog'
+import { useRemoveJobApplication } from '@/db/queries'
+import { Skeleton } from '../ui/skeleton'
 
 interface Props {
   jobApplications: JobApplication[]
   className?: string
+  loading?: boolean
 }
 
-export const JobApplicationsTable = ({ jobApplications, className }: Props) => {
+export const JobApplicationsTable = ({
+  jobApplications,
+  className,
+  loading,
+}: Props) => {
   const router = useRouter()
-  const removeJobApplication = useRemoveJobApplication()
+  const { mutateAsync: removeJobApplication, isPending: isRemoving } =
+    useRemoveJobApplication()
 
   const [removingId, setRemovingId] = useState<string>()
+
+  if (loading) {
+    return (
+      <Table className={cn('overflow-auto', className)}>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Headline</TableHead>
+            <TableHead>Job Application</TableHead>
+            <TableHead>Created At</TableHead>
+            <TableHead className="text-right">Actions</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {Array.from({ length: 5 }).map((_, i) => (
+            <TableRow key={i}>
+              <TableCell>
+                <Skeleton className="h-4 w-[200px]" />
+              </TableCell>
+              <TableCell>
+                <Skeleton className="h-4 w-[300px]" />
+              </TableCell>
+              <TableCell>
+                <Skeleton className="h-4 w-[100px]" />
+              </TableCell>
+              <TableCell className="text-right">
+                <Skeleton className="h-9 w-9 inline-block" />
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    )
+  }
 
   return (
     <>
@@ -70,6 +111,7 @@ export const JobApplicationsTable = ({ jobApplications, className }: Props) => {
                     className="ml-2"
                     variant="destructive"
                     onClick={() => setRemovingId(jobApplication.id)}
+                    disabled={isRemoving}
                   >
                     <Trash />
                   </Button>
@@ -100,8 +142,9 @@ export const JobApplicationsTable = ({ jobApplications, className }: Props) => {
                   removeJobApplication(removingId)
                 }
               }}
+              disabled={isRemoving}
             >
-              Delete
+              {isRemoving ? <Loader2 className="animate-spin" /> : 'Delete'}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

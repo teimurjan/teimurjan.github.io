@@ -8,8 +8,8 @@ const linkStyles = cva(
   {
     variants: {
       color: {
-        dark: 'text-dark',
-        light: 'text-light',
+        dark: 'text-dark-foreground',
+        light: 'text-light-foreground',
       },
       underline: {
         none: 'after:hidden',

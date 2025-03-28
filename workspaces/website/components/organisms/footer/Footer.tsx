@@ -1,5 +1,9 @@
 import gqlClient from '@/gql-client'
-import { Background, Button, Container, Link, Typography } from '../../atoms'
+import Background from '../../atoms/background'
+import Button from '../../atoms/button'
+import Container from '../../atoms/container'
+import Link from '../../atoms/link'
+import Typography from '../../atoms/typography'
 
 const Footer = async () => {
   const data = await gqlClient.Resume()

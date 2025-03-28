@@ -9,7 +9,7 @@ const Tag = ({ className, children, color }: BackgroundProps) => {
       className={classNames(
         className,
         'uppercase font-bold text-sm py-1 px-2',
-        color === 'dark' || color === 'dark2' ? 'text-light' : 'text-dark',
+        color === 'dark' || color === 'dark2' ? 'text-light-foreground' : 'text-dark-foreground',
       )}
       color={color}
     >

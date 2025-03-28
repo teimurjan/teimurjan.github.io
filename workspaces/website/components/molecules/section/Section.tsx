@@ -1,4 +1,5 @@
-import { Background, BackgroundProps, Container } from '../../atoms'
+import Background, { Props as BackgroundProps } from '../../atoms/background'
+import Container from '../../atoms/container'
 import classNames from 'classnames'
 
 export interface Props extends BackgroundProps {

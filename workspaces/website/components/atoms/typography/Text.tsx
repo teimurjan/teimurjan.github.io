@@ -15,8 +15,8 @@ const textStyles = cva('m-0', {
       '5xl': 'text-5xl',
     },
     color: {
-      dark: 'text-dark',
-      light: 'text-light',
+      dark: 'text-dark-foreground',
+      light: 'text-light-foreground',
     },
   },
   defaultVariants: {

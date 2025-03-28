@@ -1,12 +1,15 @@
 'use client'
-import { PerspectiveCamera } from '@react-three/drei'
-import { Canvas } from '@react-three/fiber'
 import { useState } from 'react'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 import classNames from 'classnames'
 import { usePersonaContext } from '../../../context'
-import Persona from '../persona'
 import personaFirstFrame from '../../../assets/images/persona-first-frame.png'
+
+const PersonaScene = dynamic(() => import('../persona-scene'), {
+  ssr: false,
+  loading: () => null,
+})
 
 const PersonaCanvas = () => {
   const { state } = usePersonaContext()
@@ -25,7 +28,7 @@ const PersonaCanvas = () => {
     >
       <Image
         className={classNames(
-          'absolute top-0 left-0 right-0 bottom-0 z-10 opacity-0 object-cover',
+          'absolute top-0 left-0 right-0 bottom-0 z-10 opacity-0 object-contain',
           state === 'loading' && 'opacity-100 animate-pulse',
         )}
         src={personaFirstFrame}
@@ -33,20 +36,13 @@ const PersonaCanvas = () => {
         fill
         priority
       />
-
-      <Canvas
+      <PersonaScene
         className={classNames(
-          'absolute top-0 left-0 right-0 bottom-0 z-10 h-full w-full',
-          state === 'loading' && 'opacity-0',
+          'absolute top-0 left-0 right-0 bottom-0 z-10 h-full w-full opacity-0',
+          state !== 'loading' && 'opacity-100',
         )}
-      >
-        <ambientLight intensity={3} />
-        <ambientLight intensity={0.1} />
-        <directionalLight intensity={0.4} />
-        <PerspectiveCamera makeDefault fov={40} position={[0, 1, 3]} />
-
-        <Persona key={key} />
-      </Canvas>
+        personaKey={key}
+      />
     </div>
   )
 }

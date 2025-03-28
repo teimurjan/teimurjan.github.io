@@ -1,7 +1,8 @@
 import { forwardRef, HTMLAttributes, ReactNode } from 'react'
 import classNames from 'classnames'
 import Image from 'next/image'
-import { Background, Typography } from '../../atoms'
+import Background from '../../atoms/background'
+import Typography from '../../atoms/typography'
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
   id?: string

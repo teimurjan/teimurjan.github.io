@@ -1,7 +1,9 @@
 'use client'
-import { Content } from '../components/atoms'
-import { FullPageSection, Hero } from '../components/molecules'
-import { TopNavigation, Footer } from '../components/organisms'
+import Content from '../components/atoms/content'
+import FullPageSection from '../components/molecules/full-page-section'
+import Hero from '../components/molecules/hero'
+import TopNavigation from '../components/organisms/top-navigation'
+import Footer from '../components/organisms/footer'
 import error from '../assets/images/error.webp'
 
 const NotFound = () => {

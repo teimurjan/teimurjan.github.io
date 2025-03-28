@@ -1,5 +1,5 @@
 'use client'
-import { Button } from '@/components/atoms'
+import Button from '../../atoms/button'
 import { useResume, type ResumeProps } from '@teimurjan/resume'
 
 export type Props = ResumeProps

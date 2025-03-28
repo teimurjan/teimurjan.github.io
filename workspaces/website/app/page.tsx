@@ -1,14 +1,13 @@
-import { Content } from '../components/atoms'
-import { Section, GridSection } from '../components/molecules'
-import {
-  ExperienceHistory,
-  Education,
-  IndexBanner,
-  TopNavigation,
-  Footer,
-  Skills,
-  Media,
-} from '../components/organisms'
+import Content from '../components/atoms/content'
+import Section from '../components/molecules/section'
+import GridSection from '../components/molecules/section'
+import ExperienceHistory from '../components/organisms/experience-history'
+import Education from '../components/organisms/education'
+import IndexBanner from '../components/organisms/index-banner'
+import TopNavigation from '../components/organisms/top-navigation'
+import Footer from '../components/organisms/footer'
+import Skills from '../components/organisms/skills'
+import Media from '../components/organisms/media'
 
 const Page = () => {
   return (

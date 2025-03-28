@@ -1,6 +1,6 @@
 import { HTMLAttributes, ReactNode } from 'react'
 import classNames from 'classnames'
-import { Typography } from '../../atoms'
+import Typography from '../../atoms/typography'
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
   title: string

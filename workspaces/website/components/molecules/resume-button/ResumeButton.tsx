@@ -1,14 +1,28 @@
-import { Button } from '@/components/atoms'
-import { ResumeButtonLive } from '@/components/atoms'
-import { ResumeProps } from '@teimurjan/resume'
+'use client'
+import dynamic from 'next/dynamic'
+import Button from '../../atoms/button'
+import gqlClient from '@/gql-client'
 
-export type Props = ResumeProps
+const ResumeButtonLive = dynamic(
+  async () => {
+    const Component = (await import('../../atoms/resume-button-live')).default
+    const props = await gqlClient.Resume()
 
-const ResumeButton = (resumeProps: Props) => {
+    return () => <Component {...props} />
+  },
+  {
+    loading: () => <Button>Get resume</Button>,
+    ssr: false,
+  },
+)
+
+const ResumeButton = () => {
   return process.env.NODE_ENV === 'development' ? (
-    <ResumeButtonLive {...resumeProps} />
+    <ResumeButtonLive />
   ) : (
-    <Button.Link href="/resume.pdf">Get resume</Button.Link>
+    <Button.Link href="/resume.pdf" prefetch={false}>
+      Get resume
+    </Button.Link>
   )
 }
 

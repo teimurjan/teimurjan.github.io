@@ -1,7 +1,0 @@
-export { default as TopNavigation } from './top-navigation'
-export { default as IndexBanner } from './index-banner'
-export { default as ExperienceHistory } from './experience-history'
-export { default as Education } from './education'
-export { default as Skills } from './skills'
-export { default as Media } from './media'
-export { default as Footer } from './footer'

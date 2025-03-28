@@ -8,7 +8,8 @@ import {
   useClick,
   useDismiss,
 } from '@floating-ui/react'
-import { Button, Typography } from '../../atoms'
+import Button from '../../atoms/button'
+import Typography from '../../atoms/typography'
 
 type Option = {
   value: string

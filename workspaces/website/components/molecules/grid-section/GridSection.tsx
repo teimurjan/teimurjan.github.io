@@ -1,5 +1,8 @@
 import { Children } from 'react'
-import { Background, BackgroundProps, Container } from '../../atoms'
+import Background, {
+  Props as BackgroundProps,
+} from '../../atoms/background'
+import Container from '../../atoms/container'
 
 export type Props = BackgroundProps
 

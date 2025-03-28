@@ -1,5 +1,8 @@
 import Image from 'next/image'
-import { Progress, ProgressProps, Typography } from '../../atoms'
+import Progress, {
+  Props as ProgressProps,
+} from '../../atoms/progress'
+import Typography from '../../atoms/typography'
 import classNames from 'classnames'
 
 export interface Props extends ProgressProps {

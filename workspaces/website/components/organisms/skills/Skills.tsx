@@ -1,7 +1,7 @@
 import { calculatePercentage } from '@teimurjan/utils'
 import { Skill } from '@teimurjan/gql-client'
-import { Typography } from '../../atoms'
-import { InformativeProgress } from '../../molecules'
+import Typography from '../../atoms/typography'
+import InformativeProgress from '../../molecules/informative-progress'
 import gqlClient from '@/gql-client'
 import { Anchor } from '@/utils'
 

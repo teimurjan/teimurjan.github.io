@@ -1,1 +1,1 @@
-export { default, type Props } from './ResumeButton'
+export { default } from './ResumeButton'

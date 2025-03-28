@@ -1,10 +1,12 @@
 import { Fragment } from 'react'
-import { Banner, ResumeButton } from '../../molecules'
-import { PersonaCanvas, Background } from '../../atoms'
+import Banner from '../../molecules/banner'
+import PersonaCanvas from '../../atoms/persona-canvas'
+import Background from '../../atoms/background'
 import gqlClient from '@/gql-client'
+import ResumeButton from '../../molecules/resume-button'
 
 const IndexBanner = async () => {
-  const data = await gqlClient.Resume()
+  const data = await gqlClient.Bio()
   const {
     bios: [{ fullName, headline, about }],
   } = data
@@ -15,7 +17,7 @@ const IndexBanner = async () => {
       title={fullName}
       subtitle={headline}
       description={about}
-      button={<ResumeButton {...data} />}
+      button={<ResumeButton />}
       image={
         <Fragment>
           <PersonaCanvas />

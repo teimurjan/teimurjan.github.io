@@ -4,12 +4,13 @@ import classNames from 'classnames'
 import Link, { Props as LinkProps } from '../link'
 
 const buttonStyles = cva(
-  'uppercase border-2 border-solid text-center cursor-pointer transition-all duration-300 ease-in-out bg-double-x bg-right-bottom hover:bg-left-bottom',
+  'uppercase border-none text-center cursor-pointer !transition-[background-position] duration-300 ease-in-out bg-[length:200%_100%] bg-[position:100%_0] hover:bg-[position:0_0]',
   {
     variants: {
       color: {
-        light: 'bg-button-light text-dark border-light hover:border-dark',
-        dark: 'bg-button-dark text-light border-dark hover:border-dark2',
+        light:
+          'bg-[image:var(--color-light-button)] text-dark-foreground',
+        dark: 'bg-[image:var(--color-dark-button)] text-light-foreground',
       },
       disabled: {
         true: 'pointer-events-none opacity-50',

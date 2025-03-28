@@ -1,7 +1,10 @@
 import { prettyRange } from '@teimurjan/utils'
 import gqlClient from '@/gql-client'
-import { RichText, Tag, Typography } from '../../atoms'
-import { Card, Tooltip } from '../../molecules'
+import RichText from '../../atoms/rich-text'
+import Tag from '../../atoms/tag'
+import Typography from '../../atoms/typography'
+import Card from '../../molecules/card'
+import Tooltip from '../../molecules/tooltip'
 import CardCarousel from '../card-carousel'
 import { Anchor } from '@/utils'
 

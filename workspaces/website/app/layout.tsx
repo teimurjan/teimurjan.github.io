@@ -64,7 +64,7 @@ const Layout = ({
   children: React.ReactNode
 }>) => {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="bg-light">
       <Script
         defer
         src="https://cloud.umami.is/script.js"

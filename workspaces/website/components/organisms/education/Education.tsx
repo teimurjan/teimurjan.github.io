@@ -1,6 +1,7 @@
 import { Fragment } from 'react'
 import { prettyRange } from '@teimurjan/utils'
-import { RichText, Typography } from '../../atoms'
+import RichText from '../../atoms/rich-text'
+import Typography from '../../atoms/typography'
 import gqlClient from '@/gql-client'
 import { Anchor } from '@/utils'
 

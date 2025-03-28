@@ -1,5 +1,6 @@
 import { HTMLAttributes } from 'react'
-import { Container, Typography } from '../../atoms'
+import Container from '../../atoms/container'
+import Typography from '../../atoms/typography'
 import Image, { ImageProps } from 'next/image'
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {

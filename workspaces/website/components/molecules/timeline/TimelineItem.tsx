@@ -1,5 +1,5 @@
 import { HTMLAttributes, ReactNode } from 'react'
-import { Typography } from '../../atoms'
+import Typography from '../../atoms/typography'
 import classNames from 'classnames'
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {

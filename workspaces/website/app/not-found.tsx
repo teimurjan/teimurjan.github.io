@@ -1,6 +1,8 @@
-import { Content } from '../components/atoms'
-import { FullPageSection, Hero } from '../components/molecules'
-import { TopNavigation, Footer } from '../components/organisms'
+import Content from '../components/atoms/content'
+import FullPageSection from '../components/molecules/full-page-section'
+import Hero from '../components/molecules/hero'
+import TopNavigation from '../components/organisms/top-navigation'
+import Footer from '../components/organisms/footer'
 import notFound from '../assets/images/not-found.webp'
 
 const NotFound = () => {

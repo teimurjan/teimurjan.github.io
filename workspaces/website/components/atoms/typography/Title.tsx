@@ -13,8 +13,8 @@ const titleStyles = cva('m-0 font-bold', {
       h6: 'text-lg',
     },
     color: {
-      dark: 'text-dark',
-      light: 'text-light',
+      dark: 'text-dark-foreground',
+      light: 'text-light-foreground',
     },
     transform: {
       uppercase: 'uppercase',

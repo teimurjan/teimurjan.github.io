@@ -1,5 +1,5 @@
 import { forwardRef, PropsWithChildren, ReactNode } from 'react'
-import { Typography } from '../../atoms'
+import Typography from '../../atoms/typography'
 import classNames from 'classnames'
 
 export type Props = PropsWithChildren<{

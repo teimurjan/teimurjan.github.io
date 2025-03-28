@@ -1,7 +1,104 @@
-@import './theme.css';
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+:root {
+  --text-dark: #05386b;
+  --text-light: #edf5f1;
+
+  --bg-dark: #5cdb95;
+  --bg-dark2: #05386b;
+  --bg-light: #edf5f1;
+  --bg-light2: #f9f9f9;
+  --bg-outline: rgba(0, 0, 0, 0.35);
+
+  --geometry-dark: #05386b;
+  --geometry-light: rgba(5, 56, 107, 0.5);
+
+  --border-dark: #05386b;
+  --border-light: #edf5f1;
+  --border-dark2: #03223f;
+  --border-light2: #d5e7e2;
+
+  --button-gradient-dark: linear-gradient(
+    to right,
+    var(--border-dark2) 50%,
+    var(--border-dark) 50%
+  );
+  --button-gradient-light: linear-gradient(
+    to right,
+    var(--border-light2) 50%,
+    var(--border-light) 50%
+  );
+}
+
+[data-theme='dark'] {
+  --text-dark: #f2f2f2;
+  --text-light: #ffffff;
+
+  --bg-dark: #000519;
+  --bg-dark2: #020b1c;
+  --bg-light: #000f26;
+  --bg-light2: #0b203e;
+  --bg-outline: rgba(255, 255, 255, 0.35);
+
+  --geometry-dark: #0a386c;
+  --geometry-light: rgba(23, 47, 75, 0.5);
+
+  --border-dark: #13447b;
+  --border-light: var(--border-dark);
+  --border-dark2: #0f2e51;
+  --border-light2: var(--border-dark2);
+
+  --button-gradient-dark: linear-gradient(
+    to right,
+    var(--border-dark2) 50%,
+    var(--border-dark) 50%
+  );
+  --button-gradient-light: linear-gradient(
+    to right,
+    var(--border-light2) 50%,
+    var(--border-light) 50%
+  );
+}
+
+@theme {
+  --color-dark-foreground: var(--text-dark);
+  --color-light-foreground: var(--text-light);
+
+  --color-dark: var(--bg-dark);
+  --color-dark2: var(--bg-dark2);
+  --color-light: var(--bg-light);
+  --color-light2: var(--bg-light2);
+  --color-outline: var(--bg-outline);
+
+  --color-geometry-dark: var(--geometry-dark);
+  --color-geometry-light: var(--geometry-light);
+
+  --color-dark-button: var(--button-gradient-dark);
+  --color-light-button: var(--button-gradient-light);
+
+  --color-dark-border: var(--border-dark);
+  --color-light-border: var(--border-light);
+  --color-dark-border2: var(--border-dark2);
+  --color-light-border2: var(--border-light2);
+
+  @keyframes rolllg {
+    from {
+      transform: translateX(-100vw);
+    }
+    to {
+      transform: translateX(0) rotate(200deg);
+    }
+  }
+
+  @keyframes rollsm {
+    from {
+      transform: translateX(-100vw);
+    }
+    to {
+      transform: translateX(0) rotate(150deg);
+    }
+  }
+}
 
 * {
   font-family:
@@ -12,7 +109,7 @@
 }
 
 html {
-  @apply scroll-smooth bg-light;
+  @apply scroll-smooth;
 }
 
 body {

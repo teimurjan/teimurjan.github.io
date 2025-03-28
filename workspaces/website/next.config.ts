@@ -1,9 +1,12 @@
-import type { NextConfig } from 'next'
+import withBundleAnalyzer from '@next/bundle-analyzer'
 
-const nextConfig: NextConfig = {
+const nextConfig = withBundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+  openAnalyzer: false,
+})({
   output: 'export',
   images: {
-    unoptimized: true,  
+    unoptimized: true,
     dangerouslyAllowSVG: true,
     remotePatterns: [
       {
@@ -12,6 +15,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-}
+})
 
 export default nextConfig

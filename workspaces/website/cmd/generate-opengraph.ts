@@ -3,6 +3,7 @@ import path from 'path'
 import fs from 'fs'
 import prettier from 'prettier'
 
+import existingOpengraphs from '../__generated__/opengraphs.ts'
 import gqlClient from '../gql-client'
 
 type OpengraphData = Record<string, string | null>
@@ -113,6 +114,13 @@ const main = async () => {
 
   console.log('generate-opengraph: getting publications...')
   const publicationLinks = await getPublicationLinks()
+  const linksToGenerate = publicationLinks.filter(
+    (link) => !existingOpengraphs[link],
+  )
+  if (linksToGenerate.length === 0) {
+    console.log('generate-opengraph: no links to generate')
+    return
+  }
 
   console.log('generate-opengraph: launching puppeteer...')
   const browser = await puppeteer.launch({
@@ -121,8 +129,8 @@ const main = async () => {
   })
 
   const opengraphs: Record<string, OpengraphData> = {}
-  for (const link of publicationLinks) {
-    console.log(`generate-opengraph: getting opengraph for ${link}...`)
+  for (const link of linksToGenerate) {
+    console.log(`generate-opengraph: getting missing opengraph for ${link}...`)
     // Wait for 1 second to avoid spamming the server
     await new Promise((resolve) => setTimeout(resolve, 1000))
     opengraphs[link] = await getOpengraph(link, browser)
@@ -134,7 +142,7 @@ const main = async () => {
     console.log('generate-opengraph: output folder missing, creating...')
     fs.mkdirSync(parsedOutputPath.dir)
   }
-  const rawOutput = `export default ${JSON.stringify(opengraphs, null, 2)} as Record<string, Record<string, string | null>>`
+  const rawOutput = `export default ${JSON.stringify({ ...existingOpengraphs, ...opengraphs }, null, 2)} as Record<string, Record<string, string | null>>`
 
   console.log('generate-opengraph: formatting output...')
   const prettierRcPath = path.resolve(__dirname, '../../../.prettierrc.mjs')

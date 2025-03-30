@@ -32,6 +32,8 @@ export default [
           ignoreRestSiblings: true,
         },
       ],
+      '@typescript-eslint/no-var-requires': ['off', { allow: ['**/*.cjs'] }],
+      '@typescript-eslint/no-require-imports': ['off', { allow: ['**/*.cjs'] }],
     },
     settings: {
       react: {

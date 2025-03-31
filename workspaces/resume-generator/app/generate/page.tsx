@@ -3,7 +3,7 @@ import { RecentJobApplications } from '@/components/custom/recent-job-applicatio
 import { Separator } from '@/components/ui/separator'
 import gqlClient from '@/gql-client'
 
-const Home = async () => {
+const Generate = async () => {
   const data = await gqlClient.Resume()
 
   return (
@@ -20,4 +20,4 @@ const Home = async () => {
   )
 }
 
-export default Home
+export default Generate

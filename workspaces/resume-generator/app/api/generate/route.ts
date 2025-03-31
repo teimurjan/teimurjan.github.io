@@ -6,6 +6,9 @@ const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 })
 
+let lastRequestTime = 0
+const RATE_LIMIT_MS = 10000
+
 const extractJSON = (text: string) => {
   const jsonRegex = /```json\s*([\s\S]*?)\s*```/
   const match = jsonRegex.exec(text)
@@ -14,6 +17,18 @@ const extractJSON = (text: string) => {
 
 export async function POST(request: NextRequest) {
   try {
+    const now = Date.now()
+    if (now - lastRequestTime < RATE_LIMIT_MS) {
+      return NextResponse.json(
+        {
+          error:
+            'Too many requests. Please wait 10 seconds before trying again.',
+        },
+        { status: 429 },
+      )
+    }
+    lastRequestTime = now
+
     const body = await request.json()
     const parsed = generateFormSchema.safeParse(body)
     if (!parsed.success) {

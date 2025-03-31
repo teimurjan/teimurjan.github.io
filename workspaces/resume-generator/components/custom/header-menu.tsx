@@ -7,8 +7,15 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
 import Link from 'next/link'
+import { useAuth } from '@/providers/auth-provider'
 
 export const HeaderMenu = () => {
+  const { user } = useAuth()
+
+  if (!user) {
+    return null
+  }
+
   return (
     <NavigationMenu className="-mx-6">
       <NavigationMenuList>

@@ -9,7 +9,7 @@ import { Switch } from '../ui/switch'
 import { Label } from '../ui/label'
 import { useCoverLetter, useResume } from '@teimurjan/resume'
 import { Button } from '../ui/button'
-import { JobApplication } from '@/db/db'
+import { JobApplication } from '@/db/types'
 import { Textarea } from '../ui/textarea'
 import { adjustFormSchema } from '@/schema/adjust-form'
 import dynamic from 'next/dynamic'
@@ -32,7 +32,7 @@ const JsonEditor = dynamic(
 )
 
 interface Props {
-  application: Pick<JobApplication, 'resume' | 'coverLetter'>
+  application: Pick<JobApplication, 'resume' | 'coverLetter' | 'status'>
   onSave?: (application: Pick<JobApplication, 'resume' | 'coverLetter'>) => void
 }
 

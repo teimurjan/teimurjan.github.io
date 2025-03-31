@@ -1,4 +1,4 @@
-import { JobApplication } from '@/db/db'
+import { JobApplication } from '@/db/types'
 import {
   Table,
   TableHeader,
@@ -29,6 +29,16 @@ interface Props {
   jobApplications: JobApplication[]
   className?: string
   loading?: boolean
+}
+
+const getStatus = (jobApplication: JobApplication) => {
+  if (!jobApplication.status) {
+    return jobApplication.resume ? 'Completed' : 'Pending'
+  }
+  return (
+    jobApplication.status.slice(0, 1).toUpperCase() +
+    jobApplication.status.slice(1)
+  )
 }
 
 export const JobApplicationsTable = ({
@@ -88,9 +98,11 @@ export const JobApplicationsTable = ({
         </TableHeader>
         <TableBody>
           {jobApplications.map((jobApplication) => {
+            const headline = jobApplication.resume?.bios[0].headline
+            const status = getStatus(jobApplication)
             return (
               <TableRow key={jobApplication.id}>
-                <TableCell>{jobApplication.resume.bios[0].headline}</TableCell>
+                <TableCell>{headline ?? status}</TableCell>
                 <TableCell>
                   {jobApplication.jobDescription.slice(0, 80)}...
                 </TableCell>

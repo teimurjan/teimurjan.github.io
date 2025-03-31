@@ -4885,6 +4885,7 @@ __metadata:
     "@types/node": "npm:^20"
     "@types/react": "npm:^19"
     "@types/react-dom": "npm:^19"
+    "@upstash/qstash": "npm:^2.7.23"
     class-variance-authority: "npm:^0.7.1"
     clsx: "npm:^2.1.1"
     firebase: "npm:^11.4.0"
@@ -4894,6 +4895,7 @@ __metadata:
     next: "npm:15.2.4"
     next-themes: "npm:^0.4.4"
     openai: "npm:^4.87.3"
+    rate-limiter-flexible: "npm:^6.2.1"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     react-hook-form: "npm:^7.54.2"
@@ -5529,6 +5531,17 @@ __metadata:
     "@typescript-eslint/types": "npm:8.6.0"
     eslint-visitor-keys: "npm:^3.4.3"
   checksum: 10c0/9bd5d5daee9de7e009fdd1b64b1eca685a699d1b2639373bc279c97e25e769fff56fffef708ef66a2b19bc8bb201d36daf9e7084f0e0872178bfcf9d923b41f3
+  languageName: node
+  linkType: hard
+
+"@upstash/qstash@npm:^2.7.23":
+  version: 2.7.23
+  resolution: "@upstash/qstash@npm:2.7.23"
+  dependencies:
+    crypto-js: "npm:>=4.2.0"
+    jose: "npm:^5.2.3"
+    neverthrow: "npm:^7.0.1"
+  checksum: 10c0/51f8e67591fddcb9264109ab3828ff2509bdc44dc958048740316a8329404f10a11b616331ae9d054e816955417cbdac05570af9bb2a7011b2edca50423128fc
   languageName: node
   linkType: hard
 
@@ -7107,7 +7120,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"crypto-js@npm:^4.2.0":
+"crypto-js@npm:>=4.2.0, crypto-js@npm:^4.2.0":
   version: 4.2.0
   resolution: "crypto-js@npm:4.2.0"
   checksum: 10c0/8fbdf9d56f47aea0794ab87b0eb9833baf80b01a7c5c1b0edc7faf25f662fb69ab18dc2199e2afcac54670ff0cd9607a9045a3f7a80336cccd18d77a55b9fdf0
@@ -10421,7 +10434,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jose@npm:^5.0.0":
+"jose@npm:^5.0.0, jose@npm:^5.2.3":
   version: 5.10.0
   resolution: "jose@npm:5.10.0"
   checksum: 10c0/e20d9fc58d7e402f2e5f04e824b8897d5579aae60e64cb88ebdea1395311c24537bf4892f7de413fab1acf11e922797fb1b42269bc8fc65089a3749265ccb7b0
@@ -11486,6 +11499,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"neverthrow@npm:^7.0.1":
+  version: 7.2.0
+  resolution: "neverthrow@npm:7.2.0"
+  checksum: 10c0/16d1b07638e109c3e96a737fdb59703aa65e89cb68318db3cfe04c03a17a64d47e8462c8d25cb51d4199f15f37596db3097ff74ef33074eaa4b2248d3d5b599d
+  languageName: node
+  linkType: hard
+
 "next-themes@npm:^0.4.4":
   version: 0.4.4
   resolution: "next-themes@npm:0.4.4"
@@ -12538,6 +12558,13 @@ __metadata:
   dependencies:
     inherits: "npm:~2.0.3"
   checksum: 10c0/cf987476cc72e7d3aaabe23ccefaab1cd757a2b5e0c8d80b67c9575a6b5e1198807ffd4f0948a3f118b149d1111d810ee773473530b77a5c606673cac2c9c996
+  languageName: node
+  linkType: hard
+
+"rate-limiter-flexible@npm:^6.2.1":
+  version: 6.2.1
+  resolution: "rate-limiter-flexible@npm:6.2.1"
+  checksum: 10c0/76d403c46be06affa196f13c8212b49f3fe020d98b056b56d5f8c7755bab68f6dae18460950096a11af165d5e9c7b57fbaaea0682cd032332a2baa724a333a83
   languageName: node
   linkType: hard
 

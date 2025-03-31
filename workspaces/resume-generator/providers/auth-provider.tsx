@@ -6,8 +6,9 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  getAuth,
 } from 'firebase/auth'
-import { auth } from '../auth/auth'
+import { firebase } from '@/firebase/firebase'
 
 interface AuthContextType {
   user: User | null
@@ -17,6 +18,8 @@ interface AuthContextType {
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
+
+const auth = getAuth(firebase)
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null)

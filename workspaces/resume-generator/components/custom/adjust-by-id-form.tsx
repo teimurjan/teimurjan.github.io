@@ -1,11 +1,11 @@
 'use client'
 import { AdjustForm } from '@/components/custom/adjust-form'
-import { JobApplication } from '@/db/db'
+import { JobApplication } from '@/db/types'
 import { useCallback } from 'react'
 import { toast } from 'sonner'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
 import { Button } from '../ui/button'
-import { Copy } from 'lucide-react'
+import { Copy, Loader2 } from 'lucide-react'
 import { useJobApplication, useUpdateJobApplication } from '@/db/queries'
 
 interface Props {
@@ -35,7 +35,14 @@ export const AdjustByIdForm = ({ id }: Props) => {
         <TabsTrigger value="description">Description</TabsTrigger>
       </TabsList>
       <TabsContent value="resume" className="overflow-hidden mt-2">
-        <AdjustForm application={application} onSave={handleSave} />
+        {application.status !== 'completed' || !application.resume ? (
+          <div className="flex items-center justify-center h-full">
+            Application is still processing{' '}
+            <Loader2 className="ml-2 animate-spin" />
+          </div>
+        ) : (
+          <AdjustForm application={application} onSave={handleSave} />
+        )}
       </TabsContent>
       <TabsContent value="description" className="overflow-hidden mt-2">
         <pre>{application.jobDescription}</pre>

@@ -16,14 +16,9 @@ import {
 } from '../ui/form'
 import { toast } from 'sonner'
 import { Loader2, PartyPopper } from 'lucide-react'
-import { JobApplication } from '@/db/db'
-import { Timestamp } from 'firebase/firestore'
+import { JobApplication } from '@/db/types'
 import { cn } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
-import { useAddJobApplication } from '@/db/queries'
-
-type GeneratedApplication = Pick<JobApplication, 'resume' | 'coverLetter'>
-
 interface Props {
   application: Pick<JobApplication, 'resume'>
   className?: string
@@ -32,9 +27,7 @@ interface Props {
 type FormValues = z.infer<typeof generateFormSchema>
 
 export const GenerateForm = ({ application, className }: Props) => {
-  const { mutateAsync: addJobApplication } = useAddJobApplication()
   const router = useRouter()
-
   const form = useForm<FormValues>({
     resolver: zodResolver(generateFormSchema),
     defaultValues: {
@@ -52,18 +45,12 @@ export const GenerateForm = ({ application, className }: Props) => {
           resume: application.resume,
         }),
       })
-      if (response.ok) {
-        const newGeneratedApplication =
-          (await response.json()) as GeneratedApplication
-        const newApplicationId = await addJobApplication({
-          ...newGeneratedApplication,
-          jobDescription: values.jobDescription,
-          createdAt: Timestamp.now(),
-        })
-        router.push(`/adjust/${newApplicationId}`)
-      } else {
+      if (!response.ok) {
         throw new Error()
       }
+
+      const { jobApplicationId } = await response.json()
+      router.push(`/adjust/${jobApplicationId}`)
     } catch (_e) {
       toast('Error generating resume')
     }

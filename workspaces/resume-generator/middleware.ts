@@ -26,5 +26,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/', '/generate', '/adjust', '/adjust/:id*', '/api/generate', '/api/queue/generate'],
+  matcher: ['/', '/generate', '/adjust', '/adjust/:id*', '/api/generate'],
 }

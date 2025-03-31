@@ -1,12 +1,10 @@
 'use client'
 import { ResumeQuery } from '@teimurjan/gql-client'
-import { useEffect, useRef } from 'react'
-import { JSONEditor, Mode } from 'vanilla-jsoneditor/standalone.js'
+import { useRef } from 'react'
 import { Copy, ExternalLink, Save } from 'lucide-react'
 import { useForm, useWatch } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import 'vanilla-jsoneditor/themes/jse-theme-dark.css'
 import { Switch } from '../ui/switch'
 import { Label } from '../ui/label'
 import { useCoverLetter, useResume } from '@teimurjan/resume'
@@ -14,6 +12,7 @@ import { Button } from '../ui/button'
 import { JobApplication } from '@/db/db'
 import { Textarea } from '../ui/textarea'
 import { adjustFormSchema } from '@/schema/adjust-form'
+import dynamic from 'next/dynamic'
 import {
   Form,
   FormControl,
@@ -23,8 +22,14 @@ import {
   FormMessage,
 } from '../ui/form'
 import { toast } from 'sonner'
+import type { JsonEditorRef } from './json-editor'
 
-const JSON_EDITOR_ID = 'editor'
+const JsonEditor = dynamic(
+  () => import('./json-editor').then((mod) => mod.JsonEditor),
+  {
+    ssr: false,
+  },
+)
 
 interface Props {
   application: Pick<JobApplication, 'resume' | 'coverLetter'>
@@ -34,7 +39,7 @@ interface Props {
 type FormValues = z.infer<typeof adjustFormSchema>
 
 export const AdjustForm = ({ application, onSave }: Props) => {
-  const jsonEditorRef = useRef<JSONEditor>()
+  const jsonEditorRef = useRef<JsonEditorRef>(null)
 
   const form = useForm<FormValues>({
     resolver: zodResolver(adjustFormSchema),
@@ -59,44 +64,6 @@ export const AdjustForm = ({ application, onSave }: Props) => {
   const { openCoverLetter } = useCoverLetter({
     children: formCoverLetterValue,
   })
-
-  useEffect(() => {
-    const target = document.getElementById(JSON_EDITOR_ID)
-    if (!target) {
-      return
-    }
-
-    jsonEditorRef.current = new JSONEditor({
-      target,
-      props: {
-        mode: Mode.tree,
-        mainMenuBar: false,
-        navigationBar: false,
-        content: { json: form.getValues('resume') },
-        onChange: (updatedContent) => {
-          if ('json' in updatedContent) {
-            form.setValue('resume', updatedContent.json as ResumeQuery)
-          }
-          if (
-            'text' in updatedContent &&
-            typeof updatedContent.text === 'string'
-          ) {
-            form.setValue(
-              'resume',
-              JSON.parse(updatedContent.text) as ResumeQuery,
-            )
-          }
-        },
-      },
-    })
-
-    return () => {
-      if (jsonEditorRef.current) {
-        jsonEditorRef.current.destroy()
-        jsonEditorRef.current = undefined
-      }
-    }
-  }, [form])
 
   return (
     <Form {...form}>
@@ -168,9 +135,11 @@ export const AdjustForm = ({ application, onSave }: Props) => {
                           defaultChecked
                           onCheckedChange={(checked) => {
                             if (jsonEditorRef.current) {
-                              jsonEditorRef.current.updateProps({
-                                mode: checked ? Mode.tree : Mode.text,
-                              })
+                              if (checked) {
+                                jsonEditorRef.current.setTreeMode()
+                              } else {
+                                jsonEditorRef.current.setTextMode()
+                              }
                             }
                           }}
                         />
@@ -185,8 +154,23 @@ export const AdjustForm = ({ application, onSave }: Props) => {
               )}
             />
           </div>
-          <div
-            id={JSON_EDITOR_ID}
+          <JsonEditor
+            ref={jsonEditorRef}
+            content={{ json: formResumeValue }}
+            onChange={(updatedContent) => {
+              if ('json' in updatedContent) {
+                form.setValue('resume', updatedContent.json as ResumeQuery)
+              }
+              if (
+                'text' in updatedContent &&
+                typeof updatedContent.text === 'string'
+              ) {
+                form.setValue(
+                  'resume',
+                  JSON.parse(updatedContent.text) as ResumeQuery,
+                )
+              }
+            }}
             className="jse-theme-dark flex-1 overflow-auto"
           />
         </div>

@@ -1,5 +1,6 @@
 import { onRequest } from 'firebase-functions/v2/https'
 import { onInit } from 'firebase-functions/v2/core'
+import * as logger from 'firebase-functions/logger'
 import { defineSecret } from 'firebase-functions/params'
 import OpenAI from 'openai'
 import { Receiver } from '@upstash/qstash'
@@ -24,8 +25,14 @@ onInit(() => {
 })
 
 export const generate = onRequest(async (req, res) => {
+  if (req.method !== 'POST') {
+    res.status(405).send('Method Not Allowed')
+    return
+  }
+
   const signature = req.headers['upstash-signature']
   if (typeof signature !== 'string') {
+    logger.error('Invalid signature type', signature)
     res.status(400).send('Invalid signature')
     return
   }
@@ -34,18 +41,15 @@ export const generate = onRequest(async (req, res) => {
     const isVerified = await receiver.verify({
       body: req.rawBody.toString(),
       signature,
+      url: req.headers.referer,
     })
     if (!isVerified) {
       res.status(401).send('Unauthorized')
       return
     }
-  } catch (_error) {
+  } catch (error) {
+    logger.error('Signature verification failed', error)
     res.status(401).send('Unauthorized')
-    return
-  }
-
-  if (req.method !== 'POST') {
-    res.status(405).send('Method Not Allowed')
     return
   }
 
@@ -125,7 +129,8 @@ export const generate = onRequest(async (req, res) => {
     })
 
     res.status(200).json({ success: true })
-  } catch (_error) {
+  } catch (error) {
+    logger.error('Error generating resume', error)
     if (jobApplicationId) {
       await db.collection('jobApplications').doc(jobApplicationId).update({
         status: 'failed',

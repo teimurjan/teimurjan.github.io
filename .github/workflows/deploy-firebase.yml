@@ -24,9 +24,6 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: Login to Firebase
-        run: yarn firebase login:ci
-
       - name: Deploy Firebase Functions
         run: yarn workspace @teimurjan/firebase-functions deploy
         env:

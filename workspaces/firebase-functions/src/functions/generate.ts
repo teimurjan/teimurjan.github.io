@@ -5,21 +5,21 @@ import { Receiver } from '@upstash/qstash'
 import { extractOpenAIJSON } from '../utils/extract-openai-json'
 import { db } from '../firebase/admin-firestore'
 
+const qstashCurrentSigningKey = defineSecret('QSTASH_CURRENT_SIGNING_KEY')
+const qstashNextSigningKey = defineSecret('QSTASH_NEXT_SIGNING_KEY')
+const qstashUrl = defineSecret('QSTASH_URL')
+const openaiApiKey = defineSecret('OPENAI_API_KEY')
+
+const receiver = new Receiver({
+  currentSigningKey: qstashCurrentSigningKey.value(),
+  nextSigningKey: qstashNextSigningKey.value(),
+})
+
+const client = new OpenAI({
+  apiKey: openaiApiKey.value(),
+})
+
 export const generate = onRequest(async (req, res) => {
-  const qstashCurrentSigningKey = defineSecret('qstash.current-signing-key')
-  const qstashNextSigningKey = defineSecret('qstash.next-signing-key')
-  const qstashUrl = defineSecret('qstash.url')
-  const openAiKey = defineSecret('openai.key')
-
-  const receiver = new Receiver({
-    currentSigningKey: qstashCurrentSigningKey.value(),
-    nextSigningKey: qstashNextSigningKey.value(),
-  })
-
-  const client = new OpenAI({
-    apiKey: openAiKey.value(),
-  })
-
   const signature = req.headers['Upstash-Signature']
   const body = req.body
   if (typeof signature !== 'string') {

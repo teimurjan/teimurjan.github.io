@@ -8,6 +8,7 @@ on:
       - 'workspaces/**'
       - '!workspaces/functions/**'
       - '!workspaces/resume-generator/**'
+      - '!workspaces/firebase-functions/**'
   workflow_dispatch:
 
 jobs:

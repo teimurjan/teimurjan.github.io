@@ -1,4 +1,5 @@
 import { onRequest } from 'firebase-functions/v2/https'
+import { onInit } from 'firebase-functions/v2/core'
 import { defineSecret } from 'firebase-functions/params'
 import OpenAI from 'openai'
 import { Receiver } from '@upstash/qstash'
@@ -10,13 +11,17 @@ const qstashNextSigningKey = defineSecret('QSTASH_NEXT_SIGNING_KEY')
 const qstashUrl = defineSecret('QSTASH_URL')
 const openaiApiKey = defineSecret('OPENAI_API_KEY')
 
-const receiver = new Receiver({
-  currentSigningKey: qstashCurrentSigningKey.value(),
-  nextSigningKey: qstashNextSigningKey.value(),
-})
+let receiver: Receiver
+let client: OpenAI
 
-const client = new OpenAI({
-  apiKey: openaiApiKey.value(),
+onInit(() => {
+  receiver = new Receiver({
+    currentSigningKey: qstashCurrentSigningKey.value(),
+    nextSigningKey: qstashNextSigningKey.value(),
+  })
+  client = new OpenAI({
+    apiKey: openaiApiKey.value(),
+  })
 })
 
 export const generate = onRequest(async (req, res) => {

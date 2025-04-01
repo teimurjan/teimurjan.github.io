@@ -8,7 +8,6 @@ import { db } from '../firebase/admin-firestore'
 
 const qstashCurrentSigningKey = defineSecret('QSTASH_CURRENT_SIGNING_KEY')
 const qstashNextSigningKey = defineSecret('QSTASH_NEXT_SIGNING_KEY')
-const qstashUrl = defineSecret('QSTASH_URL')
 const openaiApiKey = defineSecret('OPENAI_API_KEY')
 
 let receiver: Receiver
@@ -25,19 +24,22 @@ onInit(() => {
 })
 
 export const generate = onRequest(async (req, res) => {
-  const signature = req.headers['Upstash-Signature']
-  const body = req.body
+  const signature = req.headers['upstash-signature']
   if (typeof signature !== 'string') {
     res.status(400).send('Invalid signature')
     return
   }
 
-  const isVerified = receiver.verify({
-    body,
-    signature,
-    url: qstashUrl.value(),
-  })
-  if (!isVerified) {
+  try {
+    const isVerified = await receiver.verify({
+      body: req.rawBody.toString(),
+      signature,
+    })
+    if (!isVerified) {
+      res.status(401).send('Unauthorized')
+      return
+    }
+  } catch (_error) {
     res.status(401).send('Unauthorized')
     return
   }
@@ -123,13 +125,13 @@ export const generate = onRequest(async (req, res) => {
     })
 
     res.status(200).json({ success: true })
-  } catch (error) {
+  } catch (_error) {
     if (jobApplicationId) {
       await db.collection('jobApplications').doc(jobApplicationId).update({
         status: 'failed',
       })
     }
 
-    res.status(500).json({ error: `${error}` })
+    res.status(500).json({ error: 'Something went wrong' })
   }
 })

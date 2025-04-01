@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
     })
 
     const { messageId } = await client.publishJSON({
-      url: `https://us-central1-${process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID}.cloudfunctions.net/generate`,
+      url: process.env.FIREBASE_GENERATE_FUNCTION_URL!,
       body: {
         jobApplicationId: jobApplicationRef.id,
         data: parsed.data,

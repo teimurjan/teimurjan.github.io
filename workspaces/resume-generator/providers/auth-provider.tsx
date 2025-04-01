@@ -27,11 +27,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      setUser(user)
       if (user) {
         const token = await user.getIdToken()
         document.cookie = `token=${token}; path=/;`
       }
+      setUser(user)
       setLoading(false)
     })
 

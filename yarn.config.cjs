@@ -2,7 +2,7 @@
 const { defineConfig } = require('@yarnpkg/types')
 const { compareVersions } = require('compare-versions')
 
-const workspaceCheckExclusions = []
+const workspaceCheckExclusions = ['@teimurjan/firebase-functions']
 const dependencyCheckExclusions = []
 
 module.exports = defineConfig({

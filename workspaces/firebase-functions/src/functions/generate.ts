@@ -1,17 +1,48 @@
+import { onRequest } from 'firebase-functions/v2/https'
+import { defineSecret } from 'firebase-functions/params'
 import OpenAI from 'openai'
-import { verifySignatureAppRouter } from '@upstash/qstash/nextjs'
-import { NextRequest, NextResponse } from 'next/server'
-import { db } from '@/firebase/admin-firestore'
-import { extractOpenAIJSON } from '@/utils/extract-openai-json'
+import { Receiver } from '@upstash/qstash'
+import { extractOpenAIJSON } from '../utils/extract-openai-json'
+import { db } from '../firebase/admin-firestore'
 
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-})
+export const generate = onRequest(async (req, res) => {
+  const qstashCurrentSigningKey = defineSecret('qstash.current-signing-key')
+  const qstashNextSigningKey = defineSecret('qstash.next-signing-key')
+  const qstashUrl = defineSecret('qstash.url')
+  const openAiKey = defineSecret('openai.key')
 
-async function handler(request: NextRequest) {
-  const body = await request.json()
-  const { jobApplicationId, data } = body
+  const receiver = new Receiver({
+    currentSigningKey: qstashCurrentSigningKey.value(),
+    nextSigningKey: qstashNextSigningKey.value(),
+  })
 
+  const client = new OpenAI({
+    apiKey: openAiKey.value(),
+  })
+
+  const signature = req.headers['Upstash-Signature']
+  const body = req.body
+  if (typeof signature !== 'string') {
+    res.status(400).send('Invalid signature')
+    return
+  }
+
+  const isVerified = receiver.verify({
+    body,
+    signature,
+    url: qstashUrl.value(),
+  })
+  if (!isVerified) {
+    res.status(401).send('Unauthorized')
+    return
+  }
+
+  if (req.method !== 'POST') {
+    res.status(405).send('Method Not Allowed')
+    return
+  }
+
+  const { jobApplicationId, data } = req.body
   try {
     await db.collection('jobApplications').doc(jobApplicationId).update({
       status: 'processing',
@@ -80,24 +111,20 @@ async function handler(request: NextRequest) {
     const json = rawResponse ? extractOpenAIJSON(rawResponse) : rawResponse
     const parsedJson = json ? JSON.parse(json) : {}
 
-    // Update the job application with the generated content
     await db.collection('jobApplications').doc(jobApplicationId).update({
       resume: parsedJson.resume,
       coverLetter: parsedJson.coverLetter,
       status: 'completed',
     })
 
-    return NextResponse.json({ success: true })
+    res.status(200).json({ success: true })
   } catch (error) {
-    if (body?.jobApplicationId) {
-      await db.collection('jobApplications').doc(body.jobApplicationId).update({
+    if (jobApplicationId) {
+      await db.collection('jobApplications').doc(jobApplicationId).update({
         status: 'failed',
       })
-
-      console.error('Error generating resume', error)
     }
 
-    return NextResponse.json({ error: `${error}` }, { status: 500 })
+    res.status(500).json({ error: `${error}` })
   }
-}
-export const POST = verifySignatureAppRouter(handler)
+})

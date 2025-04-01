@@ -5,7 +5,6 @@ import { Timestamp } from 'firebase-admin/firestore'
 import { generateFormSchema } from '@/schema/generate-form'
 import { db } from '@/firebase/admin-firestore'
 
-console.log('QSTASH_URL', process.env.QSTASH_URL)
 const client = new Client({
   baseUrl: process.env.QSTASH_URL!,
   token: process.env.QSTASH_TOKEN!,
@@ -44,7 +43,7 @@ export async function POST(request: NextRequest) {
     })
 
     const { messageId } = await client.publishJSON({
-      url: `${request.nextUrl.origin}/api/generate/queue`,
+      url: `https://us-central1-${process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID}.cloudfunctions.net/generate`,
       body: {
         jobApplicationId: jobApplicationRef.id,
         data: parsed.data,

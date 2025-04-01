@@ -1,0 +1,26 @@
+{
+  "name": "@teimurjan/firebase-functions",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Firebase functions for my personal website",
+  "author": "Teimur Gasanov",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "deploy": "yarn build && firebase deploy --only functions"
+  },
+  "dependencies": {
+    "@upstash/qstash": "^2.7.23",
+    "firebase-admin": "^13.2.0",
+    "firebase-functions": "^6.3.2",
+    "openai": "^4.87.3",
+    "typescript": "^5.7.3"
+  },
+  "devDependencies": {
+    "firebase-tools": "^14.0.1"
+  },
+  "engines": {
+    "node": "20"
+  },
+  "packageManager": "yarn@4.4.0"
+}

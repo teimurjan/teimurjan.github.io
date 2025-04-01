@@ -24,42 +24,44 @@ onInit(() => {
   })
 })
 
-export const generate = onRequest(async (req, res) => {
-  if (req.method !== 'POST') {
-    res.status(405).send('Method Not Allowed')
-    return
-  }
+export const generate = onRequest(
+  { secrets: ['QSTASH_CURRENT_SIGNING_KEY', 'QSTASH_NEXT_SIGNING_KEY', 'OPENAI_API_KEY'] },
+  async (req, res) => {
+    if (req.method !== 'POST') {
+      res.status(405).send('Method Not Allowed')
+      return
+    }
 
-  const signature = req.headers['upstash-signature']
-  if (typeof signature !== 'string') {
-    logger.error('Invalid signature type', signature)
-    res.status(400).send('Invalid signature')
-    return
-  }
+    const signature = req.headers['upstash-signature']
+    if (typeof signature !== 'string') {
+      logger.error('Invalid signature type', signature)
+      res.status(400).send('Invalid signature')
+      return
+    }
 
-  try {
-    const isVerified = await receiver.verify({
-      body: req.rawBody.toString(),
-      signature,
-      url: req.headers.referer,
-    })
-    if (!isVerified) {
+    try {
+      const isVerified = await receiver.verify({
+        body: req.rawBody.toString(),
+        signature,
+        url: req.headers.referer,
+      })
+      if (!isVerified) {
+        res.status(401).send('Unauthorized')
+        return
+      }
+    } catch (error) {
+      logger.error('Signature verification failed', error)
       res.status(401).send('Unauthorized')
       return
     }
-  } catch (error) {
-    logger.error('Signature verification failed', error)
-    res.status(401).send('Unauthorized')
-    return
-  }
 
-  const { jobApplicationId, data } = req.body
-  try {
-    await db.collection('jobApplications').doc(jobApplicationId).update({
-      status: 'processing',
-    })
+    const { jobApplicationId, data } = req.body
+    try {
+      await db.collection('jobApplications').doc(jobApplicationId).update({
+        status: 'processing',
+      })
 
-    const prompt = `
+      const prompt = `
     I am applying for the following job: ${data.jobDescription}
     
     I have the following JSON data for my resume: ${JSON.stringify(data.resume)}
@@ -106,37 +108,38 @@ export const generate = onRequest(async (req, res) => {
     Important: Maintain authenticity while optimizing for impact. The goal is to present my true experience in the most compelling way possible for this specific role.
     `
 
-    const completion = await client.chat.completions.create({
-      model: 'gpt-4o',
-      messages: [
-        {
-          role: 'system',
-          content:
-            "You're a resume creator with deep expertise in updating resumes, bios, and cover letters.",
-        },
-        { role: 'user', content: prompt },
-      ],
-    })
-
-    const rawResponse = completion.choices[0].message.content
-    const json = rawResponse ? extractOpenAIJSON(rawResponse) : rawResponse
-    const parsedJson = json ? JSON.parse(json) : {}
-
-    await db.collection('jobApplications').doc(jobApplicationId).update({
-      resume: parsedJson.resume,
-      coverLetter: parsedJson.coverLetter,
-      status: 'completed',
-    })
-
-    res.status(200).json({ success: true })
-  } catch (error) {
-    logger.error('Error generating resume', error)
-    if (jobApplicationId) {
-      await db.collection('jobApplications').doc(jobApplicationId).update({
-        status: 'failed',
+      const completion = await client.chat.completions.create({
+        model: 'gpt-4o',
+        messages: [
+          {
+            role: 'system',
+            content:
+              "You're a resume creator with deep expertise in updating resumes, bios, and cover letters.",
+          },
+          { role: 'user', content: prompt },
+        ],
       })
-    }
 
-    res.status(500).json({ error: 'Something went wrong' })
-  }
-})
+      const rawResponse = completion.choices[0].message.content
+      const json = rawResponse ? extractOpenAIJSON(rawResponse) : rawResponse
+      const parsedJson = json ? JSON.parse(json) : {}
+
+      await db.collection('jobApplications').doc(jobApplicationId).update({
+        resume: parsedJson.resume,
+        coverLetter: parsedJson.coverLetter,
+        status: 'completed',
+      })
+
+      res.status(200).json({ success: true })
+    } catch (error) {
+      logger.error('Error generating resume', error)
+      if (jobApplicationId) {
+        await db.collection('jobApplications').doc(jobApplicationId).update({
+          status: 'failed',
+        })
+      }
+
+      res.status(500).json({ error: 'Something went wrong' })
+    }
+  },
+)

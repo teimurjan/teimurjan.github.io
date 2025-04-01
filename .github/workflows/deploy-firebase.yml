@@ -27,4 +27,4 @@ jobs:
       - name: Deploy Firebase Functions
         run: yarn workspace @teimurjan/firebase-functions deploy
         env:
-          FIREBASE_DEPLOY_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

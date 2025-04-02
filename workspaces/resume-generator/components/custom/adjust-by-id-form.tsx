@@ -35,7 +35,8 @@ export const AdjustByIdForm = ({ id }: Props) => {
         <TabsTrigger value="description">Description</TabsTrigger>
       </TabsList>
       <TabsContent value="resume" className="overflow-hidden mt-2">
-        {application.status !== 'completed' || !application.resume ? (
+        {(application.status && application.status !== 'completed') ||
+        !application.resume ? (
           <div className="flex items-center justify-center h-full">
             Application is still processing{' '}
             <Loader2 className="ml-2 animate-spin" />

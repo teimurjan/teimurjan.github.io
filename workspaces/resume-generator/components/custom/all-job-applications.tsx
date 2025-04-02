@@ -14,6 +14,7 @@ export const AllJobApplications = ({ className }: Props) => {
       className={className}
       jobApplications={jobApplications}
       loading={isLoading}
+      search
     />
   )
 }

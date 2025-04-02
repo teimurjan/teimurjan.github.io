@@ -2,6 +2,7 @@
 
 import { useJobApplications } from '@/db/queries'
 import { JobApplicationsTable } from './job-applications-table'
+import { useMemo } from 'react'
 
 interface Props {
   className?: string
@@ -9,10 +10,14 @@ interface Props {
 
 export const RecentJobApplications = ({ className }: Props) => {
   const { data: jobApplications = [], isLoading } = useJobApplications()
+  const slicedJobApplications = useMemo(
+    () => jobApplications.slice(0, 5),
+    [jobApplications],
+  )
   return (
     <JobApplicationsTable
       className={className}
-      jobApplications={jobApplications.slice(0, 5)}
+      jobApplications={slicedJobApplications}
       loading={isLoading}
     />
   )

@@ -1,3 +1,4 @@
+'use client'
 import { JobApplication } from '@/db/types'
 import {
   Table,
@@ -9,7 +10,7 @@ import {
 } from '../ui/table'
 import { Button } from '../ui/button'
 import { useRouter } from 'next/navigation'
-import { ExternalLink, Loader2, Trash } from 'lucide-react'
+import { ExternalLink, Loader2, Search, Trash, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
 import {
@@ -24,11 +25,14 @@ import {
 } from '../ui/alert-dialog'
 import { useRemoveJobApplication } from '@/db/queries'
 import { Skeleton } from '../ui/skeleton'
+import { Input } from '../ui/input'
+import { useSearch } from '@/hooks/use-search'
 
 interface Props {
   jobApplications: JobApplication[]
   className?: string
   loading?: boolean
+  search?: boolean
 }
 
 const getStatus = (jobApplication: JobApplication) => {
@@ -45,7 +49,11 @@ export const JobApplicationsTable = ({
   jobApplications,
   className,
   loading,
+  search,
 }: Props) => {
+  const { searchResults, isSearching, setIsSearching, setSearchQuery, searchQuery } =
+    useSearch({ items: jobApplications, keys: ['jobDescription'] })
+
   const router = useRouter()
   const { mutateAsync: removeJobApplication, isPending: isRemoving } =
     useRemoveJobApplication()
@@ -91,13 +99,51 @@ export const JobApplicationsTable = ({
         <TableHeader>
           <TableRow>
             <TableHead>Headline</TableHead>
-            <TableHead>Job Application</TableHead>
+            <TableHead>
+              <div className="flex items-center">
+                {isSearching ? (
+                  <>
+                    <Input
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      placeholder="Search"
+                      autoFocus
+                    />
+                    <Button
+                      className="align-middle ml-1"
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => {
+                        setSearchQuery('')
+                        setIsSearching(false)
+                      }}
+                    >
+                      <X />
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <span>Job Application </span>
+                    {search && (
+                      <Button
+                        className="py-0 ml-auto"
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => setIsSearching(true)}
+                      >
+                        <Search />
+                      </Button>
+                    )}
+                  </>
+                )}
+              </div>
+            </TableHead>
             <TableHead>Created At</TableHead>
             <TableHead className="text-right">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {jobApplications.map((jobApplication) => {
+          {searchResults.map((jobApplication) => {
             const headline = jobApplication.resume?.bios[0].headline
             const status = getStatus(jobApplication)
             return (

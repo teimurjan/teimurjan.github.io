@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const bioSchema = z.object({
+const bioSchema = z.object({
   fullName: z.string().nonempty('Full name is required'),
   headline: z.string().nonempty('Headline is required'),
   about: z.string().nonempty('About is required'),
@@ -9,7 +9,7 @@ export const bioSchema = z.object({
   email: z.string().email('Invalid email address'),
 })
 
-export const educationSchema = z.object({
+const educationSchema = z.object({
   id: z.string().nonempty('ID is required'),
   school: z.string().nonempty('School is required'),
   degree: z.string().nullable().optional(),
@@ -18,7 +18,7 @@ export const educationSchema = z.object({
   endDate: z.string().nullable().optional(),
 })
 
-export const skillSchema = z.object({
+const skillSchema = z.object({
   id: z.string().nonempty('ID is required'),
   title: z.string().nonempty('Title is required'),
   yearsOfExperience: z
@@ -27,11 +27,11 @@ export const skillSchema = z.object({
     .nonnegative('Years of experience must be non-negative'),
 })
 
-export const descriptionSchema = z.object({
+const descriptionSchema = z.object({
   html: z.string().nonempty('HTML description is required'),
 })
 
-export const experienceSchema = z.object({
+const experienceSchema = z.object({
   id: z.string().nonempty('ID is required'),
   company: z.string().nonempty('Company is required'),
   position: z.string().nonempty('Position is required'),
@@ -40,14 +40,14 @@ export const experienceSchema = z.object({
   description: descriptionSchema,
 })
 
-export const publicationSchema = z.object({
+const publicationSchema = z.object({
   id: z.string().nonempty('ID is required'),
   title: z.string().nonempty('Title is required'),
   link: z.string().url('Invalid URL'),
   date: z.string().nonempty('Date is required'),
 })
 
-export const conferenceSchema = z.object({
+const conferenceSchema = z.object({
   id: z.string().nonempty('ID is required'),
   title: z.string().nonempty('Title is required'),
   topic: z.string().nonempty('Topic is required'),

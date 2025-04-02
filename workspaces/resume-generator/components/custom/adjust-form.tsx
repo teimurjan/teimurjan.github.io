@@ -11,7 +11,6 @@ import { useCoverLetter, useResume } from '@teimurjan/resume'
 import { Button } from '../ui/button'
 import { JobApplication } from '@/db/types'
 import { Textarea } from '../ui/textarea'
-import { adjustFormSchema } from '@/schema/adjust-form'
 import dynamic from 'next/dynamic'
 import {
   Form,
@@ -23,6 +22,7 @@ import {
 } from '../ui/form'
 import { toast } from 'sonner'
 import type { JsonEditorRef } from './json-editor'
+import { adjustFormSchema } from '@/schema/adjust-form'
 
 const JsonEditor = dynamic(
   () => import('./json-editor').then((mod) => mod.JsonEditor),

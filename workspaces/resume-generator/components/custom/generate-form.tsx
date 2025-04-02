@@ -5,7 +5,6 @@ import 'vanilla-jsoneditor/themes/jse-theme-dark.css'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { generateFormSchema } from '@/schema/generate-form'
 import {
   Form,
   FormControl,
@@ -19,6 +18,7 @@ import { Loader2, PartyPopper } from 'lucide-react'
 import { JobApplication } from '@/db/types'
 import { cn } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
+import { generateFormSchema } from '@/schema/generate-form'
 interface Props {
   application: Pick<JobApplication, 'resume'>
   className?: string

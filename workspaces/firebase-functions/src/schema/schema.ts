@@ -52,7 +52,7 @@ const conferenceSchema = z.object({
   date: z.string(),
 })
 
-export const openaiResponseSchema = z.object({
+export const generateSchema = z.object({
   coverLetter: z.string(),
   resume: z.object({
     bios: z.array(bioSchema),

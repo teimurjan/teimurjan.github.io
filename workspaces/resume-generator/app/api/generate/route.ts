@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { RateLimiterMemory } from 'rate-limiter-flexible'
 import { Client } from '@upstash/qstash'
-import { Timestamp } from 'firebase-admin/firestore'
-import { db } from '@/firebase/admin-firestore'
+import { createJobApplication } from '@/db/admin'
 import { generateFormSchema } from '@/schema/generate-form'
 
 const client = new Client({
@@ -36,24 +35,21 @@ export async function POST(request: NextRequest) {
     if (!parsed.success) {
       return NextResponse.json({ error: parsed.error.errors }, { status: 400 })
     }
-    const jobApplicationRef = await db.collection('jobApplications').add({
-      jobDescription: parsed.data.jobDescription,
-      status: 'pending',
-      createdAt: Timestamp.now(),
-    })
+
+    const jobApplicationId = await createJobApplication(parsed.data)
 
     const { messageId } = await client.publishJSON({
       url: process.env.FIREBASE_GENERATE_FUNCTION_URL!,
+      retries: 0,
       body: {
-        jobApplicationId: jobApplicationRef.id,
-        data: parsed.data,
+        jobApplicationId,
+        jobDescription: parsed.data.jobDescription,
       },
     })
 
     return NextResponse.json({
-      jobApplicationId: jobApplicationRef.id,
+      jobApplicationId,
       messageId,
-      status: 'pending',
     })
   } catch (error) {
     return NextResponse.json({ error: `${error}` }, { status: 500 })

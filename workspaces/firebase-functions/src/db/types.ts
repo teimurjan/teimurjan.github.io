@@ -1,5 +1,5 @@
-import { ResumeQuery } from "@teimurjan/gql-client"
-import { Timestamp } from "firebase/firestore"
+import { ResumeQuery } from '@teimurjan/gql-client'
+import { Timestamp } from 'firebase/firestore'
 
 export type JobApplicationStatus =
   | 'pending'

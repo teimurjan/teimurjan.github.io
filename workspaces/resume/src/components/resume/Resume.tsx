@@ -6,11 +6,7 @@ import {
   StyleSheet,
   Styles,
 } from '@react-pdf/renderer'
-import {
-  YEAR_DATE_FORMAT,
-  prettyRange,
-  sortByDate,
-} from '@teimurjan/utils'
+import { YEAR_DATE_FORMAT, prettyRange, dateSorter } from '@teimurjan/utils'
 import theme from '../../theme'
 import Header from '../header'
 import ResumeItem from '../resume-item'
@@ -103,24 +99,26 @@ const Resume = ({
             <View style={styles.layout}>
               <View style={styles.layoutLeft}>
                 <Text style={styles.title}>Work Experience</Text>
-                {experiences.map((experience, index) => (
-                  <ResumeItem
-                    key={experience.id}
-                    title={experience.position}
-                    dates={prettyRange(
-                      experience.startDate,
-                      experience.endDate,
-                      YEAR_DATE_FORMAT,
-                    )}
-                    subtitle={experience.company}
-                    description={experience.description.html}
-                    style={getItemMarginStyle(
-                      styles.itemMarginBottom,
-                      index,
-                      experiences.length,
-                    )}
-                  />
-                ))}
+                {experiences
+                  .sort((a, b) => dateSorter(a.startDate, b.startDate))
+                  .map((experience, index) => (
+                    <ResumeItem
+                      key={experience.id}
+                      title={experience.position}
+                      dates={prettyRange(
+                        experience.startDate,
+                        experience.endDate,
+                        YEAR_DATE_FORMAT,
+                      )}
+                      subtitle={experience.company}
+                      description={experience.description.html}
+                      style={getItemMarginStyle(
+                        styles.itemMarginBottom,
+                        index,
+                        experiences.length,
+                      )}
+                    />
+                  ))}
               </View>
 
               <View style={styles.layoutRight}>
@@ -185,12 +183,14 @@ const Resume = ({
 
                 <Text style={styles.title}>Publications</Text>
                 <View>
-                  {sortByDate(publications).map((publication, index) => (
-                    <ResumeItem
-                      key={publication.id}
-                      title={publication.title}
-                      subtitle={new URL(publication.link)}
-                      style={getItemMarginStyle(
+                  {publications
+                    .sort((a, b) => dateSorter(a.date, b.date))
+                    .map((publication, index) => (
+                      <ResumeItem
+                        key={publication.id}
+                        title={publication.title}
+                        subtitle={new URL(publication.link)}
+                        style={getItemMarginStyle(
                         styles.itemMarginBottomSmall,
                         index,
                         publications.length,
@@ -203,12 +203,14 @@ const Resume = ({
 
                 <Text style={styles.title}>Conferences</Text>
                 <View>
-                  {sortByDate(conferences).map((conference, index) => (
-                    <ResumeItem
-                      key={conference.id}
-                      title={conference.topic}
-                      subtitle={conference.title}
-                      style={getItemMarginStyle(
+                  {conferences
+                    .sort((a, b) => dateSorter(a.date, b.date))
+                    .map((conference, index) => (
+                      <ResumeItem
+                        key={conference.id}
+                        title={conference.topic}
+                        subtitle={conference.title}
+                        style={getItemMarginStyle(
                         styles.itemMarginBottomSmall,
                         index,
                         publications.length,

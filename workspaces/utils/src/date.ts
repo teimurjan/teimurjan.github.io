@@ -10,15 +10,13 @@ export const prettyDate = (date: string, format = PRETTY_DATE_FORMAT) => {
 export const prettyRange = (
   startDate: string,
   endDate?: string,
-  format = PRETTY_DATE_FORMAT
+  format = PRETTY_DATE_FORMAT,
 ) => {
   return `${prettyDate(startDate, format)} - ${
     endDate ? prettyDate(endDate, format) : 'Now'
   }`
 }
 
-export const sortByDate = <T extends { date: string }>(array: T[]) => {
-  return array.sort(
-    (a, b) => -differenceInDays(new Date(a.date), new Date(b.date))
-  )
+export const dateSorter = (a: string, b: string) => {
+  return -differenceInDays(new Date(a), new Date(b))
 }

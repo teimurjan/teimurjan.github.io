@@ -5299,7 +5299,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@teimurjan/firebase-functions@workspace:workspaces/firebase-functions"
   dependencies:
-    "@teimurjan/gql-client": "workspace:*"
     "@upstash/qstash": "npm:^2.7.23"
     firebase-admin: "npm:^13.2.0"
     firebase-functions: "npm:^6.3.2"

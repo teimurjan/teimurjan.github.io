@@ -28,7 +28,7 @@ const formSchema = z.object({
 })
 
 export default function Login() {
-  const { signIn, user } = useAuth()
+  const { signIn, user, loading } = useAuth()
   const router = useRouter()
 
   useEffect(() => {
@@ -49,8 +49,8 @@ export default function Login() {
     await signIn(values.email, values.password)
   }
 
-  // Waiting for redirect
-  if (user) {
+  const isRedirecting = !!user
+  if (isRedirecting || loading) {
     return (
       <div className="flex items-center justify-center h-screen w-full">
         <Loader2 className="animate-spin" />

@@ -18,7 +18,7 @@ export const useSearch = <T extends object>({
   const [isSearching, setIsSearching] = useState(false)
   const debouncedSearchQuery = useDebounce(searchQuery, debounceMs)
 
-  const fuse = useMemo(() => new Fuse(items, { keys }), [items, keys])
+  const fuse = useMemo(() => new Fuse(items, { keys, threshold: 0.5 }), [items, keys])
   const searchResults = useMemo(() => {
     if (!debouncedSearchQuery) {
       return items

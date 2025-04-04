@@ -1,18 +1,9 @@
 'use client'
 import { JobApplication } from '@/db/types'
-import {
-  Table,
-  TableHeader,
-  TableRow,
-  TableHead,
-  TableBody,
-  TableCell,
-} from '../ui/table'
 import { Button } from '../ui/button'
 import { useRouter } from 'next/navigation'
 import { ExternalLink, Loader2, Search, Trash, X } from 'lucide-react'
-import { cn } from '@/lib/utils'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import {
   AlertDialog,
   AlertDialogContent,
@@ -24,10 +15,12 @@ import {
   AlertDialogFooter,
 } from '../ui/alert-dialog'
 import { useRemoveJobApplication } from '@/db/queries'
-import { Skeleton } from '../ui/skeleton'
 import { Input } from '../ui/input'
 import { useSearch } from '@/hooks/use-search'
-
+import { JobApplicationsTableSkeleton } from './job-applications-table-skeleton'
+import { DataTable } from '../ui/data-table'
+import { ColumnDef } from '@tanstack/react-table'
+import { Badge } from '../ui/badge'
 interface Props {
   jobApplications: JobApplication[]
   className?: string
@@ -35,24 +28,18 @@ interface Props {
   search?: boolean
 }
 
-const getStatus = (jobApplication: JobApplication) => {
-  if (!jobApplication.status) {
-    return jobApplication.resume ? 'Completed' : 'Pending'
-  }
-  return (
-    jobApplication.status.slice(0, 1).toUpperCase() +
-    jobApplication.status.slice(1)
-  )
-}
-
 export const JobApplicationsTable = ({
   jobApplications,
-  className,
   loading,
   search,
 }: Props) => {
-  const { searchResults, isSearching, setIsSearching, setSearchQuery, searchQuery } =
-    useSearch({ items: jobApplications, keys: ['jobDescription'] })
+  const {
+    searchResults,
+    isSearching,
+    setIsSearching,
+    setSearchQuery,
+    searchQuery,
+  } = useSearch({ items: jobApplications, keys: ['jobDescription'] })
 
   const router = useRouter()
   const { mutateAsync: removeJobApplication, isPending: isRemoving } =
@@ -60,125 +47,135 @@ export const JobApplicationsTable = ({
 
   const [removingId, setRemovingId] = useState<string>()
 
+  const columns: ColumnDef<JobApplication>[] = useMemo(
+    () => [
+      {
+        header: 'Headline',
+        cell: ({ row }) => (
+          <div className="truncate w-72">
+            {row.original.resume?.bios[0].headline ?? 'No Headline'}
+          </div>
+        ),
+      },
+      {
+        header: () => {
+          if (isSearching) {
+            return (
+              <>
+                <Input
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search"
+                  autoFocus
+                />
+                <Button
+                  className="align-middle ml-1"
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => {
+                    setSearchQuery('')
+                    setIsSearching(false)
+                  }}
+                >
+                  <X />
+                </Button>
+              </>
+            )
+          }
+          return (
+            <>
+              <span>Job Description</span>
+              {search && (
+                <Button
+                  className="py-0 ml-auto"
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setIsSearching(true)}
+                >
+                  <Search />
+                </Button>
+              )}
+            </>
+          )
+        },
+        cell: ({ row }) => (
+          <div className="truncate w-[500px]">
+            {row.original.jobDescription}
+          </div>
+        ),
+        id: 'jobDescription',
+      },
+      {
+        accessorFn: (row) =>
+          new Intl.DateTimeFormat('en-US').format(
+            new Date(row.createdAt.toMillis()),
+          ),
+        header: 'Created At',
+      },
+      {
+        cell: ({ row }) => {
+          const status = (() => {
+            if (!row.original.status) {
+              return row.original.resume ? 'Completed' : 'Pending'
+            }
+            return (
+              row.original.status.slice(0, 1).toUpperCase() +
+              row.original.status.slice(1)
+            )
+          })()
+          return (
+            <Badge variant={status === 'Completed' ? 'default' : 'secondary'}>
+              {status}
+            </Badge>
+          )
+        },
+        header: 'Status',
+      },
+      {
+        id: 'actions',
+        cell: ({ row }) => {
+          const jobApplication = row.original
+          return (
+            <div className="text-right">
+              <Button
+                onClick={() => {
+                  router.push(`/adjust/${jobApplication.id}`)
+                }}
+              >
+                <ExternalLink />
+              </Button>
+              <Button
+                className="ml-2"
+                variant="destructive"
+                onClick={() => setRemovingId(jobApplication.id)}
+                disabled={isRemoving}
+              >
+                <Trash />
+              </Button>
+            </div>
+          )
+        },
+        header: () => <span className="ml-auto">Actions</span>,
+      },
+    ],
+    [
+      isSearching,
+      search,
+      searchQuery,
+      setSearchQuery,
+      setIsSearching,
+      isRemoving,
+      router,
+    ],
+  )
+
   if (loading) {
-    return (
-      <Table className={cn('overflow-auto', className)}>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Headline</TableHead>
-            <TableHead>Job Application</TableHead>
-            <TableHead>Created At</TableHead>
-            <TableHead className="text-right">Actions</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {Array.from({ length: 5 }).map((_, i) => (
-            <TableRow key={i}>
-              <TableCell>
-                <Skeleton className="h-4 w-[200px]" />
-              </TableCell>
-              <TableCell>
-                <Skeleton className="h-4 w-[300px]" />
-              </TableCell>
-              <TableCell>
-                <Skeleton className="h-4 w-[100px]" />
-              </TableCell>
-              <TableCell className="text-right">
-                <Skeleton className="h-9 w-9 inline-block" />
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    )
+    return <JobApplicationsTableSkeleton />
   }
 
   return (
     <>
-      <Table className={cn('overflow-auto', className)}>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Headline</TableHead>
-            <TableHead>
-              <div className="flex items-center">
-                {isSearching ? (
-                  <>
-                    <Input
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      placeholder="Search"
-                      autoFocus
-                    />
-                    <Button
-                      className="align-middle ml-1"
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => {
-                        setSearchQuery('')
-                        setIsSearching(false)
-                      }}
-                    >
-                      <X />
-                    </Button>
-                  </>
-                ) : (
-                  <>
-                    <span>Job Application </span>
-                    {search && (
-                      <Button
-                        className="py-0 ml-auto"
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => setIsSearching(true)}
-                      >
-                        <Search />
-                      </Button>
-                    )}
-                  </>
-                )}
-              </div>
-            </TableHead>
-            <TableHead>Created At</TableHead>
-            <TableHead className="text-right">Actions</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {searchResults.map((jobApplication) => {
-            const headline = jobApplication.resume?.bios[0].headline
-            const status = getStatus(jobApplication)
-            return (
-              <TableRow key={jobApplication.id}>
-                <TableCell>{headline ?? status}</TableCell>
-                <TableCell>
-                  {jobApplication.jobDescription.slice(0, 80)}...
-                </TableCell>
-                <TableCell>
-                  {new Intl.DateTimeFormat('en-US').format(
-                    new Date(jobApplication.createdAt.toMillis()),
-                  )}
-                </TableCell>
-                <TableCell className="text-right">
-                  <Button
-                    onClick={() => {
-                      router.push(`/adjust/${jobApplication.id}`)
-                    }}
-                  >
-                    <ExternalLink />
-                  </Button>
-                  <Button
-                    className="ml-2"
-                    variant="destructive"
-                    onClick={() => setRemovingId(jobApplication.id)}
-                    disabled={isRemoving}
-                  >
-                    <Trash />
-                  </Button>
-                </TableCell>
-              </TableRow>
-            )
-          })}
-        </TableBody>
-      </Table>
+      <DataTable columns={columns} data={searchResults} height="600px" />
 
       <AlertDialog
         open={!!removingId}

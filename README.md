@@ -12,6 +12,7 @@
 
 ![](https://github.com/teimurjan/teimurjan.github.io/actions/workflows/deploy.yml/badge.svg)
 ![](https://github.com/teimurjan/teimurjan.github.io/actions/workflows/deploy-readme.yml/badge.svg)
+![](https://github.com/teimurjan/teimurjan.github.io/actions/workflows/deploy-firebase.yml/badge.svg)
 
 </div>
 

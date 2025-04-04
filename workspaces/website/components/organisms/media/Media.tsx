@@ -1,5 +1,5 @@
 import { Fragment } from 'react'
-import { prettyDate, sortByDate } from '@teimurjan/utils'
+import { prettyDate, dateSorter } from '@teimurjan/utils'
 import Link from '../../atoms/link'
 import Typography from '../../atoms/typography'
 import MediaCard from '../../molecules/media-card'
@@ -11,14 +11,14 @@ import { Anchor } from '@/utils'
 const Media = async () => {
   const { publications, conferences, interviews } = await gqlClient.Media()
 
-  const mediaItems = sortByDate([
+  const mediaItems = [
     ...publications.map((publication) => ({
       ...publication,
       opengraph: opengraphs[publication.link],
     })),
     ...conferences,
     ...interviews,
-  ])
+  ].sort((a, b) => dateSorter(a.date, b.date))
 
   const renderLink = (link: string) => (
     <Link

@@ -41,14 +41,7 @@ export const JobApplicationsTable = ({
     setSearchQuery,
     searchQuery,
   } = useSearch({ items: jobApplications, keys: ['jobDescription'] })
-  const [containerHeight, setContainerHeight] = useState<number>(0)
-  const containerRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    if (containerRef.current) {
-      setContainerHeight(containerRef.current.clientHeight)
-    }
-  }, [containerRef])
+  const [containerHeight, setContainerHeight] = useState<number>(600)
 
   const router = useRouter()
   const { mutateAsync: removeJobApplication, isPending: isRemoving } =
@@ -183,7 +176,14 @@ export const JobApplicationsTable = ({
   }
 
   return (
-    <div className={className} ref={containerRef}>
+    <div
+      className={className}
+      ref={(ref) => {
+        if (ref) {
+          setContainerHeight(ref.clientHeight)
+        }
+      }}
+    >
       <DataTable
         columns={columns}
         data={searchResults}

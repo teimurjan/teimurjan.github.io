@@ -56,7 +56,7 @@ const TableRowComponent = <TData,>(rows: Row<TData>[]) =>
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
-  height: string
+  height: number
 }
 
 export function DataTable<TData, TValue>({

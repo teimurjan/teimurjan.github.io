@@ -3,7 +3,7 @@ import { JobApplication } from '@/db/types'
 import { Button } from '../ui/button'
 import { useRouter } from 'next/navigation'
 import { ExternalLink, Loader2, Search, Trash, X } from 'lucide-react'
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useRef, useEffect } from 'react'
 import {
   AlertDialog,
   AlertDialogContent,
@@ -32,6 +32,7 @@ export const JobApplicationsTable = ({
   jobApplications,
   loading,
   search,
+  className,
 }: Props) => {
   const {
     searchResults,
@@ -40,6 +41,14 @@ export const JobApplicationsTable = ({
     setSearchQuery,
     searchQuery,
   } = useSearch({ items: jobApplications, keys: ['jobDescription'] })
+  const [containerHeight, setContainerHeight] = useState<number>(0)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (containerRef.current) {
+      setContainerHeight(containerRef.current.clientHeight)
+    }
+  }, [containerRef])
 
   const router = useRouter()
   const { mutateAsync: removeJobApplication, isPending: isRemoving } =
@@ -174,8 +183,12 @@ export const JobApplicationsTable = ({
   }
 
   return (
-    <>
-      <DataTable columns={columns} data={searchResults} height="600px" />
+    <div className={className} ref={containerRef}>
+      <DataTable
+        columns={columns}
+        data={searchResults}
+        height={containerHeight}
+      />
 
       <AlertDialog
         open={!!removingId}
@@ -204,6 +217,6 @@ export const JobApplicationsTable = ({
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </>
+    </div>
   )
 }

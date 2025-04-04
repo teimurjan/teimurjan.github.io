@@ -3,7 +3,7 @@ import { JobApplication } from '@/db/types'
 import { Button } from '../ui/button'
 import { useRouter } from 'next/navigation'
 import { ExternalLink, Loader2, Search, Trash, X } from 'lucide-react'
-import { useMemo, useState, useRef, useEffect } from 'react'
+import { useMemo, useState } from 'react'
 import {
   AlertDialog,
   AlertDialogContent,

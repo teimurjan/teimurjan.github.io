@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import {
   User,
   signInWithEmailAndPassword,
@@ -13,14 +13,14 @@ import {
 } from 'firebase/auth'
 import { firebase } from '@/firebase/firebase'
 import { jwtDecode } from 'jwt-decode'
+import { useCookie } from '@/hooks/use-cookie'
 
 interface AuthContextType {
   user: User | null
-  loading: boolean
   signIn: (email: string, password: string) => Promise<void>
   signInWithGoogle: () => Promise<void>
   logout: () => Promise<void>
-  syncUser: () => Promise<boolean>
+  loading: boolean
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -28,8 +28,12 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 const auth = getAuth(firebase)
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
+
+  const tokenFromCookie = useCookie('token')
+  const decodedTokenFromCookie = useMemo(() => {
+    return tokenFromCookie ? jwtDecode<IdTokenResult>(tokenFromCookie) : null
+  }, [tokenFromCookie])
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -37,38 +41,37 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const token = await user.getIdToken()
         document.cookie = `token=${token}; path=/;`
       }
-      setUser(user)
+
       setLoading(false)
     })
 
     return unsubscribe
   }, [])
 
-  const syncUser = async () => {
-    const currentToken = document.cookie
-      .split('; ')
-      .find((row) => row.startsWith('token='))
-      ?.split('=')[1]
-    const decodedToken = currentToken
-      ? jwtDecode<IdTokenResult>(currentToken)
-      : null
-    const shouldUpdateToken =
-      !decodedToken ||
-      (decodedToken?.expirationTime &&
-        new Date(decodedToken.expirationTime).getTime() < Date.now())
+  useEffect(() => {
+    const syncUser = async () => {
+      const shouldUpdateToken =
+        !decodedTokenFromCookie ||
+        (decodedTokenFromCookie?.expirationTime &&
+          new Date(decodedTokenFromCookie.expirationTime).getTime() <
+            Date.now())
 
-    if (!shouldUpdateToken) {
-      return true
+      if (!shouldUpdateToken) {
+        return
+      }
+
+      if (auth.currentUser) {
+        setLoading(true)
+        const token = await auth.currentUser.getIdToken(true)
+        document.cookie = `token=${token}; path=/;`
+        return
+      }
+
+      return
     }
 
-    if (user) {
-      const token = await user.getIdToken(true)
-      document.cookie = `token=${token}; path=/;`
-      return true
-    }
-
-    return false
-  }
+    syncUser()
+  }, [decodedTokenFromCookie])
 
   const signIn = async (email: string, password: string) => {
     await signInWithEmailAndPassword(auth, email, password)
@@ -87,12 +90,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   return (
     <AuthContext.Provider
       value={{
-        user,
-        loading,
+        user: decodedTokenFromCookie ? auth.currentUser : null,
         signIn,
         signInWithGoogle,
         logout,
-        syncUser,
+        loading,
       }}
     >
       {children}

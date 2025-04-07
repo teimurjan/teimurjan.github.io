@@ -16,7 +16,7 @@ import { Input } from '@/components/ui/input'
 import { useAuth } from '@/providers/auth-provider'
 import { Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { SiGoogle } from '@icons-pack/react-simple-icons'
 
 const formSchema = z.object({
@@ -29,21 +29,16 @@ const formSchema = z.object({
 })
 
 export default function Login() {
-  const { signIn, signInWithGoogle, loading, syncUser, user } = useAuth()
+  const { signIn, signInWithGoogle, user, loading } = useAuth()
   const router = useRouter()
-  const [isSyncing, setIsSyncing] = useState(true)
 
   useEffect(() => {
-    async function syncUser_() {
-      const isSynced = await syncUser()
-      setIsSyncing(false)
-      if (isSynced) {
-        router.replace('/')
-      }
+    console.log('user', user)
+    console.log('loading', loading)
+    if (user && !loading) {
+      router.replace('/')
     }
-    syncUser_()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [!!user])
+  }, [router, user, loading])
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -61,7 +56,7 @@ export default function Login() {
     await signInWithGoogle()
   }
 
-  if (loading || isSyncing) {
+  if (loading) {
     return (
       <div className="flex items-center justify-center h-screen w-full">
         <Loader2 className="animate-spin" />

@@ -16,7 +16,8 @@ import { Input } from '@/components/ui/input'
 import { useAuth } from '@/providers/auth-provider'
 import { Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { SiGoogle } from '@icons-pack/react-simple-icons'
 
 const formSchema = z.object({
   email: z.string().email({
@@ -28,14 +29,21 @@ const formSchema = z.object({
 })
 
 export default function Login() {
-  const { signIn, user, loading } = useAuth()
+  const { signIn, signInWithGoogle, loading, syncUser, user } = useAuth()
   const router = useRouter()
+  const [isSyncing, setIsSyncing] = useState(true)
 
   useEffect(() => {
-    if (user) {
-      router.replace('/')
+    async function syncUser_() {
+      const isSynced = await syncUser()
+      setIsSyncing(false)
+      if (isSynced) {
+        router.replace('/')
+      }
     }
-  }, [user, router])
+    syncUser_()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [!!user])
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -49,8 +57,11 @@ export default function Login() {
     await signIn(values.email, values.password)
   }
 
-  const isRedirecting = !!user
-  if (isRedirecting || loading) {
+  const handleGoogleSignIn = async () => {
+    await signInWithGoogle()
+  }
+
+  if (loading || isSyncing) {
     return (
       <div className="flex items-center justify-center h-screen w-full">
         <Loader2 className="animate-spin" />
@@ -113,6 +124,25 @@ export default function Login() {
             </Button>
           </form>
         </Form>
+        <div className="relative">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t" />
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-background px-2 text-muted-foreground">
+              Or continue with
+            </span>
+          </div>
+        </div>
+        <Button
+          variant="outline"
+          type="button"
+          onClick={handleGoogleSignIn}
+          className="w-full"
+        >
+          <SiGoogle className="w-4 h-4 mr-2" />
+          Sign in with Google
+        </Button>
       </div>
     </div>
   )

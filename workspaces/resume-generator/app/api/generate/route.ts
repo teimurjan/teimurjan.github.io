@@ -29,6 +29,23 @@ export async function POST(request: NextRequest) {
     )
   }
 
+  const token = request.cookies.get('token')?.value
+  if (!token) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+  const verifyResponse = await fetch(
+    `${request.nextUrl.origin}/api/verify-token`,
+    {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  )
+  if (!verifyResponse.ok) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+
   try {
     const body = await request.json()
     const parsed = generateFormSchema.safeParse(body)

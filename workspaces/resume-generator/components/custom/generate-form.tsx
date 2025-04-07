@@ -45,6 +45,12 @@ export const GenerateForm = ({ application, className }: Props) => {
           resume: application.resume,
         }),
       })
+      
+      if (response.status === 401) {
+        router.push('/login')
+        return
+      }
+      
       if (!response.ok) {
         throw new Error()
       }

@@ -21,6 +21,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "teimurjan's AI resume generator",
   description: 'Create a resume from a job description',
+  icons: ['/logo.webp'],
 }
 
 const Layout = ({

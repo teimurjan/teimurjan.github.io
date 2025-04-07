@@ -33,8 +33,6 @@ export default function Login() {
   const router = useRouter()
 
   useEffect(() => {
-    console.log('user', user)
-    console.log('loading', loading)
     if (user && !loading) {
       router.replace('/')
     }

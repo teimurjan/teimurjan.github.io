@@ -5,11 +5,11 @@ import { Copy, ExternalLink, Save } from 'lucide-react'
 import { useForm, useWatch } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Label } from '../ui/label'
+import { Label } from '../../ui/label'
 import { useCoverLetter, useResume } from '@teimurjan/resume'
-import { Button } from '../ui/button'
+import { Button } from '../../ui/button'
 import { JobApplication } from '@/db/types'
-import { Textarea } from '../ui/textarea'
+import { Textarea } from '../../ui/textarea'
 import dynamic from 'next/dynamic'
 import {
   Form,
@@ -18,9 +18,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../ui/form'
+} from '../../ui/form'
 import { toast } from 'sonner'
-import type { JsonEditorRef } from './json-editor'
+import type { JsonEditorRef } from '../../common/json-editor'
 import { adjustFormSchema } from '@/schema/adjust-form'
 import {
   Select,
@@ -28,11 +28,11 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '../ui/select'
-import { AdjustResumeForm } from './adjust-resume-form'
+} from '../../ui/select'
+import { AdjustResumeSubform } from '../adjust-resume-subform/adjust-resume-subform'
 
 const JsonEditor = dynamic(
-  () => import('./json-editor').then((mod) => mod.JsonEditor),
+  () => import('../../common/json-editor').then((mod) => mod.JsonEditor),
   {
     ssr: false,
   },
@@ -45,7 +45,7 @@ interface Props {
 
 type FormValues = z.infer<typeof adjustFormSchema>
 
-export const AdjustForm = ({ application, onSave }: Props) => {
+export const AdjustApplicationForm = ({ application, onSave }: Props) => {
   const jsonEditorRef = useRef<JsonEditorRef>(null)
   const [viewMode, setViewMode] = useState<'tree' | 'text' | 'form'>('form')
 
@@ -177,7 +177,7 @@ export const AdjustForm = ({ application, onSave }: Props) => {
           </div>
 
           {viewMode === 'form' ? (
-            <AdjustResumeForm form={form} />
+            <AdjustResumeSubform form={form} />
           ) : (
             <JsonEditor
               ref={jsonEditorRef}

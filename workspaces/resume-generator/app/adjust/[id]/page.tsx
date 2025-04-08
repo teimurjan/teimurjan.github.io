@@ -1,9 +1,9 @@
-import { AdjustByIdForm } from '@/components/custom/adjust-by-id-form'
+import { AdjustApplication } from '@/components/widgets/adjust-application/adjust-application'
 
 const AdjustById = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params
 
-  return <AdjustByIdForm id={id} />
+  return <AdjustApplication id={id} />
 }
 
 export default AdjustById

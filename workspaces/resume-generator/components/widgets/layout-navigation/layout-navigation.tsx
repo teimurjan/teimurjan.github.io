@@ -10,7 +10,8 @@ import Link from 'next/link'
 import { useAuth } from '@/providers/auth-provider'
 import { Layers, Pickaxe, Sparkles } from 'lucide-react'
 import { usePathname } from 'next/navigation'
-export const HeaderMenu = () => {
+
+export const LayoutNavigation = () => {
   const { user } = useAuth()
   const pathname = usePathname()
 

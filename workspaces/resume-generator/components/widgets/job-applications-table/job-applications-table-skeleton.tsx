@@ -6,8 +6,8 @@ import {
   TableRow,
   TableCell,
   TableHead,
-} from '../ui/table'
-import { Skeleton } from '../ui/skeleton'
+} from '../../ui/table'
+import { Skeleton } from '../../ui/skeleton'
 import { cn } from '@/lib/utils'
 
 interface Props {

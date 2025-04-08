@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
-import { HeaderMenu } from '@/components/custom/header-menu'
+import { LayoutNavigation } from '@/components/widgets/layout-navigation/layout-navigation'
 import { ThemeProvider } from '@/providers/theme-provider'
 import { Toaster } from '@/components/ui/sonner'
 import { QueryProvider } from '@/providers/query-provider'
 import { AuthProvider } from '@/providers/auth-provider'
-import { LogoutButton } from '@/components/custom/logout-button'
+import { LogoutButton } from '@/components/widgets/logout-button/logout-button'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -44,7 +44,7 @@ const Layout = ({
               disableTransitionOnChange
             >
               <header className="flex items-center justify-between px-2 h-16 shadow container mx-auto">
-                <HeaderMenu />
+                <LayoutNavigation />
                 <LogoutButton />
               </header>
 

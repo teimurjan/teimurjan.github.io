@@ -11,12 +11,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../ui/form'
-import { Button } from '../ui/button'
-import { Input } from '../ui/input'
-import { Textarea } from '../ui/textarea'
-import { Label } from '../ui/label'
-import { Combobox, ComboboxOption } from '../ui/combobox'
+} from '../../ui/form'
+import { Button } from '../../ui/button'
+import { Input } from '../../ui/input'
+import { Textarea } from '../../ui/textarea'
+import { Label } from '../../ui/label'
+import { Combobox, ComboboxOption } from '../../ui/combobox'
 import { z } from 'zod'
 import { adjustFormSchema } from '@/schema/adjust-form'
 
@@ -26,7 +26,7 @@ interface Props {
   form: UseFormReturn<FormValues>
 }
 
-export const AdjustResumeForm = ({ form }: Props) => {
+export const AdjustResumeSubform = ({ form }: Props) => {
   const { fields: bioFields } = useFieldArray({
     control: form.control,
     name: 'resume.bios',

@@ -1,6 +1,6 @@
 'use client'
 import { JobApplication } from '@/db/types'
-import { Button } from '../ui/button'
+import { Button } from '../../ui/button'
 import { useRouter } from 'next/navigation'
 import { ExternalLink, Loader2, Search, Trash, X } from 'lucide-react'
 import { useMemo, useState } from 'react'
@@ -13,14 +13,15 @@ import {
   AlertDialogCancel,
   AlertDialogAction,
   AlertDialogFooter,
-} from '../ui/alert-dialog'
+} from '../../ui/alert-dialog'
 import { useRemoveJobApplication } from '@/db/queries'
-import { Input } from '../ui/input'
+import { Input } from '../../ui/input'
 import { useSearch } from '@/hooks/use-search'
 import { JobApplicationsTableSkeleton } from './job-applications-table-skeleton'
-import { DataTable } from '../ui/data-table'
+import { DataTable } from '../../ui/data-table'
 import { ColumnDef } from '@tanstack/react-table'
-import { Badge } from '../ui/badge'
+import { Badge } from '../../ui/badge'
+
 interface Props {
   jobApplications: JobApplication[]
   className?: string

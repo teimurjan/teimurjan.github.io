@@ -1,5 +1,5 @@
 'use client'
-import { Button } from '../ui/button'
+import { Button } from '../../ui/button'
 import { useAuth } from '@/providers/auth-provider'
 import { useRouter } from 'next/navigation'
 export const LogoutButton = () => {

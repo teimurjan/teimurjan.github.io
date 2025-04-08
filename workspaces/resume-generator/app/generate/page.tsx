@@ -1,5 +1,5 @@
-import { GenerateForm } from '@/components/custom/generate-form'
-import { RecentJobApplications } from '@/components/custom/recent-job-applications'
+import { GenerateApplicationForm } from '@/components/widgets/generate-application-form/generate-application-form'
+import { RecentJobApplications } from '@/components/widgets/recent-job-applications/recent-job-applications'
 import { Separator } from '@/components/ui/separator'
 import gqlClient from '@/gql-client'
 
@@ -8,7 +8,7 @@ const Generate = async () => {
 
   return (
     <div className="flex flex-col gap-4 h-full">
-      <GenerateForm
+      <GenerateApplicationForm
         application={{
           resume: data,
         }}

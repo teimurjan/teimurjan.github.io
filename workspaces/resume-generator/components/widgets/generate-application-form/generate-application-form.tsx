@@ -12,7 +12,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../ui/form'
+} from '../../ui/form'
 import { toast } from 'sonner'
 import { Loader2, PartyPopper } from 'lucide-react'
 import { JobApplication } from '@/db/types'
@@ -26,7 +26,7 @@ interface Props {
 
 type FormValues = z.infer<typeof generateFormSchema>
 
-export const GenerateForm = ({ application, className }: Props) => {
+export const GenerateApplicationForm = ({ application, className }: Props) => {
   const router = useRouter()
   const form = useForm<FormValues>({
     resolver: zodResolver(generateFormSchema),

@@ -1,7 +1,7 @@
 'use client'
 
 import { useJobApplications } from '@/db/queries'
-import { JobApplicationsTable } from './job-applications-table'
+import { JobApplicationsTable } from '../job-applications-table/job-applications-table'
 import { useMemo } from 'react'
 
 interface Props {

@@ -1,6 +1,6 @@
 import { JobApplications } from '@/components/widgets/job-applications/job-applications'
 
-const Home = async () => {
+const Home = () => {
   return (
     <div className="flex flex-col gap-4 h-full">
       <h4>Your job applications</h4>

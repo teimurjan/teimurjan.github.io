@@ -15,9 +15,8 @@ import {
 import { Input } from '@/components/ui/input'
 import { useAuth } from '@/providers/auth-provider'
 import { Loader2 } from 'lucide-react'
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
 import { SiGoogle } from '@icons-pack/react-simple-icons'
+import { useAnonymous } from '@/hooks/use-anonymous'
 
 const formSchema = z.object({
   email: z.string().email({
@@ -29,14 +28,9 @@ const formSchema = z.object({
 })
 
 export default function Login() {
-  const { signIn, signInWithGoogle, user, loading } = useAuth()
-  const router = useRouter()
+  useAnonymous()
 
-  useEffect(() => {
-    if (user && !loading) {
-      router.replace('/')
-    }
-  }, [router, user, loading])
+  const { signIn, signInWithGoogle, loading } = useAuth()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

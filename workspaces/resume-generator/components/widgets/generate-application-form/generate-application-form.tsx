@@ -19,6 +19,8 @@ import { JobApplication } from '@/db/types'
 import { cn } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
 import { generateFormSchema } from '@/schema/generate-form'
+import { useAuth } from '@/providers/auth-provider'
+
 interface Props {
   application: Pick<JobApplication, 'resume'>
   className?: string
@@ -28,6 +30,7 @@ type FormValues = z.infer<typeof generateFormSchema>
 
 export const GenerateApplicationForm = ({ application, className }: Props) => {
   const router = useRouter()
+  const { user } = useAuth()
   const form = useForm<FormValues>({
     resolver: zodResolver(generateFormSchema),
     defaultValues: {
@@ -37,20 +40,33 @@ export const GenerateApplicationForm = ({ application, className }: Props) => {
 
   const handleSubmit = async (values: FormValues) => {
     try {
+      const token = await user?.getIdToken()
+      const redirectParams = new URLSearchParams({
+        redirect: window.location.href,
+      })
+      const loginUrl = `/login?${redirectParams.toString()}`
+      if (!token) {
+        router.push(loginUrl)
+        return
+      }
+
       const response = await fetch('/api/generate', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify({
           jobDescription: values.jobDescription,
           resume: application.resume,
         }),
       })
-      
+
       if (response.status === 401) {
-        router.push('/login')
+        router.push(loginUrl)
         return
       }
-      
+
       if (!response.ok) {
         throw new Error()
       }

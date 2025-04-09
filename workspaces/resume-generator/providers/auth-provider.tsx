@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import {
   User,
   signInWithEmailAndPassword,
@@ -9,11 +9,8 @@ import {
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
-  IdTokenResult,
 } from 'firebase/auth'
 import { firebase } from '@/firebase/firebase'
-import { jwtDecode } from 'jwt-decode'
-import { useCookie } from '@/hooks/use-cookie'
 
 interface AuthContextType {
   user: User | null
@@ -29,49 +26,16 @@ const auth = getAuth(firebase)
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true)
-
-  const tokenFromCookie = useCookie('token')
-  const decodedTokenFromCookie = useMemo(() => {
-    return tokenFromCookie ? jwtDecode<IdTokenResult>(tokenFromCookie) : null
-  }, [tokenFromCookie])
+  const [user, setUser] = useState<User | null>(null)
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        const token = await user.getIdToken()
-        document.cookie = `token=${token}; path=/;`
-      }
-
+      setUser(user)
       setLoading(false)
     })
 
     return unsubscribe
   }, [])
-
-  useEffect(() => {
-    const syncUser = async () => {
-      const shouldUpdateToken =
-        !decodedTokenFromCookie ||
-        (decodedTokenFromCookie?.expirationTime &&
-          new Date(decodedTokenFromCookie.expirationTime).getTime() <
-            Date.now())
-
-      if (!shouldUpdateToken) {
-        return
-      }
-
-      if (auth.currentUser) {
-        setLoading(true)
-        const token = await auth.currentUser.getIdToken(true)
-        document.cookie = `token=${token}; path=/;`
-        return
-      }
-
-      return
-    }
-
-    syncUser()
-  }, [decodedTokenFromCookie])
 
   const signIn = async (email: string, password: string) => {
     await signInWithEmailAndPassword(auth, email, password)
@@ -84,13 +48,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const logout = async () => {
     await signOut(auth)
-    document.cookie = 'token=; Max-Age=0; path=/'
   }
 
   return (
     <AuthContext.Provider
       value={{
-        user: decodedTokenFromCookie ? auth.currentUser : null,
+        user,
         signIn,
         signInWithGoogle,
         logout,

@@ -29,10 +29,11 @@ export async function POST(request: NextRequest) {
     )
   }
 
-  const token = request.cookies.get('token')?.value
+  const token = request.headers.get('Authorization')?.split('Bearer ')[1]
   if (!token) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
+
   const verifyResponse = await fetch(
     `${request.nextUrl.origin}/api/verify-token`,
     {

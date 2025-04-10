@@ -1,7 +1,7 @@
 'use client'
 import { JobApplication } from '@/db/types'
 import { Button } from '../../ui/button'
-import { useRouter } from 'next/navigation'
+import { useRouter } from '@bprogress/next/app';
 import { ExternalLink, Loader2, Search, Trash, X } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import {

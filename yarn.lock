@@ -1131,6 +1131,39 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@bprogress/core@npm:^1.3.3":
+  version: 1.3.3
+  resolution: "@bprogress/core@npm:1.3.3"
+  checksum: 10c0/6df83bd2c10052c3e245a9a9b85931e156c34f26d46379e89fa68b97a5b99f86d6db61b9c53de55da1dca3f204be2aba181d48e5b2df42889d0e6db4265a8221
+  languageName: node
+  linkType: hard
+
+"@bprogress/next@npm:^3.2.11":
+  version: 3.2.11
+  resolution: "@bprogress/next@npm:3.2.11"
+  dependencies:
+    "@bprogress/core": "npm:^1.3.3"
+    "@bprogress/react": "npm:^1.2.6"
+  peerDependencies:
+    next: ">=13.0.0"
+    react: ">=18.0.0"
+    react-dom: ">=18.0.0"
+  checksum: 10c0/380fa641a72fa1fc4ad0cc0ab7206b00d877715609a925cecb3cb13a87b631114e20c6f24a19430c12f0a16af4ac05c17e11eea02f12380fff1370f6a3627f7d
+  languageName: node
+  linkType: hard
+
+"@bprogress/react@npm:^1.2.6":
+  version: 1.2.6
+  resolution: "@bprogress/react@npm:1.2.6"
+  dependencies:
+    "@bprogress/core": "npm:^1.3.3"
+  peerDependencies:
+    react: ">=18.0.0"
+    react-dom: ">=18.0.0"
+  checksum: 10c0/8043893f54634c37279da8b9b3eb1e73b2f0fb7047077d07bd2a3b52fdddbfa65c2e274305ee4aba721046e8e22906e3544c4d151e2f053c12cbd3c4613b6b39
+  languageName: node
+  linkType: hard
+
 "@codemirror/autocomplete@npm:^6.16.2":
   version: 6.18.1
   resolution: "@codemirror/autocomplete@npm:6.18.1"
@@ -5525,6 +5558,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@teimurjan/resume-generator@workspace:workspaces/resume-generator"
   dependencies:
+    "@bprogress/next": "npm:^3.2.11"
     "@hookform/resolvers": "npm:^4.1.3"
     "@icons-pack/react-simple-icons": "npm:^12.5.0"
     "@radix-ui/react-alert-dialog": "npm:^1.1.6"

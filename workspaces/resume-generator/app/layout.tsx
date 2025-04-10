@@ -7,6 +7,7 @@ import { Toaster } from '@/components/ui/sonner'
 import { QueryProvider } from '@/providers/query-provider'
 import { AuthProvider } from '@/providers/auth-provider'
 import { LogoutButton } from '@/components/widgets/logout-button/logout-button'
+import { ProgressProvider } from '@/providers/progress-provider'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -34,26 +35,28 @@ const Layout = ({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <AuthProvider>
-          <QueryProvider>
-            <Toaster />
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="dark"
-              enableSystem
-              disableTransitionOnChange
-            >
-              <header className="flex items-center justify-between px-2 h-16 shadow container mx-auto">
-                <LayoutNavigation />
-                <LogoutButton />
-              </header>
+        <ProgressProvider>
+          <AuthProvider>
+            <QueryProvider>
+              <Toaster />
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="dark"
+                enableSystem
+                disableTransitionOnChange
+              >
+                <header className="flex items-center justify-between px-2 h-16 shadow container mx-auto">
+                  <LayoutNavigation />
+                  <LogoutButton />
+                </header>
 
-              <main className="py-4 h-[calc(100vh-4rem)] overflow-hidden container mx-auto">
-                {children}
-              </main>
-            </ThemeProvider>
-          </QueryProvider>
-        </AuthProvider>
+                <main className="py-4 h-[calc(100vh-4rem)] overflow-hidden container mx-auto">
+                  {children}
+                </main>
+              </ThemeProvider>
+            </QueryProvider>
+          </AuthProvider>
+        </ProgressProvider>
       </body>
     </html>
   )

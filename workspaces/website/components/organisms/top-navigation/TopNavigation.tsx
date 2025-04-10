@@ -2,7 +2,7 @@
 import NextLink from 'next/link'
 import classNames from 'classnames'
 import { useWindowScroll } from '@/hooks'
-import { useRouter } from 'next/navigation'
+import { useRouter } from '@bprogress/next/app';
 import Logo from '../../atoms/logo'
 import Container from '../../atoms/container'
 import Background from '../../atoms/background'

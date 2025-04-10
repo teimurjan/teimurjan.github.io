@@ -17,7 +17,7 @@ import { toast } from 'sonner'
 import { Loader2, PartyPopper } from 'lucide-react'
 import { JobApplication } from '@/db/types'
 import { cn } from '@/lib/utils'
-import { useRouter } from 'next/navigation'
+import { useRouter } from '@bprogress/next/app';
 import { generateFormSchema } from '@/schema/generate-form'
 import { useAuth } from '@/providers/auth-provider'
 

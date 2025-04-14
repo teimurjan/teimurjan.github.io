@@ -1,6 +1,6 @@
 import { Font } from '@react-pdf/renderer'
 import Resume from './Resume'
-import { ResumeProps } from './types'
+import { CustomResumeProps } from '../types'
 
 Font.registerEmojiSource({
   format: 'png',
@@ -11,8 +11,6 @@ Font.registerHyphenationCallback((word: string) => {
   return [word]
 })
 
-const Resume_ = (props: ResumeProps) => <Resume {...props} />
+const Resume_ = (props: CustomResumeProps) => <Resume {...props} />
 
 export default Resume_
-
-export type { ResumeProps }

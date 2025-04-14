@@ -30,6 +30,7 @@ import {
   SelectValue,
 } from '../../ui/select'
 import { AdjustResumeSubform } from '../adjust-resume-subform/adjust-resume-subform'
+import { Separator } from '@/components/ui/separator'
 
 const JsonEditor = dynamic(
   () => import('../../common/json-editor').then((mod) => mod.JsonEditor),
@@ -55,20 +56,25 @@ export const AdjustApplicationForm = ({ application, onSave }: Props) => {
       resume: application.resume,
       coverLetter: application.coverLetter,
       config: { skills: 'row' as const },
+      style: 'harvard' as const,
     },
   })
 
   const formConfigValue = useWatch({ control: form.control, name: 'config' })
+  const formStyleValue = useWatch({ control: form.control, name: 'style' })
   const formResumeValue = useWatch({ control: form.control, name: 'resume' })
   const formCoverLetterValue = useWatch({
     control: form.control,
     name: 'coverLetter',
   })
 
-  const { openResume } = useResume({
-    config: formConfigValue,
-    ...formResumeValue,
-  })
+  const { openResume } = useResume(
+    {
+      config: formConfigValue,
+      ...formResumeValue,
+    },
+    formStyleValue,
+  )
   const { openCoverLetter } = useCoverLetter({
     children: formCoverLetterValue,
   })
@@ -113,39 +119,79 @@ export const AdjustApplicationForm = ({ application, onSave }: Props) => {
                 </Button>
               </div>
             </div>
-            <div className="flex items-center gap-4">
-              <Label>Skills Layout</Label>
-              <FormField
-                control={form.control}
-                name="config.skills"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <div className="flex items-center gap-2">
-                        <Select
-                          value={field.value}
-                          onValueChange={(value) =>
-                            form.setValue(
-                              'config.skills',
-                              value as 'row' | 'column',
-                            )
-                          }
-                        >
-                          <SelectTrigger className="w-[140px]">
-                            <SelectValue placeholder="Skills Layout" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="row">Horizontal</SelectItem>
-                            <SelectItem value="column">Vertical</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <div className="flex items-center gap-2">
+
+            <div className="flex gap-4 mt-4">
+              <div className="flex items-center gap-4">
+                <Label>Style</Label>
+                <FormField
+                  control={form.control}
+                  name="style"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <div className="flex items-center gap-2">
+                          <Select
+                            value={field.value}
+                            onValueChange={(value) =>
+                              form.setValue(
+                                'style',
+                                value as 'custom' | 'harvard',
+                              )
+                            }
+                          >
+                            <SelectTrigger className="w-[140px]">
+                              <SelectValue placeholder="Style" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="custom">Custom</SelectItem>
+                              <SelectItem value="harvard">Harvard</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              {formStyleValue === 'custom' && (
+                <div className="flex items-center gap-4">
+                  <Label>Skills Layout</Label>
+                  <FormField
+                    control={form.control}
+                    name="config.skills"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <div className="flex items-center gap-2">
+                            <Select
+                              value={field.value}
+                              onValueChange={(value) =>
+                                form.setValue(
+                                  'config.skills',
+                                  value as 'row' | 'column',
+                                )
+                              }
+                            >
+                              <SelectTrigger className="w-[140px]">
+                                <SelectValue placeholder="Skills Layout" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="row">Horizontal</SelectItem>
+                                <SelectItem value="column">Vertical</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+              )}
+
+              <div className="flex items-center gap-2 ml-auto">
                 <Label>View Mode</Label>
                 <Select
                   value={viewMode}
@@ -175,6 +221,8 @@ export const AdjustApplicationForm = ({ application, onSave }: Props) => {
               </div>
             </div>
           </div>
+
+          <Separator className="mb-4" />
 
           {viewMode === 'form' ? (
             <AdjustResumeSubform form={form} />
@@ -208,9 +256,7 @@ export const AdjustApplicationForm = ({ application, onSave }: Props) => {
             render={({ field }) => (
               <FormItem className="flex flex-col">
                 <div className="flex items-center justify-between flex-0 mb-2">
-                  <FormLabel className="text-lg">
-                    Cover Letter
-                  </FormLabel>
+                  <FormLabel className="text-lg">Cover Letter</FormLabel>
                   <div className="flex items-center gap-2">
                     <Button
                       size="sm"

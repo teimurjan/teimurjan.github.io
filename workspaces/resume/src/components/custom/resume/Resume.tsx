@@ -1,16 +1,12 @@
-import {
-  Page,
-  Text,
-  View,
-  Document,
-  StyleSheet,
-  Styles,
-} from '@react-pdf/renderer'
+import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer'
+import type { Style } from '@react-pdf/types'
 import { YEAR_DATE_FORMAT, prettyRange, dateSorter } from '@teimurjan/utils'
-import theme from '../../theme'
+import theme from '../../../theme'
 import Header from '../header'
 import ResumeItem from '../resume-item'
-import { ResumeProps } from './types'
+import { CustomResumeProps } from '../types'
+import sharedStyles from '../styles'
+import Skills from '../skills'
 
 const styles = StyleSheet.create({
   page: {
@@ -50,28 +46,15 @@ const styles = StyleSheet.create({
     fontFamily: 'Helvetica-Bold',
     marginBottom: 4,
   },
-  itemMarginBottomSmall: {
-    marginBottom: 4,
-  },
-  itemMarginBottom: {
-    marginBottom: 8,
-  },
-  skills: {
-    flexDirection: 'row',
-  },
-  skillsCol: {
-    flex: 1,
-    flexDirection: 'column',
-  },
 })
 
 const getItemMarginStyle = (
-  style: { marginBottom: number },
+  style: Style | Style[],
   index: number,
   itemsCount: number,
-) => (index + 1 === itemsCount ? undefined : style) as Styles | undefined
+) => (index + 1 === itemsCount ? undefined : style)
 
-const Resume = ({
+const CustomResume = ({
   bios: [{ fullName, headline, about, location, phoneNumber, email }],
   educations,
   skills,
@@ -79,7 +62,7 @@ const Resume = ({
   publications,
   conferences,
   config = { skills: 'row' },
-}: ResumeProps) => {
+}: CustomResumeProps) => {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -113,7 +96,7 @@ const Resume = ({
                       subtitle={experience.company}
                       description={experience.description.html}
                       style={getItemMarginStyle(
-                        styles.itemMarginBottom,
+                        sharedStyles.itemMarginBottom,
                         index,
                         experiences.length,
                       )}
@@ -135,7 +118,7 @@ const Resume = ({
                       title={`${education.degree}\nin ${education.areaOfStudy}`}
                       subtitle={education.school}
                       style={getItemMarginStyle(
-                        styles.itemMarginBottom,
+                        sharedStyles.itemMarginBottom,
                         index,
                         educations.length,
                       )}
@@ -146,38 +129,7 @@ const Resume = ({
                 <View style={styles.horizontalDivider} />
 
                 <Text style={styles.title}>Skills</Text>
-                <View style={styles.skills}>
-                  {config.skills === 'column' ? (
-                    <>
-                      <View style={styles.skillsCol}>
-                        {skills.slice(0, skills.length / 2).map((skill) => (
-                          <Text
-                            key={skill.id}
-                            style={styles.itemMarginBottomSmall}
-                          >
-                            {skill.title}
-                          </Text>
-                        ))}
-                      </View>
-                      <View style={styles.skillsCol}>
-                        {skills.slice(skills.length / 2).map((skill) => (
-                          <Text
-                            key={skill.id}
-                            style={styles.itemMarginBottomSmall}
-                          >
-                            {skill.title}
-                          </Text>
-                        ))}
-                      </View>
-                    </>
-                  ) : (
-                    <View style={styles.skillsCol}>
-                      <Text>
-                        {skills.map((skill) => skill.title).join(', ')}
-                      </Text>
-                    </View>
-                  )}
-                </View>
+                <Skills skills={skills} config={config} />
 
                 <View style={styles.horizontalDivider} />
 
@@ -191,12 +143,12 @@ const Resume = ({
                         title={publication.title}
                         subtitle={new URL(publication.link)}
                         style={getItemMarginStyle(
-                        styles.itemMarginBottomSmall,
-                        index,
-                        publications.length,
-                      )}
-                    />
-                  ))}
+                          sharedStyles.itemMarginBottomSmall,
+                          index,
+                          publications.length,
+                        )}
+                      />
+                    ))}
                 </View>
 
                 <View style={styles.horizontalDivider} />
@@ -211,12 +163,12 @@ const Resume = ({
                         title={conference.topic}
                         subtitle={conference.title}
                         style={getItemMarginStyle(
-                        styles.itemMarginBottomSmall,
-                        index,
-                        publications.length,
-                      )}
-                    />
-                  ))}
+                          sharedStyles.itemMarginBottomSmall,
+                          index,
+                          publications.length,
+                        )}
+                      />
+                    ))}
                 </View>
               </View>
             </View>
@@ -227,4 +179,4 @@ const Resume = ({
   )
 }
 
-export default Resume
+export default CustomResume

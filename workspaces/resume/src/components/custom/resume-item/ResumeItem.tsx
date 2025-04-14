@@ -1,6 +1,7 @@
-import { Text, View, StyleSheet, Styles, Link } from '@react-pdf/renderer'
+import { Text, View, StyleSheet, Link } from '@react-pdf/renderer'
+import type { Style } from '@react-pdf/types'
 import Html from 'react-pdf-html'
-import theme from '../../theme'
+import theme from '../../../theme'
 
 const styles = StyleSheet.create({
   experienceTitle: {
@@ -30,7 +31,7 @@ interface Props {
   title: string
   subtitle?: string | URL
   description?: string
-  style?: Styles
+  style?: Style | Style[]
 }
 
 const ResumeItem = ({

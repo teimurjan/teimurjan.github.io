@@ -1,4 +1,4 @@
-import { Resume, renderToFile } from '@teimurjan/resume'
+import { HarvardResume, renderToFile } from '@teimurjan/resume'
 import gqlClient from '../gql-client'
 import { createElement, ReactElement } from 'react'
 import path from 'path'
@@ -12,7 +12,10 @@ const main = async () => {
   const outputPath = path.resolve(__dirname, '../public/resume.pdf')
 
   console.log('generate-resume: rendering to file...')
-  await renderToFile(createElement(Resume, data) as ReactElement, outputPath)
+  await renderToFile(
+    createElement(HarvardResume, data) as ReactElement,
+    outputPath,
+  )
 
   console.log('generate-resume: generated successfully')
 }

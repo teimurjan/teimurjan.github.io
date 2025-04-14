@@ -68,7 +68,7 @@ const HarvardResume = ({
           />
 
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Professional Summary</Text>
+            <Text style={styles.sectionTitle}>Summary</Text>
             <Text style={styles.aboutText}>{about}</Text>
           </View>
 

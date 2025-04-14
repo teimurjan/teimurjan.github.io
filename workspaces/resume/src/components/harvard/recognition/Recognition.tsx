@@ -5,6 +5,9 @@ import theme from '../../../theme'
 export type Props = Pick<HarvardResumeProps, 'publications' | 'conferences'>
 
 const styles = StyleSheet.create({
+  container: {
+    lineHeight: 0.64,
+  },
   award: {
     fontSize: 10,
   },
@@ -15,7 +18,7 @@ const styles = StyleSheet.create({
 
 const Recognition = ({ publications, conferences }: Props) => {
   return (
-    <View>
+    <View style={styles.container}>
       <Text>
         • Published {publications.length} technical articles earning HackerNoon{' '}
         <Text style={styles.award}>Top Story</Text> Badge,{' '}

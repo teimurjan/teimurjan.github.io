@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
   },
   aboutText: {
     textAlign: 'justify',
+    lineHeight: 0.64,
   },
   recognitionFullList: {
     display: 'flex',

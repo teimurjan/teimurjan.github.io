@@ -75,6 +75,7 @@ const ResumeItem = ({
           stylesheet={{
             ul: {
               margin: '2px 0 0 -20px',
+              lineHeight: 0.64,
             },
             li: {
               marginBottom: 2,

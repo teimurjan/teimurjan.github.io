@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     lineHeight: 0.64,
   },
   award: {
-    fontSize: 10,
+    fontFamily: 'Helvetica-Bold',
   },
   link: {
     color: theme.colors.dark3,

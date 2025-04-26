@@ -61,7 +61,7 @@ const CustomResume = ({
   experiences,
   publications,
   conferences,
-  config = { skills: 'row' },
+  config = { skills: 'row', location: true },
 }: CustomResumeProps) => {
   return (
     <Document>
@@ -69,7 +69,7 @@ const CustomResume = ({
         <Header
           title={fullName}
           subtitle={headline}
-          location={location}
+          location={config?.location ? location : undefined}
           email={email}
           phoneNumber={phoneNumber}
         />

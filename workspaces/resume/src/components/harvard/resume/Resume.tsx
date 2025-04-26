@@ -54,6 +54,7 @@ const HarvardResume = ({
   experiences,
   publications,
   conferences,
+  config = { location: true },
 }: HarvardResumeProps) => {
   return (
     <Document>
@@ -62,7 +63,7 @@ const HarvardResume = ({
           <Header
             title={fullName}
             subtitle={headline}
-            location={location}
+            location={config?.location ? location : undefined}
             email={email}
             phoneNumber={phoneNumber}
           />

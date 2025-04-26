@@ -8,6 +8,7 @@ export const adjustFormSchema = z.object({
   config: z
     .object({
       skills: z.enum(['row', 'column']),
+      location: z.boolean(),
     })
     .optional(),
 })

@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
 interface Props {
   title: string
   subtitle: string
-  location: string
+  location?: string
   email: string
   phoneNumber: string
 }

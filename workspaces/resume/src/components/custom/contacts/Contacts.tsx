@@ -17,16 +17,18 @@ const styles = StyleSheet.create({
 })
 
 interface Props {
-  location: string
+  location?: string
   email: string
   phoneNumber: string
 }
 
 const Contacts = ({ location, email, phoneNumber }: Props) => (
   <View style={styles.contactsContainer}>
-    <View style={styles.contact}>
-      <Text>{location} 📍</Text>
-    </View>
+    {location && (
+      <View style={styles.contact}>
+        <Text>{location} 📍</Text>
+      </View>
+    )}
     <View style={styles.contact}>
       <Text>{email} 📫</Text>
     </View>

@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
 interface Props {
   title: string
   subtitle: string
-  location: string
+  location?: string
   email: string
   phoneNumber: string
 }
@@ -54,8 +54,12 @@ const Header = ({ title, location, email, phoneNumber }: Props) => {
         <Link src={`tel:${phoneNumber}`} style={styles.contact}>
           {phoneNumber}
         </Link>
-        <Text style={styles.divider}>•</Text>
-        <Text style={styles.contact}>{location}</Text>
+        {location && (
+          <>
+            <Text style={styles.divider}>•</Text>
+            <Text style={styles.contact}>{location}</Text>
+          </>
+        )}
       </View>
     </View>
   )

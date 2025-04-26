@@ -31,6 +31,7 @@ import {
 } from '../../ui/select'
 import { AdjustResumeSubform } from '../adjust-resume-subform/adjust-resume-subform'
 import { Separator } from '@/components/ui/separator'
+import { Switch } from '@/components/ui/switch'
 
 const JsonEditor = dynamic(
   () => import('../../common/json-editor').then((mod) => mod.JsonEditor),
@@ -55,7 +56,7 @@ export const AdjustApplicationForm = ({ application, onSave }: Props) => {
     defaultValues: {
       resume: application.resume,
       coverLetter: application.coverLetter,
-      config: { skills: 'row' as const },
+      config: { skills: 'row' as const, location: true },
       style: 'harvard' as const,
     },
   })
@@ -190,6 +191,29 @@ export const AdjustApplicationForm = ({ application, onSave }: Props) => {
                   />
                 </div>
               )}
+
+              <div className="flex items-center gap-4">
+                <Label>Show Location</Label>
+                <FormField
+                  control={form.control}
+                  name="config.location"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <div className="flex items-center gap-2">
+                          <Switch
+                            checked={field.value}
+                            onCheckedChange={(checked) =>
+                              form.setValue('config.location', checked)
+                            }
+                          />
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
 
               <div className="flex items-center gap-2 ml-auto">
                 <Label>View Mode</Label>

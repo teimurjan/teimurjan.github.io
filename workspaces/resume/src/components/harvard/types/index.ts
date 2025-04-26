@@ -1,3 +1,9 @@
 import { ResumeProps } from '../../types'
 
-export type HarvardResumeProps = ResumeProps
+export interface ResumeConfig {
+  location?: boolean
+}
+
+export type HarvardResumeProps = ResumeProps & {
+  config?: ResumeConfig
+}

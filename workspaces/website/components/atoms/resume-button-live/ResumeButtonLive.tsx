@@ -1,11 +1,11 @@
 'use client'
 import Button from '../../atoms/button'
-import { useResume, type ResumeProps } from '@teimurjan/resume'
+import { useResume, type ResumeProps, HarvardResume } from '@teimurjan/resume'
 
 export type Props = ResumeProps
 
-const ResumeButtonLive = (resumeProps: Props) => {
-  const { openResume } = useResume(resumeProps, 'harvard')
+const ResumeButtonLive = (props: Props) => {
+  const { openResume } = useResume(HarvardResume, props)
   return (
     <Button
       onClick={(e) => {

@@ -6,7 +6,12 @@ import { useForm, useWatch } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Label } from '../../ui/label'
-import { useCoverLetter, useResume } from '@teimurjan/resume'
+import {
+  CustomResume,
+  HarvardResume,
+  useCoverLetter,
+  useResume,
+} from '@teimurjan/resume'
 import { Button } from '../../ui/button'
 import { JobApplication } from '@/db/types'
 import { Textarea } from '../../ui/textarea'
@@ -70,11 +75,11 @@ export const AdjustApplicationForm = ({ application, onSave }: Props) => {
   })
 
   const { openResume } = useResume(
+    formStyleValue === 'custom' ? CustomResume : HarvardResume,
     {
       config: formConfigValue,
       ...formResumeValue,
     },
-    formStyleValue,
   )
   const { openCoverLetter } = useCoverLetter({
     children: formCoverLetterValue,

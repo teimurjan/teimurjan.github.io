@@ -1,16 +1,11 @@
-import CustomResume from '../components/custom/resume'
-import HarvardResume from '../components/harvard/resume'
-import { CustomResumeProps } from '../components/custom/types'
-import { HarvardResumeProps } from '../components/harvard/types'
+import { ComponentType } from 'react'
 import useOpenPdf from './use-open-pdf'
 
-const useResume = <P extends CustomResumeProps | HarvardResumeProps>(
-  resumeProps: P | undefined,
-  style: 'custom' | 'harvard' = 'custom',
+const useResume = <P extends object>(
+  Component: ComponentType<P>,
+  props: P | undefined,
 ) => {
-  const Resume = style === 'custom' ? CustomResume : HarvardResume
-
-  const { openPdf } = useOpenPdf(Resume, resumeProps, 'resume')
+  const { openPdf } = useOpenPdf(Component, props, 'resume')
 
   return {
     openResume: openPdf,

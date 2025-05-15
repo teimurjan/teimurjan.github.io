@@ -60,6 +60,8 @@ export const GenerateApplicationForm = ({ application, className }: Props) => {
         body: JSON.stringify({
           jobDescription: values.jobDescription,
           resume: application.resume,
+          jobTitle: values.jobTitle,
+          companyName: values.companyName,
         }),
       })
 

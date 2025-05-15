@@ -17,9 +17,10 @@ import { toast } from 'sonner'
 import { Loader2, PartyPopper } from 'lucide-react'
 import { JobApplication } from '@/db/types'
 import { cn } from '@/lib/utils'
-import { useRouter } from '@bprogress/next/app';
+import { useRouter } from '@bprogress/next/app'
 import { generateFormSchema } from '@/schema/generate-form'
 import { useAuth } from '@/providers/auth-provider'
+import { Input } from '@/components/ui/input'
 
 interface Props {
   application: Pick<JobApplication, 'resume'>
@@ -84,6 +85,34 @@ export const GenerateApplicationForm = ({ application, className }: Props) => {
         className={cn('flex flex-col gap-4', className)}
         onSubmit={form.handleSubmit(handleSubmit)}
       >
+        <FormField
+          control={form.control}
+          name="companyName"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-base">Company name</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="jobTitle"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-base">Job title</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <FormField
           control={form.control}
           name="jobDescription"

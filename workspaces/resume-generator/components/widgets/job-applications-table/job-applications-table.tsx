@@ -1,8 +1,8 @@
 'use client'
 import { JobApplication } from '@/db/types'
 import { Button } from '../../ui/button'
-import { useRouter } from '@bprogress/next/app';
-import { ExternalLink, Loader2, Search, Trash, X } from 'lucide-react'
+import { useRouter } from '@bprogress/next/app'
+import { ExternalLink, Loader2, Trash } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import {
   AlertDialog,
@@ -21,27 +21,26 @@ import { JobApplicationsTableSkeleton } from './job-applications-table-skeleton'
 import { DataTable } from '../../ui/data-table'
 import { ColumnDef } from '@tanstack/react-table'
 import { Badge } from '../../ui/badge'
-
+import { cn } from '@/lib/utils'
 interface Props {
   jobApplications: JobApplication[]
   className?: string
   loading?: boolean
   search?: boolean
+  footer?: boolean
 }
 
 export const JobApplicationsTable = ({
   jobApplications,
   loading,
   search,
+  footer,
   className,
 }: Props) => {
-  const {
-    searchResults,
-    isSearching,
-    setIsSearching,
-    setSearchQuery,
-    searchQuery,
-  } = useSearch({ items: jobApplications, keys: ['jobDescription'] })
+  const { searchResults, setSearchQuery, searchQuery } = useSearch({
+    items: jobApplications,
+    keys: ['jobDescription', 'jobTitle', 'companyName'],
+  })
   const [containerHeight, setContainerHeight] = useState<number>(600)
 
   const router = useRouter()
@@ -53,54 +52,24 @@ export const JobApplicationsTable = ({
   const columns: ColumnDef<JobApplication>[] = useMemo(
     () => [
       {
-        header: 'Headline',
+        header: 'Company',
         cell: ({ row }) => (
-          <div className="truncate w-72">
-            {row.original.resume?.bios[0].headline ?? 'No Headline'}
+          <div className="truncate w-32">
+            {row.original.companyName ?? 'N/A'}
           </div>
+        ),
+        footer: footer
+          ? () => <div>Total: {jobApplications.length} applications</div>
+          : undefined,
+      },
+      {
+        header: 'Job Title',
+        cell: ({ row }) => (
+          <div className="truncate w-52">{row.original.jobTitle ?? 'N/A'}</div>
         ),
       },
       {
-        header: () => {
-          if (isSearching) {
-            return (
-              <>
-                <Input
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search"
-                  autoFocus
-                />
-                <Button
-                  className="align-middle ml-1"
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => {
-                    setSearchQuery('')
-                    setIsSearching(false)
-                  }}
-                >
-                  <X />
-                </Button>
-              </>
-            )
-          }
-          return (
-            <>
-              <span>Job Description</span>
-              {search && (
-                <Button
-                  className="py-0 ml-auto"
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setIsSearching(true)}
-                >
-                  <Search />
-                </Button>
-              )}
-            </>
-          )
-        },
+        header: 'Job Description',
         cell: ({ row }) => (
           <div className="truncate w-[500px]">
             {row.original.jobDescription}
@@ -161,15 +130,7 @@ export const JobApplicationsTable = ({
         header: () => <span className="ml-auto">Actions</span>,
       },
     ],
-    [
-      isSearching,
-      search,
-      searchQuery,
-      setSearchQuery,
-      setIsSearching,
-      isRemoving,
-      router,
-    ],
+    [footer, isRemoving, jobApplications.length, router],
   )
 
   if (loading) {
@@ -177,47 +138,59 @@ export const JobApplicationsTable = ({
   }
 
   return (
-    <div
-      className={className}
-      ref={(ref) => {
-        if (ref) {
-          setContainerHeight(ref.clientHeight)
-        }
-      }}
-    >
-      <DataTable
-        columns={columns}
-        data={searchResults}
-        height={containerHeight}
-      />
-
-      <AlertDialog
-        open={!!removingId}
-        onOpenChange={(open) => !open && setRemovingId(undefined)}
+    <div className={cn('flex flex-col gap-2', className)}>
+      {search && (
+        <div className="flex items-center gap-2">
+          <Input
+            className="w-96 max-w-full"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search by job title, company name, or description..."
+          />
+        </div>
+      )}
+      <div
+        className="flex-1"
+        ref={(ref) => {
+          if (ref) {
+            setContainerHeight(ref.clientHeight)
+          }
+        }}
       >
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-            <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete the
-              generated application.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction
-              onClick={() => {
-                if (removingId) {
-                  removeJobApplication(removingId)
-                }
-              }}
-              disabled={isRemoving}
-            >
-              {isRemoving ? <Loader2 className="animate-spin" /> : 'Delete'}
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+        <DataTable
+          columns={columns}
+          data={searchResults}
+          height={containerHeight}
+        />
+
+        <AlertDialog
+          open={!!removingId}
+          onOpenChange={(open) => !open && setRemovingId(undefined)}
+        >
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. This will permanently delete the
+                generated application.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={() => {
+                  if (removingId) {
+                    removeJobApplication(removingId)
+                  }
+                }}
+                disabled={isRemoving}
+              >
+                {isRemoving ? <Loader2 className="animate-spin" /> : 'Delete'}
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </div>
     </div>
   )
 }

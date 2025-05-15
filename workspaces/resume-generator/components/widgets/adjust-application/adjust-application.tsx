@@ -29,12 +29,12 @@ export const AdjustApplication = ({ id }: Props) => {
   }
 
   return (
-    <Tabs defaultValue="resume" className="w-full h-full">
+    <Tabs defaultValue="application" className="w-full h-full">
       <TabsList className="w-full">
-        <TabsTrigger value="resume">Resume</TabsTrigger>
+        <TabsTrigger value="application">Application</TabsTrigger>
         <TabsTrigger value="description">Description</TabsTrigger>
       </TabsList>
-      <TabsContent value="resume" className="overflow-hidden mt-2">
+      <TabsContent value="application" className="overflow-hidden mt-2">
         {(application.status && application.status !== 'completed') ||
         !application.resume ? (
           <div className="flex items-center justify-center h-full">

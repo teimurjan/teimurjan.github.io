@@ -69,5 +69,7 @@ export const generateFormSchema = z.object({
     .string()
     .nonempty('Job description is required')
     .min(100, 'Job description must be at least 100 characters'),
+  companyName: z.string().nonempty('Company name is required'),
+  jobTitle: z.string().nonempty('Job title is required'),
   resume: resumeSchema,
 })

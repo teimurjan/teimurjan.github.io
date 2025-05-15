@@ -37,6 +37,7 @@ import {
 import { AdjustResumeSubform } from '../adjust-resume-subform/adjust-resume-subform'
 import { Separator } from '@/components/ui/separator'
 import { Switch } from '@/components/ui/switch'
+import { Input } from '@/components/ui/input'
 
 const JsonEditor = dynamic(
   () => import('../../common/json-editor').then((mod) => mod.JsonEditor),
@@ -46,8 +47,16 @@ const JsonEditor = dynamic(
 )
 
 interface Props {
-  application: Pick<JobApplication, 'resume' | 'coverLetter' | 'status'>
-  onSave?: (application: Pick<JobApplication, 'resume' | 'coverLetter'>) => void
+  application: Pick<
+    JobApplication,
+    'resume' | 'coverLetter' | 'status' | 'jobTitle' | 'companyName'
+  >
+  onSave?: (
+    application: Pick<
+      JobApplication,
+      'resume' | 'coverLetter' | 'jobTitle' | 'companyName'
+    >,
+  ) => void
 }
 
 type FormValues = z.infer<typeof adjustFormSchema>
@@ -92,6 +101,35 @@ export const AdjustApplicationForm = ({ application, onSave }: Props) => {
         onSubmit={onSave ? form.handleSubmit(onSave) : undefined}
       >
         <div className="flex flex-col flex-1 overflow-hidden text-sm">
+          <Label className="text-lg mb-4">Company</Label>
+
+          <div className="flex items-center gap-4 mb-4">
+            <FormField
+              control={form.control}
+              name="jobTitle"
+              render={({ field }) => (
+                <FormItem className="flex-1">
+                  <FormLabel>Job Title</FormLabel>
+                  <FormControl>
+                    <Input {...field} placeholder="Software Engineer" />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="companyName"
+              render={({ field }) => (
+                <FormItem className="flex-1">
+                  <FormLabel>Company Name</FormLabel>
+                  <FormControl>
+                    <Input {...field} placeholder="Google" />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
+
           <div className="mb-4">
             <div className="flex items-center justify-between">
               <Label className="text-lg">Resume</Label>

@@ -15,10 +15,12 @@ export const useSearch = <T extends object>({
   debounceMs = 300,
 }: Props<T>) => {
   const [searchQuery, setSearchQuery] = useState('')
-  const [isSearching, setIsSearching] = useState(false)
   const debouncedSearchQuery = useDebounce(searchQuery, debounceMs)
 
-  const fuse = useMemo(() => new Fuse(items, { keys, threshold: 0.5 }), [items, keys])
+  const fuse = useMemo(
+    () => new Fuse(items, { keys, threshold: 0.5 }),
+    [items, keys],
+  )
   const searchResults = useMemo(() => {
     if (!debouncedSearchQuery) {
       return items
@@ -28,8 +30,6 @@ export const useSearch = <T extends object>({
 
   return {
     searchResults,
-    isSearching,
-    setIsSearching,
     setSearchQuery,
     searchQuery,
   }

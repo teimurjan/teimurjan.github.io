@@ -14,4 +14,6 @@ export type JobApplication = {
   jobDescription: string
   createdAt: Timestamp
   status?: JobApplicationStatus
+  companyName?: string
+  jobTitle?: string
 }

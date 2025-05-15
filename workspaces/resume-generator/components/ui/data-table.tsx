@@ -83,18 +83,25 @@ export function DataTable<TData, TValue>({
           TableRow: TableRowComponent(rows),
         }}
         fixedHeaderContent={() =>
-          table.getHeaderGroups().map((headerGroup) => (
-            <TableRow className="bg-card" key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <TableHead
-                    key={header.id}
-                    colSpan={header.colSpan}
-                    style={{
-                      width: header.getSize(),
-                    }}
-                  >
-                    {header.isPlaceholder ? null : (
+          table
+            .getHeaderGroups()
+            .filter((headerGroup) =>
+              headerGroup.headers.some(
+                (header) =>
+                  !header.isPlaceholder && header.column.columnDef.header,
+              ),
+            )
+            .map((headerGroup) => (
+              <TableRow className="bg-card" key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
+                  return (
+                    <TableHead
+                      key={header.id}
+                      colSpan={header.colSpan}
+                      style={{
+                        width: header.getSize(),
+                      }}
+                    >
                       <div
                         className="flex items-center"
                         {...{
@@ -112,12 +119,41 @@ export function DataTable<TData, TValue>({
                           header.getContext(),
                         )}
                       </div>
-                    )}
+                    </TableHead>
+                  )
+                })}
+              </TableRow>
+            ))
+        }
+        fixedFooterContent={() =>
+          table
+            .getFooterGroups()
+            .filter((footerGroup) =>
+              footerGroup.headers.some(
+                (header) =>
+                  !header.isPlaceholder && header.column.columnDef.footer,
+              ),
+            )
+            .map((footerGroup) => (
+              <TableRow key={footerGroup.id} className="bg-card">
+                {footerGroup.headers.map((footer) => (
+                  <TableHead
+                    key={footer.id}
+                    colSpan={footer.colSpan}
+                    style={{
+                      width: footer.getSize(),
+                    }}
+                  >
+                    <div className="flex items-center">
+                      {flexRender(
+                        footer.column.columnDef.footer,
+                        footer.getContext(),
+                      )}
+                    </div>
                   </TableHead>
-                )
-              })}
-            </TableRow>
-          ))
+                ))}
+              </TableRow>
+            ))
         }
       />
     </div>

@@ -70,6 +70,8 @@ export const AdjustApplicationForm = ({ application, onSave }: Props) => {
     defaultValues: {
       resume: application.resume,
       coverLetter: application.coverLetter,
+      jobTitle: application.jobTitle,
+      companyName: application.companyName,
       config: { skills: 'row' as const, location: true },
       style: 'harvard' as const,
     },

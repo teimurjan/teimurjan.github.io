@@ -5,10 +5,11 @@ const useResume = <P extends object>(
   Component: ComponentType<P>,
   props: P | undefined,
 ) => {
-  const { openPdf } = useOpenPdf(Component, props, 'resume')
+  const { openPdf, generatePdfUrl } = useOpenPdf(Component, props, 'resume')
 
   return {
     openResume: openPdf,
+    generateResumeUrl: generatePdfUrl,
   }
 }
 

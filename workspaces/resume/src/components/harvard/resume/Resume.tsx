@@ -54,7 +54,7 @@ const HarvardResume = ({
   experiences,
   publications,
   conferences,
-  config = { location: true },
+  config = { location: false },
 }: HarvardResumeProps) => {
   return (
     <Document>

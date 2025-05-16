@@ -1,14 +1,19 @@
 import { pdf } from '@react-pdf/renderer'
 import { useCallback, useRef } from 'react'
+import { openLinkByUrl, downloadByUrl } from '../utils'
 
 const useOpenPdf = <T extends object>(
   Component: React.ComponentType<T>,
   props: T | undefined,
-  filename: string
+  filename: string,
 ) => {
   const currentPdfUrl = useRef<string | undefined>(undefined)
 
-  const initializePdfUrl = useCallback(async () => {
+  const generatePdfUrl = useCallback(async () => {
+    if (currentPdfUrl.current) {
+      URL.revokeObjectURL(currentPdfUrl.current)
+    }
+
     if (!props) {
       return undefined
     }
@@ -20,37 +25,29 @@ const useOpenPdf = <T extends object>(
     const blobData = await response.blob()
     const blobUrl = window.URL.createObjectURL(blobData)
 
-    if (currentPdfUrl.current) {
-      URL.revokeObjectURL(currentPdfUrl.current)
-    }
-
     currentPdfUrl.current = blobUrl
+
+    return blobUrl
   }, [Component, props])
 
   const openPdf = useCallback(
     async (download = false) => {
-      if (!props) {
+      const url = await generatePdfUrl()
+      if (!url) {
         return
       }
 
-      await initializePdfUrl()
-      if (!currentPdfUrl.current) {
+      if (!download) {
+        openLinkByUrl(url)
         return
       }
 
-      const link = document.createElement('a')
-      link.href = currentPdfUrl.current
-      if (download) {
-        link.download = `${filename}-${Date.now()}.pdf`
-      } else {
-        link.target = '_blank'
-      }
-      link.click()
+      downloadByUrl(url, filename)
     },
-    [initializePdfUrl, props, filename],
+    [generatePdfUrl, filename],
   )
 
-  return { openPdf }
+  return { openPdf, generatePdfUrl }
 }
 
 export default useOpenPdf

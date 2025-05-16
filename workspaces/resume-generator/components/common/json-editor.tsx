@@ -16,30 +16,32 @@ export interface Props {
 }
 
 export interface JsonEditorRef {
-  setTextMode: () => void
-  setTreeMode: () => void
+  getMode: () => Mode
+  setMode: (mode: Mode) => void
 }
 
 const JsonEditorComponent = forwardRef<JsonEditorRef, Props>(
-  ({ content, onChange, className, mode = Mode.tree }, ref) => {
+  ({ content, onChange, className, mode }, ref) => {
     const jsonEditorRef = useRef<JSONEditor>()
     const containerRef = useRef<HTMLDivElement>(null)
 
     useImperativeHandle(
       ref,
       () => ({
-        setTextMode: () => {
+        getMode: () => {
           if (jsonEditorRef.current) {
-            jsonEditorRef.current.updateProps({ mode: Mode.text })
+            return jsonEditorRef.current.mode
           }
+
+          return mode
         },
-        setTreeMode: () => {
+        setMode: (mode: Mode) => {
           if (jsonEditorRef.current) {
-            jsonEditorRef.current.updateProps({ mode: Mode.tree })
+            jsonEditorRef.current.updateProps({ mode })
           }
         },
       }),
-      [],
+      [mode],
     )
 
     useEffect(() => {

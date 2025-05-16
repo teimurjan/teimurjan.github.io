@@ -1,7 +1,7 @@
 'use client'
 import { ResumeQuery } from '@teimurjan/gql-client'
-import { useRef, useState } from 'react'
-import { Copy, ExternalLink, Save } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { Copy, Save } from 'lucide-react'
 import { useForm, useWatch } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -38,6 +38,7 @@ import { AdjustResumeSubform } from '../adjust-resume-subform/adjust-resume-subf
 import { Separator } from '@/components/ui/separator'
 import { Switch } from '@/components/ui/switch'
 import { Input } from '@/components/ui/input'
+import { PdfPreviewButton } from '../pdf-preview-button/pdf-preview-button'
 
 const JsonEditor = dynamic(
   () => import('../../common/json-editor').then((mod) => mod.JsonEditor),
@@ -65,6 +66,10 @@ export const AdjustApplicationForm = ({ application, onSave }: Props) => {
   const jsonEditorRef = useRef<JsonEditorRef>(null)
   const [viewMode, setViewMode] = useState<'tree' | 'text' | 'form'>('form')
 
+  const filenamePrefix = `${application.companyName}-${application.jobTitle}-${application.resume?.bios[0].fullName}`
+  const getFilename = (postfix: string) =>
+    `${filenamePrefix.toLowerCase().replace(/\s+/g, '-')}-${postfix}.pdf`
+
   const form = useForm<FormValues>({
     resolver: zodResolver(adjustFormSchema),
     defaultValues: {
@@ -72,7 +77,7 @@ export const AdjustApplicationForm = ({ application, onSave }: Props) => {
       coverLetter: application.coverLetter,
       jobTitle: application.jobTitle,
       companyName: application.companyName,
-      config: { skills: 'row' as const, location: true },
+      config: { skills: 'row' as const, location: false },
       style: 'harvard' as const,
     },
   })
@@ -85,14 +90,30 @@ export const AdjustApplicationForm = ({ application, onSave }: Props) => {
     name: 'coverLetter',
   })
 
-  const { openResume } = useResume(
+  useEffect(() => {
+    if (!jsonEditorRef.current) {
+      return
+    }
+
+    if (viewMode === 'form') {
+      return
+    }
+
+    if (jsonEditorRef.current.getMode() !== viewMode) {
+      // @ts-expect-error Unknown error
+      jsonEditorRef.current.setMode(viewMode)
+      return
+    }
+  }, [viewMode])
+
+  const { generateResumeUrl } = useResume(
     formStyleValue === 'custom' ? CustomResume : HarvardResume,
     {
       config: formConfigValue,
       ...formResumeValue,
     },
   )
-  const { openCoverLetter } = useCoverLetter({
+  const { generateCoverLetterUrl } = useCoverLetter({
     children: formCoverLetterValue,
   })
 
@@ -151,18 +172,11 @@ export const AdjustApplicationForm = ({ application, onSave }: Props) => {
                   Copy
                   <Copy />
                 </Button>
-                <Button
+                <PdfPreviewButton
                   size="sm"
-                  onClick={(e) => {
-                    // Prevent submit action to be triggered
-                    e.preventDefault()
-
-                    openResume()
-                  }}
-                >
-                  Open
-                  <ExternalLink />
-                </Button>
+                  generatePdfUrl={generateResumeUrl}
+                  filename={getFilename('cv')}
+                />
               </div>
             </div>
 
@@ -266,16 +280,6 @@ export const AdjustApplicationForm = ({ application, onSave }: Props) => {
                   value={viewMode}
                   onValueChange={(value: 'tree' | 'text' | 'form') => {
                     setViewMode(value)
-                    if (
-                      jsonEditorRef.current &&
-                      (value === 'tree' || value === 'text')
-                    ) {
-                      if (value === 'tree') {
-                        jsonEditorRef.current.setTreeMode()
-                      } else if (value === 'text') {
-                        jsonEditorRef.current.setTextMode()
-                      }
-                    }
                   }}
                 >
                   <SelectTrigger className="w-[100px]">
@@ -298,6 +302,8 @@ export const AdjustApplicationForm = ({ application, onSave }: Props) => {
           ) : (
             <JsonEditor
               ref={jsonEditorRef}
+              // @ts-expect-error Unknown error
+              mode={viewMode}
               content={{ json: formResumeValue }}
               onChange={(updatedContent) => {
                 if ('json' in updatedContent) {
@@ -339,17 +345,11 @@ export const AdjustApplicationForm = ({ application, onSave }: Props) => {
                     >
                       Copy <Copy />
                     </Button>
-                    <Button
+                    <PdfPreviewButton
                       size="sm"
-                      onClick={(e) => {
-                        // Prevent submit action to be triggered
-                        e.preventDefault()
-
-                        openCoverLetter()
-                      }}
-                    >
-                      Open <ExternalLink />
-                    </Button>
+                      generatePdfUrl={generateCoverLetterUrl}
+                      filename={getFilename('cl')}
+                    />
                   </div>
                 </div>
                 <FormControl className="flex-1">

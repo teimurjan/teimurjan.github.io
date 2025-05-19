@@ -2,7 +2,7 @@
 import { JobApplication } from '@/db/types'
 import { Button } from '../../ui/button'
 import { useRouter } from '@bprogress/next/app'
-import { ExternalLink, Loader2, Trash } from 'lucide-react'
+import { ExternalLink, Loader2 } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import {
   AlertDialog,
@@ -14,7 +14,7 @@ import {
   AlertDialogAction,
   AlertDialogFooter,
 } from '../../ui/alert-dialog'
-import { useRemoveJobApplication } from '@/db/queries'
+import { useRemoveJobApplications } from '@/db/queries'
 import { Input } from '../../ui/input'
 import { useSearch } from '@/hooks/use-search'
 import { JobApplicationsTableSkeleton } from './job-applications-table-skeleton'
@@ -22,11 +22,13 @@ import { DataTable } from '../../ui/data-table'
 import { ColumnDef } from '@tanstack/react-table'
 import { Badge } from '../../ui/badge'
 import { cn } from '@/lib/utils'
+import { Checkbox } from '@/components/ui/checkbox'
 interface Props {
   jobApplications: JobApplication[]
   className?: string
   loading?: boolean
   search?: boolean
+  selectable?: boolean
   footer?: boolean
 }
 
@@ -35,6 +37,7 @@ export const JobApplicationsTable = ({
   loading,
   search,
   footer,
+  selectable,
   className,
 }: Props) => {
   const { searchResults, setSearchQuery, searchQuery } = useSearch({
@@ -44,28 +47,54 @@ export const JobApplicationsTable = ({
   const [containerHeight, setContainerHeight] = useState<number>(600)
 
   const router = useRouter()
-  const { mutateAsync: removeJobApplication, isPending: isRemoving } =
-    useRemoveJobApplication()
+  const { mutateAsync: removeJobApplications, isPending: isRemoving } =
+    useRemoveJobApplications()
 
-  const [removingId, setRemovingId] = useState<string>()
+  const [removingIds, setRemovingIds] = useState<string[]>([])
 
-  const columns: ColumnDef<JobApplication>[] = useMemo(
-    () => [
+  const columns: ColumnDef<JobApplication>[] = useMemo(() => {
+    const selectColumn: ColumnDef<JobApplication> = {
+      id: 'select',
+      header: ({ table }) => (
+        <Checkbox
+          checked={
+            table.getIsAllPageRowsSelected() ||
+            (table.getIsSomePageRowsSelected() && 'indeterminate')
+          }
+          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        />
+      ),
+      cell: ({ row }) => (
+        <Checkbox
+          checked={row.getIsSelected()}
+          onCheckedChange={(value) => row.toggleSelected(!!value)}
+        />
+      ),
+      enableSorting: false,
+      enableHiding: false,
+      footer: footer
+        ? ({ table }) => (
+            <div>
+              Selected {table.getFilteredSelectedRowModel().rows.length} of{' '}
+              {jobApplications.length} applications
+            </div>
+          )
+        : undefined,
+    }
+
+    const columns_: ColumnDef<JobApplication>[] = [
       {
         header: 'Company',
         cell: ({ row }) => (
-          <div className="truncate w-32">
+          <div className="truncate w-40">
             {row.original.companyName ?? 'N/A'}
           </div>
         ),
-        footer: footer
-          ? () => <div>Total: {jobApplications.length} applications</div>
-          : undefined,
       },
       {
         header: 'Job Title',
         cell: ({ row }) => (
-          <div className="truncate w-52">{row.original.jobTitle ?? 'N/A'}</div>
+          <div className="truncate w-60">{row.original.jobTitle ?? 'N/A'}</div>
         ),
       },
       {
@@ -110,28 +139,28 @@ export const JobApplicationsTable = ({
           return (
             <div className="text-right">
               <Button
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+
                   router.push(`/adjust/${jobApplication.id}`)
                 }}
+                variant="outline"
               >
                 <ExternalLink />
-              </Button>
-              <Button
-                className="ml-2"
-                variant="destructive"
-                onClick={() => setRemovingId(jobApplication.id)}
-                disabled={isRemoving}
-              >
-                <Trash />
               </Button>
             </div>
           )
         },
-        header: () => <span className="ml-auto">Actions</span>,
       },
-    ],
-    [footer, isRemoving, jobApplications.length, router],
-  )
+    ]
+
+    if (selectable) {
+      return [selectColumn, ...columns_]
+    }
+
+    return columns_
+  }, [footer, jobApplications.length, router, selectable])
 
   if (loading) {
     return <JobApplicationsTableSkeleton />
@@ -139,21 +168,11 @@ export const JobApplicationsTable = ({
 
   return (
     <div className={cn('flex flex-col gap-2', className)}>
-      {search && (
-        <div className="flex items-center gap-2">
-          <Input
-            className="w-96 max-w-full"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search by job title, company name, or description..."
-          />
-        </div>
-      )}
       <div
         className="flex-1"
         ref={(ref) => {
           if (ref) {
-            setContainerHeight(ref.clientHeight)
+            setContainerHeight(ref.clientHeight - 64)
           }
         }}
       >
@@ -161,26 +180,59 @@ export const JobApplicationsTable = ({
           columns={columns}
           data={searchResults}
           height={containerHeight}
+          header={({ table }) => {
+            const selectedRows = table.getFilteredSelectedRowModel().rows
+            return search ? (
+              <div className="flex items-center justify-between gap-2 h-16">
+                <Input
+                  className="w-96 max-w-full"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search by job title, company name, or description..."
+                />
+                <Button
+                  className={cn(
+                    selectedRows.length === 0 ? 'opacity-0!' : 'opacity-100',
+                    'transition-opacity duration-300',
+                  )}
+                  variant="destructive"
+                  disabled={selectedRows.length === 0}
+                  onClick={() => {
+                    setRemovingIds(
+                      selectedRows
+                        .map((row) => row.original.id)
+                        .filter((id) => id !== undefined),
+                    )
+                  }}
+                >
+                  Delete
+                </Button>
+              </div>
+            ) : null
+          }}
         />
 
         <AlertDialog
-          open={!!removingId}
-          onOpenChange={(open) => !open && setRemovingId(undefined)}
+          open={!!removingIds.length}
+          onOpenChange={(open) => !open && setRemovingIds([])}
         >
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogTitle>
+                Are you sure you want to delete {removingIds.length}{' '}
+                applications?
+              </AlertDialogTitle>
               <AlertDialogDescription>
                 This action cannot be undone. This will permanently delete the
-                generated application.
+                generated applications.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
               <AlertDialogAction
                 onClick={() => {
-                  if (removingId) {
-                    removeJobApplication(removingId)
+                  if (removingIds.length) {
+                    removeJobApplications(removingIds)
                   }
                 }}
                 disabled={isRemoving}

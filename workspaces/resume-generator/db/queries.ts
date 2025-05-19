@@ -144,7 +144,6 @@ export const useUpdateJobApplication = () => {
     },
   })
 }
-
 export const useRemoveJobApplication = () => {
   const queryClient = useQueryClient()
 
@@ -155,6 +154,26 @@ export const useRemoveJobApplication = () => {
     onSuccess: (_, id) => {
       queryClient.invalidateQueries({ queryKey: queryKeys.jobApplications })
       queryClient.invalidateQueries({ queryKey: queryKeys.jobApplication(id) })
+    },
+  })
+}
+
+export const useRemoveJobApplications = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: async (ids: string[]) => {
+      await Promise.all(
+        ids.map((id) => deleteDoc(doc(db, 'jobApplications', id))),
+      )
+    },
+    onSuccess: (_, ids) => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.jobApplications })
+      ids.forEach((id) => {
+        queryClient.invalidateQueries({
+          queryKey: queryKeys.jobApplication(id),
+        })
+      })
     },
   })
 }

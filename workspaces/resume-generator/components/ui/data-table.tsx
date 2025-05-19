@@ -3,6 +3,7 @@
 import {
   ColumnDef,
   Row,
+  Table,
   flexRender,
   getCoreRowModel,
   getSortedRowModel,
@@ -57,12 +58,16 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
   height: number
+  header?:
+    | React.ReactNode
+    | (({ table }: { table: Table<TData> }) => React.ReactNode)
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
   height,
+  header,
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
@@ -73,8 +78,80 @@ export function DataTable<TData, TValue>({
 
   const { rows } = table.getRowModel()
 
+  const renderHeader = () =>
+    table
+      .getHeaderGroups()
+      .filter((headerGroup) =>
+        headerGroup.headers.some(
+          (header) => !header.isPlaceholder && header.column.columnDef.header,
+        ),
+      )
+      .map((headerGroup) => (
+        <TableRow className="bg-card" key={headerGroup.id}>
+          {headerGroup.headers.map((header) => {
+            return (
+              <TableHead
+                key={header.id}
+                colSpan={header.colSpan}
+                style={{
+                  width: header.getSize(),
+                }}
+              >
+                <div
+                  className="flex items-center"
+                  {...{
+                    style: header.column.getCanSort()
+                      ? {
+                          cursor: 'pointer',
+                          userSelect: 'none',
+                        }
+                      : {},
+                    onClick: header.column.getToggleSortingHandler(),
+                  }}
+                >
+                  {flexRender(
+                    header.column.columnDef.header,
+                    header.getContext(),
+                  )}
+                </div>
+              </TableHead>
+            )
+          })}
+        </TableRow>
+      ))
+
+  const renderFooter = () =>
+    table
+      .getFooterGroups()
+      .filter((footerGroup) =>
+        footerGroup.headers.some(
+          (header) => !header.isPlaceholder && header.column.columnDef.footer,
+        ),
+      )
+      .map((footerGroup) => (
+        <TableRow key={footerGroup.id} className="bg-card">
+          {footerGroup.headers.map((footer) => (
+            <TableHead
+              key={footer.id}
+              colSpan={footer.colSpan}
+              style={{
+                width: footer.getSize(),
+              }}
+            >
+              <div className="flex items-center">
+                {flexRender(
+                  footer.column.columnDef.footer,
+                  footer.getContext(),
+                )}
+              </div>
+            </TableHead>
+          ))}
+        </TableRow>
+      ))
+
   return (
     <div>
+      {typeof header === 'function' ? header({ table }) : header}
       <TableVirtuoso
         style={{ height }}
         totalCount={rows.length}
@@ -82,79 +159,8 @@ export function DataTable<TData, TValue>({
           Table: TableComponent,
           TableRow: TableRowComponent(rows),
         }}
-        fixedHeaderContent={() =>
-          table
-            .getHeaderGroups()
-            .filter((headerGroup) =>
-              headerGroup.headers.some(
-                (header) =>
-                  !header.isPlaceholder && header.column.columnDef.header,
-              ),
-            )
-            .map((headerGroup) => (
-              <TableRow className="bg-card" key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead
-                      key={header.id}
-                      colSpan={header.colSpan}
-                      style={{
-                        width: header.getSize(),
-                      }}
-                    >
-                      <div
-                        className="flex items-center"
-                        {...{
-                          style: header.column.getCanSort()
-                            ? {
-                                cursor: 'pointer',
-                                userSelect: 'none',
-                              }
-                            : {},
-                          onClick: header.column.getToggleSortingHandler(),
-                        }}
-                      >
-                        {flexRender(
-                          header.column.columnDef.header,
-                          header.getContext(),
-                        )}
-                      </div>
-                    </TableHead>
-                  )
-                })}
-              </TableRow>
-            ))
-        }
-        fixedFooterContent={() =>
-          table
-            .getFooterGroups()
-            .filter((footerGroup) =>
-              footerGroup.headers.some(
-                (header) =>
-                  !header.isPlaceholder && header.column.columnDef.footer,
-              ),
-            )
-            .map((footerGroup) => (
-              <TableRow key={footerGroup.id} className="bg-card">
-                {footerGroup.headers.map((footer) => (
-                  <TableHead
-                    key={footer.id}
-                    colSpan={footer.colSpan}
-                    style={{
-                      width: footer.getSize(),
-                    }}
-                  >
-                    <div className="flex items-center">
-                      {flexRender(
-                        footer.column.columnDef.footer,
-                        footer.getContext(),
-                      )}
-                    </div>
-                  </TableHead>
-                ))}
-              </TableRow>
-            ))
-        }
+        fixedHeaderContent={renderHeader}
+        fixedFooterContent={renderFooter}
       />
     </div>
   )

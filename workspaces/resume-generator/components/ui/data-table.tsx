@@ -1,13 +1,13 @@
 'use client'
 
 import {
-  ColumnDef,
   Row,
   Table,
   flexRender,
   getCoreRowModel,
   getSortedRowModel,
   useReactTable,
+  TableOptions,
 } from '@tanstack/react-table'
 
 import { TableCell, TableHead, TableRow } from '@/components/ui/table'
@@ -46,7 +46,12 @@ const TableRowComponent = <TData,>(rows: Row<TData>[]) =>
         {...props}
       >
         {row.getVisibleCells().map((cell) => (
-          <TableCell key={cell.id}>
+          <TableCell
+            key={cell.id}
+            style={{
+              width: cell.column.getSize(),
+            }}
+          >
             {flexRender(cell.column.columnDef.cell, cell.getContext())}
           </TableCell>
         ))}
@@ -54,8 +59,8 @@ const TableRowComponent = <TData,>(rows: Row<TData>[]) =>
     )
   }
 
-interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
+interface DataTableProps<TData> {
+  columns: TableOptions<TData>['columns']
   data: TData[]
   height: number
   header?:
@@ -63,12 +68,12 @@ interface DataTableProps<TData, TValue> {
     | (({ table }: { table: Table<TData> }) => React.ReactNode)
 }
 
-export function DataTable<TData, TValue>({
+export function DataTable<TData>({
   columns,
   data,
   height,
   header,
-}: DataTableProps<TData, TValue>) {
+}: DataTableProps<TData>) {
   const table = useReactTable({
     data,
     columns,
@@ -99,15 +104,15 @@ export function DataTable<TData, TValue>({
               >
                 <div
                   className="flex items-center"
-                  {...{
-                    style: header.column.getCanSort()
+                  style={
+                    header.column.getCanSort()
                       ? {
                           cursor: 'pointer',
                           userSelect: 'none',
                         }
-                      : {},
-                    onClick: header.column.getToggleSortingHandler(),
-                  }}
+                      : undefined
+                  }
+                  onClick={header.column.getToggleSortingHandler()}
                 >
                   {flexRender(
                     header.column.columnDef.header,

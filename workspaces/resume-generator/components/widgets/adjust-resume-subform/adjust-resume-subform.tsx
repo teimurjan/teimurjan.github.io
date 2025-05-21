@@ -19,6 +19,14 @@ import { Label } from '../../ui/label'
 import { Combobox, ComboboxOption } from '../../ui/combobox'
 import { z } from 'zod'
 import { adjustFormSchema } from '@/schema/adjust-form'
+import dynamic from 'next/dynamic'
+
+const HtmlEditor = dynamic(
+  () => import('../../common/html-editor').then((mod) => mod.HtmlEditor),
+  {
+    ssr: false,
+  },
+)
 
 type FormValues = z.infer<typeof adjustFormSchema>
 
@@ -447,9 +455,12 @@ export const AdjustResumeSubform = ({ form }: Props) => {
                 name={`resume.experiences.${index}.description.html`}
                 render={({ field }) => (
                   <FormItem className="md:col-span-2">
-                    <FormLabel>Description (HTML)</FormLabel>
+                    <FormLabel>Description</FormLabel>
                     <FormControl>
-                      <Textarea {...field} rows={4} />
+                      <HtmlEditor
+                        value={field.value ?? ''}
+                        onChange={(content) => field.onChange(content)}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

@@ -1,9 +1,8 @@
 'use client'
 import { JobApplication } from '@/db/types'
 import { Button } from '../../ui/button'
-import { useRouter } from '@bprogress/next/app'
-import { ExternalLink, Loader2 } from 'lucide-react'
-import { useMemo, useState } from 'react'
+import { Loader2 } from 'lucide-react'
+import { useState } from 'react'
 import {
   AlertDialog,
   AlertDialogContent,
@@ -19,10 +18,10 @@ import { Input } from '../../ui/input'
 import { useSearch } from '@/hooks/use-search'
 import { JobApplicationsTableSkeleton } from './job-applications-table-skeleton'
 import { DataTable } from '../../ui/data-table'
-import { ColumnDef } from '@tanstack/react-table'
-import { Badge } from '../../ui/badge'
 import { cn } from '@/lib/utils'
-import { Checkbox } from '@/components/ui/checkbox'
+import { useJobApplicationsTableColumns } from './use-job-applications-table-columns'
+import { Table } from '@tanstack/react-table'
+
 interface Props {
   jobApplications: JobApplication[]
   className?: string
@@ -46,121 +45,51 @@ export const JobApplicationsTable = ({
   })
   const [containerHeight, setContainerHeight] = useState<number>(600)
 
-  const router = useRouter()
   const { mutateAsync: removeJobApplications, isPending: isRemoving } =
     useRemoveJobApplications()
 
   const [removingIds, setRemovingIds] = useState<string[]>([])
 
-  const columns: ColumnDef<JobApplication>[] = useMemo(() => {
-    const selectColumn: ColumnDef<JobApplication> = {
-      id: 'select',
-      header: ({ table }) => (
-        <Checkbox
-          checked={
-            table.getIsAllPageRowsSelected() ||
-            (table.getIsSomePageRowsSelected() && 'indeterminate')
-          }
-          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        />
-      ),
-      cell: ({ row }) => (
-        <Checkbox
-          checked={row.getIsSelected()}
-          onCheckedChange={(value) => row.toggleSelected(!!value)}
-        />
-      ),
-      enableSorting: false,
-      enableHiding: false,
-      footer: footer
-        ? ({ table }) => (
-            <div>
-              Selected {table.getFilteredSelectedRowModel().rows.length} of{' '}
-              {jobApplications.length} applications
-            </div>
-          )
-        : undefined,
+  const columns = useJobApplicationsTableColumns({
+    jobApplications,
+    footer,
+    selectable,
+  })
+
+  const renderHeader = ({ table }: { table: Table<JobApplication> }) => {
+    if (!search) {
+      return null
     }
 
-    const columns_: ColumnDef<JobApplication>[] = [
-      {
-        header: 'Company',
-        cell: ({ row }) => (
-          <div className="truncate w-40">
-            {row.original.companyName ?? 'N/A'}
-          </div>
-        ),
-      },
-      {
-        header: 'Job Title',
-        cell: ({ row }) => (
-          <div className="truncate w-60">{row.original.jobTitle ?? 'N/A'}</div>
-        ),
-      },
-      {
-        header: 'Job Description',
-        cell: ({ row }) => (
-          <div className="truncate w-[500px]">
-            {row.original.jobDescription}
-          </div>
-        ),
-        id: 'jobDescription',
-      },
-      {
-        accessorFn: (row) =>
-          new Intl.DateTimeFormat('en-US').format(
-            new Date(row.createdAt.toMillis()),
-          ),
-        header: 'Created At',
-      },
-      {
-        cell: ({ row }) => {
-          const status = (() => {
-            if (!row.original.status) {
-              return row.original.resume ? 'Completed' : 'Pending'
-            }
-            return (
-              row.original.status.slice(0, 1).toUpperCase() +
-              row.original.status.slice(1)
+    const selectedRows = table.getFilteredSelectedRowModel().rows
+    return (
+      <div className="flex items-center justify-between gap-2 h-16">
+        <Input
+          className="w-96 max-w-full"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Search by job title, company name, or description..."
+        />
+        <Button
+          className={cn(
+            selectedRows.length === 0 ? 'opacity-0!' : 'opacity-100',
+            'transition-opacity duration-300',
+          )}
+          variant="destructive"
+          disabled={selectedRows.length === 0}
+          onClick={() => {
+            setRemovingIds(
+              selectedRows
+                .map((row) => row.original.id)
+                .filter((id) => id !== undefined),
             )
-          })()
-          return (
-            <Badge variant={status === 'Completed' ? 'default' : 'secondary'}>
-              {status}
-            </Badge>
-          )
-        },
-        header: 'Status',
-      },
-      {
-        id: 'actions',
-        cell: ({ row }) => {
-          const jobApplication = row.original
-          return (
-            <div className="text-right">
-              <Button
-                onClick={(e) => {
-                  e.preventDefault()
-                  e.stopPropagation()
-
-                  router.push(`/adjust/${jobApplication.id}`)
-                }}
-                variant="outline"
-              >
-                <ExternalLink />
-              </Button>
-            </div>
-          )
-        },
-      },
-    ]
-
-    if (selectable) {
-      return [selectColumn, ...columns_]
-    }
-
-    return columns_
-  }, [footer, jobApplications.length, router, selectable])
+          }}
+        >
+          Delete
+        </Button>
+      </div>
+    )
+  }
 
   if (loading) {
     return <JobApplicationsTableSkeleton />
@@ -180,36 +109,7 @@ export const JobApplicationsTable = ({
           columns={columns}
           data={searchResults}
           height={containerHeight}
-          header={({ table }) => {
-            const selectedRows = table.getFilteredSelectedRowModel().rows
-            return search ? (
-              <div className="flex items-center justify-between gap-2 h-16">
-                <Input
-                  className="w-96 max-w-full"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search by job title, company name, or description..."
-                />
-                <Button
-                  className={cn(
-                    selectedRows.length === 0 ? 'opacity-0!' : 'opacity-100',
-                    'transition-opacity duration-300',
-                  )}
-                  variant="destructive"
-                  disabled={selectedRows.length === 0}
-                  onClick={() => {
-                    setRemovingIds(
-                      selectedRows
-                        .map((row) => row.original.id)
-                        .filter((id) => id !== undefined),
-                    )
-                  }}
-                >
-                  Delete
-                </Button>
-              </div>
-            ) : null
-          }}
+          header={renderHeader}
         />
 
         <AlertDialog

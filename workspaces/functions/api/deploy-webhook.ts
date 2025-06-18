@@ -1,13 +1,15 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
+import { Redis } from '@upstash/redis'
 import crypto from 'crypto'
 
 const HYGRAPH_SECRET = process.env.HYGRAPH_SECRET!
 const GITHUB_WORKFLOW_URL = process.env.GITHUB_WORKFLOW_URL!
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN!
 
-// Global timer to accumulate webhook requests
-let timer: NodeJS.Timeout | null = null
-const TIMEOUT = 30000
+const COOLDOWN_PERIOD = 30000 // seconds
+const DEPLOY_KEY = 'last_deploy_timestamp'
+
+const redis = Redis.fromEnv();
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
@@ -34,38 +36,39 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(403).json({ message: 'Invalid signature' })
   }
 
-  if (timer) {
-    return res.status(200).json({ message: 'Deployment already scheduled' })
+  try {
+    const lastDeployTime = (await redis.get<number>(DEPLOY_KEY)) || 0
+    const now = Date.now()
+    const timeSinceLastDeploy = now - lastDeployTime
+
+    if (timeSinceLastDeploy < COOLDOWN_PERIOD) {
+      return res.status(429).json({
+        message: `Deployment already scheduled. Please wait ${Math.round((COOLDOWN_PERIOD - timeSinceLastDeploy) / 1000)} seconds.`,
+      })
+    }
+
+    await redis.set(DEPLOY_KEY, now)
+
+    const response = await fetch(GITHUB_WORKFLOW_URL, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${GITHUB_TOKEN}`,
+        Accept: 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28',
+      },
+      body: JSON.stringify({ ref: 'main' }),
+    })
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to trigger workflow: ${response.statusText} ${await response.text()}`,
+      )
+    }
+
+    console.log('Deployment triggered')
+    return res.status(200).json({ message: 'Deployment triggered' })
+  } catch (error) {
+    console.error('Error:', error)
+    return res.status(500).json({ message: 'Internal server error' })
   }
-
-  await new Promise<void>((resolve, reject) => {
-    timer = setTimeout(async () => {
-      try {
-        const response = await fetch(GITHUB_WORKFLOW_URL, {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${GITHUB_TOKEN}`,
-            Accept: 'application/vnd.github+json',
-            'X-GitHub-Api-Version': '2022-11-28',
-          },
-          body: JSON.stringify({ ref: 'main' }),
-        })
-
-        if (!response.ok) {
-          console.error(`Failed to trigger workflow: ${response.statusText}`)
-        } else {
-          console.log('Deployment triggered')
-        }
-        resolve()
-      } catch (error) {
-        console.error('Error triggering deployment:', error)
-        reject(error)
-      } finally {
-        // Reset the timer so that future requests can schedule a new dispatch.
-        timer = null
-      }
-    }, TIMEOUT)
-  })
-
-  return res.status(200).json({ message: 'Deployment scheduled' })
 }

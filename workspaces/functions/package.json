@@ -6,6 +6,7 @@
   "author": "Teimur Gasanov",
   "dependencies": {
     "@types/node": "^20",
+    "@upstash/redis": "^1.35.0",
     "@vercel/node": "^5.1.10",
     "typescript": "^5.7.3"
   },

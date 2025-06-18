@@ -38,30 +38,34 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(200).json({ message: 'Deployment already scheduled' })
   }
 
-  timer = setTimeout(async () => {
-    try {
-      const response = await fetch(GITHUB_WORKFLOW_URL, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${GITHUB_TOKEN}`,
-          Accept: 'application/vnd.github+json',
-          'X-GitHub-Api-Version': '2022-11-28',
-        },
-        body: JSON.stringify({ ref: 'main' }),
-      })
+  await new Promise<void>((resolve, reject) => {
+    timer = setTimeout(async () => {
+      try {
+        const response = await fetch(GITHUB_WORKFLOW_URL, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${GITHUB_TOKEN}`,
+            Accept: 'application/vnd.github+json',
+            'X-GitHub-Api-Version': '2022-11-28',
+          },
+          body: JSON.stringify({ ref: 'main' }),
+        })
 
-      if (!response.ok) {
-        console.error(`Failed to trigger workflow: ${response.statusText}`)
-      } else {
-        console.log('Deployment triggered')
+        if (!response.ok) {
+          console.error(`Failed to trigger workflow: ${response.statusText}`)
+        } else {
+          console.log('Deployment triggered')
+        }
+        resolve()
+      } catch (error) {
+        console.error('Error triggering deployment:', error)
+        reject(error)
+      } finally {
+        // Reset the timer so that future requests can schedule a new dispatch.
+        timer = null
       }
-    } catch (error) {
-      console.error('Error triggering deployment:', error)
-    } finally {
-      // Reset the timer so that future requests can schedule a new dispatch.
-      timer = null
-    }
-  }, TIMEOUT)
+    }, TIMEOUT)
+  })
 
   return res.status(200).json({ message: 'Deployment scheduled' })
 }

@@ -51,6 +51,7 @@ export type Asset = Entity & Node & {
   /** The unique identifier */
   id: Scalars['ID']['output'];
   imageConference: Array<Conference>;
+  imageInterview: Array<Interview>;
   /** System Locale field */
   locale: Locale;
   /** Get the other localizations for this document */
@@ -121,6 +122,20 @@ export type AssetImageConferenceArgs = {
   orderBy?: InputMaybe<ConferenceOrderByInput>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<ConferenceWhereInput>;
+};
+
+
+/** Asset system model */
+export type AssetImageInterviewArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<InterviewOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<InterviewWhereInput>;
 };
 
 
@@ -224,6 +239,7 @@ export type AssetCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   fileName?: InputMaybe<Scalars['String']['input']>;
   imageConference?: InputMaybe<ConferenceCreateManyInlineInput>;
+  imageInterview?: InputMaybe<InterviewCreateManyInlineInput>;
   /** Inline mutations for managing document localizations excluding the default locale */
   localizations?: InputMaybe<AssetCreateLocalizationsInput>;
   logoExperience?: InputMaybe<ExperienceCreateManyInlineInput>;
@@ -326,6 +342,9 @@ export type AssetManyWhereInput = {
   imageConference_every?: InputMaybe<ConferenceWhereInput>;
   imageConference_none?: InputMaybe<ConferenceWhereInput>;
   imageConference_some?: InputMaybe<ConferenceWhereInput>;
+  imageInterview_every?: InputMaybe<InterviewWhereInput>;
+  imageInterview_none?: InputMaybe<InterviewWhereInput>;
+  imageInterview_some?: InputMaybe<InterviewWhereInput>;
   logoExperience_every?: InputMaybe<ExperienceWhereInput>;
   logoExperience_none?: InputMaybe<ExperienceWhereInput>;
   logoExperience_some?: InputMaybe<ExperienceWhereInput>;
@@ -415,6 +434,7 @@ export type AssetTransformationInput = {
 export type AssetUpdateInput = {
   fileName?: InputMaybe<Scalars['String']['input']>;
   imageConference?: InputMaybe<ConferenceUpdateManyInlineInput>;
+  imageInterview?: InputMaybe<InterviewUpdateManyInlineInput>;
   /** Manage document localizations */
   localizations?: InputMaybe<AssetUpdateLocalizationsInput>;
   logoExperience?: InputMaybe<ExperienceUpdateManyInlineInput>;
@@ -742,6 +762,9 @@ export type AssetWhereInput = {
   imageConference_every?: InputMaybe<ConferenceWhereInput>;
   imageConference_none?: InputMaybe<ConferenceWhereInput>;
   imageConference_some?: InputMaybe<ConferenceWhereInput>;
+  imageInterview_every?: InputMaybe<InterviewWhereInput>;
+  imageInterview_none?: InputMaybe<InterviewWhereInput>;
+  imageInterview_some?: InputMaybe<InterviewWhereInput>;
   logoExperience_every?: InputMaybe<ExperienceWhereInput>;
   logoExperience_none?: InputMaybe<ExperienceWhereInput>;
   logoExperience_some?: InputMaybe<ExperienceWhereInput>;
@@ -3543,6 +3566,8 @@ export type Interview = Entity & Node & {
   history: Array<Version>;
   /** The unique identifier */
   id: Scalars['ID']['output'];
+  image?: Maybe<Asset>;
+  link?: Maybe<Scalars['String']['output']>;
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
   /** User that last published this document */
@@ -3576,6 +3601,13 @@ export type InterviewHistoryArgs = {
   limit?: Scalars['Int']['input'];
   skip?: Scalars['Int']['input'];
   stageOverride?: InputMaybe<Stage>;
+};
+
+
+export type InterviewImageArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+  where?: InputMaybe<AssetSingleRelationWhereInput>;
 };
 
 
@@ -3628,6 +3660,8 @@ export type InterviewConnection = {
 export type InterviewCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   date: Scalars['Date']['input'];
+  image?: InputMaybe<AssetCreateOneInlineInput>;
+  link?: InputMaybe<Scalars['String']['input']>;
   title: Scalars['String']['input'];
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   videoEmbed?: InputMaybe<VideoEmbedCreateOneInlineInput>;
@@ -3719,6 +3753,26 @@ export type InterviewManyWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  image?: InputMaybe<AssetWhereInput>;
+  link?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  link_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  link_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  link_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  link_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  link_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  link_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  link_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  link_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  link_starts_with?: InputMaybe<Scalars['String']['input']>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -3783,6 +3837,8 @@ export enum InterviewOrderByInput {
   DateDesc = 'date_DESC',
   IdAsc = 'id_ASC',
   IdDesc = 'id_DESC',
+  LinkAsc = 'link_ASC',
+  LinkDesc = 'link_DESC',
   PublishedAtAsc = 'publishedAt_ASC',
   PublishedAtDesc = 'publishedAt_DESC',
   TitleAsc = 'title_ASC',
@@ -3793,6 +3849,8 @@ export enum InterviewOrderByInput {
 
 export type InterviewUpdateInput = {
   date?: InputMaybe<Scalars['Date']['input']>;
+  image?: InputMaybe<AssetUpdateOneInlineInput>;
+  link?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
   videoEmbed?: InputMaybe<VideoEmbedUpdateOneInlineInput>;
 };
@@ -3816,6 +3874,7 @@ export type InterviewUpdateManyInlineInput = {
 
 export type InterviewUpdateManyInput = {
   date?: InputMaybe<Scalars['Date']['input']>;
+  link?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -3931,6 +3990,26 @@ export type InterviewWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  image?: InputMaybe<AssetWhereInput>;
+  link?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  link_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  link_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  link_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  link_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  link_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  link_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  link_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  link_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  link_starts_with?: InputMaybe<Scalars['String']['input']>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -9731,6 +9810,7 @@ export enum _FilterKind {
   ContainsAll = 'contains_all',
   ContainsNone = 'contains_none',
   ContainsSome = 'contains_some',
+  DescendantsOf = 'descendants_of',
   EndsWith = 'ends_with',
   Eq = 'eq',
   EqNot = 'eq_not',
@@ -9827,7 +9907,7 @@ export type ExperienceHistoryQuery = { __typename?: 'Query', experiences: Array<
 export type MediaQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MediaQuery = { __typename?: 'Query', publications: Array<{ __typename: 'Publication', id: string, title: string, link: string, date: any }>, conferences: Array<{ __typename: 'Conference', id: string, title: string, topic: string, link: string, date: any, image?: { __typename?: 'Asset', url: string } | null, videoEmbed?: { __typename?: 'VideoEmbed', link: string, iframeOptions?: any | null } | null }>, interviews: Array<{ __typename: 'Interview', id: string, title: string, date: any, videoEmbed?: { __typename?: 'VideoEmbed', link: string, iframeOptions?: any | null } | null }> };
+export type MediaQuery = { __typename?: 'Query', publications: Array<{ __typename: 'Publication', id: string, title: string, link: string, date: any }>, conferences: Array<{ __typename: 'Conference', id: string, title: string, topic: string, link: string, date: any, image?: { __typename?: 'Asset', url: string } | null, videoEmbed?: { __typename?: 'VideoEmbed', link: string, iframeOptions?: any | null } | null }>, interviews: Array<{ __typename: 'Interview', id: string, title: string, date: any, link?: string | null, image?: { __typename?: 'Asset', url: string } | null, videoEmbed?: { __typename?: 'VideoEmbed', link: string, iframeOptions?: any | null } | null }> };
 
 export type ProfileReadmeQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -9922,6 +10002,10 @@ export const MediaDocument = gql`
     id
     title
     date
+    link
+    image {
+      url
+    }
     videoEmbed {
       link
       iframeOptions

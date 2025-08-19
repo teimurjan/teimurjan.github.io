@@ -3,4 +3,5 @@ export enum Anchor {
   Skills = 'skills',
   Education = 'education',
   Media = 'activity',
+  Contribution = 'contribution',
 }

@@ -4,13 +4,13 @@ import Image from 'next/image'
 import Background from '../../atoms/background'
 import Typography from '../../atoms/typography'
 
-export interface Props extends HTMLAttributes<HTMLDivElement> {
+export interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   id?: string
   image?: {
     src: string
     alt: string
   }
-  title: string
+  title: ReactNode
   subtitle1: ReactNode
   subtitle2?: string
   overlay?: ReactNode

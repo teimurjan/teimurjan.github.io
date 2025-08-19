@@ -18,6 +18,7 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}
     env:
       NEXT_PUBLIC_HYGRAPH_URL: ${{ vars.HYGRAPH_URL }}
+      GQL_API_GITHUB_TOKEN: ${{ secrets.GQL_API_GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
 

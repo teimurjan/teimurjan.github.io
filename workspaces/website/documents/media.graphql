@@ -26,6 +26,10 @@ query Media {
     id
     title
     date
+    link
+    image {
+      url
+    }
     videoEmbed {
       link
       iframeOptions

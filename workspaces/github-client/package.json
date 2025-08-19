@@ -1,0 +1,19 @@
+{
+  "name": "@teimurjan/github-client",
+  "version": "0.0.0",
+  "private": true,
+  "description": "GitHub API client",
+  "author": "Teimur Gasanov",
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@octokit/rest": "^22.0.0",
+    "@octokit/types": "^14.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+    "node": ">=20.18.1"
+  },
+  "packageManager": "yarn@4.4.0"
+}

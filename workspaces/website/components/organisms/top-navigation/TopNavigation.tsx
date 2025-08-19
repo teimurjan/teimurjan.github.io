@@ -28,6 +28,11 @@ const navItems = [
     value: Anchor.Skills,
     label: Anchor.Education.toUpperCase(),
   },
+  {
+    key: Anchor.Contribution,
+    value: Anchor.Contribution,
+    label: Anchor.Contribution.toUpperCase(),
+  },
   { key: Anchor.Media, value: Anchor.Media, label: Anchor.Media.toUpperCase() },
 ]
 

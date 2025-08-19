@@ -1,0 +1,202 @@
+# Cursor Rules for Teimur Gasanov's Personal Website Monorepo
+
+## Project Overview
+This is a TypeScript monorepo containing multiple workspaces for a personal website ecosystem including a portfolio website, resume generator, Firebase functions, and various utilities. The project uses Yarn 4 workspaces with strict TypeScript configuration.
+
+## Core Technologies & Frameworks
+- **Languages**: TypeScript, JavaScript
+- **Frontend**: Next.js 15, React 19, Tailwind CSS 4
+- **Backend**: Firebase Functions, Vercel Functions
+- **Database**: Firebase Firestore
+- **Build Tools**: Yarn 4, ESLint 9, Prettier
+- **UI Libraries**: Radix UI, React Three Fiber, Framer Motion
+- **Styling**: Tailwind CSS with class-variance-authority (CVA)
+- **Validation**: Zod schemas
+- **GraphQL**: GraphQL Request with custom client
+
+## Workspace Structure
+```
+workspaces/
+├── website/              # Main portfolio Next.js app
+├── resume-generator/     # Resume generation app
+├── firebase-functions/   # Firebase cloud functions
+├── functions/            # Vercel functions
+├── resume/               # Resume PDF component library
+├── github-client/        # GitHub API client utilities
+├── gql-client/           # GraphQL client utilities
+├── utils/                # Shared utilities
+└── profile-readme/       # GitHub profile README generator
+```
+
+## Code Style & Conventions
+
+### TypeScript
+- Use strict TypeScript configuration with `strict: true`
+- Prefer `interface` over `type` for object shapes
+- Use explicit return types for functions when beneficial for clarity
+- Follow the pattern: `export interface Props extends HTMLAttributes<HTMLElement>`
+- Use Zod for runtime validation and schema definition
+- Leverage TypeScript's `satisfies` operator for type checking
+
+### React Components
+- Use functional components with hooks exclusively
+- Implement `forwardRef` for reusable UI components
+- Follow atomic design principles: atoms, molecules, organisms
+- Export interfaces as `Props` for component prop types
+- Use `children` prop for composition patterns
+- Prefer named exports with default export assignment: `export default Object.assign(Component, { SubComponent })`
+
+### Component Structure
+```typescript
+// Preferred component structure
+interface Props extends HTMLAttributes<HTMLElement> {
+  // component-specific props
+}
+
+const Component = forwardRef<HTMLElement, Props>(({ children, ...props }, ref) => {
+  return (
+    <element ref={ref} {...props}>
+      {children}
+    </element>
+  )
+})
+
+export default Component
+```
+
+### Styling with CVA (Class Variance Authority)
+- Use `cva` for component variant styling patterns
+- Define variants with comprehensive default values
+- Combine CVA with `classNames` for conditional styles
+- Follow the pattern:
+```typescript
+const componentStyles = cva(
+  'base-classes',
+  {
+    variants: {
+      variant: { default: 'classes' },
+      size: { md: 'classes' }
+    },
+    defaultVariants: {
+      variant: 'default',
+      size: 'md'
+    }
+  }
+)
+```
+
+### File Organization
+- Use index.ts files for clean re-exports
+- Follow directory structure: `/component-name/Component.tsx` and `/component-name/index.ts`
+- Group related utilities in dedicated directories
+- Separate hooks into dedicated files with `use-` prefix
+- Co-locate types with their usage when possible
+
+### Hooks
+- Prefix custom hooks with `use-`
+- Return objects for multiple values, not arrays
+- Use `useCallback` and `useMemo` for performance optimization
+- Handle client-side rendering with `useIsClient` pattern
+- Follow the pattern for custom hooks returning state and actions
+
+### Import/Export Patterns
+- Use absolute imports with path mapping (`@/*`)
+- Prefer named imports for utilities and hooks
+- Use default imports for components
+- Group imports: external libraries, internal modules, relative imports
+- Use workspace protocol for internal packages: `"@teimurjan/package": "workspace:*"`
+
+### GraphQL & Data Fetching
+- Use GraphQL Request for API calls
+- Define queries in separate `.graphql` files
+- Leverage TypeScript code generation for type safety
+- Use React Query for client-side state management
+
+### State Management
+- Use React Context for global state
+- Implement custom providers with proper TypeScript typing
+- Use React Query for server state
+- Prefer local state with `useState` for component-specific state
+
+## Workspace-Specific Guidelines
+
+### Website (Next.js Portfolio)
+- Use `'use client'` directive for client-side components
+- Implement proper SEO with Next.js metadata API
+- Use dynamic imports for Three.js components to avoid SSR issues
+- Follow responsive design principles with Tailwind
+
+### Resume Generator
+- Use shadcn/ui components for consistent UI
+- Implement proper form validation with react-hook-form and Zod
+- Use Radix UI for accessible components
+- Follow the data table patterns with TanStack Table
+
+### Firebase Functions
+- Use strict error handling with proper logging
+- Implement rate limiting for API endpoints
+- Use Zod schemas for request validation
+- Follow Firebase best practices for cloud functions
+
+## Error Handling
+- Use try-catch blocks for async operations
+- Implement proper error boundaries in React
+- Use Zod for runtime validation and error messages
+- Log errors appropriately based on environment
+
+## Performance Guidelines
+- Use React.memo for expensive components
+- Implement proper code splitting with dynamic imports
+- Optimize images with Next.js Image component
+- Use Tailwind CSS purging for smaller bundle sizes
+- Leverage Next.js performance optimizations (turbopack in dev)
+
+## Testing & Quality
+- Follow ESLint configuration with React hooks rules
+- Use Prettier for code formatting
+- Implement TypeScript strict mode across all workspaces
+- Use `@typescript-eslint/no-unused-vars` with underscore prefix pattern
+
+## Environment & Deployment
+- Use Node.js >= 20.18.1
+- Leverage Yarn 4 workspaces for dependency management
+- Use environment-specific configurations
+- Follow proper secret management for API keys
+
+## Naming Conventions
+- Use kebab-case for file and directory names
+- Use PascalCase for component names
+- Use camelCase for variables, functions, and props
+- Use SCREAMING_SNAKE_CASE for constants
+- Prefix interface names with descriptive context when needed
+
+## Package Dependencies
+- Prefer exact versions for critical dependencies
+- Use workspace protocol for internal dependencies
+- Keep dependencies up to date, especially security patches
+- Use resolutions for version conflicts
+
+## Git & Collaboration
+- Follow conventional commits for clear history
+- Use meaningful branch names
+- Keep commits focused and atomic
+- Update documentation when making architectural changes
+
+## AI Assistant Guidelines
+- Always use TypeScript with proper typing
+- Follow the established component patterns
+- Respect the monorepo workspace structure
+- Use existing utility functions and hooks when available
+- Maintain consistency with the existing codebase style
+- Consider performance implications of code changes
+- Ensure accessibility standards are met
+- Test components in isolation when possible
+
+## Security Considerations
+- Validate all inputs with Zod schemas
+- Use environment variables for sensitive configuration
+- Implement proper CORS policies
+- Follow Firebase security rules best practices
+- Sanitize user inputs, especially in HTML editors
+
+Remember: This is a personal portfolio project showcasing modern web development practices. Prioritize clean, maintainable code that demonstrates technical proficiency while ensuring excellent user experience.

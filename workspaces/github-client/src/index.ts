@@ -1,0 +1,6 @@
+export { default as getClient } from './get-client'
+export { default as getUserWithContributions } from './get-user-with-contributions'
+export { default as getRepositoriesContributedTo } from './get-repositories-contributed-to'
+export { default as getUserCreatedAt } from './get-user-created-at'
+export * from './types'
+export * from './error'

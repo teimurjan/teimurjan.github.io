@@ -5,9 +5,10 @@ import classNames from 'classnames'
 
 interface CardCarouselProps {
   children: ReactNode
+  controls?: boolean
 }
 
-const CardCarousel = ({ children }: CardCarouselProps) => {
+const CardCarousel = ({ children, controls = true }: CardCarouselProps) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ dragFree: true })
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [scrollProgress, setScrollProgress] = useState(0)
@@ -55,22 +56,24 @@ const CardCarousel = ({ children }: CardCarouselProps) => {
         )}
       />
 
-      <div className="embla__controls">
-        <div className="embla__dots flex items-center justify-center gap-4">
-          {scrollSnaps.map((_, index) => (
-            <button
-              key={index}
-              className={classNames(
-                'embla__dot w-4 h-4 rounded-full',
-                index === selectedIndex
-                  ? 'embla__dot--selected bg-geometry-dark'
-                  : 'bg-geometry-light',
-              )}
-              onClick={() => emblaApi?.scrollTo(index)}
-            />
-          ))}
+      {controls && (
+        <div className="embla__controls">
+          <div className="embla__dots flex items-center justify-center gap-4">
+            {scrollSnaps.map((_, index) => (
+              <button
+                key={index}
+                className={classNames(
+                  'embla__dot w-4 h-4 rounded-full',
+                  index === selectedIndex
+                    ? 'embla__dot--selected bg-geometry-dark'
+                    : 'bg-geometry-light',
+                )}
+                onClick={() => emblaApi?.scrollTo(index)}
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }

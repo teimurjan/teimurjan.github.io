@@ -56,6 +56,10 @@ const elementsToCheckVisibility = [
     id: Anchor.Media,
     threshold: 0.25,
   },
+  {
+    id: Anchor.Contribution,
+    threshold: 0.5,
+  },
 ]
 
 const Layout = ({

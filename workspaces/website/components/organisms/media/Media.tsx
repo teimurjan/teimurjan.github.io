@@ -36,26 +36,24 @@ const Media = async () => {
     if (item.__typename === 'Interview') {
       return (
         <Timeline.Item key={item.id} icon="📺" date={prettyDate(item.date)}>
-          {item.videoEmbed?.iframeOptions ? (
-            <MediaCard
-              title={item.title}
-              media={
-                <iframe
-                  title={item.title}
-                  className="w-full"
-                  src={item.videoEmbed.link}
-                  {...item.videoEmbed.iframeOptions}
-                />
-              }
-              subtitle={renderLink(item.videoEmbed.link)}
-            />
-          ) : (
-            <Typography.Title variant="h5">
-              {item.title}
-              <br />
-              {renderLink(item.videoEmbed?.link ?? '')}
-            </Typography.Title>
-          )}
+          <MediaCard
+            title={item.title}
+            media={
+              item.image ? (
+                <img className="w-full" src={item.image.url} alt={item.title} />
+              ) : (
+                item.videoEmbed && (
+                  <iframe
+                    title={item.title}
+                    className="w-full"
+                    src={item.videoEmbed.link}
+                    {...item.videoEmbed.iframeOptions}
+                  />
+                )
+              )
+            }
+            subtitle={renderLink(item.link ?? item.videoEmbed?.link ?? '')}
+          />
         </Timeline.Item>
       )
     }

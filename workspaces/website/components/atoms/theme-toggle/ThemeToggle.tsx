@@ -4,6 +4,7 @@ import { useTheme } from 'next-themes'
 import { Moon, Sun } from 'lucide-react'
 import useIsClient from '@/hooks/use-is-client'
 import classNames from 'classnames'
+
 const ThemeToggle = () => {
   const { theme, setTheme } = useTheme()
   const isClient = useIsClient()

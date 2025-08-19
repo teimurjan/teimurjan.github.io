@@ -7,6 +7,7 @@ import TopNavigation from '../components/organisms/top-navigation'
 import Footer from '../components/organisms/footer'
 import Skills from '../components/organisms/skills'
 import Media from '../components/organisms/media'
+import GitHubActivity from '../components/organisms/github-activity'
 
 const Page = () => {
   return (
@@ -19,11 +20,14 @@ const Page = () => {
         <Section color="light" className="pt-12 pb-20">
           <ExperienceHistory />
         </Section>
-        <Section color="light" className="pb-16">
+        <Section color="light" className="pb-12">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
             <Skills />
             <Education />
           </div>
+        </Section>
+        <Section color="light" className="pb-16">
+          <GitHubActivity username="teimurjan" />
         </Section>
         <Section color="light" className="pb-12">
           <Media />

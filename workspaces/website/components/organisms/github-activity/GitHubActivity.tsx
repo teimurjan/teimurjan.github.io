@@ -12,13 +12,11 @@ interface Props {
   minStars?: number
 }
 
-const GitHubActivity = async ({ username, minStars = 100 }: Props) => {
+const GitHubActivity = async ({ username, minStars = 50 }: Props) => {
   if (!process.env.GQL_API_GITHUB_TOKEN) {
     throw new Error('GQL_API_GITHUB_TOKEN is not defined')
   }
 
-  const lastYear = new Date()
-  lastYear.setFullYear(lastYear.getFullYear() - 1)
   const now = new Date()
   now.setHours(0, 0, 0, 0)
 

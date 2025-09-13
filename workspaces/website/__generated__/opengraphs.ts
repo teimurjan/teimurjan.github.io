@@ -112,4 +112,27 @@ export default {
       image: null,
       url: null,
     },
+  'https://dev.to/teimurjan/building-blazediff-how-i-made-the-fastest-image-diff-up-to-60-faster-with-block-level-optimization-ok7':
+    {
+      description:
+        "From analyzing pixelmatch's bottlenecks to creating a faster algorithm with zero allocations and... Tagged with performance, javascript, typescript, frontend.",
+      twitterImageSrc:
+        'https://media2.dev.to/dynamic/image/width=1000,height=500,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fdwe7vrkd2n1md3a1mgjp.png',
+      twitterCard: 'summary_large_image',
+      twitterTitle:
+        'Building BlazeDiff: How I Made The Fastest Image Diff up-to 60% Faster with Block-Level Optimization',
+      twitterDescription:
+        "From analyzing pixelmatch's bottlenecks to creating a faster algorithm with zero allocations and...",
+      ogImage:
+        'https://media2.dev.to/dynamic/image/width=1000,height=500,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fdwe7vrkd2n1md3a1mgjp.png',
+      ogType: 'article',
+      ogTitle:
+        'Building BlazeDiff: How I Made The Fastest Image Diff up-to 60% Faster with Block-Level Optimization',
+      ogUrl:
+        'https://dev.to/teimurjan/building-blazediff-how-i-made-the-fastest-image-diff-up-to-60-faster-with-block-level-optimization-ok7',
+      ogDescription:
+        "From analyzing pixelmatch's bottlenecks to creating a faster algorithm with zero allocations and...",
+      image: null,
+      url: null,
+    },
 } as Record<string, Record<string, string | null>>

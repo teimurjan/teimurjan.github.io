@@ -4,7 +4,12 @@ export const PRETTY_DATE_FORMAT = 'MMM yyyy'
 export const YEAR_DATE_FORMAT = 'yyyy'
 
 export const prettyDate = (date: string, format = PRETTY_DATE_FORMAT) => {
-  return dateFnsFormat(new Date(date), format)
+  try {
+    return dateFnsFormat(new Date(date), format)
+  } catch (error) {
+    console.warn(error)
+    return undefined
+  }
 }
 
 export const prettyRange = (
@@ -12,9 +17,12 @@ export const prettyRange = (
   endDate?: string,
   format = PRETTY_DATE_FORMAT,
 ) => {
-  return `${prettyDate(startDate, format)} - ${
-    endDate ? prettyDate(endDate, format) : 'Now'
-  }`
+  const finalEndDate = endDate
+    ? endDate.includes('null') || endDate.includes('undefined')
+      ? undefined
+      : endDate
+    : undefined
+  return `${prettyDate(startDate, format)} - ${prettyDate(finalEndDate, format) ?? 'Now'}`
 }
 
 export const dateSorter = (a: string, b: string) => {

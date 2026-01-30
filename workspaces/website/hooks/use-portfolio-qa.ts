@@ -13,6 +13,13 @@ const MODEL_ID = 'Qwen3-0.6B-q4f16_1-MLC'
 
 type ModelStatus = 'idle' | 'loading' | 'ready' | 'error' | 'unsupported'
 
+function isSafari(): boolean {
+  if (typeof navigator === 'undefined') return false
+  const ua = navigator.userAgent
+  // Safari but not Chrome (Chrome includes "Safari" in UA)
+  return /Safari/.test(ua) && !/Chrome/.test(ua) && !/Chromium/.test(ua)
+}
+
 interface UsePortfolioQAResult {
   loadModel: () => void
   ask: (question: string) => Promise<void>
@@ -109,7 +116,14 @@ export function usePortfolioQA(context: PortfolioContext): UsePortfolioQAResult 
     // Check WebGPU support before attempting to load
     if (typeof navigator === 'undefined' || !('gpu' in navigator)) {
       setStatus('unsupported')
-      setError('Your browser does not support WebGPU')
+      setError('WebGPU not supported')
+      return
+    }
+
+    // Safari has WebGPU but crashes due to memory limits with LLMs
+    if (isSafari()) {
+      setStatus('unsupported')
+      setError('Safari not supported (memory limits)')
       return
     }
 

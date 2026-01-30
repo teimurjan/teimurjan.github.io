@@ -135,7 +135,9 @@ export function Terminal({ folders, fullName }: TerminalProps) {
           )}
 
           {status === 'unsupported' && (
-            <span className="text-xs text-muted-foreground">Unavailable (WebGPU not supported)</span>
+            <span className="text-xs text-muted-foreground">
+              Unavailable ({error || 'not supported'})
+            </span>
           )}
         </div>
         {isExpanded ? (

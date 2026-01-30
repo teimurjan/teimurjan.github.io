@@ -5,68 +5,56 @@ import { generateSchema } from '../schema/schema'
 
 export const prompt = async (openaiClient: OpenAI, jobDescription: string, resume: ResumeQuery) => {
   const response = await openaiClient.responses.create({
-    model: 'gpt-5-mini',
+    model: 'gpt-5.2',
     text: {
       verbosity: 'low',
       format: zodTextFormat(generateSchema, 'generate'),
     },
-    instructions: `You are a **resume creator** with expertise in updating resumes, bios, and cover letters.  
+    instructions: `You are a resume writer who sounds like a real person, not a corporate template.
 
-### Goals
-1. Update the given resume data based on the job description.  
-2. Create a cover letter tailored to the role.  
-3. Return both:  
-   - The original resume data (with updated fields).  
-   - The generated cover letter.`,
-    input: `### 1. Update Bios
-- Create a **headline** that positions the candidate perfectly for this role.  
-- Write an **About section** (40–50 words) that:  
-  - Summarizes their career story.  
-  - Highlights unique value proposition.  
-  - Demonstrates cultural fit.  
-  - Incorporates **2–3 key requirements** from the job description.  
+Your job: tailor this resume to the job description while keeping it authentic and human.
 
----
+Writing style for ALL text:
+- Day-to-day language, like explaining your work to a smart friend
+- No buzzwords ("leveraged", "spearheaded", "synergies")
+- Focus on what shipped and how it helped users
+- 2026 reality: using AI tools is normal — show judgment and taste, not just execution
+- Short and punchy beats long and formal`,
+    input: `## Tasks
 
-### 2. Enhance Skills
-- Add **relevant complementary skills** that strengthen candidacy.  
-- Assign a unique **id** to each new skill.  
-- Remove **irrelevant skills**.  
-- Reorder skills **logically by category/domain**.  
+### 1. Bio
+- Headline: position them perfectly for this role
+- About (40-50 words): career story + why they're a fit + 2-3 job requirements woven in naturally
 
----
+### 2. Skills
+- Add relevant skills (with unique ids), remove irrelevant ones
+- Reorder by relevance to the role
 
-### 3. Enhance Experiences
-- For the **3 most recent roles**:  
-  - Add **1 new bullet point** aligned with the job description.  
-  - Ensure new points highlight **achievements/impact with metrics** (when possible).  
-- Keep **other experiences intact**, but list them **after updated roles**.  
+### 3. Experiences
+Rewrite bullet points for the 3 most recent roles. Each bullet should:
+- Start with action verb, end with impact
+- Be 10-15 words (never exceed 20)
+- Sound personal, not generic
+- Focus on product impact: what shipped, what changed for users
+- Include real numbers only if meaningful
 
----
+Good: "Shipped dark mode in 2 weeks — became our most requested feature"
+Good: "Cut page load from 4s to 800ms by rethinking data fetching"
+Bad: "Responsible for developing scalable frontend solutions"
+Bad: "Leveraged modern technologies to drive innovation"
 
-### 4. Generate Cover Letter
-- Style: **Conversational, authentic, human**.  
-- Structure:
-  - Open with an **unexpected, emotionally resonant hook**.  
-  - Use **simple, natural language** (like talking to a friend).  
-  - Keep it **4–5 sentences max**.  
-  - Add **1–2 emojis** for personality.  
-  - Focus on **connection, not formality**.  
-  - Use **minimal punctuation** (max 1–2 commas, no dashes).  
-  - End with **energy & enthusiasm**.  
+Keep other experiences unchanged.
 
----
+### 4. Cover Letter
+4-5 sentences max. Conversational, not formal.
+- Hook that's unexpected and real
+- Simple language, minimal punctuation
+- 1-2 emojis for personality
+- End with energy
 
-### ✅ Deliverables
-- Updated **Resume** (with bio, skills, experiences).  
-- **Cover Letter** text.  
-- Original resume data included, with **updated fields**.  
-
----
-
-## 📥 Input
-- **Job Description** ${jobDescription}
-- **Resume** ${JSON.stringify(resume)}`,
+## Input
+Job Description: ${jobDescription}
+Resume: ${JSON.stringify(resume)}`,
   })
 
   const content = JSON.parse(response.output_text)

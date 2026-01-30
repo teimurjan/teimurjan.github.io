@@ -14,7 +14,7 @@
     "@upstash/qstash": "^2.7.23",
     "firebase-admin": "^13.2.0",
     "firebase-functions": "^6.3.2",
-    "openai": "^5.12.2",
+    "openai": "^6.17.0",
     "typescript": "^5.7.3",
     "zod": "^3.24.2"
   },

@@ -5,6 +5,7 @@ const nextConfig = withBundleAnalyzer({
   openAnalyzer: false,
 })({
   output: 'export',
+  turbopack: {},
   images: {
     unoptimized: true,
     dangerouslyAllowSVG: true,

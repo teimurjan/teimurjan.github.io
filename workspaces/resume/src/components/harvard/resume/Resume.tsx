@@ -1,5 +1,6 @@
 import { Document, Page, StyleSheet, Text, View } from '@react-pdf/renderer'
 import type { Style } from '@react-pdf/types'
+import { colord } from 'colord'
 import { YEAR_DATE_FORMAT, dateSorter, prettyRange } from '@teimurjan/utils'
 import theme from '../../../theme'
 import Header from '../header'
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     color: theme.colors.dark3,
-    borderBottom: `1px solid ${theme.colors.dark2}`,
+    borderBottom: `1px solid ${colord(theme.colors.dark2).lighten(0.16).toRgbString()}`,
     fontSize: 10,
     textTransform: 'uppercase',
     fontFamily: 'Helvetica-Bold',

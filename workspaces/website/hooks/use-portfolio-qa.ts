@@ -155,9 +155,7 @@ export function usePortfolioQA(context: PortfolioContext): UsePortfolioQAResult 
         }
         device.destroy()
 
-        const worker = new Worker(new URL('../lib/webllm-worker.ts', import.meta.url), {
-          type: 'module',
-        })
+        const worker = new Worker('/webllm-worker.js', { type: 'module' })
 
         const engine = await CreateWebWorkerMLCEngine(worker, MODEL_ID, {
           initProgressCallback,

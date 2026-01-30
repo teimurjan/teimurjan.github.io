@@ -31,8 +31,9 @@ export function AboutSection({ data }: AboutSectionProps) {
       <div className="flex flex-wrap gap-4">
         <a
           href="/resume.pdf"
-          download
           className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-foreground bg-glass-highlight border border-glass-border rounded-xl shadow-glass-pill backdrop-blur-sm hover:bg-secondary/50 hover:border-primary/30 transition-all duration-200"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           <FileDown className="w-4 h-4" />
           Get Resume

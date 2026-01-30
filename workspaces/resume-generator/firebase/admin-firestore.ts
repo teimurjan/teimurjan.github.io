@@ -1,4 +1,14 @@
-import { admin } from '@/firebase/admin'
-import { getFirestore } from 'firebase-admin/firestore'
+import { getAdmin } from '@/firebase/admin'
+import type { Firestore } from 'firebase-admin/firestore'
 
-export const db = getFirestore(admin)
+let firestoreDb: Firestore | null = null
+
+export const getDb = async (): Promise<Firestore> => {
+  if (firestoreDb) return firestoreDb
+
+  const admin = await getAdmin()
+  const { getFirestore } = await import('firebase-admin/firestore')
+  firestoreDb = getFirestore(admin)
+
+  return firestoreDb
+}

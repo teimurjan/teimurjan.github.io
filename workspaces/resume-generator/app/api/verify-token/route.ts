@@ -1,5 +1,4 @@
-import { admin } from '@/firebase/admin'
-import { getAuth } from 'firebase-admin/auth'
+import { getAdmin } from '@/firebase/admin'
 import { type NextRequest, NextResponse } from 'next/server'
 
 export async function POST(request: NextRequest) {
@@ -10,6 +9,8 @@ export async function POST(request: NextRequest) {
   }
 
   try {
+    const admin = await getAdmin()
+    const { getAuth } = await import('firebase-admin/auth')
     const decoded = await getAuth(admin).verifyIdToken(token)
     return NextResponse.json({ uid: decoded.uid })
   } catch {

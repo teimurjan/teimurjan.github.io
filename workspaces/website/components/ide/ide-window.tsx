@@ -61,7 +61,7 @@ export function IDEWindow({ folders, fullName, headline }: IDEWindowProps) {
         <Editor section={activeSection} />
       </div>
 
-      <Terminal />
+      <Terminal folders={folders} fullName={fullName} />
     </div>
   )
 }

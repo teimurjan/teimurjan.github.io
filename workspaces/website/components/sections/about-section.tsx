@@ -1,7 +1,10 @@
 import type { AboutData, ContactData } from '@/lib/sections'
-import { FileDown, Github, Linkedin, Mail, Users } from 'lucide-react'
+import { FileDown, Mail } from 'lucide-react'
 import Image from 'next/image'
 import LiquidEther from '../ui/liquid-ether'
+import githubIcon from '../icons/github.svg'
+import linkedinIcon from '../icons/linkedin.png'
+import toptalIcon from '../icons/toptal.png'
 
 interface AboutSectionProps {
   data: AboutData & ContactData
@@ -40,25 +43,23 @@ export function AboutSection({ data }: AboutSectionProps) {
         I'm always interested in hearing about new projects and opportunities.
       </p>
 
-      <p className="text-muted-foreground">
-        The best way to reach me is via email:{' '}
-        <a
-          href={`mailto:${data.email}`}
-          className="inline-flex items-center gap-2 text-primary hover:underline font-medium"
-        >
-          <Mail className="w-4 h-4" />
-          {data.email}
-        </a>
-      </p>
+      <p className="text-muted-foreground">Feel free to reach out to me via:</p>
 
       <div className="flex flex-wrap gap-3">
+        <a
+          href={`mailto:${data.email}`}
+          className="inline-flex items-center gap-2 px-3 py-2 bg-secondary rounded-lg hover:bg-secondary/80 transition-colors text-sm"
+        >
+          <Mail className="w-4 h-4" />
+          Email
+        </a>
         <a
           href="https://github.com/teimurjan"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-3 py-2 bg-secondary rounded-lg hover:bg-secondary/80 transition-colors text-sm"
         >
-          <Github className="w-4 h-4" />
+          <img src={githubIcon.src} alt="GitHub" className="w-5 h-5" />
           GitHub
         </a>
         <a
@@ -67,7 +68,7 @@ export function AboutSection({ data }: AboutSectionProps) {
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-3 py-2 bg-secondary rounded-lg hover:bg-secondary/80 transition-colors text-sm"
         >
-          <Linkedin className="w-4 h-4" />
+          <img src={linkedinIcon.src} alt="LinkedIn" className="w-auto h-3.5" />
           LinkedIn
         </a>
         <a
@@ -76,7 +77,7 @@ export function AboutSection({ data }: AboutSectionProps) {
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-3 py-2 bg-secondary rounded-lg hover:bg-secondary/80 transition-colors text-sm"
         >
-          <Users className="w-4 h-4" />
+          <img src={toptalIcon.src} alt="Toptal" className="w-4 h-auto" />
           Toptal
         </a>
       </div>

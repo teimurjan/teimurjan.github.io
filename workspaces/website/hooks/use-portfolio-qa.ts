@@ -1,108 +1,200 @@
 'use client'
 
-import { type EmbeddingsData, formatSearchResults, searchEmbeddings } from '@/lib/semantic-search'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import type { FolderStructure } from '@/lib/sections'
+import {
+  type ChatCompletionMessageParam,
+  CreateWebWorkerMLCEngine,
+  type InitProgressReport,
+  type WebWorkerMLCEngine,
+} from '@mlc-ai/web-llm'
+import { useCallback, useRef, useState } from 'react'
 
-interface FeatureExtractionOutput {
-  data: Float32Array
-}
+const MODEL_ID = 'Qwen3-0.6B-q4f16_1-MLC'
 
-type FeatureExtractionPipeline = (
-  text: string,
-  options?: { pooling?: string; normalize?: boolean }
-) => Promise<FeatureExtractionOutput>
+type ModelStatus = 'idle' | 'loading' | 'ready' | 'error'
 
 interface UsePortfolioQAResult {
-  ask: (question: string) => Promise<string>
-  isLoading: boolean
-  isModelLoading: boolean
+  loadModel: () => void
+  ask: (question: string) => Promise<void>
+  status: ModelStatus
+  progress: number
   error: string | null
+  streamingResponse: string
+  isGenerating: boolean
 }
 
-export function usePortfolioQA(): UsePortfolioQAResult {
-  const [isLoading, setIsLoading] = useState(false)
-  const [isModelLoading, setIsModelLoading] = useState(false)
+interface PortfolioContext {
+  folders: FolderStructure[]
+  fullName: string
+}
+
+function buildSystemPrompt(context: PortfolioContext): string {
+  const { folders, fullName } = context
+
+  let aboutInfo = ''
+  let skills: string[] = []
+  let currentRole = ''
+  let location = ''
+  let experiences: string[] = []
+  let education: string[] = []
+  let projects: string[] = []
+
+  for (const folder of folders) {
+    for (const section of folder.sections) {
+      switch (section.type) {
+        case 'about':
+          aboutInfo = section.data.about
+          location = section.data.location
+          break
+        case 'skills':
+          skills = section.data.skills.map((s) => `${s.title} (${s.yearsOfExperience}+ years)`)
+          break
+        case 'experience': {
+          const exps = section.data.experiences
+          if (exps.length > 0) {
+            const current = exps[0]
+            currentRole = `${current.position} at ${current.company}`
+          }
+          experiences = exps.slice(0, 3).map((e) => {
+            const dates = e.endDate ? `${e.startDate} - ${e.endDate}` : `${e.startDate} - Present`
+            return `${e.position} at ${e.company} (${dates})`
+          })
+          break
+        }
+        case 'education':
+          education = section.data.educations.map((e) => {
+            const degree = e.degree ? `${e.degree} in ` : ''
+            return `${degree}${e.areaOfStudy} at ${e.school}`
+          })
+          break
+        case 'projects':
+          projects = section.data.repositories.slice(0, 5).map((r) => {
+            const ownership = r.isOwned ? 'Created' : 'Contributed to'
+            return `${ownership} ${r.nameWithOwner}${r.primaryLanguage ? ` (${r.primaryLanguage})` : ''}`
+          })
+          break
+      }
+    }
+  }
+
+  return `You are an AI assistant on ${fullName}'s portfolio website. Answer questions about ${fullName} based on the following information. Keep responses concise (2-3 sentences max). Be friendly and helpful.
+
+**About:** ${aboutInfo}
+**Location:** ${location}
+**Current Role:** ${currentRole}
+**Skills:** ${skills.join(', ')}
+**Experience:** ${experiences.join('; ')}
+**Education:** ${education.join('; ')}
+**Notable Projects:** ${projects.join('; ')}
+
+If asked something not covered in this information, politely say you don't have that specific information but suggest what you can help with.`
+}
+
+export function usePortfolioQA(context: PortfolioContext): UsePortfolioQAResult {
+  const [status, setStatus] = useState<ModelStatus>('idle')
+  const [progress, setProgress] = useState(0)
   const [error, setError] = useState<string | null>(null)
+  const [streamingResponse, setStreamingResponse] = useState('')
+  const [isGenerating, setIsGenerating] = useState(false)
 
-  const embedderRef = useRef<FeatureExtractionPipeline | null>(null)
-  const embeddingsRef = useRef<EmbeddingsData | null>(null)
-  const initPromiseRef = useRef<Promise<void> | null>(null)
+  const engineRef = useRef<WebWorkerMLCEngine | null>(null)
+  const loadPromiseRef = useRef<Promise<void> | null>(null)
+  const systemPromptRef = useRef<string>('')
 
-  const initialize = useCallback(async () => {
-    if (initPromiseRef.current) {
-      return initPromiseRef.current
+  const loadModel = useCallback(() => {
+    if (loadPromiseRef.current || status === 'ready') {
+      return
     }
 
-    initPromiseRef.current = (async () => {
-      setIsModelLoading(true)
+    systemPromptRef.current = buildSystemPrompt(context)
+
+    const initProgressCallback = (report: InitProgressReport) => {
+      const percentMatch = report.text.match(/(\d+(?:\.\d+)?)%/)
+      if (percentMatch) {
+        setProgress(Math.round(Number.parseFloat(percentMatch[1])))
+      }
+    }
+
+    loadPromiseRef.current = (async () => {
+      setStatus('loading')
       setError(null)
+      setProgress(0)
 
       try {
-        const [{ pipeline }, embeddingsModule] = await Promise.all([
-          import('@huggingface/transformers'),
-          import('@/__generated__/embeddings.json'),
-        ])
-
-        embeddingsRef.current = embeddingsModule.default as EmbeddingsData
-
-        embedderRef.current = (await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2', {
-          dtype: 'fp32',
-        })) as unknown as FeatureExtractionPipeline
-      } catch (err) {
-        const message = err instanceof Error ? err.message : 'Failed to initialize'
-        setError(message)
-        initPromiseRef.current = null
-        throw err
-      } finally {
-        setIsModelLoading(false)
-      }
-    })()
-
-    return initPromiseRef.current
-  }, [])
-
-  const ask = useCallback(
-    async (question: string): Promise<string> => {
-      if (!question.trim()) {
-        return 'Please enter a question.'
-      }
-
-      setIsLoading(true)
-      setError(null)
-
-      try {
-        await initialize()
-
-        if (!embedderRef.current || !embeddingsRef.current) {
-          throw new Error('Model not initialized')
-        }
-
-        const output = await embedderRef.current(question, {
-          pooling: 'mean',
-          normalize: true,
+        const worker = new Worker(new URL('../lib/webllm-worker.ts', import.meta.url), {
+          type: 'module',
         })
 
-        const queryEmbedding = Array.from(output.data)
-        const results = searchEmbeddings(queryEmbedding, embeddingsRef.current, 3)
-        return formatSearchResults(results)
-      } catch (err) {
-        const message = err instanceof Error ? err.message : 'An error occurred'
-        setError(message)
-        return `Error: ${message}`
-      } finally {
-        setIsLoading(false)
-      }
-    },
-    [initialize]
-  )
+        const engine = await CreateWebWorkerMLCEngine(worker, MODEL_ID, {
+          initProgressCallback,
+        })
 
-  useEffect(() => {
-    return () => {
-      embedderRef.current = null
-      embeddingsRef.current = null
-      initPromiseRef.current = null
+        engineRef.current = engine
+        setStatus('ready')
+        setProgress(100)
+      } catch (err) {
+        const message = err instanceof Error ? err.message : 'Failed to load model'
+
+        if (message.includes('WebGPU')) {
+          setError('WebGPU not supported in this browser')
+        } else {
+          setError(message)
+        }
+
+        setStatus('error')
+        loadPromiseRef.current = null
+      }
+    })()
+  }, [context, status])
+
+  const ask = useCallback(async (question: string): Promise<void> => {
+    const engine = engineRef.current
+    if (!engine) return
+
+    setIsGenerating(true)
+    setStreamingResponse('')
+
+    const messages: ChatCompletionMessageParam[] = [
+      { role: 'system', content: systemPromptRef.current },
+      { role: 'user', content: question },
+    ]
+
+    try {
+      const stream = await engine.chat.completions.create({
+        messages,
+        stream: true,
+        max_tokens: 512,
+        temperature: 0.7,
+      })
+
+      let fullResponse = ''
+
+      for await (const chunk of stream) {
+        const delta = chunk.choices[0]?.delta?.content ?? ''
+        fullResponse += delta
+
+        // Strip <think>...</think> blocks from visible output
+        let visibleResponse = fullResponse
+          .replace(/<think>[\s\S]*?<\/think>/g, '')
+          .replace(/<think>[\s\S]*$/, '')
+
+        setStreamingResponse(visibleResponse.trim())
+      }
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Failed to generate response'
+      setStreamingResponse(`Error: ${message}`)
+    } finally {
+      setIsGenerating(false)
     }
   }, [])
 
-  return { ask, isLoading, isModelLoading, error }
+  return {
+    loadModel,
+    ask,
+    status,
+    progress,
+    error,
+    streamingResponse,
+    isGenerating,
+  }
 }

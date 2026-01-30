@@ -1,9 +1,10 @@
 'use client'
 
 import { usePortfolioQA } from '@/hooks/use-portfolio-qa'
+import type { FolderStructure } from '@/lib/sections'
 import { cn } from '@/lib/utils'
 import { ChevronDown, ChevronUp, Loader2, Terminal as TerminalIcon } from 'lucide-react'
-import { type KeyboardEvent, useCallback, useRef, useState } from 'react'
+import { type KeyboardEvent, useCallback, useEffect, useRef, useState } from 'react'
 
 const exampleQuestions = [
   "What's Teimur's experience with React?",
@@ -17,24 +18,46 @@ interface Message {
   text: string
 }
 
-export function Terminal() {
+interface TerminalProps {
+  folders: FolderStructure[]
+  fullName: string
+}
+
+export function Terminal({ folders, fullName }: TerminalProps) {
   const [isExpanded, setIsExpanded] = useState(false)
   const [input, setInput] = useState('')
   const [messages, setMessages] = useState<Message[]>([])
   const inputRef = useRef<HTMLInputElement>(null)
+  const scrollRef = useRef<HTMLDivElement>(null)
 
-  const { ask, isLoading, isModelLoading } = usePortfolioQA()
+  const { loadModel, ask, status, progress, error, streamingResponse, isGenerating } =
+    usePortfolioQA({ folders, fullName })
+
+  useEffect(() => {
+    loadModel()
+  }, [loadModel])
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight
+    }
+  }, [messages, streamingResponse])
 
   const handleSubmit = useCallback(async () => {
     const question = input.trim()
-    if (!question || isLoading) return
+    if (!question || isGenerating || status !== 'ready') return
 
     setInput('')
     setMessages((prev) => [...prev, { type: 'question', text: question }])
 
-    const answer = await ask(question)
-    setMessages((prev) => [...prev, { type: 'answer', text: answer }])
-  }, [input, isLoading, ask])
+    await ask(question)
+  }, [input, isGenerating, status, ask])
+
+  useEffect(() => {
+    if (!isGenerating && streamingResponse) {
+      setMessages((prev) => [...prev, { type: 'answer', text: streamingResponse }])
+    }
+  }, [isGenerating, streamingResponse])
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent<HTMLInputElement>) => {
@@ -48,18 +71,25 @@ export function Terminal() {
 
   const handleExampleClick = useCallback(
     async (question: string) => {
-      if (isLoading) return
+      if (isGenerating || status !== 'ready') return
 
       setMessages((prev) => [...prev, { type: 'question', text: question }])
-      const answer = await ask(question)
-      setMessages((prev) => [...prev, { type: 'answer', text: answer }])
+      await ask(question)
     },
-    [isLoading, ask]
+    [isGenerating, status, ask]
   )
 
   const focusInput = useCallback(() => {
     inputRef.current?.focus()
   }, [])
+
+  const handleToggle = useCallback(() => {
+    if (status === 'ready') {
+      setIsExpanded((prev) => !prev)
+    }
+  }, [status])
+
+  const isDisabled = status !== 'ready'
 
   return (
     <div
@@ -71,17 +101,37 @@ export function Terminal() {
     >
       <button
         type="button"
-        onClick={() => setIsExpanded(!isExpanded)}
-        className="flex items-center justify-between px-4 py-2 border-b border-border/30 hover:bg-secondary/30 transition-colors"
+        onClick={handleToggle}
+        disabled={isDisabled && status !== 'loading'}
+        className={cn(
+          'flex items-center justify-between px-4 py-2 border-b border-border/30 transition-colors',
+          isDisabled ? 'cursor-not-allowed opacity-70' : 'hover:bg-secondary/30'
+        )}
       >
         <div className="flex items-center gap-2">
           <TerminalIcon className="w-4 h-4 text-primary" />
           <span className="text-sm font-medium">Whoami</span>
-          {isModelLoading && (
+
+          {status === 'idle' && (
+            <span className="text-xs text-muted-foreground">Initializing...</span>
+          )}
+
+          {status === 'loading' && (
             <span className="text-xs text-muted-foreground flex items-center gap-1">
               <Loader2 className="w-3 h-3 animate-spin" />
-              Loading model...
+              Loading ({progress}%)
             </span>
+          )}
+
+          {status === 'ready' && (
+            <span className="text-xs text-green-500 flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
+              Ready
+            </span>
+          )}
+
+          {status === 'error' && (
+            <span className="text-xs text-destructive">{error || 'Not available'}</span>
           )}
         </div>
         {isExpanded ? (
@@ -93,8 +143,8 @@ export function Terminal() {
 
       {isExpanded && (
         <div className="flex-1 flex flex-col min-h-0" onClick={focusInput}>
-          <div className="flex-1 overflow-y-auto p-4 font-mono text-sm space-y-2">
-            {messages.length === 0 ? (
+          <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 font-mono text-sm space-y-2">
+            {messages.length === 0 && !isGenerating ? (
               <div className="space-y-2">
                 <p className="text-muted-foreground">Try asking:</p>
                 <div className="flex flex-col items-start gap-2">
@@ -103,7 +153,7 @@ export function Terminal() {
                       type="button"
                       key={q}
                       onClick={() => handleExampleClick(q)}
-                      disabled={isLoading}
+                      disabled={isGenerating}
                       className="text-xs py-0.5 rounded-md bg-secondary/50 text-secondary-foreground hover:bg-secondary/70 transition-colors disabled:opacity-50"
                     >
                       {q}
@@ -112,27 +162,37 @@ export function Terminal() {
                 </div>
               </div>
             ) : (
-              messages.map((msg, i) => (
-                <div
-                  key={`${msg.type}-${i}`}
-                  className={cn(
-                    msg.type === 'question' ? 'text-primary' : 'text-foreground whitespace-pre-wrap'
-                  )}
-                >
-                  {msg.type === 'question' ? (
-                    <span>
-                      <span className="text-syntax-keyword">❯</span> {msg.text}
-                    </span>
-                  ) : (
-                    msg.text
-                  )}
-                </div>
-              ))
+              <>
+                {messages.map((msg, i) => (
+                  <div
+                    key={`${msg.type}-${i}`}
+                    className={cn(
+                      msg.type === 'question'
+                        ? 'text-primary'
+                        : 'text-foreground whitespace-pre-wrap'
+                    )}
+                  >
+                    {msg.type === 'question' ? (
+                      <span>
+                        <span className="text-syntax-keyword">❯</span> {msg.text}
+                      </span>
+                    ) : (
+                      msg.text
+                    )}
+                  </div>
+                ))}
+                {isGenerating && streamingResponse && (
+                  <div className="text-foreground whitespace-pre-wrap">
+                    {streamingResponse}
+                    <span className="animate-pulse">▋</span>
+                  </div>
+                )}
+              </>
             )}
-            {isLoading && (
+            {isGenerating && !streamingResponse && (
               <div className="flex items-center gap-2 text-muted-foreground">
                 <Loader2 className="w-4 h-4 animate-spin" />
-                <span>Searching...</span>
+                <span>Thinking...</span>
               </div>
             )}
           </div>
@@ -145,7 +205,7 @@ export function Terminal() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              disabled={isLoading}
+              disabled={isGenerating}
               placeholder="Ask me anything..."
               className="flex-1 bg-transparent outline-none text-sm font-mono placeholder:text-muted-foreground disabled:opacity-50"
             />

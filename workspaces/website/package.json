@@ -8,14 +8,13 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "generate": "yarn generate-resume && yarn generate-opengraph && yarn generate-embeddings",
+    "generate": "yarn generate-resume && yarn generate-opengraph",
     "generate-resume": "tsx --tsconfig ../resume/tsconfig.json ./cmd/generate-resume.ts",
     "generate-opengraph": "tsx ./cmd/generate-opengraph.ts",
-    "generate-opengraph:ci": "xvfb-run --auto-servernum tsx ./cmd/generate-opengraph.ts",
-    "generate-embeddings": "tsx --env-file=.env ./cmd/generate-embeddings.ts"
+    "generate-opengraph:ci": "xvfb-run --auto-servernum tsx ./cmd/generate-opengraph.ts"
   },
   "dependencies": {
-    "@huggingface/transformers": "^3.4.1",
+    "@mlc-ai/web-llm": "^0.2.80",
     "@octokit/rest": "^22.0.0",
     "@octokit/types": "^14.1.0",
     "@teimurjan/github-client": "workspace:*",

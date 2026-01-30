@@ -133,6 +133,10 @@ export function Terminal({ folders, fullName }: TerminalProps) {
           {status === 'error' && (
             <span className="text-xs text-destructive">{error || 'Not available'}</span>
           )}
+
+          {status === 'unsupported' && (
+            <span className="text-xs text-muted-foreground">Unavailable (WebGPU not supported)</span>
+          )}
         </div>
         {isExpanded ? (
           <ChevronDown className="w-4 h-4 text-muted-foreground" />

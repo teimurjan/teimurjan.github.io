@@ -11,7 +11,7 @@ import { useCallback, useRef, useState } from 'react'
 
 const MODEL_ID = 'Qwen3-0.6B-q4f16_1-MLC'
 
-type ModelStatus = 'idle' | 'loading' | 'ready' | 'error'
+type ModelStatus = 'idle' | 'loading' | 'ready' | 'error' | 'unsupported'
 
 interface UsePortfolioQAResult {
   loadModel: () => void
@@ -102,7 +102,14 @@ export function usePortfolioQA(context: PortfolioContext): UsePortfolioQAResult 
   const systemPromptRef = useRef<string>('')
 
   const loadModel = useCallback(() => {
-    if (loadPromiseRef.current || status === 'ready') {
+    if (loadPromiseRef.current || status === 'ready' || status === 'unsupported') {
+      return
+    }
+
+    // Check WebGPU support before attempting to load
+    if (typeof navigator === 'undefined' || !('gpu' in navigator)) {
+      setStatus('unsupported')
+      setError('Your browser does not support WebGPU')
       return
     }
 
@@ -121,6 +128,19 @@ export function usePortfolioQA(context: PortfolioContext): UsePortfolioQAResult 
       setProgress(0)
 
       try {
+        // Verify WebGPU is fully functional (not just present)
+        const adapter = await navigator.gpu.requestAdapter()
+        if (!adapter) {
+          throw new Error('WebGPU adapter not available')
+        }
+
+        // Request device to verify GPU actually works (catches iOS Safari issues)
+        const device = await adapter.requestDevice()
+        if (!device) {
+          throw new Error('WebGPU device not available')
+        }
+        device.destroy()
+
         const worker = new Worker(new URL('../lib/webllm-worker.ts', import.meta.url), {
           type: 'module',
         })
@@ -135,13 +155,14 @@ export function usePortfolioQA(context: PortfolioContext): UsePortfolioQAResult 
       } catch (err) {
         const message = err instanceof Error ? err.message : 'Failed to load model'
 
-        if (message.includes('WebGPU')) {
-          setError('WebGPU not supported in this browser')
+        if (message.toLowerCase().includes('webgpu') || message.includes('adapter')) {
+          setError('WebGPU not available')
+          setStatus('unsupported')
         } else {
           setError(message)
+          setStatus('error')
         }
 
-        setStatus('error')
         loadPromiseRef.current = null
       }
     })()
@@ -174,7 +195,7 @@ export function usePortfolioQA(context: PortfolioContext): UsePortfolioQAResult 
         fullResponse += delta
 
         // Strip <think>...</think> blocks from visible output
-        let visibleResponse = fullResponse
+        const visibleResponse = fullResponse
           .replace(/<think>[\s\S]*?<\/think>/g, '')
           .replace(/<think>[\s\S]*$/, '')
 
@@ -182,7 +203,23 @@ export function usePortfolioQA(context: PortfolioContext): UsePortfolioQAResult 
       }
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Failed to generate response'
-      setStreamingResponse(`Error: ${message}`)
+      const lowerMessage = message.toLowerCase()
+
+      // Detect WebGPU/GPU-related failures during inference
+      if (
+        lowerMessage.includes('gpu') ||
+        lowerMessage.includes('webgpu') ||
+        lowerMessage.includes('device lost') ||
+        lowerMessage.includes('validation error') ||
+        lowerMessage.includes('out of memory')
+      ) {
+        setStatus('unsupported')
+        setError('GPU inference failed')
+        setStreamingResponse('')
+        engineRef.current = null
+      } else {
+        setStreamingResponse(`Error: ${message}`)
+      }
     } finally {
       setIsGenerating(false)
     }

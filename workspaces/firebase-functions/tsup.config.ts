@@ -1,7 +1,7 @@
+import fs from 'node:fs'
+import path from 'node:path'
+import type { Plugin } from 'esbuild'
 import { defineConfig } from 'tsup'
-import { Plugin } from 'esbuild'
-import path from 'path'
-import fs from 'fs'
 const WORKSPACE_REGEXP = /^@teimurjan\/(.+)$/
 
 const workspaceAliasPlugin = (): Plugin => ({

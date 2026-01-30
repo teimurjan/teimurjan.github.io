@@ -1,41 +1,23 @@
-import Content from '../components/atoms/content'
-import Section from '../components/molecules/section'
-import ExperienceHistory from '../components/organisms/experience-history'
-import Education from '../components/organisms/education'
-import IndexBanner from '../components/organisms/index-banner'
-import TopNavigation from '../components/organisms/top-navigation'
-import Footer from '../components/organisms/footer'
-import Skills from '../components/organisms/skills'
-import Media from '../components/organisms/media'
-import GitHubActivity from '../components/organisms/github-activity'
+import { IDEWindow } from '@/components/ide/ide-window'
+import gqlClient from '@/gql-client'
+import { generateAllSections } from '@/lib/section-generator'
 
-const Page = () => {
+export default async function Page() {
+  if (!process.env.GQL_API_GITHUB_TOKEN) {
+    throw new Error('GQL_API_GITHUB_TOKEN is not defined')
+  }
+
+  const { folders, fullName, headline } = await generateAllSections({
+    gqlClient,
+    githubToken: process.env.GQL_API_GITHUB_TOKEN,
+    githubUsername: 'teimurjan',
+  })
+
   return (
-    <>
-      <TopNavigation />
-      <Content>
-        <Section color="dark">
-          <IndexBanner />
-        </Section>
-        <Section color="light" className="pt-12 pb-20">
-          <ExperienceHistory />
-        </Section>
-        <Section color="light" className="pb-12">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
-            <Skills />
-            <Education />
-          </div>
-        </Section>
-        <Section color="light" className="pb-16">
-          <GitHubActivity username="teimurjan" />
-        </Section>
-        <Section color="light" className="pb-12">
-          <Media />
-        </Section>
-      </Content>
-      <Footer />
-    </>
+    <main className="min-h-screen relative overflow-hidden">
+      <div className="relative z-10 flex items-center justify-center min-h-screen">
+        <IDEWindow folders={folders} fullName={fullName} headline={headline} />
+      </div>
+    </main>
   )
 }
-
-export default Page

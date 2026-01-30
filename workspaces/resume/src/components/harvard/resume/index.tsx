@@ -1,6 +1,6 @@
 import { Font } from '@react-pdf/renderer'
+import type { HarvardResumeProps } from '../types'
 import Resume from './Resume'
-import { HarvardResumeProps } from '../types'
 
 Font.registerHyphenationCallback((word: string) => {
   return [word]

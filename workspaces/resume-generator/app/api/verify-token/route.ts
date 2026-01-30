@@ -1,6 +1,6 @@
 import { admin } from '@/firebase/admin'
 import { getAuth } from 'firebase-admin/auth'
-import { NextRequest, NextResponse } from 'next/server'
+import { type NextRequest, NextResponse } from 'next/server'
 
 export async function POST(request: NextRequest) {
   const authHeader = request.headers.get('authorization')

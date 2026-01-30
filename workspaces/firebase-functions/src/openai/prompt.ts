@@ -1,13 +1,9 @@
-import OpenAI from 'openai'
-import { ResumeQuery } from '@teimurjan/gql-client'
+import type { ResumeQuery } from '@teimurjan/gql-client'
+import type OpenAI from 'openai'
 import { zodTextFormat } from 'openai/helpers/zod'
 import { generateSchema } from '../schema/schema'
 
-export const prompt = async (
-  openaiClient: OpenAI,
-  jobDescription: string,
-  resume: ResumeQuery,
-) => {
+export const prompt = async (openaiClient: OpenAI, jobDescription: string, resume: ResumeQuery) => {
   const response = await openaiClient.responses.create({
     model: 'gpt-5-mini',
     text: {

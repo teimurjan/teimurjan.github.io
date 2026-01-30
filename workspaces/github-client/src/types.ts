@@ -20,6 +20,7 @@ export interface ContributionCalendar {
 export interface ContributedRepository {
   id: string
   nameWithOwner: string
+  description: string | null
   isPrivate: boolean
   url: string
   viewerPermission: string | null
@@ -27,6 +28,10 @@ export interface ContributedRepository {
   primaryLanguage: {
     name: string
   } | null
+  owner: {
+    login: string
+    avatarUrl: string
+  }
 }
 
 export interface RepositoriesContributedTo {

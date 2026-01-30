@@ -1,7 +1,7 @@
 'use client'
-import { Button } from '../../ui/button'
 import { useAuth } from '@/providers/auth-provider'
-import { useRouter } from '@bprogress/next/app';
+import { useRouter } from '@bprogress/next/app'
+import { Button } from '../../ui/button'
 
 export const LogoutButton = () => {
   const { logout, user } = useAuth()

@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Link } from '@react-pdf/renderer'
+import { Link, StyleSheet, Text, View } from '@react-pdf/renderer'
 import theme from '../../../theme'
 
 const styles = StyleSheet.create({
@@ -44,10 +44,7 @@ const Header = ({ title, location, email, phoneNumber }: Props) => {
       <View style={styles.contactsContainer}>
         <Text style={styles.contact}>{email}</Text>
         <Text style={styles.divider}>•</Text>
-        <Link
-          src="https://www.linkedin.com/in/teimur-gasanov"
-          style={styles.contact}
-        >
+        <Link src="https://www.linkedin.com/in/teimur-gasanov" style={styles.contact}>
           in/teimur-gasanov
         </Link>
         <Text style={styles.divider}>•</Text>

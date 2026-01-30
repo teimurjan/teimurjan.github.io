@@ -1,7 +1,7 @@
 export class ClientRequestError extends Error {
   constructor(
     message: string,
-    public status?: number,
+    public status?: number
   ) {
     super(message)
     this.name = 'ClientRequestError'

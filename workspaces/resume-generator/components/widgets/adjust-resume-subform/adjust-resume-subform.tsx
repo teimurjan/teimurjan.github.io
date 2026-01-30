@@ -1,32 +1,23 @@
 'use client'
 
-import { useMemo } from 'react'
-import { useFieldArray, UseFormReturn } from 'react-hook-form'
-import { v4 as uuidv4 } from 'uuid'
 import { Plus, Trash } from 'lucide-react'
+import { useMemo } from 'react'
+import { type UseFormReturn, useFieldArray } from 'react-hook-form'
+import { v4 as uuidv4 } from 'uuid'
 
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '../../ui/form'
-import { Button } from '../../ui/button'
-import { Input } from '../../ui/input'
-import { Textarea } from '../../ui/textarea'
-import { Label } from '../../ui/label'
-import { Combobox, ComboboxOption } from '../../ui/combobox'
-import { z } from 'zod'
-import { adjustFormSchema } from '@/schema/adjust-form'
+import type { adjustFormSchema } from '@/schema/adjust-form'
 import dynamic from 'next/dynamic'
+import type { z } from 'zod'
+import { Button } from '../../ui/button'
+import { Combobox, type ComboboxOption } from '../../ui/combobox'
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../../ui/form'
+import { Input } from '../../ui/input'
+import { Label } from '../../ui/label'
+import { Textarea } from '../../ui/textarea'
 
-const HtmlEditor = dynamic(
-  () => import('../../common/html-editor').then((mod) => mod.HtmlEditor),
-  {
-    ssr: false,
-  },
-)
+const HtmlEditor = dynamic(() => import('../../common/html-editor').then((mod) => mod.HtmlEditor), {
+  ssr: false,
+})
 
 type FormValues = z.infer<typeof adjustFormSchema>
 
@@ -216,9 +207,7 @@ export const AdjustResumeSubform = ({ form }: Props) => {
                         type="number"
                         min={0}
                         {...field}
-                        onChange={(e) =>
-                          field.onChange(parseInt(e.target.value, 10) || 0)
-                        }
+                        onChange={(e) => field.onChange(Number.parseInt(e.target.value, 10) || 0)}
                       />
                     </FormControl>
                     <FormMessage />

@@ -1,5 +1,5 @@
+import path from 'node:path'
 import type { CodegenConfig } from '@graphql-codegen/cli'
-import path from 'path'
 
 if (!process.env.HYGRAPH_URL) {
   throw new Error('HYGRAPH_URL is not defined')

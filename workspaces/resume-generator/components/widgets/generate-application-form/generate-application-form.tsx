@@ -2,25 +2,18 @@
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import 'vanilla-jsoneditor/themes/jse-theme-dark.css'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '../../ui/form'
-import { toast } from 'sonner'
-import { Loader2, PartyPopper } from 'lucide-react'
-import { JobApplication } from '@/db/types'
-import { cn } from '@/lib/utils'
-import { useRouter } from '@bprogress/next/app'
-import { generateFormSchema } from '@/schema/generate-form'
-import { useAuth } from '@/providers/auth-provider'
 import { Input } from '@/components/ui/input'
+import type { JobApplication } from '@/db/types'
+import { cn } from '@/lib/utils'
+import { useAuth } from '@/providers/auth-provider'
+import { generateFormSchema } from '@/schema/generate-form'
+import { useRouter } from '@bprogress/next/app'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Loader2, PartyPopper } from 'lucide-react'
+import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
+import type { z } from 'zod'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../../ui/form'
 
 interface Props {
   application: Pick<JobApplication, 'resume'>
@@ -122,11 +115,7 @@ export const GenerateApplicationForm = ({ application, className }: Props) => {
             <FormItem>
               <FormLabel className="text-base">Job description</FormLabel>
               <FormControl>
-                <Textarea
-                  placeholder="Enter job description"
-                  className="h-[50vh]"
-                  {...field}
-                />
+                <Textarea placeholder="Enter job description" className="h-[50vh]" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -134,14 +123,8 @@ export const GenerateApplicationForm = ({ application, className }: Props) => {
         />
 
         <div className="flex gap-4">
-          <Button
-            className="flex-1"
-            type="submit"
-            disabled={form.formState.isSubmitting}
-          >
-            {form.formState.isSubmitting && (
-              <Loader2 className="animate-spin" />
-            )}
+          <Button className="flex-1" type="submit" disabled={form.formState.isSubmitting}>
+            {form.formState.isSubmitting && <Loader2 className="animate-spin" />}
             Generate <PartyPopper />
           </Button>
         </div>

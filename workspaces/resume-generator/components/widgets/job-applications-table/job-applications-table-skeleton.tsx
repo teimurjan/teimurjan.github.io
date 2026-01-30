@@ -1,14 +1,7 @@
 'use client'
-import {
-  Table,
-  TableHeader,
-  TableBody,
-  TableRow,
-  TableCell,
-  TableHead,
-} from '../../ui/table'
-import { Skeleton } from '../../ui/skeleton'
 import { cn } from '@/lib/utils'
+import { Skeleton } from '../../ui/skeleton'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../ui/table'
 
 interface Props {
   className?: string

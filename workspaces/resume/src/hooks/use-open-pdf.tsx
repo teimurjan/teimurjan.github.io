@@ -1,11 +1,11 @@
 import { pdf } from '@react-pdf/renderer'
 import { useCallback, useRef } from 'react'
-import { openLinkByUrl, downloadByUrl } from '../utils'
+import { downloadByUrl, openLinkByUrl } from '../utils'
 
 const useOpenPdf = <T extends object>(
   Component: React.ComponentType<T>,
   props: T | undefined,
-  filename: string,
+  filename: string
 ) => {
   const currentPdfUrl = useRef<string | undefined>(undefined)
 
@@ -44,7 +44,7 @@ const useOpenPdf = <T extends object>(
 
       downloadByUrl(url, filename)
     },
-    [generatePdfUrl, filename],
+    [generatePdfUrl, filename]
   )
 
   return { openPdf, generatePdfUrl }

@@ -1,12 +1,12 @@
 'use client'
-import { JobApplication } from '@/db/types'
-import { Button } from '../../ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
+import type { JobApplication } from '@/db/types'
 import { useRouter } from '@bprogress/next/app'
+import { createColumnHelper } from '@tanstack/react-table'
 import { ExternalLink } from 'lucide-react'
 import { useMemo } from 'react'
-import { createColumnHelper } from '@tanstack/react-table'
 import { Badge } from '../../ui/badge'
-import { Checkbox } from '@/components/ui/checkbox'
+import { Button } from '../../ui/button'
 
 interface Props {
   jobApplications: JobApplication[]
@@ -16,11 +16,7 @@ interface Props {
 
 const columnHelper = createColumnHelper<JobApplication>()
 
-export const useJobApplicationsTableColumns = ({
-  jobApplications,
-  footer,
-  selectable,
-}: Props) => {
+export const useJobApplicationsTableColumns = ({ jobApplications, footer, selectable }: Props) => {
   const router = useRouter()
 
   const selectColumn = useMemo(() => {
@@ -58,20 +54,13 @@ export const useJobApplicationsTableColumns = ({
       columnHelper.display({
         header: 'Job Description',
         id: 'jobDescription',
-        cell: ({ row }) => (
-          <div className="truncate w-[500px]">
-            {row.original.jobDescription}
-          </div>
-        ),
+        cell: ({ row }) => <div className="truncate w-[500px]">{row.original.jobDescription}</div>,
       }),
       columnHelper.accessor(
-        (row) =>
-          new Intl.DateTimeFormat('en-US').format(
-            new Date(row.createdAt.toMillis()),
-          ),
+        (row) => new Intl.DateTimeFormat('en-US').format(new Date(row.createdAt.toMillis())),
         {
           header: 'Created At',
-        },
+        }
       ),
       columnHelper.display({
         header: 'Status',
@@ -86,10 +75,7 @@ export const useJobApplicationsTableColumns = ({
           const status = getStatus()
 
           return (
-            <Badge
-              variant={status === 'completed' ? 'success' : 'danger'}
-              className="capitalize"
-            >
+            <Badge variant={status === 'completed' ? 'success' : 'danger'} className="capitalize">
               {status}
             </Badge>
           )

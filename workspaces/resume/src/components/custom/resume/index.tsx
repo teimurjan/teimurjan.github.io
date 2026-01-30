@@ -1,6 +1,6 @@
 import { Font } from '@react-pdf/renderer'
+import type { CustomResumeProps } from '../types'
 import Resume from './Resume'
-import { CustomResumeProps } from '../types'
 
 Font.registerEmojiSource({
   format: 'png',

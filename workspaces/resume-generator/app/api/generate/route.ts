@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { RateLimiterMemory } from 'rate-limiter-flexible'
-import { Client } from '@upstash/qstash'
 import { createJobApplication } from '@/db/admin'
 import { generateFormSchema } from '@/schema/generate-form'
+import { Client } from '@upstash/qstash'
+import { type NextRequest, NextResponse } from 'next/server'
+import { RateLimiterMemory } from 'rate-limiter-flexible'
 
 const client = new Client({
   baseUrl: process.env.QSTASH_URL!,
@@ -20,12 +20,12 @@ export async function POST(request: NextRequest) {
       request.headers.get('x-forwarded-for') ||
         request.headers.get('x-real-ip') ||
         request.headers.get('x-client-ip') ||
-        '',
+        ''
     )
   } catch (_error) {
     return NextResponse.json(
       { error: 'Too many requests. Please try again later.' },
-      { status: 429 },
+      { status: 429 }
     )
   }
 
@@ -34,15 +34,12 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const verifyResponse = await fetch(
-    `${request.nextUrl.origin}/api/verify-token`,
-    {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+  const verifyResponse = await fetch(`${request.nextUrl.origin}/api/verify-token`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
     },
-  )
+  })
   if (!verifyResponse.ok) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }

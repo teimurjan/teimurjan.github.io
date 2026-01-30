@@ -1,11 +1,11 @@
-import { onRequest } from 'firebase-functions/v2/https'
-import { onInit } from 'firebase-functions/v2/core'
+import { type ResumeQuery, type Sdk, getClient } from '@teimurjan/gql-client'
+import { Receiver } from '@upstash/qstash'
 import * as logger from 'firebase-functions/logger'
 import { defineSecret } from 'firebase-functions/params'
+import { onInit } from 'firebase-functions/v2/core'
+import { onRequest } from 'firebase-functions/v2/https'
 import OpenAI from 'openai'
-import { Receiver } from '@upstash/qstash'
 import { updateJobApplication } from '../db/admin'
-import { getClient, ResumeQuery, Sdk } from '@teimurjan/gql-client'
 import { prompt } from '../openai/prompt'
 import { verifySignature } from '../upstash/signature'
 
@@ -75,5 +75,5 @@ export const generate = onRequest(
       logger.error('Error generating resume', error)
       res.status(500).json({ error: 'Something went wrong' })
     }
-  },
+  }
 )

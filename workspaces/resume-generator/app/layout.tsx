@@ -1,13 +1,13 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
-import { LayoutNavigation } from '@/components/widgets/layout-navigation/layout-navigation'
-import { ThemeProvider } from '@/providers/theme-provider'
 import { Toaster } from '@/components/ui/sonner'
-import { QueryProvider } from '@/providers/query-provider'
-import { AuthProvider } from '@/providers/auth-provider'
+import { LayoutNavigation } from '@/components/widgets/layout-navigation/layout-navigation'
 import { LogoutButton } from '@/components/widgets/logout-button/logout-button'
+import { AuthProvider } from '@/providers/auth-provider'
 import { ProgressProvider } from '@/providers/progress-provider'
+import { QueryProvider } from '@/providers/query-provider'
+import { ThemeProvider } from '@/providers/theme-provider'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -22,7 +22,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "teimurjan's AI resume generator",
   description: 'Create a resume from a job description',
-  icons: ['/logo.webp'],
+  icons: ['/logo.png'],
 }
 
 const Layout = ({
@@ -32,9 +32,7 @@ const Layout = ({
 }>) => {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ProgressProvider>
           <AuthProvider>
             <QueryProvider>

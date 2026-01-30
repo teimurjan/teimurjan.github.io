@@ -1,4 +1,4 @@
-import { Receiver } from '@upstash/qstash'
+import type { Receiver } from '@upstash/qstash'
 import type { Request } from 'firebase-functions/v2/https'
 
 export const verifySignature = async (req: Request, receiver: Receiver) => {
@@ -14,6 +14,6 @@ export const verifySignature = async (req: Request, receiver: Receiver) => {
       url: req.headers.origin,
     })
   } catch (error) {
-    throw new Error('Signature verification failed:\n\n' + error)
+    throw new Error(`Signature verification failed:\n\n${error}`)
   }
 }

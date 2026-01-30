@@ -1,8 +1,8 @@
-import { Button, ButtonProps } from '@/components/ui/button'
+import { Button, type ButtonProps } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { downloadByUrl } from '@teimurjan/resume'
 import { Eye, Loader2 } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 interface Props extends ButtonProps {
   generatePdfUrl: () => Promise<string | undefined>

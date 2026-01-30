@@ -1,21 +1,21 @@
-import type { Metadata } from 'next'
-import { Roboto_Mono } from 'next/font/google'
+import Aurora from '@/components/ui/aurora'
 import gqlClient from '@/gql-client'
-import { PersonaContextProvider, ThemeContextProvider } from '@/context'
-import 'react-tooltip/dist/react-tooltip.css'
-import './globals.css'
-import { VisibilityContextProvider } from '@/context/VisibilityContext'
-import { Anchor } from '@/utils'
+import type { Metadata } from 'next'
+import { Geist, Geist_Mono } from 'next/font/google'
 import Script from 'next/script'
+import './globals.css'
 
-const roboto = Roboto_Mono({
-  weight: ['100', '300', '400', '500', '700'],
+const geist = Geist({
   subsets: ['latin'],
+  variable: '--font-geist',
 })
 
-type Props = object
+const geistMono = Geist_Mono({
+  subsets: ['latin'],
+  variable: '--font-geist-mono',
+})
 
-export async function generateMetadata(_props: Props): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   const {
     bios: [{ fullName, headline }],
   } = await gqlClient.Bio()
@@ -24,69 +24,39 @@ export async function generateMetadata(_props: Props): Promise<Metadata> {
     title: fullName,
     description: headline,
     metadataBase: URL.parse('https://teimurjan.dev'),
-    icons: ['/logo.webp'],
+    icons: ['/logo.png'],
     openGraph: {
-      images: ['/logo.webp'],
+      images: ['/logo.png'],
       title: fullName,
       description: headline,
       url: 'https://teimurjan.dev',
     },
     twitter: {
-      images: ['/logo.webp'],
+      images: ['/logo.png'],
       card: 'summary_large_image',
       title: fullName,
     },
   }
 }
 
-const elementsToCheckVisibility = [
-  {
-    id: Anchor.Experience,
-    threshold: 0.5,
-  },
-  {
-    id: Anchor.Skills,
-    threshold: 0.5,
-  },
-  {
-    id: Anchor.Education,
-    threshold: 0.5,
-  },
-  {
-    id: Anchor.Media,
-    threshold: 0.25,
-  },
-  {
-    id: Anchor.Contribution,
-    threshold: 0.5,
-  },
-]
-
-const Layout = ({
+export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode
-}>) => {
+}>) {
   return (
-    <html lang="en" suppressHydrationWarning className="bg-light">
+    <html lang="en" className="dark">
       <Script
         defer
         src="https://cloud.umami.is/script.js"
         data-website-id="f312ce9d-5eb0-4a08-8331-320723dfdaed"
       />
-      <body className={roboto.className}>
-        <ThemeContextProvider
-          defaultTheme="light"
-          enableSystem={false}
-          enableColorScheme={false}
-        >
-          <VisibilityContextProvider elements={elementsToCheckVisibility}>
-            <PersonaContextProvider>{children}</PersonaContextProvider>
-          </VisibilityContextProvider>
-        </ThemeContextProvider>
+      <body className={`${geist.variable} ${geistMono.variable} font-sans antialiased relative`}>
+        <div className="fixed inset-0 w-full h-full overflow-hidden">
+          <Aurora colorStops={['#6678ff', '#B19EEF', '#3d14e1']} />
+        </div>
+        {children}
       </body>
     </html>
   )
 }
-
-export default Layout

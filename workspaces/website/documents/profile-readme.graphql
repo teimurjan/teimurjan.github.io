@@ -19,11 +19,7 @@ query ProfileReadme {
       html
     }
     logo {
-      url(
-        transformation: {
-          image: { resize: { width: 200, height: 200, fit: clip } }
-        }
-      )
+      url(transformation: { image: { resize: { width: 200, height: 200, fit: clip } } })
     }
   }
   publications {

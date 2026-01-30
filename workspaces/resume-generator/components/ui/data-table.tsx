@@ -1,32 +1,27 @@
 'use client'
 
 import {
-  Row,
-  Table,
+  type Row,
+  type Table,
+  type TableOptions,
   flexRender,
   getCoreRowModel,
   getSortedRowModel,
   useReactTable,
-  TableOptions,
 } from '@tanstack/react-table'
 
 import { TableCell, TableHead, TableRow } from '@/components/ui/table'
-import { HTMLAttributes, forwardRef } from 'react'
-import { TableVirtuoso } from 'react-virtuoso'
 import { cn } from '@/lib/utils'
+import { type HTMLAttributes, forwardRef } from 'react'
+import { TableVirtuoso } from 'react-virtuoso'
 
 // Original Table is wrapped with a <div> (see https://ui.shadcn.com/docs/components/table#radix-:r24:-content-manual),
 // but here we don't want it, so let's use a new component with only <table> tag
-const TableComponent = forwardRef<
-  HTMLTableElement,
-  React.HTMLAttributes<HTMLTableElement>
->(({ className, ...props }, ref) => (
-  <table
-    ref={ref}
-    className={cn('w-full caption-bottom text-sm', className)}
-    {...props}
-  />
-))
+const TableComponent = forwardRef<HTMLTableElement, React.HTMLAttributes<HTMLTableElement>>(
+  ({ className, ...props }, ref) => (
+    <table ref={ref} className={cn('w-full caption-bottom text-sm', className)} {...props} />
+  )
+)
 TableComponent.displayName = 'TableComponent'
 
 const TableRowComponent = <TData,>(rows: Row<TData>[]) =>
@@ -40,11 +35,7 @@ const TableRowComponent = <TData,>(rows: Row<TData>[]) =>
     }
 
     return (
-      <TableRow
-        key={row.id}
-        data-state={row.getIsSelected() && 'selected'}
-        {...props}
-      >
+      <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'} {...props}>
         {row.getVisibleCells().map((cell) => (
           <TableCell
             key={cell.id}
@@ -63,17 +54,10 @@ interface DataTableProps<TData> {
   columns: TableOptions<TData>['columns']
   data: TData[]
   height: number
-  header?:
-    | React.ReactNode
-    | (({ table }: { table: Table<TData> }) => React.ReactNode)
+  header?: React.ReactNode | (({ table }: { table: Table<TData> }) => React.ReactNode)
 }
 
-export function DataTable<TData>({
-  columns,
-  data,
-  height,
-  header,
-}: DataTableProps<TData>) {
+export function DataTable<TData>({ columns, data, height, header }: DataTableProps<TData>) {
   const table = useReactTable({
     data,
     columns,
@@ -88,8 +72,8 @@ export function DataTable<TData>({
       .getHeaderGroups()
       .filter((headerGroup) =>
         headerGroup.headers.some(
-          (header) => !header.isPlaceholder && header.column.columnDef.header,
-        ),
+          (header) => !header.isPlaceholder && header.column.columnDef.header
+        )
       )
       .map((headerGroup) => (
         <TableRow className="bg-card" key={headerGroup.id}>
@@ -114,10 +98,7 @@ export function DataTable<TData>({
                   }
                   onClick={header.column.getToggleSortingHandler()}
                 >
-                  {flexRender(
-                    header.column.columnDef.header,
-                    header.getContext(),
-                  )}
+                  {flexRender(header.column.columnDef.header, header.getContext())}
                 </div>
               </TableHead>
             )
@@ -130,8 +111,8 @@ export function DataTable<TData>({
       .getFooterGroups()
       .filter((footerGroup) =>
         footerGroup.headers.some(
-          (header) => !header.isPlaceholder && header.column.columnDef.footer,
-        ),
+          (header) => !header.isPlaceholder && header.column.columnDef.footer
+        )
       )
       .map((footerGroup) => (
         <TableRow key={footerGroup.id} className="bg-card">
@@ -144,10 +125,7 @@ export function DataTable<TData>({
               }}
             >
               <div className="flex items-center">
-                {flexRender(
-                  footer.column.columnDef.footer,
-                  footer.getContext(),
-                )}
+                {flexRender(footer.column.columnDef.footer, footer.getContext())}
               </div>
             </TableHead>
           ))}

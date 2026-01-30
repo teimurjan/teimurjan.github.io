@@ -1,14 +1,14 @@
 'use client'
 import {
   NavigationMenu,
-  NavigationMenuList,
   NavigationMenuItem,
   NavigationMenuLink,
+  NavigationMenuList,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
-import Link from 'next/link'
 import { useAuth } from '@/providers/auth-provider'
 import { Layers, Pickaxe, Sparkles } from 'lucide-react'
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 export const LayoutNavigation = () => {
@@ -24,10 +24,7 @@ export const LayoutNavigation = () => {
       <NavigationMenuList>
         <NavigationMenuItem>
           <Link href="/" legacyBehavior passHref>
-            <NavigationMenuLink
-              active={pathname === '/'}
-              className={navigationMenuTriggerStyle()}
-            >
+            <NavigationMenuLink active={pathname === '/'} className={navigationMenuTriggerStyle()}>
               <span className="flex items-center gap-2">
                 Applications <Layers className="h-4 w-4" />
               </span>

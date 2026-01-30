@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://teimurjan.dev">
-    <img alt="logo" src="./workspaces/website/public/logo.webp" width="200" />
+    <img alt="logo" src="./workspaces/website/public/logo.png" width="200" />
   </a>
 </p>
 <h1 align="center">

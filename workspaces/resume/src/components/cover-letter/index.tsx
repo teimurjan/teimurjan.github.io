@@ -1,5 +1,5 @@
 import { Font } from '@react-pdf/renderer'
-import CoverLetter, { CoverLetterProps } from './CoverLetter'
+import CoverLetter, { type CoverLetterProps } from './CoverLetter'
 
 Font.registerEmojiSource({
   format: 'png',

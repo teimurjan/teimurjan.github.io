@@ -1,4 +1,4 @@
-import { getApps, getApp, initializeApp, cert } from 'firebase-admin/app'
+import { cert, getApp, getApps, initializeApp } from 'firebase-admin/app'
 
 export const admin =
   getApps().length === 0
@@ -11,6 +11,6 @@ export const admin =
                 privateKey: process.env.PRIVATE_KEY,
               }),
             }
-          : undefined,
+          : undefined
       )
     : getApp()

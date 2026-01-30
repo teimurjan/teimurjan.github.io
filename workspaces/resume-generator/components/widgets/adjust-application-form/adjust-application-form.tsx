@@ -1,51 +1,30 @@
 'use client'
-import { ResumeQuery } from '@teimurjan/gql-client'
-import { useEffect, useRef, useState } from 'react'
-import { Copy, Save } from 'lucide-react'
-import { useForm, useWatch } from 'react-hook-form'
-import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Label } from '../../ui/label'
-import {
-  CustomResume,
-  HarvardResume,
-  useCoverLetter,
-  useResume,
-} from '@teimurjan/resume'
-import { Button } from '../../ui/button'
-import { JobApplication } from '@/db/types'
-import { Textarea } from '../../ui/textarea'
-import dynamic from 'next/dynamic'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '../../ui/form'
-import { toast } from 'sonner'
-import type { JsonEditorRef } from '../../common/json-editor'
-import { adjustFormSchema } from '@/schema/adjust-form'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '../../ui/select'
-import { AdjustResumeSubform } from '../adjust-resume-subform/adjust-resume-subform'
+import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
 import { Switch } from '@/components/ui/switch'
-import { Input } from '@/components/ui/input'
+import type { JobApplication } from '@/db/types'
+import { adjustFormSchema } from '@/schema/adjust-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import type { ResumeQuery } from '@teimurjan/gql-client'
+import { CustomResume, HarvardResume, useCoverLetter, useResume } from '@teimurjan/resume'
+import { Copy, Save } from 'lucide-react'
+import dynamic from 'next/dynamic'
+import { useEffect, useRef, useState } from 'react'
+import { useForm, useWatch } from 'react-hook-form'
+import { toast } from 'sonner'
+import type { z } from 'zod'
+import type { JsonEditorRef } from '../../common/json-editor'
+import { Button } from '../../ui/button'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../../ui/form'
+import { Label } from '../../ui/label'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../ui/select'
+import { Textarea } from '../../ui/textarea'
+import { AdjustResumeSubform } from '../adjust-resume-subform/adjust-resume-subform'
 import { PdfPreviewButton } from '../pdf-preview-button/pdf-preview-button'
 
-const JsonEditor = dynamic(
-  () => import('../../common/json-editor').then((mod) => mod.JsonEditor),
-  {
-    ssr: false,
-  },
-)
+const JsonEditor = dynamic(() => import('../../common/json-editor').then((mod) => mod.JsonEditor), {
+  ssr: false,
+})
 
 interface Props {
   application: Pick<
@@ -53,10 +32,7 @@ interface Props {
     'resume' | 'coverLetter' | 'status' | 'jobTitle' | 'companyName'
   >
   onSave?: (
-    application: Pick<
-      JobApplication,
-      'resume' | 'coverLetter' | 'jobTitle' | 'companyName'
-    >,
+    application: Pick<JobApplication, 'resume' | 'coverLetter' | 'jobTitle' | 'companyName'>
   ) => void
 }
 
@@ -111,7 +87,7 @@ export const AdjustApplicationForm = ({ application, onSave }: Props) => {
     {
       config: formConfigValue,
       ...formResumeValue,
-    },
+    }
   )
   const { generateCoverLetterUrl } = useCoverLetter({
     children: formCoverLetterValue,
@@ -163,9 +139,7 @@ export const AdjustApplicationForm = ({ application, onSave }: Props) => {
                     // Prevent submit action to be triggered
                     e.preventDefault()
 
-                    navigator.clipboard.writeText(
-                      JSON.stringify(formResumeValue),
-                    )
+                    navigator.clipboard.writeText(JSON.stringify(formResumeValue))
                     toast('Resume data copied to clipboard ✅')
                   }}
                 >
@@ -193,10 +167,7 @@ export const AdjustApplicationForm = ({ application, onSave }: Props) => {
                           <Select
                             value={field.value}
                             onValueChange={(value) =>
-                              form.setValue(
-                                'style',
-                                value as 'custom' | 'harvard',
-                              )
+                              form.setValue('style', value as 'custom' | 'harvard')
                             }
                           >
                             <SelectTrigger className="w-[140px]">
@@ -228,10 +199,7 @@ export const AdjustApplicationForm = ({ application, onSave }: Props) => {
                             <Select
                               value={field.value}
                               onValueChange={(value) =>
-                                form.setValue(
-                                  'config.skills',
-                                  value as 'row' | 'column',
-                                )
+                                form.setValue('config.skills', value as 'row' | 'column')
                               }
                             >
                               <SelectTrigger className="w-[140px]">
@@ -262,9 +230,7 @@ export const AdjustApplicationForm = ({ application, onSave }: Props) => {
                         <div className="flex items-center gap-2">
                           <Switch
                             checked={field.value}
-                            onCheckedChange={(checked) =>
-                              form.setValue('config.location', checked)
-                            }
+                            onCheckedChange={(checked) => form.setValue('config.location', checked)}
                           />
                         </div>
                       </FormControl>
@@ -309,14 +275,8 @@ export const AdjustApplicationForm = ({ application, onSave }: Props) => {
                 if ('json' in updatedContent) {
                   form.setValue('resume', updatedContent.json as ResumeQuery)
                 }
-                if (
-                  'text' in updatedContent &&
-                  typeof updatedContent.text === 'string'
-                ) {
-                  form.setValue(
-                    'resume',
-                    JSON.parse(updatedContent.text) as ResumeQuery,
-                  )
+                if ('text' in updatedContent && typeof updatedContent.text === 'string') {
+                  form.setValue('resume', JSON.parse(updatedContent.text) as ResumeQuery)
                 }
               }}
               className="jse-theme-dark flex-1 overflow-auto"

@@ -9,18 +9,11 @@ interface Props<T extends object> {
   debounceMs?: number
 }
 
-export const useSearch = <T extends object>({
-  items,
-  keys,
-  debounceMs = 300,
-}: Props<T>) => {
+export const useSearch = <T extends object>({ items, keys, debounceMs = 300 }: Props<T>) => {
   const [searchQuery, setSearchQuery] = useState('')
   const debouncedSearchQuery = useDebounce(searchQuery, debounceMs)
 
-  const fuse = useMemo(
-    () => new Fuse(items, { keys, threshold: 0.5 }),
-    [items, keys],
-  )
+  const fuse = useMemo(() => new Fuse(items, { keys, threshold: 0.5 }), [items, keys])
   const searchResults = useMemo(() => {
     if (!debouncedSearchQuery) {
       return items

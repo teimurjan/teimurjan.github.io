@@ -1,6 +1,6 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node'
+import crypto from 'node:crypto'
 import { Redis } from '@upstash/redis'
-import crypto from 'crypto'
+import type { VercelRequest, VercelResponse } from '@vercel/node'
 
 const HYGRAPH_SECRET = process.env.HYGRAPH_SECRET!
 const GITHUB_WORKFLOW_URL = process.env.GITHUB_WORKFLOW_URL!
@@ -9,7 +9,7 @@ const GITHUB_TOKEN = process.env.GITHUB_TOKEN!
 const COOLDOWN_PERIOD = 30000 // seconds
 const DEPLOY_KEY = 'last_deploy_timestamp'
 
-const redis = Redis.fromEnv();
+const redis = Redis.fromEnv()
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
@@ -21,16 +21,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   const sign = rawSign.replace('sign=', '')
   const env = rawEnv.replace('env=', '')
-  const timestamp = parseInt(rawTimestamp.replace('t=', ''))
+  const timestamp = Number.parseInt(rawTimestamp.replace('t=', ''))
   const payload = JSON.stringify({
     Body: JSON.stringify(req.body),
     EnvironmentName: env,
     TimeStamp: timestamp,
   })
-  const hash = crypto
-    .createHmac('sha256', HYGRAPH_SECRET)
-    .update(payload)
-    .digest('base64')
+  const hash = crypto.createHmac('sha256', HYGRAPH_SECRET).update(payload).digest('base64')
 
   if (sign !== hash) {
     return res.status(403).json({ message: 'Invalid signature' })
@@ -60,9 +57,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     })
 
     if (!response.ok) {
-      throw new Error(
-        `Failed to trigger workflow: ${response.statusText} ${await response.text()}`,
-      )
+      throw new Error(`Failed to trigger workflow: ${response.statusText} ${await response.text()}`)
     }
 
     console.log('Deployment triggered')

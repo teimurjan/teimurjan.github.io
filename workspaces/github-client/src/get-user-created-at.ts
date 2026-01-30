@@ -1,5 +1,5 @@
 import getClient from './get-client'
-import { RequestOptions } from './types'
+import type { RequestOptions } from './types'
 
 const QUERY = `
   query($login: String!) {

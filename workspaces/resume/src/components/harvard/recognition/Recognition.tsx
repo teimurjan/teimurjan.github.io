@@ -1,6 +1,6 @@
-import { Text, View, StyleSheet, Link } from '@react-pdf/renderer'
-import { HarvardResumeProps } from '../types'
+import { Link, StyleSheet, Text, View } from '@react-pdf/renderer'
 import theme from '../../../theme'
+import type { HarvardResumeProps } from '../types'
 
 export type Props = Pick<HarvardResumeProps, 'publications' | 'conferences'>
 

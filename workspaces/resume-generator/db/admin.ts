@@ -1,9 +1,9 @@
-import { Timestamp } from 'firebase-admin/firestore'
 import { db } from '@/firebase/admin-firestore'
-import { JobApplication } from './types'
+import { Timestamp } from 'firebase-admin/firestore'
+import type { JobApplication } from './types'
 
 export async function createJobApplication(
-  data: Pick<JobApplication, 'jobDescription' | 'companyName' | 'jobTitle'>,
+  data: Pick<JobApplication, 'jobDescription' | 'companyName' | 'jobTitle'>
 ) {
   const jobApplicationRef = await db.collection('jobApplications').add({
     jobDescription: data.jobDescription,

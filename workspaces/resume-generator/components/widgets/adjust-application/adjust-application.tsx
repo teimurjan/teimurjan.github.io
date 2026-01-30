@@ -1,11 +1,11 @@
 'use client'
-import { JobApplication } from '@/db/types'
+import { useJobApplication, useUpdateJobApplication } from '@/db/queries'
+import type { JobApplication } from '@/db/types'
+import { Copy, Loader2 } from 'lucide-react'
 import { useCallback } from 'react'
 import { toast } from 'sonner'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../ui/tabs'
 import { Button } from '../../ui/button'
-import { Copy, Loader2 } from 'lucide-react'
-import { useJobApplication, useUpdateJobApplication } from '@/db/queries'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../ui/tabs'
 import { AdjustApplicationForm } from '../adjust-application-form/adjust-application-form'
 
 interface Props {
@@ -21,7 +21,7 @@ export const AdjustApplication = ({ id }: Props) => {
       await updateJobApplication({ id, data: newApplication })
       toast('Application updated successfully ✅')
     },
-    [id, updateJobApplication],
+    [id, updateJobApplication]
   )
 
   if (!application) {
@@ -35,17 +35,12 @@ export const AdjustApplication = ({ id }: Props) => {
         <TabsTrigger value="description">Description</TabsTrigger>
       </TabsList>
       <TabsContent value="application" className="overflow-hidden mt-2">
-        {(application.status && application.status !== 'completed') ||
-        !application.resume ? (
+        {(application.status && application.status !== 'completed') || !application.resume ? (
           <div className="flex items-center justify-center h-full">
-            Application is still processing{' '}
-            <Loader2 className="ml-2 animate-spin" />
+            Application is still processing <Loader2 className="ml-2 animate-spin" />
           </div>
         ) : (
-          <AdjustApplicationForm
-            application={application}
-            onSave={handleSave}
-          />
+          <AdjustApplicationForm application={application} onSave={handleSave} />
         )}
       </TabsContent>
       <TabsContent value="description" className="overflow-hidden mt-2">

@@ -1,12 +1,15 @@
-import puppeteer, { Browser } from 'puppeteer'
-import path from 'path'
-import fs from 'fs'
-import prettier from 'prettier'
+import fs from 'node:fs'
+import path from 'node:path'
+import { Biome } from '@biomejs/js-api/nodejs'
+import { chromium, type Browser } from 'playwright'
 
 import existingOpengraphs from '../__generated__/opengraphs.ts'
 import gqlClient from '../gql-client'
 
 type OpengraphData = Record<string, string | null>
+
+const biome = new Biome()
+const { projectKey } = biome.openProject(path.resolve(__dirname, '../../../'))
 
 const getPublicationLinks = async () => {
   const { publications } = await gqlClient.Media()
@@ -17,13 +20,11 @@ const getOpengraph = async (link: string, browser: Browser) => {
   const page = await browser.newPage()
 
   try {
-    page.goto(link)
-
-    await page.waitForRequest(link)
+    await page.goto(link, { waitUntil: 'domcontentloaded' })
 
     const openGraphData = await page.evaluate(() => {
       const metaTags = Array.from(document.querySelectorAll('meta'))
-      const ogData: OpengraphData = {
+      const ogData: Record<string, string | null> = {
         description: null,
         twitterImageSrc: null,
         twitterCard: null,
@@ -38,9 +39,8 @@ const getOpengraph = async (link: string, browser: Browser) => {
         url: null,
       }
 
-      metaTags.forEach((tag) => {
-        const property =
-          tag.getAttribute('property') || tag.getAttribute('name')
+      for (const tag of metaTags) {
+        const property = tag.getAttribute('property') || tag.getAttribute('name')
         const content = tag.getAttribute('content')
 
         switch (property) {
@@ -81,7 +81,7 @@ const getOpengraph = async (link: string, browser: Browser) => {
             ogData.url = content
             break
         }
-      })
+      }
 
       return ogData
     })
@@ -114,24 +114,18 @@ const main = async () => {
 
   console.log('generate-opengraph: getting publications...')
   const publicationLinks = await getPublicationLinks()
-  const linksToGenerate = publicationLinks.filter(
-    (link) => !existingOpengraphs[link],
-  )
+  const linksToGenerate = publicationLinks.filter((link) => !existingOpengraphs[link])
   if (linksToGenerate.length === 0) {
     console.log('generate-opengraph: no links to generate')
     return
   }
 
-  console.log('generate-opengraph: launching puppeteer...')
-  const browser = await puppeteer.launch({
-    headless: false,
-    args: ['--disable-gpu', '--no-sandbox'],
-  })
+  console.log('generate-opengraph: launching playwright...')
+  const browser = await chromium.launch({ headless: false })
 
   const opengraphs: Record<string, OpengraphData> = {}
   for (const link of linksToGenerate) {
     console.log(`generate-opengraph: getting missing opengraph for ${link}...`)
-    // Wait for 1 second to avoid spamming the server
     await new Promise((resolve) => setTimeout(resolve, 1000))
     opengraphs[link] = await getOpengraph(link, browser)
   }
@@ -145,15 +139,10 @@ const main = async () => {
   const rawOutput = `export default ${JSON.stringify({ ...existingOpengraphs, ...opengraphs }, null, 2)} as Record<string, Record<string, string | null>>`
 
   console.log('generate-opengraph: formatting output...')
-  const prettierRcPath = path.resolve(__dirname, '../../../.prettierrc.mjs')
-  const prettierConfig = await prettier.resolveConfig(prettierRcPath)
 
-  const output = prettierConfig
-    ? await prettier.format(rawOutput, {
-        ...prettierConfig,
-        parser: 'typescript',
-      })
-    : rawOutput
+  const { content: output } = biome.formatContent(projectKey, rawOutput, {
+    filePath: outputPath,
+  })
 
   if (fs.existsSync(outputPath)) {
     const existingContent = fs.readFileSync(outputPath, 'utf-8')
@@ -165,7 +154,7 @@ const main = async () => {
     }
   }
 
-  console.log('generate-opengraph: closing puppeteer...')
+  console.log('generate-opengraph: closing playwright...')
   await browser.close()
 
   console.log('generate-opengraph: generated successfully')

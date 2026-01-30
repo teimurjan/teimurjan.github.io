@@ -1,5 +1,5 @@
-import { getSdk } from './get-sdk'
 import { GraphQLClient } from 'graphql-request'
+import { getSdk } from './get-sdk'
 
 const getClient = (url: string) => {
   const client = new GraphQLClient(url)

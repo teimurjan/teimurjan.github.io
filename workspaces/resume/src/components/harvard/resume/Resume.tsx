@@ -1,13 +1,13 @@
-import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer'
+import { Document, Page, StyleSheet, Text, View } from '@react-pdf/renderer'
 import type { Style } from '@react-pdf/types'
-import { YEAR_DATE_FORMAT, prettyRange, dateSorter } from '@teimurjan/utils'
+import { YEAR_DATE_FORMAT, dateSorter, prettyRange } from '@teimurjan/utils'
 import theme from '../../../theme'
 import Header from '../header'
+import Recognition from '../recognition'
 import ResumeItem from '../resume-item'
 import Skills from '../skills'
 import sharedStyles from '../styles'
-import { HarvardResumeProps } from '../types'
-import Recognition from '../recognition'
+import type { HarvardResumeProps } from '../types'
 
 const styles = StyleSheet.create({
   page: {
@@ -41,11 +41,8 @@ const styles = StyleSheet.create({
   },
 })
 
-const getItemMarginStyle = (
-  style: Style | Style[],
-  index: number,
-  itemsCount: number,
-) => (index + 1 === itemsCount ? undefined : style)
+const getItemMarginStyle = (style: Style | Style[], index: number, itemsCount: number) =>
+  index + 1 === itemsCount ? undefined : style
 
 const HarvardResume = ({
   bios: [{ fullName, headline, about, location, phoneNumber, email }],
@@ -81,17 +78,13 @@ const HarvardResume = ({
                 <ResumeItem
                   key={experience.id}
                   title={experience.position}
-                  dates={prettyRange(
-                    experience.startDate,
-                    experience.endDate,
-                    YEAR_DATE_FORMAT,
-                  )}
+                  dates={prettyRange(experience.startDate, experience.endDate, YEAR_DATE_FORMAT)}
                   subtitle={experience.company}
                   description={experience.description.html}
                   style={getItemMarginStyle(
                     sharedStyles.itemMarginBottomSmall,
                     index,
-                    experiences.length,
+                    experiences.length
                   )}
                 />
               ))}
@@ -104,17 +97,13 @@ const HarvardResume = ({
               .map((education, index) => (
                 <ResumeItem
                   key={education.id}
-                  dates={prettyRange(
-                    education.startDate,
-                    education.endDate,
-                    YEAR_DATE_FORMAT,
-                  )}
+                  dates={prettyRange(education.startDate, education.endDate, YEAR_DATE_FORMAT)}
                   title={`${education.degree} in ${education.areaOfStudy}`}
                   subtitle={education.school}
                   style={getItemMarginStyle(
                     sharedStyles.itemMarginBottom,
                     index,
-                    educations.length,
+                    educations.length
                   )}
                 />
               ))}
@@ -127,10 +116,7 @@ const HarvardResume = ({
 
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Recognition</Text>
-            <Recognition
-              publications={publications}
-              conferences={conferences}
-            />
+            <Recognition publications={publications} conferences={conferences} />
           </View>
         </View>
       </Page>

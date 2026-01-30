@@ -1,16 +1,16 @@
 'use client'
 
-import { createContext, useContext, useEffect, useState } from 'react'
-import {
-  User,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-  getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
-} from 'firebase/auth'
 import { firebase } from '@/firebase/firebase'
+import {
+  GoogleAuthProvider,
+  type User,
+  getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+} from 'firebase/auth'
+import { createContext, useContext, useEffect, useState } from 'react'
 
 interface AuthContextType {
   user: User | null

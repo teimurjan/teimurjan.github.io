@@ -1,9 +1,5 @@
-import {
-  Text,
-  View,
-  StyleSheet,
-} from '@react-pdf/renderer'
-import { CustomResumeProps } from '../types'
+import { StyleSheet, Text, View } from '@react-pdf/renderer'
+import type { CustomResumeProps } from '../types'
 
 const styles = StyleSheet.create({
   itemMarginBottomSmall: {

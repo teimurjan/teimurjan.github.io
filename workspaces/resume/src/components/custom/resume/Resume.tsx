@@ -1,12 +1,12 @@
-import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer'
+import { Document, Page, StyleSheet, Text, View } from '@react-pdf/renderer'
 import type { Style } from '@react-pdf/types'
-import { YEAR_DATE_FORMAT, prettyRange, dateSorter } from '@teimurjan/utils'
+import { YEAR_DATE_FORMAT, dateSorter, prettyRange } from '@teimurjan/utils'
 import theme from '../../../theme'
 import Header from '../header'
 import ResumeItem from '../resume-item'
-import { CustomResumeProps } from '../types'
-import sharedStyles from '../styles'
 import Skills from '../skills'
+import sharedStyles from '../styles'
+import type { CustomResumeProps } from '../types'
 
 const styles = StyleSheet.create({
   page: {
@@ -48,11 +48,8 @@ const styles = StyleSheet.create({
   },
 })
 
-const getItemMarginStyle = (
-  style: Style | Style[],
-  index: number,
-  itemsCount: number,
-) => (index + 1 === itemsCount ? undefined : style)
+const getItemMarginStyle = (style: Style | Style[], index: number, itemsCount: number) =>
+  index + 1 === itemsCount ? undefined : style
 
 const CustomResume = ({
   bios: [{ fullName, headline, about, location, phoneNumber, email }],
@@ -91,14 +88,14 @@ const CustomResume = ({
                       dates={prettyRange(
                         experience.startDate,
                         experience.endDate,
-                        YEAR_DATE_FORMAT,
+                        YEAR_DATE_FORMAT
                       )}
                       subtitle={experience.company}
                       description={experience.description.html}
                       style={getItemMarginStyle(
                         sharedStyles.itemMarginBottom,
                         index,
-                        experiences.length,
+                        experiences.length
                       )}
                     />
                   ))}
@@ -110,17 +107,13 @@ const CustomResume = ({
                   {educations.map((education, index) => (
                     <ResumeItem
                       key={education.id}
-                      dates={prettyRange(
-                        education.startDate,
-                        education.endDate,
-                        YEAR_DATE_FORMAT,
-                      )}
+                      dates={prettyRange(education.startDate, education.endDate, YEAR_DATE_FORMAT)}
                       title={`${education.degree}\nin ${education.areaOfStudy}`}
                       subtitle={education.school}
                       style={getItemMarginStyle(
                         sharedStyles.itemMarginBottom,
                         index,
-                        educations.length,
+                        educations.length
                       )}
                     />
                   ))}
@@ -145,7 +138,7 @@ const CustomResume = ({
                         style={getItemMarginStyle(
                           sharedStyles.itemMarginBottomSmall,
                           index,
-                          publications.length,
+                          publications.length
                         )}
                       />
                     ))}
@@ -165,7 +158,7 @@ const CustomResume = ({
                         style={getItemMarginStyle(
                           sharedStyles.itemMarginBottomSmall,
                           index,
-                          publications.length,
+                          publications.length
                         )}
                       />
                     ))}

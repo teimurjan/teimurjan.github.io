@@ -1,10 +1,10 @@
 'use client'
 import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react'
 import {
+  type Content,
   JSONEditor,
-  Mode,
-  OnChange,
-  Content,
+  type Mode,
+  type OnChange,
 } from 'vanilla-jsoneditor/standalone.js'
 import 'vanilla-jsoneditor/themes/jse-theme-dark.css'
 
@@ -41,7 +41,7 @@ const JsonEditorComponent = forwardRef<JsonEditorRef, Props>(
           }
         },
       }),
-      [mode],
+      [mode]
     )
 
     useEffect(() => {
@@ -70,7 +70,7 @@ const JsonEditorComponent = forwardRef<JsonEditorRef, Props>(
     }, [])
 
     return <div ref={containerRef} className={className} />
-  },
+  }
 )
 
 JsonEditorComponent.displayName = 'JsonEditor'

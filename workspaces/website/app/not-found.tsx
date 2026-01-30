@@ -1,22 +1,20 @@
-import Content from '../components/atoms/content'
-import FullPageSection from '../components/molecules/full-page-section'
-import Hero from '../components/molecules/hero'
-import TopNavigation from '../components/organisms/top-navigation'
-import Footer from '../components/organisms/footer'
-import notFound from '../assets/images/not-found.webp'
+import { FileQuestion } from 'lucide-react'
+import Link from 'next/link'
 
-const NotFound = () => {
+export default function NotFound() {
   return (
-    <>
-      <TopNavigation />
-      <Content>
-        <FullPageSection color="dark">
-          <Hero title="404 - Not found" image={notFound} />
-        </FullPageSection>
-      </Content>
-      <Footer />
-    </>
+    <main className="min-h-screen relative overflow-hidden flex items-center justify-center">
+      <div className="bg-glass border border-glass-border rounded-2xl shadow-glass backdrop-blur-[40px] backdrop-saturate-150 p-8 max-w-md text-center relative z-10">
+        <FileQuestion className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+        <h1 className="text-2xl font-semibold text-foreground mb-2">404 — Not Found</h1>
+        <p className="text-muted-foreground mb-6">The page you're looking for doesn't exist.</p>
+        <Link
+          href="/"
+          className="inline-block px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+        >
+          Go home
+        </Link>
+      </div>
+    </main>
   )
 }
-
-export default NotFound

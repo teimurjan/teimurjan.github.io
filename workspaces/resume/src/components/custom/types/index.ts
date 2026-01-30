@@ -1,4 +1,4 @@
-import { ResumeProps } from '../../types'
+import type { ResumeProps } from '../../types'
 
 export interface ResumeConfig {
   skills: 'column' | 'row'

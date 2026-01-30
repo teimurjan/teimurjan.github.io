@@ -9,11 +9,7 @@ interface Props {
 }
 
 const Skills = ({ skills, style = {} }: Props) => {
-  return (
-    <Text style={style}>
-      {skills.map((skill) => skill.title).join(', ')}
-    </Text>
-  )
+  return <Text style={style}>{skills.map((skill) => skill.title).join(', ')}</Text>
 }
 
 export default Skills

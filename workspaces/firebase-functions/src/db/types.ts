@@ -1,11 +1,7 @@
-import { ResumeQuery } from '@teimurjan/gql-client'
-import { Timestamp } from 'firebase/firestore'
+import type { ResumeQuery } from '@teimurjan/gql-client'
+import type { Timestamp } from 'firebase/firestore'
 
-export type JobApplicationStatus =
-  | 'pending'
-  | 'processing'
-  | 'completed'
-  | 'failed'
+export type JobApplicationStatus = 'pending' | 'processing' | 'completed' | 'failed'
 
 export type JobApplication = {
   id?: string

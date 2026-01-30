@@ -1,6 +1,6 @@
 import { ClientRequestError } from './error'
 import getClient from './get-client'
-import {
+import type {
   GetUserWithContributionsArgs,
   GetUserWithContributionsResponse,
   RequestOptions,
@@ -30,7 +30,7 @@ const QUERY = `
 
 const getUserWithContributions = async (
   args: GetUserWithContributionsArgs,
-  options: RequestOptions,
+  options: RequestOptions
 ) => {
   const client = getClient(options.auth)
 
@@ -40,10 +40,7 @@ const getUserWithContributions = async (
     to: args.to.toISOString(),
   }
 
-  const response = await client.graphql<GetUserWithContributionsResponse>(
-    QUERY,
-    variables,
-  )
+  const response = await client.graphql<GetUserWithContributionsResponse>(QUERY, variables)
 
   if (!response.user) {
     throw new ClientRequestError(`User ${args.username} not found`)

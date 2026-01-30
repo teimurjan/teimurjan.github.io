@@ -1,21 +1,17 @@
-"use client"
+'use client'
 
-import * as React from "react"
-import { Check, ChevronsUpDown, Plus } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import { Button } from '@/components/ui/button'
 import {
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
-} from "@/components/ui/command"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
+} from '@/components/ui/command'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { cn } from '@/lib/utils'
+import { Check, ChevronsUpDown, Plus } from 'lucide-react'
+import * as React from 'react'
 
 export type ComboboxOption = {
   value: string
@@ -36,13 +32,13 @@ export function Combobox({
   options,
   value,
   onChange,
-  placeholder = "Select an option",
-  emptyText = "No results found.",
+  placeholder = 'Select an option',
+  emptyText = 'No results found.',
   className,
   onAdd,
 }: ComboboxProps) {
   const [open, setOpen] = React.useState(false)
-  const [inputValue, setInputValue] = React.useState("")
+  const [inputValue, setInputValue] = React.useState('')
 
   const handleInputChange = (value: string) => {
     setInputValue(value)
@@ -51,7 +47,7 @@ export function Combobox({
   const handleAddNew = () => {
     if (inputValue && onAdd) {
       onAdd(inputValue)
-      setInputValue("")
+      setInputValue('')
     }
   }
 
@@ -62,19 +58,17 @@ export function Combobox({
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className={cn("w-full justify-between", className)}
+          className={cn('w-full justify-between', className)}
         >
-          {value
-            ? options.find((option) => option.value === value)?.label || value
-            : placeholder}
+          {value ? options.find((option) => option.value === value)?.label || value : placeholder}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-full p-0">
         <Command>
-          <CommandInput 
-            placeholder={placeholder} 
-            value={inputValue} 
+          <CommandInput
+            placeholder={placeholder}
+            value={inputValue}
             onValueChange={handleInputChange}
           />
           <CommandEmpty>
@@ -98,14 +92,14 @@ export function Combobox({
                 key={option.value}
                 value={option.value}
                 onSelect={() => {
-                  onChange(option.value === value ? "" : option.value)
+                  onChange(option.value === value ? '' : option.value)
                   setOpen(false)
                 }}
               >
                 <Check
                   className={cn(
-                    "mr-2 h-4 w-4",
-                    value === option.value ? "opacity-100" : "opacity-0"
+                    'mr-2 h-4 w-4',
+                    value === option.value ? 'opacity-100' : 'opacity-0'
                   )}
                 />
                 {option.label}
@@ -116,4 +110,4 @@ export function Combobox({
       </PopoverContent>
     </Popover>
   )
-} 
+}

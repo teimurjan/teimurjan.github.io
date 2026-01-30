@@ -1,26 +1,26 @@
 'use client'
-import { JobApplication } from '@/db/types'
-import { Button } from '../../ui/button'
+import { useRemoveJobApplications } from '@/db/queries'
+import type { JobApplication } from '@/db/types'
+import { useSearch } from '@/hooks/use-search'
+import { cn } from '@/lib/utils'
+import type { Table } from '@tanstack/react-table'
 import { Loader2 } from 'lucide-react'
 import { useState } from 'react'
 import {
   AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
   AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogCancel,
-  AlertDialogAction,
-  AlertDialogFooter,
 } from '../../ui/alert-dialog'
-import { useRemoveJobApplications } from '@/db/queries'
-import { Input } from '../../ui/input'
-import { useSearch } from '@/hooks/use-search'
-import { JobApplicationsTableSkeleton } from './job-applications-table-skeleton'
+import { Button } from '../../ui/button'
 import { DataTable } from '../../ui/data-table'
-import { cn } from '@/lib/utils'
+import { Input } from '../../ui/input'
+import { JobApplicationsTableSkeleton } from './job-applications-table-skeleton'
 import { useJobApplicationsTableColumns } from './use-job-applications-table-columns'
-import { Table } from '@tanstack/react-table'
 
 interface Props {
   jobApplications: JobApplication[]
@@ -45,8 +45,7 @@ export const JobApplicationsTable = ({
   })
   const [containerHeight, setContainerHeight] = useState<number>(600)
 
-  const { mutateAsync: removeJobApplications, isPending: isRemoving } =
-    useRemoveJobApplications()
+  const { mutateAsync: removeJobApplications, isPending: isRemoving } = useRemoveJobApplications()
 
   const [removingIds, setRemovingIds] = useState<string[]>([])
 
@@ -73,15 +72,13 @@ export const JobApplicationsTable = ({
         <Button
           className={cn(
             selectedRows.length === 0 ? 'opacity-0!' : 'opacity-100',
-            'transition-opacity duration-300',
+            'transition-opacity duration-300'
           )}
           variant="destructive"
           disabled={selectedRows.length === 0}
           onClick={() => {
             setRemovingIds(
-              selectedRows
-                .map((row) => row.original.id)
-                .filter((id) => id !== undefined),
+              selectedRows.map((row) => row.original.id).filter((id) => id !== undefined)
             )
           }}
         >
@@ -119,12 +116,11 @@ export const JobApplicationsTable = ({
           <AlertDialogContent>
             <AlertDialogHeader>
               <AlertDialogTitle>
-                Are you sure you want to delete {removingIds.length}{' '}
-                applications?
+                Are you sure you want to delete {removingIds.length} applications?
               </AlertDialogTitle>
               <AlertDialogDescription>
-                This action cannot be undone. This will permanently delete the
-                generated applications.
+                This action cannot be undone. This will permanently delete the generated
+                applications.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>

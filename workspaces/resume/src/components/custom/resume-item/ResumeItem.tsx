@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Link } from '@react-pdf/renderer'
+import { Link, StyleSheet, Text, View } from '@react-pdf/renderer'
 import type { Style } from '@react-pdf/types'
 import Html from 'react-pdf-html'
 import theme from '../../../theme'
@@ -34,22 +34,14 @@ interface Props {
   style?: Style | Style[]
 }
 
-const ResumeItem = ({
-  dates,
-  title,
-  subtitle,
-  description,
-  style = {},
-}: Props) => {
+const ResumeItem = ({ dates, title, subtitle, description, style = {} }: Props) => {
   return (
     <View style={style}>
       <View style={styles.experienceTitleDates}>
         <Text style={styles.experienceTitle}>{title}</Text>
         {dates && <Text style={styles.experienceDates}>{dates}</Text>}
       </View>
-      {typeof subtitle === 'string' && (
-        <Text style={styles.experienceSubtitle}>{subtitle}</Text>
-      )}
+      {typeof subtitle === 'string' && <Text style={styles.experienceSubtitle}>{subtitle}</Text>}
       {typeof subtitle === 'object' && !!subtitle && (
         <Link src={subtitle.toString()} style={styles.experienceSubtitle}>
           {subtitle.hostname.replace('www.', '').split('.')[0]}

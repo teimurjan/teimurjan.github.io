@@ -1,20 +1,20 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { db } from '@/firebase/firestore'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import {
-  collection,
+  Timestamp,
   addDoc,
+  collection,
   deleteDoc,
   doc,
-  getDocs,
   getDoc,
-  query,
-  orderBy,
-  updateDoc,
-  Timestamp,
+  getDocs,
   onSnapshot,
+  orderBy,
+  query,
+  updateDoc,
 } from 'firebase/firestore'
-import { db } from '@/firebase/firestore'
-import type { JobApplication } from './types'
 import React from 'react'
+import type { JobApplication } from './types'
 
 const queryKeys = {
   jobApplications: ['jobApplications'] as const,
@@ -56,8 +56,8 @@ export const useJobApplications = () => {
     refetchOnMount: false,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
-    staleTime: Infinity,
-    gcTime: Infinity,
+    staleTime: Number.POSITIVE_INFINITY,
+    gcTime: Number.POSITIVE_INFINITY,
   })
 }
 
@@ -101,8 +101,8 @@ export const useJobApplication = (id: string) => {
     refetchOnMount: false,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
-    staleTime: Infinity,
-    gcTime: Infinity,
+    staleTime: Number.POSITIVE_INFINITY,
+    gcTime: Number.POSITIVE_INFINITY,
   })
 }
 
@@ -163,9 +163,7 @@ export const useRemoveJobApplications = () => {
 
   return useMutation({
     mutationFn: async (ids: string[]) => {
-      await Promise.all(
-        ids.map((id) => deleteDoc(doc(db, 'jobApplications', id))),
-      )
+      await Promise.all(ids.map((id) => deleteDoc(doc(db, 'jobApplications', id))))
     },
     onSuccess: (_, ids) => {
       queryClient.invalidateQueries({ queryKey: queryKeys.jobApplications })

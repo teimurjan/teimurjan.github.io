@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { Biome } from '@biomejs/js-api/nodejs'
-import { chromium, type Browser } from 'playwright'
+import { type Browser, chromium } from 'playwright'
 
 import existingOpengraphs from '../__generated__/opengraphs.ts'
 import gqlClient from '../gql-client'

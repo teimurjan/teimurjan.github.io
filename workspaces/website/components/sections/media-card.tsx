@@ -23,7 +23,6 @@ interface MediaCardProps {
   fallbackIcon: LucideIcon
 }
 
-
 export function MediaCard({
   id,
   title,
@@ -34,10 +33,8 @@ export function MediaCard({
   iframeOptions,
   fallbackIcon: FallbackIcon,
 }: MediaCardProps) {
-
   const hasVideo = !!videoEmbedUrl
   const hasLink = !!link || hasVideo
-
 
   const mediaContent = (
     <>
@@ -87,13 +84,7 @@ export function MediaCard({
 
   if (link) {
     return (
-      <a
-        key={id}
-        href={link}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={className}
-      >
+      <a key={id} href={link} target="_blank" rel="noopener noreferrer" className={className}>
         {mediaContent}
       </a>
     )
@@ -101,11 +92,7 @@ export function MediaCard({
 
   if (hasVideo) {
     return (
-      <button
-        key={id}
-        type="button"
-        className={cn(className, 'text-left w-full')}
-      >
+      <button key={id} type="button" className={cn(className, 'text-left w-full')}>
         {mediaContent}
       </button>
     )

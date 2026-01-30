@@ -93,7 +93,10 @@ function extractTextFromSection(section: Section): string[] {
   return chunks
 }
 
-function extractAllChunks(folders: FolderStructure[], fullName: string): { id: string; section: string; text: string }[] {
+function extractAllChunks(
+  folders: FolderStructure[],
+  fullName: string
+): { id: string; section: string; text: string }[] {
   const allChunks: { id: string; section: string; text: string }[] = []
 
   allChunks.push({

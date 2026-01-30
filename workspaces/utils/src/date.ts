@@ -13,12 +13,11 @@ export const prettyDate = (date: string, format = PRETTY_DATE_FORMAT) => {
 }
 
 export const prettyRange = (startDate: string, endDate?: string, format = PRETTY_DATE_FORMAT) => {
-  const finalEndDate = endDate
-    ? endDate.includes('null') || endDate.includes('undefined')
-      ? undefined
-      : endDate
-    : undefined
-  return `${prettyDate(startDate, format)} - ${prettyDate(finalEndDate, format) ?? 'Now'}`
+  if (!endDate || endDate.includes('null') || endDate.includes('undefined')) {
+    return `${prettyDate(startDate, format)} - Now`
+  }
+
+  return `${prettyDate(startDate, format)} - ${prettyDate(endDate, format)}`
 }
 
 export const dateSorter = (a: string, b: string) => {

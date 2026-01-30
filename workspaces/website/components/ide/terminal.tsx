@@ -3,7 +3,7 @@
 import { usePortfolioQA } from '@/hooks/use-portfolio-qa'
 import { cn } from '@/lib/utils'
 import { ChevronDown, ChevronUp, Loader2, Terminal as TerminalIcon } from 'lucide-react'
-import { useCallback, useRef, useState, type KeyboardEvent } from 'react'
+import { type KeyboardEvent, useCallback, useRef, useState } from 'react'
 
 const exampleQuestions = [
   "What's Teimur's experience with React?",

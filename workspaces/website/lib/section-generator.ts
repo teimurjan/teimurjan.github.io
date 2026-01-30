@@ -1,3 +1,4 @@
+import opengraphs from '@/__generated__/opengraphs'
 import {
   type ContributedRepository,
   getRepositoriesContributedTo,
@@ -12,7 +13,6 @@ import type {
 } from '@teimurjan/gql-client'
 import type { Sdk } from '@teimurjan/gql-client'
 import { dateSorter } from '@teimurjan/utils'
-import opengraphs from '@/__generated__/opengraphs'
 import type { FolderStructure, Section } from './sections'
 
 function stripHtml(html: string): string {
@@ -58,7 +58,6 @@ function generateAbout(bio: BioQuery['bios'][0]): Section {
     },
   }
 }
-
 
 function generateExperience(experiences: ExperienceHistoryQuery['experiences']): Section {
   return {
@@ -185,10 +184,12 @@ function generateConferences(conferences: MediaQuery['conferences']): Section {
         title: conf.title,
         topic: conf.topic,
         link: conf.link || null,
-        videoEmbed: conf.videoEmbed ? {
-          url: conf.videoEmbed.link,
-          iframeOptions: conf.videoEmbed.iframeOptions ?? null,
-        } : null,
+        videoEmbed: conf.videoEmbed
+          ? {
+              url: conf.videoEmbed.link,
+              iframeOptions: conf.videoEmbed.iframeOptions ?? null,
+            }
+          : null,
         date: conf.date,
         imageUrl: conf.image?.url ?? null,
       })),
@@ -210,10 +211,12 @@ function generateInterviews(interviews: MediaQuery['interviews']): Section {
         id: interview.id,
         title: interview.title,
         link: interview.link || null,
-        videoEmbed: interview.videoEmbed ? {
-          url: interview.videoEmbed.link,
-          iframeOptions: interview.videoEmbed.iframeOptions ?? null,
-        } : null,
+        videoEmbed: interview.videoEmbed
+          ? {
+              url: interview.videoEmbed.link,
+              iframeOptions: interview.videoEmbed.iframeOptions ?? null,
+            }
+          : null,
         date: interview.date,
         imageUrl: interview.image?.url ?? null,
       })),

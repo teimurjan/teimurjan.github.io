@@ -2,15 +2,7 @@
 
 import type { FolderStructure, Section } from '@/lib/sections'
 import { cn } from '@/lib/utils'
-import {
-  ChevronDown,
-  ChevronRight,
-  FileDown,
-  FileText,
-  Folder,
-  ChevronLeft,
-  X,
-} from 'lucide-react'
+import { ChevronDown, ChevronLeft, ChevronRight, FileDown, FileText, Folder, X } from 'lucide-react'
 import Image from 'next/image'
 import { useCallback, useEffect, useState } from 'react'
 

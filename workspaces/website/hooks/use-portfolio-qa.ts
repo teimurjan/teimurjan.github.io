@@ -1,13 +1,16 @@
 'use client'
 
+import { type EmbeddingsData, formatSearchResults, searchEmbeddings } from '@/lib/semantic-search'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import {
-  type EmbeddingsData,
-  formatSearchResults,
-  searchEmbeddings,
-} from '@/lib/semantic-search'
 
-type Pipeline = Awaited<ReturnType<typeof import('@huggingface/transformers').pipeline>>
+interface FeatureExtractionOutput {
+  data: Float32Array
+}
+
+type FeatureExtractionPipeline = (
+  text: string,
+  options?: { pooling?: string; normalize?: boolean }
+) => Promise<FeatureExtractionOutput>
 
 interface UsePortfolioQAResult {
   ask: (question: string) => Promise<string>
@@ -21,7 +24,7 @@ export function usePortfolioQA(): UsePortfolioQAResult {
   const [isModelLoading, setIsModelLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const embedderRef = useRef<Pipeline | null>(null)
+  const embedderRef = useRef<FeatureExtractionPipeline | null>(null)
   const embeddingsRef = useRef<EmbeddingsData | null>(null)
   const initPromiseRef = useRef<Promise<void> | null>(null)
 
@@ -42,11 +45,9 @@ export function usePortfolioQA(): UsePortfolioQAResult {
 
         embeddingsRef.current = embeddingsModule.default as EmbeddingsData
 
-        embedderRef.current = await pipeline(
-          'feature-extraction',
-          'Xenova/all-MiniLM-L6-v2',
-          { dtype: 'fp32' }
-        )
+        embedderRef.current = (await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2', {
+          dtype: 'fp32',
+        })) as unknown as FeatureExtractionPipeline
       } catch (err) {
         const message = err instanceof Error ? err.message : 'Failed to initialize'
         setError(message)
@@ -81,7 +82,7 @@ export function usePortfolioQA(): UsePortfolioQAResult {
           normalize: true,
         })
 
-        const queryEmbedding = Array.from(output.data as Float32Array)
+        const queryEmbedding = Array.from(output.data)
         const results = searchEmbeddings(queryEmbedding, embeddingsRef.current, 3)
         return formatSearchResults(results)
       } catch (err) {

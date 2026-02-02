@@ -30,7 +30,7 @@ export function Terminal({ folders, fullName }: TerminalProps) {
   const inputRef = useRef<HTMLInputElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
 
-  const { loadModel, ask, status, progress, error, streamingResponse, isGenerating } =
+  const { loadModel, ask, status, progress, progressText, error, streamingResponse, isGenerating } =
     usePortfolioQA({ folders, fullName })
 
   useEffect(() => {
@@ -119,7 +119,7 @@ export function Terminal({ folders, fullName }: TerminalProps) {
           {status === 'loading' && (
             <span className="text-xs text-muted-foreground flex items-center gap-1">
               <Loader2 className="w-3 h-3 animate-spin" />
-              Loading ({progress}%)
+              {progress > 0 ? `Loading (${progress}%)` : progressText || 'Starting...'}
             </span>
           )}
 

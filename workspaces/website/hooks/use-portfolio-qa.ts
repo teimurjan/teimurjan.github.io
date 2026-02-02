@@ -25,6 +25,7 @@ interface UsePortfolioQAResult {
   ask: (question: string) => Promise<void>
   status: ModelStatus
   progress: number
+  progressText: string
   error: string | null
   streamingResponse: string
   isGenerating: boolean
@@ -100,6 +101,7 @@ If asked something not covered in this information, politely say you don't have 
 export function usePortfolioQA(context: PortfolioContext): UsePortfolioQAResult {
   const [status, setStatus] = useState<ModelStatus>('idle')
   const [progress, setProgress] = useState(0)
+  const [progressText, setProgressText] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [streamingResponse, setStreamingResponse] = useState('')
   const [isGenerating, setIsGenerating] = useState(false)
@@ -130,9 +132,23 @@ export function usePortfolioQA(context: PortfolioContext): UsePortfolioQAResult 
     systemPromptRef.current = buildSystemPrompt(context)
 
     const initProgressCallback = (report: InitProgressReport) => {
-      const percentMatch = report.text.match(/(\d+(?:\.\d+)?)%/)
+      const text = report.text
+
+      // Extract percentage if present
+      const percentMatch = text.match(/(\d+(?:\.\d+)?)%/)
       if (percentMatch) {
         setProgress(Math.round(Number.parseFloat(percentMatch[1])))
+      }
+
+      // Set human-readable progress text
+      if (text.includes('Loading model from cache')) {
+        setProgressText('Loading from cache...')
+      } else if (text.includes('Fetching param cache')) {
+        setProgressText('Downloading model...')
+      } else if (text.includes('Loading GPU shader modules')) {
+        setProgressText('Preparing GPU...')
+      } else if (text.includes('Finish loading')) {
+        setProgressText('Finishing...')
       }
     }
 
@@ -242,6 +258,7 @@ export function usePortfolioQA(context: PortfolioContext): UsePortfolioQAResult 
     ask,
     status,
     progress,
+    progressText,
     error,
     streamingResponse,
     isGenerating,

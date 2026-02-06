@@ -1,9 +1,9 @@
 'use client'
 
+import { FillSkeletonImage } from '@/components/ui/skeleton-image'
 import { cn } from '@/lib/utils'
 import { ExternalLink } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
-import Image from 'next/image'
 
 interface MediaCardProps {
   id: string
@@ -51,13 +51,7 @@ export function MediaCard({
         </div>
       ) : imageUrl ? (
         <div className="relative w-full sm:w-48 h-32 shrink-0 bg-secondary overflow-hidden rounded-lg">
-          <Image
-            src={imageUrl}
-            alt={title}
-            fill
-            className="object-cover"
-            sizes="(max-width: 640px) 100vw, 192px"
-          />
+          <FillSkeletonImage src={imageUrl} alt={title} sizes="(max-width: 640px) 100vw, 192px" />
         </div>
       ) : (
         <div className="relative w-full sm:w-48 h-32 shrink-0 bg-secondary flex items-center justify-center overflow-hidden rounded-lg">

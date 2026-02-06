@@ -1,6 +1,6 @@
+import { SkeletonImage } from '@/components/ui/skeleton-image'
 import type { ExperienceData } from '@/lib/sections'
 import { prettyRange } from '@teimurjan/utils'
-import Image from 'next/image'
 
 interface ExperienceSectionProps {
   data: ExperienceData
@@ -18,7 +18,7 @@ export function ExperienceSection({ data }: ExperienceSectionProps) {
 
             <div className="flex gap-4">
               <div className="shrink-0">
-                <Image
+                <SkeletonImage
                   src={exp.logoUrl}
                   alt={`${exp.company} logo`}
                   width={48}

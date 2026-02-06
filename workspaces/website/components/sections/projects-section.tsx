@@ -1,6 +1,6 @@
+import { SkeletonImage } from '@/components/ui/skeleton-image'
 import type { ProjectsData, Repository } from '@/lib/sections'
 import { ExternalLink, Star } from 'lucide-react'
-import Image from 'next/image'
 
 interface ProjectsSectionProps {
   data: ProjectsData
@@ -16,7 +16,7 @@ function OwnedRepoCard({ repo }: { repo: Repository }) {
     >
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-3 min-w-0">
-          <Image
+          <SkeletonImage
             src={repo.ownerAvatarUrl}
             alt={repo.nameWithOwner.split('/')[0]}
             width={24}
@@ -53,7 +53,7 @@ function ContributedRepoCard({ repo }: { repo: Repository }) {
       rel="noopener noreferrer"
       className="group flex items-center gap-3 p-2 rounded-lg transition-colors"
     >
-      <Image
+      <SkeletonImage
         src={repo.ownerAvatarUrl}
         alt={repo.nameWithOwner.split('/')[0]}
         width={24}

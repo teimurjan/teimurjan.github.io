@@ -1,5 +1,5 @@
 import type { AboutData, ContactData } from '@/lib/sections'
-import { FileDown, Mail } from 'lucide-react'
+import { FileDown, Mail, Calendar } from 'lucide-react'
 import Image from 'next/image'
 import LiquidEther from '../ui/liquid-ether'
 import githubIcon from '../icons/github.svg'
@@ -31,12 +31,21 @@ export function AboutSection({ data }: AboutSectionProps) {
       <div className="flex flex-wrap gap-4">
         <a
           href="/resume.pdf"
-          className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-foreground bg-glass-highlight border border-glass-border rounded-xl shadow-glass-pill backdrop-blur-sm hover:bg-secondary/50 hover:border-primary/30 transition-all duration-200"
+          className="inline-flex items-center gap-2 px-3 py-2 text-sm text-foreground bg-glass-highlight border border-glass-border rounded-xl shadow-glass-pill backdrop-blur-sm hover:bg-secondary/50 hover:border-primary/30 transition-all duration-200"
           target="_blank"
           rel="noopener noreferrer"
         >
           <FileDown className="w-4 h-4" />
           Get Resume
+        </a>
+        <a
+          href="https://adplist.org/mentors/teimur-gasanov?session=70480-mentorship-session"
+          className="inline-flex items-center gap-2 px-3 py-2 text-sm text-foreground bg-glass-highlight border border-glass-border rounded-xl shadow-glass-pill backdrop-blur-sm hover:bg-secondary/50 hover:border-primary/30 transition-all duration-200"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Calendar className="w-4 h-4" />
+          Book Session
         </a>
       </div>
 

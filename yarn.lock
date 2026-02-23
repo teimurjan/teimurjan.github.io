@@ -5747,7 +5747,7 @@ __metadata:
     openai: "npm:^6.17.0"
     tsup: "npm:^8.4.0"
     typescript: "npm:^5.7.3"
-    zod: "npm:^3.24.2"
+    zod: "npm:3.22.2"
   languageName: unknown
   linkType: soft
 
@@ -16837,6 +16837,13 @@ __metadata:
     compress-commons: "npm:^6.0.2"
     readable-stream: "npm:^4.0.0"
   checksum: 10c0/50f2fb30327fb9d09879abf7ae2493705313adf403e794b030151aaae00009162419d60d0519e807673ec04d442e140c8879ca14314df0a0192de3b233e8f28b
+  languageName: node
+  linkType: hard
+
+"zod@npm:3.22.2":
+  version: 3.22.2
+  resolution: "zod@npm:3.22.2"
+  checksum: 10c0/10afd994bcec3affb81776adc486871bfa6790037f57f0e45280e99baed8c3df5f46c5ab65a6d7921a00dffd9fab299e4492519dd6bb5d2eb3de9a67d3eb8051
   languageName: node
   linkType: hard
 

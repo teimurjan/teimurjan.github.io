@@ -24,9 +24,11 @@ Writing rules:
 
 ### 1. Bio
 - Headline: role title + core value prop (e.g., "Senior Engineer | Scaled 3 products to 1M+ users")
-- About (30-40 words): what you do + biggest achievements + direct alignment with job requirements. Lead with impact.
+- About (30-40 words): introduce who you are and how you work — NOT specific achievements (those go in bullet points). Focus on approach, expertise areas, and what drives you.
 
-Example about: "I design and deploy high-impact systems built on LLMs and agent architectures, shipping production solutions that move core metrics. Scaled 5 products to 100k+ users."
+Good example: "I design and deploy high-impact systems built on LLMs and agent architectures, working close to real problems and shipping production solutions that move core metrics."
+
+Bad example: "Scaled 5 products to 100k+ users. Reduced build times by 25%." (This duplicates bullet points)
 
 ### 2. Skills
 - Add relevant skills (with unique ids), remove irrelevant ones

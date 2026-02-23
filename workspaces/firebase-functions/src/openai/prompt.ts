@@ -58,9 +58,9 @@ Rules:
 
 ### 4. Cover Letter
 3-4 sentences. Direct and confident.
-- Open with your strongest relevant achievement
-- Connect 1-2 specific experiences to their needs
-- End with clear interest, no fluff
+- Open with why THIS role/company interests you (be specific, not generic)
+- Connect your expertise areas to their needs — don't repeat specific metrics from bullet points
+- End with energy and clear interest
 
 ## Input
 Job Description: ${jobDescription}

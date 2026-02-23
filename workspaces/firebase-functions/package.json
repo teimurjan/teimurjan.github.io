@@ -7,19 +7,21 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsup",
-    "deploy": "yarn build && firebase deploy --only functions",
-    "dev": "yarn build && firebase emulators:start --only functions"
+    "firebase:deploy": "firebase deploy --only functions",
+    "deploy": "yarn build && yarn firebase:deploy",
+    "firebase:emulators:start": "firebase emulators:start --only functions",
+    "dev": "yarn build && yarn firebase:emulators:start"
   },
   "dependencies": {
-    "@upstash/qstash": "^2.7.23",
-    "firebase-admin": "^13.2.0",
-    "firebase-functions": "^6.3.2",
-    "openai": "^6.17.0",
+    "@upstash/qstash": "^2.9.0",
+    "firebase-admin": "^13.6.1",
+    "firebase-functions": "^7.0.5",
+    "openai": "^6.22.0",
     "typescript": "^5.7.3",
-    "zod": "3.22.2"
+    "zod": "^4.3.6"
   },
   "devDependencies": {
-    "firebase-tools": "^14.0.1",
+    "firebase-tools": "^15.7.0",
     "tsup": "^8.4.0"
   },
   "engines": {

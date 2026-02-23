@@ -9,6 +9,7 @@ import { updateJobApplication } from '../db/admin'
 import { prompt } from '../openai/prompt'
 import { verifySignature } from '../upstash/signature'
 
+
 const qstashCurrentSigningKey = defineSecret('QSTASH_CURRENT_SIGNING_KEY')
 const qstashNextSigningKey = defineSecret('QSTASH_NEXT_SIGNING_KEY')
 const openaiApiKey = defineSecret('OPENAI_API_KEY')

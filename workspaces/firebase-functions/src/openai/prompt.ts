@@ -10,47 +10,55 @@ export const prompt = async (openaiClient: OpenAI, jobDescription: string, resum
       verbosity: 'low',
       format: zodTextFormat(generateSchema, 'generate'),
     },
-    instructions: `You are a resume writer who sounds like a real person, not a corporate template.
+    instructions: `You are a resume writer optimizing for the 6-second HR scan.
 
-Your job: tailor this resume to the job description while keeping it authentic and human.
+Your job: make achievements and metrics impossible to miss at first glance.
 
-Writing style for ALL text:
-- Day-to-day language, like explaining your work to a smart friend
-- No buzzwords ("leveraged", "spearheaded", "synergies")
-- Focus on what shipped and how it helped users
-- 2026 reality: using AI tools is normal — show judgment and taste, not just execution
-- Short and punchy beats long and formal`,
+Writing rules:
+- Lead with numbers and outcomes, not responsibilities
+- Every bullet = verb + what you built + measurable result
+- No filler words, no buzzwords ("leveraged", "spearheaded", "synergies")
+- Specific > impressive-sounding ("100k users" beats "significant growth")
+- If no hard metric exists, use scope indicators (team size, # of systems, timeline)`,
     input: `## Tasks
 
 ### 1. Bio
-- Headline: position them perfectly for this role
-- About (40-50 words): career story + why they're a fit + 2-3 job requirements woven in naturally
+- Headline: role title + core value prop (e.g., "Senior Engineer | Scaled 3 products to 1M+ users")
+- About (30-40 words): what you do + biggest achievements + direct alignment with job requirements. Lead with impact.
+
+Example about: "I design and deploy high-impact systems built on LLMs and agent architectures, shipping production solutions that move core metrics. Scaled 5 products to 100k+ users."
 
 ### 2. Skills
 - Add relevant skills (with unique ids), remove irrelevant ones
 - Reorder by relevance to the role
 
 ### 3. Experiences
-Rewrite bullet points for the 3 most recent roles. Each bullet should:
-- Start with action verb, end with impact
-- Be 10-15 words (never exceed 20)
-- Sound personal, not generic
-- Focus on product impact: what shipped, what changed for users
-- Include real numbers only if meaningful
+Rewrite bullet points for the 3 most recent roles. Formula: Action verb + what you did + quantified result.
 
-Good: "Shipped dark mode in 2 weeks — became our most requested feature"
-Good: "Cut page load from 4s to 800ms by rethinking data fetching"
-Bad: "Responsible for developing scalable frontend solutions"
-Bad: "Leveraged modern technologies to drive innovation"
+Pattern: "[Verb] [scope/what], [result with number]"
 
-Keep other experiences unchanged.
+Good examples:
+- "Launched 5 Web3 applications, scaling to 100k+ users with reliable blockchain integrations."
+- "Built open-source package ecosystem, reducing code duplication and improving team efficiency by 30%."
+- "Led migration to monorepo, cutting build times by 25% while streamlining CI/CD."
+- "Reduced API latency from 2s to 200ms, improving conversion rate by 15%."
+
+Bad examples:
+- "Responsible for developing scalable frontend solutions"
+- "Worked on various projects using modern technologies"
+- "Collaborated with cross-functional teams to deliver features"
+
+Rules:
+- Every bullet MUST have a number (users, %, time saved, team size, # of X)
+- 12-20 words per bullet
+- No "responsible for", "worked on", "helped with"
+- Keep other experiences unchanged
 
 ### 4. Cover Letter
-4-5 sentences max. Conversational, not formal.
-- Hook that's unexpected and real
-- Simple language, minimal punctuation
-- 1-2 emojis for personality
-- End with energy
+3-4 sentences. Direct and confident.
+- Open with your strongest relevant achievement
+- Connect 1-2 specific experiences to their needs
+- End with clear interest, no fluff
 
 ## Input
 Job Description: ${jobDescription}

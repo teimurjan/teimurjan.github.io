@@ -14,6 +14,7 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }} 
     env:
       HYGRAPH_URL: ${{ vars.HYGRAPH_URL }}
+      GQL_API_GITHUB_TOKEN: ${{ secrets.GQL_API_GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
 

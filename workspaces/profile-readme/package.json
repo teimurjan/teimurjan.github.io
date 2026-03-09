@@ -8,7 +8,9 @@
     "generate-readme": "tsx ./index.ts"
   },
   "dependencies": {
-    "@teimurjan/gql-client": "workspace:*"
+    "@teimurjan/github-client": "workspace:*",
+    "@teimurjan/gql-client": "workspace:*",
+    "dotenv": "^17.3.1"
   },
   "devDependencies": {
     "tsx": "^4.19.3",

@@ -28,7 +28,11 @@ export function SkeletonImage({ src, alt, width, height, className }: SkeletonIm
         alt={alt}
         width={width}
         height={height}
-        className={cn('transition-opacity duration-200', isLoaded ? 'opacity-100' : 'opacity-0', className)}
+        className={cn(
+          'transition-opacity duration-200',
+          isLoaded ? 'opacity-100' : 'opacity-0',
+          className
+        )}
         onLoad={() => setIsLoaded(true)}
       />
     </div>

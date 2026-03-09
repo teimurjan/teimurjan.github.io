@@ -1,10 +1,10 @@
 import type { AboutData, ContactData } from '@/lib/sections'
-import { FileDown, Mail, Calendar } from 'lucide-react'
+import { Calendar, FileDown, Mail } from 'lucide-react'
 import Image from 'next/image'
-import LiquidEther from '../ui/liquid-ether'
 import githubIcon from '../icons/github.svg'
 import linkedinIcon from '../icons/linkedin.png'
 import toptalIcon from '../icons/toptal.png'
+import LiquidEther from '../ui/liquid-ether'
 
 interface AboutSectionProps {
   data: AboutData & ContactData

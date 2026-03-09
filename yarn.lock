@@ -5555,7 +5555,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@teimurjan/profile-readme@workspace:workspaces/profile-readme"
   dependencies:
+    "@teimurjan/github-client": "workspace:*"
     "@teimurjan/gql-client": "workspace:*"
+    dotenv: "npm:^17.3.1"
     tsx: "npm:^4.19.3"
     typescript: "npm:^5.7.3"
   languageName: unknown
@@ -8271,6 +8273,13 @@ __metadata:
   version: 16.4.7
   resolution: "dotenv@npm:16.4.7"
   checksum: 10c0/be9f597e36a8daf834452daa1f4cc30e5375a5968f98f46d89b16b983c567398a330580c88395069a77473943c06b877d1ca25b4afafcdd6d4adb549e8293462
+  languageName: node
+  linkType: hard
+
+"dotenv@npm:^17.3.1":
+  version: 17.3.1
+  resolution: "dotenv@npm:17.3.1"
+  checksum: 10c0/c78e0c2d5a549c751e544cc60e2b95e7cb67e0c551f42e094d161c6b297aa44b630a3c2dcacf5569e529a6c2a6b84e2ab9be8d37b299d425df5a18b81ce4a35f
   languageName: node
   linkType: hard
 

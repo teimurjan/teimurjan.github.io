@@ -1,7 +1,7 @@
 import { Document, Page, StyleSheet, Text, View } from '@react-pdf/renderer'
 import type { Style } from '@react-pdf/types'
-import { colord } from 'colord'
 import { YEAR_DATE_FORMAT, dateSorter, prettyRange } from '@teimurjan/utils'
+import { colord } from 'colord'
 import theme from '../../../theme'
 import Header from '../header'
 import Recognition from '../recognition'

@@ -1,72 +1,113 @@
 import fs from 'node:fs'
 import path from 'node:path'
+import { config } from 'dotenv'
 
+config()
+
+import {
+  type ContributedRepository,
+  getClient as getGithubClient,
+  getRepositoriesContributedTo,
+  getUserCreatedAt,
+} from '@teimurjan/github-client'
 import { getClient } from '@teimurjan/gql-client'
 
-const index = async () => {
-  const lines: string[] = []
+const GITHUB_USERNAME = 'teimurjan'
+const WEBSITE_URL = 'https://teimurjan.github.io'
+const MAINTAINED_PROJECTS = ['blazediff', 'avatune']
 
+const index = async () => {
   if (!process.env.HYGRAPH_URL) {
     throw new Error('HYGRAPH_URL is not defined')
   }
-
-  const gqlClient = getClient(process.env.HYGRAPH_URL)
-  const data = await gqlClient.ProfileReadme()
-
-  lines.push('### Hi there 👋\n')
-  lines.push(`${data.bios[0].about}\n`)
-
-  lines.push(`At the time you're reading that, I've worked at the following companies:\n`)
-  lines.push('<table>')
-  data.experiences.forEach((experience) => {
-    lines.push(
-      `<tr><td valign="center"><img width="16" src="${experience.logo.url}" />&nbsp; ${experience.company} <code>(${experience.location} ${experience.locationIcon})</code></td></tr>`
-    )
-  })
-  lines.push('</table>')
-
-  lines.push('<br />')
-
-  lines.push(`The knowledge I've got from these companies lets me contribute to the community:\n`)
-
-  lines.push('|Publications ✏️|Conferences 🎙️|Interviews 📺|')
-  lines.push('|-|-|-|')
-
-  const publications: string[] = []
-  data.publications.reverse().forEach((publication) => {
-    publications.push(`[${publication.title}](${publication.link})`)
-  })
-
-  const conferences: string[] = []
-  data.conferences.reverse().forEach((conference) => {
-    conferences.push(
-      `[${conference.title} - ${conference.topic}](${
-        conference.videoEmbed?.link || conference.link
-      })`
-    )
-  })
-
-  const interviews: string[] = []
-  data.interviews.reverse().forEach((interview) => {
-    interviews.push(`[${interview.title}](${interview.videoEmbed?.link ?? ''})`)
-  })
-
-  const rowsCount = Math.max(publications.length, conferences.length, interviews.length)
-  for (let index = 0; index < rowsCount; index++) {
-    lines.push(
-      `|${[publications, conferences, interviews]
-        .map((array) => {
-          return array[index] ?? ''
-        })
-        .join('|')}|`
-    )
+  if (!process.env.GQL_API_GITHUB_TOKEN) {
+    throw new Error('GQL_API_GITHUB_TOKEN is not defined')
   }
 
-  lines.push('\n')
+  const gqlClient = getClient(process.env.HYGRAPH_URL)
+  const githubToken = process.env.GQL_API_GITHUB_TOKEN
 
-  lines.push(
-    `Despite the fact that I might be busy, I'm open to any offers/collaboartions and would be happy to reply.`
+  const [data, userCreatedAt] = await Promise.all([
+    gqlClient.ProfileReadme(),
+    getUserCreatedAt(GITHUB_USERNAME, { auth: githubToken }),
+  ])
+
+  const now = new Date()
+  now.setHours(0, 0, 0, 0)
+
+  const repos = await getRepositoriesContributedTo(
+    { login: GITHUB_USERNAME, from: new Date(userCreatedAt), to: now },
+    { auth: githubToken }
   )
+
+  const octokit = getGithubClient(githubToken)
+
+  const maintainedRepos = await Promise.all(
+    MAINTAINED_PROJECTS.map(async (name) => {
+      const contributed = repos.find((r) =>
+        r.nameWithOwner.toLowerCase().includes(name.toLowerCase())
+      )
+      if (contributed) return contributed
+
+      // fallback: fetch directly (e.g. org repos)
+      const { data: ghRepo } = await octokit.rest.repos.get({
+        owner: name,
+        repo: name,
+      })
+      return {
+        nameWithOwner: ghRepo.full_name,
+        description: ghRepo.description,
+        url: ghRepo.html_url,
+        stargazerCount: ghRepo.stargazers_count,
+      } satisfies Pick<
+        ContributedRepository,
+        'nameWithOwner' | 'description' | 'url' | 'stargazerCount'
+      >
+    })
+  )
+
+  const lines: string[] = []
+
+  // header
+  lines.push(`# ${data.bios[0].fullName.toLowerCase()}`)
+  lines.push('')
+  lines.push(`> ${data.bios[0].headline}`)
+  lines.push('')
+  lines.push(data.bios[0].about)
+  lines.push('')
+  lines.push('---')
+  lines.push('')
+
+  // recent work (top 3)
+  lines.push('### recent work')
+  lines.push('')
+  data.experiences.slice(0, 3).forEach((exp) => {
+    lines.push(`- **${exp.company}** -- ${exp.location} ${exp.locationIcon}`)
+  })
+  lines.push('')
+
+  // projects I maintain
+  if (maintainedRepos.length > 0) {
+    lines.push('### projects I maintain')
+    lines.push('')
+    maintainedRepos.forEach((repo) => {
+      const desc = repo.description ? ` -- ${repo.description}` : ''
+      lines.push(`- **[${repo.nameWithOwner}](${repo.url})**${desc}`)
+    })
+    lines.push('')
+  }
+
+  // writing & speaking summary
+  const articleCount = data.publications.length
+  const talkCount = data.conferences.length
+  lines.push('### writing & speaking')
+  lines.push('')
+  lines.push(`${articleCount} articles published, ${talkCount} conference talks.`)
+  lines.push(`[more on my website](${WEBSITE_URL})`)
+  lines.push('')
+  lines.push('---')
+  lines.push('')
+  lines.push('*open to offers and collaborations*')
 
   fs.writeFileSync(path.resolve('./README.md'), lines.join('\n'))
 }

@@ -16,18 +16,19 @@ const styles = StyleSheet.create({
   },
   item: {
     marginBottom: 2,
-  }
+  },
 })
 
 const Recognition = ({ publications, conferences }: Props) => {
   return (
     <View style={styles.container}>
-       <Text style={styles.item}>
+      <Text style={styles.item}>
         • Creator of{' '}
         <Link style={styles.link} src="https://blazediff.dev">
           BlazeDiff
         </Link>
-        , a state-of-the-art image diffing engine achieving <Text style={styles.award}>industry-leading performance</Text>.
+        , a state-of-the-art image diffing engine achieving{' '}
+        <Text style={styles.award}>industry-leading performance</Text>.
       </Text>
       <Text style={styles.item}>
         • Published {publications.length} technical articles earning HackerNoon{' '}

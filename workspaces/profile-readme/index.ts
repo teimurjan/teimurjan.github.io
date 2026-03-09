@@ -69,9 +69,7 @@ const index = async () => {
   const lines: string[] = []
 
   // header
-  lines.push(`# ${data.bios[0].fullName.toLowerCase()}`)
-  lines.push('')
-  lines.push(`> ${data.bios[0].headline}`)
+  lines.push(`# ${data.bios[0].fullName}`)
   lines.push('')
   lines.push(data.bios[0].about)
   lines.push('')
@@ -79,7 +77,7 @@ const index = async () => {
   lines.push('')
 
   // recent work (top 3)
-  lines.push('### recent work')
+  lines.push('### Recent Work')
   lines.push('')
   data.experiences.slice(0, 3).forEach((exp) => {
     lines.push(`- **${exp.company}** -- ${exp.location} ${exp.locationIcon}`)
@@ -88,7 +86,7 @@ const index = async () => {
 
   // projects I maintain
   if (maintainedRepos.length > 0) {
-    lines.push('### projects I maintain')
+    lines.push('### Projects I Maintain')
     lines.push('')
     maintainedRepos.forEach((repo) => {
       const desc = repo.description ? ` -- ${repo.description}` : ''
@@ -100,14 +98,14 @@ const index = async () => {
   // writing & speaking summary
   const articleCount = data.publications.length
   const talkCount = data.conferences.length
-  lines.push('### writing & speaking')
+  lines.push('### Writing & Speaking')
   lines.push('')
   lines.push(`${articleCount} articles published, ${talkCount} conference talks.`)
   lines.push(`[more on my website](${WEBSITE_URL})`)
   lines.push('')
   lines.push('---')
   lines.push('')
-  lines.push('*open to offers and collaborations*')
+  lines.push('*Open to offers and collaborations*')
 
   fs.writeFileSync(path.resolve('./README.md'), lines.join('\n'))
 }

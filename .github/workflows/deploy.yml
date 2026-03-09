@@ -35,7 +35,7 @@ jobs:
         run: yarn
       
       - name: Install playwright
-        run: yarn playwright install
+        run: yarn workspace @teimurjan/website playwright install
 
       - name: Generate opengraph
         run: yarn workspace @teimurjan/website generate-opengraph:ci

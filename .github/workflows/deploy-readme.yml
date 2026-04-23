@@ -11,7 +11,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }} 
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
     env:
       HYGRAPH_URL: ${{ vars.HYGRAPH_URL }}
       GQL_API_GITHUB_TOKEN: ${{ secrets.GQL_API_GITHUB_TOKEN }}
@@ -21,7 +22,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20.18.1'
+          node-version: '24.4.1'
           cache: 'yarn'
 
       - name: Install dependencies

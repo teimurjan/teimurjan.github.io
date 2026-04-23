@@ -15,7 +15,7 @@ module.exports = defineConfig({
         continue
       }
 
-      workspace.set('engines.node', `>=20.18.1`)
+      workspace.set('engines.node', `>=24.4.1`)
       workspace.set('packageManager', `yarn@4.4.0`)
     }
 

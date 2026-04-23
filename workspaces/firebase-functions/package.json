@@ -13,10 +13,11 @@
     "dev": "yarn build && yarn firebase:emulators:start"
   },
   "dependencies": {
+    "@ai-sdk/anthropic": "^3.0.71",
     "@upstash/qstash": "^2.9.0",
+    "ai": "^6.0.168",
     "firebase-admin": "^13.6.1",
     "firebase-functions": "^7.0.5",
-    "openai": "^6.22.0",
     "typescript": "^5.7.3",
     "zod": "^4.3.6"
   },
@@ -27,5 +28,5 @@
   "engines": {
     "node": "20"
   },
-  "packageManager": "yarn@4.4.0"
+  "packageManager": "yarn@4.14.1"
 }

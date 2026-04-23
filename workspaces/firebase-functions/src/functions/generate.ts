@@ -4,27 +4,21 @@ import * as logger from 'firebase-functions/logger'
 import { defineSecret } from 'firebase-functions/params'
 import { onInit } from 'firebase-functions/v2/core'
 import { onRequest } from 'firebase-functions/v2/https'
-import OpenAI from 'openai'
+import { prompt } from '../ai/prompt'
 import { updateJobApplication } from '../db/admin'
-import { prompt } from '../openai/prompt'
 import { verifySignature } from '../upstash/signature'
 
 const qstashCurrentSigningKey = defineSecret('QSTASH_CURRENT_SIGNING_KEY')
 const qstashNextSigningKey = defineSecret('QSTASH_NEXT_SIGNING_KEY')
-const openaiApiKey = defineSecret('OPENAI_API_KEY')
 const hygraphUrl = defineSecret('HYGRAPH_URL')
 
 let receiver: Receiver
-let openaiClient: OpenAI
 let gqlClient: Sdk
 
 onInit(async () => {
   receiver = new Receiver({
     currentSigningKey: qstashCurrentSigningKey.value(),
     nextSigningKey: qstashNextSigningKey.value(),
-  })
-  openaiClient = new OpenAI({
-    apiKey: openaiApiKey.value(),
   })
   gqlClient = getClient(hygraphUrl.value())
 })
@@ -34,7 +28,7 @@ export const generate = onRequest(
     secrets: [
       'QSTASH_CURRENT_SIGNING_KEY',
       'QSTASH_NEXT_SIGNING_KEY',
-      'OPENAI_API_KEY',
+      'ANTHROPIC_API_KEY',
       'HYGRAPH_URL',
     ],
   },
@@ -56,7 +50,7 @@ export const generate = onRequest(
 
       const resume = await gqlClient.Resume()
 
-      const response = await prompt(openaiClient, jobDescription, resume)
+      const response = await prompt(jobDescription, resume)
 
       await updateJobApplication(jobApplicationId, {
         resume: response.resume as ResumeQuery,

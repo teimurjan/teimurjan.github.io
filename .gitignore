@@ -6,3 +6,5 @@ node_modules
 tsconfig.tsbuildinfo
 
 firebase-debug.log
+
+.lethe

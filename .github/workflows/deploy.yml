@@ -16,6 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
     env:
       NEXT_PUBLIC_HYGRAPH_URL: ${{ vars.HYGRAPH_URL }}
       GQL_API_GITHUB_TOKEN: ${{ secrets.GQL_API_GITHUB_TOKEN }}

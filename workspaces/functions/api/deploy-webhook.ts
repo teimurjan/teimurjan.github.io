@@ -1,15 +1,9 @@
 import crypto from 'node:crypto'
-import { Redis } from '@upstash/redis'
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 
 const HYGRAPH_SECRET = process.env.HYGRAPH_SECRET!
 const GITHUB_WORKFLOW_URL = process.env.GITHUB_WORKFLOW_URL!
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN!
-
-const COOLDOWN_PERIOD = 30000 // seconds
-const DEPLOY_KEY = 'last_deploy_timestamp'
-
-const redis = Redis.fromEnv()
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
@@ -34,18 +28,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const lastDeployTime = (await redis.get<number>(DEPLOY_KEY)) || 0
-    const now = Date.now()
-    const timeSinceLastDeploy = now - lastDeployTime
-
-    if (timeSinceLastDeploy < COOLDOWN_PERIOD) {
-      return res.status(429).json({
-        message: `Deployment already scheduled. Please wait ${Math.round((COOLDOWN_PERIOD - timeSinceLastDeploy) / 1000)} seconds.`,
-      })
-    }
-
-    await redis.set(DEPLOY_KEY, now)
-
     const response = await fetch(GITHUB_WORKFLOW_URL, {
       method: 'POST',
       headers: {

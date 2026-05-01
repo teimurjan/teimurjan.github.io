@@ -14,7 +14,7 @@ import { getClient } from '@teimurjan/gql-client'
 
 const GITHUB_USERNAME = 'teimurjan'
 const WEBSITE_URL = 'https://teimurjan.github.io'
-const MAINTAINED_PROJECTS = ['blazediff', 'avatune']
+const MAINTAINED_PROJECTS = ['blazediff', 'avatune', 'lethe']
 
 const index = async () => {
   if (!process.env.HYGRAPH_URL) {
@@ -89,7 +89,7 @@ const index = async () => {
     lines.push('### Projects I Maintain')
     lines.push('')
     maintainedRepos.forEach((repo) => {
-      const desc = repo.description ? ` -- ${repo.description}` : ''
+      const desc = repo.description ? ` - ${repo.description}` : ''
       lines.push(`- **[${repo.nameWithOwner}](${repo.url})**${desc}`)
     })
     lines.push('')

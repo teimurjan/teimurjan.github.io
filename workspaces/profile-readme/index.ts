@@ -80,7 +80,7 @@ const index = async () => {
   lines.push('### Recent Work')
   lines.push('')
   data.experiences.slice(0, 3).forEach((exp) => {
-    lines.push(`- **${exp.company}** -- ${exp.location} ${exp.locationIcon}`)
+    lines.push(`- **${exp.company}** - ${exp.location} ${exp.locationIcon}`)
   })
   lines.push('')
 

@@ -1,15 +1,17 @@
 import type { EducationData } from '@/lib/sections'
 import { prettyRange } from '@teimurjan/utils'
 import { GraduationCap } from 'lucide-react'
+import { SectionHeader } from './section-header'
 
 interface EducationSectionProps {
   data: EducationData
+  markdown: string
 }
 
-export function EducationSection({ data }: EducationSectionProps) {
+export function EducationSection({ data, markdown }: EducationSectionProps) {
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-foreground">Education</h1>
+      <SectionHeader title="Education" markdown={markdown} />
 
       <div className="space-y-8">
         {data.educations.map((edu, index) => (

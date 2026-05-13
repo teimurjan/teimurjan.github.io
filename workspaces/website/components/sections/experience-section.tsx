@@ -1,15 +1,17 @@
 import { SkeletonImage } from '@/components/ui/skeleton-image'
 import type { ExperienceData } from '@/lib/sections'
 import { prettyRange } from '@teimurjan/utils'
+import { SectionHeader } from './section-header'
 
 interface ExperienceSectionProps {
   data: ExperienceData
+  markdown: string
 }
 
-export function ExperienceSection({ data }: ExperienceSectionProps) {
+export function ExperienceSection({ data, markdown }: ExperienceSectionProps) {
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-foreground">Experience</h1>
+      <SectionHeader title="Experience" markdown={markdown} />
 
       <div className="space-y-4">
         {data.experiences.map((exp, index) => (

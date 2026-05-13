@@ -1,9 +1,11 @@
 import { SkeletonImage } from '@/components/ui/skeleton-image'
 import type { ProjectsData, Repository } from '@/lib/sections'
 import { ExternalLink, Star } from 'lucide-react'
+import { SectionHeader } from './section-header'
 
 interface ProjectsSectionProps {
   data: ProjectsData
+  markdown: string
 }
 
 function OwnedRepoCard({ repo }: { repo: Repository }) {
@@ -79,11 +81,11 @@ function ContributedRepoCard({ repo }: { repo: Repository }) {
   )
 }
 
-export function ProjectsSection({ data }: ProjectsSectionProps) {
+export function ProjectsSection({ data, markdown }: ProjectsSectionProps) {
   if (data.repositories.length === 0) {
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-bold text-foreground">Projects</h1>
+        <SectionHeader title="Projects" markdown={markdown} />
         <p className="text-muted-foreground">No projects yet.</p>
       </div>
     )
@@ -94,7 +96,7 @@ export function ProjectsSection({ data }: ProjectsSectionProps) {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-foreground">Projects</h1>
+      <SectionHeader title="Projects" markdown={markdown} />
 
       {ownedRepos.length > 0 && (
         <div className="space-y-3">

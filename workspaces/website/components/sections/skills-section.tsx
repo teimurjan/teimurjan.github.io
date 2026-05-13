@@ -1,14 +1,16 @@
 import { SkeletonImage } from '@/components/ui/skeleton-image'
 import type { SkillsData } from '@/lib/sections'
+import { SectionHeader } from './section-header'
 
 interface SkillsSectionProps {
   data: SkillsData
+  markdown: string
 }
 
-export function SkillsSection({ data }: SkillsSectionProps) {
+export function SkillsSection({ data, markdown }: SkillsSectionProps) {
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-foreground">Skills</h1>
+      <SectionHeader title="Skills" markdown={markdown} />
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-y-3">
         {data.skills.map((skill) => (

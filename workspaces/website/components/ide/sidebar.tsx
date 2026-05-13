@@ -2,7 +2,7 @@
 
 import type { FolderStructure, Section } from '@/lib/sections'
 import { cn } from '@/lib/utils'
-import { ChevronDown, ChevronLeft, ChevronRight, FileDown, FileText, Folder, X } from 'lucide-react'
+import { ChevronDown, ChevronLeft, ChevronRight, FileText, Folder, X } from 'lucide-react'
 import Image from 'next/image'
 import { useCallback, useEffect, useState } from 'react'
 
@@ -118,14 +118,6 @@ export function Sidebar({
               )}
             </div>
           ))}
-          <a
-            href="/resume.pdf"
-            download
-            className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors ml-8 mt-2"
-          >
-            <FileDown className="w-4 h-4" />
-            <span>resume.pdf</span>
-          </a>
         </div>
       </div>
     </>

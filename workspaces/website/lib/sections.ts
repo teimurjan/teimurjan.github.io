@@ -3,11 +3,13 @@ interface SectionBase {
   filename: string
   title: string
   folder: string
+  markdown: string
 }
 
 export interface AboutData {
   about: string
   email: string
+  cvMarkdown: string
 }
 
 export interface ContactData {

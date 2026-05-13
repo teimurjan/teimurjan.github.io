@@ -1,3 +1,4 @@
+import { CopyButton } from '@/components/ui/copy-button'
 import type { AboutData, ContactData } from '@/lib/sections'
 import { Calendar, FileDown, Mail } from 'lucide-react'
 import Image from 'next/image'
@@ -5,15 +6,17 @@ import githubIcon from '../icons/github.svg'
 import linkedinIcon from '../icons/linkedin.png'
 import toptalIcon from '../icons/toptal.png'
 import LiquidEther from '../ui/liquid-ether'
+import { SectionHeader } from './section-header'
 
 interface AboutSectionProps {
   data: AboutData & ContactData
+  markdown: string
 }
 
-export function AboutSection({ data }: AboutSectionProps) {
+export function AboutSection({ data, markdown }: AboutSectionProps) {
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-foreground">About</h1>
+      <SectionHeader title="About" markdown={markdown} />
 
       <div className="relative border border-glass-border rounded-xl h-64 w-full">
         <LiquidEther className="!absolute inset-0 z-0" />
@@ -36,8 +39,9 @@ export function AboutSection({ data }: AboutSectionProps) {
           rel="noopener noreferrer"
         >
           <FileDown className="w-4 h-4" />
-          Get Resume
+          Download CV
         </a>
+        <CopyButton text={data.cvMarkdown} label="Copy CV" ariaLabel="Copy CV as markdown" />
         <a
           href="https://adplist.org/mentors/teimur-gasanov?session=70480-mentorship-session"
           className="inline-flex items-center gap-2 px-3 py-2 text-sm text-foreground bg-glass-highlight border border-glass-border rounded-xl shadow-glass-pill backdrop-blur-sm hover:bg-secondary/50 hover:border-primary/30 transition-all duration-200"

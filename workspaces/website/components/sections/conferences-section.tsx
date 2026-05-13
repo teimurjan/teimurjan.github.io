@@ -2,16 +2,18 @@ import type { ConferencesData } from '@/lib/sections'
 import { prettyDate } from '@teimurjan/utils'
 import { Presentation } from 'lucide-react'
 import { MediaCard } from './media-card'
+import { SectionHeader } from './section-header'
 
 interface ConferencesSectionProps {
   data: ConferencesData
+  markdown: string
 }
 
-export function ConferencesSection({ data }: ConferencesSectionProps) {
+export function ConferencesSection({ data, markdown }: ConferencesSectionProps) {
   if (data.conferences.length === 0) {
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-bold text-foreground">Conferences</h1>
+        <SectionHeader title="Conferences" markdown={markdown} />
         <p className="text-muted-foreground">No conference talks yet.</p>
       </div>
     )
@@ -19,7 +21,7 @@ export function ConferencesSection({ data }: ConferencesSectionProps) {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-foreground">Conferences</h1>
+      <SectionHeader title="Conferences" markdown={markdown} />
 
       <div className="grid gap-4">
         {data.conferences.map((conf) => (

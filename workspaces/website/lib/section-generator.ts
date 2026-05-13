@@ -13,6 +13,7 @@ import type {
 } from '@teimurjan/gql-client'
 import type { Sdk } from '@teimurjan/gql-client'
 import { dateSorter } from '@teimurjan/utils'
+import { buildResumeMarkdown, sectionToMarkdown } from './section-markdown'
 import type { FolderStructure, Section } from './sections'
 
 function stripHtml(html: string): string {
@@ -44,8 +45,16 @@ function stripHtml(html: string): string {
     .trim()
 }
 
+type SectionDraft = Omit<Section, 'markdown'>
+
+function withMarkdown(draft: SectionDraft): Section {
+  const section = { ...draft, markdown: '' } as Section
+  section.markdown = sectionToMarkdown(section)
+  return section
+}
+
 function generateAbout(bio: BioQuery['bios'][0]): Section {
-  return {
+  return withMarkdown({
     type: 'about',
     id: 'about',
     filename: 'about.md',
@@ -55,12 +64,13 @@ function generateAbout(bio: BioQuery['bios'][0]): Section {
       about: bio.about,
       email: bio.email,
       location: bio.location,
+      cvMarkdown: '',
     },
-  }
+  })
 }
 
 function generateExperience(experiences: ExperienceHistoryQuery['experiences']): Section {
-  return {
+  return withMarkdown({
     type: 'experience',
     id: 'experience',
     filename: 'experience.md',
@@ -78,13 +88,13 @@ function generateExperience(experiences: ExperienceHistoryQuery['experiences']):
         logoUrl: exp.logo.url,
       })),
     },
-  }
+  })
 }
 
 function generateSkills(skills: SkillsQuery['skills']): Section {
   const maxYears = Math.max(...skills.map((s) => s.yearsOfExperience))
 
-  return {
+  return withMarkdown({
     type: 'skills',
     id: 'skills',
     filename: 'skills.md',
@@ -99,11 +109,11 @@ function generateSkills(skills: SkillsQuery['skills']): Section {
       })),
       maxYears,
     },
-  }
+  })
 }
 
 function generateEducation(educations: EducationQuery['educations']): Section {
-  return {
+  return withMarkdown({
     type: 'education',
     id: 'education',
     filename: 'education.md',
@@ -120,11 +130,11 @@ function generateEducation(educations: EducationQuery['educations']): Section {
         description: edu.description?.html ? stripHtml(edu.description.html) : null,
       })),
     },
-  }
+  })
 }
 
 function generateProjects(repositories: ContributedRepository[], username: string): Section {
-  return {
+  return withMarkdown({
     type: 'projects',
     id: 'projects',
     filename: 'projects.md',
@@ -142,13 +152,13 @@ function generateProjects(repositories: ContributedRepository[], username: strin
         isOwned: repo.owner.login.toLowerCase() === username.toLowerCase(),
       })),
     },
-  }
+  })
 }
 
 function generatePublications(publications: MediaQuery['publications']): Section {
   const sorted = [...publications].sort((a, b) => dateSorter(a.date, b.date))
 
-  return {
+  return withMarkdown({
     type: 'publications',
     id: 'publications',
     filename: 'publications.md',
@@ -166,13 +176,13 @@ function generatePublications(publications: MediaQuery['publications']): Section
         }
       }),
     },
-  }
+  })
 }
 
 function generateConferences(conferences: MediaQuery['conferences']): Section {
   const sorted = [...conferences].sort((a, b) => dateSorter(a.date, b.date))
 
-  return {
+  return withMarkdown({
     type: 'conferences',
     id: 'conferences',
     filename: 'conferences.md',
@@ -194,13 +204,13 @@ function generateConferences(conferences: MediaQuery['conferences']): Section {
         imageUrl: conf.image?.url ?? null,
       })),
     },
-  }
+  })
 }
 
 function generateInterviews(interviews: MediaQuery['interviews']): Section {
   const sorted = [...interviews].sort((a, b) => dateSorter(a.date, b.date))
 
-  return {
+  return withMarkdown({
     type: 'interviews',
     id: 'interviews',
     filename: 'interviews.md',
@@ -221,7 +231,7 @@ function generateInterviews(interviews: MediaQuery['interviews']): Section {
         imageUrl: interview.image?.url ?? null,
       })),
     },
-  }
+  })
 }
 
 interface GenerateAllSectionsParams {
@@ -288,6 +298,10 @@ export async function generateAllSections({
       ],
     },
   ]
+
+  const cvMarkdown = buildResumeMarkdown(folders, bio.fullName, bio.headline)
+  const aboutSection = folders[0].sections[0]
+  if (aboutSection.type === 'about') aboutSection.data.cvMarkdown = cvMarkdown
 
   return { folders, fullName: bio.fullName, headline: bio.headline }
 }

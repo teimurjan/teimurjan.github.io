@@ -41,7 +41,10 @@ Gold standard (this is the target voice)
 - "Integrated intent-aware Siri Shortcuts into the Klarna app, boosting return-to-app rate by 10%."
 - "Created an automated testing Google Sheets plugin, reducing manual testing hours by 50%."`
 
-const buildUserPrompt = (jobDescription: string, resume: ResumeQuery) => `## Step 0 (silent, do not output)
+const buildUserPrompt = (
+  jobDescription: string,
+  resume: ResumeQuery
+) => `## Step 0 (silent, do not output)
 
 Before rewriting anything, internally do this:
 a) Summarise the core role vector in one line: what is this role actually about? (e.g. "internationalisation-heavy growth frontend at a consumer scale-up", "payments infra with Kafka and Go", "LLM agent tooling for devs").

@@ -2,16 +2,18 @@ import type { InterviewsData } from '@/lib/sections'
 import { prettyDate } from '@teimurjan/utils'
 import { Mic } from 'lucide-react'
 import { MediaCard } from './media-card'
+import { SectionHeader } from './section-header'
 
 interface InterviewsSectionProps {
   data: InterviewsData
+  markdown: string
 }
 
-export function InterviewsSection({ data }: InterviewsSectionProps) {
+export function InterviewsSection({ data, markdown }: InterviewsSectionProps) {
   if (data.interviews.length === 0) {
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-bold text-foreground">Interviews</h1>
+        <SectionHeader title="Interviews" markdown={markdown} />
         <p className="text-muted-foreground">No interviews yet.</p>
       </div>
     )
@@ -19,7 +21,7 @@ export function InterviewsSection({ data }: InterviewsSectionProps) {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-foreground">Interviews</h1>
+      <SectionHeader title="Interviews" markdown={markdown} />
 
       <div className="grid gap-4">
         {data.interviews.map((interview) => (

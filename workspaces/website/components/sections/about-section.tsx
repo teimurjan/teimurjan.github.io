@@ -1,100 +1,108 @@
+import { AvatarBox } from '@/components/ui/avatar-box'
+import { Bold } from '@/components/ui/bold'
+import { Button } from '@/components/ui/button'
 import { CopyButton } from '@/components/ui/copy-button'
+import { FadeIn } from '@/components/ui/fade-in'
+import {
+  IconCalendar,
+  IconDownload,
+  IconGitHub,
+  IconLink,
+  IconLinkedIn,
+  IconMail,
+} from '@/components/ui/sketch-icons'
+import { TagChip } from '@/components/ui/tag-chip'
 import type { AboutData, ContactData } from '@/lib/sections'
-import { Calendar, FileDown, Mail } from 'lucide-react'
 import Image from 'next/image'
-import githubIcon from '../icons/github.svg'
-import linkedinIcon from '../icons/linkedin.png'
-import toptalIcon from '../icons/toptal.png'
-import LiquidEther from '../ui/liquid-ether'
-import { SectionHeader } from './section-header'
 
 interface AboutSectionProps {
   data: AboutData & ContactData
-  markdown: string
 }
 
-export function AboutSection({ data, markdown }: AboutSectionProps) {
+export function AboutSection({ data }: AboutSectionProps) {
   return (
-    <div className="space-y-6">
-      <SectionHeader title="About" markdown={markdown} />
-
-      <div className="relative border border-glass-border rounded-xl h-64 w-full">
-        <LiquidEther className="!absolute inset-0 z-0" />
-        <Image
-          src="/logo3d.png"
-          alt="Logo"
-          width={256}
-          height={256}
-          className="absolute z-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-        />
+    <FadeIn>
+      <div className="border-[1.5px] border-ink shadow-hard bg-paper-3 p-[26px] mb-7 grid grid-cols-[140px_1fr] gap-[26px] items-center relative max-tablet:grid-cols-1 max-tablet:p-5 max-tablet:gap-[18px] max-tablet:text-center max-mobile:p-4">
+        <AvatarBox size="xl" bg="paper-2" className="max-tablet:mx-auto">
+          <Image
+            src="/logo.png"
+            alt={data.fullName}
+            width={140}
+            height={140}
+            className="w-full h-full object-contain"
+          />
+        </AvatarBox>
+        <div>
+          <h1 className="m-0 mb-1 text-[28px] tracking-[-0.01em] max-tablet:text-2xl">
+            {data.fullName}
+          </h1>
+          <div className="text-ink-dim text-[13px] mb-3.5 flex flex-wrap gap-2 items-center max-tablet:justify-center">
+            <TagChip>{data.headline}</TagChip>
+            <TagChip>{data.location}</TagChip>
+            <TagChip>open to collaborations</TagChip>
+          </div>
+          <p className="text-ink-dim text-[14px] leading-relaxed [&>b]:text-ink [&>b]:font-semibold">
+            <Bold text={data.about} />
+          </p>
+        </div>
       </div>
 
-      <p className="text-muted-foreground leading-relaxed">{data.about}</p>
-
-      <div className="flex flex-wrap gap-4">
-        <a
-          href="/resume.pdf"
-          className="inline-flex items-center gap-2 px-3 py-2 text-sm text-foreground bg-glass-highlight border border-glass-border rounded-xl shadow-glass-pill backdrop-blur-sm hover:bg-secondary/50 hover:border-primary/30 transition-all duration-200"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FileDown className="w-4 h-4" />
-          Download CV
-        </a>
+      <div className="flex gap-2 mb-5 max-tablet:flex-wrap">
+        <Button as="a" href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+          <IconDownload size={14} /> Download CV
+        </Button>
         <CopyButton text={data.cvMarkdown} label="Copy CV" ariaLabel="Copy CV as markdown" />
-        <a
+        <Button
+          as="a"
+          variant="ghost"
           href="https://adplist.org/mentors/teimur-gasanov?session=70480-mentorship-session"
-          className="inline-flex items-center gap-2 px-3 py-2 text-sm text-foreground bg-glass-highlight border border-glass-border rounded-xl shadow-glass-pill backdrop-blur-sm hover:bg-secondary/50 hover:border-primary/30 transition-all duration-200"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Calendar className="w-4 h-4" />
-          Book Session
-        </a>
+          <IconCalendar size={14} /> Book a session
+        </Button>
       </div>
 
-      <p className="text-muted-foreground mb-0">
-        I'm always interested in hearing about new projects and opportunities.
+      <div className="note-with-arrow">always open for a good conversation</div>
+
+      <p className="mt-[18px]">
+        I&apos;m always interested in hearing about new projects and opportunities.
+        <br />
+        Feel free to reach out to me via:
       </p>
 
-      <p className="text-muted-foreground">Feel free to reach out to me via:</p>
-
-      <div className="flex flex-wrap gap-3">
-        <a
-          href={`mailto:${data.email}`}
-          className="inline-flex items-center gap-2 px-3 py-2 bg-secondary rounded-lg hover:bg-secondary/80 transition-colors text-sm"
-        >
-          <Mail className="w-4 h-4" />
-          Email
-        </a>
-        <a
+      <div className="flex flex-wrap gap-2.5 mt-3.5 max-tablet:gap-2">
+        <Button as="a" variant="ghost" href={`mailto:${data.email}`}>
+          <IconMail size={14} /> Email
+        </Button>
+        <Button
+          as="a"
+          variant="ghost"
           href="https://github.com/teimurjan"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-3 py-2 bg-secondary rounded-lg hover:bg-secondary/80 transition-colors text-sm"
         >
-          <img src={githubIcon.src} alt="GitHub" className="w-5 h-5" />
-          GitHub
-        </a>
-        <a
+          <IconGitHub size={14} /> GitHub
+        </Button>
+        <Button
+          as="a"
+          variant="ghost"
           href="https://www.linkedin.com/in/teimur-gasanov"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-3 py-2 bg-secondary rounded-lg hover:bg-secondary/80 transition-colors text-sm"
         >
-          <img src={linkedinIcon.src} alt="LinkedIn" className="w-auto h-3.5" />
-          LinkedIn
-        </a>
-        <a
+          <IconLinkedIn size={14} /> LinkedIn
+        </Button>
+        <Button
+          as="a"
+          variant="ghost"
           href="https://www.toptal.com/resume/teimur-gasanov"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-3 py-2 bg-secondary rounded-lg hover:bg-secondary/80 transition-colors text-sm"
         >
-          <img src={toptalIcon.src} alt="Toptal" className="w-4 h-auto" />
-          Toptal
-        </a>
+          <IconLink size={14} /> Toptal
+        </Button>
       </div>
-    </div>
+    </FadeIn>
   )
 }

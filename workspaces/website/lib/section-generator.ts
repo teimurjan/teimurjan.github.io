@@ -45,6 +45,26 @@ function stripHtml(html: string): string {
     .trim()
 }
 
+function extractBullets(html: string): string[] {
+  const matches = [...html.matchAll(/<li>([\s\S]*?)<\/li>/gi)]
+  if (matches.length === 0) return []
+  return matches
+    .map((m) =>
+      m[1]
+        .replace(/<strong>(.*?)<\/strong>/gi, '**$1**')
+        .replace(/<b>(.*?)<\/b>/gi, '**$1**')
+        .replace(/<em>(.*?)<\/em>/gi, '*$1*')
+        .replace(/<i>(.*?)<\/i>/gi, '*$1*')
+        .replace(/<[^>]*>/g, '')
+        .replace(/&nbsp;/g, ' ')
+        .replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .trim()
+    )
+    .filter(Boolean)
+}
+
 type SectionDraft = Omit<Section, 'markdown'>
 
 function withMarkdown(draft: SectionDraft): Section {
@@ -61,6 +81,8 @@ function generateAbout(bio: BioQuery['bios'][0]): Section {
     title: 'About',
     folder: 'personal',
     data: {
+      fullName: bio.fullName,
+      headline: bio.headline,
       about: bio.about,
       email: bio.email,
       location: bio.location,
@@ -85,6 +107,7 @@ function generateExperience(experiences: ExperienceHistoryQuery['experiences']):
         startDate: exp.startDate,
         endDate: exp.endDate ?? null,
         description: stripHtml(exp.description.html),
+        bullets: extractBullets(exp.description.html),
         logoUrl: exp.logo.url,
       })),
     },
@@ -128,6 +151,7 @@ function generateEducation(educations: EducationQuery['educations']): Section {
         startDate: edu.startDate,
         endDate: edu.endDate ?? null,
         description: edu.description?.html ? stripHtml(edu.description.html) : null,
+        bullets: edu.description?.html ? extractBullets(edu.description.html) : [],
       })),
     },
   })

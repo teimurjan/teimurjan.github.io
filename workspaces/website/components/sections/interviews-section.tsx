@@ -1,43 +1,71 @@
+import { FadeIn } from '@/components/ui/fade-in'
+import { MediaRow } from '@/components/ui/media-row'
+import { InterviewSketch } from '@/components/ui/sketch-icons'
 import type { InterviewsData } from '@/lib/sections'
 import { prettyDate } from '@teimurjan/utils'
-import { Mic } from 'lucide-react'
-import { MediaCard } from './media-card'
-import { SectionHeader } from './section-header'
+import Image from 'next/image'
 
 interface InterviewsSectionProps {
   data: InterviewsData
-  markdown: string
 }
 
-export function InterviewsSection({ data, markdown }: InterviewsSectionProps) {
+export function InterviewsSection({ data }: InterviewsSectionProps) {
   if (data.interviews.length === 0) {
     return (
-      <div className="space-y-6">
-        <SectionHeader title="Interviews" markdown={markdown} />
-        <p className="text-muted-foreground">No interviews yet.</p>
-      </div>
+      <FadeIn>
+        <p>No interviews yet.</p>
+      </FadeIn>
     )
   }
 
   return (
-    <div className="space-y-6">
-      <SectionHeader title="Interviews" markdown={markdown} />
+    <FadeIn>
+      {data.interviews.map((it) => {
+        const meta = prettyDate(it.date)
 
-      <div className="grid gap-4">
-        {data.interviews.map((interview) => (
-          <MediaCard
-            key={interview.id}
-            id={interview.id}
-            title={interview.title}
-            subtitle={prettyDate(interview.date)}
-            imageUrl={interview.imageUrl}
-            link={interview.link}
-            videoEmbedUrl={interview.videoEmbed?.url ?? null}
-            iframeOptions={interview.videoEmbed?.iframeOptions ?? null}
-            fallbackIcon={Mic}
+        if (it.videoEmbed) {
+          return (
+            <MediaRow
+              key={it.id}
+              title={it.title}
+              meta={meta}
+              thumb={
+                <iframe
+                  src={it.videoEmbed.url}
+                  title={it.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full border-0"
+                  {...(it.videoEmbed.iframeOptions ?? {})}
+                />
+              }
+            />
+          )
+        }
+
+        const thumb = it.imageUrl ? (
+          <Image
+            src={it.imageUrl}
+            alt={it.title}
+            width={140}
+            height={79}
+            unoptimized
+            className="w-full h-full object-cover"
           />
-        ))}
-      </div>
-    </div>
+        ) : (
+          <InterviewSketch />
+        )
+
+        return (
+          <MediaRow
+            key={it.id}
+            href={it.link ?? undefined}
+            title={it.title}
+            meta={meta}
+            thumb={thumb}
+          />
+        )
+      })}
+    </FadeIn>
   )
 }

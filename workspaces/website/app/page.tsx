@@ -13,11 +13,5 @@ export default async function Page() {
     githubUsername: 'teimurjan',
   })
 
-  return (
-    <main className="min-h-screen relative overflow-hidden">
-      <div className="relative z-10 flex items-center justify-center min-h-screen">
-        <IDEWindow folders={folders} fullName={fullName} headline={headline} />
-      </div>
-    </main>
-  )
+  return <IDEWindow folders={folders} fullName={fullName} headline={headline} />
 }

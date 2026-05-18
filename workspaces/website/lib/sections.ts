@@ -7,6 +7,8 @@ interface SectionBase {
 }
 
 export interface AboutData {
+  fullName: string
+  headline: string
   about: string
   email: string
   cvMarkdown: string
@@ -25,6 +27,7 @@ export interface Experience {
   startDate: string
   endDate: string | null
   description: string
+  bullets: string[]
   logoUrl: string
 }
 
@@ -52,6 +55,7 @@ export interface Education {
   startDate: string
   endDate: string | null
   description: string | null
+  bullets: string[]
 }
 
 export interface EducationData {

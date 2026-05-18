@@ -157,4 +157,67 @@ export default {
 		image: null,
 		url: null,
 	},
+	"https://hackernoon.com/beating-javascript-performance-limits-with-rust-and-n-api-building-a-faster-image-diff-tool":
+		{
+			description:
+				"From JavaScript bottlenecks to SIMD-powered Rust. The engineering journey behind a 3–4× faster image diff tool integrated with Node.js via N-API.",
+			twitterImageSrc: null,
+			twitterCard: "summary_large_image",
+			twitterTitle:
+				"Beating JavaScript Performance Limits With Rust and N-API: Building a Faster Image Diff Tool | HackerNoon",
+			twitterDescription:
+				"From JavaScript bottlenecks to SIMD-powered Rust. The engineering journey behind a 3–4× faster image diff tool integrated with Node.js via N-API.",
+			ogImage:
+				"https://hackernoon.imgix.net/images/e62dXSoL6FdWx9wUA9Lka0OQw8A3-1d83gsx.png",
+			ogType: null,
+			ogTitle:
+				"Beating JavaScript Performance Limits With Rust and N-API: Building a Faster Image Diff Tool | HackerNoon",
+			ogUrl: null,
+			ogDescription:
+				"From JavaScript bottlenecks to SIMD-powered Rust. The engineering journey behind a 3–4× faster image diff tool integrated with Node.js via N-API.",
+			image: null,
+			url: null,
+		},
+	"https://hackernoon.com/i-tried-to-make-llm-memory-evolve-like-antibodies-heres-what-broke":
+		{
+			description:
+				"I tried to make vector embeddings evolve like antibodies in the immune system. Four experiments, two datasets, one consistent negative result. Here's why.",
+			twitterImageSrc: null,
+			twitterCard: "summary_large_image",
+			twitterTitle:
+				"I Tried to Make LLM Memory Evolve Like Antibodies: Here's What Broke | HackerNoon",
+			twitterDescription:
+				"I tried to make vector embeddings evolve like antibodies in the immune system. Four experiments, two datasets, one consistent negative result. Here's why.",
+			ogImage:
+				"https://hackernoon.imgix.net/images/e62dXSoL6FdWx9wUA9Lka0OQw8A3-3g93dh2.png",
+			ogType: null,
+			ogTitle:
+				"I Tried to Make LLM Memory Evolve Like Antibodies: Here's What Broke | HackerNoon",
+			ogUrl: null,
+			ogDescription:
+				"I tried to make vector embeddings evolve like antibodies in the immune system. Four experiments, two datasets, one consistent negative result. Here's why.",
+			image: null,
+			url: null,
+		},
+	"https://hackernoon.com/experimental-results-from-a-self-improving-retrieval-system-for-conversational-memory":
+		{
+			description:
+				"Eighteen retrieval experiments on agent memory: why BM25 dominates, what clustered retrieval-induced forgetting actually does, and the Rust port that shipped.",
+			twitterImageSrc: null,
+			twitterCard: "summary_large_image",
+			twitterTitle:
+				"Experimental Results from a Self-Improving Retrieval System for Conversational Memory | HackerNoon",
+			twitterDescription:
+				"Eighteen retrieval experiments on agent memory: why BM25 dominates, what clustered retrieval-induced forgetting actually does, and the Rust port that shipped.",
+			ogImage:
+				"https://hackernoon.imgix.net/images/e62dXSoL6FdWx9wUA9Lka0OQw8A3-kg03d83.png",
+			ogType: null,
+			ogTitle:
+				"Experimental Results from a Self-Improving Retrieval System for Conversational Memory | HackerNoon",
+			ogUrl: null,
+			ogDescription:
+				"Eighteen retrieval experiments on agent memory: why BM25 dominates, what clustered retrieval-induced forgetting actually does, and the Rust port that shipped.",
+			image: null,
+			url: null,
+		},
 } as Record<string, Record<string, string | null>>;

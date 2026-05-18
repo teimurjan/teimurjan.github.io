@@ -1,54 +1,50 @@
+import { AvatarBox } from '@/components/ui/avatar-box'
+import { Card } from '@/components/ui/card'
+import { FadeIn } from '@/components/ui/fade-in'
+import { IconCap } from '@/components/ui/sketch-icons'
 import type { EducationData } from '@/lib/sections'
 import { prettyRange } from '@teimurjan/utils'
-import { GraduationCap } from 'lucide-react'
-import { SectionHeader } from './section-header'
 
 interface EducationSectionProps {
   data: EducationData
-  markdown: string
 }
 
-export function EducationSection({ data, markdown }: EducationSectionProps) {
+export function EducationSection({ data }: EducationSectionProps) {
   return (
-    <div className="space-y-6">
-      <SectionHeader title="Education" markdown={markdown} />
-
-      <div className="space-y-8">
-        {data.educations.map((edu, index) => (
-          <div key={edu.id}>
-            {index > 0 && <hr className="border-border/50 mb-8" />}
-
-            <div className="flex gap-4">
-              <div className="shrink-0">
-                <div className="w-12 h-12 bg-secondary rounded-lg flex items-center justify-center">
-                  <GraduationCap className="w-6 h-6 text-muted-foreground" />
+    <FadeIn>
+      {data.educations.map((edu) => {
+        const degreeLine = edu.degree ? `${edu.degree} in ${edu.areaOfStudy}` : edu.areaOfStudy
+        return (
+          <Card key={edu.id} className="p-5 max-tablet:p-3.5">
+            <div className="grid grid-cols-[56px_1fr] gap-4 items-start max-tablet:grid-cols-[44px_1fr] max-tablet:gap-3">
+              <AvatarBox size="lg">
+                <IconCap size={26} />
+              </AvatarBox>
+              <div>
+                <h3 className="text-[17px] font-semibold m-0 max-tablet:text-[15px]">
+                  {edu.school}
+                </h3>
+                <div className="mt-1 text-[12px] text-ink-dim flex flex-wrap gap-2 items-center max-tablet:text-[11px] max-tablet:gap-1.5 max-mobile:flex-col max-mobile:items-start max-mobile:gap-0.5">
+                  <b className="text-ink font-semibold">{degreeLine}</b>
+                  <span className="text-ink-faint max-mobile:hidden">|</span>
+                  <span>{prettyRange(edu.startDate, edu.endDate ?? undefined)}</span>
                 </div>
-              </div>
-
-              <div className="space-y-2 min-w-0">
-                <h2 className="text-lg font-semibold text-foreground">{edu.school}</h2>
-
-                <p className="text-sm text-muted-foreground">
-                  <span className="font-medium text-foreground">
-                    {edu.degree ? `${edu.degree} in ` : ''}
-                    {edu.areaOfStudy}
-                  </span>
-                </p>
-
-                <p className="text-sm text-muted-foreground">
-                  {prettyRange(edu.startDate, edu.endDate ?? undefined)}
-                </p>
-
-                {edu.description && (
-                  <p className="text-sm text-muted-foreground whitespace-pre-line">
-                    {edu.description}
-                  </p>
+                {edu.bullets.length > 0 && (
+                  <ul className="bullets">
+                    {edu.bullets.map((b, k) => {
+                      const key = `${edu.id}-${k}`
+                      return <li key={key}>{b}</li>
+                    })}
+                  </ul>
+                )}
+                {edu.bullets.length === 0 && edu.description && (
+                  <p className="mt-3">{edu.description}</p>
                 )}
               </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </div>
+          </Card>
+        )
+      })}
+    </FadeIn>
   )
 }

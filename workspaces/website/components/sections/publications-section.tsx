@@ -1,41 +1,47 @@
+import { FadeIn } from '@/components/ui/fade-in'
+import { MediaRow } from '@/components/ui/media-row'
+import { PubScribbleSketch } from '@/components/ui/sketch-icons'
 import type { PublicationsData } from '@/lib/sections'
 import { prettyDate } from '@teimurjan/utils'
-import { FileText } from 'lucide-react'
-import { MediaCard } from './media-card'
-import { SectionHeader } from './section-header'
+import Image from 'next/image'
 
 interface PublicationsSectionProps {
   data: PublicationsData
-  markdown: string
 }
 
-export function PublicationsSection({ data, markdown }: PublicationsSectionProps) {
+export function PublicationsSection({ data }: PublicationsSectionProps) {
   if (data.publications.length === 0) {
     return (
-      <div className="space-y-6">
-        <SectionHeader title="Publications" markdown={markdown} />
-        <p className="text-muted-foreground">No publications yet.</p>
-      </div>
+      <FadeIn>
+        <p>No publications yet.</p>
+      </FadeIn>
     )
   }
 
   return (
-    <div className="space-y-6">
-      <SectionHeader title="Publications" markdown={markdown} />
-
-      <div className="grid gap-4">
-        {data.publications.map((pub) => (
-          <MediaCard
-            key={pub.id}
-            id={pub.id}
-            title={pub.title}
-            subtitle={prettyDate(pub.date)}
-            imageUrl={pub.imageUrl}
-            link={pub.link}
-            fallbackIcon={FileText}
-          />
-        ))}
-      </div>
-    </div>
+    <FadeIn>
+      {data.publications.map((pub) => (
+        <MediaRow
+          key={pub.id}
+          href={pub.link}
+          title={pub.title}
+          meta={prettyDate(pub.date)}
+          thumb={
+            pub.imageUrl ? (
+              <Image
+                src={pub.imageUrl}
+                alt={pub.title}
+                width={140}
+                height={79}
+                unoptimized
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <PubScribbleSketch />
+            )
+          }
+        />
+      ))}
+    </FadeIn>
   )
 }

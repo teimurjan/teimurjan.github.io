@@ -15,21 +15,21 @@ interface SectionRendererProps {
 export function SectionRenderer({ section }: SectionRendererProps) {
   switch (section.type) {
     case 'about':
-      return <AboutSection data={section.data} markdown={section.markdown} />
+      return <AboutSection data={section.data} />
     case 'experience':
-      return <ExperienceSection data={section.data} markdown={section.markdown} />
+      return <ExperienceSection data={section.data} />
     case 'skills':
-      return <SkillsSection data={section.data} markdown={section.markdown} />
+      return <SkillsSection data={section.data} />
     case 'education':
-      return <EducationSection data={section.data} markdown={section.markdown} />
+      return <EducationSection data={section.data} />
     case 'projects':
-      return <ProjectsSection data={section.data} markdown={section.markdown} />
+      return <ProjectsSection data={section.data} />
     case 'publications':
-      return <PublicationsSection data={section.data} markdown={section.markdown} />
+      return <PublicationsSection data={section.data} />
     case 'conferences':
-      return <ConferencesSection data={section.data} markdown={section.markdown} />
+      return <ConferencesSection data={section.data} />
     case 'interviews':
-      return <InterviewsSection data={section.data} markdown={section.markdown} />
+      return <InterviewsSection data={section.data} />
     default: {
       const _exhaustive: never = section
       return null

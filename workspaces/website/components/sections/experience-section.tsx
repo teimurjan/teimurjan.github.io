@@ -1,57 +1,72 @@
-import { SkeletonImage } from '@/components/ui/skeleton-image'
+import { AvatarBox } from '@/components/ui/avatar-box'
+import { Bold } from '@/components/ui/bold'
+import { Card } from '@/components/ui/card'
+import { FadeIn } from '@/components/ui/fade-in'
 import type { ExperienceData } from '@/lib/sections'
 import { prettyRange } from '@teimurjan/utils'
-import { SectionHeader } from './section-header'
+import Image from 'next/image'
 
 interface ExperienceSectionProps {
   data: ExperienceData
-  markdown: string
 }
 
-export function ExperienceSection({ data, markdown }: ExperienceSectionProps) {
+function getMark(company: string) {
+  const trimmed = company.trim()
+  return trimmed.length > 0 ? trimmed.charAt(0).toUpperCase() : '?'
+}
+
+export function ExperienceSection({ data }: ExperienceSectionProps) {
   return (
-    <div className="space-y-6">
-      <SectionHeader title="Experience" markdown={markdown} />
-
-      <div className="space-y-4">
-        {data.experiences.map((exp, index) => (
-          <div key={exp.id}>
-            {index > 0 && <hr className="border-border/50 mb-8" />}
-
-            <div className="flex gap-4">
-              <div className="shrink-0">
-                <SkeletonImage
-                  src={exp.logoUrl}
-                  alt={`${exp.company} logo`}
-                  width={48}
-                  height={48}
-                  className="rounded-lg bg-secondary"
-                />
-              </div>
-
-              <div className="space-y-2 min-w-0">
-                <h2 className="text-lg font-semibold text-foreground">{exp.position}</h2>
-
-                <div className="flex flex-wrap items-center gap-x-2 text-sm text-muted-foreground">
-                  <span className="font-medium text-foreground">{exp.company}</span>
+    <FadeIn>
+      {data.experiences.map((exp, i) => {
+        const bullets = exp.bullets.length > 0 ? exp.bullets : [exp.description]
+        return (
+          <Card key={exp.id} tilt={i % 2 === 1 ? 'r' : 'l'}>
+            <div className="grid grid-cols-[56px_1fr] gap-4 items-start max-tablet:grid-cols-[44px_1fr] max-tablet:gap-3">
+              <AvatarBox size="lg" className="text-[18px] font-bold max-tablet:text-base">
+                {exp.logoUrl ? (
+                  <Image
+                    src={exp.logoUrl}
+                    alt={`${exp.company} logo`}
+                    width={56}
+                    height={56}
+                    unoptimized
+                    className="w-full h-full object-contain p-1.5"
+                  />
+                ) : (
+                  getMark(exp.company)
+                )}
+              </AvatarBox>
+              <div>
+                <h3 className="text-[17px] font-semibold m-0 max-tablet:text-[15px]">
+                  {exp.position}
+                </h3>
+                <div className="mt-1 text-[12px] text-ink-dim flex flex-wrap gap-2 items-center max-tablet:text-[11px] max-tablet:gap-1.5 max-mobile:flex-col max-mobile:items-start max-mobile:gap-0.5">
+                  <b className="text-ink font-semibold">{exp.company}</b>
                   {exp.location && (
                     <>
-                      <span>·</span>
+                      <span className="text-ink-faint max-mobile:hidden">·</span>
                       <span>{exp.location}</span>
                     </>
                   )}
-                  <span>|</span>
+                  <span className="text-ink-faint max-mobile:hidden">|</span>
                   <span>{prettyRange(exp.startDate, exp.endDate ?? undefined)}</span>
                 </div>
-
-                <p className="text-sm text-muted-foreground whitespace-pre-line">
-                  {exp.description}
-                </p>
+                <ul className="bullets">
+                  {bullets.map((b, k) => {
+                    const key = `${exp.id}-${k}`
+                    return (
+                      <li key={key}>
+                        <Bold text={b} />
+                      </li>
+                    )
+                  })}
+                </ul>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </div>
+          </Card>
+        )
+      })}
+    </FadeIn>
   )
 }

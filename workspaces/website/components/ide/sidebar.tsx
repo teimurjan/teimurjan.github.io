@@ -1,156 +1,139 @@
 'use client'
 
+import { IconButton } from '@/components/ui/icon-button'
+import {
+  IconChev,
+  IconCollapse,
+  IconFile,
+  IconFolder,
+  IconSearch,
+} from '@/components/ui/sketch-icons'
+import { TagChip } from '@/components/ui/tag-chip'
 import type { FolderStructure, Section } from '@/lib/sections'
 import { cn } from '@/lib/utils'
-import { ChevronDown, ChevronLeft, ChevronRight, FileText, Folder, X } from 'lucide-react'
 import Image from 'next/image'
-import { useCallback, useEffect, useState } from 'react'
 
 interface SidebarProps {
   folders: FolderStructure[]
-  headline: string
-  activeSection: Section
-  onSectionChange: (section: Section) => void
   fullName: string
+  headline: string
+  status: string
+  activeId: string
+  openFolders: Set<string>
+  onToggleFolder: (name: string) => void
+  onCollapseAll: () => void
+  onOpenFile: (section: Section) => void
+  onOpenPalette: () => void
+  mobileOpen: boolean
 }
+
+const TREE_ITEM_BASE =
+  'flex items-center gap-1.5 px-2 py-1 text-[13px] cursor-pointer select-none relative bg-transparent border-0 w-full text-left font-inherit transition-colors duration-[120ms]'
 
 export function Sidebar({
   folders,
-  headline,
-  activeSection,
-  onSectionChange,
   fullName,
+  headline,
+  status,
+  activeId,
+  openFolders,
+  onToggleFolder,
+  onCollapseAll,
+  onOpenFile,
+  onOpenPalette,
+  mobileOpen,
 }: SidebarProps) {
-  const [expandedFolders, setExpandedFolders] = useState<Set<string>>(
-    new Set(folders.map((f) => f.name))
-  )
-  const [isOpen, setIsOpen] = useState(false)
-
-  const toggleFolder = (folderName: string) => {
-    setExpandedFolders((prev) => {
-      const next = new Set(prev)
-      if (next.has(folderName)) {
-        next.delete(folderName)
-      } else {
-        next.add(folderName)
-      }
-      return next
-    })
-  }
-
-  const handleSectionChange = useCallback(
-    (section: Section) => {
-      onSectionChange(section)
-      setIsOpen(false)
-    },
-    [onSectionChange]
-  )
-
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [isOpen])
-
-  const sidebarContent = (
-    <>
-      <div className="p-4 flex items-center gap-3 border-b border-border/30">
-        <Image src="/logo.png" alt="Logo" width={32} height={32} />
-        <div className="flex-1 min-w-0">
-          <h1 className="text-foreground font-semibold text-sm">{fullName}</h1>
-          <p className="text-muted-foreground text-xs">{headline}</p>
+  return (
+    <aside
+      className={cn(
+        'border-r-[1.5px] border-ink flex flex-col bg-paper-2 overflow-hidden',
+        'max-tablet:fixed max-tablet:top-0 max-tablet:bottom-0 max-tablet:left-0 max-tablet:w-[min(300px,88vw)] max-tablet:z-40 max-tablet:shadow-[8px_0_0_rgba(0,0,0,0.4)] max-tablet:transition-transform max-tablet:duration-[220ms] max-tablet:ease-out',
+        mobileOpen ? 'max-tablet:translate-x-0' : 'max-tablet:-translate-x-[105%]'
+      )}
+    >
+      <div className="pt-[22px] px-[18px] pb-[18px] border-b-[1.5px] border-ink flex flex-col gap-3 relative">
+        <div className="flex gap-3 items-center">
+          <button
+            type="button"
+            aria-label={fullName}
+            className="w-12 h-12 border-[1.5px] border-ink bg-paper-3 grid place-items-center shadow-stamp transition-transform duration-200 cursor-pointer shrink-0 overflow-hidden p-0 hover:rotate-[-4deg] hover:scale-[1.05]"
+          >
+            <Image
+              src="/logo.png"
+              alt=""
+              width={48}
+              height={48}
+              className="w-full h-full object-cover"
+            />
+          </button>
+          <div>
+            <div className="text-sm font-semibold tracking-[0.01em]">{fullName}</div>
+            <div className="text-[11px] text-ink-dim mt-0.5">{headline}</div>
+          </div>
         </div>
-        <button
-          type="button"
-          onClick={() => setIsOpen(false)}
-          className="sm:hidden p-1.5 rounded-md hover:bg-secondary/50 transition-colors"
-        >
-          <X className="w-5 h-5 text-muted-foreground" />
-        </button>
+        <TagChip pulse>{status}</TagChip>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-3">
-        <div className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-3 px-2">
-          Explorer
+      <div className="flex-1 px-2 py-3.5 overflow-y-auto">
+        <div className="flex items-center justify-between text-[10px] text-ink-faint uppercase tracking-[0.18em] pt-1.5 px-2.5 pb-2.5">
+          <span>Explorer</span>
+          <div className="flex gap-1">
+            <IconButton title="search" onClick={onOpenPalette}>
+              <IconSearch size={12} />
+            </IconButton>
+            <IconButton title="collapse all" onClick={onCollapseAll}>
+              <IconCollapse size={12} />
+            </IconButton>
+          </div>
         </div>
 
-        <div className="space-y-1">
-          {folders.map((folder) => (
+        {folders.map((folder) => {
+          const isOpen = openFolders.has(folder.name)
+          return (
             <div key={folder.name}>
               <button
                 type="button"
-                onClick={() => toggleFolder(folder.name)}
-                className="flex items-center gap-2 w-full px-2 py-1.5 rounded-md hover:bg-secondary/50 transition-colors text-sm text-muted-foreground"
+                onClick={() => onToggleFolder(folder.name)}
+                className={cn(TREE_ITEM_BASE, 'text-ink-dim font-medium hover:text-ink')}
               >
-                {expandedFolders.has(folder.name) ? (
-                  <ChevronDown className="w-4 h-4" />
-                ) : (
-                  <ChevronRight className="w-4 h-4" />
-                )}
-                <Folder className="w-4 h-4" />
+                <span
+                  className={cn(
+                    'w-3 inline-grid place-items-center text-ink-faint transition-transform duration-[180ms]',
+                    isOpen && 'rotate-90'
+                  )}
+                >
+                  <IconChev size={10} />
+                </span>
+                <IconFolder size={14} className="shrink-0 opacity-90" />
                 <span>{folder.name}</span>
               </button>
-
-              {expandedFolders.has(folder.name) && (
-                <div className="ml-8 mt-1 space-y-0.5">
-                  {folder.sections.map((section) => (
+              <div className={cn('flex flex-col pl-[18px]', !isOpen && 'hidden')}>
+                {folder.sections.map((section) => {
+                  const isActive = activeId === section.id
+                  return (
                     <button
                       type="button"
                       key={section.id}
-                      onClick={() => handleSectionChange(section)}
+                      onClick={() => onOpenFile(section)}
                       className={cn(
-                        'flex items-center gap-2 w-full px-2 py-1.5 rounded-md transition-all text-sm',
-                        activeSection.id === section.id
-                          ? 'bg-secondary/60 text-foreground'
-                          : 'text-muted-foreground hover:bg-secondary/30 hover:text-foreground'
+                        TREE_ITEM_BASE,
+                        'hover:text-ink',
+                        isActive
+                          ? 'text-ink bg-highlight before:content-[""] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-[3px] before:h-[70%] before:bg-ink'
+                          : 'text-ink-dim'
                       )}
                     >
-                      <FileText className="w-4 h-4 shrink-0" />
-                      <span className="truncate">{section.filename}</span>
+                      <span className="w-3" />
+                      <IconFile size={14} className="shrink-0 opacity-90" />
+                      <span>{section.filename}</span>
                     </button>
-                  ))}
-                </div>
-              )}
+                  )
+                })}
+              </div>
             </div>
-          ))}
-        </div>
+          )
+        })}
       </div>
-    </>
-  )
-
-  return (
-    <>
-      <button
-        type="button"
-        onClick={() => setIsOpen(true)}
-        className="sm:hidden absolute top-7 right-6 z-30 p-2.5 bg-glass border border-glass-border rounded-lg shadow-glass-pill backdrop-blur-[40px] backdrop-saturate-150 hover:bg-secondary/50 transition-colors"
-      >
-        <ChevronLeft className="w-5 h-5 text-foreground" />
-      </button>
-
-      {isOpen && (
-        <div
-          className="sm:hidden fixed inset-0 z-40 bg-background/80 backdrop-blur-sm"
-          onClick={() => setIsOpen(false)}
-          onKeyDown={(e) => e.key === 'Escape' && setIsOpen(false)}
-        />
-      )}
-
-      <aside
-        className={cn(
-          'bg-glass border border-glass-border shadow-glass backdrop-blur-[40px] backdrop-saturate-150 flex flex-col shrink-0',
-          'fixed inset-y-0 right-0 z-50 w-72 rounded-r-2xl transition-transform duration-300 ease-out',
-          'sm:relative sm:inset-auto sm:z-auto sm:rounded-2xl sm:translate-x-0 sm:w-72',
-          isOpen ? 'translate-x-0' : 'translate-x-full sm:translate-x-0'
-        )}
-      >
-        {sidebarContent}
-      </aside>
-    </>
+    </aside>
   )
 }

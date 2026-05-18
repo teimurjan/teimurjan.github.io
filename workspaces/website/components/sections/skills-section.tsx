@@ -1,31 +1,43 @@
-import { SkeletonImage } from '@/components/ui/skeleton-image'
+import { AvatarBox } from '@/components/ui/avatar-box'
+import { FadeIn } from '@/components/ui/fade-in'
 import type { SkillsData } from '@/lib/sections'
-import { SectionHeader } from './section-header'
+import Image from 'next/image'
 
 interface SkillsSectionProps {
   data: SkillsData
-  markdown: string
 }
 
-export function SkillsSection({ data, markdown }: SkillsSectionProps) {
-  return (
-    <div className="space-y-6">
-      <SectionHeader title="Skills" markdown={markdown} />
+function getMark(title: string) {
+  const words = title.trim().split(/\s+/)
+  if (words.length >= 2) return (words[0][0] + words[1][0]).toUpperCase()
+  return title.slice(0, 2).toUpperCase()
+}
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-y-3">
-        {data.skills.map((skill) => (
-          <div key={skill.id} className="flex items-center gap-3">
-            <SkeletonImage
-              src={skill.logoUrl}
-              alt={`${skill.title} logo`}
-              width={24}
-              height={24}
-              className="shrink-0 rounded"
-            />
-            <span className="font-medium text-foreground truncate">{skill.title}</span>
-          </div>
-        ))}
-      </div>
-    </div>
+export function SkillsSection({ data }: SkillsSectionProps) {
+  return (
+    <FadeIn className="grid grid-cols-[repeat(auto-fill,minmax(170px,1fr))] gap-3 max-tablet:grid-cols-[repeat(auto-fill,minmax(140px,1fr))] max-mobile:grid-cols-2">
+      {data.skills.map((skill) => (
+        <div
+          key={skill.id}
+          className="border-[1.5px] border-ink bg-paper-2 p-3.5 flex items-center gap-2.5 shadow-stamp cursor-default transition-[transform,box-shadow] duration-150 relative hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0_var(--ink)] hover:rotate-[-1deg] odd:hover:rotate-[1deg]"
+        >
+          <AvatarBox size="sm" shadow={false} className="text-[11px] font-bold">
+            {skill.logoUrl ? (
+              <Image
+                src={skill.logoUrl}
+                alt={`${skill.title} logo`}
+                width={28}
+                height={28}
+                unoptimized
+                className="w-full h-full object-contain p-[3px]"
+              />
+            ) : (
+              getMark(skill.title)
+            )}
+          </AvatarBox>
+          <div className="text-[13px] font-medium">{skill.title}</div>
+        </div>
+      ))}
+    </FadeIn>
   )
 }

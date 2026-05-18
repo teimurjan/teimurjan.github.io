@@ -1,128 +1,95 @@
-import { SkeletonImage } from '@/components/ui/skeleton-image'
+import { AvatarBox } from '@/components/ui/avatar-box'
+import { FadeIn } from '@/components/ui/fade-in'
+import { SectionHead } from '@/components/ui/section-head'
+import { IconStar } from '@/components/ui/sketch-icons'
 import type { ProjectsData, Repository } from '@/lib/sections'
-import { ExternalLink, Star } from 'lucide-react'
-import { SectionHeader } from './section-header'
+import Image from 'next/image'
 
 interface ProjectsSectionProps {
   data: ProjectsData
-  markdown: string
 }
 
-function OwnedRepoCard({ repo }: { repo: Repository }) {
+function formatStars(n: number): string {
+  if (n >= 1000) return `${(n / 1000).toFixed(1)}k`
+  return n.toString()
+}
+
+function getMark(nameWithOwner: string): string {
+  const repoName = nameWithOwner.split('/')[1] ?? nameWithOwner
+  const clean = repoName.replace(/[^a-zA-Z0-9]/g, '')
+  return clean.slice(0, 2).toUpperCase() || '?'
+}
+
+function RepoRow({ repo, showDesc }: { repo: Repository; showDesc: boolean }) {
   return (
     <a
+      key={repo.id}
       href={repo.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex flex-col gap-2 p-3 rounded-lg transition-colors"
+      className="grid grid-cols-[28px_1fr_auto_auto] gap-3.5 items-center px-3.5 py-2.5 border-b border-dashed border-rule cursor-pointer transition-[background,padding] duration-[120ms] no-underline text-inherit last:border-b-0 hover:bg-highlight hover:pl-[22px] max-tablet:grid-cols-[24px_1fr_auto] max-tablet:gap-2.5 max-tablet:px-3 max-tablet:hover:pl-3"
     >
-      <div className="flex items-center justify-between gap-4">
-        <div className="flex items-center gap-3 min-w-0">
-          <SkeletonImage
+      <AvatarBox size="xs" shadow={false} className="text-[11px] font-bold">
+        {repo.ownerAvatarUrl ? (
+          <Image
             src={repo.ownerAvatarUrl}
-            alt={repo.nameWithOwner.split('/')[0]}
+            alt=""
             width={24}
             height={24}
-            className="rounded-full shrink-0"
+            unoptimized
+            className="w-full h-full object-cover"
           />
-          <h3 className="font-medium text-foreground group-hover:text-primary transition-colors flex items-center gap-2 truncate">
-            {repo.nameWithOwner}
-            <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
-          </h3>
-        </div>
-
-        <div className="flex items-center gap-4 text-sm text-muted-foreground shrink-0 max-sm:hidden">
-          <div className="flex items-center gap-1">
-            <Star className="w-4 h-4" />
-            <span>{repo.stargazerCount.toLocaleString()}</span>
-          </div>
-          {repo.primaryLanguage && <span>{repo.primaryLanguage}</span>}
-        </div>
+        ) : (
+          getMark(repo.nameWithOwner)
+        )}
+      </AvatarBox>
+      <div className="text-[13px] font-medium min-w-0">
+        {repo.nameWithOwner}
+        {showDesc && repo.description && (
+          <span className="text-ink-dim font-normal text-[12px] block mt-0.5">
+            {repo.description}
+          </span>
+        )}
       </div>
-
-      {repo.description && (
-        <p className="text-sm text-muted-foreground line-clamp-2">{repo.description}</p>
-      )}
-    </a>
-  )
-}
-
-function ContributedRepoCard({ repo }: { repo: Repository }) {
-  return (
-    <a
-      href={repo.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group flex items-center gap-3 p-2 rounded-lg transition-colors"
-    >
-      <SkeletonImage
-        src={repo.ownerAvatarUrl}
-        alt={repo.nameWithOwner.split('/')[0]}
-        width={24}
-        height={24}
-        className="rounded-full shrink-0"
-      />
-
-      <div className="flex items-center justify-between gap-4 flex-1 min-w-0">
-        <h3 className="font-medium text-foreground group-hover:text-primary transition-colors flex items-center gap-2 truncate">
-          {repo.nameWithOwner}
-          <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
-        </h3>
-
-        <div className="flex items-center gap-4 text-sm text-muted-foreground shrink-0 max-sm:hidden">
-          <div className="flex items-center gap-1">
-            <Star className="w-4 h-4" />
-            <span>{repo.stargazerCount.toLocaleString()}</span>
-          </div>
-          {repo.primaryLanguage && <span>{repo.primaryLanguage}</span>}
-        </div>
+      <div className="text-[11px] text-ink-dim flex items-center gap-1">
+        <IconStar size={12} /> {formatStars(repo.stargazerCount)}
+      </div>
+      <div className="text-[11px] text-ink-dim border border-rule px-2 py-0.5 max-tablet:hidden">
+        {repo.primaryLanguage ?? '—'}
       </div>
     </a>
   )
 }
 
-export function ProjectsSection({ data, markdown }: ProjectsSectionProps) {
-  if (data.repositories.length === 0) {
-    return (
-      <div className="space-y-6">
-        <SectionHeader title="Projects" markdown={markdown} />
-        <p className="text-muted-foreground">No projects yet.</p>
-      </div>
-    )
-  }
-
-  const ownedRepos = data.repositories.filter((r) => r.isOwned)
-  const contributedRepos = data.repositories.filter((r) => !r.isOwned)
+export function ProjectsSection({ data }: ProjectsSectionProps) {
+  const owned = data.repositories.filter((r) => r.isOwned)
+  const contributed = data.repositories.filter((r) => !r.isOwned)
 
   return (
-    <div className="space-y-6">
-      <SectionHeader title="Projects" markdown={markdown} />
-
-      {ownedRepos.length > 0 && (
-        <div className="space-y-3">
-          <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
-            My Projects
-          </h2>
-          <div className="grid gap-3">
-            {ownedRepos.map((repo) => (
-              <OwnedRepoCard key={repo.id} repo={repo} />
+    <FadeIn>
+      {owned.length > 0 && (
+        <>
+          <SectionHead label="My projects" count={owned.length} />
+          <div className="flex flex-col border-[1.5px] border-ink shadow-tight bg-paper-2">
+            {owned.map((r) => (
+              <RepoRow key={r.id} repo={r} showDesc />
             ))}
           </div>
-        </div>
+        </>
       )}
 
-      {contributedRepos.length > 0 && (
-        <div className="space-y-3">
-          <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
-            Contributions
-          </h2>
-          <div className="grid gap-2">
-            {contributedRepos.map((repo) => (
-              <ContributedRepoCard key={repo.id} repo={repo} />
+      {contributed.length > 0 && (
+        <>
+          <SectionHead label="Contributions" count={contributed.length} />
+          <div className="flex flex-col border-[1.5px] border-ink shadow-tight bg-paper-2">
+            {contributed.map((r) => (
+              <RepoRow key={r.id} repo={r} showDesc={false} />
             ))}
           </div>
-        </div>
+        </>
       )}
-    </div>
+
+      {data.repositories.length === 0 && <p>No projects yet.</p>}
+    </FadeIn>
   )
 }

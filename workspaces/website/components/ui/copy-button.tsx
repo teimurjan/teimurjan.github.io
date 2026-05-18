@@ -1,17 +1,24 @@
 'use client'
 
-import { cn } from '@/lib/utils'
-import { Check, Copy } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { Button } from './button'
+import { IconCheck, IconCopy } from './sketch-icons'
 
 interface CopyButtonProps {
   text: string
   label?: string
   ariaLabel?: string
+  variant?: 'ghost' | 'solid' | 'naked'
   className?: string
 }
 
-export function CopyButton({ text, label = 'Copy', ariaLabel, className }: CopyButtonProps) {
+export function CopyButton({
+  text,
+  label,
+  ariaLabel,
+  variant = 'ghost',
+  className,
+}: CopyButtonProps) {
   const [copied, setCopied] = useState(false)
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -32,22 +39,18 @@ export function CopyButton({ text, label = 'Copy', ariaLabel, className }: CopyB
     }
   }, [text])
 
-  const Icon = copied ? Check : Copy
-  const visibleLabel = label ? (copied ? 'Copied' : label) : undefined
+  const Icon = copied ? IconCheck : IconCopy
+  const visibleLabel = label ? (copied ? 'Copied!' : label) : null
 
   return (
-    <button
-      type="button"
+    <Button
+      variant={variant}
       onClick={handleClick}
       aria-label={ariaLabel ?? (label ? `Copy ${label}` : 'Copy as markdown')}
-      className={cn(
-        'inline-flex items-center gap-2 text-sm text-foreground cursor-pointer',
-        label ? 'px-3 py-2' : 'p-2 text-muted-foreground hover:text-foreground',
-        className
-      )}
+      className={className}
     >
-      <Icon className="w-4 h-4" />
+      <Icon size={14} />
       {visibleLabel}
-    </button>
+    </Button>
   )
 }

@@ -1,18 +1,20 @@
-import Aurora from '@/components/ui/aurora'
 import gqlClient from '@/gql-client'
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Caveat, JetBrains_Mono } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
 
-const geist = Geist({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
-  variable: '--font-geist',
+  weight: ['400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-jetbrains-mono',
 })
 
-const geistMono = Geist_Mono({
+const caveat = Caveat({
   subsets: ['latin'],
-  variable: '--font-geist-mono',
+  weight: ['500', '700'],
+  variable: '--font-caveat',
 })
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -21,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
   } = await gqlClient.Bio()
 
   return {
-    title: fullName,
+    title: `${fullName} — ${headline}`,
     description: headline,
     metadataBase: URL.parse('https://teimurjan.dev'),
     icons: ['/logo.png'],
@@ -45,18 +47,13 @@ export default function Layout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className={`${jetbrainsMono.variable} ${caveat.variable}`}>
       <Script
         defer
         src="https://cloud.umami.is/script.js"
         data-website-id="f312ce9d-5eb0-4a08-8331-320723dfdaed"
       />
-      <body className={`${geist.variable} ${geistMono.variable} font-sans antialiased relative`}>
-        <div className="fixed inset-0 w-full h-full overflow-hidden">
-          <Aurora colorStops={['#6678ff', '#B19EEF', '#3d14e1']} />
-        </div>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   )
 }

@@ -1,19 +1,17 @@
-import { FileQuestion } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen relative overflow-hidden flex items-center justify-center">
-      <div className="bg-glass border border-glass-border rounded-2xl shadow-glass backdrop-blur-[40px] backdrop-saturate-150 p-8 max-w-md text-center relative z-10">
-        <FileQuestion className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
-        <h1 className="text-2xl font-semibold text-foreground mb-2">404 — Not Found</h1>
-        <p className="text-muted-foreground mb-6">The page you're looking for doesn't exist.</p>
-        <Link
-          href="/"
-          className="inline-block px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
-        >
+    <main className="relative z-[2] min-h-screen grid place-items-center p-6">
+      <div className="border-[1.5px] border-ink bg-paper-2 shadow-hard p-8 max-w-[420px] text-center">
+        <h1 className="m-0 mb-2 text-2xl font-bold">404 — Not Found</h1>
+        <p className="text-ink-dim m-0 mb-6">
+          The page you&apos;re looking for doesn&apos;t exist.
+        </p>
+        <Button as={Link} href="/">
           Go home
-        </Link>
+        </Button>
       </div>
     </main>
   )

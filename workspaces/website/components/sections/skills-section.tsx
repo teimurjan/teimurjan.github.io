@@ -15,7 +15,7 @@ function getMark(title: string) {
 
 export function SkillsSection({ data }: SkillsSectionProps) {
   return (
-    <FadeIn className="grid grid-cols-[repeat(auto-fill,minmax(170px,1fr))] gap-3 max-tablet:grid-cols-[repeat(auto-fill,minmax(140px,1fr))] max-mobile:grid-cols-2">
+    <FadeIn className="grid grid-cols-3 max-tablet:grid-cols-2 max-mobile:grid-cols-1 gap-3">
       {data.skills.map((skill) => (
         <div
           key={skill.id}

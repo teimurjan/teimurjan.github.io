@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+
+Host: https://teimurjan.dev
+Sitemap: https://teimurjan.dev/sitemap.xml

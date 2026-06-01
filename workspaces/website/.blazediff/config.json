@@ -1,0 +1,11 @@
+{
+  "devServer": {
+    "command": "yarn dev",
+    "port": 3000,
+    "readyTimeoutMs": 60000
+  },
+  "framework": "next",
+  "packageManager": "yarn",
+  "baseUrl": "http://127.0.0.1:3000",
+  "judge": "host"
+}

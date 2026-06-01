@@ -11,7 +11,8 @@
     "generate": "yarn generate-resume && yarn generate-opengraph",
     "generate-resume": "tsx --tsconfig ../resume/tsconfig.json ./cmd/generate-resume.ts",
     "generate-opengraph": "tsx ./cmd/generate-opengraph.ts",
-    "generate-opengraph:ci": "xvfb-run --auto-servernum tsx ./cmd/generate-opengraph.ts"
+    "generate-opengraph:ci": "xvfb-run --auto-servernum tsx ./cmd/generate-opengraph.ts",
+    "test:visual": "blazediff-agent check"
   },
   "dependencies": {
     "@octokit/rest": "^22.0.0",
@@ -33,6 +34,7 @@
   "devDependencies": {
     "@biomejs/js-api": "^4.0.0",
     "@biomejs/wasm-nodejs": "^2.3.13",
+    "@blazediff/agent": "^0.6.0",
     "@next/bundle-analyzer": "^16.2.6",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",

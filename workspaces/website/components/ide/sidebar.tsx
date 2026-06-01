@@ -9,9 +9,10 @@ import {
   IconSearch,
 } from '@/components/ui/sketch-icons'
 import { TagChip } from '@/components/ui/tag-chip'
-import type { FolderStructure, Section } from '@/lib/sections'
+import type { FolderStructure } from '@/lib/sections'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
+import Link from 'next/link'
 
 interface SidebarProps {
   folders: FolderStructure[]
@@ -22,7 +23,7 @@ interface SidebarProps {
   openFolders: Set<string>
   onToggleFolder: (name: string) => void
   onCollapseAll: () => void
-  onOpenFile: (section: Section) => void
+  hrefForSection: (id: string) => string
   onOpenPalette: () => void
   mobileOpen: boolean
 }
@@ -39,7 +40,7 @@ export function Sidebar({
   openFolders,
   onToggleFolder,
   onCollapseAll,
-  onOpenFile,
+  hrefForSection,
   onOpenPalette,
   mobileOpen,
 }: SidebarProps) {
@@ -111,13 +112,13 @@ export function Sidebar({
                 {folder.sections.map((section) => {
                   const isActive = activeId === section.id
                   return (
-                    <button
-                      type="button"
+                    <Link
                       key={section.id}
-                      onClick={() => onOpenFile(section)}
+                      href={hrefForSection(section.id)}
+                      aria-current={isActive ? 'page' : undefined}
                       className={cn(
                         TREE_ITEM_BASE,
-                        'hover:text-ink',
+                        'no-underline hover:text-ink',
                         isActive
                           ? 'text-ink bg-highlight before:content-[""] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-[3px] before:h-[70%] before:bg-ink'
                           : 'text-ink-dim'
@@ -126,7 +127,7 @@ export function Sidebar({
                       <span className="w-3" />
                       <IconFile size={14} className="shrink-0 opacity-90" />
                       <span>{section.filename}</span>
-                    </button>
+                    </Link>
                   )
                 })}
               </div>

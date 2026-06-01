@@ -1,0 +1,169 @@
+{
+  "version": 1,
+  "configHash": "sha256:8d055cb1b22e0b65b4d0a4fc4c04967dc8943d8afb8af7d9fe8205303357a2e4",
+  "stabilityHooksVersion": 1,
+  "entries": [
+    {
+      "id": "conferences",
+      "url": "/conferences",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "waitFor": [
+        "networkidle",
+        "fonts"
+      ],
+      "mask": [],
+      "fullPage": true,
+      "baselinePath": ".blazediff/baselines/conferences.png",
+      "captureHash": "sha256:d460aea3f823e4742bbd53f2d577d888770b886cbffe6dd9f03d7249c6545fe0",
+      "createdBy": "agent",
+      "createdAt": "2026-06-01"
+    },
+    {
+      "id": "education",
+      "url": "/education",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "waitFor": [
+        "networkidle",
+        "fonts"
+      ],
+      "mask": [],
+      "fullPage": true,
+      "baselinePath": ".blazediff/baselines/education.png",
+      "captureHash": "sha256:c3a9eb7a1b3c1a9b0767c2179222a319ac940f4b1f16309523c2148e500b696d",
+      "createdBy": "agent",
+      "createdAt": "2026-06-01"
+    },
+    {
+      "id": "experience",
+      "url": "/experience",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "waitFor": [
+        "networkidle",
+        "fonts"
+      ],
+      "mask": [],
+      "fullPage": true,
+      "baselinePath": ".blazediff/baselines/experience.png",
+      "captureHash": "sha256:0a07ff9b844be593e2a9d8edbfbf4eb2b689c85a2c4ad67d43a8e50c63f6a34d",
+      "createdBy": "agent",
+      "createdAt": "2026-06-01"
+    },
+    {
+      "id": "home",
+      "url": "/",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "waitFor": [
+        "networkidle",
+        "fonts"
+      ],
+      "mask": [],
+      "fullPage": true,
+      "baselinePath": ".blazediff/baselines/home.png",
+      "captureHash": "sha256:f4c036f0eb2f076e83b675dc21398017f2e823d6e45028fa2c50933a646008bd",
+      "createdBy": "agent",
+      "createdAt": "2026-06-01"
+    },
+    {
+      "id": "interviews",
+      "url": "/interviews",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "waitFor": [
+        "networkidle",
+        "fonts"
+      ],
+      "mask": [],
+      "fullPage": true,
+      "baselinePath": ".blazediff/baselines/interviews.png",
+      "captureHash": "sha256:0d243f7dae2d5bce3e8217c93b239ac11c7792cb077ddfae221b06ec024448ac",
+      "createdBy": "agent",
+      "createdAt": "2026-06-01"
+    },
+    {
+      "id": "not-found",
+      "url": "/_not-found",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "waitFor": [
+        "networkidle",
+        "fonts"
+      ],
+      "mask": [],
+      "fullPage": true,
+      "baselinePath": ".blazediff/baselines/not-found.png",
+      "captureHash": "sha256:9fdf328d5482286e7f8b4bfe34f839ef08bf70320ce5ce7b76239cb361f3c036",
+      "createdBy": "agent",
+      "createdAt": "2026-06-01"
+    },
+    {
+      "id": "projects",
+      "url": "/projects",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "waitFor": [
+        "networkidle",
+        "fonts"
+      ],
+      "mask": [],
+      "fullPage": true,
+      "baselinePath": ".blazediff/baselines/projects.png",
+      "captureHash": "sha256:d81de2276fd7334e1d71aa32ae7d26aa5e6f99df4eb5f43713c07a0033812937",
+      "createdBy": "agent",
+      "createdAt": "2026-06-01"
+    },
+    {
+      "id": "publications",
+      "url": "/publications",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "waitFor": [
+        "networkidle",
+        "fonts"
+      ],
+      "mask": [],
+      "fullPage": true,
+      "baselinePath": ".blazediff/baselines/publications.png",
+      "captureHash": "sha256:8456b85371dae1c9a87aa4bbfa58622a2ef4153183d4af3a9f18ce047f10ba7c",
+      "createdBy": "agent",
+      "createdAt": "2026-06-01"
+    },
+    {
+      "id": "skills",
+      "url": "/skills",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "waitFor": [
+        "networkidle",
+        "fonts"
+      ],
+      "mask": [],
+      "fullPage": true,
+      "baselinePath": ".blazediff/baselines/skills.png",
+      "captureHash": "sha256:d2a5e1e16c086a6a126b88278123e7323ed933e7d2df18679223d5582887a3c8",
+      "createdBy": "agent",
+      "createdAt": "2026-06-01"
+    }
+  ]
+}

@@ -1,4 +1,6 @@
-import gqlClient from '@/gql-client'
+import { IDEShell } from '@/components/ide/ide-shell'
+import { getSections } from '@/lib/get-sections'
+import { BASE_URL } from '@/lib/routes'
 import type { Metadata } from 'next'
 import { Caveat, JetBrains_Mono } from 'next/font/google'
 import Script from 'next/script'
@@ -18,20 +20,19 @@ const caveat = Caveat({
 })
 
 export async function generateMetadata(): Promise<Metadata> {
-  const {
-    bios: [{ fullName, headline }],
-  } = await gqlClient.Bio()
+  const { fullName, headline } = await getSections()
 
   return {
     title: `${fullName} — ${headline}`,
     description: headline,
-    metadataBase: URL.parse('https://teimurjan.dev'),
+    metadataBase: URL.parse(BASE_URL),
+    alternates: { canonical: '/' },
     icons: ['/logo.png'],
     openGraph: {
       images: ['/logo.png'],
       title: fullName,
       description: headline,
-      url: 'https://teimurjan.dev',
+      url: BASE_URL,
     },
     twitter: {
       images: ['/logo.png'],
@@ -41,11 +42,13 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-export default function Layout({
+export default async function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const { folders, fullName, headline } = await getSections()
+
   return (
     <html lang="en" className={`${jetbrainsMono.variable} ${caveat.variable}`}>
       <Script
@@ -53,7 +56,11 @@ export default function Layout({
         src="https://cloud.umami.is/script.js"
         data-website-id="f312ce9d-5eb0-4a08-8331-320723dfdaed"
       />
-      <body>{children}</body>
+      <body>
+        <IDEShell folders={folders} fullName={fullName} headline={headline}>
+          {children}
+        </IDEShell>
+      </body>
     </html>
   )
 }

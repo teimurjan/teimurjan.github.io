@@ -14,7 +14,7 @@ import { getClient } from '@teimurjan/gql-client'
 
 const GITHUB_USERNAME = 'teimurjan'
 const WEBSITE_URL = 'https://teimurjan.github.io'
-const MAINTAINED_PROJECTS = ['blazediff', 'avatune', 'lethe']
+const MAINTAINED_PROJECTS = ['blazediff', 'avatune', 'lethe', 'interviewium']
 
 const index = async () => {
   if (!process.env.HYGRAPH_URL) {

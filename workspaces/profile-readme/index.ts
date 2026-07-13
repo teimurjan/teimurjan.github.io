@@ -13,7 +13,7 @@ import {
 import { getClient } from '@teimurjan/gql-client'
 
 const GITHUB_USERNAME = 'teimurjan'
-const WEBSITE_URL = 'https://teimurjan.github.io'
+const WEBSITE_URL = 'https://teimurjan.dev'
 const MAINTAINED_PROJECTS = ['blazediff', 'avatune', 'lethe']
 
 const index = async () => {

@@ -1,6 +1,8 @@
 import { IDEShell } from '@/components/ide/ide-shell'
 import { getSections } from '@/lib/get-sections'
+import { llmsAlternateTypes } from '@/lib/llms-txt'
 import { BASE_URL } from '@/lib/routes'
+import { buildPersonJsonLd } from '@/lib/structured-data'
 import type { Metadata } from 'next'
 import { Caveat, JetBrains_Mono } from 'next/font/google'
 import Script from 'next/script'
@@ -26,7 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: `${fullName} — ${headline}`,
     description: headline,
     metadataBase: URL.parse(BASE_URL),
-    alternates: { canonical: '/' },
+    alternates: { canonical: '/', types: llmsAlternateTypes('about') },
     icons: ['/logo.png'],
     openGraph: {
       images: ['/logo.png'],
@@ -47,7 +49,8 @@ export default async function Layout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const { folders, fullName, headline } = await getSections()
+  const content = await getSections()
+  const { folders, fullName, headline } = content
 
   return (
     <html lang="en" className={`${jetbrainsMono.variable} ${caveat.variable}`}>
@@ -57,6 +60,10 @@ export default async function Layout({
         data-website-id="f312ce9d-5eb0-4a08-8331-320723dfdaed"
       />
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(buildPersonJsonLd(content)) }}
+        />
         <IDEShell folders={folders} fullName={fullName} headline={headline}>
           {children}
         </IDEShell>

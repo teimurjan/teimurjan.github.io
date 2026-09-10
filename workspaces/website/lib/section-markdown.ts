@@ -1,4 +1,5 @@
 import { prettyDate, prettyRange } from '@teimurjan/utils'
+import { PROFILE_LINKS } from './links'
 import type {
   AboutData,
   ConferencesData,
@@ -16,12 +17,16 @@ import type {
 const trimBlankLines = (s: string) => s.replace(/\n{3,}/g, '\n\n').trim()
 
 function aboutToMarkdown(data: AboutData & ContactData): string {
+  const links = Object.values(PROFILE_LINKS).map((link) => `- [${link.label}](${link.url})`)
+
   return trimBlankLines(`# About
 
 ${data.about}
 
 **Location:** ${data.location}
-**Email:** ${data.email}`)
+**Email:** ${data.email}
+
+${links.join('\n')}`)
 }
 
 function experienceToMarkdown(data: ExperienceData): string {

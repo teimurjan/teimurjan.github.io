@@ -14,7 +14,7 @@ import type {
 import type { Sdk } from '@teimurjan/gql-client'
 import { dateSorter } from '@teimurjan/utils'
 import { buildResumeMarkdown, sectionToMarkdown } from './section-markdown'
-import type { FolderStructure, Section } from './sections'
+import type { FolderStructure, Section, SiteContent } from './sections'
 
 function stripHtml(html: string): string {
   return html
@@ -270,11 +270,7 @@ export async function generateAllSections({
   githubToken,
   githubUsername,
   minStars = 50,
-}: GenerateAllSectionsParams): Promise<{
-  folders: FolderStructure[]
-  fullName: string
-  headline: string
-}> {
+}: GenerateAllSectionsParams): Promise<SiteContent> {
   const [bioData, educationData, experienceData, skillsData, mediaData] = await Promise.all([
     gqlClient.Bio(),
     gqlClient.Education(),

@@ -1,5 +1,6 @@
 import { SectionDoc } from '@/components/ide/section-doc'
 import { getAllSections, getSectionById, getSections } from '@/lib/get-sections'
+import { llmsAlternateTypes } from '@/lib/llms-txt'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
@@ -22,7 +23,7 @@ export async function generateMetadata({ params }: SectionPageProps): Promise<Me
     title,
     openGraph: { title },
     twitter: { title },
-    alternates: { canonical: `/${id}` },
+    alternates: { canonical: `/${id}`, types: llmsAlternateTypes(id) },
   }
 }
 

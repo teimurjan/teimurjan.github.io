@@ -12,6 +12,7 @@ import {
   IconMail,
 } from '@/components/ui/sketch-icons'
 import { TagChip } from '@/components/ui/tag-chip'
+import { PROFILE_LINKS, RESUME_PATH } from '@/lib/links'
 import type { AboutData, ContactData } from '@/lib/sections'
 import Image from 'next/image'
 
@@ -48,14 +49,14 @@ export function AboutSection({ data }: AboutSectionProps) {
       </div>
 
       <div className="flex gap-2 mb-5 max-tablet:flex-wrap">
-        <Button as="a" href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+        <Button as="a" href={RESUME_PATH} target="_blank" rel="noopener noreferrer">
           <IconDownload size={14} /> Download CV
         </Button>
         <CopyButton text={data.cvMarkdown} label="Copy CV" ariaLabel="Copy CV as markdown" />
         <Button
           as="a"
           variant="ghost"
-          href="https://adplist.org/mentors/teimur-gasanov?session=70480-mentorship-session"
+          href={PROFILE_LINKS.mentorship.url}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -78,7 +79,7 @@ export function AboutSection({ data }: AboutSectionProps) {
         <Button
           as="a"
           variant="ghost"
-          href="https://github.com/teimurjan"
+          href={PROFILE_LINKS.github.url}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -87,7 +88,7 @@ export function AboutSection({ data }: AboutSectionProps) {
         <Button
           as="a"
           variant="ghost"
-          href="https://www.linkedin.com/in/teimur-gasanov"
+          href={PROFILE_LINKS.linkedin.url}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -96,7 +97,7 @@ export function AboutSection({ data }: AboutSectionProps) {
         <Button
           as="a"
           variant="ghost"
-          href="https://www.toptal.com/resume/teimur-gasanov"
+          href={PROFILE_LINKS.toptal.url}
           target="_blank"
           rel="noopener noreferrer"
         >

@@ -146,3 +146,9 @@ export interface FolderStructure {
   name: string
   sections: Section[]
 }
+
+export interface SiteContent {
+  folders: FolderStructure[]
+  fullName: string
+  headline: string
+}

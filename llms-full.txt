@@ -1,0 +1,201 @@
+# Teimur Gasanov
+
+> Impact Engineer
+
+Full content of https://teimurjan.dev, one document per page.
+
+---
+
+Source: https://teimurjan.dev/
+
+# About
+
+I design and deploy high-impact systems built on LLMs, local inference, and agent architectures, working close to real problems and shipping production solutions that move core metrics.
+
+**Location:** Bishkek, Kyrgyzstan
+**Email:** me@teimurjan.dev
+
+- [GitHub](https://github.com/teimurjan)
+- [LinkedIn](https://www.linkedin.com/in/teimur-gasanov)
+- [Toptal](https://www.toptal.com/resume/teimur-gasanov)
+- [Mentorship on ADPList](https://adplist.org/mentors/teimur-gasanov?session=70480-mentorship-session)
+
+---
+
+Source: https://teimurjan.dev/experience
+
+# Experience
+
+## Member of Technical Staff @ Speechify
+*Jun 2025 - Now · Remote*
+
+- Scaled LLM translation engine from 20 to 43 locales across 10,000 pages, tripling non-English search clicks.
+- Lifted international revenue 2x YoY after unifying translation across website, web app, mobile, and payments.
+- Shipped flow-based video pipeline service (0-1), doubling international creative output.
+
+## Senior Frontend Engineer @ Form
+*Sep 2022 - Jun 2025 · Remote*
+
+- Launched 5 Web3 applications, scaling to 100k+ users with reliable blockchain integrations.
+- Built and led an open-source package ecosystem, reducing code duplication and improving team efficiency by 30%.
+- Led migration to a monorepo, improving collaboration and cutting build times by 25% while streamlining CI/CD.
+
+## Senior Software Engineer @ Klarna
+*Jan 2022 - Jan 2023 · Berlin, Germany*
+
+- Launched React Native onboarding library used by 3+ teams, cutting onboarding time by 40%.
+- Integrated intent-aware Siri Shortcuts into the Klarna app, boosting return-to-app rate by 10%.
+- Created an automated testing Google Sheets plugin, reducing manual testing hours by 50%.
+
+## Senior Frontend Engineer @ Toptal
+*Sep 2020 - Dec 2021 · Remote*
+
+- Scaled a shared component system, cutting UI development time by 50% across products.
+- Led CI/CD migration from Jenkins to GitHub Actions, accelerating deployments by 30%.
+- Mentored 10+ engineers on monorepo architecture, improving delivery efficiency by 25%.
+
+## Frontend Engineer @ Clubhouse (currently Shortcut)
+*Feb 2019 - Sep 2020 · Remote*
+
+- Doubled page navigation speed via strategic code splitting, improving usability and session duration.
+- Led migration from jQuery to React, modernizing the architecture and reducing maintenance effort by 40%.
+- Built a CMS-powered landing page enabling no-code marketing updates and increasing lead conversion by 12%.
+
+## Frontend Engineer @ weffect
+*Jun 2018 - Jan 2019 · Remote*
+
+- Cut paint time by 25% by migrating animations from CSS/JS to WebGL.
+- Guarded the app with integration tests, increasing UI uptime and reducing production incidents by 40%.
+
+## Software Engineer @ Attractor Software
+*Oct 2016 - May 2018 · Bishkek, Kyrgyzstan*
+
+- Doubled site performance, cutting load time to 2s and increasing conversions by 15%.
+- Built a browser extension to detect live report errors, improving data accuracy and productivity by 40%.
+
+---
+
+Source: https://teimurjan.dev/skills
+
+# Skills
+
+- **JavaScript** — 9y
+- **TypeScript** — 9y
+- **CI/CD** — 8y
+- **Docker** — 8y
+- **React** — 8y
+- **GraphQL** — 7y
+- **Go** — 6y
+- **LangGraph** — 2y
+- **GPT** — 2y
+- **Claude** — 2y
+- **Rust** — 2y
+- **Agent Development Kit** — 1y
+
+---
+
+Source: https://teimurjan.dev/education
+
+# Education
+
+## Ala-too Internatinal University
+*Bachelor's Degree in Computer Science* · Sep 2015 - Jun 2019
+
+- Created a self-driving toy car using image processing and machine learning techniques.
+- Created a peer-to-peer local network using Go.
+- Participated in competitive programming initiatives.
+
+---
+
+Source: https://teimurjan.dev/projects
+
+# Projects
+
+## My Projects
+
+- [teimurjan/blazediff](https://github.com/teimurjan/blazediff) — ⭐ 338 · Rust
+  Blazing-fast diff ecosystem for JavaScript applications
+
+## Contributions
+
+- [ant-design/ant-design](https://github.com/ant-design/ant-design) — ⭐ 99,461 · TypeScript
+  An enterprise-class UI design language and React UI library
+- [storybookjs/storybook](https://github.com/storybookjs/storybook) — ⭐ 91,028 · TypeScript
+  Storybook is the industry standard workshop for building, documenting, and testing UI components in isolation
+- [facebook/docusaurus](https://github.com/facebook/docusaurus) — ⭐ 66,215 · TypeScript
+  Easy to maintain open source documentation websites.
+- [apexcharts/apexcharts.js](https://github.com/apexcharts/apexcharts.js) — ⭐ 15,152 · JavaScript
+  📊 Interactive JavaScript Charts built on SVG
+- [segmentio/evergreen](https://github.com/segmentio/evergreen) — ⭐ 12,421 · JavaScript
+  🌲 Evergreen React UI Framework by Segment
+- [vega/vega](https://github.com/vega/vega) — ⭐ 11,984 · JavaScript
+  A visualization grammar.
+- [ethereum-lists/chains](https://github.com/ethereum-lists/chains) — ⭐ 9,825 · Kotlin
+  provides metadata for chains
+- [Shopify/react-native-skia](https://github.com/Shopify/react-native-skia) — ⭐ 8,552 · TypeScript
+  High-performance React Native Graphics using Skia
+- [ant-design/x](https://github.com/ant-design/x) — ⭐ 4,770 · TypeScript
+  Craft AI-driven interface effortlessly🤖
+- [flow-typed/flow-typed](https://github.com/flow-typed/flow-typed) — ⭐ 3,755 · JavaScript
+  A central repository for Flow library definitions
+- [wevm/viem](https://github.com/wevm/viem) — ⭐ 3,551 · TypeScript
+  TypeScript Interface for Ethereum
+- [antvis/G](https://github.com/antvis/G) — ⭐ 1,215 · TypeScript
+  💥 A flexible rendering engine for visualization.
+- [coinbase/onchainkit](https://github.com/coinbase/onchainkit) — ⭐ 1,042 · TypeScript
+  React components and TypeScript utilities to help you build top-tier onchain apps.
+- [antvis/GPT-Vis](https://github.com/antvis/GPT-Vis) — ⭐ 779 · TypeScript
+  🤖 GPT Vision, Visualization for AI Friendly! AntV's entry for AI, and 100% generated by AI.
+- [digitalocean/action-doctl](https://github.com/digitalocean/action-doctl) — ⭐ 520 · JavaScript
+  GitHub Actions for DigitalOcean - doctl
+- [gophercises/quiz](https://github.com/gophercises/quiz) — ⭐ 470 · Go
+  Ex 1 - Run timed quizzes via the command line
+- [saurabhnemade/react-twitter-embed](https://github.com/saurabhnemade/react-twitter-embed) — ⭐ 370 · TypeScript
+  Simplest way to add twitter widgets to your react project.
+- [jakobhoeg/browser-ai](https://github.com/jakobhoeg/browser-ai) — ⭐ 195 · TypeScript
+  TypeScript SDK for different in-browser AI model providers, built to make client-side AI integration simpler and more consistent across vendors.
+- [gophercises/urlshort](https://github.com/gophercises/urlshort) — ⭐ 141 · Go
+  Ex 2 - Create an http.Handler that forwards paths to other URLs
+- [toptal/picasso](https://github.com/toptal/picasso) — ⭐ 139 · TypeScript
+  Toptal UI components library
+- [avatune/avatune](https://github.com/avatune/avatune) — ⭐ 128 · TypeScript
+  Tuning visual identity, emotional tone. Feels friendly & composable.
+
+---
+
+Source: https://teimurjan.dev/publications
+
+# Publications
+
+- [The Math Behind Difference: From Pixels to Semantic Diffing](https://substack.com/home/post/p-212826825) — Aug 2026
+- [Experimental Results from a Self-Improving Retrieval System for Conversational Memory](https://hackernoon.com/experimental-results-from-a-self-improving-retrieval-system-for-conversational-memory) — May 2026
+- [I Tried to Make LLM Memory Evolve Like Antibodies: Here's What Broke](https://hackernoon.com/i-tried-to-make-llm-memory-evolve-like-antibodies-heres-what-broke) — Apr 2026
+- [Beating JavaScript Performance Limits With Rust and N-API: Building a Faster Image Diff Tool](https://hackernoon.com/beating-javascript-performance-limits-with-rust-and-n-api-building-a-faster-image-diff-tool) — Mar 2026
+- [Porting Scientific Algorithms from MATLAB to JavaScript](https://hackernoon.com/porting-scientific-algorithms-from-matlab-to-javascript) — Dec 2025
+- [Building BlazeDiff: How I Made The Fastest Image Diff up-to 60% Faster with Block-Level Optimization](https://dev.to/teimurjan/building-blazediff-how-i-made-the-fastest-image-diff-up-to-60-faster-with-block-level-optimization-ok7) — Sep 2025
+- [Building a Robust JS/TS Monorepo: Best Practices with Yarn, NX and Changesets](https://hackernoon.com/building-a-robust-jsts-monorepo-best-practices-with-yarn-nx-and-changesets) — Mar 2025
+- [Crafting Automation Magic: A Look Into Modern CV Development Techniques](https://hackernoon.com/crafting-automation-magic-a-look-into-modern-cv-development-techniques) — Oct 2023
+- [Demystifying Debugging With React Developer Tools](https://www.toptal.com/react/debugging-react-developer-tools) — Jan 2023
+- [The Best React State Management Tools for Enterprise Applications](https://www.toptal.com/react/react-state-management-tools-enterprise) — Jul 2021
+- [Machine Learning Number Recognition - From Zero to Application](https://www.toptal.com/data-science/machine-learning-number-recognition) — Jan 2021
+- [Lighter and Faster - A Guide to the Svelte Framework](https://www.toptal.com/front-end/svelte-framework-guide) — Oct 2019
+
+---
+
+Source: https://teimurjan.dev/conferences
+
+# Conferences
+
+- **"Career growth recipes"** at IT Entrance Belarus 2020 — Dec 2020 · https://entrance.by/
+- **"Proper documentation with React"** at GDG Almaty 2018 — Oct 2018 · https://m.facebook.com/GDGAlmaty/posts/2286677874707203
+- **"Data visualization in Python"** at PyCon Kyrgyzstan 2018 — Sep 2018 · https://en-gb.facebook.com/events/389576511550143/?active_tab=about
+- **"Optimization of React applications"** at GDG IWD Bishkek 2018 — Mar 2018 · https://gdg.community.dev/events/details/google-gdg-bishkek-presents-gdg-iwd-2018/
+
+---
+
+Source: https://teimurjan.dev/interviews
+
+# Interviews
+
+- [Кыргызстанец вошел в международный список талантов и разрабатывает ИИ-решения в компании с капитализацией $10 млрд](https://limon.kg/ru/news:84696) — Aug 2025
+- IT-специалист: “Toptal – это реальный шанс выйти на новый уровень” — Sep 2020

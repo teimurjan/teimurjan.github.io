@@ -1,0 +1,37 @@
+# Teimur Gasanov
+
+> Impact Engineer
+
+I design and deploy high-impact systems built on LLMs, local inference, and agent architectures, working close to real problems and shipping production solutions that move core metrics.
+
+- Location: Bishkek, Kyrgyzstan
+- Email: me@teimurjan.dev
+- GitHub: https://github.com/teimurjan
+- LinkedIn: https://www.linkedin.com/in/teimur-gasanov
+- Toptal: https://www.toptal.com/resume/teimur-gasanov
+- Mentorship on ADPList: https://adplist.org/mentors/teimur-gasanov?session=70480-mentorship-session
+
+Every page below is a Markdown mirror of a page on https://teimurjan.dev — the HTML version of `/llms/<page>.md` lives at `/<page>` (`about` is the home page).
+
+## Personal
+
+- [About](https://teimurjan.dev/llms/about.md): Bio, current focus, location and contact details
+
+## Career
+
+- [Experience](https://teimurjan.dev/llms/experience.md): 7 roles, most recently Member of Technical Staff at Speechify (Jun 2025 - Now)
+- [Skills](https://teimurjan.dev/llms/skills.md): 12 technologies with years of experience, up to 9y — led by JavaScript, TypeScript, CI/CD
+- [Education](https://teimurjan.dev/llms/education.md): Degrees from Ala-too Internatinal University
+
+## Contribution
+
+- [Projects](https://teimurjan.dev/llms/projects.md): 22 open-source repositories owned or contributed to, 332,051 stars combined
+- [Publications](https://teimurjan.dev/llms/publications.md): 12 articles, latest "The Math Behind Difference: From Pixels to Semantic Diffing" (Aug 2026)
+- [Conferences](https://teimurjan.dev/llms/conferences.md): 4 talks, latest "Career growth recipes" at IT Entrance Belarus 2020 (Dec 2020)
+- [Interviews](https://teimurjan.dev/llms/interviews.md): 2 interviews and podcasts, latest "Кыргызстанец вошел в международный список талантов и разрабатывает ИИ-решения в компании с капитализацией $10 млрд" (Aug 2025)
+
+## Optional
+
+- [Everything in one file](https://teimurjan.dev/llms-full.txt): every page above concatenated
+- [Résumé](https://teimurjan.dev/resume.pdf): the same career history as a PDF
+- [Sitemap](https://teimurjan.dev/sitemap.xml): the HTML pages

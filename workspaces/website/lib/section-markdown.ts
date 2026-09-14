@@ -8,6 +8,7 @@ import type {
   ExperienceData,
   FolderStructure,
   InterviewsData,
+  ProductsData,
   ProjectsData,
   PublicationsData,
   Section,
@@ -55,6 +56,14 @@ function educationToMarkdown(data: EducationData): string {
 *${degreeLine}* · ${range}${body}`
   })
   return trimBlankLines(`# Education\n\n${entries.join('\n\n')}`)
+}
+
+function productsToMarkdown(data: ProductsData): string {
+  const entries = data.products.map((product) => {
+    const heading = product.link ? `## [${product.name}](${product.link})` : `## ${product.name}`
+    return `${heading}\n\n${product.description}`
+  })
+  return trimBlankLines(`# Products\n\n${entries.join('\n\n')}`)
 }
 
 function projectsToMarkdown(data: ProjectsData): string {
@@ -107,6 +116,8 @@ export function sectionToMarkdown(section: Section): string {
       return skillsToMarkdown(section.data)
     case 'education':
       return educationToMarkdown(section.data)
+    case 'products':
+      return productsToMarkdown(section.data)
     case 'projects':
       return projectsToMarkdown(section.data)
     case 'publications':

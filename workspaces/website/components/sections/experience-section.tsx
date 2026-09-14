@@ -18,10 +18,10 @@ function getMark(company: string) {
 export function ExperienceSection({ data }: ExperienceSectionProps) {
   return (
     <FadeIn>
-      {data.experiences.map((exp, i) => {
+      {data.experiences.map((exp) => {
         const bullets = exp.bullets.length > 0 ? exp.bullets : [exp.description]
         return (
-          <Card key={exp.id} tilt={i % 2 === 1 ? 'r' : 'l'}>
+          <Card key={exp.id}>
             <div className="grid grid-cols-[56px_1fr] gap-4 items-start max-tablet:grid-cols-[44px_1fr] max-tablet:gap-3">
               <AvatarBox size="lg" className="text-[18px] font-bold max-tablet:text-base">
                 {exp.logoUrl ? (

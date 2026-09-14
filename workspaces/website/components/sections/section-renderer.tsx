@@ -4,6 +4,7 @@ import { ConferencesSection } from './conferences-section'
 import { EducationSection } from './education-section'
 import { ExperienceSection } from './experience-section'
 import { InterviewsSection } from './interviews-section'
+import { ProductsSection } from './products-section'
 import { ProjectsSection } from './projects-section'
 import { PublicationsSection } from './publications-section'
 import { SkillsSection } from './skills-section'
@@ -22,6 +23,8 @@ export function SectionRenderer({ section }: SectionRendererProps) {
       return <SkillsSection data={section.data} />
     case 'education':
       return <EducationSection data={section.data} />
+    case 'products':
+      return <ProductsSection data={section.data} />
     case 'projects':
       return <ProjectsSection data={section.data} />
     case 'publications':

@@ -40,6 +40,12 @@ function summarize(section: Section): string {
       const schools = educations.map((education) => education.school)
       return schools.length > 0 ? `Degrees from ${schools.join(', ')}` : 'Education history'
     }
+    case 'products': {
+      const { products } = section.data
+      if (products.length === 0) return 'Products I have built'
+      const names = products.map((product) => `"${product.name}"`)
+      return `${products.length} products I have built — ${names.join(', ')}`
+    }
     case 'projects': {
       const { repositories } = section.data
       const stars = repositories.reduce((total, repo) => total + repo.stargazerCount, 0)

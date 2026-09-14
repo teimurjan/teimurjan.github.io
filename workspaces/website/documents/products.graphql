@@ -1,0 +1,14 @@
+query Products {
+  products {
+    __typename
+    id
+    name
+    link
+    description {
+      html
+    }
+    logo {
+      url
+    }
+  }
+}

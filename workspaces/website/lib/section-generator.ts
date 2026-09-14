@@ -9,6 +9,7 @@ import type {
   EducationQuery,
   ExperienceHistoryQuery,
   MediaQuery,
+  ProductsQuery,
   SkillsQuery,
 } from '@teimurjan/gql-client'
 import type { Sdk } from '@teimurjan/gql-client'
@@ -157,6 +158,25 @@ function generateEducation(educations: EducationQuery['educations']): Section {
   })
 }
 
+function generateProducts(products: ProductsQuery['products']): Section {
+  return withMarkdown({
+    type: 'products',
+    id: 'products',
+    filename: 'products.md',
+    title: 'Products',
+    folder: 'contribution',
+    data: {
+      products: products.map((product) => ({
+        id: product.id,
+        name: product.name,
+        link: product.link || null,
+        description: stripHtml(product.description.html),
+        logoUrl: product.logo.url,
+      })),
+    },
+  })
+}
+
 function generateProjects(repositories: ContributedRepository[], username: string): Section {
   return withMarkdown({
     type: 'projects',
@@ -271,13 +291,15 @@ export async function generateAllSections({
   githubUsername,
   minStars = 50,
 }: GenerateAllSectionsParams): Promise<SiteContent> {
-  const [bioData, educationData, experienceData, skillsData, mediaData] = await Promise.all([
-    gqlClient.Bio(),
-    gqlClient.Education(),
-    gqlClient.ExperienceHistory(),
-    gqlClient.Skills(),
-    gqlClient.Media(),
-  ])
+  const [bioData, educationData, experienceData, skillsData, productsData, mediaData] =
+    await Promise.all([
+      gqlClient.Bio(),
+      gqlClient.Education(),
+      gqlClient.ExperienceHistory(),
+      gqlClient.Skills(),
+      gqlClient.Products(),
+      gqlClient.Media(),
+    ])
 
   const bio = bioData.bios[0]
 
@@ -311,6 +333,7 @@ export async function generateAllSections({
     {
       name: 'contribution',
       sections: [
+        generateProducts(productsData.products),
         generateProjects(filteredRepos, githubUsername),
         generatePublications(mediaData.publications),
         generateConferences(mediaData.conferences),

@@ -77,6 +77,18 @@ export interface ProjectsData {
   repositories: Repository[]
 }
 
+export interface Product {
+  id: string
+  name: string
+  link: string | null
+  description: string
+  logoUrl: string
+}
+
+export interface ProductsData {
+  products: Product[]
+}
+
 export interface Publication {
   id: string
   title: string
@@ -137,6 +149,7 @@ export type Section =
   | (SectionBase & { type: 'experience'; data: ExperienceData })
   | (SectionBase & { type: 'skills'; data: SkillsData })
   | (SectionBase & { type: 'education'; data: EducationData })
+  | (SectionBase & { type: 'products'; data: ProductsData })
   | (SectionBase & { type: 'projects'; data: ProjectsData })
   | (SectionBase & { type: 'publications'; data: PublicationsData })
   | (SectionBase & { type: 'conferences'; data: ConferencesData })

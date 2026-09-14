@@ -76,8 +76,7 @@ const buildHtml = ({ fullName, headline }: Bio) => {
 
   .body {
     flex: 1;
-    display: flex;
-    justify-content: flex-end;
+    display: flex;    justify-content: flex-end;
     align-items: center;
     padding: 0 90px;
     min-height: 0;

@@ -92,6 +92,20 @@ export const IconLinkedIn = (p: IconProps) => (
   </Ic>
 )
 
+export const IconSubstack = (p: IconProps) => (
+  <Ic {...p}>
+    <path d="M4.5 4.5 L 19.5 4.5 M 4.5 9 L 19.5 9" />
+    <path d="M4.5 13.5 L 19.5 13.5 L 19.5 20.5 L 12 16.3 L 4.5 20.5 Z" />
+  </Ic>
+)
+
+export const IconTelegram = (p: IconProps) => (
+  <Ic {...p}>
+    <path d="M20.5 3.8 L 14.2 20.2 L 10.4 13.2 L 3.5 10.2 Z" />
+    <path d="M20.5 3.8 L 10.4 13.2" />
+  </Ic>
+)
+
 export const IconLink = (p: IconProps) => (
   <Ic {...p}>
     <path d="M10 14 C 11.5 15.5, 13.5 15.5, 15 14 L 18 11 C 19.5 9.5, 19.5 7, 18 5.5 C 16.5 4, 14 4, 12.5 5.5 L 11 7" />

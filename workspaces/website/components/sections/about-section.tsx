@@ -10,6 +10,8 @@ import {
   IconLink,
   IconLinkedIn,
   IconMail,
+  IconSubstack,
+  IconTelegram,
 } from '@/components/ui/sketch-icons'
 import { TagChip } from '@/components/ui/tag-chip'
 import { PROFILE_LINKS, RESUME_PATH } from '@/lib/links'
@@ -93,6 +95,24 @@ export function AboutSection({ data }: AboutSectionProps) {
           rel="noopener noreferrer"
         >
           <IconLinkedIn size={14} /> LinkedIn
+        </Button>
+        <Button
+          as="a"
+          variant="ghost"
+          href={PROFILE_LINKS.substack.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <IconSubstack size={14} /> Substack
+        </Button>
+        <Button
+          as="a"
+          variant="ghost"
+          href={PROFILE_LINKS.telegram.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <IconTelegram size={14} /> Telegram
         </Button>
         <Button
           as="a"

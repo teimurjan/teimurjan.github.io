@@ -1,0 +1,3 @@
+[submodule ".vendor/teimurjan-llm-wiki"]
+	path = .vendor/teimurjan-llm-wiki
+	url = git@github.com:teimurjan/llm-wiki.git

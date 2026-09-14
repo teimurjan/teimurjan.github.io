@@ -1,6 +1,6 @@
 # Teimur Gasanov
 
-> Impact Engineer
+> Member of Technical Staff @ Speechify
 
 I design and deploy high-impact systems built on LLMs, local inference, and agent architectures, working close to real problems and shipping production solutions that move core metrics.
 
@@ -8,6 +8,8 @@ I design and deploy high-impact systems built on LLMs, local inference, and agen
 - Email: me@teimurjan.dev
 - GitHub: https://github.com/teimurjan
 - LinkedIn: https://www.linkedin.com/in/teimur-gasanov
+- Substack: https://substack.com/@teimurjan
+- Telegram: https://t.me/headcount0
 - Toptal: https://www.toptal.com/resume/teimur-gasanov
 - Mentorship on ADPList: https://adplist.org/mentors/teimur-gasanov?session=70480-mentorship-session
 
@@ -25,7 +27,8 @@ Every page below is a Markdown mirror of a page on https://teimurjan.dev — the
 
 ## Contribution
 
-- [Projects](https://teimurjan.dev/llms/projects.md): 22 open-source repositories owned or contributed to, 332,051 stars combined
+- [Products](https://teimurjan.dev/llms/products.md): 2 products I have built — "Interviewium", "Wait, Professor"
+- [Projects](https://teimurjan.dev/llms/projects.md): 22 open-source repositories owned or contributed to, 332,208 stars combined
 - [Publications](https://teimurjan.dev/llms/publications.md): 12 articles, latest "The Math Behind Difference: From Pixels to Semantic Diffing" (Aug 2026)
 - [Conferences](https://teimurjan.dev/llms/conferences.md): 4 talks, latest "Career growth recipes" at IT Entrance Belarus 2020 (Dec 2020)
 - [Interviews](https://teimurjan.dev/llms/interviews.md): 2 interviews and podcasts, latest "Кыргызстанец вошел в международный список талантов и разрабатывает ИИ-решения в компании с капитализацией $10 млрд" (Aug 2025)

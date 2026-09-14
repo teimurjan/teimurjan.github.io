@@ -21,6 +21,11 @@
 <priority>0.8</priority>
 </url>
 <url>
+<loc>https://teimurjan.dev/products</loc>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
 <loc>https://teimurjan.dev/projects</loc>
 <changefreq>monthly</changefreq>
 <priority>0.8</priority>

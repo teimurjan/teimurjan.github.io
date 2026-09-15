@@ -8,20 +8,20 @@ const WIDTH = 4200
 const HEIGHT = 700
 const SCALE = 2
 
+// What I actually do, instead of the CMS headline (a job title).
+const TAGLINE = ['10 years as an engineer,', 'launching products with 0 headcount.']
+
 // LinkedIn overlays the profile photo + name on the bottom-left of the cover, so
 // the whole left band is intentionally kept empty and the editor content sits right.
 const escapeHtml = (value: string) =>
   value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 
-interface Bio {
+interface Cover {
   fullName: string
-  headline: string
+  tagline: string[]
 }
 
-const buildHtml = ({ fullName, headline }: Bio) => {
-  const lines: string[] = []
-
-  return `<!doctype html>
+const buildHtml = ({ fullName, tagline }: Cover) => `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
@@ -76,7 +76,8 @@ const buildHtml = ({ fullName, headline }: Bio) => {
 
   .body {
     flex: 1;
-    display: flex;    justify-content: flex-end;
+    display: flex;
+    justify-content: flex-end;
     align-items: center;
     padding: 0 90px;
     min-height: 0;
@@ -104,19 +105,12 @@ const buildHtml = ({ fullName, headline }: Bio) => {
     opacity: 0.75;
   }
 
-  .doc .headline {
-    font-size: 48px;
+  .doc .tagline {
+    margin-top: 28px;
+    font-size: 40px;
+    line-height: 1.3;
     color: var(--ink-dim);
-    margin-top: 26px;
   }
-
-  .doc .lines {
-    margin-top: 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-  }
-  .doc .lines span { font-size: 15px; color: var(--ink-dim); }
 
   .doc .url {
     margin-top: 26px;
@@ -131,19 +125,15 @@ const buildHtml = ({ fullName, headline }: Bio) => {
     <div class="body">
       <div class="doc">
         <h1>${escapeHtml(fullName)}</h1>
-        <div class="headline">${escapeHtml(headline)}</div>
-        <div class="lines">
-          ${lines.map((line) => `<span>${line}</span>`).join('\n          ')}
-        </div>
+        <div class="tagline">${tagline.map(escapeHtml).join('<br />')}</div>
         <div class="url"><span class="prompt">$</span>open https://teimurjan.dev</div>
       </div>
     </div>
   </div>
 </body>
 </html>`
-}
 
-const getBio = async (): Promise<Bio> => {
+const getFullName = async () => {
   const envPath = path.resolve(__dirname, '../.env')
   if (fs.existsSync(envPath)) process.loadEnvFile(envPath)
 
@@ -152,12 +142,12 @@ const getBio = async (): Promise<Bio> => {
   const bio = bios[0]
   if (!bio) throw new Error('generate-linkedin-cover: no bio found')
 
-  return { fullName: bio.fullName, headline: bio.headline }
+  return bio.fullName
 }
 
 const main = async () => {
   console.log('generate-linkedin-cover: fetching bio...')
-  const bio = await getBio()
+  const fullName = await getFullName()
 
   console.log('generate-linkedin-cover: launching playwright...')
   const browser = await chromium.launch()
@@ -166,7 +156,7 @@ const main = async () => {
     deviceScaleFactor: SCALE,
   })
 
-  await page.setContent(buildHtml(bio), { waitUntil: 'networkidle' })
+  await page.setContent(buildHtml({ fullName, tagline: TAGLINE }), { waitUntil: 'networkidle' })
   await page.evaluate(() => document.fonts.ready)
 
   const outputPath = path.resolve(__dirname, '../public/linkedin-cover.png')

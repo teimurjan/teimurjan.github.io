@@ -27,8 +27,8 @@ Every page below is a Markdown mirror of a page on https://teimurjan.dev — the
 
 ## Contribution
 
-- [Products](https://teimurjan.dev/llms/products.md): 2 products I have built — "Interviewium", "Wait, Professor"
-- [Projects](https://teimurjan.dev/llms/projects.md): 22 open-source repositories owned or contributed to, 332,217 stars combined
+- [Products](https://teimurjan.dev/llms/products.md): 3 products I have built — "Interviewium", "Wait, Professor", "Printyard"
+- [Projects](https://teimurjan.dev/llms/projects.md): 22 open-source repositories owned or contributed to, 332,478 stars combined
 - [Publications](https://teimurjan.dev/llms/publications.md): 12 articles, latest "The Math Behind Difference: From Pixels to Semantic Diffing" (Aug 2026)
 - [Conferences](https://teimurjan.dev/llms/conferences.md): 4 talks, latest "Career growth recipes" at IT Entrance Belarus 2020 (Dec 2020)
 - [Interviews](https://teimurjan.dev/llms/interviews.md): 2 interviews and podcasts, latest "Кыргызстанец вошел в международный список талантов и разрабатывает ИИ-решения в компании с капитализацией $10 млрд" (Aug 2025)

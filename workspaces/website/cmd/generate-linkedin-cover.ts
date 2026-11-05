@@ -88,7 +88,7 @@ const buildHtml = ({ fullName, tagline }: Cover) => `<!doctype html>
   .doc h1 {
     position: relative;
     display: inline-block;
-    font-size: 80px;
+    font-size: 72px;
     font-weight: 700;
     letter-spacing: -0.01em;
     line-height: 1.05;
@@ -106,15 +106,15 @@ const buildHtml = ({ fullName, tagline }: Cover) => `<!doctype html>
   }
 
   .doc .tagline {
-    margin-top: 28px;
-    font-size: 40px;
+    margin-top: 24px;
+    font-size: 36px;
     line-height: 1.3;
     color: var(--ink-dim);
   }
 
   .doc .url {
-    margin-top: 26px;
-    font-size: 32px;
+    margin-top: 22px;
+    font-size: 30px;
     color: var(--ink);
   }
   .doc .url .prompt { color: var(--ink-faint); margin-right: 8px; }

@@ -5,7 +5,7 @@
 
 - Scaled LLM translation engine from 20 to 43 locales across 10,000 pages, tripling non-English search clicks.
 - Lifted international revenue 2x YoY after unifying translation across website, web app, mobile, and payments.
-- Shipped flow-based video pipeline service (0-1), doubling international creative output.
+- Shipped flow-based marketing pipeline service (0-1), doubling localized creative output.
 
 ## Senior Frontend Engineer @ Form
 *Sep 2022 - Jun 2025 · Remote*

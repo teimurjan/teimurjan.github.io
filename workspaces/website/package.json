@@ -43,7 +43,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "playwright": "^1.50.1",
+    "playwright": "^1.64.1",
     "postcss": "^8.4.47",
     "tailwindcss": "^4",
     "tsx": "^4.19.3",

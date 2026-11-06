@@ -1,6 +1,6 @@
 # Querygauge Privacy Policy
 
-Effective November 5, 2026. This policy covers [Querygauge](/lab/querygauge), a private tool that only I, Teimur Gasanov, use.
+Effective November 5, 2026. This policy covers Querygauge, a private tool that only I, Teimur Gasanov, use.
 
 ## Data access
 

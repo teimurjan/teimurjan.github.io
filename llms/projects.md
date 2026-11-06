@@ -7,27 +7,27 @@
 
 ## Contributions
 
-- [ant-design/ant-design](https://github.com/ant-design/ant-design) — ⭐ 100,086 · TypeScript
+- [ant-design/ant-design](https://github.com/ant-design/ant-design) — ⭐ 100,094 · TypeScript
   An enterprise-class UI design language and React UI library
-- [storybookjs/storybook](https://github.com/storybookjs/storybook) — ⭐ 91,463 · TypeScript
+- [storybookjs/storybook](https://github.com/storybookjs/storybook) — ⭐ 91,466 · TypeScript
   Storybook is the industry standard workshop for building, documenting, and testing UI components in isolation
-- [meta/docusaurus](https://github.com/meta/docusaurus) — ⭐ 66,659 · TypeScript
+- [meta/docusaurus](https://github.com/meta/docusaurus) — ⭐ 66,660 · TypeScript
   Easy to maintain open source documentation websites.
-- [apexcharts/apexcharts.js](https://github.com/apexcharts/apexcharts.js) — ⭐ 15,185 · JavaScript
+- [apexcharts/apexcharts.js](https://github.com/apexcharts/apexcharts.js) — ⭐ 15,187 · JavaScript
   📊 Interactive JavaScript Charts built on SVG
 - [segmentio/evergreen](https://github.com/segmentio/evergreen) — ⭐ 12,428 · JavaScript
   🌲 Evergreen React UI Framework by Segment
-- [vega/vega](https://github.com/vega/vega) — ⭐ 12,033 · JavaScript
+- [vega/vega](https://github.com/vega/vega) — ⭐ 12,036 · JavaScript
   A visualization grammar.
-- [ethereum-lists/chains](https://github.com/ethereum-lists/chains) — ⭐ 9,835 · Kotlin
+- [ethereum-lists/chains](https://github.com/ethereum-lists/chains) — ⭐ 9,834 · Kotlin
   provides metadata for chains
-- [wcandillon/react-native-skia](https://github.com/wcandillon/react-native-skia) — ⭐ 8,770 · TypeScript
+- [wcandillon/react-native-skia](https://github.com/wcandillon/react-native-skia) — ⭐ 8,772 · TypeScript
   High-performance React Native Graphics using Skia
-- [ant-design/x](https://github.com/ant-design/x) — ⭐ 4,835 · TypeScript
+- [ant-design/x](https://github.com/ant-design/x) — ⭐ 4,838 · TypeScript
   Craft AI-driven interface effortlessly🤖
 - [flow-typed/flow-typed](https://github.com/flow-typed/flow-typed) — ⭐ 3,759 · JavaScript
   A central repository for Flow library definitions
-- [wevm/viem](https://github.com/wevm/viem) — ⭐ 3,635 · TypeScript
+- [wevm/viem](https://github.com/wevm/viem) — ⭐ 3,634 · TypeScript
   TypeScript Interface for Ethereum
 - [antvis/G](https://github.com/antvis/G) — ⭐ 1,217 · TypeScript
   💥 A flexible rendering engine for visualization.
@@ -41,7 +41,7 @@
   Ex 1 - Run timed quizzes via the command line
 - [saurabhnemade/react-twitter-embed](https://github.com/saurabhnemade/react-twitter-embed) — ⭐ 369 · TypeScript
   Simplest way to add twitter widgets to your react project.
-- [jakobhoeg/browser-ai](https://github.com/jakobhoeg/browser-ai) — ⭐ 205 · TypeScript
+- [jakobhoeg/browser-ai](https://github.com/jakobhoeg/browser-ai) — ⭐ 206 · TypeScript
   In-browser AI model providers for the Vercel AI SDK, built to make client-side AI integration simpler and more consistent across vendors.
 - [gophercises/urlshort](https://github.com/gophercises/urlshort) — ⭐ 141 · Go
   Ex 2 - Create an http.Handler that forwards paths to other URLs

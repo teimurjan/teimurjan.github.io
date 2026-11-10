@@ -10,13 +10,9 @@ yarn
 
 # Development
 yarn workspace @teimurjan/website dev              # Run website locally (Next.js with Turbopack)
-yarn workspace @teimurjan/resume-generator dev     # Run resume generator locally
-yarn workspace @teimurjan/firebase-functions dev   # Run Firebase functions emulator
 
 # Build
 yarn workspace @teimurjan/website build
-yarn workspace @teimurjan/resume-generator build
-yarn workspace @teimurjan/firebase-functions build
 
 # GraphQL codegen (requires HYGRAPH_URL env var)
 env HYGRAPH_URL=<url> yarn workspace @teimurjan/gql-client codegen
@@ -32,8 +28,6 @@ yarn lint                    # Check all workspaces with Biome
 yarn lint:fix                # Fix lint issues
 yarn typecheck:all           # TypeScript check all workspaces
 
-# Firebase deployment
-yarn workspace @teimurjan/firebase-functions deploy
 ```
 
 ## Architecture
@@ -43,10 +37,8 @@ yarn workspace @teimurjan/firebase-functions deploy
 ```
 workspaces/
 ├── website/           # Main Next.js website (deployed to GitHub Pages)
-├── resume-generator/  # Resume generation UI (deployed to Vercel)
 ├── resume/            # React-PDF resume components (shared library)
 ├── gql-client/        # GraphQL client & generated types (shared library)
-├── firebase-functions/ # Firebase Cloud Functions (OpenAI integration)
 ├── functions/         # Vercel serverless functions
 ├── profile-readme/    # GitHub profile README generator
 ├── github-client/     # Octokit wrapper (shared library)
@@ -62,15 +54,14 @@ workspaces/
 
 ### Key Integration Points
 
-- **gql-client**: Exports `getSdk()` function used by website, resume-generator, and profile-readme
-- **resume**: Exports two resume templates (`custom` and `harvard`) and cover letter component
-- **firebase-functions**: Handles async job application generation via QStash pub/sub
+- **gql-client**: Exports `getSdk()` function used by website and profile-readme
+- **resume**: Exports the `harvard` resume template
+- **resume/cmd/render.tsx**: Renders `ResumeQuery` JSON from stdin to a PDF. The Resume plugin in `~/Projects/routines` runs it with bun.
 
 ### Environment Variables
 
 - `HYGRAPH_URL`: GraphQL endpoint (required for codegen and runtime)
 - `GQL_API_GITHUB_TOKEN`: GitHub token for website data fetching
-- Firebase/Vercel configs in respective workspace `.env` files
 
 ## Code Style
 

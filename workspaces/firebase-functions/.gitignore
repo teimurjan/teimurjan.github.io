@@ -1,4 +1,0 @@
-dist
-.env*
-!.env.example
-.secret.local

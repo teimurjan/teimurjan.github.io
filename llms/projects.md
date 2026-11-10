@@ -2,42 +2,42 @@
 
 ## My Projects
 
-- [teimurjan/blazediff](https://github.com/teimurjan/blazediff) — ⭐ 354 · Rust
+- [teimurjan/blazediff](https://github.com/teimurjan/blazediff) — ⭐ 355 · Rust
    Blazing-fast image diffing for JS, Rust and Python
 
 ## Contributions
 
-- [ant-design/ant-design](https://github.com/ant-design/ant-design) — ⭐ 100,094 · TypeScript
+- [ant-design/ant-design](https://github.com/ant-design/ant-design) — ⭐ 100,134 · TypeScript
   An enterprise-class UI design language and React UI library
-- [storybookjs/storybook](https://github.com/storybookjs/storybook) — ⭐ 91,466 · TypeScript
+- [storybookjs/storybook](https://github.com/storybookjs/storybook) — ⭐ 91,510 · TypeScript
   Storybook is the industry standard workshop for building, documenting, and testing UI components in isolation
-- [meta/docusaurus](https://github.com/meta/docusaurus) — ⭐ 66,660 · TypeScript
+- [meta/docusaurus](https://github.com/meta/docusaurus) — ⭐ 66,695 · TypeScript
   Easy to maintain open source documentation websites.
 - [apexcharts/apexcharts.js](https://github.com/apexcharts/apexcharts.js) — ⭐ 15,187 · JavaScript
   📊 Interactive JavaScript Charts built on SVG
-- [segmentio/evergreen](https://github.com/segmentio/evergreen) — ⭐ 12,428 · JavaScript
+- [segmentio/evergreen](https://github.com/segmentio/evergreen) — ⭐ 12,430 · JavaScript
   🌲 Evergreen React UI Framework by Segment
-- [vega/vega](https://github.com/vega/vega) — ⭐ 12,036 · JavaScript
+- [vega/vega](https://github.com/vega/vega) — ⭐ 12,038 · JavaScript
   A visualization grammar.
-- [ethereum-lists/chains](https://github.com/ethereum-lists/chains) — ⭐ 9,834 · Kotlin
+- [ethereum-lists/chains](https://github.com/ethereum-lists/chains) — ⭐ 9,833 · Kotlin
   provides metadata for chains
-- [wcandillon/react-native-skia](https://github.com/wcandillon/react-native-skia) — ⭐ 8,772 · TypeScript
+- [wcandillon/react-native-skia](https://github.com/wcandillon/react-native-skia) — ⭐ 8,776 · TypeScript
   High-performance React Native Graphics using Skia
-- [ant-design/x](https://github.com/ant-design/x) — ⭐ 4,838 · TypeScript
+- [ant-design/x](https://github.com/ant-design/x) — ⭐ 4,845 · TypeScript
   Craft AI-driven interface effortlessly🤖
 - [flow-typed/flow-typed](https://github.com/flow-typed/flow-typed) — ⭐ 3,759 · JavaScript
   A central repository for Flow library definitions
-- [wevm/viem](https://github.com/wevm/viem) — ⭐ 3,634 · TypeScript
+- [wevm/viem](https://github.com/wevm/viem) — ⭐ 3,636 · TypeScript
   TypeScript Interface for Ethereum
 - [antvis/G](https://github.com/antvis/G) — ⭐ 1,217 · TypeScript
   💥 A flexible rendering engine for visualization.
-- [coinbase/onchainkit](https://github.com/coinbase/onchainkit) — ⭐ 1,043 · TypeScript
+- [coinbase/onchainkit](https://github.com/coinbase/onchainkit) — ⭐ 1,045 · TypeScript
   React components and TypeScript utilities to help you build top-tier onchain apps.
-- [antvis/GPT-Vis](https://github.com/antvis/GPT-Vis) — ⭐ 798 · TypeScript
+- [antvis/GPT-Vis](https://github.com/antvis/GPT-Vis) — ⭐ 800 · TypeScript
   🤖 GPT Vision, Visualization for AI Friendly! AntV's entry for AI.
 - [digitalocean/action-doctl](https://github.com/digitalocean/action-doctl) — ⭐ 520 · JavaScript
   GitHub Actions for DigitalOcean - doctl
-- [gophercises/quiz](https://github.com/gophercises/quiz) — ⭐ 473 · Go
+- [gophercises/quiz](https://github.com/gophercises/quiz) — ⭐ 474 · Go
   Ex 1 - Run timed quizzes via the command line
 - [saurabhnemade/react-twitter-embed](https://github.com/saurabhnemade/react-twitter-embed) — ⭐ 369 · TypeScript
   Simplest way to add twitter widgets to your react project.

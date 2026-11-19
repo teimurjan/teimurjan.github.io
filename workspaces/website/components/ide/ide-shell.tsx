@@ -123,7 +123,7 @@ export function IDEShell({ folders, fullName, headline, children }: IDEShellProp
   )
 
   return (
-    <div className="grid grid-cols-[280px_1fr] grid-rows-[44px_1fr_28px] h-screen w-screen relative z-[2] max-tablet:grid-cols-1">
+    <div className="grid grid-cols-[280px_1fr] grid-rows-[44px_1fr_28px] h-screen w-screen relative z-[2] max-tablet:grid-cols-1 desk:h-full desk:w-full">
       <div className="col-span-full border-b-[1.5px] border-ink flex items-center px-3.5 gap-2.5 bg-paper relative max-tablet:px-2.5 max-tablet:gap-2">
         <button
           type="button"

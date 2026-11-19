@@ -1,3 +1,6 @@
+import { BootSketch } from '@/components/desk/boot-sketch/boot-sketch'
+import { deskBootScript } from '@/components/desk/desk-mode'
+import { DeskStage } from '@/components/desk/desk-stage'
 import { IDEShell } from '@/components/ide/ide-shell'
 import { getSections } from '@/lib/get-sections'
 import { llmsAlternateTypes } from '@/lib/llms-txt'
@@ -20,6 +23,8 @@ const caveat = Caveat({
   weight: ['500', '700'],
   variable: '--font-caveat',
 })
+
+const SITE_NAME = new URL(BASE_URL).host
 
 export async function generateMetadata(): Promise<Metadata> {
   const { fullName, headline } = await getSections()
@@ -53,7 +58,11 @@ export default async function Layout({
   const { folders, fullName, headline } = content
 
   return (
-    <html lang="en" className={`${jetbrainsMono.variable} ${caveat.variable}`}>
+    <html
+      lang="en"
+      className={`${jetbrainsMono.variable} ${caveat.variable}`}
+      suppressHydrationWarning
+    >
       <Script
         defer
         src="https://cloud.umami.is/script.js"
@@ -64,9 +73,12 @@ export default async function Layout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(buildPersonJsonLd(content)) }}
         />
-        <IDEShell folders={folders} fullName={fullName} headline={headline}>
-          {children}
-        </IDEShell>
+        <script dangerouslySetInnerHTML={{ __html: deskBootScript }} />
+        <DeskStage siteName={SITE_NAME} loader={<BootSketch />}>
+          <IDEShell folders={folders} fullName={fullName} headline={headline}>
+            {children}
+          </IDEShell>
+        </DeskStage>
       </body>
     </html>
   )

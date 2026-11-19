@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant desk (&:where(html[data-desk] *));
+
 :root {
   --paper: #0d0d0f;
   --paper-2: #131316;
@@ -218,4 +220,295 @@ body::before {
 /* hide WebKit scrollbar (used on the tabs strip) */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+.crt-slot,
+.crt {
+  display: contents;
+}
+
+html[data-desk] {
+  --desk-night: #040406;
+  --crt-w: min(66vw, 120vh, 1380px);
+  --crt-w: round(down, min(66vw, 120vh, 1380px), 6px);
+  --crt-h: calc(var(--crt-w) / 1.5);
+  --crt-left: calc((100vw - var(--crt-w)) / 2);
+  --crt-left: round(calc((100vw - var(--crt-w)) / 2), 1px);
+  --crt-top: calc((100vh - var(--crt-h)) / 2 - 1vh);
+  --crt-top: round(calc((100vh - var(--crt-h)) / 2 - 1vh), 1px);
+}
+
+html[data-desk] body {
+  background: var(--desk-night);
+}
+
+html[data-desk] body::before {
+  display: none;
+}
+
+html[data-desk] .crt-slot {
+  display: block;
+  position: fixed;
+  left: var(--crt-left);
+  top: var(--crt-top);
+  width: var(--crt-w);
+  height: var(--crt-h);
+  z-index: 2;
+}
+
+html[data-desk] .crt {
+  display: block;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  contain: layout paint;
+  border-radius: calc(var(--crt-w) * 0.011);
+  background: var(--paper);
+  transform-origin: 0 0;
+}
+
+html[data-desk="boot"] .crt-slot {
+  visibility: hidden;
+  animation: deskFailsafe 0s linear 10s forwards;
+}
+
+.boot-sketch {
+  display: none;
+}
+
+html[data-desk] .boot-sketch {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  width: 100vh;
+  height: 100vh;
+  translate: -50% -50%;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0s linear 0.5s;
+}
+
+html[data-desk="boot"] .boot-sketch {
+  opacity: 1;
+  visibility: visible;
+  transition: none;
+  animation: sketchGiveUp 0.4s ease 10s forwards;
+}
+
+.boot-sketch-stroke {
+  position: absolute;
+}
+
+.boot-sketch-stroke > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.boot-sketch-cover {
+  position: absolute;
+  inset: 0;
+  background: var(--desk-night);
+  transform-origin: right center;
+  will-change: transform;
+  animation: sketchUncoverX var(--draw) cubic-bezier(0.3, 0.6, 0.2, 1) var(--delay) both;
+}
+
+.boot-sketch-stroke[data-axis="y"] > .boot-sketch-cover {
+  transform-origin: center bottom;
+  animation-name: sketchUncoverY;
+}
+
+html[data-desk="on"] .boot-sketch-cover {
+  visibility: hidden;
+}
+
+.boot-sketch path {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 0.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.boot-sketch path[data-fine="true"] {
+  stroke: var(--ink-dim);
+  stroke-width: 0.13;
+}
+
+.boot-sketch-cursor {
+  position: absolute;
+  opacity: 0;
+  animation: sketchBlink 1s steps(2, jump-none) 0.6s infinite;
+}
+
+.boot-sketch-cursor path {
+  fill: var(--ink);
+  stroke: none;
+}
+
+.boot-sketch-note {
+  position: absolute;
+  opacity: 0;
+  animation: sketchNote 0.5s ease 1s forwards;
+}
+
+.boot-sketch-caption {
+  color: var(--ink-dim);
+  font-size: 3.6vh;
+  line-height: 1;
+  white-space: nowrap;
+  rotate: -5deg;
+  transform-origin: left center;
+}
+
+.desk-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.9s ease;
+}
+
+.desk-canvas[data-ready="true"] {
+  opacity: 1;
+}
+
+.crt-glass {
+  position: absolute;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(
+      118deg,
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0.014) 17%,
+      transparent 34%
+    ), radial-gradient(ellipse 125% 125% at 50% 50%, transparent 56%, rgba(0, 0, 0, 0.4) 100%);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.75), inset 0 0 36px rgba(0, 0, 0, 0.45);
+}
+
+.crt-glass::before,
+.crt-glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.crt-glass::before {
+  background: repeating-linear-gradient(to bottom, transparent 0 2px, rgba(0, 0, 0, 0.09) 2px 3px);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.crt-slot[data-phase="focused"] .crt-glass::before {
+  opacity: 1;
+}
+
+.crt-glass::after {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.93  0 0 0 0 0.90  0 0 0 0 0.85  0 0 0 0.04 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  opacity: 0.5;
+  mix-blend-mode: screen;
+}
+
+.crt-slot[data-phase="intro"] {
+  animation: slotAppear 0.6s ease 0.15s both;
+}
+
+.crt-slot[data-phase="intro"] .boot-meter {
+  animation: bootMeter var(--intro-reveal) steps(14, jump-end) both;
+}
+
+.crt-slot[data-phase="intro"] .boot-splash {
+  animation: bootSplashOut 0.45s ease var(--intro-reveal) forwards;
+}
+
+@keyframes bootSplashOut {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes deskFailsafe {
+  to {
+    visibility: visible;
+  }
+}
+
+@keyframes slotAppear {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes sketchUncoverX {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes sketchUncoverY {
+  from {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes sketchBlink {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes sketchNote {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes sketchGiveUp {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes bootMeter {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .desk-canvas,
+  html[data-desk] .boot-sketch {
+    transition: none;
+  }
+
+  .boot-sketch-cover {
+    display: none;
+  }
+
+  .boot-sketch-cursor,
+  .boot-sketch-note {
+    animation: none;
+    opacity: 1;
+  }
+
+  .crt-slot[data-phase="intro"] {
+    animation: none;
+  }
 }

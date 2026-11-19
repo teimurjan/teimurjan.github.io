@@ -182,6 +182,20 @@ export const IconMenu = (p: IconProps) => (
   </Ic>
 )
 
+export const IconStepBack = (p: IconProps) => (
+  <Ic {...p}>
+    <path d="M9.5 9.5 L 4 4 M 4 8.5 L 4 4 L 8.5 4" />
+    <path d="M14.5 14.5 L 20 20 M 20 15.5 L 20 20 L 15.5 20" />
+  </Ic>
+)
+
+export const IconSitDown = (p: IconProps) => (
+  <Ic {...p}>
+    <path d="M4 4 L 9.5 9.5 M 9.5 5 L 9.5 9.5 L 5 9.5" />
+    <path d="M20 20 L 14.5 14.5 M 14.5 19 L 14.5 14.5 L 19 14.5" />
+  </Ic>
+)
+
 interface AvatarProps {
   size?: number
   className?: string

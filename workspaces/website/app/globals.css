@@ -223,7 +223,8 @@ body::before {
 }
 
 .crt-slot,
-.crt {
+.crt,
+.crt-screen {
   display: contents;
 }
 
@@ -232,6 +233,8 @@ html[data-desk] {
   --crt-w: min(66vw, 120vh, 1380px);
   --crt-w: round(down, min(66vw, 120vh, 1380px), 6px);
   --crt-h: calc(var(--crt-w) / 1.5);
+  --crt-virtual-w: 880px;
+  --crt-zoom: max(1, tan(atan2(var(--crt-w), var(--crt-virtual-w))));
   --crt-left: calc((100vw - var(--crt-w)) / 2);
   --crt-left: round(calc((100vw - var(--crt-w)) / 2), 1px);
   --crt-top: calc((100vh - var(--crt-h)) / 2 - 1vh);
@@ -265,6 +268,13 @@ html[data-desk] .crt {
   border-radius: calc(var(--crt-w) * 0.011);
   background: var(--paper);
   transform-origin: 0 0;
+}
+
+html[data-desk] .crt-screen {
+  display: block;
+  position: absolute;
+  inset: 0;
+  zoom: var(--crt-zoom);
 }
 
 html[data-desk="boot"] .crt-slot {

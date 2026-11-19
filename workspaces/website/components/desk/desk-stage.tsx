@@ -125,7 +125,7 @@ export function DeskStage({ siteName, loader, children }: DeskStageProps) {
         style={INTRO_TIMING}
       >
         <div className="crt" ref={crtRef}>
-          {children}
+          <div className="crt-screen">{children}</div>
           {isEnabled && <BootSplash siteName={siteName} isVisible={isBooting} />}
           {isEnabled && <div className="crt-glass" aria-hidden="true" />}
         </div>

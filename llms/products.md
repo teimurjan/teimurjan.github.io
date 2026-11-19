@@ -1,12 +1,12 @@
 # Products
 
-## [Interviewium](https://www.interviewium.xyz/)
+## [Kibi](https://heykibi.app/)
 
-Interviews grade the part you never practice: saying it. Speak your reasoning, watch each idea land as a card, and talk your way from brute force to optimal.
+A cozy gut garden for adults who want more fiber and more kinds of plants. Log a plant in under 10 seconds and watch the garden grow.
 
-## [Wait, Professor](https://waitprofessor.com/)
+## [Oyno](https://oyno.app/)
 
-Thorne teaches it straight. Tap Mila when you need it simple — no jargon, no judgment, any hour.
+For parents of kids 0 to 5 whose phone eats the evening. Pause the apps you pick, play a 5 to 15 minute game together and watch your family&#39;s planet grow.
 
 ## [Printyard](https://printyard.app/)
 

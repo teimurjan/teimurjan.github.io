@@ -2,46 +2,46 @@
 
 ## My Projects
 
-- [teimurjan/blazediff](https://github.com/teimurjan/blazediff) — ⭐ 355 · Rust
+- [teimurjan/blazediff](https://github.com/teimurjan/blazediff) — ⭐ 356 · Rust
    Blazing-fast image diffing for JS, Rust and Python
 
 ## Contributions
 
-- [ant-design/ant-design](https://github.com/ant-design/ant-design) — ⭐ 100,134 · TypeScript
+- [ant-design/ant-design](https://github.com/ant-design/ant-design) — ⭐ 100,277 · TypeScript
   An enterprise-class UI design language and React UI library
-- [storybookjs/storybook](https://github.com/storybookjs/storybook) — ⭐ 91,510 · TypeScript
+- [storybookjs/storybook](https://github.com/storybookjs/storybook) — ⭐ 91,643 · TypeScript
   Storybook is the industry standard workshop for building, documenting, and testing UI components in isolation
-- [meta/docusaurus](https://github.com/meta/docusaurus) — ⭐ 66,695 · TypeScript
+- [meta/docusaurus](https://github.com/meta/docusaurus) — ⭐ 66,767 · TypeScript
   Easy to maintain open source documentation websites.
-- [apexcharts/apexcharts.js](https://github.com/apexcharts/apexcharts.js) — ⭐ 15,187 · JavaScript
+- [apexcharts/apexcharts.js](https://github.com/apexcharts/apexcharts.js) — ⭐ 15,190 · JavaScript
   📊 Interactive JavaScript Charts built on SVG
-- [segmentio/evergreen](https://github.com/segmentio/evergreen) — ⭐ 12,430 · JavaScript
+- [segmentio/evergreen](https://github.com/segmentio/evergreen) — ⭐ 12,427 · JavaScript
   🌲 Evergreen React UI Framework by Segment
-- [vega/vega](https://github.com/vega/vega) — ⭐ 12,038 · JavaScript
+- [vega/vega](https://github.com/vega/vega) — ⭐ 12,051 · JavaScript
   A visualization grammar.
-- [ethereum-lists/chains](https://github.com/ethereum-lists/chains) — ⭐ 9,833 · Kotlin
+- [ethereum-lists/chains](https://github.com/ethereum-lists/chains) — ⭐ 9,838 · Kotlin
   provides metadata for chains
-- [wcandillon/react-native-skia](https://github.com/wcandillon/react-native-skia) — ⭐ 8,776 · TypeScript
+- [wcandillon/react-native-skia](https://github.com/wcandillon/react-native-skia) — ⭐ 8,785 · TypeScript
   High-performance React Native Graphics using Skia
-- [ant-design/x](https://github.com/ant-design/x) — ⭐ 4,845 · TypeScript
+- [ant-design/x](https://github.com/ant-design/x) — ⭐ 4,851 · TypeScript
   Craft AI-driven interface effortlessly🤖
-- [flow-typed/flow-typed](https://github.com/flow-typed/flow-typed) — ⭐ 3,759 · JavaScript
+- [flow-typed/flow-typed](https://github.com/flow-typed/flow-typed) — ⭐ 3,760 · JavaScript
   A central repository for Flow library definitions
-- [wevm/viem](https://github.com/wevm/viem) — ⭐ 3,636 · TypeScript
+- [wevm/viem](https://github.com/wevm/viem) — ⭐ 3,640 · TypeScript
   TypeScript Interface for Ethereum
-- [antvis/G](https://github.com/antvis/G) — ⭐ 1,217 · TypeScript
+- [antvis/G](https://github.com/antvis/G) — ⭐ 1,218 · TypeScript
   💥 A flexible rendering engine for visualization.
-- [coinbase/onchainkit](https://github.com/coinbase/onchainkit) — ⭐ 1,045 · TypeScript
+- [coinbase/onchainkit](https://github.com/coinbase/onchainkit) — ⭐ 1,046 · TypeScript
   React components and TypeScript utilities to help you build top-tier onchain apps.
-- [antvis/GPT-Vis](https://github.com/antvis/GPT-Vis) — ⭐ 800 · TypeScript
+- [antvis/GPT-Vis](https://github.com/antvis/GPT-Vis) — ⭐ 806 · TypeScript
   🤖 GPT Vision, Visualization for AI Friendly! AntV's entry for AI.
 - [digitalocean/action-doctl](https://github.com/digitalocean/action-doctl) — ⭐ 520 · JavaScript
   GitHub Actions for DigitalOcean - doctl
-- [gophercises/quiz](https://github.com/gophercises/quiz) — ⭐ 474 · Go
+- [gophercises/quiz](https://github.com/gophercises/quiz) — ⭐ 475 · Go
   Ex 1 - Run timed quizzes via the command line
 - [saurabhnemade/react-twitter-embed](https://github.com/saurabhnemade/react-twitter-embed) — ⭐ 369 · TypeScript
   Simplest way to add twitter widgets to your react project.
-- [jakobhoeg/browser-ai](https://github.com/jakobhoeg/browser-ai) — ⭐ 206 · TypeScript
+- [jakobhoeg/browser-ai](https://github.com/jakobhoeg/browser-ai) — ⭐ 208 · TypeScript
   In-browser AI model providers for the Vercel AI SDK, built to make client-side AI integration simpler and more consistent across vendors.
 - [gophercises/urlshort](https://github.com/gophercises/urlshort) — ⭐ 141 · Go
   Ex 2 - Create an http.Handler that forwards paths to other URLs

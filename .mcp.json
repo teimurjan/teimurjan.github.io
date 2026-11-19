@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "hygraph": {
+      "command": "sh",
+      "args": [
+        "-c",
+        "[ -f .env.mcp ] || { echo 'hygraph: .env.mcp missing — copy .env.mcp.example and set HYGRAPH_MCP_TOKEN' >&2; exit 1; }; set -a; . ./.env.mcp; set +a; exec npx -y mcp-remote https://mcp-eu-central-1.hygraph.com/ckuqwop6l1gvq01xqb8y0dsj3/master/mcp --header \"Authorization:Bearer $HYGRAPH_MCP_TOKEN\""
+      ]
+    }
+  }
+}

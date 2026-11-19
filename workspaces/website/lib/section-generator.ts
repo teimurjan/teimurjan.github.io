@@ -14,7 +14,7 @@ import type {
 } from '@teimurjan/gql-client'
 import type { Sdk } from '@teimurjan/gql-client'
 import { dateSorter } from '@teimurjan/utils'
-import { buildResumeMarkdown, sectionToMarkdown } from './section-markdown'
+import { sectionToMarkdown } from './section-markdown'
 import type { FolderStructure, Section, SiteContent } from './sections'
 
 function stripHtml(html: string): string {
@@ -87,7 +87,6 @@ function generateAbout(bio: BioQuery['bios'][0]): Section {
       about: bio.about,
       email: bio.email,
       location: bio.location,
-      cvMarkdown: '',
     },
   })
 }
@@ -341,10 +340,6 @@ export async function generateAllSections({
       ],
     },
   ]
-
-  const cvMarkdown = buildResumeMarkdown(folders, bio.fullName, bio.headline)
-  const aboutSection = folders[0].sections[0]
-  if (aboutSection.type === 'about') aboutSection.data.cvMarkdown = cvMarkdown
 
   return { folders, fullName: bio.fullName, headline: bio.headline }
 }

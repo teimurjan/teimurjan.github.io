@@ -6,7 +6,6 @@ import type {
   ContactData,
   EducationData,
   ExperienceData,
-  FolderStructure,
   InterviewsData,
   ProductsData,
   ProjectsData,
@@ -127,31 +126,4 @@ export function sectionToMarkdown(section: Section): string {
     case 'interviews':
       return interviewsToMarkdown(section.data)
   }
-}
-
-const CV_SECTION_ORDER = [
-  'about',
-  'experience',
-  'skills',
-  'education',
-  'publications',
-  'conferences',
-  'interviews',
-] as const
-
-export function buildResumeMarkdown(
-  folders: FolderStructure[],
-  fullName: string,
-  headline: string
-): string {
-  const byType = new Map<string, Section>()
-  for (const folder of folders) {
-    for (const section of folder.sections) byType.set(section.type, section)
-  }
-
-  const sections = CV_SECTION_ORDER.map((type) => byType.get(type))
-    .filter((s): s is Section => Boolean(s))
-    .map((s) => sectionToMarkdown(s))
-
-  return trimBlankLines(`# ${fullName}\n\n*${headline}*\n\n${sections.join('\n\n')}`)
 }

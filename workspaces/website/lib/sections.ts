@@ -11,7 +11,6 @@ export interface AboutData {
   headline: string
   about: string
   email: string
-  cvMarkdown: string
 }
 
 export interface ContactData {

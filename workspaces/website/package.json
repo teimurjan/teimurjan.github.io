@@ -14,7 +14,8 @@
     "generate-linkedin-cover": "tsx ./cmd/generate-linkedin-cover.ts",
     "generate-opengraph:ci": "xvfb-run --auto-servernum tsx ./cmd/generate-opengraph.ts",
     "test:visual": "blazediff-agent check",
-    "generate-patreon-cover": "tsx ./cmd/generate-patreon-cover.ts"
+    "generate-patreon-cover": "tsx ./cmd/generate-patreon-cover.ts",
+    "generate-x-cover": "tsx ./cmd/generate-x-cover.ts"
   },
   "dependencies": {
     "@octokit/rest": "^22.0.0",

@@ -7,11 +7,11 @@
 
 ## Contributions
 
-- [ant-design/ant-design](https://github.com/ant-design/ant-design) — ⭐ 100,277 · TypeScript
+- [ant-design/ant-design](https://github.com/ant-design/ant-design) — ⭐ 100,292 · TypeScript
   An enterprise-class UI design language and React UI library
-- [storybookjs/storybook](https://github.com/storybookjs/storybook) — ⭐ 91,643 · TypeScript
+- [storybookjs/storybook](https://github.com/storybookjs/storybook) — ⭐ 91,651 · TypeScript
   Storybook is the industry standard workshop for building, documenting, and testing UI components in isolation
-- [meta/docusaurus](https://github.com/meta/docusaurus) — ⭐ 66,767 · TypeScript
+- [meta/docusaurus](https://github.com/meta/docusaurus) — ⭐ 66,768 · TypeScript
   Easy to maintain open source documentation websites.
 - [apexcharts/apexcharts.js](https://github.com/apexcharts/apexcharts.js) — ⭐ 15,190 · JavaScript
   📊 Interactive JavaScript Charts built on SVG
@@ -19,7 +19,7 @@
   🌲 Evergreen React UI Framework by Segment
 - [vega/vega](https://github.com/vega/vega) — ⭐ 12,051 · JavaScript
   A visualization grammar.
-- [ethereum-lists/chains](https://github.com/ethereum-lists/chains) — ⭐ 9,838 · Kotlin
+- [ethereum-lists/chains](https://github.com/ethereum-lists/chains) — ⭐ 9,837 · Kotlin
   provides metadata for chains
 - [wcandillon/react-native-skia](https://github.com/wcandillon/react-native-skia) — ⭐ 8,785 · TypeScript
   High-performance React Native Graphics using Skia
@@ -47,5 +47,5 @@
   Ex 2 - Create an http.Handler that forwards paths to other URLs
 - [toptal/picasso](https://github.com/toptal/picasso) — ⭐ 139 · TypeScript
   Toptal UI components library
-- [avatune/avatune](https://github.com/avatune/avatune) — ⭐ 131 · TypeScript
+- [avatune/avatune](https://github.com/avatune/avatune) — ⭐ 132 · TypeScript
   Tuning visual identity, emotional tone. Feels friendly & composable.

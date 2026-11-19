@@ -25,8 +25,6 @@ interface IDEShellProps {
   children: React.ReactNode
 }
 
-const STATUS = 'open to collaborations'
-
 function buildLookups(folders: FolderStructure[]) {
   const sectionsById = new Map<string, Section>()
   const pathById = new Map<string, string>()
@@ -168,7 +166,6 @@ export function IDEShell({ folders, fullName, headline, children }: IDEShellProp
         folders={folders}
         fullName={fullName}
         headline={headline}
-        status={STATUS}
         activeId={activeId}
         openFolders={openFolders}
         onToggleFolder={toggleFolder}

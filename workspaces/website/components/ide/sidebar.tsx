@@ -8,7 +8,7 @@ import {
   IconFolder,
   IconSearch,
 } from '@/components/ui/sketch-icons'
-import { TagChip } from '@/components/ui/tag-chip'
+import { abbreviateHeadline } from '@/lib/headline'
 import type { FolderStructure } from '@/lib/sections'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
@@ -18,7 +18,6 @@ interface SidebarProps {
   folders: FolderStructure[]
   fullName: string
   headline: string
-  status: string
   activeId: string
   openFolders: Set<string>
   onToggleFolder: (name: string) => void
@@ -35,7 +34,6 @@ export function Sidebar({
   folders,
   fullName,
   headline,
-  status,
   activeId,
   openFolders,
   onToggleFolder,
@@ -69,10 +67,9 @@ export function Sidebar({
           </button>
           <div>
             <div className="text-sm font-semibold tracking-[0.01em]">{fullName}</div>
-            <div className="text-[11px] text-ink-dim mt-0.5">{headline}</div>
+            <div className="text-[11px] text-ink-dim mt-0.5">{abbreviateHeadline(headline)}</div>
           </div>
         </div>
-        <TagChip pulse>{status}</TagChip>
       </div>
 
       <div className="flex-1 px-2 py-3.5 overflow-y-auto">

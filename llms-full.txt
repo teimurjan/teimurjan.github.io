@@ -137,7 +137,7 @@ Source: https://teimurjan.dev/projects
 
 ## Contributions
 
-- [ant-design/ant-design](https://github.com/ant-design/ant-design) — ⭐ 100,389 · TypeScript
+- [ant-design/ant-design](https://github.com/ant-design/ant-design) — ⭐ 100,388 · TypeScript
   An enterprise-class UI design language and React UI library
 - [storybookjs/storybook](https://github.com/storybookjs/storybook) — ⭐ 91,729 · TypeScript
   Storybook is the industry standard workshop for building, documenting, and testing UI components in isolation

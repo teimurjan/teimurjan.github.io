@@ -1,7 +1,7 @@
 import { AvatarBox } from '@/components/ui/avatar-box'
-import { Bold } from '@/components/ui/bold'
 import { Card } from '@/components/ui/card'
 import { FadeIn } from '@/components/ui/fade-in'
+import { InlineMarkdown } from '@/components/ui/inline-markdown'
 import type { ExperienceData } from '@/lib/sections'
 import { prettyRange } from '@teimurjan/utils'
 import Image from 'next/image'
@@ -57,7 +57,7 @@ export function ExperienceSection({ data }: ExperienceSectionProps) {
                     const key = `${exp.id}-${k}`
                     return (
                       <li key={key}>
-                        <Bold text={b} />
+                        <InlineMarkdown text={b} />
                       </li>
                     )
                   })}

@@ -10,27 +10,21 @@ import {
   getRepositoriesContributedTo,
   getUserCreatedAt,
 } from '@teimurjan/github-client'
-import { getClient } from '@teimurjan/gql-client'
+import { loadSiteData } from '@teimurjan/site-data'
 
 const GITHUB_USERNAME = 'teimurjan'
 const WEBSITE_URL = 'https://teimurjan.dev'
 const MAINTAINED_PROJECTS = ['blazediff', 'avatune', 'lethe']
 
 const index = async () => {
-  if (!process.env.HYGRAPH_URL) {
-    throw new Error('HYGRAPH_URL is not defined')
-  }
   if (!process.env.GQL_API_GITHUB_TOKEN) {
     throw new Error('GQL_API_GITHUB_TOKEN is not defined')
   }
 
-  const gqlClient = getClient(process.env.HYGRAPH_URL)
   const githubToken = process.env.GQL_API_GITHUB_TOKEN
 
-  const [data, userCreatedAt] = await Promise.all([
-    gqlClient.ProfileReadme(),
-    getUserCreatedAt(GITHUB_USERNAME, { auth: githubToken }),
-  ])
+  const data = loadSiteData()
+  const userCreatedAt = await getUserCreatedAt(GITHUB_USERNAME, { auth: githubToken })
 
   const now = new Date()
   now.setHours(0, 0, 0, 0)
@@ -69,9 +63,9 @@ const index = async () => {
   const lines: string[] = []
 
   // header
-  lines.push(`# ${data.bios[0].fullName}`)
+  lines.push(`# ${data.bio.fullName}`)
   lines.push('')
-  lines.push(data.bios[0].about)
+  lines.push(data.bio.about)
   lines.push('')
   lines.push('---')
   lines.push('')

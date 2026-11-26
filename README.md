@@ -19,11 +19,10 @@ Hey! 👋 This repository contains the source code for my personal website hoste
 
 ## 🤷 What makes this project special?
 
-1. Tech stack: [Hygraph](https://hygraph.com/) + [Next](https://nextjs.org/) + [TypeScript](https://www.typescriptlang.org/).
-2. [GraphQL TypeScript codegen](https://www.graphql-code-generator.com/).
-3. Resume generation on website start/build via [react-pdf](https://react-pdf.org/).
-4. GitHub Actions-based automatic deployment.
-5. Monorepo project structure with [yarn workspaces](https://yarnpkg.com/features/workspaces).
+1. Tech stack: [Next](https://nextjs.org/) + [TypeScript](https://www.typescriptlang.org/), with content from a private markdown wiki.
+2. Resume generation on website start/build via [react-pdf](https://react-pdf.org/).
+3. GitHub Actions-based automatic deployment.
+4. Monorepo project structure with [yarn workspaces](https://yarnpkg.com/features/workspaces).
 
 ## 🚀 Quick start
 

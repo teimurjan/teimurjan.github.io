@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@teimurjan/github-client": "workspace:*",
-    "@teimurjan/gql-client": "workspace:*",
+    "@teimurjan/site-data": "workspace:*",
     "dotenv": "^17.3.1"
   },
   "devDependencies": {

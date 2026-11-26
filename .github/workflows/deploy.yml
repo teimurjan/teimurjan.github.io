@@ -6,8 +6,9 @@ on:
       - main
     paths:
       - 'workspaces/**'
-      - '!workspaces/functions/**'
   workflow_dispatch:
+  repository_dispatch:
+    types: [wiki-updated]
 
 jobs:
   deploy:
@@ -16,10 +17,20 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
     env:
-      NEXT_PUBLIC_HYGRAPH_URL: ${{ vars.HYGRAPH_URL }}
       GQL_API_GITHUB_TOKEN: ${{ secrets.GQL_API_GITHUB_TOKEN }}
+      LLM_WIKI_DIR: ${{ github.workspace }}/.llm-wiki
     steps:
       - uses: actions/checkout@v4
+
+      - name: Check out llm-wiki
+        uses: actions/checkout@v4
+        with:
+          repository: teimurjan/llm-wiki
+          ssh-key: ${{ secrets.LLM_WIKI_DEPLOY_KEY }}
+          path: .llm-wiki
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
 
       - name: Setup Node
         uses: actions/setup-node@v4

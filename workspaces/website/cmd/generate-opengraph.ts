@@ -3,18 +3,16 @@ import path from 'node:path'
 import { Biome } from '@biomejs/js-api/nodejs'
 import { type Browser, chromium } from 'playwright'
 
+import { loadSiteData } from '@teimurjan/site-data'
 import existingOpengraphs from '../__generated__/opengraphs.ts'
-import gqlClient from '../gql-client'
 
 type OpengraphData = Record<string, string | null>
 
 const biome = new Biome()
 const { projectKey } = biome.openProject(path.resolve(__dirname, '../../../'))
 
-const getPublicationLinks = async () => {
-  const { publications } = await gqlClient.Media()
-  return publications.map((publication) => publication.link)
-}
+const getPublicationLinks = async () =>
+  loadSiteData().publications.map((publication) => publication.link)
 
 const getOpengraph = async (link: string, browser: Browser) => {
   const page = await browser.newPage()

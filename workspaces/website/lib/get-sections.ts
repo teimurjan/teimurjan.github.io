@@ -1,4 +1,4 @@
-import gqlClient from '@/gql-client'
+import { loadSiteData } from '@teimurjan/site-data'
 import { unstable_cache } from 'next/cache'
 import { cache } from 'react'
 import { generateAllSections } from './section-generator'
@@ -14,7 +14,7 @@ const loadSections = unstable_cache(
     }
 
     return generateAllSections({
-      gqlClient,
+      siteData: loadSiteData(),
       githubToken,
       githubUsername: 'teimurjan',
     })

@@ -1,0 +1,16 @@
+{
+  "name": "@teimurjan/site-data",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Site content from the llm-wiki `website` view",
+  "author": "Teimur Gasanov",
+  "main": "./src/index.ts",
+  "devDependencies": {
+    "@types/node": "^22",
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+    "node": ">=24.4.1"
+  },
+  "packageManager": "yarn@4.14.1"
+}

@@ -1,5 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
+import { loadSiteData } from '@teimurjan/site-data'
 import { chromium } from 'playwright'
 
 const SCALE = 2
@@ -18,15 +19,25 @@ interface ShippedProduct {
   logoUrl: string
 }
 
-const getShippedProducts = async (): Promise<ShippedProduct[]> => {
-  const envPath = path.resolve(__dirname, '../../.env')
-  if (fs.existsSync(envPath)) process.loadEnvFile(envPath)
+const MIME: Record<string, string> = {
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.svg': 'image/svg+xml',
+  '.webp': 'image/webp',
+}
 
-  const { default: gqlClient } = await import('../../gql-client')
-  const { products } = await gqlClient.Products()
+/** The cover renders from a blank page, so a public asset goes in as a data URL. */
+const publicAsDataUrl = (publicPath: string) => {
+  const file = path.resolve(__dirname, '../../public', `.${publicPath}`)
+  const mime = MIME[path.extname(file)] ?? 'image/png'
+  return `data:${mime};base64,${fs.readFileSync(file).toString('base64')}`
+}
+
+const getShippedProducts = async (): Promise<ShippedProduct[]> => {
+  const { products } = loadSiteData()
   if (products.length === 0) throw new Error('profile-cover: no products found')
 
-  return products.map(({ name, logo }) => ({ name, logoUrl: logo.url }))
+  return products.map(({ name, logo }) => ({ name, logoUrl: publicAsDataUrl(logo) }))
 }
 
 const escapeHtml = (value: string) =>

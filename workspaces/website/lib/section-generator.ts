@@ -5,66 +5,21 @@ import {
   getUserCreatedAt,
 } from '@teimurjan/github-client'
 import type {
-  BioQuery,
-  EducationQuery,
-  ExperienceHistoryQuery,
-  MediaQuery,
-  ProductsQuery,
-  SkillsQuery,
-} from '@teimurjan/gql-client'
-import type { Sdk } from '@teimurjan/gql-client'
+  Bio,
+  Conference,
+  Education,
+  Experience,
+  Interview,
+  Product,
+  Publication,
+  SiteData,
+  Skill,
+} from '@teimurjan/site-data'
 import { dateSorter } from '@teimurjan/utils'
 import { sectionToMarkdown } from './section-markdown'
 import type { FolderStructure, Section, SiteContent } from './sections'
 
-function stripHtml(html: string): string {
-  return html
-    .replace(/<br\s*\/?>/gi, '\n')
-    .replace(/<\/li>\s*<li>/gi, '\n- ')
-    .replace(/<li>/gi, '- ')
-    .replace(/<\/li>/gi, '')
-    .replace(/<ul>/gi, '\n')
-    .replace(/<\/ul>/gi, '\n')
-    .replace(/<ol>/gi, '\n')
-    .replace(/<\/ol>/gi, '\n')
-    .replace(/<p>/gi, '')
-    .replace(/<\/p>/gi, '\n\n')
-    .replace(/<strong>/gi, '')
-    .replace(/<\/strong>/gi, '')
-    .replace(/<b>/gi, '')
-    .replace(/<\/b>/gi, '')
-    .replace(/<em>/gi, '')
-    .replace(/<\/em>/gi, '')
-    .replace(/<i>/gi, '')
-    .replace(/<\/i>/gi, '')
-    .replace(/<[^>]*>/g, '')
-    .replace(/&nbsp;/g, ' ')
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/\n{3,}/g, '\n\n')
-    .trim()
-}
-
-function extractBullets(html: string): string[] {
-  const matches = [...html.matchAll(/<li>([\s\S]*?)<\/li>/gi)]
-  if (matches.length === 0) return []
-  return matches
-    .map((m) =>
-      m[1]
-        .replace(/<strong>(.*?)<\/strong>/gi, '**$1**')
-        .replace(/<b>(.*?)<\/b>/gi, '**$1**')
-        .replace(/<em>(.*?)<\/em>/gi, '*$1*')
-        .replace(/<i>(.*?)<\/i>/gi, '*$1*')
-        .replace(/<[^>]*>/g, '')
-        .replace(/&nbsp;/g, ' ')
-        .replace(/&amp;/g, '&')
-        .replace(/&lt;/g, '<')
-        .replace(/&gt;/g, '>')
-        .trim()
-    )
-    .filter(Boolean)
-}
+const bulletText = (bullets: string[]): string => bullets.map((bullet) => `- ${bullet}`).join('\n')
 
 type SectionDraft = Omit<Section, 'markdown'>
 
@@ -74,7 +29,7 @@ function withMarkdown(draft: SectionDraft): Section {
   return section
 }
 
-function generateAbout(bio: BioQuery['bios'][0]): Section {
+function generateAbout(bio: Bio): Section {
   return withMarkdown({
     type: 'about',
     id: 'about',
@@ -91,7 +46,7 @@ function generateAbout(bio: BioQuery['bios'][0]): Section {
   })
 }
 
-function generateExperience(experiences: ExperienceHistoryQuery['experiences']): Section {
+function generateExperience(experiences: Experience[]): Section {
   return withMarkdown({
     type: 'experience',
     id: 'experience',
@@ -106,15 +61,15 @@ function generateExperience(experiences: ExperienceHistoryQuery['experiences']):
         location: exp.location ?? null,
         startDate: exp.startDate,
         endDate: exp.endDate ?? null,
-        description: stripHtml(exp.description.html),
-        bullets: extractBullets(exp.description.html),
-        logoUrl: exp.logo.url,
+        description: bulletText(exp.bullets),
+        bullets: exp.bullets,
+        logoUrl: exp.logo,
       })),
     },
   })
 }
 
-function generateSkills(skills: SkillsQuery['skills']): Section {
+function generateSkills(skills: Skill[]): Section {
   const maxYears = Math.max(...skills.map((s) => s.yearsOfExperience))
 
   return withMarkdown({
@@ -128,14 +83,14 @@ function generateSkills(skills: SkillsQuery['skills']): Section {
         id: skill.id,
         title: skill.title,
         yearsOfExperience: skill.yearsOfExperience,
-        logoUrl: skill.logo.url,
+        logoUrl: skill.logo,
       })),
       maxYears,
     },
   })
 }
 
-function generateEducation(educations: EducationQuery['educations']): Section {
+function generateEducation(educations: Education[]): Section {
   return withMarkdown({
     type: 'education',
     id: 'education',
@@ -150,14 +105,14 @@ function generateEducation(educations: EducationQuery['educations']): Section {
         areaOfStudy: edu.areaOfStudy,
         startDate: edu.startDate,
         endDate: edu.endDate ?? null,
-        description: edu.description?.html ? stripHtml(edu.description.html) : null,
-        bullets: edu.description?.html ? extractBullets(edu.description.html) : [],
+        description: edu.bullets.length > 0 ? bulletText(edu.bullets) : null,
+        bullets: edu.bullets,
       })),
     },
   })
 }
 
-function generateProducts(products: ProductsQuery['products']): Section {
+function generateProducts(products: Product[]): Section {
   return withMarkdown({
     type: 'products',
     id: 'products',
@@ -169,8 +124,8 @@ function generateProducts(products: ProductsQuery['products']): Section {
         id: product.id,
         name: product.name,
         link: product.link || null,
-        description: stripHtml(product.description.html),
-        logoUrl: product.logo.url,
+        description: product.description,
+        logoUrl: product.logo,
       })),
     },
   })
@@ -198,7 +153,7 @@ function generateProjects(repositories: ContributedRepository[], username: strin
   })
 }
 
-function generatePublications(publications: MediaQuery['publications']): Section {
+function generatePublications(publications: Publication[]): Section {
   const sorted = [...publications].sort((a, b) => dateSorter(a.date, b.date))
 
   return withMarkdown({
@@ -222,7 +177,7 @@ function generatePublications(publications: MediaQuery['publications']): Section
   })
 }
 
-function generateConferences(conferences: MediaQuery['conferences']): Section {
+function generateConferences(conferences: Conference[]): Section {
   const sorted = [...conferences].sort((a, b) => dateSorter(a.date, b.date))
 
   return withMarkdown({
@@ -244,13 +199,13 @@ function generateConferences(conferences: MediaQuery['conferences']): Section {
             }
           : null,
         date: conf.date,
-        imageUrl: conf.image?.url ?? null,
+        imageUrl: conf.image,
       })),
     },
   })
 }
 
-function generateInterviews(interviews: MediaQuery['interviews']): Section {
+function generateInterviews(interviews: Interview[]): Section {
   const sorted = [...interviews].sort((a, b) => dateSorter(a.date, b.date))
 
   return withMarkdown({
@@ -271,36 +226,26 @@ function generateInterviews(interviews: MediaQuery['interviews']): Section {
             }
           : null,
         date: interview.date,
-        imageUrl: interview.image?.url ?? null,
+        imageUrl: interview.image,
       })),
     },
   })
 }
 
 interface GenerateAllSectionsParams {
-  gqlClient: Sdk
+  siteData: SiteData
   githubToken: string
   githubUsername: string
   minStars?: number
 }
 
 export async function generateAllSections({
-  gqlClient,
+  siteData,
   githubToken,
   githubUsername,
   minStars = 50,
 }: GenerateAllSectionsParams): Promise<SiteContent> {
-  const [bioData, educationData, experienceData, skillsData, productsData, mediaData] =
-    await Promise.all([
-      gqlClient.Bio(),
-      gqlClient.Education(),
-      gqlClient.ExperienceHistory(),
-      gqlClient.Skills(),
-      gqlClient.Products(),
-      gqlClient.Media(),
-    ])
-
-  const bio = bioData.bios[0]
+  const { bio } = siteData
 
   const now = new Date()
   now.setHours(0, 0, 0, 0)
@@ -324,19 +269,19 @@ export async function generateAllSections({
     {
       name: 'career',
       sections: [
-        generateExperience(experienceData.experiences),
-        generateSkills(skillsData.skills),
-        generateEducation(educationData.educations),
+        generateExperience(siteData.experiences),
+        generateSkills(siteData.skills),
+        generateEducation(siteData.educations),
       ],
     },
     {
       name: 'contribution',
       sections: [
-        generateProducts(productsData.products),
+        generateProducts(siteData.products),
         generateProjects(filteredRepos, githubUsername),
-        generatePublications(mediaData.publications),
-        generateConferences(mediaData.conferences),
-        generateInterviews(mediaData.interviews),
+        generatePublications(siteData.publications),
+        generateConferences(siteData.conferences),
+        generateInterviews(siteData.interviews),
       ],
     },
   ]

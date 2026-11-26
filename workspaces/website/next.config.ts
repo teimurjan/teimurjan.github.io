@@ -9,12 +9,6 @@ const nextConfig = withBundleAnalyzer({
   images: {
     unoptimized: true,
     dangerouslyAllowSVG: true,
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**.graphassets.com',
-      },
-    ],
   },
 })
 

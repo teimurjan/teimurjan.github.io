@@ -20,8 +20,8 @@ const Bullets = ({ items }: { items: string[] }) => (
   </View>
 )
 
-const Section = ({ section }: { section: CvSection }) => (
-  <View style={styles.section}>
+const Section = ({ section, last }: { section: CvSection; last: boolean }) => (
+  <View style={last ? undefined : styles.section}>
     <Text style={styles.sectionTitle} minPresenceAhead={36}>
       {section.title}
     </Text>
@@ -63,7 +63,7 @@ const HarvardCv = ({ cv }: { cv: CvDocument }) => (
           <Text style={styles.aboutText}>{cv.summary}</Text>
         </View>
         {cv.sections.map((section, index) => (
-          <Section key={index} section={section} />
+          <Section key={index} section={section} last={index === cv.sections.length - 1} />
         ))}
       </View>
     </Page>

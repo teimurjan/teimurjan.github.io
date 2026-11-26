@@ -3,46 +3,45 @@
 ## Member of Technical Staff @ Speechify
 *Jun 2025 - Now · Remote*
 
-- Scaled LLM translation engine from 20 to 43 locales across 10,000 pages, tripling non-English search clicks.
-- Lifted international revenue 2x YoY after unifying translation across website, web app, mobile, and payments.
-- Shipped flow-based marketing pipeline service (0-1), doubling localized creative output.
+- Lead the localization initiative with a team of 6 across iOS, Android, web and website.
+- Built an LLM translation platform that took the product from 20 to 43 languages.
+- Non-English search clicks tripled, and international revenue doubled in the same period.
+- Built an ad factory with agent loops that now generates 70% of the company's ad creatives.
 
-## Senior Frontend Engineer @ Form
+## Senior Frontend Engineer @ Roll (Form)
 *Sep 2022 - Jun 2025 · Remote*
 
-- Launched 5 Web3 applications, scaling to 100k+ users with reliable blockchain integrations.
-- Built and led an open-source package ecosystem, reducing code duplication and improving team efficiency by 30%.
-- Led migration to a monorepo, improving collaboration and cutting build times by 25% while streamlining CI/CD.
+- Led a frontend team of 2 engineers and a designer, reporting to the CTO.
+- Launched 5 full-stack apps that reached 100k+ users, on an architecture I designed.
+- Led the monorepo migration for every team, cutting build times by 25%.
+- Built [tryrolljs](https://github.com/roll-network/tryrolljs), the open-source package ecosystem (158 merged pull requests).
 
 ## Senior Software Engineer @ Klarna
 *Jan 2022 - Jan 2023 · Berlin, Germany*
 
-- Launched React Native onboarding library used by 3+ teams, cutting onboarding time by 40%.
-- Integrated intent-aware Siri Shortcuts into the Klarna app, boosting return-to-app rate by 10%.
-- Created an automated testing Google Sheets plugin, reducing manual testing hours by 50%.
+- Led Siri Shortcuts with a team of 4, lifting return-to-app rate by 10%.
+- Built an onboarding library for 3+ teams, cutting onboarding development time by 40%.
+- Built a Google Sheets testing plugin that halved manual testing hours.
 
 ## Senior Frontend Engineer @ Toptal
 *Sep 2020 - Dec 2021 · Remote*
 
-- Scaled a shared component system, cutting UI development time by 50% across products.
-- Led CI/CD migration from Jenkins to GitHub Actions, accelerating deployments by 30%.
-- Mentored 10+ engineers on monorepo architecture, improving delivery efficiency by 25%.
+- Scaled [Picasso](https://github.com/toptal/picasso), a design system used by about 80 engineers, cutting UI development time by 50%.
+- Led the Jenkins to GitHub Actions migration, making deployments 30% faster.
+- Created a monorepo mentorship program: 10 engineers trained, 4 became mentors.
 
 ## Frontend Engineer @ Clubhouse (currently Shortcut)
 *Feb 2019 - Sep 2020 · Remote*
 
-- Doubled page navigation speed via strategic code splitting, improving usability and session duration.
-- Led migration from jQuery to React, modernizing the architecture and reducing maintenance effort by 40%.
-- Built a CMS-powered landing page enabling no-code marketing updates and increasing lead conversion by 12%.
+- Doubled page navigation speed with code splitting and led the jQuery to React migration.
 
 ## Frontend Engineer @ weffect
 *Jun 2018 - Jan 2019 · Remote*
 
-- Cut paint time by 25% by migrating animations from CSS/JS to WebGL.
-- Guarded the app with integration tests, increasing UI uptime and reducing production incidents by 40%.
+- Cut paint time by 25% by moving animations from CSS and JS to WebGL.
+- Added integration tests that cut production incidents by 40%.
 
 ## Software Engineer @ Attractor Software
 *Oct 2016 - May 2018 · Bishkek, Kyrgyzstan*
 
-- Doubled site performance, cutting load time to 2s and increasing conversions by 15%.
-- Built a browser extension to detect live report errors, improving data accuracy and productivity by 40%.
+- Doubled site performance, bringing load time down to 2s.

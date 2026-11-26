@@ -1,4 +1,5 @@
 import { Link, StyleSheet, Text, View } from '@react-pdf/renderer'
+import { Fragment } from 'react'
 import theme from '../../../theme'
 
 const styles = StyleSheet.create({
@@ -12,8 +13,14 @@ const styles = StyleSheet.create({
     fontFamily: 'Helvetica-Bold',
     fontSize: 12,
   },
+  headline: {
+    fontFamily: 'Helvetica-Bold',
+    fontSize: 10,
+    marginTop: 2,
+  },
   contactsContainer: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     justifyContent: 'center',
     marginTop: 4,
   },
@@ -29,34 +36,35 @@ const styles = StyleSheet.create({
   },
 })
 
-interface Props {
-  title: string
-  subtitle: string
-  location?: string
-  email: string
-  phoneNumber: string
+export interface Contact {
+  label: string
+  href?: string
 }
 
-const Header = ({ title, location, email, phoneNumber }: Props) => {
+interface Props {
+  title: string
+  headline?: string
+  contacts: Contact[]
+}
+
+const Header = ({ title, headline, contacts }: Props) => {
   return (
     <View style={styles.header}>
       <Text style={styles.headerTitle}>{title}</Text>
+      {headline && <Text style={styles.headline}>{headline}</Text>}
       <View style={styles.contactsContainer}>
-        <Text style={styles.contact}>{email}</Text>
-        <Text style={styles.divider}>•</Text>
-        <Link src="https://www.linkedin.com/in/teimur-gasanov" style={styles.contact}>
-          in/teimur-gasanov
-        </Link>
-        <Text style={styles.divider}>•</Text>
-        <Link src={`tel:${phoneNumber}`} style={styles.contact}>
-          {phoneNumber}
-        </Link>
-        {location && (
-          <>
-            <Text style={styles.divider}>•</Text>
-            <Text style={styles.contact}>{location}</Text>
-          </>
-        )}
+        {contacts.map((contact, index) => (
+          <Fragment key={contact.label}>
+            {index > 0 && <Text style={styles.divider}>•</Text>}
+            {contact.href ? (
+              <Link src={contact.href} style={styles.contact}>
+                {contact.label}
+              </Link>
+            ) : (
+              <Text style={styles.contact}>{contact.label}</Text>
+            )}
+          </Fragment>
+        ))}
       </View>
     </View>
   )

@@ -1,6 +1,5 @@
-// Renders the Harvard resume from ResumeQuery JSON on stdin to the PDF path in argv.
-import type { ResumeQuery } from '@teimurjan/gql-client'
-import { HarvardResume, renderToFile } from '../src'
+// Renders the Harvard resume from resume JSON on stdin to the PDF path in argv.
+import { HarvardResume, type ResumeData, renderToFile } from '../src'
 
 const readStdin = async () => {
   const chunks: Buffer[] = []
@@ -15,7 +14,7 @@ const main = async () => {
     process.exit(1)
   }
 
-  const data = JSON.parse(await readStdin()) as ResumeQuery
+  const data = JSON.parse(await readStdin()) as ResumeData
   await renderToFile(<HarvardResume {...data} />, outputPath)
   console.log(outputPath)
 }

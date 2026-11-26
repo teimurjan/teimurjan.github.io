@@ -2,6 +2,7 @@ import { Link, StyleSheet, Text, View } from '@react-pdf/renderer'
 import type { Style } from '@react-pdf/types'
 import Html from 'react-pdf-html'
 import theme from '../../../theme'
+import { htmlStylesheet } from '../styles/layout'
 
 const styles = StyleSheet.create({
   resumeItem: {
@@ -30,6 +31,11 @@ const styles = StyleSheet.create({
     marginTop: 2,
     textTransform: 'capitalize',
   },
+  note: {
+    color: theme.colors.dark2,
+    fontSize: 9,
+    marginTop: 1,
+  },
   description: {
     fontSize: 10,
     textAlign: 'justify',
@@ -41,11 +47,21 @@ interface Props {
   dates?: string
   title: string
   subtitle?: string | URL
+  note?: string
   description?: string
+  stylesheet?: typeof htmlStylesheet
   style?: Style | Style[]
 }
 
-const ResumeItem = ({ dates, title, subtitle, description, style = {} }: Props) => {
+const ResumeItem = ({
+  dates,
+  title,
+  subtitle,
+  note,
+  description,
+  stylesheet = htmlStylesheet,
+  style = {},
+}: Props) => {
   return (
     <View style={{ ...styles.resumeItem, ...style }}>
       <Text style={styles.title}>{title}</Text>
@@ -61,27 +77,14 @@ const ResumeItem = ({ dates, title, subtitle, description, style = {} }: Props) 
         {dates && <Text style={styles.dates}>{dates}</Text>}
       </View>
 
+      {note && (
+        <Html style={styles.note} stylesheet={stylesheet}>
+          {note}
+        </Html>
+      )}
+
       {description && (
-        <Html
-          style={styles.description}
-          stylesheet={{
-            ul: {
-              margin: '2px 0 0 -20px',
-              lineHeight: 0.64,
-            },
-            li: {
-              marginBottom: 2,
-              fontSize: 10,
-            },
-            div: {
-              margin: 0,
-              marginLeft: -2,
-            },
-            p: {
-              margin: 0,
-            },
-          }}
-        >
+        <Html style={styles.description} stylesheet={stylesheet}>
           {description}
         </Html>
       )}

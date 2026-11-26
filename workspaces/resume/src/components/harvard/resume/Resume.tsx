@@ -1,52 +1,19 @@
-import { Document, Page, StyleSheet, Text, View } from '@react-pdf/renderer'
+import { Document, Page, Text, View } from '@react-pdf/renderer'
 import type { Style } from '@react-pdf/types'
 import { YEAR_DATE_FORMAT, dateSorter, prettyRange } from '@teimurjan/utils'
-import { colord } from 'colord'
-import theme from '../../../theme'
 import Header from '../header'
 import Recognition from '../recognition'
 import ResumeItem from '../resume-item'
 import Skills from '../skills'
 import sharedStyles from '../styles'
+import styles from '../styles/layout'
 import type { HarvardResumeProps } from '../types'
-
-const styles = StyleSheet.create({
-  page: {
-    backgroundColor: theme.colors.light,
-    fontFamily: 'Helvetica',
-    color: theme.colors.dark3,
-    fontSize: 10,
-  },
-  container: {
-    padding: 24,
-  },
-  section: {
-    marginBottom: 6,
-  },
-  sectionTitle: {
-    color: theme.colors.dark3,
-    borderBottom: `1px solid ${colord(theme.colors.dark2).lighten(0.16).toRgbString()}`,
-    fontSize: 10,
-    textTransform: 'uppercase',
-    fontFamily: 'Helvetica-Bold',
-    marginBottom: 4,
-    textAlign: 'left',
-  },
-  aboutText: {
-    textAlign: 'justify',
-    lineHeight: 0.64,
-  },
-  recognitionFullList: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-})
 
 const getItemMarginStyle = (style: Style | Style[], index: number, itemsCount: number) =>
   index + 1 === itemsCount ? undefined : style
 
 const HarvardResume = ({
-  bios: [{ fullName, headline, about, location, phoneNumber, email }],
+  bios: [{ fullName, about, location, phoneNumber, email }],
   educations,
   skills,
   experiences,
@@ -60,12 +27,13 @@ const HarvardResume = ({
         <View style={styles.container}>
           <Header
             title={fullName}
-            subtitle={headline}
-            location={config?.location ? location : undefined}
-            email={email}
-            phoneNumber={phoneNumber}
+            contacts={[
+              { label: email },
+              { label: 'in/teimur-gasanov', href: 'https://www.linkedin.com/in/teimur-gasanov' },
+              { label: phoneNumber, href: `tel:${phoneNumber}` },
+              ...(config?.location && location ? [{ label: location }] : []),
+            ]}
           />
-
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Summary</Text>
             <Text style={styles.aboutText}>{about}</Text>
@@ -79,7 +47,11 @@ const HarvardResume = ({
                 <ResumeItem
                   key={experience.id}
                   title={experience.position}
-                  dates={prettyRange(experience.startDate, experience.endDate, YEAR_DATE_FORMAT)}
+                  dates={prettyRange(
+                    experience.startDate,
+                    experience.endDate ?? undefined,
+                    YEAR_DATE_FORMAT
+                  )}
                   subtitle={experience.company}
                   description={experience.description.html}
                   style={getItemMarginStyle(
@@ -98,7 +70,11 @@ const HarvardResume = ({
               .map((education, index) => (
                 <ResumeItem
                   key={education.id}
-                  dates={prettyRange(education.startDate, education.endDate, YEAR_DATE_FORMAT)}
+                  dates={prettyRange(
+                    education.startDate,
+                    education.endDate ?? undefined,
+                    YEAR_DATE_FORMAT
+                  )}
                   title={`${education.degree} in ${education.areaOfStudy}`}
                   subtitle={education.school}
                   style={getItemMarginStyle(

@@ -9,7 +9,6 @@ I design and deploy high-impact systems built on LLMs, local inference, and agen
 - GitHub: https://github.com/teimurjan
 - LinkedIn: https://www.linkedin.com/in/teimur-gasanov
 - Substack: https://substack.com/@teimurjan
-- Telegram: https://t.me/headcount0
 - Toptal: https://www.toptal.com/resume/teimur-gasanov
 - Mentorship on ADPList: https://adplist.org/mentors/teimur-gasanov?session=70480-mentorship-session
 
@@ -23,12 +22,12 @@ Every page below is a Markdown mirror of a page on https://teimurjan.dev — the
 
 - [Experience](https://teimurjan.dev/llms/experience.md): 7 roles, most recently Member of Technical Staff at Speechify (Jun 2025 - Now)
 - [Skills](https://teimurjan.dev/llms/skills.md): 12 technologies with years of experience, up to 9y — led by JavaScript, TypeScript, CI/CD
-- [Education](https://teimurjan.dev/llms/education.md): Degrees from Ala-too Internatinal University
+- [Education](https://teimurjan.dev/llms/education.md): Degrees from Ala-too International University
 
 ## Contribution
 
 - [Products](https://teimurjan.dev/llms/products.md): 3 products I have built — "Kibi", "Oyno", "Printyard"
-- [Projects](https://teimurjan.dev/llms/projects.md): 22 open-source repositories owned or contributed to, 334,662 stars combined
+- [Projects](https://teimurjan.dev/llms/projects.md): 22 open-source repositories owned or contributed to, 334,884 stars combined
 - [Publications](https://teimurjan.dev/llms/publications.md): 12 articles, latest "The Math Behind Difference: From Pixels to Semantic Diffing" (Aug 2026)
 - [Conferences](https://teimurjan.dev/llms/conferences.md): 4 talks, latest "Career growth recipes" at IT Entrance Belarus 2020 (Dec 2020)
 - [Interviews](https://teimurjan.dev/llms/interviews.md): 2 interviews and podcasts, latest "Кыргызстанец вошел в международный список талантов и разрабатывает ИИ-решения в компании с капитализацией $10 млрд" (Aug 2025)

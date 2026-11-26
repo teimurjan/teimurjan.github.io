@@ -6,7 +6,7 @@ A cozy gut garden for adults who want more fiber and more kinds of plants. Log a
 
 ## [Oyno](https://oyno.app/)
 
-For parents of kids 0 to 5 whose phone eats the evening. Pause the apps you pick, play a 5 to 15 minute game together and watch your family&#39;s planet grow.
+For parents of kids 0 to 5 whose phone eats the evening. Pause the apps you pick, play a 5 to 15 minute game together and watch your family's planet grow.
 
 ## [Printyard](https://printyard.app/)
 

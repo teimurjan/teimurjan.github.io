@@ -1,6 +1,6 @@
 # Education
 
-## Ala-too Internatinal University
+## Ala-too International University
 *Bachelor's Degree in Computer Science* · Sep 2015 - Jun 2019
 
 - Created a self-driving toy car using image processing and machine learning techniques.

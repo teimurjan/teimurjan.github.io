@@ -15,7 +15,6 @@ jobs:
       cancel-in-progress: true
     env:
       GQL_API_GITHUB_TOKEN: ${{ secrets.GQL_API_GITHUB_TOKEN }}
-      LLM_WIKI_DIR: ${{ github.workspace }}/.llm-wiki
     steps:
       - uses: actions/checkout@v4
 
@@ -25,6 +24,12 @@ jobs:
           repository: teimurjan/llm-wiki
           ssh-key: ${{ secrets.LLM_WIKI_DEPLOY_KEY }}
           path: .llm-wiki
+
+      # Keep the wiki outside the repo, as it is locally, so the Next build never traces it.
+      - name: Move llm-wiki beside the repo
+        run: |
+          mv .llm-wiki "$RUNNER_TEMP/llm-wiki"
+          echo "LLM_WIKI_DIR=$RUNNER_TEMP/llm-wiki" >> "$GITHUB_ENV"
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2

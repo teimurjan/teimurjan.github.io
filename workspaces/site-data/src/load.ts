@@ -14,7 +14,9 @@ const COLLECTIONS = [
 ] as const
 
 /** `LLM_WIKI_DIR`, or the `llm-wiki` checkout beside this repo when run from a workspace. */
-const wikiDir = () => process.env.LLM_WIKI_DIR ?? path.resolve(process.cwd(), '../../../llm-wiki')
+const wikiDir = () =>
+  process.env.LLM_WIKI_DIR ??
+  path.resolve(/*turbopackIgnore: true*/ process.cwd(), '../../../llm-wiki')
 
 const parseSiteData = (value: unknown): SiteData => {
   if (typeof value !== 'object' || value === null) {
@@ -38,7 +40,7 @@ export const loadSiteData = (): SiteData => {
   if (cached) return cached
 
   const dir = wikiDir()
-  if (!existsSync(dir)) {
+  if (!existsSync(/*turbopackIgnore: true*/ dir)) {
     throw new Error(`site-data: no llm-wiki at ${dir}. Clone it there or set LLM_WIKI_DIR.`)
   }
 

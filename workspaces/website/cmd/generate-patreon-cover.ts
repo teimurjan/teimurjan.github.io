@@ -8,7 +8,7 @@ const HEIGHT = 800
 const SCALE = 2
 
 // Single centered line — Patreon crops the sides hard, so keep it middle-weighted.
-const TAGLINE = 'building products with headcount 0'
+const TAGLINE = 'products built solo'
 
 const escapeHtml = (value: string) =>
   value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')

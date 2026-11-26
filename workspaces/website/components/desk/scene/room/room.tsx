@@ -58,7 +58,7 @@ function Glazing({ castsSpill }: { castsSpill: boolean }) {
 }
 
 function Sign({ castsLight }: { castsLight: boolean }) {
-  return <NeonSign position={[0, 2.46, NEON_Z]} text="headcount: 0" castsLight={castsLight} />
+  return <NeonSign position={[0, 2.46, NEON_Z]} text="built solo" castsLight={castsLight} />
 }
 
 function FloorReflections() {

@@ -43,10 +43,7 @@ const getShippedProducts = async (): Promise<ShippedProduct[]> => {
 const escapeHtml = (value: string) =>
   value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 
-const HAND_CIRCLE = `<svg class="circle" aria-hidden="true" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M58 6 C 22 2, 4 30, 8 56 C 12 84, 44 98, 70 90 C 94 82, 98 46, 86 24 C 76 8, 52 2, 36 10" /></svg>`
-
-const renderHeadline = () =>
-  `<h1>launching products<br />with <span class="zero">0${HAND_CIRCLE}</span> headcount.</h1>`
+const renderHeadline = () => '<h1>products<br />built solo.</h1>'
 
 const renderShipped = (products: ShippedProduct[]) => `
   <div class="shipped">
@@ -116,28 +113,6 @@ const buildHtml = (
     font-weight: 800;
     letter-spacing: -0.035em;
     line-height: 1.02;
-  }
-
-  .zero {
-    position: relative;
-    display: inline-block;
-    padding: 0 0.08em;
-  }
-  .circle {
-    position: absolute;
-    left: -0.12em;
-    top: -0.06em;
-    width: calc(100% + 0.24em);
-    height: calc(100% + 0.14em);
-    transform: rotate(-6deg);
-    overflow: visible;
-  }
-  .circle path {
-    fill: none;
-    stroke: var(--ink);
-    stroke-width: 4;
-    stroke-linecap: round;
-    vector-effect: non-scaling-stroke;
   }
 
   .shipped {

@@ -1,6 +1,6 @@
-import { Bold } from '@/components/ui/bold'
 import { Button } from '@/components/ui/button'
 import { FadeIn } from '@/components/ui/fade-in'
+import { InlineMarkdown } from '@/components/ui/inline-markdown'
 import {
   IconCalendar,
   IconDownload,
@@ -46,7 +46,7 @@ export function AboutSection({ data }: AboutSectionProps) {
       </div>
 
       <div className="mt-7 max-w-[58ch] text-base leading-[1.75] text-ink-dim [&>b]:text-ink [&>b]:font-semibold max-tablet:text-[15px]">
-        <Bold text={data.about} />
+        <InlineMarkdown text={data.about} />
       </div>
 
       <div className="flex flex-wrap gap-3 mt-8">
